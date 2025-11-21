@@ -1,0 +1,1043 @@
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2578, in handle_parse_result
+jac-celery-worker |     value = self.process_value(ctx, value)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 3313, in process_value
+jac-celery-worker |     return super().process_value(ctx, value)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2448, in process_value
+jac-celery-worker |     value = self.callback(ctx, self, value)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 158, in <lambda>
+jac-celery-worker |     value: value or ctx.obj.app.conf.worker_state_db,
+jac-celery-worker |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 111, in __getattr__
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1871, in invoke
+jac-celery-beat  |     sub_ctx = cmd.make_context(cmd_name, args, parent=ctx)
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1216, in make_context
+jac-celery-beat  |     self.parse_args(ctx, args)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1227, in parse_args
+jac-celery-beat  |     _, args = param.handle_parse_result(ctx, opts, args)
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2578, in handle_parse_result
+jac-celery-beat  |     value = self.process_value(ctx, value)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 3313, in process_value
+jac-celery-beat  |     return super().process_value(ctx, value)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2448, in process_value
+jac-celery-beat  |     value = self.callback(ctx, self, value)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 22, in <lambda>
+jac-celery-beat  |     callback=lambda ctx, _, value: value or ctx.obj.app.conf.beat_schedule_filename,
+jac-celery-beat  |                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 111, in __getattr__
+jac-celery-worker |     return self[k]
+jac-celery-worker |            ~~~~^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 391, in __getitem__
+jac-celery-worker |     return getitem(k)
+jac-celery-worker |            ^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 249, in __getitem__
+jac-celery-worker |     return mapping[_key]
+jac-celery-worker |            ~~~~~~~^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/collections/__init__.py", line 1122, in __getitem__
+jac-celery-worker |     if key in self.data:
+jac-celery-worker |               ^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/kombu/utils/objects.py", line 40, in __get__
+jac-celery-worker |     return super().__get__(instance, owner)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/functools.py", line 1001, in __get__
+jac-celery-worker |     val = self.func(instance)
+jac-celery-worker |           ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 210, in data
+jac-celery-worker |     return self.callback()
+jac-celery-worker |            ^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1113, in _finalize_pending_conf
+jac-celery-worker |     conf = self._conf = self._load_config()
+jac-celery-worker |                         ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1129, in _load_config
+jac-celery-worker |     self.loader.config_from_object(self._config_source)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 127, in config_from_object
+jac-celery-worker |     self._conf = force_mapping(obj)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 42, in force_mapping
+jac-celery-worker |     if isinstance(m, (LazyObject, LazySettings)):
+jac-celery-worker |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 280, in __getattribute__
+jac-celery-worker |     value = super().__getattribute__(name)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 251, in inner
+jac-celery-worker |     self._setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+jac-celery-worker |     self._wrapped = Settings(settings_module)
+jac-celery-worker |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+jac-celery-worker |     mod = importlib.import_module(self.SETTINGS_MODULE)
+jac-celery-worker |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+jac-celery-worker | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-celery-beat  |     return self[k]
+jac-celery-beat  |            ~~~~^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 391, in __getitem__
+jac-celery-beat  |     return getitem(k)
+jac-celery-beat  |            ^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 249, in __getitem__
+jac-celery-beat  |     return mapping[_key]
+jac-celery-beat  |            ~~~~~~~^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/collections/__init__.py", line 1122, in __getitem__
+jac-celery-beat  |     if key in self.data:
+jac-celery-beat  |               ^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/kombu/utils/objects.py", line 40, in __get__
+jac-celery-beat  |     return super().__get__(instance, owner)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/functools.py", line 1001, in __get__
+jac-celery-beat  |     val = self.func(instance)
+jac-celery-beat  |           ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 210, in data
+jac-celery-beat  |     return self.callback()
+jac-celery-beat  |            ^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1113, in _finalize_pending_conf
+jac-celery-beat  |     conf = self._conf = self._load_config()
+jac-celery-beat  |                         ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1129, in _load_config
+jac-celery-beat  |     self.loader.config_from_object(self._config_source)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 127, in config_from_object
+jac-celery-beat  |     self._conf = force_mapping(obj)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 42, in force_mapping
+jac-celery-beat  |     if isinstance(m, (LazyObject, LazySettings)):
+jac-celery-beat  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 280, in __getattribute__
+jac-celery-beat  |     value = super().__getattribute__(name)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 251, in inner
+jac-celery-beat  |     self._setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+jac-celery-beat  |     self._wrapped = Settings(settings_module)
+jac-celery-beat  |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+jac-celery-beat  |     mod = importlib.import_module(self.SETTINGS_MODULE)
+jac-celery-beat  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+jac-celery-beat  | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-celery-beat exited with code 1
+jac-celery-worker exited with code 1
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1871, in invoke
+jac-celery-worker |     sub_ctx = cmd.make_context(cmd_name, args, parent=ctx)
+jac-celery-worker |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1216, in make_context
+jac-celery-worker |     self.parse_args(ctx, args)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1227, in parse_args
+jac-celery-worker |     _, args = param.handle_parse_result(ctx, opts, args)
+jac-celery-worker |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2578, in handle_parse_result
+jac-celery-worker |     value = self.process_value(ctx, value)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 3313, in process_value
+jac-celery-worker |     return super().process_value(ctx, value)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2448, in process_value
+jac-celery-worker |     value = self.callback(ctx, self, value)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 158, in <lambda>
+jac-celery-worker |     value: value or ctx.obj.app.conf.worker_state_db,
+jac-celery-worker |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 111, in __getattr__
+jac-celery-worker |     return self[k]
+jac-celery-worker |            ~~~~^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 391, in __getitem__
+jac-celery-worker |     return getitem(k)
+jac-celery-worker |            ^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 249, in __getitem__
+jac-celery-worker |     return mapping[_key]
+jac-celery-worker |            ~~~~~~~^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/collections/__init__.py", line 1122, in __getitem__
+jac-celery-worker |     if key in self.data:
+jac-celery-worker |               ^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/kombu/utils/objects.py", line 40, in __get__
+jac-celery-worker |     return super().__get__(instance, owner)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/functools.py", line 1001, in __get__
+jac-celery-worker |     val = self.func(instance)
+jac-celery-worker |           ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 210, in data
+jac-celery-worker |     return self.callback()
+jac-celery-worker |            ^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1113, in _finalize_pending_conf
+jac-celery-worker |     conf = self._conf = self._load_config()
+jac-celery-worker |                         ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1129, in _load_config
+jac-celery-worker |     self.loader.config_from_object(self._config_source)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 127, in config_from_object
+jac-celery-worker |     self._conf = force_mapping(obj)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 42, in force_mapping
+jac-celery-worker |     if isinstance(m, (LazyObject, LazySettings)):
+jac-celery-worker |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 280, in __getattribute__
+jac-celery-worker |     value = super().__getattribute__(name)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 251, in inner
+jac-celery-worker |     self._setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+jac-celery-worker |     self._wrapped = Settings(settings_module)
+jac-celery-worker |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+jac-celery-worker |     mod = importlib.import_module(self.SETTINGS_MODULE)
+jac-celery-worker |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+jac-celery-worker | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1871, in invoke
+jac-celery-beat  |     sub_ctx = cmd.make_context(cmd_name, args, parent=ctx)
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1216, in make_context
+jac-celery-beat  |     self.parse_args(ctx, args)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1227, in parse_args
+jac-celery-beat  |     _, args = param.handle_parse_result(ctx, opts, args)
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2578, in handle_parse_result
+jac-celery-beat  |     value = self.process_value(ctx, value)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 3313, in process_value
+jac-celery-beat  |     return super().process_value(ctx, value)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2448, in process_value
+jac-celery-beat  |     value = self.callback(ctx, self, value)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 22, in <lambda>
+jac-celery-beat  |     callback=lambda ctx, _, value: value or ctx.obj.app.conf.beat_schedule_filename,
+jac-celery-beat  |                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 111, in __getattr__
+jac-celery-beat  |     return self[k]
+jac-celery-beat  |            ~~~~^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 391, in __getitem__
+jac-celery-beat  |     return getitem(k)
+jac-celery-beat  |            ^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 249, in __getitem__
+jac-celery-beat  |     return mapping[_key]
+jac-celery-beat  |            ~~~~~~~^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/collections/__init__.py", line 1122, in __getitem__
+jac-celery-beat  |     if key in self.data:
+jac-celery-beat  |               ^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/kombu/utils/objects.py", line 40, in __get__
+jac-celery-beat  |     return super().__get__(instance, owner)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/functools.py", line 1001, in __get__
+jac-celery-beat  |     val = self.func(instance)
+jac-celery-beat  |           ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 210, in data
+jac-celery-beat  |     return self.callback()
+jac-celery-beat  |            ^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1113, in _finalize_pending_conf
+jac-celery-beat  |     conf = self._conf = self._load_config()
+jac-celery-beat  |                         ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1129, in _load_config
+jac-celery-beat  |     self.loader.config_from_object(self._config_source)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 127, in config_from_object
+jac-celery-beat  |     self._conf = force_mapping(obj)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 42, in force_mapping
+jac-celery-beat  |     if isinstance(m, (LazyObject, LazySettings)):
+jac-celery-beat  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 280, in __getattribute__
+jac-celery-beat  |     value = super().__getattribute__(name)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 251, in inner
+jac-celery-beat  |     self._setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+jac-celery-beat  |     self._wrapped = Settings(settings_module)
+jac-celery-beat  |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+jac-celery-beat  |     mod = importlib.import_module(self.SETTINGS_MODULE)
+jac-celery-beat  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+jac-celery-beat  | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-celery-worker exited with code 1
+jac-celery-beat exited with code 1
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1871, in invoke
+jac-celery-worker |     sub_ctx = cmd.make_context(cmd_name, args, parent=ctx)
+jac-celery-worker |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1216, in make_context
+jac-celery-worker |     self.parse_args(ctx, args)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1227, in parse_args
+jac-celery-worker |     _, args = param.handle_parse_result(ctx, opts, args)
+jac-celery-worker |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2578, in handle_parse_result
+jac-celery-worker |     value = self.process_value(ctx, value)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 3313, in process_value
+jac-celery-worker |     return super().process_value(ctx, value)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2448, in process_value
+jac-celery-worker |     value = self.callback(ctx, self, value)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 158, in <lambda>
+jac-celery-worker |     value: value or ctx.obj.app.conf.worker_state_db,
+jac-celery-worker |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 111, in __getattr__
+jac-celery-worker |     return self[k]
+jac-celery-worker |            ~~~~^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 391, in __getitem__
+jac-celery-worker |     return getitem(k)
+jac-celery-worker |            ^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 249, in __getitem__
+jac-celery-worker |     return mapping[_key]
+jac-celery-worker |            ~~~~~~~^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/collections/__init__.py", line 1122, in __getitem__
+jac-celery-worker |     if key in self.data:
+jac-celery-worker |               ^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/kombu/utils/objects.py", line 40, in __get__
+jac-celery-worker |     return super().__get__(instance, owner)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/functools.py", line 1001, in __get__
+jac-celery-worker |     val = self.func(instance)
+jac-celery-worker |           ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 210, in data
+jac-celery-worker |     return self.callback()
+jac-celery-worker |            ^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1113, in _finalize_pending_conf
+jac-celery-worker |     conf = self._conf = self._load_config()
+jac-celery-worker |                         ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1129, in _load_config
+jac-celery-worker |     self.loader.config_from_object(self._config_source)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 127, in config_from_object
+jac-celery-worker |     self._conf = force_mapping(obj)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 42, in force_mapping
+jac-celery-worker |     if isinstance(m, (LazyObject, LazySettings)):
+jac-celery-worker |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 280, in __getattribute__
+jac-celery-worker |     value = super().__getattribute__(name)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 251, in inner
+jac-celery-worker |     self._setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+jac-celery-worker |     self._wrapped = Settings(settings_module)
+jac-celery-worker |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+jac-celery-worker |     mod = importlib.import_module(self.SETTINGS_MODULE)
+jac-celery-worker |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+jac-celery-worker | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1871, in invoke
+jac-celery-beat  |     sub_ctx = cmd.make_context(cmd_name, args, parent=ctx)
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1216, in make_context
+jac-celery-beat  |     self.parse_args(ctx, args)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1227, in parse_args
+jac-celery-beat  |     _, args = param.handle_parse_result(ctx, opts, args)
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2578, in handle_parse_result
+jac-celery-beat  |     value = self.process_value(ctx, value)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 3313, in process_value
+jac-celery-beat  |     return super().process_value(ctx, value)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2448, in process_value
+jac-celery-beat  |     value = self.callback(ctx, self, value)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 22, in <lambda>
+jac-celery-beat  |     callback=lambda ctx, _, value: value or ctx.obj.app.conf.beat_schedule_filename,
+jac-celery-beat  |                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 111, in __getattr__
+jac-celery-beat  |     return self[k]
+jac-celery-beat  |            ~~~~^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 391, in __getitem__
+jac-celery-beat  |     return getitem(k)
+jac-celery-beat  |            ^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 249, in __getitem__
+jac-celery-beat  |     return mapping[_key]
+jac-celery-beat  |            ~~~~~~~^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/collections/__init__.py", line 1122, in __getitem__
+jac-celery-beat  |     if key in self.data:
+jac-celery-beat  |               ^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/kombu/utils/objects.py", line 40, in __get__
+jac-celery-beat  |     return super().__get__(instance, owner)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/functools.py", line 1001, in __get__
+jac-celery-beat  |     val = self.func(instance)
+jac-celery-beat  |           ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 210, in data
+jac-celery-beat  |     return self.callback()
+jac-celery-beat  |            ^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1113, in _finalize_pending_conf
+jac-celery-beat  |     conf = self._conf = self._load_config()
+jac-celery-beat  |                         ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1129, in _load_config
+jac-celery-beat  |     self.loader.config_from_object(self._config_source)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 127, in config_from_object
+jac-celery-beat  |     self._conf = force_mapping(obj)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 42, in force_mapping
+jac-celery-beat  |     if isinstance(m, (LazyObject, LazySettings)):
+jac-celery-beat  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 280, in __getattribute__
+jac-celery-beat  |     value = super().__getattribute__(name)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 251, in inner
+jac-celery-beat  |     self._setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+jac-celery-beat  |     self._wrapped = Settings(settings_module)
+jac-celery-beat  |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+jac-celery-beat  |     mod = importlib.import_module(self.SETTINGS_MODULE)
+jac-celery-beat  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+jac-celery-beat  | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-celery-worker exited with code 1
+jac-celery-beat exited with code 1
+frontend_1       | 127.0.0.1 - - [21/Nov/2025:20:23:57 +0000] "GET / HTTP/1.1" 200 592 "-" "curl/8.14.1" "-"
+postgres_1       | 2025-11-21 20:24:05.567 UTC [38] LOG:  invalid length of startup packet
+postgres_1       | 2025-11-21 20:24:05.573 UTC [60] LOG:  invalid length of startup packet
+postgres_1       | 2025-11-21 20:24:05.580 UTC [61] LOG:  invalid length of startup packet
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1871, in invoke
+jac-celery-worker |     sub_ctx = cmd.make_context(cmd_name, args, parent=ctx)
+jac-celery-worker |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1216, in make_context
+jac-celery-worker |     self.parse_args(ctx, args)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1227, in parse_args
+jac-celery-worker |     _, args = param.handle_parse_result(ctx, opts, args)
+jac-celery-worker |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2578, in handle_parse_result
+jac-celery-worker |     value = self.process_value(ctx, value)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 3313, in process_value
+jac-celery-worker |     return super().process_value(ctx, value)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2448, in process_value
+jac-celery-worker |     value = self.callback(ctx, self, value)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 158, in <lambda>
+jac-celery-worker |     value: value or ctx.obj.app.conf.worker_state_db,
+jac-celery-worker |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 111, in __getattr__
+jac-celery-worker |     return self[k]
+jac-celery-worker |            ~~~~^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 391, in __getitem__
+jac-celery-worker |     return getitem(k)
+jac-celery-worker |            ^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 249, in __getitem__
+jac-celery-worker |     return mapping[_key]
+jac-celery-worker |            ~~~~~~~^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/collections/__init__.py", line 1122, in __getitem__
+jac-celery-worker |     if key in self.data:
+jac-celery-worker |               ^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/kombu/utils/objects.py", line 40, in __get__
+jac-celery-worker |     return super().__get__(instance, owner)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/functools.py", line 1001, in __get__
+jac-celery-worker |     val = self.func(instance)
+jac-celery-worker |           ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 210, in data
+jac-celery-worker |     return self.callback()
+jac-celery-worker |            ^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1113, in _finalize_pending_conf
+jac-celery-worker |     conf = self._conf = self._load_config()
+jac-celery-worker |                         ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1129, in _load_config
+jac-celery-worker |     self.loader.config_from_object(self._config_source)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 127, in config_from_object
+jac-celery-worker |     self._conf = force_mapping(obj)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 42, in force_mapping
+jac-celery-worker |     if isinstance(m, (LazyObject, LazySettings)):
+jac-celery-worker |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 280, in __getattribute__
+jac-celery-worker |     value = super().__getattribute__(name)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 251, in inner
+jac-celery-worker |     self._setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+jac-celery-worker |     self._wrapped = Settings(settings_module)
+jac-celery-worker |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+jac-celery-worker |     mod = importlib.import_module(self.SETTINGS_MODULE)
+jac-celery-worker |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+jac-celery-worker | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1871, in invoke
+jac-celery-beat  |     sub_ctx = cmd.make_context(cmd_name, args, parent=ctx)
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1216, in make_context
+jac-celery-beat  |     self.parse_args(ctx, args)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1227, in parse_args
+jac-celery-beat  |     _, args = param.handle_parse_result(ctx, opts, args)
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2578, in handle_parse_result
+jac-celery-beat  |     value = self.process_value(ctx, value)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 3313, in process_value
+jac-celery-beat  |     return super().process_value(ctx, value)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2448, in process_value
+jac-celery-beat  |     value = self.callback(ctx, self, value)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 22, in <lambda>
+jac-celery-beat  |     callback=lambda ctx, _, value: value or ctx.obj.app.conf.beat_schedule_filename,
+jac-celery-beat  |                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 111, in __getattr__
+jac-celery-beat  |     return self[k]
+jac-celery-beat  |            ~~~~^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 391, in __getitem__
+jac-celery-beat  |     return getitem(k)
+jac-celery-beat  |            ^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 249, in __getitem__
+jac-celery-beat  |     return mapping[_key]
+jac-celery-beat  |            ~~~~~~~^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/collections/__init__.py", line 1122, in __getitem__
+jac-celery-beat  |     if key in self.data:
+jac-celery-beat  |               ^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/kombu/utils/objects.py", line 40, in __get__
+jac-celery-beat  |     return super().__get__(instance, owner)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/functools.py", line 1001, in __get__
+jac-celery-beat  |     val = self.func(instance)
+jac-celery-beat  |           ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 210, in data
+jac-celery-beat  |     return self.callback()
+jac-celery-beat  |            ^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1113, in _finalize_pending_conf
+jac-celery-beat  |     conf = self._conf = self._load_config()
+jac-celery-beat  |                         ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1129, in _load_config
+jac-celery-beat  |     self.loader.config_from_object(self._config_source)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 127, in config_from_object
+jac-celery-beat  |     self._conf = force_mapping(obj)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 42, in force_mapping
+jac-celery-beat  |     if isinstance(m, (LazyObject, LazySettings)):
+jac-celery-beat  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 280, in __getattribute__
+jac-celery-beat  |     value = super().__getattribute__(name)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 251, in inner
+jac-celery-beat  |     self._setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+jac-celery-beat  |     self._wrapped = Settings(settings_module)
+jac-celery-beat  |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+jac-celery-beat  |     mod = importlib.import_module(self.SETTINGS_MODULE)
+jac-celery-beat  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+jac-celery-beat  | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-celery-worker exited with code 1
+jac-celery-beat exited with code 1
+frontend_1       | 127.0.0.1 - - [21/Nov/2025:20:24:28 +0000] "GET / HTTP/1.1" 200 592 "-" "curl/8.14.1" "-"
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1871, in invoke
+jac-celery-worker |     sub_ctx = cmd.make_context(cmd_name, args, parent=ctx)
+jac-celery-worker |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1216, in make_context
+jac-celery-worker |     self.parse_args(ctx, args)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1227, in parse_args
+jac-celery-worker |     _, args = param.handle_parse_result(ctx, opts, args)
+jac-celery-worker |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2578, in handle_parse_result
+jac-celery-worker |     value = self.process_value(ctx, value)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 3313, in process_value
+jac-celery-worker |     return super().process_value(ctx, value)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2448, in process_value
+jac-celery-worker |     value = self.callback(ctx, self, value)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 158, in <lambda>
+jac-celery-worker |     value: value or ctx.obj.app.conf.worker_state_db,
+jac-celery-worker |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 111, in __getattr__
+jac-celery-worker |     return self[k]
+jac-celery-worker |            ~~~~^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 391, in __getitem__
+jac-celery-worker |     return getitem(k)
+jac-celery-worker |            ^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 249, in __getitem__
+jac-celery-worker |     return mapping[_key]
+jac-celery-worker |            ~~~~~~~^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/collections/__init__.py", line 1122, in __getitem__
+jac-celery-worker |     if key in self.data:
+jac-celery-worker |               ^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/kombu/utils/objects.py", line 40, in __get__
+jac-celery-worker |     return super().__get__(instance, owner)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/functools.py", line 1001, in __get__
+jac-celery-worker |     val = self.func(instance)
+jac-celery-worker |           ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 210, in data
+jac-celery-worker |     return self.callback()
+jac-celery-worker |            ^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1113, in _finalize_pending_conf
+jac-celery-worker |     conf = self._conf = self._load_config()
+jac-celery-worker |                         ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1129, in _load_config
+jac-celery-worker |     self.loader.config_from_object(self._config_source)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 127, in config_from_object
+jac-celery-worker |     self._conf = force_mapping(obj)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 42, in force_mapping
+jac-celery-worker |     if isinstance(m, (LazyObject, LazySettings)):
+jac-celery-worker |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 280, in __getattribute__
+jac-celery-worker |     value = super().__getattribute__(name)
+jac-celery-worker |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 251, in inner
+jac-celery-worker |     self._setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+jac-celery-worker |     self._wrapped = Settings(settings_module)
+jac-celery-worker |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+jac-celery-worker |     mod = importlib.import_module(self.SETTINGS_MODULE)
+jac-celery-worker |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+jac-celery-worker | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1871, in invoke
+jac-celery-beat  |     sub_ctx = cmd.make_context(cmd_name, args, parent=ctx)
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1216, in make_context
+jac-celery-beat  |     self.parse_args(ctx, args)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1227, in parse_args
+jac-celery-beat  |     _, args = param.handle_parse_result(ctx, opts, args)
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2578, in handle_parse_result
+jac-celery-beat  |     value = self.process_value(ctx, value)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 3313, in process_value
+jac-celery-beat  |     return super().process_value(ctx, value)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 2448, in process_value
+jac-celery-beat  |     value = self.callback(ctx, self, value)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 22, in <lambda>
+jac-celery-beat  |     callback=lambda ctx, _, value: value or ctx.obj.app.conf.beat_schedule_filename,
+jac-celery-beat  |                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 111, in __getattr__
+jac-celery-beat  |     return self[k]
+jac-celery-beat  |            ~~~~^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 391, in __getitem__
+jac-celery-beat  |     return getitem(k)
+jac-celery-beat  |            ^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 249, in __getitem__
+jac-celery-beat  |     return mapping[_key]
+jac-celery-beat  |            ~~~~~~~^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/collections/__init__.py", line 1122, in __getitem__
+jac-celery-beat  |     if key in self.data:
+jac-celery-beat  |               ^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/kombu/utils/objects.py", line 40, in __get__
+jac-celery-beat  |     return super().__get__(instance, owner)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/functools.py", line 1001, in __get__
+jac-celery-beat  |     val = self.func(instance)
+jac-celery-beat  |           ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 210, in data
+jac-celery-beat  |     return self.callback()
+jac-celery-beat  |            ^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1113, in _finalize_pending_conf
+jac-celery-beat  |     conf = self._conf = self._load_config()
+jac-celery-beat  |                         ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 1129, in _load_config
+jac-celery-beat  |     self.loader.config_from_object(self._config_source)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 127, in config_from_object
+jac-celery-beat  |     self._conf = force_mapping(obj)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/collections.py", line 42, in force_mapping
+jac-celery-beat  |     if isinstance(m, (LazyObject, LazySettings)):
+jac-celery-beat  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 280, in __getattribute__
+jac-celery-beat  |     value = super().__getattribute__(name)
+jac-celery-beat  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 251, in inner
+jac-celery-beat  |     self._setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+jac-celery-beat  |     self._wrapped = Settings(settings_module)
+jac-celery-beat  |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+jac-celery-beat  |     mod = importlib.import_module(self.SETTINGS_MODULE)
+jac-celery-beat  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+jac-celery-beat  | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-celery-worker exited with code 1
+jac-celery-beat exited with code 1
