@@ -149,6 +149,7 @@ services:
       SENTRY_TRACES_SAMPLE_RATE: "0.1"
     volumes:
       - ./backend:/app
+      - ./backend/logs:/app/logs
     depends_on:
       - postgres
       - redis
@@ -171,6 +172,7 @@ services:
       REDIS_URL: "redis://redis:6379/0"
     volumes:
       - ./backend:/app
+      - ./backend/logs:/app/logs
     depends_on:
       - postgres
       - redis
