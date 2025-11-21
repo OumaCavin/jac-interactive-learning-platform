@@ -3,7 +3,7 @@
 # Author: Cavin Otieno
 
 # Stage 1: Build dependencies and compile
-FROM node:18-alpine as builder
+FROM node:22-alpine as builder
 
 # Set work directory
 WORKDIR /app
@@ -14,7 +14,8 @@ COPY pnpm-lock.yaml ./
 COPY tsconfig.json ./
 COPY tailwind.config.js ./
 
-# Install pnpm
+# Update npm to latest version and install pnpm
+RUN npm install -g npm@latest
 RUN npm install -g pnpm
 
 # Install dependencies
