@@ -40,7 +40,6 @@ THIRD_PARTY_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'mptt',
-    'cachalot',
     'drf_spectacular',
     'django_extensions',
 ]
