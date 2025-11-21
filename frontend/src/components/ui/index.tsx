@@ -36,8 +36,8 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   );
 };
 
-// Button Component
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+// Button Component - Exclude conflicting framer-motion props
+interface ButtonBaseProps {
   variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
@@ -45,7 +45,24 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   rightIcon?: React.ReactNode;
   glass?: boolean;
   children: React.ReactNode;
+  className?: string;
+  disabled?: boolean;
 }
+
+type ButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 
+  | 'onAnimationStart' 
+  | 'onAnimationEnd' 
+  | 'onAnimationIteration'
+  | 'animate'
+  | 'variants'
+  | 'initial'
+  | 'whileHover'
+  | 'whileTap'
+  | 'whileFocus'
+  | 'whileDrag'
+  | 'exit'
+  | 'transition'
+> & ButtonBaseProps;
 
 const buttonVariants: Variants = {
   initial: { scale: 1 },
