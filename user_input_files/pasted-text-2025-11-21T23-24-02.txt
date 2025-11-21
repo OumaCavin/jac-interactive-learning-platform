@@ -1,0 +1,1044 @@
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess] return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,717: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,718: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] return callback(*args, **kwargs)
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,719: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,720: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] return f(ctx, *args, **kwargs)
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,721: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] return beat().run()
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,722: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 84, in run
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess] self.start_scheduler()
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 113, in start_scheduler
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess] service.start()
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/celery/beat.py", line 635, in start
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess] humanize_seconds(self.scheduler.max_interval))
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,723: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/kombu/utils/objects.py", line 40, in __get__
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] return super().__get__(instance, owner)
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,724: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess]   File "/usr/local/lib/python3.11/functools.py", line 1001, in __get__
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] val = self.func(instance)
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,725: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/celery/beat.py", line 678, in scheduler
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] return self.get_scheduler()
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,726: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/celery/beat.py", line 669, in get_scheduler
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] return symbol_by_name(self.scheduler_cls, aliases=aliases)(
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,727: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,728: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django_celery_beat/schedulers.py", line 252, in __init__
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess] Scheduler.__init__(self, *args, **kwargs)
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/celery/beat.py", line 265, in __init__
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess] self.setup_schedule()
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django_celery_beat/schedulers.py", line 260, in setup_schedule
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess] self.install_default_entries(self.schedule)
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,729: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django_celery_beat/schedulers.py", line 531, in schedule
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess] self._schedule = self.all_as_schedule()
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,730: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django_celery_beat/schedulers.py", line 266, in all_as_schedule
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,731: WARNING/MainProcess] for model in self.enabled_models():
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,732: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django_celery_beat/schedulers.py", line 279, in enabled_models
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] return list(self.enabled_models_qs())
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,733: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django_celery_beat/schedulers.py", line 290, in enabled_models_qs
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess] exclude_cron_tasks_query = self._get_crontab_exclude_query()
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,734: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,735: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django_celery_beat/schedulers.py", line 334, in _get_crontab_exclude_query
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess] *[
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 386, in __iter__
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess] self._fetch_all()
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1954, in _fetch_all
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess] self._result_cache = list(self._iterable_class(self))
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,736: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 273, in __iter__
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess] for row in compiler.results_iter(
+jac-celery-beat  | [2025-11-21 23:18:11,737: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,738: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1572, in results_iter
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] results = self.execute_sql(
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,739: WARNING/MainProcess] cursor.execute(sql, params)
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 122, in execute
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] return super().execute(sql, params)
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,740: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 79, in execute
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] return self._execute_with_wrappers(
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,741: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess] return executor(sql, params, many, context)
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,742: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,743: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 100, in _execute
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] with self.db.wrap_database_errors:
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] raise dj_exc_value.with_traceback(traceback) from exc_value
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] return self.cursor.execute(sql, params)
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,744: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] django.db.utils
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] .
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] ProgrammingError
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] : 
+jac-celery-beat  | [2025-11-21 23:18:11,745: WARNING/MainProcess] relation "django_celery_beat_crontabschedule" does not exist
+jac-celery-beat  | LINE 1: ...django_celery_beat_crontabschedule"."minute" FROM "django_ce...
+jac-celery-beat  |                                                              ^
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | __    -    ... __   -        _
+jac-celery-beat  | LocalTime -> 2025-11-21 23:19:06
+jac-celery-beat  | Configuration ->
+jac-celery-beat  |     . broker -> redis://redis:6379/0
+jac-celery-beat  |     . loader -> celery.loaders.app.AppLoader
+jac-celery-beat  |     . scheduler -> django_celery_beat.schedulers.DatabaseScheduler
+jac-celery-beat  | 
+jac-celery-beat  |     . logfile -> [stderr]@%INFO
+jac-celery-beat  |     . maxinterval -> 5.00 seconds (5s)
+jac-celery-beat  | [2025-11-21 23:19:06,432: INFO/MainProcess] beat: Starting...
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 

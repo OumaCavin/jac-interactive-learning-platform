@@ -1,0 +1,87 @@
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # Check celery-worker logs (service name is celery-worker, not jac-celery-worker)
+docker-compose logs celery-worker
+Attaching to jac-celery-worker
+jac-celery-worker |  
+jac-celery-worker |  -------------- celery@5de44310b71d v5.5.3 (immunity)
+jac-celery-worker | --- ***** ----- 
+jac-celery-worker | -- ******* ---- Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.41 2025-11-21 23:17:04
+jac-celery-worker | - *** --- * --- 
+jac-celery-worker | - ** ---------- [config]
+jac-celery-worker | - ** ---------- .> app:         config:0x74edb19b7d90
+jac-celery-worker | - ** ---------- .> transport:   redis://redis:6379/0
+jac-celery-worker | - ** ---------- .> results:     redis://redis:6379/0
+jac-celery-worker | - *** --- * --- .> concurrency: 2 (prefork)
+jac-celery-worker | -- ******* ---- .> task events: ON
+jac-celery-worker | --- ***** ----- 
+jac-celery-worker |  -------------- [queues]
+jac-celery-worker |                 .> celery           exchange=celery(direct) key=celery
+jac-celery-worker |                 
+jac-celery-worker | 
+jac-celery-worker | [tasks]
+jac-celery-worker |   . config.celery.debug_task
+jac-celery-worker |   . content.process_content
+jac-celery-worker |   . users.send_welcome_email
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:17:04,908: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 2.00 seconds... (1/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:17:06,910: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 4.00 seconds... (2/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:17:10,912: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 6.00 seconds... (3/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:17:16,915: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 8.00 seconds... (4/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:17:25,956: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 10.00 seconds... (5/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:17:35,960: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 12.00 seconds... (6/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:17:47,964: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 14.00 seconds... (7/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:18:03,029: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 16.00 seconds... (8/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:18:19,033: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 18.00 seconds... (9/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:18:38,114: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 20.00 seconds... (10/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:18:58,120: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 22.00 seconds... (11/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:19:21,188: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 24.00 seconds... (12/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:19:46,267: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 26.00 seconds... (13/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:20:13,297: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 28.00 seconds... (14/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:20:41,302: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 30.00 seconds... (15/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:21:12,333: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 32.00 seconds... (16/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:21:45,354: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 32.00 seconds... (16/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:22:18,385: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 32.00 seconds... (16/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:22:51,432: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 32.00 seconds... (16/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:23:24,534: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 32.00 seconds... (16/100)
+jac-celery-worker | 
+jac-celery-worker | [2025-11-21 23:23:57,607: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Authentication required..
+jac-celery-worker | Trying again in 32.00 seconds... (16/100)
+jac-celery-worker | 
