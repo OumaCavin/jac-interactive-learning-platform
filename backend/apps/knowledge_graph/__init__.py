@@ -1,0 +1,1 @@
+# Knowledge Graph app for JAC Learning Platform

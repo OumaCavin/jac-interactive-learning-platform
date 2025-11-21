@@ -1,0 +1,1 @@
+# Assessments app for JAC Learning Platform

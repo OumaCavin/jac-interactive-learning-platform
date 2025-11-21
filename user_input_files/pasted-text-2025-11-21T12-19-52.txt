@@ -1,0 +1,1607 @@
+# Enhanced Interactive Learning Platform for Jaseci - Complete Development Prompt
+
+Poject 1 - Interactive Learning Platform for Jaseci 
+Concept: Build a self-paced learning portal for Jac and Jaseci. Learners progress through short 
+lessons, interactive coding exercises, and auto-generated quizzes. Behind the scenes, an 
+object-spatial graph models each user’s mastery over concepts (nodes represent topics like 
+walkers, OSP, byLLM; edges encode prerequisites and proficiency). byLLM agents generate 
+questions, evaluate free-text answers, and suggest what to study next. The platform behaves like 
+a personalized tutor rather than static documentation. 
+Key Components 
+● Backend (Jac lang): 
+○ Data models for users, lessons, quizzes and OSP graph nodes. 
+○ Walkers to record progress, update mastery scores, and serve content. byLLM 
+decorators 
+can 
+● Frontend (Jac-Client): 
+generate 
+quizzes 
+and 
+assess 
+answers. 
+○ React-style components for lessons, code editor (Monaco/CodeMirror), quizzes 
+and progress dashboards. 
+○ Use Spawn() to call walkers (e.g., generate_quiz, evaluate_answer) 
+directly 
+from 
+● Adaptive Learning Logic: 
+the 
+UI. 
+○ byLLM agents analyze the OSP graph to unlock new lessons, adjust quiz difficulty, 
+and prompt revision when needed. 
+○ A visual “skill map” shows mastered and weak areas.
+
+
+
+# 🚀 **PROJECT: Jaseci "Neuro-Link" – Enterprise Adaptive Learning Ecosystem**
+
+## **1. EXECUTIVE SUMMARY**
+
+You are tasked with architecting and building a **next-generation, production-ready Multi-Agent System (MAS)** for teaching the Jaseci programming language. This platform functions as an **AI-Powered Personal Tutor**, utilizing **Object-Spatial Programming (OSP)** to model learner knowledge and **Generative UI (GenUI)** to deliver interactive content.
+
+**Core Philosophy:**
+
+  * **Backend:** Jaseci (Jac) agents utilizing OSP graphs to model mastery.
+  * **Frontend:** A "Bento Grid" style Next.js dashboard with Glassmorphism and Generative UI streaming.
+  * **Interaction:** A personalized experience where agents negotiate curriculum, generate quizzes via LLM, and stream interactive React components directly into the chat.
+
+-----
+
+## **2. SYSTEM ARCHITECTURE**
+
+The system follows a **Service-Oriented Architecture (SOA)** with a heavy emphasis on Event-Driven communication between agents.
+
+### **High-Level Stack**
+
+```mermaid
+graph TD
+    User[User / Browser] -->|Next.js + GenUI| FE[Frontend Layer]
+    FE -->|WebSocket / HTTP| GW[API Gateway]
+    GW -->|Auth & Rate Limit| Orch[Agent Orchestrator]
+    
+    subgraph "Jaseci Agent Layer"
+        Orch -->|Delegates| Curr[Curriculum Agent]
+        Orch -->|Delegates| Quiz[Quiz Gen Agent]
+        Orch -->|Delegates| Eval[Code Evaluator]
+        Orch -->|Delegates| Anal[Analytics Agent]
+    end
+    
+    subgraph "Data & Knowledge Layer"
+        Curr <-->|Reads/Writes| OSP[(Neo4j OSP Graph)]
+        Eval <-->|Updates| PG[(PostgreSQL User Data)]
+        Quiz <-->|Cache| Redis[(Redis Message Bus)]
+    end
+```
+
+-----
+
+## **3. TECHNOLOGY STACK & REQUIREMENTS**
+
+### **A. Frontend (Bleeding Edge Stack)**
+
+  * **Framework:** **Next.js 14** (App Router) with TypeScript.
+  * **State Management:** **Zustand 4.4+** for granular agent state and progression tracking.
+  * **UI Architecture:** **Bento Grid Layouts** (Aceternity UI) combined with **Glassmorphism**.
+  * **Generative UI (GenUI)**: Use **Vercel AI SDK (RSC)**. Agents must stream interactive components (e.g., `<QuizCard />`, `<GraphViz />`) into the chat, not just text.
+  * **Navigation**: **cmdk** for a global "Command Palette" (Cmd+K) to jump between lessons or summon agents.
+  * **Visualizations**:
+      * **Recharts**: For skill mastery radar charts.
+      * **D3.js**: For interactive OSP Knowledge Graph rendering.
+  * **Editor**: **Monaco Editor** with **Shiki** for server-side syntax highlighting.
+
+### **B. Backend (Jaseci & Python)**
+
+  * **Core Logic**: **Jac Programming Language** (Walkers, Architypes).
+  * **API Layer**: **FastAPI** (Python 3.11+) acting as the gateway.
+  * **AI Integration**: **byLLM** decorators for dynamic content generation.
+  * **Orchestration**: Chain of Responsibility pattern for agent delegation.
+
+### **C. Data & Infrastructure**
+
+  * **Graph DB**: **Neo4j 5.0+** (Stores the OSP Knowledge Graph: Concept Nodes & Prerequisite Edges).
+  * **Relational DB**: **PostgreSQL 15+** (User profiles, auth, logs).
+  * **Caching/PubSub**: **Redis 7+** (Real-time agent messaging bus).
+  * **DevOps**: Docker, Kubernetes (Helm Charts), Prometheus/Grafana for observability.
+
+-----
+
+## **4. DESIGN SYSTEM & UX**
+
+### **Visual Language**
+
+1.  **Bento Grid Layout**: The dashboard must organize complex data (Editor, Chat, Graph, Status) into modular, distinct grid cells that fit together like a puzzle.
+2.  **Glassmorphism**: Use `backdrop-filter: blur(16px)` on containers with subtle gradients (`#667eea` to `#764ba2`).
+3.  **Micro-Interactions**:
+      * **Spotlight Effects**: Hovering over cards reveals a light source following the cursor.
+      * **Border Beams**: Animated borders on the "Active Agent" card to show processing status.
+      * **Sparkles/Meteors**: Aceternity UI effects for "Level Up" or "Mastery" events.
+
+### **User Experience Patterns**
+
+  * **Command Palette (Cmd+K)**: Users never leave the keyboard. Shortcuts to: `> Ask Tutor`, `> Reset Lesson`, `> Go to Skill Map`.
+  * **Streaming Responses**: The UI must never "hang." Show skeletons immediately, then stream the agent's text and UI components.
+
+-----
+
+## **5. SPECIALIZED AGENT SQUAD**
+
+Implement the following **6 Jaseci Walkers** as autonomous agents:
+
+1.  **🧠 Curriculum Agent**: Traverses the OSP Graph to find the next optimal node (Lesson) based on prerequisites.
+2.  **📝 Quiz Generator (byLLM)**: Generates context-aware questions based on the current lesson's metadata.
+3.  **⚖️ Evaluator Agent**: Sandboxes user code, runs unit tests, or uses LLM to grade free-text answers.
+4.  **🔍 Code Analyzer**: Parses User AST (Abstract Syntax Tree) to generate a Code Context Graph (CCG) and detect anti-patterns.
+5.  **📊 Analytics Agent**: Background walker that aggregates streak data and predicts "dropout risk."
+6.  **🗣️ Tutor Agent (Orchestrator)**: The user-facing persona that routes requests to the other agents and manages the chat stream.
+
+-----
+
+## **6. DATA MODELS (OSP & STORE)**
+
+### **Backend: OSP Graph (Neo4j/Jac)**
+
+```cypher
+// Concept Nodes
+CREATE (c:Concept {id: "walker_logic", type: "mechanic", difficulty: 2});
+
+// Mastery Edge (Weighted)
+CREATE (u:User)-[:MASTERED {proficiency: 0.85, last_practiced: timestamp}]->(c:Concept);
+
+// Dependency Edge
+CREATE (c1:Concept)-[:UNLOCKS]->(c2:Concept);
+```
+
+### **Frontend: Agent Store (Zustand)**
+
+```typescript
+interface AgentState {
+  id: string;
+  status: 'idle' | 'thinking' | 'streaming' | 'error';
+  currentAction: string; // e.g., "Generating Quiz via byLLM..."
+  streamedComponent?: React.ReactNode; // GenUI slot
+}
+
+interface LearningStore {
+  skillMap: OSPNode[];
+  masteryLevel: number;
+  unlockNextLesson: (nodeId: string) => void;
+}
+```
+
+-----
+
+## **7. IMPLEMENTATION ROADMAP**
+
+### **Phase 1: The Foundation (Days 1-4)**
+
+  * **Scaffold**: Setup Monorepo (Next.js + FastAPI/Jac).
+  * **Data Layer**: Docker Compose for Postgres, Neo4j, and Redis.
+  * **OSP Schema**: Define the fundamental Jaseci concepts (Walkers, Architypes) as graph nodes.
+
+### **Phase 2: The Agents (Days 5-10)**
+
+  * **Jac Walkers**: Implement the `Curriculum` and `Evaluator` walkers.
+  * **byLLM Integration**: Connect OpenAI/LLM API for the `Quiz Generator`.
+  * **Orchestration**: Build the logic that allows the Tutor to call the Quiz Generator.
+
+### **Phase 3: Bleeding Edge Frontend (Days 11-18)**
+
+  * **UI Shell**: Build the **Bento Grid** layout using Aceternity components.
+  * **Editor**: Integrate Monaco with Shiki highlighting.
+  * **GenUI Pipeline**: Implement the Vercel AI SDK to allow the backend to stream React components (e.g., `<QuizOptions />`) to the frontend.
+
+### **Phase 4: Visualization & Polish (Days 19-25)**
+
+  * **Skill Map**: Implement the D3.js force-directed graph to visualize the OSP data.
+  * **Gamification**: Add Framer Motion animations for XP gain and streaks.
+  * **Command Palette**: Integrate `cmdk` for navigation.
+
+-----
+
+## **8. DELIVERABLES & SUCCESS CRITERIA**
+
+### **Key Deliverables**
+
+1.  **GitHub Repo**: Clean monorepo with `services/jac_backend` and `frontend/neuro_dashboard`.
+2.  **Documentation**: Architecture diagrams (Mermaid.js) and API references (Swagger).
+3.  **Demo Video**: A walkthrough showing:
+      * Cmd+K navigation.
+      * A user taking a lesson.
+      * The Agent streaming a specific UI component (Quiz).
+      * The Skill Map updating in real-time (Recharts/D3).
+
+### **Success Metrics**
+
+  * ✅ **Performance**: Dashboard loads in \<1.5s; Animations run at 60fps.
+  * ✅ **Interaction**: Agents respond via Streaming (TTFB \< 200ms).
+  * ✅ **Jaseci Compliance**: Code utilizes OSP and `byLLM` decorators correctly.
+  * ✅ **Visuals**: The "Bento Grid" layout adapts perfectly to mobile devices.
+  
+Verion 1
+## PROJECT OVERVIEW
+
+You are tasked with creating a **next-generation, enterprise-grade, production-ready multi-agent system (MAS)** for learning the Jaseci programming language.
+ This project combines advanced multi-agent orchestration, real-time analytics, Code Context Graph (CCG) analysis, Object-Subject-Predicate (OSP) graph visualization, and 
+ comprehensive quality assessment.
+
+### Core Vision
+Build an intelligent learning ecosystem that goes beyond traditional platforms by implementing:
+- **Multi-Agent Architecture**: 6+ specialized agents with Chain of Responsibility orchestration
+- **Real-Time Intelligence**: WebSocket-powered live updates across all components
+- **Advanced Code Analysis**: AST-based Code Context Graph with relationship mapping
+- **Interactive Visualization**: D3.js-powered OSP graphs with multiple layouts
+- **Enterprise Security**: OAuth 2.0, JWT, role-based access, audit logging
+- **Cloud-Native**: Kubernetes-ready with HPA, service mesh, and observability
+
+### Key Components
+- **Backend (Jac lang)**:
+  - Data models for users, lessons, quizzes and OSP graph nodes
+  - Walkers to record progress, update mastery scores, and serve content
+  - byLLM decorators to generate quizzes and assess answers
+
+- **Frontend (Jac-Client)**:
+  - React-style components for lessons, code editor (Monaco/CodeMirror), quizzes and progress dashboards
+  - Use Spawn() to call walkers (e.g., generate_quiz, evaluate_answer) directly from the UI
+
+- **Adaptive Learning Logic**:
+  - byLLM agents analyze the OSP graph to unlock new lessons, adjust quiz difficulty, and prompt revision when needed
+  - A visual "skill map" shows mastered and weak areas
+
+---
+
+## SYSTEM ARCHITECTURE
+
+### High-Level Architecture Components
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    FRONTEND LAYER                           │
+├─────────────────────────────────────────────────────────────┤
+│  React Enterprise Dashboard  │  Monaco Editor Integration   │
+│  Real-time Visualizations    │  WebSocket Client            │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────────┐
+│                    API GATEWAY LAYER                        │
+├─────────────────────────────────────────────────────────────┤
+│  FastAPI Gateway     │  Auth Service    │  Rate Limiting    │
+│  Load Balancer       │  Health Checks   │  Monitoring       │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────────┐
+│              MULTI-AGENT ORCHESTRATION                      │
+├─────────────────────────────────────────────────────────────┤
+│  Agent Orchestrator  │  Message Bus     │  Task Scheduler   │
+│  Agent Registry      │  Service Discovery│  Health Monitoring│
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────────┐
+│                 SPECIALIZED AGENTS                          │
+├─────────────────────────────────────────────────────────────┤
+│  Learning Progress  │  Quiz Generator   │  Code Analyzer    │
+│  Quality Assessor   │  Content Reco     │  Analytics Agent  │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────────┐
+│                   CORE SERVICES                             │
+├─────────────────────────────────────────────────────────────┤
+│  OSP Graph Service  │  User Management  │  Notifications    │
+│  Neo4j Integration  │  PostgreSQL DB    │  Redis Cache      │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────────┐
+│                 INFRASTRUCTURE LAYER                        │
+├─────────────────────────────────────────────────────────────┤
+│  Docker/Kubernetes  │  Prometheus      │  Grafana          │
+│  Elasticsearch      │  Jaeger Tracing  │  CI/CD Pipeline   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## TECHNICAL STACK REQUIREMENTS
+
+### Backend Technologies
+- **Python 3.11+** with FastAPI framework
+- **Jac Programming Language** as the core framework
+- **Multi-Agent Framework** with Chain of Responsibility pattern
+- **WebSocket Support** for real-time communication
+- **JWT Authentication** with refresh tokens
+- **Redis 7+** for caching, sessions, and pub/sub messaging
+- **PostgreSQL 15+** for primary data storage
+- **Neo4j 5.0+** for graph database operations
+- **Elasticsearch** for search and analytics
+
+### Frontend Technologies
+- **React 18.2.0+** with TypeScript support
+- **Vite** as build tool and development server
+- **React Router DOM 6.8.0+** for client-side routing
+- **@tanstack/react-query 5.8.0+** for data fetching and caching
+- **Monaco Editor** for code editing with Jac syntax highlighting
+- **D3.js** for interactive graph visualization
+
+### UI Framework & Styling
+- **Bootstrap 5.3.0+** via CDN (main styling framework)
+- **Font Awesome 6.4.0+** via CDN (icon library)
+- **Google Fonts - Inter** for typography
+- **Framer Motion 10.16.0+** for animations
+- **Tailwind CSS 3.3.0+** (development dependencies only)
+
+### Data Management & State
+- **Zustand 4.4.0+** for client-side state management
+- **React Hook Form 7.48.0+** for form handling
+- **React Hot Toast 2.4.0+** for notifications
+- **Zod 3.22.0+** for schema validation
+
+### Data Visualization
+- **Recharts 2.8.0+** for charts and graphs (LineChart, AreaChart, PieChart, ResponsiveContainer)
+- **D3.js** for OSP graph visualization
+
+### Additional Libraries
+- **date-fns 2.30.0+** for date manipulation
+- **socket.io-client 4.7.0+** for real-time updates
+- **clsx 2.0.0** for conditional className handling
+
+### Infrastructure & DevOps
+- **Docker** with multi-stage builds
+- **Kubernetes** with HPA and service mesh
+- **Helm Charts** for deployment
+- **Terraform** for infrastructure as code
+- **Prometheus + Grafana** for monitoring
+- **Jaeger** for distributed tracing
+- **GitHub Actions** for CI/CD
+
+---
+
+## PROJECT STRUCTURE REQUIREMENTS
+
+### Root Directory Structure
+```
+jaseci-learning-companion/
+├── README.md                          # Main project documentation
+├── requirements.txt                   # Global dependencies
+├── Makefile                          # Build automation
+├── .github/workflows/                 # CI/CD pipelines
+├── docs/                             # Documentation
+│   ├── SETUP_DEPLOYMENT_GUIDE.md
+│   ├── SYSTEM_ARCHITECTURE.md
+│   └── api/
+├── services/                         # Microservices architecture
+│   ├── core/                         # Core platform services
+│   │   ├── api_gateway/              # FastAPI gateway
+│   │   ├── auth_service/             # Authentication service
+│   │   ├── user_management/          # User lifecycle management
+│   │   ├── notification_service/     # Multi-channel notifications
+│   │   └── osp_graph_service/        # Graph analysis service
+│   ├── orchestrator/                 # Multi-agent orchestration
+│   │   ├── agents/                   # Specialized agents
+│   │   ├── message_bus/              # Inter-agent communication
+│   │   ├── registry/                 # Agent discovery
+│   │   └── scheduling/               # Task scheduling
+│   └── data/                         # Data management services
+├── frontend/                         # React frontend
+│   └── web-dashboard/                # Vite + React application
+│       ├── src/
+│       │   ├── components/           # Reusable UI components
+│       │   │   ├── Sidebar.tsx
+│       │   │   ├── Header.tsx
+│       │   │   └── [other components]
+│       │   ├── pages/                # Route components
+│       │   │   ├── Dashboard.tsx
+│       │   │   ├── Agents.tsx
+│       │   │   ├── Lessons.tsx
+│       │   │   ├── Quizzes.tsx
+│       │   │   ├── SkillMap.tsx
+│       │   │   ├── Monitoring.tsx
+│       │   │   └── Settings.tsx
+│       │   ├── store/                # Zustand state management
+│       │   │   ├── agentStore.ts
+│       │   │   ├── projectStore.ts
+│       │   │   └── learningStore.ts
+│       │   ├── hooks/                # Custom React hooks
+│       │   │   └── useWebSocket.ts
+│       │   ├── utils/                # Utility functions
+│       │   │   └── cn.ts
+│       │   ├── App.tsx               # Main application component
+│       │   ├── main.tsx              # Application entry point
+│       │   └── index.css             # Global styles
+│       ├── index.html                # HTML template
+│       ├── package.json              # Dependencies
+│       ├── tsconfig.json             # TypeScript configuration
+│       ├── tailwind.config.js        # Tailwind configuration
+│       └── postcss.config.js         # PostCSS configuration
+├── database/                         # Database schemas
+├── infrastructure/                   # Deployment configurations
+│   ├── docker/                       # Docker configurations
+│   ├── kubernetes/                   # K8s manifests
+│   ├── helm/                         # Helm charts
+│   └── terraform/                    # Infrastructure as code
+├── monitoring/                       # Observability stack
+│   ├── prometheus/                   # Metrics collection
+│   ├── grafana/                      # Visualization
+│   └── jaeger/                       # Tracing
+├── tests/                            # Comprehensive testing
+└── scripts/                          # Utility scripts
+```
+
+---
+
+## DESIGN SYSTEM REQUIREMENTS
+
+### Visual Design Principles
+1. **Modern Enterprise Aesthetic**: Clean, professional interface with glassmorphism effects
+2. **Gradient Backgrounds**: Primary background using `linear-gradient(135deg, #667eea 0%, #764ba2 100%)`
+3. **Glassmorphism Effects**: `backdrop-filter: blur(16px)` with semi-transparent backgrounds
+4. **Consistent Spacing**: Bootstrap spacing utilities (p-4, mb-5, gap-4)
+5. **Color Scheme**: 
+   - Primary: Blue (#667eea, #764ba2)
+   - Success: Green for completed tasks
+   - Warning: Orange for pending items
+   - Info: Purple for learning metrics
+
+### Component Styling Standards
+- **Cards**: `card` class with `shadow-lg` and `rounded-4` for modern appearance
+- **Buttons**: Bootstrap button classes with custom hover effects
+- **Typography**: Inter font family with proper font weights (300, 400, 500, 600, 700)
+- **Icons**: Font Awesome icon classes (fas fa-[icon-name])
+- **Animations**: Framer Motion for smooth transitions and micro-interactions
+
+---
+
+## DATA ARCHITECTURE
+
+### Agent Store (agentStore.ts)
+```typescript
+interface Agent {
+  id: string
+  name: string
+  type: string
+  status: 'idle' | 'running' | 'busy' | 'error' | 'stopped'
+  version: string
+  description: string
+  capabilities: string[]
+  lastActivity: string
+  performance: {
+    tasksCompleted: number
+    successRate: number
+    averageExecutionTime: number
+  }
+}
+
+// Required Functions:
+// - setAgents(agents: Agent[])
+// - addAgent(agent: Agent)
+// - updateAgentStatus(agentId: string, status: Agent['status'])
+// - removeAgent(agentId: string)
+```
+
+### Learning Store (learningStore.ts)
+```typescript
+interface LearningProgress {
+  userId: string
+  moduleId: string
+  progressPercentage: number
+  timeSpent: number
+  masteryScore: number
+  completedLessons: string[]
+  quizResults: QuizResult[]
+  streakData: {
+    currentStreak: number
+    longestStreak: number
+    lastActivityDate: string
+  }
+}
+
+interface Lesson {
+  id: string
+  title: string
+  description: string
+  difficulty: 'beginner' | 'intermediate' | 'advanced' | 'expert'
+  prerequisites: string[]
+  content: string
+  codeExercises: CodeExercise[]
+  estimatedTime: number
+  topics: string[] // walkers, OSP, byLLM, etc.
+}
+
+interface Quiz {
+  id: string
+  lessonId: string
+  questions: Question[]
+  difficulty: number
+  adaptiveDifficulty: boolean
+  generatedByLLM: boolean
+}
+```
+
+### OSP Graph Data Model
+```typescript
+interface OSPNode {
+  id: string
+  type: 'object' | 'subject' | 'concept'
+  name: string
+  masteryLevel: number // 0-100
+  dependencies: string[]
+  relatedTopics: string[]
+}
+
+interface OSPEdge {
+  source: string
+  target: string
+  relationship: 'prerequisite' | 'proficiency' | 'related'
+  weight: number
+}
+
+interface UserKnowledgeGraph {
+  userId: string
+  nodes: OSPNode[]
+  edges: OSPEdge[]
+  lastUpdated: string
+}
+```
+
+---
+
+## COMPONENT SPECIFICATIONS
+
+### 1. Main App Component (App.tsx)
+```typescript
+- Use Bootstrap flexbox: d-flex, flex-grow-1
+- Sidebar navigation with collapsible functionality
+- Header with connection status, notifications, system health
+- Main content area with proper routing
+- Background: gradient with backdrop-filter blur
+- Responsive design for all screen sizes
+```
+
+### 2. Sidebar Component
+```typescript
+Features:
+- Collapsible design (80px collapsed, 300px expanded)
+- Jaseci Learning Platform branding with logo
+- Navigation items: Dashboard, Lessons, Quizzes, Skill Map, Agents, Monitoring, Settings
+- Current page highlighting with bg-primary styling
+- User profile section at bottom with learning streak display
+- Font Awesome icons for all navigation items
+
+Styling:
+- Background: bg-white with 95% opacity and backdrop-filter blur
+- Border: border-end border-light
+- Active state: bg-primary bg-opacity-10 text-primary
+- Hover effects: smooth transitions and scale transforms
+```
+
+### 3. Dashboard Component (Main Feature)
+```typescript
+Structure:
+1. Header Section:
+   - Title: "Learning Dashboard" with gradient text
+   - Subtitle: "Track your Jaseci learning progress in real-time"
+   - Glassmorphism card with shadow and rounded corners
+
+2. Key Metrics Cards (4 cards in responsive grid):
+   - Learning Progress: Overall mastery percentage
+   - Completed Lessons: Count with streak indicator
+   - Quiz Performance: Average score percentage
+   - Current Streak: Days in a row studying
+   
+   Each card should have:
+   - Unique gradient accent colors
+   - Font Awesome icons
+   - Hover animations (scale transform)
+   - Real data from stores
+
+3. Charts Section:
+   - Progress Chart (8 columns on large screens):
+     * AreaChart with Recharts
+     * Learning progress over time
+     * Custom tooltips with glassmorphism
+     * Multiple data series (lessons, quizzes, time spent)
+   
+   - Topic Mastery Chart (4 columns on large screens):
+     * PieChart showing mastery by topic (Walkers, OSP, byLLM, etc.)
+     * Color-coded status indicators
+     * Legend with topic breakdown
+
+4. Recent Activity Timeline:
+   - Activity items with timestamps
+   - Different activity types (lesson_completed, quiz_passed, milestone_reached, recommendation)
+   - Icon indicators for each activity type
+   - Hover effects and smooth animations
+```
+
+### 4. Skill Map Component (OSP Graph Visualization)
+```typescript
+Features:
+- Interactive D3.js force-directed graph
+- Nodes represent Jaseci concepts (Walkers, OSP, byLLM, Abilities, etc.)
+- Node size indicates mastery level
+- Edge colors indicate relationship type
+- Click to view concept details
+- Zoom and pan capabilities
+- Filter by topic area
+- Highlight learning path recommendations
+```
+
+### 5. Lesson Component
+```typescript
+Features:
+- Monaco Editor integration for code exercises
+- Real-time Jac code execution feedback
+- Progress tracker within lesson
+- byLLM-powered hints and explanations
+- Code validation and testing
+- Responsive layout for reading and coding
+```
+
+### 6. Quiz Component
+```typescript
+Features:
+- Adaptive difficulty based on user mastery
+- Multiple question types (multiple choice, code completion, free text)
+- byLLM-generated questions
+- Real-time answer evaluation
+- Detailed feedback with explanations
+- Progress indicator
+- Timer (optional)
+```
+
+---
+
+## RESPONSIVE DESIGN REQUIREMENTS
+
+### Breakpoint Strategy
+- **Mobile First**: Start with mobile design
+- **Bootstrap Grid**: col-12, col-md-6, col-lg-4, col-xl-3
+- **Flexible Layout**: Cards stack vertically on mobile, side-by-side on desktop
+
+### Mobile Optimization
+- Collapsible sidebar for mobile
+- Touch-friendly button sizes (minimum 44px)
+- Optimized font sizes and spacing
+- Horizontal scroll prevention
+
+---
+
+## IMPLEMENTATION PHASES
+
+### Phase 0: Foundation Setup (Days 1-2)
+1. **Project Scaffolding**
+   - Create monorepo structure with proper organization
+   - Set up development environment with Docker Compose
+   - Initialize Git repository with proper .gitignore and README
+   - Configure CI/CD pipeline with GitHub Actions
+
+2. **Database Schema Design**
+   - PostgreSQL schema for users, progress, analytics
+   - Neo4j schema for OSP graph structures
+   - Redis configuration for caching and sessions
+   - Elasticsearch setup for search functionality
+
+3. **Infrastructure as Code**
+   - Docker Compose for local development
+   - Kubernetes manifests for production
+   - Helm charts for easy deployment
+   - Terraform modules for cloud infrastructure
+
+### Phase 1: Core Services Development (Days 3-5)
+1. **API Gateway Service** (503 lines required)
+2. **Authentication Service** (260 lines required)
+3. **User Management Service** (434 lines required)
+4. **Notification Service** (509 lines required)
+
+### Phase 2: Multi-Agent Orchestration (Days 6-8)
+1. **Orchestrator Main Service** (812 lines required)
+2. **Agent Registry** (354 lines required)
+3. **Message Bus** (423 lines required)
+4. **Task Scheduler** (407 lines required)
+
+### Phase 3: Specialized Agents Implementation (Days 9-12)
+1. **Learning Progress Agent** (657 lines required)
+2. **Quiz Generator Agent** (677 lines required)
+3. **Code Analyzer Agent** (181 lines required)
+4. **Quality Assessor Agent** (96 lines required)
+5. **Content Recommendation Agent** (94 lines required)
+6. **Analytics Agent** (117 lines required)
+
+### Phase 4: OSP Graph Service Implementation (Days 13-16)
+1. **Core OSP Service** (3,493+ lines required)
+2. **Graph Visualization Frontend** (2,218+ lines required)
+
+### Phase 5: Frontend Development (Days 17-20)
+1. **Vite + React 18 Application Setup**
+2. **Core Dashboard Components**
+3. **OSP Graph Visualization (Skill Map)**
+4. **Lesson and Quiz Components**
+5. **Monaco Editor Integration**
+
+### Phase 6: Integration & Testing (Days 21-24)
+1. **End-to-End Integration**
+2. **Performance Optimization**
+3. **Monitoring & Observability**
+
+### Phase 7: Production Deployment (Days 25-28)
+1. **Kubernetes Deployment**
+2. **Security Hardening**
+3. **Documentation & Training**
+
+---
+
+## DATABASE SCHEMA REQUIREMENTS
+
+### PostgreSQL Schema
+
+**Users Table**:
+```sql
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    username VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role VARCHAR(50) DEFAULT 'student',
+    profile JSONB,
+    preferences JSONB,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**Learning Progress Table**:
+```sql
+CREATE TABLE learning_progress (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id),
+    module_id VARCHAR(100) NOT NULL,
+    progress_percentage INTEGER DEFAULT 0,
+    time_spent INTEGER DEFAULT 0,
+    mastery_score DECIMAL(5,2) DEFAULT 0,
+    completed_at TIMESTAMP,
+    milestones JSONB,
+    streak_data JSONB,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**Lessons Table**:
+```sql
+CREATE TABLE lessons (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    difficulty VARCHAR(20) NOT NULL,
+    prerequisites JSONB,
+    content TEXT NOT NULL,
+    code_exercises JSONB,
+    estimated_time INTEGER,
+    topics VARCHAR(100)[],
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**Quiz Results Table**:
+```sql
+CREATE TABLE quiz_results (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id),
+    quiz_id VARCHAR(100) NOT NULL,
+    score INTEGER NOT NULL,
+    total_questions INTEGER NOT NULL,
+    time_taken INTEGER,
+    difficulty_level VARCHAR(20),
+    question_responses JSONB,
+    feedback JSONB,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### Neo4j Schema
+
+**OSP Graph Nodes**:
+```cypher
+// Concept nodes (Jaseci topics)
+CREATE (c:Concept {
+    id: String,
+    name: String,
+    type: String, // 'walker', 'ability', 'osp', 'byllm', etc.
+    description: String,
+    difficulty: String
+});
+
+// User Mastery nodes
+CREATE (m:Mastery {
+    userId: String,
+    conceptId: String,
+    level: Float,
+    lastUpdated: DateTime
+});
+
+// Relationships
+CREATE (c1:Concept)-[:PREREQUISITE {weight: Float}]->(c2:Concept);
+CREATE (c1:Concept)-[:RELATED_TO {strength: Float}]->(c2:Concept);
+CREATE (u:User)-[:HAS_MASTERY]->(m:Mastery)-[:OF_CONCEPT]->(c:Concept);
+```
+
+---
+
+## SECURITY REQUIREMENTS
+
+### Authentication & Authorization
+- JWT tokens with RS256 algorithm
+- Refresh token rotation
+- Role-based access control (RBAC)
+- API key management for services
+- OAuth 2.0 integration ready
+
+### Data Protection
+- Password hashing with bcrypt (cost factor 12)
+- SQL injection prevention with parameterized queries
+- XSS protection with proper input sanitization
+- CSRF protection for state-changing operations
+- Rate limiting (1000 requests/hour per user)
+
+### Network Security
+- TLS 1.3 for all communications
+- Certificate pinning for internal services
+- Network segmentation with service mesh
+- Ingress security policies
+- API gateway security headers
+
+---
+
+## MONITORING & OBSERVABILITY
+
+### Metrics Collection
+```yaml
+metrics:
+  - api_gateway_requests_total
+  - agent_execution_duration
+  - database_query_duration
+  - websocket_connections_active
+  - osp_graph_analysis_time
+  - user_session_duration
+  - lesson_completion_rate
+  - quiz_generation_time
+  - learning_progress_updates
+```
+
+### Alerting Rules
+```yaml
+alerts:
+  - agent_failure_rate > 5%
+  - api_response_time > 2s
+  - database_connection_pool > 80%
+  - websocket_disconnections > 100/hour
+  - osp_analysis_queue_size > 1000
+  - quiz_generation_failure_rate > 10%
+```
+
+---
+
+## SAMPLE DATA TO INCLUDE
+
+### Agents (6 agents)
+1. **Learning Progress Agent** (Running) - 156 tasks, 98.5% success
+2. **Quiz Generator Agent** (Idle) - 89 tasks, 95.2% success
+3. **Code Analyzer Agent** (Busy) - 234 tasks, 99.1% success
+4. **Quality Assessor Agent** (Running) - 67 tasks, 92.3% success
+5. **Content Recommendation Agent** (Idle) - 45 tasks, 88.9% success
+6. **Analytics Agent** (Running) - 123 tasks, 97.5% success
+
+### Jaseci Topics (for OSP Graph)
+1. **Walkers** - Core concept, beginner level
+2. **Abilities** - Core concept, beginner level
+3. **OSP (Object-Spatial Programming)** - Intermediate level
+4. **byLLM Decorators** - Intermediate level
+5. **Jac Client** - Advanced level
+6. **Data Spatial References** - Advanced level
+7. **Graph Operations** - Expert level
+
+### Sample Lessons
+1. **Introduction to Jac** - Beginner, 15 min
+2. **Creating Your First Walker** - Beginner, 30 min
+3. **Understanding OSP Concepts** - Intermediate, 45 min
+4. **AI Integration with byLLM** - Intermediate, 60 min
+5. **Building Interactive UIs** - Advanced, 90 min
+
+---
+
+## COMMON PITFALLS TO AVOID
+
+### 1. Framework Conflicts
+- **Avoid**: Mixing Tailwind and Bootstrap classes in same components
+- **Solution**: Choose one framework and stick with it throughout
+
+### 2. JSX Syntax Errors
+- **Avoid**: Orphaned className attributes, mismatched closing tags
+- **Solution**: Validate JSX syntax after every edit, use proper tag nesting
+
+### 3. CSS Compilation Issues
+- **Avoid**: Extra closing braces, syntax errors in CSS files
+- **Solution**: Use CSS linters, validate syntax before commit
+
+### 4. State Management Complexity
+- **Avoid**: Overcomplicated state patterns, prop drilling
+- **Solution**: Use Zustand for centralized state management
+
+### 5. Performance Issues
+- **Avoid**: Unoptimized re-renders, heavy animations
+- **Solution**: Use React.memo, optimize chart rendering
+
+### 6. OSP Graph Rendering
+- **Avoid**: Large graphs without virtualization
+- **Solution**: Implement node clustering and level-of-detail rendering
+
+---
+
+## DEBUGGING TIPS
+
+### Common Issues & Solutions
+1. **Framework conflicts**: Ensure consistent framework usage
+2. **TypeScript errors**: Check interface definitions in stores
+3. **Chart rendering issues**: Verify data structure matches Recharts expectations
+4. **Styling conflicts**: Use specific class names to avoid Bootstrap/Tailwind clashes
+5. **Build errors**: Validate CSS syntax and import paths
+6. **WebSocket connection issues**: Implement proper reconnection logic
+7. **OSP graph performance**: Use Web Workers for heavy graph calculations
+
+---
+
+## SUCCESS CRITERIA
+
+### Functional Requirements
+- [ ] All 6 specialized agents working and communicating
+- [ ] Real-time WebSocket updates across all components
+- [ ] OSP graph generation and visualization working
+- [ ] Multi-agent orchestration with proper load balancing
+- [ ] Complete user management and authentication
+- [ ] Quiz generation and progress tracking functional
+- [ ] Adaptive learning recommendations working
+- [ ] Skill map accurately reflects user mastery
+
+### Visual Requirements
+- [ ] Modern, professional enterprise appearance
+- [ ] Consistent color scheme and typography
+- [ ] Smooth animations and hover effects
+- [ ] Glassmorphism and gradient effects implemented
+- [ ] No visual glitches or layout issues
+- [ ] Responsive design on all devices
+
+### Performance Requirements
+- [ ] API response time < 200ms for 95th percentile
+- [ ] WebSocket message delivery < 50ms
+- [ ] OSP graph analysis < 5 seconds for typical code
+- [ ] Support for 1000+ concurrent users
+- [ ] 99.9% uptime SLA
+- [ ] Auto-scaling based on load
+- [ ] Fast initial load time (<3 seconds)
+- [ ] Smooth animations (60fps)
+
+### Quality Requirements
+- [ ] 80%+ test coverage across all services
+- [ ] A+ code quality rating
+- [ ] Zero critical bugs in production
+- [ ] Proper error handling and graceful degradation
+- [ ] Accessibility compliance (WCAG 2.1 AA)
+
+---
+
+## FINAL DELIVERABLES
+
+Upon completion, you should deliver:
+
+1. **Complete Source Code** - All services, frontend, and infrastructure
+2. **Deployment Scripts** - Automated deployment for all environments
+3. **Documentation Suite** - Comprehensive guides and API docs
+4. **Testing Suite** - Unit, integration, and E2E tests
+5. **Monitoring Setup** - Dashboards, alerts, and metrics
+6. **Demo Application** - Working demo with sample Jaseci lessons and quizzes
+7. **Presentation Materials** - Architecture diagrams and feature overview
+8. **JAC Learning Content** - Sample lessons covering beginner to expert topics
+
+---
+
+## JASECI/JAC TECHNICAL REQUIREMENTS
+
+All projects must:
+- Use Jac programming language as the core framework
+- Integrate at least one of these features:
+  - OSP (Object-Spatial Programming)
+  - byLLM (AI/LLM integration)
+  - Jac Client (Frontend framework)
+- Include clean GitHub repository with README
+- Provide a recorded demo showing features and workflow
+
+---
+
+**Remember**: This is an enterprise-grade project that should demonstrate professional software engineering practices, scalable architecture, and production-ready implementation. Focus on creating a system that can handle real-world usage and scale appropriately while providing an exceptional learning experience for Jaseci developers.
+Here is the assessment of the valuable features from the second prompt and the fully updated, comprehensive project prompt.
+
+### 💎 **Key Features Extracted from Prompt 2**
+
+I have identified the following specific frontend technologies and design patterns to upgrade the original prompt from "Functional" to "Modern & Engaging":
+
+1.  **Advanced UI/UX Design System**:
+
+      * **Glassmorphism**: Replacing standard Material UI flatness with modern glassmorphism (`backdrop-filter`, gradients) to make the learning platform feel futuristic.
+      * **Framer Motion**: Adding animations for gamification (unlocking lessons, leveling up) and smooth transitions.
+      * **Inter Font & Typography**: Specific typography standards for readability.
+
+2.  **Modern State Management**:
+
+      * **Zustand**: Replacing generic React state with `Zustand` for managing complex agent states and learning progress without the boilerplate of Redux.
+      * **Schema Validation**: Adding `Zod` and `React Hook Form` for robust input validation (crucial for coding exercises).
+
+3.  **Rich Data Visualization**:
+
+      * **Recharts**: Specifically using this library to visualize the "Skill Map" and "Mastery Graphs" defined in the backend.
+
+4.  **Component Architecture**:
+
+      * **Store Interfaces**: Adopting the explicit `interface` definitions for the frontend stores (e.g., `AgentStore`, `ProjectStore`).
+
+-----
+
+version 2
+
+## 📋 **PROJECT OVERVIEW: Jaseci "Neuro-Link" Learning Platform**
+
+You are tasked with creating a **next-generation, enterprise-grade Multi-Agent System (MAS)** for learning the Jaseci programming language. This project combines advanced multi-agent orchestration, real-time analytics, Code Context Graph (CCG) analysis, and a highly interactive, gamified frontend.
+
+### **Core Vision**
+
+Build an intelligent learning ecosystem that behaves like a personalized AI tutor:
+
+  - **Backend**: Jaseci (Jac) based agents utilizing Object-Spatial Programming (OSP) to model knowledge.
+  - **Frontend**: A "Glassmorphism" style React dashboard with real-time visualizations.
+  - **Logic**: Multi-agent orchestration where agents generate quizzes, evaluate code, and recommend learning paths dynamically.
+
+-----
+
+## 🏛️ **SYSTEM ARCHITECTURE**
+
+### **High-Level Architecture Components**
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   INTERACTIVE FRONTEND LAYER                │
+├─────────────────────────────────────────────────────────────┤
+│  Next.js Enterprise App      │  Monaco Code Editor          │
+│  Zustand State Store         │  Framer Motion Animations    │
+│  Recharts Skill Maps         │  WebSocket Client            │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────────┐
+│                   API GATEWAY LAYER                         │
+├─────────────────────────────────────────────────────────────┤
+│  FastAPI Gateway     │  Auth Service (OAuth2/JWT)           │
+│  Rate Limiting       │  Real-time Pub/Sub                   │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────────┐
+│             JASECI AGENT ORCHESTRATION (JAC)                │
+├─────────────────────────────────────────────────────────────┤
+│  Master Orchestrator │  Message Bus (Redis)                 │
+│  Agent Registry      │  Task Scheduler                      │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────────┐
+│               SPECIALIZED INTELLIGENT AGENTS                │
+├─────────────────────────────────────────────────────────────┤
+│  Proficiency Agent   │  Quiz Gen Agent    │  Code Evaluator │
+│  Curriculum Agent    │  Tutor Agent       │  Analytics Agent│
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────────┐
+│                   DATA & GRAPH LAYER                        │
+├─────────────────────────────────────────────────────────────┤
+│  Neo4j (OSP Graph)   │  PostgreSQL (User Data)              │
+│  Redis (Cache)       │  Elasticsearch (Search)              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+-----
+
+## 🛠️ **TECHNICAL STACK REQUIREMENTS**
+
+### **Backend Technologies (Jac & Python)**
+
+  - **Language**: Jac (Core logic) + Python 3.11+ (Infrastructure)
+  - **Framework**: FastAPI
+  - **Graph DB**: Neo4j (for Object-Spatial Programming graphs)
+  - **Orchestration**: Chain of Responsibility pattern
+  - **AI Integration**: `byLLM` capability for dynamic content generation
+  - **Storage**: PostgreSQL (Relational), Redis (Caching/PubSub)
+
+### **Frontend Technologies (Modern Stack)**
+
+  - **Framework**: Next.js 14 (App Router) + TypeScript
+  - **State Management**: **Zustand 4.4+** (Crucial for agent state syncing)
+  - **Styling**: **Tailwind CSS 3.3+** with **Glassmorphism** design principles
+  - **Animations**: **Framer Motion 10+** (for gamification and transitions)
+  - **Visualization**: **Recharts 2.8+** (for Skill Maps and Progress) & D3.js (for OSP Graph)
+  - **Forms**: **React Hook Form** + **Zod** (Schema validation)
+  - **Editor**: Monaco Editor (VS Code web part)
+
+### **Infrastructure**
+
+  - **Containerization**: Docker with multi-stage builds
+  - **Orchestration**: Kubernetes (K8s) with Helm Charts
+  - **Monitoring**: Prometheus + Grafana
+
+-----
+
+## 🎨 **DESIGN SYSTEM & UI REQUIREMENTS**
+
+### **Visual Design Principles**
+
+1.  **Glassmorphism aesthetic**: Use `backdrop-filter: blur(16px)`, semi-transparent whites/darks, and subtle borders to create depth.
+2.  **Gradient Theme**: Primary background using `linear-gradient(135deg, #667eea 0%, #764ba2 100%)` (or Jaseci brand colors).
+3.  **Typography**: Google Fonts - **Inter** for UI, **JetBrains Mono** for code blocks.
+4.  **Gamified Interactions**: Use Framer Motion for smooth progress bar fills, achievement unlocks, and page transitions.
+
+### **Frontend State Architecture (Zustand)**
+
+**Agent Store (`agentStore.ts`)**:
+
+```typescript
+interface Agent {
+  id: string;
+  name: string; // e.g., "QuizMaster", "CodeReviewer"
+  status: 'idle' | 'thinking' | 'grading' | 'error';
+  currentTask: string;
+  capabilities: string[]; // e.g., ["generate_quiz", "grade_jac"]
+}
+// Must implement: setAgents, updateStatus, subscribeToWebSocket
+```
+
+**Learning Store (`learningStore.ts`)**:
+
+```typescript
+interface SkillNode {
+  id: string; // e.g., "walker_logic"
+  masteryScore: number; // 0-100
+  prerequisites: string[];
+  status: 'locked' | 'available' | 'mastered';
+}
+// Must implement: updateProgress, unlockNode, calculateLevel
+```
+
+-----
+
+## 🏗️ **IMPLEMENTATION PHASES**
+
+### **Phase 1: Foundation & OSP Setup (Days 1-4)**
+
+  * **OSP Graph Schema**: Define Jac walkers and nodes to represent User Mastery.
+      * *Nodes*: `Concept`, `Lesson`, `Quiz`, `User`.
+      * *Edges*: `mastered`, `unlocks`, `prerequisite_of`.
+  * **Infrastructure**: Setup Docker Compose with Neo4j, Postgres, and Redis.
+  * **Backend Setup**: Initialize FastAPI with Jaseci integration.
+
+### **Phase 2: The Multi-Agent Core (Days 5-10)**
+
+Implement the following agents using Jac:
+
+1.  **Curriculum Agent**: Traverses the OSP graph to find the next "unlocked" node for the user.
+2.  **Quiz Generator (`byLLM`)**: Uses LLM to generate a question based on a specific Jaseci concept node.
+3.  **Evaluator Agent**: Takes user code/text, runs it (sandboxed) or evaluates it via LLM, and updates the OSP graph edges (proficiency).
+4.  **Orchestrator**: Manages the flow (e.g., User submits code -\> Orchestrator sends to Evaluator -\> Evaluator updates Graph -\> Curriculum Agent suggests next lesson).
+
+### **Phase 3: Frontend Core & Design (Days 11-15)**
+
+  * **Setup**: Initialize Next.js with Tailwind and generic layouts.
+  * **Glassmorphism Layout**: Create the Sidebar, Header, and Main Content area with the specified `backdrop-filter` styles.
+  * **Editor Integration**: Implement Monaco Editor for writing Jac code in the browser.
+  * **State**: Set up `Zustand` stores to hold user progress and active agent states.
+
+### **Phase 4: Visualization & Gamification (Days 16-20)**
+
+  * **Skill Map**: Use **Recharts** (Radar Chart or customized Scatter) to visualize the user's mastery of different Jaseci topics (Walkers, Arches, Spawns).
+  * **Real-time Updates**: Connect `socket.io-client` so that when an agent finishes grading, the mastery graph animates automatically using **Framer Motion**.
+  * **OSP Visualizer**: Use **D3.js** to render the actual underlying OSP graph nodes, allowing users to "see" their knowledge structure.
+
+### **Phase 5: Polish & Integration (Days 21-25)**
+
+  * **Notifications**: Use `React Hot Toast` for agent feedback (e.g., "Quiz Generated\!", "Level Up\!").
+  * **Security**: Implement JWT Auth and Role-Based Access (Student vs. Admin).
+  * **Deployment**: K8s manifests and Helm charts.
+
+-----
+
+## 📂 **PROJECT DIRECTORY STRUCTURE**
+
+```
+jaseci-learning-platform/
+├── services/
+│   ├── orchestrator/ (Jac + Python)
+│   ├── agents/       (Jac files for specific agents)
+│   ├── osp_graph/    (Neo4j interface)
+│   └── api_gateway/  (FastAPI)
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── editor/ (Monaco wrapper)
+│   │   │   ├── viz/    (Recharts & D3 components)
+│   │   │   └── ui/     (Glassmorphism cards, buttons)
+│   │   ├── store/      (Zustand definitions)
+│   │   ├── hooks/      (useWebSocket, useAgentStatus)
+│   │   └── app/        (Next.js pages)
+├── infrastructure/     (K8s, Docker, Helm)
+└── documentation/
+```
+
+-----
+
+## 🎯 **SUCCESS CRITERIA**
+
+### **Functional**
+
+  - ✅ Users can write Jac code in the browser, which is executed/graded by backend agents.
+  - ✅ The "Skill Map" updates in real-time upon quiz completion.
+  - ✅ Multi-agent negotiation is visible (e.g., "Curriculum Agent is requesting a quiz from Generator Agent").
+
+### **Visual/UX**
+
+  - ✅ Dashboard loads in \<2 seconds.
+  - ✅ Animations run at 60fps (using Framer Motion).
+  - ✅ Glassmorphism UI is consistent (no opaque generic cards).
+  - ✅ Responsive design works on Mobile and Desktop.
+
+### **Code Quality**
+
+  - ✅ Frontend: No TypeScript errors, strict mode enabled.
+  - ✅ Backend: Jac code follows best practices (use of walkers/nodes appropriately).
+  - ✅ 80%+ Unit Test Coverage.
+
+-----
+
+## 🎉 **FINAL DELIVERABLES**
+
+1.  **GitHub Repository**: Clean monorepo with backend (Jac/Python) and frontend (Next.js).
+2.  **Video Demo**: A recorded walkthrough showing a user taking a lesson, the agents generating a quiz, the user answering, and the Skill Map animating the progress update.
+3.  **Documentation**: "How to run" guide and "Architecture Explainers".
+
+
+
+### 1\. **Visual Style: "Bento Grid" Layouts + Aceternity UI**
+
+While Glassmorphism is great, the current trend for data-heavy dashboards is the **Bento Grid** (inspired by Apple and Linear). This organizes complex agent data into distinct, modular rectangular cells.
+
+**Recommendation:** Combine Glassmorphism with Bento Grids using **Aceternity UI** (a trending library compatible with Tailwind/Framer Motion).
+
+  * **Feature to Add:** "Bento Grid Dashboard Architecture"
+  * **Why:** It handles the density of information (Code Editor + Chat + Graph + Agent Status) much better than standard cards.
+  * **Specific Components to Request:**
+      * **Spotlight Effects:** When the mouse hovers over a card, a subtle spotlight follows the cursor (great for "revealing" knowledge).
+      * **Moving Border Beams:** Animated borders that travel around the active agent card to show it is "processing."
+      * **Sparkles/Meteor Effects:** Background animations when a user levels up.
+
+### 2\. **Interaction: "Generative UI" (GenUI) & Streaming**
+
+Don't just have the AI return text. Have the AI return **Interactive Components**. This is what Vercel's AI SDK is famous for.
+
+  * **Feature to Add:** "Generative UI with Vercel AI SDK"
+  * **Concept:** Instead of the Tutor Agent just saying "Here is a quiz," the Agent streams a **React Component** (a fully rendered interactive quiz button or a mini-game) directly into the chat stream.
+  * **Tech Stack Addition:** `ai/rsc` (React Server Components for AI) and `zod-stream` for structured data streaming.
+
+### 3\. **UX Feature: "Command Palette" Navigation (Cmd+K)**
+
+In developer-focused tools (which Jaseci is), mouse navigation is too slow. A global Command Palette is essential.
+
+  * **Feature to Add:** "Global Command Palette (cmdk)"
+  * **Usage:** User hits `Cmd+K` to instantly:
+      * Jump to a lesson ("Go to Walkers")
+      * Summon an agent ("Ask Quiz Agent")
+      * Toggle Dark Mode
+      * Clear Context
+  * **Library:** `cmdk` (by Pacocoursey) - the industry standard for React command menus.
+
+-----
+
+### **Updated Prompt Section to Append**
+
+Here is the text you should append to the **"TECHNICAL STACK REQUIREMENTS"** and **"DESIGN SYSTEM"** sections of your prompt to include these features:
+
+#### **Append to: Frontend Technologies**
+
+```markdown
+- **UI Component Library**: **Aceternity UI** (for high-performance micro-interactions and effects).
+- **AI Streaming**: **Vercel AI SDK (RSC)** (for streaming component-based responses, not just text).
+- **Command Menu**: **cmdk** (for keyboard-first navigation and agent summoning).
+- **Code Highlighting**: **Shiki** (lighter and prettier than PrismJS, supports server-side highlighting).
+```
+
+#### **Append to: Design System & UI Requirements**
+
+```markdown
+### **Advanced UX Patterns**
+1.  **Bento Grid Layout**: Organize the dashboard using a "Bento" methodology—modular, distinct grid cells for the Editor, Graph, and Chat that fit together like a puzzle.
+2.  **Generative UI (GenUI)**: The Chat Interface must support "Component Streaming." If the Agent wants to show a graph, it should not send text describing the graph; it should stream a `<Recharts />` component directly into the chat bubble.
+3.  **Spotlight & Border Physics**: Implement "Spotlight" hover effects on cards (where the light source follows the cursor) and "Moving Borders" to visually indicate which Agent is currently active/processing.
+4.  **Global Command Palette (Cmd+K)**: Implement a modal accessible via keyboard shortcut to allow users to jump between lessons, summon specific agents, or execute code without touching the mouse.
+```
+
+#### **Append to: Implementation Phases (Phase 3 or 4)**
+
+```markdown
+* **Command Center**: Implement the `cmdk` modal to index all available Lessons and Agent capabilities.
+* **Stream Protocol**: Upgrade the WebSocket layer to support streaming React Server Components (GenUI) so agents can render UI elements inside the chat.
+```
+
+version 3
+
+
+
+**Jaseci Interactive Learning Companion (JILC)**
+*A Next-Generation Multi-Agent Adaptive Learning Platform for Jac and Jaseci*
+
+---
+
+# 🧠 **PROJECT MISSION**
+
+Create a **production-ready, enterprise-grade, multi-agent learning ecosystem** that teaches the **Jac programming language** interactively using:
+
+* **Jac Walkers**
+* **OSP (Object-Spatial Programming) Graphs**
+* **byLLM agents**
+* **Jac-Client frontend integration**
+
+Your platform behaves as an **AI-powered personal tutor** that learns from the user’s behavior and adapts in real time.
+
+---
+
+# 🎯 **KEY OBJECTIVES**
+
+1. Encourage practical hands-on learning of Jac.
+2. Use at least **one unique Jaseci feature** in every module (OSP, byLLM, Jac-Client).
+3. Provide AI-driven personalized feedback using **multi-agent orchestration**.
+4. Build an adaptive learning curriculum powered by **an OSP Knowledge Graph**.
+5. Deliver a production-quality system with clean GitHub structure and documentation.
+
+---
+
+# 🏛️ **SYSTEM OVERVIEW**
+
+The platform consists of:
+
+### **A. Backend (Jac + Jaseci Supernode)**
+
+* Models: users, lessons, quizzes, concept graph nodes
+* Walkers:
+
+  * `record_progress`
+  * `update_mastery`
+  * `generate_quiz` (byLLM)
+  * `evaluate_answer` (byLLM)
+  * `recommend_next_lesson`
+* OSP Graph representing skill mastery
+* Multi-agent logic implemented using multiple walkers acting as agents
+
+### **B. Frontend (Jac-Client + React / Next.js)**
+
+* Interactive coding environment (Monaco/CodeMirror)
+* Lesson modules, quizzes, leaderboards
+* WebSocket progress updates
+* Visual Skill Map (using D3.js)
+
+### **C. Adaptive Learning Logic**
+
+* AI evaluates concept mastery
+* Determines difficulty levels
+* Unlocks lessons
+* Highlights weak areas
+* Suggests revisions or challenges
+
+All adapted from the learner’s OSP Knowledge Graph.
+
+---
+
+# 🧩 **CORE SYSTEM COMPONENTS**
+
+## **1. Multi-Agent System**
+
+Minimum **6 specialized agents**:
+
+| Agent                        | Responsibility                  |
+| ---------------------------- | ------------------------------- |
+| Learning Progress Agent      | Tracks improvements & scores    |
+| Quiz Generator Agent         | Creates quizzes using byLLM     |
+| Answer Evaluator Agent       | Evaluates free-text answers     |
+| Code Analyzer Agent          | Generates CCG & detects issues  |
+| Content Recommendation Agent | Suggests next lesson            |
+| Analytics Agent              | Monitors user behavior & trends |
+
+Implemented using Jac walkers + orchestrator walker.
+
+---
+
+## **2. Object-Spatial (OSP) Knowledge Graph**
+
+Nodes represent concepts:
+
+* variables
+* walkers
+* arch.jac
+* OSP
+* byLLM
+* semantics
+* actions
+* edges = prerequisites or mastery score links
+
+Graph is stored in:
+
+* Neo4j (optional) OR
+* Jac’s internal graph (recommended for Jaseci-compliance)
+
+---
+
+## **3. Frontend Learning Portal**
+
+Built using:
+
+* **Jac-Client**
+* **Next.js / React**
+* **TailwindCSS + Material UI**
+* **D3.js** for graph visualization
+
+Includes:
+
+* Dashboard
+* Skill Map
+* Lesson Reader
+* Code Console
+* Quiz Engine
+* Achievement system
+
+---
+
+# 🏗️ **SCAFFOLDING REQUIREMENTS**
+
+## **Root Folder Structure**
+
+```
+jaseci-learning-companion/
+├── backend/
+│   ├── jac/
+│   │   ├── models.jac
+│   │   ├── walkers/
+│   │   │   ├── progress.jac
+│   │   │   ├── quiz.jac
+│   │   │   ├── evaluator.jac
+│   │   │   ├── recommendation.jac
+│   │   │   ├── analytics.jac
+│   │   │   └── orchestrator.jac
+│   └── config/
+│       ├── settings.json
+│       └── secrets.json
+├── frontend/
+│   ├── web/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── utils/
+│   │   └── styles/
+│   └── jac-client/
+├── database/
+│   ├── user_schema.sql
+│   ├── redis.conf
+│   └── osp_schema.cypher
+├── docs/
+│   ├── SYSTEM_ARCHITECTURE.md
+│   ├── API_REFERENCE.md
+│   └── GRAPH_MODEL.md
+└── README.md
+```
+
+---
+
+# 🧬 **DETAILED IMPLEMENTATION SPECS**
+
+## **Phase 1 – Foundation (Days 1–3)**
+
+* Setup Jaseci supernode
+* Setup Jac project
+* Setup frontend with Jac-Client
+* Configure Redis, PostgreSQL, Neo4j (optional)
+* Setup WebSocket communication
+
+---
+
+## **Phase 2 – OSP Knowledge Graph (Days 3–6)**
+
+Implement:
+
+* Node creation
+* Edge creation
+* Mastery weight updates
+* Graph serialization & REST access
+
+Walkers required:
+
+```jac
+walker add_concept_node;
+walker create_relation;
+walker get_skill_map;
+walker update_mastery_score;
+```
+
+---
+
+## **Phase 3 – Multi-Agent System (Days 6–10)**
+
+### **Orchestrator Walker**
+
+Routes tasks to agents:
+
+```jac
+walker orchestrator {
+    can route_task;
+    can delegate_to_agent;
+}
+```
+
+### **Agents**
+
+6–8 walkers functioning as agents:
+
+* `progress_agent`
+* `quiz_agent` (uses byLLM)
+* `evaluation_agent` (uses byLLM)
+* `analysis_agent`
+* `recommendation_agent`
+* `analytics_agent`
+
+---
+
+## **Phase 4 – Adaptive Learning Engine (Days 10–14)**
+
+* Analyze learner history
+* Analyze concept graph slopes
+* Provide personalized messaging
+* Predict difficulty for next quiz
+* Recommend learning path
+
+---
+
+## **Phase 5 – Frontend UI/UX (Days 14–19)**
+
+### Must include:
+
+* Skill Map (D3.js)
+* Code Editor (Monaco)
+* Lesson Player
+* Quiz Engine
+* Achievement System
+* WebSocket-driven Dashboard
+
+---
+
+## **Phase 6 – Testing & Deployment (Days 19–24)**
+
+* Integration tests
+* Load testing
+* Docker containerization
+* CI/CD with GitHub Actions
+* Production deploy
+* Logging and monitoring
+
+---
+
+# 💡 **OUTPUT REQUIREMENTS**
+
+Deliverables must include:
+
+1. Clean GitHub repository
+2. README with installation & usage
+3. Recorded demo walkthrough
+4. Full documentation
+5. Example Jac lessons
+6. Example quizzes
+7. Multi-agent workflows diagram
+
+---
+
+# 🎁 **SIMPLE SUMMARY FOR THE LLM**
+
+"Create an adaptive, multi-agent, personalized learning platform for the Jac language using Jaseci features (OSP, byLLM, Jac-Client). Use an OSP knowledge graph to model learning mastery. Build multi-agent orchestration using Jac walkers. Provide frontend with lessons, quizzes, graphs, skill visualization, and real-time progress. The system must be production-grade with clean architecture, documentation, and demo."
+
+

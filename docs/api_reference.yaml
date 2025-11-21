@@ -1,0 +1,1048 @@
+openapi: 3.0.3
+info:
+  title: JAC Interactive Learning Platform API
+  description: |
+    Comprehensive API for the JAC Interactive Learning Platform featuring multi-agent adaptive learning, 
+    real-time code execution, and personalized educational experiences.
+    
+    ## Authentication
+    This API uses JWT (JSON Web Tokens) for authentication. Include the token in the Authorization header:
+    ```
+    Authorization: Bearer <your_jwt_token>
+    ```
+    
+    ## Rate Limiting
+    - Authentication endpoints: 5 requests per minute
+    - General API endpoints: 100 requests per minute
+    - Code execution endpoints: 10 requests per minute
+    
+    ## Error Handling
+    All endpoints return standard HTTP status codes and consistent error response format.
+    
+  version: 1.0.0
+  contact:
+    name: Cavin Otieno
+    email: cavin.otieno012@gmail.com
+    url: https://github.com/OumaCavin/jac-interactive-learning-platform
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: https://api.jac-platform.com/v1
+    description: Production server
+  - url: https://staging-api.jac-platform.com/v1
+    description: Staging server
+  - url: http://localhost:8000/api/v1
+    description: Development server
+
+security:
+  - bearerAuth: []
+
+paths:
+  /auth/register/:
+    post:
+      tags:
+        - Authentication
+      summary: User Registration
+      description: Register a new user account with email and password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+                - first_name
+                - last_name
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                password:
+                  type: string
+                  minLength: 8
+                  example: SecurePassword123!
+                first_name:
+                  type: string
+                  maxLength: 50
+                  example: John
+                last_name:
+                  type: string
+                  maxLength: 50
+                  example: Doe
+      responses:
+        '201':
+          description: User successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                  tokens:
+                    $ref: '#/components/schemas/TokenPair'
+        '400':
+          description: Invalid input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/login/:
+    post:
+      tags:
+        - Authentication
+      summary: User Login
+      description: Authenticate user and receive JWT tokens
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Successfully authenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                  tokens:
+                    $ref: '#/components/schemas/TokenPair'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/refresh/:
+    post:
+      tags:
+        - Authentication
+      summary: Refresh JWT Token
+      description: Refresh access token using refresh token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refresh
+              properties:
+                refresh:
+                  type: string
+      responses:
+        '200':
+          description: Token refreshed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access:
+                    type: string
+                  refresh:
+                    type: string
+        '401':
+          description: Invalid refresh token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /content/:
+    get:
+      tags:
+        - Content Management
+      summary: Get Learning Content
+      description: Retrieve curated learning content for a specific topic
+      parameters:
+        - name: topic
+          in: query
+          description: Topic identifier
+          required: true
+          schema:
+            type: string
+            example: "variables-basics"
+        - name: difficulty
+          in: query
+          description: Difficulty level
+          schema:
+            type: string
+            enum: [beginner, intermediate, advanced]
+            example: beginner
+        - name: format
+          in: query
+          description: Response format
+          schema:
+            type: string
+            enum: [json, markdown, html]
+            default: json
+      responses:
+        '200':
+          description: Learning content retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    $ref: '#/components/schemas/LearningContent'
+                  metadata:
+                    $ref: '#/components/schemas/ContentMetadata'
+        '400':
+          description: Invalid topic or parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Content not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /content/{content_id}:
+    get:
+      tags:
+        - Content Management
+      summary: Get Specific Content
+      description: Retrieve detailed information about a specific content item
+      parameters:
+        - name: content_id
+          in: path
+          required: true
+          description: Unique content identifier
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Content details retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    $ref: '#/components/schemas/LearningContent'
+                  related_content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LearningContent'
+                  prerequisites:
+                    type: array
+                    items:
+                      type: string
+        '404':
+          description: Content not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /quizzes/generate/:
+    post:
+      tags:
+        - Assessment
+      summary: Generate Adaptive Quiz
+      description: Generate a personalized quiz based on user progress and learning objectives
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - topic
+                - question_count
+              properties:
+                topic:
+                  type: string
+                  description: Topic for quiz generation
+                  example: "loops-and-iterations"
+                question_count:
+                  type: integer
+                  minimum: 1
+                  maximum: 20
+                  default: 10
+                  example: 10
+                difficulty:
+                  type: string
+                  enum: [adaptive, beginner, intermediate, advanced]
+                  default: adaptive
+                  description: Difficulty level or adaptive based on user performance
+                quiz_type:
+                  type: string
+                  enum: [multiple_choice, code_completion, debugging, conceptual]
+                  default: mixed
+                  example: mixed
+                time_limit:
+                  type: integer
+                  description: Time limit in minutes (0 for no limit)
+                  default: 0
+                  example: 30
+      responses:
+        '201':
+          description: Quiz generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  quiz:
+                    $ref: '#/components/schemas/Quiz'
+                  session_id:
+                    type: string
+                    description: Unique session identifier for tracking quiz attempt
+        '400':
+          description: Invalid quiz parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /quizzes/{quiz_id}/submit/:
+    post:
+      tags:
+        - Assessment
+      summary: Submit Quiz Answers
+      description: Submit quiz answers and receive evaluation
+      parameters:
+        - name: quiz_id
+          in: path
+          required: true
+          description: Quiz identifier
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - answers
+                - session_id
+              properties:
+                session_id:
+                  type: string
+                answers:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Answer'
+                completion_time:
+                  type: integer
+                  description: Time taken to complete quiz in seconds
+      responses:
+        '200':
+          description: Quiz evaluated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    $ref: '#/components/schemas/QuizResults'
+                  feedback:
+                    $ref: '#/components/schemas/Feedback'
+                  next_recommendations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LearningContent'
+        '400':
+          description: Invalid submission data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /code/execute/:
+    post:
+      tags:
+        - Code Execution
+      summary: Execute JAC Code
+      description: Execute JAC programming language code in a secure sandbox environment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - code
+                - language
+              properties:
+                code:
+                  type: string
+                  description: JAC code to execute
+                  example: |
+                    walker main {
+                        spawn here;
+                        init: {
+                            print("Hello from JAC!");
+                        }
+                    }
+                language:
+                  type: string
+                  enum: [jac, python]
+                  example: jac
+                input_data:
+                  type: object
+                  description: Optional input data for the program
+                  example: {}
+                timeout:
+                  type: integer
+                  description: Execution timeout in seconds
+                  default: 30
+                  minimum: 1
+                  maximum: 300
+                  example: 30
+                memory_limit:
+                  type: integer
+                  description: Memory limit in MB
+                  default: 128
+                  minimum: 16
+                  maximum: 1024
+                  example: 128
+      responses:
+        '200':
+          description: Code executed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  output:
+                    type: string
+                    description: Program output
+                  error:
+                    type: string
+                    description: Error messages (if any)
+                  execution_time:
+                    type: number
+                    description: Execution time in seconds
+                  memory_usage:
+                    type: integer
+                    description: Peak memory usage in MB
+                  success:
+                    type: boolean
+        '400':
+          description: Invalid code or execution parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Code compilation/validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Compilation error details
+                  line_number:
+                    type: integer
+                    description: Line number of error (if applicable)
+                  suggestions:
+                    type: array
+                    items:
+                      type: string
+
+  /progress/{user_id}:
+    get:
+      tags:
+        - Progress Tracking
+      summary: Get User Progress
+      description: Retrieve comprehensive learning progress and analytics for a user
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: User identifier
+          schema:
+            type: string
+            format: uuid
+        - name: time_range
+          in: query
+          description: Time range for progress data
+          schema:
+            type: string
+            enum: [week, month, quarter, year, all]
+            default: month
+        - name: include_details
+          in: query
+          description: Include detailed progress breakdown
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: User progress retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  progress:
+                    $ref: '#/components/schemas/UserProgress'
+                  analytics:
+                    $ref: '#/components/schemas/ProgressAnalytics'
+                  achievements:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Achievement'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /graph/knowledge/:
+    get:
+      tags:
+        - Knowledge Graph
+      summary: Get Knowledge Graph
+      description: Retrieve the Object-Spatial Programming (OSP) knowledge graph for JAC concepts
+      parameters:
+        - name: topic
+          in: query
+          description: Root topic for graph traversal
+          schema:
+            type: string
+            example: "core-concepts"
+        - name: depth
+          in: query
+          description: Maximum graph traversal depth
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+            default: 3
+        - name: include_relationships
+          in: query
+          description: Include concept relationships
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Knowledge graph retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nodes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConceptNode'
+                  edges:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConceptEdge'
+                  metadata:
+                    $ref: '#/components/schemas/GraphMetadata'
+
+  /analytics/insights/:
+    get:
+      tags:
+        - Analytics
+      summary: Get Learning Insights
+      description: Retrieve AI-powered learning insights and recommendations
+      parameters:
+        - name: user_id
+          in: query
+          required: true
+          description: User identifier
+          schema:
+            type: string
+            format: uuid
+        - name: insight_type
+          in: query
+          description: Type of insights to retrieve
+          schema:
+            type: string
+            enum: [learning_patterns, difficulty_analysis, time_optimization, skill_gaps, recommendations]
+            default: recommendations
+      responses:
+        '200':
+          description: Learning insights retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  insights:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LearningInsight'
+                  recommendations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ContentRecommendation'
+                  confidence_score:
+                    type: number
+                    minimum: 0
+                    maximum: 1
+                    description: AI confidence in recommendations
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        profile:
+          $ref: '#/components/schemas/UserProfile'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        last_login:
+          type: string
+          format: date-time
+
+    UserProfile:
+      type: object
+      properties:
+        learning_style:
+          type: string
+          enum: [visual, auditory, kinesthetic, reading]
+        preferred_difficulty:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        learning_pace:
+          type: string
+          enum: [slow, moderate, fast]
+        timezone:
+          type: string
+          example: "America/New_York"
+
+    TokenPair:
+      type: object
+      properties:
+        access:
+          type: string
+          description: JWT access token
+        refresh:
+          type: string
+          description: JWT refresh token
+        expires_in:
+          type: integer
+          description: Token expiration time in seconds
+
+    LearningContent:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        content_type:
+          type: string
+          enum: [text, video, interactive, code_example, tutorial]
+        difficulty_level:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        estimated_duration:
+          type: integer
+          description: Estimated completion time in minutes
+        prerequisites:
+          type: array
+          items:
+            type: string
+        objectives:
+          type: array
+          items:
+            type: string
+        content_body:
+          type: string
+          description: Main content in markdown format
+        code_examples:
+          type: array
+          items:
+            type: object
+            properties:
+              language:
+                type: string
+              code:
+                type: string
+              explanation:
+                type: string
+        interactive_elements:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              content:
+                type: string
+              solution:
+                type: string
+
+    ContentMetadata:
+      type: object
+      properties:
+        topic_category:
+          type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        quality_score:
+          type: number
+          minimum: 0
+          maximum: 1
+        last_updated:
+          type: string
+          format: date-time
+        author:
+          type: string
+
+    Quiz:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        time_limit:
+          type: integer
+          description: Time limit in seconds
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+        instructions:
+          type: string
+        difficulty_level:
+          type: string
+          enum: [beginner, intermediate, advanced]
+
+    Question:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        question_type:
+          type: string
+          enum: [multiple_choice, code_completion, debugging, conceptual, fill_blank]
+        question_text:
+          type: string
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              text:
+                type: string
+              is_correct:
+                type: boolean
+        correct_answer:
+          type: string
+          description: Correct answer or answer key
+        explanation:
+          type: string
+        difficulty_score:
+          type: number
+          minimum: 0
+          maximum: 1
+        tags:
+          type: array
+          items:
+            type: string
+
+    Answer:
+      type: object
+      properties:
+        question_id:
+          type: string
+          format: uuid
+        answer:
+          type: string
+        time_spent:
+          type: integer
+          description: Time spent on this question in seconds
+
+    QuizResults:
+      type: object
+      properties:
+        total_questions:
+          type: integer
+        correct_answers:
+          type: integer
+        score:
+          type: number
+          minimum: 0
+          maximum: 100
+        percentage:
+          type: number
+          minimum: 0
+          maximum: 100
+        time_taken:
+          type: integer
+          description: Total time taken in seconds
+        performance_rating:
+          type: string
+          enum: [excellent, good, satisfactory, needs_improvement]
+
+    Feedback:
+      type: object
+      properties:
+        overall_feedback:
+          type: string
+        strengths:
+          type: array
+          items:
+            type: string
+        areas_for_improvement:
+          type: array
+          items:
+            type: string
+        next_steps:
+          type: array
+          items:
+            type: string
+        performance_breakdown:
+          type: object
+          additionalProperties:
+            type: number
+            minimum: 0
+            maximum: 100
+
+    UserProgress:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        completed_topics:
+          type: array
+          items:
+            type: string
+        current_level:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        total_study_time:
+          type: integer
+          description: Total study time in minutes
+        streak_days:
+          type: integer
+          description: Current learning streak
+        last_activity:
+          type: string
+          format: date-time
+        mastery_scores:
+          type: object
+          additionalProperties:
+            type: number
+            minimum: 0
+            maximum: 100
+
+    ProgressAnalytics:
+      type: object
+      properties:
+        learning_velocity:
+          type: number
+          description: Topics completed per week
+        consistency_score:
+          type: number
+          minimum: 0
+          maximum: 1
+        difficulty_progression:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              average_difficulty:
+                type: number
+        weak_areas:
+          type: array
+          items:
+            type: object
+            properties:
+              topic:
+                type: string
+              score:
+                type: number
+        strong_areas:
+          type: array
+          items:
+            type: object
+            properties:
+              topic:
+                type: string
+              score:
+                type: number
+
+    Achievement:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        badge_icon:
+          type: string
+        earned_date:
+          type: string
+          format: date-time
+        category:
+          type: string
+          enum: [completion, consistency, challenge, speed]
+
+    ConceptNode:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        type:
+          type: string
+          enum: [concept, skill, tool, application]
+        description:
+          type: string
+        difficulty_level:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        importance_score:
+          type: number
+          minimum: 0
+          maximum: 1
+
+    ConceptEdge:
+      type: object
+      properties:
+        source:
+          type: string
+        target:
+          type: string
+        relationship:
+          type: string
+          enum: [prerequisite, builds_upon, relates_to, applies_to]
+        strength:
+          type: number
+          minimum: 0
+          maximum: 1
+
+    GraphMetadata:
+      type: object
+      properties:
+        total_nodes:
+          type: integer
+        total_edges:
+          type: integer
+        average_difficulty:
+          type: number
+        coverage_percentage:
+          type: number
+          description: Percentage of curriculum covered
+
+    LearningInsight:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+        actionable_recommendations:
+          type: array
+          items:
+            type: string
+
+    ContentRecommendation:
+      type: object
+      properties:
+        content_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        reason:
+          type: string
+        priority_score:
+          type: number
+          minimum: 0
+          maximum: 1
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+      example:
+        error:
+          code: "VALIDATION_ERROR"
+          message: "Invalid input parameters"
+          details: "The 'topic' parameter is required and must be a valid string"

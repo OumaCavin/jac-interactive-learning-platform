@@ -1,0 +1,15 @@
+Watching for file changes with StatReloader
+/workspace/backend/config/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /
+"GET / HTTP/1.1" 404 3516
+- Broken pipe from ('127.0.0.1', 35548)
+Not Found: /admin/
+"GET /admin/ HTTP/1.1" 404 3552
+- Broken pipe from ('127.0.0.1', 47952)
+Not Found: /
+"GET / HTTP/1.1" 404 3516
+Not Found: /admin/
+"GET /admin/ HTTP/1.1" 404 3552

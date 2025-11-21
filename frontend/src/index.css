@@ -1,0 +1,289 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables for dynamic theming */
+:root {
+  /* Glassmorphism Variables */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-bg-strong: rgba(255, 255, 255, 0.15);
+  --glass-bg-light: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-border-light: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --glass-shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --glass-inner-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  
+  /* Gradient Variables */
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --success-gradient: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  --warning-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  --error-gradient: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+  --glass-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  
+  /* Dark mode variables */
+  --dark-glass-bg: rgba(255, 255, 255, 0.05);
+  --dark-glass-bg-strong: rgba(255, 255, 255, 0.08);
+  --dark-glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* Dark mode body */
+.dark body {
+  color: #f5f5f5;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+}
+
+/* Glassmorphism utility classes */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-inner-shadow);
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-lg), var(--glass-inner-shadow);
+}
+
+.glass-light {
+  background: var(--glass-bg-light);
+  backdrop-filter: blur(8px) saturate(150%);
+  border: 1px solid var(--glass-border-light);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Dark mode glassmorphism */
+.dark .glass {
+  background: var(--dark-glass-bg);
+  border-color: var(--dark-glass-border);
+}
+
+.dark .glass-strong {
+  background: var(--dark-glass-bg-strong);
+  border-color: var(--dark-glass-border);
+}
+
+/* Card styles */
+.glass-card {
+  @apply glass rounded-2xl p-6 transition-all duration-300 hover:shadow-glow;
+}
+
+.glass-card-strong {
+  @apply glass-strong rounded-2xl p-6 transition-all duration-300 hover:shadow-glow-lg;
+}
+
+/* Button styles */
+.glass-button {
+  @apply glass rounded-xl px-6 py-3 text-white font-medium transition-all duration-300;
+  @apply hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/30;
+  @apply active:scale-95 backdrop-blur-xl;
+}
+
+.glass-button-primary {
+  @apply glass-button;
+  background: var(--primary-gradient);
+  border: none;
+}
+
+.glass-button-primary:hover {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+}
+
+/* Text selection */
+::selection {
+  background: rgba(99, 102, 241, 0.3);
+  color: white;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--glass-bg-strong);
+  border-radius: 4px;
+  border: 1px solid var(--glass-border-light);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Custom animations */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 5px rgba(99, 102, 241, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+  }
+}
+
+/* Loading states */
+.loading-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+/* Code syntax highlighting */
+.code-block {
+  @apply glass rounded-lg p-4 font-mono text-sm overflow-x-auto;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .code-block {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Progress bars */
+.progress-glass {
+  @apply glass rounded-full h-2 overflow-hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--primary-gradient);
+  border-radius: inherit;
+  transition: width 0.3s ease;
+}
+
+/* Focus styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50;
+}
+
+/* Transition utilities */
+.transition-glass {
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Responsive utilities */
+.container-glass {
+  @apply mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Utility classes */
+.text-gradient {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-gradient-glass {
+  background: var(--glass-gradient);
+}
+
+.bg-gradient-primary {
+  background: var(--primary-gradient);
+}
+
+.shadow-glass {
+  box-shadow: var(--glass-shadow);
+}
+
+/* Animation classes */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Monaco Editor theming */
+.monaco-editor .margin {
+  background: transparent !important;
+}
+
+.monaco-editor .monaco-editor-background {
+  background: transparent !important;
+}
+
+/* React Query loading states */
+.loading-dots::after {
+  content: '';
+  animation: loading-dots 1.5s infinite;
+}
+
+@keyframes loading-dots {
+  0%, 20% { content: '.'; }
+  40% { content: '..'; }
+  60% { content: '...'; }
+  90%, 100% { content: ''; }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .glass,
+  .glass-strong,
+  .glass-light {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+}

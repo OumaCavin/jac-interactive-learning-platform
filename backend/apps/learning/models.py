@@ -1,0 +1,532 @@
+"""
+Models for the Learning app.
+Core learning management models for JAC learning platform.
+"""
+
+from django.db import models
+from django.contrib.auth import get_user_model
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils import timezone
+import uuid
+
+User = get_user_model()
+
+
+class LearningPath(models.Model):
+    """
+    Represents a learning path - a structured sequence of modules.
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=200)
+    description = models.TextField()
+    difficulty_level = models.CharField(
+        max_length=20,
+        choices=[
+            ('beginner', 'Beginner'),
+            ('intermediate', 'Intermediate'),
+            ('advanced', 'Advanced'),
+        ],
+        default='beginner'
+    )
+    estimated_duration = models.PositiveIntegerField(help_text='Estimated duration in hours')
+    prerequisites = models.JSONField(default=list, blank=True, help_text='List of prerequisite module IDs')
+    
+    # Content
+    cover_image = models.ImageField(upload_to='learning-paths/covers/', blank=True, null=True)
+    tags = models.JSONField(default=list, blank=True)
+    
+    # Metadata
+    is_published = models.BooleanField(default=False)
+    is_featured = models.BooleanField(default=False)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_paths')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_learning_path'
+        ordering = ['name']
+        indexes = [
+            models.Index(fields=['difficulty_level']),
+            models.Index(fields=['is_published']),
+            models.Index(fields=['is_featured']),
+            models.Index(fields=['created_at']),
+        ]
+    
+    def __str__(self):
+        return self.name
+    
+    @property
+    def module_count(self):
+        """Get total number of modules in this path."""
+        return self.modules.count()
+    
+    @property
+    def completed_by_users(self):
+        """Get number of users who completed this path."""
+        return UserLearningPath.objects.filter(
+            learning_path=self, 
+            status='completed'
+        ).count()
+    
+    @property
+    def average_rating(self):
+        """Get average rating for this path."""
+        from django.db.models import Avg
+        return PathRating.objects.filter(learning_path=self).aggregate(
+            avg_rating=Avg('rating')
+        )['avg_rating'] or 0
+
+
+class Module(models.Model):
+    """
+    Represents a learning module within a learning path.
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    learning_path = models.ForeignKey(LearningPath, on_delete=models.CASCADE, related_name='modules')
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    
+    # Content
+    content = models.TextField(help_text='Main module content in markdown or rich text')
+    content_type = models.CharField(
+        max_length=20,
+        choices=[
+            ('markdown', 'Markdown'),
+            ('html', 'HTML'),
+            ('interactive', 'Interactive Content'),
+            ('jac_code', 'JAC Code Tutorial'),
+        ],
+        default='markdown'
+    )
+    
+    # Structure
+    order = models.PositiveIntegerField()
+    duration_minutes = models.PositiveIntegerField()
+    difficulty_rating = models.PositiveIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
+        help_text='Difficulty rating from 1 (easiest) to 5 (hardest)'
+    )
+    
+    # JAC-specific content
+    jac_concepts = models.JSONField(default=list, blank=True, help_text='JAC concepts covered in this module')
+    code_examples = models.JSONField(default=list, blank=True)
+    
+    # Interactive elements
+    has_quiz = models.BooleanField(default=False)
+    has_coding_exercise = models.BooleanField(default=False)
+    has_visual_demo = models.BooleanField(default=False)
+    
+    # Metadata
+    is_published = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_module'
+        ordering = ['learning_path', 'order']
+        unique_together = ['learning_path', 'order']
+        indexes = [
+            models.Index(fields=['learning_path', 'order']),
+            models.Index(fields=['difficulty_rating']),
+            models.Index(fields=['is_published']),
+        ]
+    
+    def __str__(self):
+        return f"{self.learning_path.name} - {self.title}"
+    
+    @property
+    def completion_rate(self):
+        """Get completion rate for this module."""
+        from django.db.models import Count
+        total_users = UserModuleProgress.objects.filter(module=self).count()
+        if total_users == 0:
+            return 0
+        completed_users = UserModuleProgress.objects.filter(
+            module=self, 
+            status='completed'
+        ).count()
+        return (completed_users / total_users) * 100
+    
+    @property
+    def average_score(self):
+        """Get average quiz/score for this module."""
+        from django.db.models import Avg
+        from apps.assessments.models import AssessmentAttempt
+        return AssessmentAttempt.objects.filter(
+            module=self
+        ).aggregate(avg_score=Avg('score'))['avg_score'] or 0
+
+
+class UserLearningPath(models.Model):
+    """
+    Tracks user progress through learning paths.
+    """
+    STATUS_CHOICES = [
+        ('not_started', 'Not Started'),
+        ('in_progress', 'In Progress'),
+        ('completed', 'Completed'),
+        ('paused', 'Paused'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='learning_paths')
+    learning_path = models.ForeignKey(LearningPath, on_delete=models.CASCADE, related_name='user_progress')
+    
+    # Progress tracking
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='not_started')
+    progress_percentage = models.PositiveIntegerField(default=0)
+    current_module_order = models.PositiveIntegerField(default=0)
+    
+    # Timing
+    started_at = models.DateTimeField(null=True, blank=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+    last_activity_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_user_learning_path'
+        unique_together = ['user', 'learning_path']
+        indexes = [
+            models.Index(fields=['user', 'status']),
+            models.Index(fields=['status', 'last_activity_at']),
+        ]
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.learning_path.name}"
+    
+    def start_path(self):
+        """Mark path as started."""
+        if self.status == 'not_started':
+            self.status = 'in_progress'
+            self.started_at = timezone.now()
+            self.save()
+    
+    def complete_path(self):
+        """Mark path as completed."""
+        self.status = 'completed'
+        self.progress_percentage = 100
+        self.completed_at = timezone.now()
+        self.save()
+    
+    def get_completion_percentage(self):
+        """Calculate current completion percentage."""
+        total_modules = self.learning_path.module_count
+        if total_modules == 0:
+            return 0
+        
+        completed_modules = UserModuleProgress.objects.filter(
+            user=self.user,
+            module__learning_path=self.learning_path,
+            status='completed'
+        ).count()
+        
+        return (completed_modules / total_modules) * 100
+
+
+class UserModuleProgress(models.Model):
+    """
+    Tracks user progress through individual modules.
+    """
+    STATUS_CHOICES = [
+        ('not_started', 'Not Started'),
+        ('in_progress', 'In Progress'),
+        ('completed', 'Completed'),
+        ('skipped', 'Skipped'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='module_progress')
+    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='user_progress')
+    
+    # Progress tracking
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='not_started')
+    time_spent = models.DurationField(default=0)
+    progress_percentage = models.PositiveIntegerField(default=0)
+    
+    # Scores and performance
+    quiz_score = models.PositiveIntegerField(null=True, blank=True)
+    coding_score = models.PositiveIntegerField(null=True, blank=True)
+    overall_score = models.PositiveIntegerField(null=True, blank=True)
+    
+    # Notes and feedback
+    user_notes = models.TextField(blank=True)
+    feedback = models.TextField(blank=True)
+    
+    # Timing
+    started_at = models.DateTimeField(null=True, blank=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+    last_activity_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_user_module_progress'
+        unique_together = ['user', 'module']
+        indexes = [
+            models.Index(fields=['user', 'status']),
+            models.Index(fields=['module', 'status']),
+            models.Index(fields=['status', 'last_activity_at']),
+        ]
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.module.title}"
+    
+    def start_module(self):
+        """Mark module as started."""
+        if self.status == 'not_started':
+            self.status = 'in_progress'
+            self.started_at = timezone.now()
+            self.save()
+    
+    def complete_module(self):
+        """Mark module as completed."""
+        self.status = 'completed'
+        self.progress_percentage = 100
+        self.completed_at = timezone.now()
+        self.save()
+        
+        # Update overall path progress
+        user_path = UserLearningPath.objects.get(
+            user=self.user,
+            learning_path=self.module.learning_path
+        )
+        user_path.progress_percentage = user_path.get_completion_percentage()
+        user_path.current_module_order = max(
+            user_path.current_module_order, 
+            self.module.order
+        )
+        user_path.save()
+        
+        # Update user statistics (commented out for default User model)
+        # self.user.total_modules_completed += 1
+        # self.user.total_time_spent += self.time_spent
+        # self.user.add_points(10)  # Points for completing a module
+        # self.user.update_streak()
+        # self.user.save()
+    
+    def add_time_spent(self, minutes):
+        """Add time spent to the module."""
+        from datetime import timedelta
+        self.time_spent += timedelta(minutes=minutes)
+        self.save()
+        
+        # Update user total time (commented out for default User model)
+        # self.user.total_time_spent += timedelta(minutes=minutes)
+        # self.user.save()
+
+
+class PathRating(models.Model):
+    """
+    User ratings and reviews for learning paths.
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='path_ratings')
+    learning_path = models.ForeignKey(LearningPath, on_delete=models.CASCADE, related_name='ratings')
+    
+    rating = models.PositiveIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
+        help_text='Rating from 1 (poor) to 5 (excellent)'
+    )
+    review = models.TextField(blank=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_path_rating'
+        unique_together = ['user', 'learning_path']
+        indexes = [
+            models.Index(fields=['learning_path', 'rating']),
+        ]
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.learning_path.name} ({self.rating}/5)"
+
+
+class LearningRecommendation(models.Model):
+    """
+    AI-generated learning recommendations for users.
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recommendations')
+    
+    recommendation_type = models.CharField(
+        max_length=30,
+        choices=[
+            ('next_module', 'Next Module Recommendation'),
+            ('skill_gap', 'Skill Gap Analysis'),
+            ('review_topic', 'Review Topic Suggestion'),
+            ('challenging_exercise', 'Challenging Exercise'),
+        ]
+    )
+    
+    # Recommendation content
+    learning_path = models.ForeignKey(LearningPath, on_delete=models.CASCADE, null=True, blank=True)
+    module = models.ForeignKey(Module, on_delete=models.CASCADE, null=True, blank=True)
+    content = models.JSONField(help_text='Recommendation details and reasoning')
+    priority_score = models.FloatField(default=0.0, help_text='AI-calculated priority score')
+    
+    # Status tracking
+    is_dismissed = models.BooleanField(default=False)
+    is_acted_upon = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    
+    class Meta:
+        db_table = 'jac_learning_recommendation'
+        indexes = [
+            models.Index(fields=['user', 'recommendation_type']),
+            models.Index(fields=['user', 'is_dismissed', 'expires_at']),
+        ]
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.recommendation_type}"
+    
+    def is_expired(self):
+        """Check if recommendation has expired."""
+        return timezone.now() > self.expires_at
+    
+    def dismiss(self):
+        """Mark recommendation as dismissed."""
+        self.is_dismissed = True
+        self.save()
+    
+    def mark_acted_upon(self):
+        """Mark recommendation as acted upon."""
+        self.is_acted_upon = True
+        self.save()
+
+
+# ============================================================================
+# JAC CODE EXECUTION MODELS
+# ============================================================================
+
+class CodeSubmission(models.Model):
+    """Code submission for JAC code evaluation"""
+    
+    STATUS_CHOICES = [
+        ('pending', 'Pending Review'),
+        ('processing', 'Processing'),
+        ('passed', 'Passed'),
+        ('failed', 'Failed'),
+        ('error', 'Execution Error'),
+        ('timeout', 'Timeout'),
+    ]
+    
+    LANGUAGE_CHOICES = [
+        ('python', 'Python'),
+        ('jac', 'JAC (Jaseci)'),
+        ('javascript', 'JavaScript'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    submission_id = models.CharField(max_length=100, unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='code_submissions')
+    learning_path = models.ForeignKey(LearningPath, on_delete=models.CASCADE, null=True, blank=True, related_name='code_submissions')
+    module = models.ForeignKey(Module, on_delete=models.CASCADE, null=True, blank=True, related_name='code_submissions')
+    
+    # Code details
+    task_title = models.CharField(max_length=200)
+    task_description = models.TextField()
+    code = models.TextField()
+    language = models.CharField(max_length=20, choices=LANGUAGE_CHOICES, default='python')
+    
+    # Execution results
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    execution_result = models.JSONField(default=dict, blank=True)
+    ai_feedback = models.TextField(blank=True)
+    score = models.FloatField(null=True, blank=True)
+    execution_time = models.FloatField(null=True, blank=True)
+    memory_usage = models.FloatField(null=True, blank=True)
+    
+    # Metadata
+    submitted_at = models.DateTimeField(default=timezone.now)
+    reviewed_at = models.DateTimeField(null=True, blank=True)
+    reviewer_agent_id = models.CharField(max_length=100, blank=True)
+    
+    class Meta:
+        db_table = 'jac_code_submissions'
+        ordering = ['-submitted_at']
+        indexes = [
+            models.Index(fields=['user', 'status']),
+            models.Index(fields=['language']),
+            models.Index(fields=['submission_id']),
+        ]
+    
+    def __str__(self):
+        return f"{self.task_title} - {self.user.username} ({self.status})"
+
+
+class TestCase(models.Model):
+    """Test cases for code validation"""
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='test_cases')
+    task_title = models.CharField(max_length=200)
+    test_input = models.JSONField(default=dict)
+    expected_output = models.JSONField(default=dict)
+    test_description = models.TextField(blank=True)
+    is_required = models.BooleanField(default=True)
+    points = models.FloatField(default=1.0)
+    created_at = models.DateTimeField(default=timezone.now)
+    
+    class Meta:
+        db_table = 'jac_test_cases'
+        ordering = ['created_at']
+    
+    def __str__(self):
+        return f"Test for {self.task_title}"
+
+
+class CodeExecutionLog(models.Model):
+    """Detailed logs of code execution for debugging and analytics"""
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    submission = models.ForeignKey(CodeSubmission, on_delete=models.CASCADE, related_name='execution_logs')
+    execution_id = models.CharField(max_length=100)
+    output = models.TextField(blank=True)
+    error_output = models.TextField(blank=True)
+    execution_time = models.FloatField()
+    memory_usage = models.FloatField(null=True, blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    
+    class Meta:
+        db_table = 'jac_code_execution_logs'
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['execution_id']),
+            models.Index(fields=['submission']),
+        ]
+    
+    def __str__(self):
+        return f"Execution {self.execution_id} for {self.submission.submission_id}"
+
+
+class AICodeReview(models.Model):
+    """AI-generated code reviews and feedback"""
+    
+    REVIEW_TYPES = [
+        ('syntax', 'Syntax Analysis'),
+        ('logic', 'Logic Review'),
+        ('performance', 'Performance Analysis'),
+        ('security', 'Security Assessment'),
+        ('style', 'Code Style'),
+        ('best_practices', 'Best Practices'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    submission = models.ForeignKey(CodeSubmission, on_delete=models.CASCADE, related_name='ai_reviews')
+    review_type = models.CharField(max_length=20, choices=REVIEW_TYPES)
+    findings = models.JSONField(default=dict)
+    suggestions = models.TextField(blank=True)
+    score = models.FloatField(null=True, blank=True)
+    agent_id = models.CharField(max_length=100)
+    created_at = models.DateTimeField(default=timezone.now)
+    
+    class Meta:
+        db_table = 'jac_ai_code_reviews'
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"AI Review - {self.review_type} for {self.submission.submission_id}"

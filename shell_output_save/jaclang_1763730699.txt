@@ -1,0 +1,2014 @@
+Using Python 3.12.5 environment at: /tmp/.venv
+⠋ Resolving dependencies...                                                     ⠙ Resolving dependencies...                                                     ⠋ Resolving dependencies...                                                     ⠙ Resolving dependencies...                                                     ⠹ Resolving dependencies...                                                     ⠹ jaseci==2.2.0                                                                 ⠸ jaseci==2.2.0                                                                 ⠸ jaclang==0.9.0                                                                ⠼ jaclang==0.9.0                                                                ⠴ jaclang==0.9.0                                                                ⠦ jaclang==0.9.0                                                                ⠧ jaclang==0.9.0                                                                ⠇ jaclang==0.9.0                                                                ⠋ jaclang==0.9.0                                                                ⠋ byllm==0.4.6                                                                  ⠋ jac-client==0.2.0                                                             ⠋ jac-streamlit==0.0.4                                                          ⠋ jaclang==0.9.0                                                                ⠋ byllm==0.4.6                                                                  ⠋ jac-client==0.2.0                                                             ⠋ jaclang==0.9.0                                                                ⠋ jaseci==2.1.0                                                                 ⠙ jaseci==2.1.0                                                                 ⠙ jaseci==2.0.0                                                                 ⠹ jaseci==2.0.0                                                                 ⠹ jaseci==1.4.2.6                                                               ⠸ jaseci==1.4.2.6                                                               ⠼ jaseci==1.4.2.6                                                               ⠴ jaseci==1.4.2.6                                                               ⠦ jaseci==1.4.2.6                                                               ⠦ kombu==5.3.1                                                                  ⠧ kombu==5.3.1                                                                  ⠇ kombu==5.3.1                                                                  ⠋ kombu==5.3.1                                                                  ⠋ celery==5.3.1                                                                 ⠋ prometheus-api-client==0.5.1                                                  ⠋ prometheus-client==0.14.1                                                     ⠋ kubernetes==21.7.0                                                            ⠙ kubernetes==21.7.0                                                            ⠹ kubernetes==21.7.0                                                            ⠸ kubernetes==21.7.0                                                            ⠼ kubernetes==21.7.0                                                            ⠼ validators==0.21.2                                                            ⠼ psycopg2-binary==2.9.5                                                        ⠼ pygls==1.0.2                                                                  ⠼ apache-libcloud==3.8.0                                                        ⠼ azure-storage-blob==12.17.0                                                   ⠼ python-magic==0.4.27                                                          ⠼ click==8.1.8                                                                  ⠼ click-shell==2.1                                                              ⠼ numpy==1.23.5                                                                 ⠼ antlr4-python3-runtime==4.9.3                                                 ⠼ fastapi==0.121.3                                                              ⠼ fastapi==0.121.3                                                              ⠼ requests==2.32.5                                                              ⠼ redis==7.1.0                                                                  ⠼ flake8==7.3.0                                                                 ⠼ pep8-naming==0.15.1                                                           ⠼ stripe==14.0.0                                                                ⠼ requests==2.32.5                                                              ⠼ pydantic==1.10.24                                                             ⠼ docstring-parser==0.17.0                                                      ⠼ pandas==2.3.3                                                                 ⠴ pandas==2.3.2                                                                 ⠦ pandas==2.3.2                                                                 ⠦ pandas==2.3.1                                                                 ⠧ pandas==2.3.1                                                                 ⠧ pandas==2.3.0                                                                 ⠇ pandas==2.3.0                                                                 ⠋ pandas==2.3.0                                                                 ⠋ pandas==2.2.3                                                                 ⠙ pandas==2.2.3                                                                 ⠙ pandas==2.2.2                                                                 ⠹ pandas==2.2.2                                                                 ⠸ pandas==2.2.2                                                                 ⠸ pandas==2.2.1                                                                 ⠸ pandas==2.2.0                                                                 ⠸ pandas==2.1.4                                                                 ⠸ pandas==2.1.3                                                                 ⠸ pandas==2.1.2                                                                 ⠼ pandas==2.1.2                                                                 ⠼ pandas==2.1.1                                                                 ⠼ pandas==2.1.0                                                                 ⠼ numpy==1.23.5                                                                 ⠼ matplotlib==3.10.7                                                            ⠼ pillow==12.0.0                                                                ⠼ httmock==1.4.0                                                                ⠼ certifi==2025.11.12                                                           ⠼ six==1.17.0                                                                   ⠼ setuptools==80.9.0                                                            ⠼ pyyaml==6.0.3                                                                 ⠼ google-auth==2.43.0                                                           ⠼ websocket-client==1.9.0                                                       ⠼ requests-oauthlib==2.0.0                                                      ⠼ urllib3==2.5.0                                                                ⠼ lsprotocol==2025.0.0                                                          ⠼ typeguard==3.0.2                                                              ⠼ azure-core==1.36.0                                                            ⠼ cryptography==46.0.3                                                          ⠼ typing-extensions==4.15.0                                                     ⠼ typing-extensions==4.15.0                                                     ⠴ fastapi-cli==0.0.16                                                           ⠴ fastapi-cli==0.0.16                                                           ⠴ httpx==0.28.1                                                                 ⠴ jinja2==3.1.6                                                                 ⠦ pydantic-settings==2.11.0                                                     ⠧ pydantic-settings==2.11.0                                                     ⠧ pydantic-settings==2.10.1                                                     ⠇ pydantic-settings==2.10.1                                                     ⠋ pydantic-settings==2.10.1                                                     ⠋ pydantic-settings==2.10.0                                                     ⠙ pydantic-settings==2.10.0                                                     ⠙ pydantic-settings==2.9.1                                                      ⠹ pydantic-settings==2.9.1                                                      ⠹ typing-extensions==4.15.0                                                     ⠹ typing-extensions==4.15.0                                                     ⠹ fastapi-cli==0.0.16                                                           ⠹ fastapi-cli==0.0.16                                                           ⠹ uvicorn==0.38.0                                                               ⠹ uvicorn==0.38.0                                                               ⠹ pandas==2.3.2                                                                 ⠹ fastapi==0.121.3                                                              ⠹ fastapi==0.121.3                                                              ⠹ requests==2.32.5                                                              ⠹ prometheus-client==0.14.1                                                     ⠹ kubernetes==21.7.0                                                            ⠹ validators==0.21.2                                                            ⠹ psycopg2-binary==2.9.5                                                        ⠸ pydantic-settings==2.9.0                                                      ⠼ pydantic-settings==2.9.0                                                      ⠼ pydantic-settings==2.8.1                                                      ⠼ pydantic-settings==2.8.0                                                      ⠼ pydantic-settings==2.7.1                                                      ⠼ pydantic-settings==2.7.0                                                      ⠴ pydantic-settings==2.6.1                                                      ⠴ pydantic-settings==2.6.0                                                      ⠴ pydantic-settings==2.5.2                                                      ⠴ pydantic-settings==2.5.1                                                      ⠦ pydantic-settings==2.5.1                                                      ⠦ pydantic-settings==2.5.0                                                      ⠦ pydantic-settings==2.4.0                                                      ⠧ pydantic-settings==2.4.0                                                      ⠧ pydantic-settings==2.3.4                                                      ⠧ pydantic-settings==2.3.3                                                      ⠧ pydantic-settings==2.3.2                                                      ⠧ pydantic-settings==2.3.1                                                      ⠇ pydantic-settings==2.3.0                                                      ⠇ pydantic-settings==2.2.1                                                      ⠇ pydantic-settings==2.2.0                                                      ⠇ pydantic-settings==2.1.0                                                      ⠇ pydantic-settings==2.0.3                                                      ⠇ pydantic-settings==2.0.2                                                      ⠋ fastapi==0.121.2                                                              ⠙ fastapi==0.121.2                                                              ⠙ fastapi==0.121.2                                                              ⠙ numpy==1.23.5                                                                 ⠙ requests==2.32.5                                                              ⠙ kombu==5.3.1                                                                  ⠙ celery==5.3.1                                                                 ⠹ fastapi==0.121.1                                                              ⠹ fastapi==0.121.1                                                              ⠹ numpy==1.23.5                                                                 ⠹ requests==2.32.5                                                              ⠸ fastapi==0.121.0                                                              ⠸ fastapi==0.121.0                                                              ⠸ numpy==1.23.5                                                                 ⠸ fastapi==0.120.4                                                              ⠼ fastapi==0.120.4                                                              ⠴ fastapi==0.120.4                                                              ⠴ fastapi==0.120.4                                                              ⠴ numpy==1.23.5                                                                 ⠴ fastapi==0.120.3                                                              ⠦ fastapi==0.120.3                                                              ⠦ fastapi==0.120.3                                                              ⠦ numpy==1.23.5                                                                 ⠦ fastapi==0.120.2                                                              ⠦ fastapi==0.120.2                                                              ⠦ numpy==1.23.5                                                                 ⠦ fastapi==0.120.1                                                              ⠦ fastapi==0.120.1                                                              ⠦ numpy==1.23.5                                                                 ⠧ fastapi==0.119.1                                                              ⠧ fastapi==0.119.1                                                              ⠧ numpy==1.23.5                                                                 ⠧ fastapi==0.119.0                                                              ⠇ fastapi==0.119.0                                                              ⠇ fastapi==0.119.0                                                              ⠇ numpy==1.23.5                                                                 ⠇ fastapi==0.118.3                                                              ⠋ fastapi==0.118.3                                                              ⠋ fastapi==0.118.3                                                              ⠙ fastapi==0.116.0                                                              ⠙ fastapi==0.116.0                                                              ⠙ numpy==1.23.5                                                                 ⠙ fastapi==0.115.14                                                             ⠹ fastapi==0.115.14                                                             ⠹ fastapi==0.115.14                                                             ⠹ numpy==1.23.5                                                                 ⠹ fastapi==0.115.13                                                             ⠹ fastapi==0.115.13                                                             ⠹ numpy==1.23.5                                                                 ⠸ fastapi==0.115.10                                                             ⠼ fastapi==0.115.10                                                             ⠼ fastapi==0.115.10                                                             ⠼ numpy==1.23.5                                                                 ⠼ fastapi==0.115.9                                                              ⠼ fastapi==0.115.9                                                              ⠼ numpy==1.23.5                                                                 ⠴ fastapi==0.115.8                                                              ⠴ fastapi==0.115.8                                                              ⠴ numpy==1.23.5                                                                 ⠴ fastapi==0.115.7                                                              ⠦ fastapi==0.115.0                                                              ⠦ fastapi==0.115.0                                                              ⠦ numpy==1.23.5                                                                 ⠦ fastapi==0.114.2                                                              ⠧ fastapi==0.112.4                                                              ⠇ fastapi==0.112.4                                                              ⠇ fastapi==0.112.4                                                              ⠇ numpy==1.23.5                                                                 ⠇ fastapi==0.112.3                                                              ⠋ fastapi==0.112.3                                                              ⠋ fastapi==0.112.3                                                              ⠋ numpy==1.23.5                                                                 ⠋ fastapi==0.112.2                                                              ⠙ fastapi==0.112.2                                                              ⠹ fastapi==0.112.2                                                              ⠸ fastapi==0.112.2                                                              ⠸ fastapi==0.112.2                                                              ⠸ numpy==1.23.5                                                                 ⠸ fastapi==0.112.1                                                              ⠸ fastapi==0.112.1                                                              ⠸ numpy==1.23.5                                                                 ⠸ fastapi==0.112.0                                                              ⠸ fastapi==0.112.0                                                              ⠸ numpy==1.23.5                                                                 ⠸ fastapi==0.111.1                                                              ⠸ fastapi==0.111.1                                                              ⠸ fastapi==0.108.0                                                              ⠸ fastapi==0.100.0                                                              ⠼ starlette==0.27.0                                                             ⠼ httpx==0.28.1                                                                 ⠼ jinja2==3.1.6                                                                 ⠴ coverage==7.12.0                                                              ⠴ coverage==7.12.0                                                              ⠴ soupsieve==2.8                                                                ⠴ webencodings==0.5.1                                                           ⠴ wcwidth==0.2.14                                                               ⠦ contourpy==1.3.2                                                              ⠦ cycler==0.12.1                                                                ⠦ fonttools==4.60.1                                                             ⠧ websockets==15.0.1                                                            ⠧ pyasn1==0.6.1                                                                 ⠧ pycparser==2.23                                                               ⠧ pycparser==2.23                                                               ⠇ sniffio==1.3.1                                                                ⠋ sniffio==1.3.1                                                                ⠋                                                                               Resolved 112 packages in 14.35s
+⠋ Preparing packages... (0/0)                                                   ⠋ Preparing packages... (0/79)                                                  ⠙ Preparing packages... (0/79)                                                  ⠙ Preparing packages... (0/79)
+pycodestyle ------------------------------     0 B/30.85 KiB                    ⠙ Preparing packages... (0/79)
+pycodestyle ------------------------------ 13.78 KiB/30.85 KiB                  ⠙ Preparing packages... (0/79)
+pycodestyle ------------------------------ 13.78 KiB/30.85 KiB
+prompt-toolkit ------------------------------     0 B/382.26 KiB                ⠙ Preparing packages... (0/79)
+pycodestyle ------------------------------ 13.78 KiB/30.85 KiB
+prompt-toolkit ------------------------------ 21.24 KiB/382.26 KiB              ⠙ Preparing packages... (0/79)
+pycodestyle ------------------------------ 13.78 KiB/30.85 KiB
+uvicorn    ------------------------------     0 B/66.51 KiB
+prompt-toolkit ------------------------------ 21.24 KiB/382.26 KiB              ⠙ Preparing packages... (0/79)
+pycodestyle ------------------------------ 13.78 KiB/30.85 KiB
+uvicorn    ------------------------------ 16.96 KiB/66.51 KiB
+prompt-toolkit ------------------------------ 21.24 KiB/382.26 KiB              ⠙ Preparing packages... (0/79)
+requests-oauthlib ------------------------------     0 B/23.61 KiB
+pycodestyle ------------------------------ 13.78 KiB/30.85 KiB
+uvicorn    ------------------------------ 16.96 KiB/66.51 KiB
+prompt-toolkit ------------------------------ 21.24 KiB/382.26 KiB              ⠙ Preparing packages... (0/79)
+requests-oauthlib ------------------------------ 15.52 KiB/23.61 KiB
+pycodestyle ------------------------------ 13.78 KiB/30.85 KiB
+uvicorn    ------------------------------ 16.96 KiB/66.51 KiB
+prompt-toolkit ------------------------------ 21.24 KiB/382.26 KiB              ⠙ Preparing packages... (0/79)
+requests-oauthlib ------------------------------ 15.52 KiB/23.61 KiB
+pycodestyle ------------------------------ 13.78 KiB/30.85 KiB
+rsa        ------------------------------     0 B/33.88 KiB
+uvicorn    ------------------------------ 16.96 KiB/66.51 KiB
+prompt-toolkit ------------------------------ 21.24 KiB/382.26 KiB              ⠙ Preparing packages... (0/79)
+requests-oauthlib ------------------------------ 15.52 KiB/23.61 KiB
+pycodestyle ------------------------------ 13.78 KiB/30.85 KiB
+rsa        ------------------------------ 16.96 KiB/33.88 KiB
+uvicorn    ------------------------------ 16.96 KiB/66.51 KiB
+prompt-toolkit ------------------------------ 21.24 KiB/382.26 KiB              ⠙ Preparing packages... (0/79)
+requests-oauthlib ------------------------------ 15.52 KiB/23.61 KiB
+pycodestyle ------------------------------ 13.78 KiB/30.85 KiB
+rsa        ------------------------------ 16.96 KiB/33.88 KiB
+uvicorn    ------------------------------ 16.96 KiB/66.51 KiB
+prompt-toolkit ------------------------------ 21.24 KiB/382.26 KiB
+watchfiles ------------------------------     0 B/446.11 KiB                    ⠙ Preparing packages... (0/79)
+requests-oauthlib ------------------------------ 15.52 KiB/23.61 KiB
+pycodestyle ------------------------------ 13.78 KiB/30.85 KiB
+rsa        ------------------------------ 16.96 KiB/33.88 KiB
+uvicorn    ------------------------------ 16.96 KiB/66.51 KiB
+prompt-toolkit ------------------------------ 21.24 KiB/382.26 KiB
+watchfiles ------------------------------ 13.24 KiB/446.11 KiB                  ⠙ Preparing packages... (0/79)
+cachetools ------------------------------     0 B/11.23 KiB
+requests-oauthlib ------------------------------ 15.52 KiB/23.61 KiB
+pycodestyle ------------------------------ 13.78 KiB/30.85 KiB
+rsa        ------------------------------ 16.96 KiB/33.88 KiB
+uvicorn    ------------------------------ 16.96 KiB/66.51 KiB
+prompt-toolkit ------------------------------ 21.24 KiB/382.26 KiB
+watchfiles ------------------------------ 13.24 KiB/446.11 KiB                  ⠙ Preparing packages... (0/79)
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+requests-oauthlib ------------------------------ 15.52 KiB/23.61 KiB
+pycodestyle ------------------------------ 13.78 KiB/30.85 KiB
+rsa        ------------------------------ 16.96 KiB/33.88 KiB
+uvicorn    ------------------------------ 16.96 KiB/66.51 KiB
+prompt-toolkit ------------------------------ 21.24 KiB/382.26 KiB
+watchfiles ------------------------------ 13.24 KiB/446.11 KiB                  ⠙ Preparing packages... (0/79)
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+requests-oauthlib ------------------------------ 15.52 KiB/23.61 KiB
+pycodestyle ------------------------------ 30.85 KiB/30.85 KiB
+rsa        ------------------------------ 16.96 KiB/33.88 KiB
+uvicorn    ------------------------------ 16.96 KiB/66.51 KiB
+prompt-toolkit ------------------------------ 21.24 KiB/382.26 KiB
+watchfiles ------------------------------ 13.24 KiB/446.11 KiB                  ⠙ Preparing packages... (0/79)
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+requests-oauthlib ------------------------------ 15.52 KiB/23.61 KiB
+pycodestyle ------------------------------ 30.85 KiB/30.85 KiB
+rsa        ------------------------------ 16.96 KiB/33.88 KiB
+uvicorn    ------------------------------ 16.96 KiB/66.51 KiB
+jinja2     ------------------------------     0 B/131.74 KiB
+prompt-toolkit ------------------------------ 21.24 KiB/382.26 KiB
+watchfiles ------------------------------ 13.24 KiB/446.11 KiB                  ⠙ Preparing packages... (0/79)
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+requests-oauthlib ------------------------------ 15.52 KiB/23.61 KiB
+pycodestyle ------------------------------ 30.85 KiB/30.85 KiB
+rsa        ------------------------------ 16.96 KiB/33.88 KiB
+uvicorn    ------------------------------ 16.96 KiB/66.51 KiB
+jinja2     ------------------------------ 13.77 KiB/131.74 KiB
+prompt-toolkit ------------------------------ 21.24 KiB/382.26 KiB
+watchfiles ------------------------------ 13.24 KiB/446.11 KiB                  ⠙ Preparing packages... (0/79)
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+requests-oauthlib ------------------------------ 15.52 KiB/23.61 KiB
+rsa        ------------------------------ 16.96 KiB/33.88 KiB
+pygls      ------------------------------ 20.91 KiB/37.75 KiB
+flake8     ------------------------------ 23.52 KiB/56.56 KiB
+uvicorn    ------------------------------ 16.96 KiB/66.51 KiB
+lsprotocol ------------------------------ 74.46 KiB/74.46 KiB
+pyasn1     ------------------------------ 7.52 KiB/81.19 KiB
+click      ------------------------------ 31.52 KiB/95.89 KiB
+jinja2     ------------------------------ 37.77 KiB/131.74 KiB
+orjson     ------------------------------ 7.51 KiB/133.13 KiB
+kombu      ------------------------------ 7.52 KiB/193.85 KiB
+azure-core ------------------------------ 7.52 KiB/208.30 KiB
+pytest     ------------------------------ 21.24 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 45.24 KiB/382.26 KiB
+watchfiles ------------------------------ 13.24 KiB/446.11 KiB
+apache-libcloud ------------------------------ 15.51 KiB/3.49 MiB
+lxml       ------------------------------ 7.51 KiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+vine       ------------------------------ 7.52 KiB/9.41 KiB
+pluggy     ------------------------------ 7.52 KiB/20.06 KiB
+python-dotenv ------------------------------ 7.52 KiB/20.73 KiB
+isodate    ------------------------------ 21.80 KiB/21.80 KiB
+pytest-cov ------------------------------ 7.52 KiB/21.90 KiB
+markupsafe ------------------------------ 22.41 KiB/22.41 KiB
+requests-oauthlib ------------------------------ 15.52 KiB/23.61 KiB
+rsa        ------------------------------ 33.88 KiB/33.88 KiB
+pygls      ------------------------------ 37.75 KiB/37.75 KiB
+flake8     ------------------------------ 23.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 7.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+lsprotocol ------------------------------ 74.46 KiB/74.46 KiB
+pyasn1     ------------------------------ 7.52 KiB/81.19 KiB
+click      ------------------------------ 31.52 KiB/95.89 KiB
+jinja2     ------------------------------ 69.77 KiB/131.74 KiB
+orjson     ------------------------------ 23.51 KiB/133.13 KiB
+kombu      ------------------------------ 23.52 KiB/193.85 KiB
+azure-core ------------------------------ 7.52 KiB/208.30 KiB
+pytest     ------------------------------ 53.24 KiB/364.91 KiB
+jaseci     ------------------------------ 7.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 45.24 KiB/382.26 KiB
+watchfiles ------------------------------ 13.24 KiB/446.11 KiB⠙ Preparing packages... (0/79)
+vine       ------------------------------ 7.52 KiB/9.41 KiB
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+python-dotenv ------------------------------ 7.52 KiB/20.73 KiB
+isodate    ------------------------------ 21.80 KiB/21.80 KiB
+pytest-cov ------------------------------ 21.90 KiB/21.90 KiB
+markupsafe ------------------------------ 22.41 KiB/22.41 KiB
+requests-oauthlib ------------------------------ 23.61 KiB/23.61 KiB
+rsa        ------------------------------ 33.88 KiB/33.88 KiB
+pygls      ------------------------------ 37.75 KiB/37.75 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 7.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 7.52 KiB/81.19 KiB
+click      ------------------------------ 95.52 KiB/95.89 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+orjson     ------------------------------ 23.51 KiB/133.13 KiB
+kombu      ------------------------------ 55.52 KiB/193.85 KiB
+azure-core ------------------------------ 23.52 KiB/208.30 KiB
+pytest     ------------------------------ 117.24 KiB/364.91 KiB
+jaseci     ------------------------------ 7.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 77.24 KiB/382.26 KiB
+watchfiles ------------------------------ 29.24 KiB/446.11 KiB
+httptools  ------------------------------ 7.52 KiB/505.52 KiB⠙ Preparing packages... (0/79)
+vine       ------------------------------ 9.41 KiB/9.41 KiB
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+python-dotenv ------------------------------ 20.73 KiB/20.73 KiB
+isodate    ------------------------------ 21.80 KiB/21.80 KiB
+pytest-cov ------------------------------ 21.90 KiB/21.90 KiB
+markupsafe ------------------------------ 22.41 KiB/22.41 KiB
+requests-oauthlib ------------------------------ 23.61 KiB/23.61 KiB
+rsa        ------------------------------ 33.88 KiB/33.88 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+pygls      ------------------------------ 37.75 KiB/37.75 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 23.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+click      ------------------------------ 95.52 KiB/95.89 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+orjson     ------------------------------ 133.13 KiB/133.13 KiB
+kombu      ------------------------------ 55.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+pytest     ------------------------------ 117.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 77.24 KiB/382.26 KiB
+watchfiles ------------------------------ 446.11 KiB/446.11 KiB⠙ Preparing packages... (0/79)
+vine       ------------------------------ 9.41 KiB/9.41 KiB
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+python-dotenv ------------------------------ 20.73 KiB/20.73 KiB
+isodate    ------------------------------ 21.80 KiB/21.80 KiB
+markupsafe ------------------------------ 22.41 KiB/22.41 KiB
+requests-oauthlib ------------------------------ 23.61 KiB/23.61 KiB
+rsa        ------------------------------ 33.88 KiB/33.88 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+pygls      ------------------------------ 37.75 KiB/37.75 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+click      ------------------------------ 95.52 KiB/95.89 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+orjson     ------------------------------ 133.13 KiB/133.13 KiB
+kombu      ------------------------------ 55.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+pytest     ------------------------------ 117.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 77.24 KiB/382.26 KiB
+watchfiles ------------------------------ 446.11 KiB/446.11 KiB
+httptools  ------------------------------ 247.52 KiB/505.52 KiB⠙ Preparing packages... (0/79)
+vine       ------------------------------ 9.41 KiB/9.41 KiB
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+python-dotenv ------------------------------ 20.73 KiB/20.73 KiB
+isodate    ------------------------------ 21.80 KiB/21.80 KiB
+markupsafe ------------------------------ 22.41 KiB/22.41 KiB
+requests-oauthlib ------------------------------ 23.61 KiB/23.61 KiB
+rsa        ------------------------------ 33.88 KiB/33.88 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+click      ------------------------------ 95.52 KiB/95.89 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+orjson     ------------------------------ 133.13 KiB/133.13 KiB
+kombu      ------------------------------ 55.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+pytest     ------------------------------ 117.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 77.24 KiB/382.26 KiB
+watchfiles ------------------------------ 446.11 KiB/446.11 KiB
+httptools  ------------------------------ 375.52 KiB/505.52 KiB
+pygments   ------------------------------ 31.51 KiB/1.17 MiB⠙ Preparing packages... (0/79)
+vine       ------------------------------ 9.41 KiB/9.41 KiB
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+python-dotenv ------------------------------ 20.73 KiB/20.73 KiB
+isodate    ------------------------------ 21.80 KiB/21.80 KiB
+markupsafe ------------------------------ 22.41 KiB/22.41 KiB
+requests-oauthlib ------------------------------ 23.61 KiB/23.61 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+click      ------------------------------ 95.52 KiB/95.89 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+orjson     ------------------------------ 133.13 KiB/133.13 KiB
+kombu      ------------------------------ 55.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+pytest     ------------------------------ 117.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 77.24 KiB/382.26 KiB
+watchfiles ------------------------------ 446.11 KiB/446.11 KiB
+httptools  ------------------------------ 375.52 KiB/505.52 KiB
+pygments   ------------------------------ 31.51 KiB/1.17 MiB
+pydantic   ------------------------------ 95.54 KiB/2.65 MiB⠙ Preparing packages... (0/79)
+vine       ------------------------------ 9.41 KiB/9.41 KiB
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+python-dotenv ------------------------------ 20.73 KiB/20.73 KiB
+isodate    ------------------------------ 21.80 KiB/21.80 KiB
+markupsafe ------------------------------ 22.41 KiB/22.41 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+click      ------------------------------ 95.52 KiB/95.89 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+orjson     ------------------------------ 133.13 KiB/133.13 KiB
+kombu      ------------------------------ 55.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+pytest     ------------------------------ 117.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 77.24 KiB/382.26 KiB
+watchfiles ------------------------------ 446.11 KiB/446.11 KiB
+httptools  ------------------------------ 375.52 KiB/505.52 KiB
+pygments   ------------------------------ 31.51 KiB/1.17 MiB
+pydantic   ------------------------------ 95.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 47.51 KiB/3.49 MiB⠙ Preparing packages... (0/79)
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+python-dotenv ------------------------------ 20.73 KiB/20.73 KiB
+isodate    ------------------------------ 21.80 KiB/21.80 KiB
+markupsafe ------------------------------ 22.41 KiB/22.41 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+click      ------------------------------ 95.52 KiB/95.89 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+orjson     ------------------------------ 133.13 KiB/133.13 KiB
+kombu      ------------------------------ 55.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+pytest     ------------------------------ 117.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 77.24 KiB/382.26 KiB
+watchfiles ------------------------------ 446.11 KiB/446.11 KiB
+httptools  ------------------------------ 375.52 KiB/505.52 KiB
+pygments   ------------------------------ 31.51 KiB/1.17 MiB
+pydantic   ------------------------------ 215.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 47.51 KiB/3.49 MiB
+uvloop     ------------------------------ 63.51 KiB/4.22 MiB⠙ Preparing packages... (0/79)
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+python-dotenv ------------------------------ 20.73 KiB/20.73 KiB
+isodate    ------------------------------ 21.80 KiB/21.80 KiB
+markupsafe ------------------------------ 22.41 KiB/22.41 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+click      ------------------------------ 95.52 KiB/95.89 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+kombu      ------------------------------ 55.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+pytest     ------------------------------ 117.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 77.24 KiB/382.26 KiB
+watchfiles ------------------------------ 446.11 KiB/446.11 KiB
+httptools  ------------------------------ 375.52 KiB/505.52 KiB
+pygments   ------------------------------ 31.51 KiB/1.17 MiB
+pydantic   ------------------------------ 215.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 47.51 KiB/3.49 MiB
+uvloop     ------------------------------ 63.51 KiB/4.22 MiB
+lxml       ------------------------------ 2.22 MiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+python-dotenv ------------------------------ 20.73 KiB/20.73 KiB
+isodate    ------------------------------ 21.80 KiB/21.80 KiB
+markupsafe ------------------------------ 22.41 KiB/22.41 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+click      ------------------------------ 95.52 KiB/95.89 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+kombu      ------------------------------ 55.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+pytest     ------------------------------ 117.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 77.24 KiB/382.26 KiB
+httptools  ------------------------------ 375.52 KiB/505.52 KiB
+pygments   ------------------------------ 31.51 KiB/1.17 MiB
+pydantic   ------------------------------ 215.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 47.51 KiB/3.49 MiB
+uvloop     ------------------------------ 63.51 KiB/4.22 MiB
+lxml       ------------------------------ 2.22 MiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+python-dotenv ------------------------------ 20.73 KiB/20.73 KiB
+isodate    ------------------------------ 21.80 KiB/21.80 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+click      ------------------------------ 95.52 KiB/95.89 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+kombu      ------------------------------ 55.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+pytest     ------------------------------ 117.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 77.24 KiB/382.26 KiB
+httptools  ------------------------------ 375.52 KiB/505.52 KiB
+pygments   ------------------------------ 31.51 KiB/1.17 MiB
+pydantic   ------------------------------ 215.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 47.51 KiB/3.49 MiB
+uvloop     ------------------------------ 63.51 KiB/4.22 MiB
+lxml       ------------------------------ 2.22 MiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+isodate    ------------------------------ 21.80 KiB/21.80 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+click      ------------------------------ 95.52 KiB/95.89 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+kombu      ------------------------------ 55.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+httptools  ------------------------------ 375.52 KiB/505.52 KiB
+pygments   ------------------------------ 95.51 KiB/1.17 MiB
+pydantic   ------------------------------ 471.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 47.51 KiB/3.49 MiB
+uvloop     ------------------------------ 63.51 KiB/4.22 MiB
+lxml       ------------------------------ 2.22 MiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+itsdangerous ------------------------------ 15.85 KiB/15.85 KiB
+isodate    ------------------------------ 21.80 KiB/21.80 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+click      ------------------------------ 95.52 KiB/95.89 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+kombu      ------------------------------ 55.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+httptools  ------------------------------ 375.52 KiB/505.52 KiB
+pygments   ------------------------------ 95.51 KiB/1.17 MiB
+pydantic   ------------------------------ 471.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 47.51 KiB/3.49 MiB
+uvloop     ------------------------------ 63.51 KiB/4.22 MiB
+lxml       ------------------------------ 2.22 MiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+itsdangerous ------------------------------ 15.85 KiB/15.85 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+click      ------------------------------ 95.52 KiB/95.89 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+kombu      ------------------------------ 55.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+httptools  ------------------------------ 375.52 KiB/505.52 KiB
+pygments   ------------------------------ 95.51 KiB/1.17 MiB
+pydantic   ------------------------------ 471.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 47.51 KiB/3.49 MiB
+uvloop     ------------------------------ 63.51 KiB/4.22 MiB
+lxml       ------------------------------ 2.22 MiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+itsdangerous ------------------------------ 15.85 KiB/15.85 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+google-auth ------------------------------ 63.51 KiB/217.88 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+httptools  ------------------------------ 503.52 KiB/505.52 KiB
+pygments   ------------------------------ 95.51 KiB/1.17 MiB
+pydantic   ------------------------------ 599.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 111.51 KiB/3.49 MiB
+uvloop     ------------------------------ 63.51 KiB/4.22 MiB
+lxml       ------------------------------ 2.22 MiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+python-magic ------------------------------ 13.52 KiB/13.52 KiB
+itsdangerous ------------------------------ 15.85 KiB/15.85 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+jinja2     ------------------------------ 131.74 KiB/131.74 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+google-auth ------------------------------ 63.51 KiB/217.88 KiB
+dnspython  ------------------------------ 15.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+httptools  ------------------------------ 503.52 KiB/505.52 KiB
+pygments   ------------------------------ 95.51 KiB/1.17 MiB
+pydantic   ------------------------------ 599.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 111.51 KiB/3.49 MiB
+uvloop     ------------------------------ 191.51 KiB/4.22 MiB
+lxml       ------------------------------ 2.71 MiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+python-magic ------------------------------ 13.52 KiB/13.52 KiB
+itsdangerous ------------------------------ 15.85 KiB/15.85 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+google-auth ------------------------------ 63.51 KiB/217.88 KiB
+dnspython  ------------------------------ 15.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+httptools  ------------------------------ 503.52 KiB/505.52 KiB
+pygments   ------------------------------ 95.51 KiB/1.17 MiB
+pydantic   ------------------------------ 727.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 111.51 KiB/3.49 MiB
+uvloop     ------------------------------ 447.51 KiB/4.22 MiB
+lxml       ------------------------------ 3.26 MiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+click-shell ------------------------------ 8.38 KiB/8.38 KiB
+python-magic ------------------------------ 13.52 KiB/13.52 KiB
+itsdangerous ------------------------------ 15.85 KiB/15.85 KiB
+tzlocal    ------------------------------ 17.60 KiB/17.60 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 40.96 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 55.52 KiB/208.30 KiB
+google-auth ------------------------------ 63.51 KiB/217.88 KiB
+dnspython  ------------------------------ 15.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 23.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+httptools  ------------------------------ 503.52 KiB/505.52 KiB
+pygments   ------------------------------ 95.51 KiB/1.17 MiB
+pydantic   ------------------------------ 727.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 111.51 KiB/3.49 MiB
+uvloop     ------------------------------ 895.51 KiB/4.22 MiB
+lxml       ------------------------------ 3.66 MiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+click-shell ------------------------------ 8.38 KiB/8.38 KiB
+python-magic ------------------------------ 13.52 KiB/13.52 KiB
+itsdangerous ------------------------------ 15.85 KiB/15.85 KiB
+tzlocal    ------------------------------ 17.60 KiB/17.60 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 66.51 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 119.52 KiB/208.30 KiB
+google-auth ------------------------------ 63.51 KiB/217.88 KiB
+dnspython  ------------------------------ 15.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+pygments   ------------------------------ 95.51 KiB/1.17 MiB
+pydantic   ------------------------------ 855.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 111.51 KiB/3.49 MiB
+uvloop     ------------------------------ 2.62 MiB/4.22 MiB
+lxml       ------------------------------ 5.25 MiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+click-shell ------------------------------ 8.38 KiB/8.38 KiB
+python-magic ------------------------------ 13.52 KiB/13.52 KiB
+itsdangerous ------------------------------ 15.85 KiB/15.85 KiB
+tzlocal    ------------------------------ 17.60 KiB/17.60 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 66.51 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 119.52 KiB/208.30 KiB
+google-auth ------------------------------ 63.51 KiB/217.88 KiB
+dnspython  ------------------------------ 15.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+pygments   ------------------------------ 223.51 KiB/1.17 MiB
+pydantic   ------------------------------ 855.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 111.51 KiB/3.49 MiB
+uvloop     ------------------------------ 2.62 MiB/4.22 MiB
+lxml       ------------------------------ 5.25 MiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+click-shell ------------------------------ 8.38 KiB/8.38 KiB
+python-magic ------------------------------ 13.52 KiB/13.52 KiB
+tzlocal    ------------------------------ 17.60 KiB/17.60 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 66.51 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 119.52 KiB/208.30 KiB
+google-auth ------------------------------ 63.51 KiB/217.88 KiB
+dnspython  ------------------------------ 15.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+pygments   ------------------------------ 223.51 KiB/1.17 MiB
+pydantic   ------------------------------ 983.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 111.51 KiB/3.49 MiB
+uvloop     ------------------------------ 3.06 MiB/4.22 MiB
+lxml       ------------------------------ 5.65 MiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+click-shell ------------------------------ 8.38 KiB/8.38 KiB
+tzlocal    ------------------------------ 17.60 KiB/17.60 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+prometheus-client ------------------------------ 55.52 KiB/58.08 KiB
+uvicorn    ------------------------------ 66.51 KiB/66.51 KiB
+pyasn1     ------------------------------ 55.52 KiB/81.19 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 119.52 KiB/208.30 KiB
+google-auth ------------------------------ 63.51 KiB/217.88 KiB
+dnspython  ------------------------------ 47.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+pygments   ------------------------------ 223.51 KiB/1.17 MiB
+pydantic   ------------------------------ 983.54 KiB/2.65 MiB
+apache-libcloud ------------------------------ 111.51 KiB/3.49 MiB
+uvloop     ------------------------------ 3.06 MiB/4.22 MiB
+lxml       ------------------------------ 5.65 MiB/7.65 MiB                     ⠙ Preparing packages... (0/79)
+click-shell ------------------------------ 8.38 KiB/8.38 KiB
+tzlocal    ------------------------------ 17.60 KiB/17.60 KiB
+pytest-xdist ------------------------------ 7.51 KiB/45.31 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+prometheus-client ------------------------------ 58.08 KiB/58.08 KiB
+uvicorn    ------------------------------ 66.51 KiB/66.51 KiB
+pyasn1     ------------------------------ 81.19 KiB/81.19 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 119.52 KiB/208.30 KiB
+google-auth ------------------------------ 63.51 KiB/217.88 KiB
+dnspython  ------------------------------ 47.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+pygments   ------------------------------ 223.51 KiB/1.17 MiB
+pydantic   ------------------------------ 1.11 MiB/2.65 MiB
+apache-libcloud ------------------------------ 111.51 KiB/3.49 MiB
+uvloop     ------------------------------ 3.94 MiB/4.22 MiB
+lxml       ------------------------------ 6.05 MiB/7.65 MiB                     ⠹ Preparing packages... (20/79)
+click-shell ------------------------------ 8.38 KiB/8.38 KiB
+tzlocal    ------------------------------ 17.60 KiB/17.60 KiB
+pytest-xdist ------------------------------ 7.51 KiB/45.31 KiB
+flake8     ------------------------------ 55.52 KiB/56.56 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+uvicorn    ------------------------------ 66.51 KiB/66.51 KiB
+pyasn1     ------------------------------ 81.19 KiB/81.19 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 119.52 KiB/208.30 KiB
+google-auth ------------------------------ 63.51 KiB/217.88 KiB
+dnspython  ------------------------------ 47.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+pygments   ------------------------------ 223.51 KiB/1.17 MiB
+pydantic   ------------------------------ 1.11 MiB/2.65 MiB
+apache-libcloud ------------------------------ 111.51 KiB/3.49 MiB
+uvloop     ------------------------------ 3.94 MiB/4.22 MiB
+lxml       ------------------------------ 6.30 MiB/7.65 MiB                     ⠹ Preparing packages... (20/79)
+click-shell ------------------------------ 8.38 KiB/8.38 KiB
+click-plugins ------------------------------ 7.51 KiB/10.79 KiB
+tzlocal    ------------------------------ 17.60 KiB/17.60 KiB
+mock       ------------------------------ 7.51 KiB/30.88 KiB
+pytest-xdist ------------------------------ 7.51 KiB/45.31 KiB
+ujson      ------------------------------ 7.51 KiB/56.01 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+starlette  ------------------------------ 21.24 KiB/65.41 KiB
+uvicorn    ------------------------------ 66.51 KiB/66.51 KiB
+pyasn1     ------------------------------ 81.19 KiB/81.19 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 7.51 KiB/178.25 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 119.52 KiB/208.30 KiB
+google-auth ------------------------------ 63.51 KiB/217.88 KiB
+dnspython  ------------------------------ 47.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+celery     ------------------------------ 18.37 KiB/410.53 KiB
+pygments   ------------------------------ 223.51 KiB/1.17 MiB
+pydantic   ------------------------------ 1.11 MiB/2.65 MiB⠹ Preparing packages... (20/79)
+click-plugins ------------------------------ 7.51 KiB/10.79 KiB
+tzlocal    ------------------------------ 17.60 KiB/17.60 KiB
+mock       ------------------------------ 7.51 KiB/30.88 KiB
+pytest-xdist ------------------------------ 7.51 KiB/45.31 KiB
+ujson      ------------------------------ 7.51 KiB/56.01 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+starlette  ------------------------------ 21.24 KiB/65.41 KiB
+uvicorn    ------------------------------ 66.51 KiB/66.51 KiB
+pyasn1     ------------------------------ 81.19 KiB/81.19 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 7.51 KiB/178.25 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 119.52 KiB/208.30 KiB
+google-auth ------------------------------ 63.51 KiB/217.88 KiB
+dnspython  ------------------------------ 47.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+celery     ------------------------------ 18.37 KiB/410.53 KiB
+pygments   ------------------------------ 223.51 KiB/1.17 MiB
+pydantic   ------------------------------ 1.11 MiB/2.65 MiB
+apache-libcloud ------------------------------ 111.51 KiB/3.49 MiB⠹ Preparing packages... (20/79)
+click-plugins ------------------------------ 7.51 KiB/10.79 KiB
+mock       ------------------------------ 7.51 KiB/30.88 KiB
+pytest-xdist ------------------------------ 7.51 KiB/45.31 KiB
+ujson      ------------------------------ 7.51 KiB/56.01 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+starlette  ------------------------------ 21.24 KiB/65.41 KiB
+uvicorn    ------------------------------ 66.51 KiB/66.51 KiB
+pyasn1     ------------------------------ 81.19 KiB/81.19 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 7.51 KiB/178.25 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 119.52 KiB/208.30 KiB
+google-auth ------------------------------ 63.51 KiB/217.88 KiB
+dnspython  ------------------------------ 47.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB
+celery     ------------------------------ 18.37 KiB/410.53 KiB
+pygments   ------------------------------ 223.51 KiB/1.17 MiB
+pydantic   ------------------------------ 1.11 MiB/2.65 MiB
+apache-libcloud ------------------------------ 111.51 KiB/3.49 MiB
+uvloop     ------------------------------ 4.19 MiB/4.22 MiB⠹ Preparing packages... (20/79)
+httmock    ------------------------------ 4.64 KiB/4.64 KiB
+pep8-naming ------------------------------ 9.34 KiB/9.34 KiB
+click-repl ------------------------------ 7.51 KiB/10.05 KiB
+click-plugins ------------------------------ 7.51 KiB/10.79 KiB
+mock       ------------------------------ 30.88 KiB/30.88 KiB
+email-validator ------------------------------ 31.51 KiB/34.77 KiB
+pytest-xdist ------------------------------ 7.51 KiB/45.31 KiB
+ujson      ------------------------------ 55.51 KiB/56.01 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+pyflakes   ------------------------------ 7.51 KiB/62.06 KiB
+starlette  ------------------------------ 21.24 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+pyasn1     ------------------------------ 81.19 KiB/81.19 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 7.51 KiB/178.25 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 119.52 KiB/208.30 KiB
+google-auth ------------------------------ 63.51 KiB/217.88 KiB
+dnspython  ------------------------------ 111.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB⠹ Preparing packages... (20/79)
+httmock    ------------------------------ 4.64 KiB/4.64 KiB
+pep8-naming ------------------------------ 9.34 KiB/9.34 KiB
+click-repl ------------------------------ 7.51 KiB/10.05 KiB
+click-plugins ------------------------------ 7.51 KiB/10.79 KiB
+python-multipart ------------------------------ 15.52 KiB/23.97 KiB
+mock       ------------------------------ 30.88 KiB/30.88 KiB
+email-validator ------------------------------ 31.51 KiB/34.77 KiB
+pytest-xdist ------------------------------ 23.51 KiB/45.31 KiB
+ujson      ------------------------------ 55.51 KiB/56.01 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+pyflakes   ------------------------------ 23.51 KiB/62.06 KiB
+starlette  ------------------------------ 21.24 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 7.51 KiB/178.25 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 119.52 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 90.61 KiB/246.40 KiB
+dnspython  ------------------------------ 111.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 245.24 KiB/364.91 KiB⠹ Preparing packages... (20/79)
+pep8-naming ------------------------------ 9.34 KiB/9.34 KiB
+click-repl ------------------------------ 7.51 KiB/10.05 KiB
+click-plugins ------------------------------ 10.79 KiB/10.79 KiB
+python-multipart ------------------------------ 15.52 KiB/23.97 KiB
+mock       ------------------------------ 30.88 KiB/30.88 KiB
+email-validator ------------------------------ 31.51 KiB/34.77 KiB
+pytest-xdist ------------------------------ 23.51 KiB/45.31 KiB
+ujson      ------------------------------ 55.51 KiB/56.01 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+pyflakes   ------------------------------ 23.51 KiB/62.06 KiB
+starlette  ------------------------------ 21.24 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 7.51 KiB/178.25 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 119.52 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 90.61 KiB/246.40 KiB
+dnspython  ------------------------------ 111.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB⠹ Preparing packages... (20/79)
+pep8-naming ------------------------------ 9.34 KiB/9.34 KiB
+click-repl ------------------------------ 7.51 KiB/10.05 KiB
+click-plugins ------------------------------ 10.79 KiB/10.79 KiB
+python-multipart ------------------------------ 15.52 KiB/23.97 KiB
+email-validator ------------------------------ 31.51 KiB/34.77 KiB
+pytest-xdist ------------------------------ 23.51 KiB/45.31 KiB
+ujson      ------------------------------ 55.51 KiB/56.01 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+pyflakes   ------------------------------ 23.51 KiB/62.06 KiB
+starlette  ------------------------------ 21.24 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+oauthlib   ------------------------------ 31.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 23.51 KiB/178.25 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 119.52 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 90.61 KiB/246.40 KiB
+dnspython  ------------------------------ 111.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB⠹ Preparing packages... (20/79)
+click-repl ------------------------------ 7.51 KiB/10.05 KiB
+click-plugins ------------------------------ 10.79 KiB/10.79 KiB
+python-multipart ------------------------------ 15.52 KiB/23.97 KiB
+email-validator ------------------------------ 31.51 KiB/34.77 KiB
+pytest-xdist ------------------------------ 45.31 KiB/45.31 KiB
+ujson      ------------------------------ 56.01 KiB/56.01 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+pyflakes   ------------------------------ 23.51 KiB/62.06 KiB
+starlette  ------------------------------ 21.24 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+beautifulsoup4 ------------------------------ 23.50 KiB/144.46 KiB
+oauthlib   ------------------------------ 31.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 23.51 KiB/178.25 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 90.61 KiB/246.40 KiB
+dnspython  ------------------------------ 111.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB   Building antlr4-python3-runtime==4.9.3
+⠹ Preparing packages... (20/79)
+click-repl ------------------------------ 7.51 KiB/10.05 KiB
+click-plugins ------------------------------ 10.79 KiB/10.79 KiB
+python-multipart ------------------------------ 15.52 KiB/23.97 KiB
+email-validator ------------------------------ 31.51 KiB/34.77 KiB
+pytest-xdist ------------------------------ 45.31 KiB/45.31 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+pyflakes   ------------------------------ 23.51 KiB/62.06 KiB
+starlette  ------------------------------ 21.24 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+beautifulsoup4 ------------------------------ 23.50 KiB/144.46 KiB
+oauthlib   ------------------------------ 31.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 23.51 KiB/178.25 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 90.61 KiB/246.40 KiB
+dnspython  ------------------------------ 111.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB   Building antlr4-python3-runtime==4.9.3
+⠹ Preparing packages... (20/79)
+click-repl ------------------------------ 7.51 KiB/10.05 KiB
+python-multipart ------------------------------ 15.52 KiB/23.97 KiB
+email-validator ------------------------------ 31.51 KiB/34.77 KiB
+pytest-xdist ------------------------------ 45.31 KiB/45.31 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+pyflakes   ------------------------------ 23.51 KiB/62.06 KiB
+starlette  ------------------------------ 21.24 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+beautifulsoup4 ------------------------------ 23.50 KiB/144.46 KiB
+oauthlib   ------------------------------ 31.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 23.51 KiB/178.25 KiB
+kombu      ------------------------------ 119.52 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 90.61 KiB/246.40 KiB
+dnspython  ------------------------------ 111.52 KiB/323.33 KiB
+redis      ------------------------------ 128.00 KiB/345.86 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 141.24 KiB/382.26 KiB   Building antlr4-python3-runtime==4.9.3
+⠹ Preparing packages... (20/79)
+python-multipart ------------------------------ 23.97 KiB/23.97 KiB
+validators ------------------------------ 15.53 KiB/25.31 KiB
+email-validator ------------------------------ 34.77 KiB/34.77 KiB
+pytest-xdist ------------------------------ 45.31 KiB/45.31 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+pyflakes   ------------------------------ 55.51 KiB/62.06 KiB
+starlette  ------------------------------ 45.24 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+beautifulsoup4 ------------------------------ 55.50 KiB/144.46 KiB
+oauthlib   ------------------------------ 31.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 23.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 90.61 KiB/246.40 KiB
+dnspython  ------------------------------ 111.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 128.00 KiB/378.94 KiB   Building antlr4-python3-runtime==4.9.3
+⠹ Preparing packages... (20/79)
+python-multipart ------------------------------ 23.97 KiB/23.97 KiB
+validators ------------------------------ 15.53 KiB/25.31 KiB
+email-validator ------------------------------ 34.77 KiB/34.77 KiB
+pytest-xdist ------------------------------ 45.31 KiB/45.31 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+pyflakes   ------------------------------ 55.51 KiB/62.06 KiB
+starlette  ------------------------------ 45.24 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+beautifulsoup4 ------------------------------ 119.50 KiB/144.46 KiB
+oauthlib   ------------------------------ 31.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 23.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 90.61 KiB/246.40 KiB
+dnspython  ------------------------------ 111.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+jaseci     ------------------------------ 55.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 128.00 KiB/378.94 KiB   Building antlr4-python3-runtime==4.9.3
+⠹ Preparing packages... (20/79)
+mccabe     ------------------------------ 7.18 KiB/7.18 KiB
+python-multipart ------------------------------ 23.97 KiB/23.97 KiB
+validators ------------------------------ 15.53 KiB/25.31 KiB
+prometheus-api-client ------------------------------ 7.53 KiB/26.50 KiB
+execnet    ------------------------------ 39.75 KiB/39.75 KiB
+pytest-xdist ------------------------------ 45.31 KiB/45.31 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+pyflakes   ------------------------------ 55.51 KiB/62.06 KiB
+starlette  ------------------------------ 45.24 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 14.66 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 119.50 KiB/144.46 KiB
+oauthlib   ------------------------------ 31.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 23.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 90.61 KiB/246.40 KiB
+dnspython  ------------------------------ 111.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB   Building antlr4-python3-runtime==4.9.3
+⠹ Preparing packages... (20/79)
+mccabe     ------------------------------ 7.18 KiB/7.18 KiB
+validators ------------------------------ 15.53 KiB/25.31 KiB
+prometheus-api-client ------------------------------ 7.53 KiB/26.50 KiB
+execnet    ------------------------------ 39.75 KiB/39.75 KiB
+pytest-xdist ------------------------------ 45.31 KiB/45.31 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+pyflakes   ------------------------------ 55.51 KiB/62.06 KiB
+starlette  ------------------------------ 45.24 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 14.66 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 119.50 KiB/144.46 KiB
+oauthlib   ------------------------------ 31.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 55.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 90.61 KiB/246.40 KiB
+dnspython  ------------------------------ 111.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB   Building antlr4-python3-runtime==4.9.3
+⠹ Preparing packages... (20/79)
+mccabe     ------------------------------ 7.18 KiB/7.18 KiB
+validators ------------------------------ 15.53 KiB/25.31 KiB
+prometheus-api-client ------------------------------ 7.53 KiB/26.50 KiB
+typeguard  ------------------------------ 29.98 KiB/29.98 KiB
+execnet    ------------------------------ 39.75 KiB/39.75 KiB
+pytest-xdist ------------------------------ 45.31 KiB/45.31 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+pyflakes   ------------------------------ 55.51 KiB/62.06 KiB
+starlette  ------------------------------ 45.24 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 14.66 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 119.50 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 55.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 90.61 KiB/246.40 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB   Building antlr4-python3-runtime==4.9.3
+⠹ Preparing packages... (20/79)
+mccabe     ------------------------------ 7.18 KiB/7.18 KiB
+validators ------------------------------ 15.53 KiB/25.31 KiB
+prometheus-api-client ------------------------------ 7.53 KiB/26.50 KiB
+typeguard  ------------------------------ 29.98 KiB/29.98 KiB
+execnet    ------------------------------ 39.75 KiB/39.75 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+pyflakes   ------------------------------ 62.06 KiB/62.06 KiB
+starlette  ------------------------------ 45.24 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 14.66 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 119.50 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 55.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 90.61 KiB/246.40 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB   Building antlr4-python3-runtime==4.9.3
+⠹ Preparing packages... (20/79)
+validators ------------------------------ 15.53 KiB/25.31 KiB
+prometheus-api-client ------------------------------ 23.53 KiB/26.50 KiB
+typeguard  ------------------------------ 29.98 KiB/29.98 KiB
+execnet    ------------------------------ 39.75 KiB/39.75 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+pyflakes   ------------------------------ 62.06 KiB/62.06 KiB
+starlette  ------------------------------ 65.41 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 30.66 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 119.50 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 119.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 90.61 KiB/246.40 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB   Building antlr4-python3-runtime==4.9.3
+⠹ Preparing packages... (20/79)
+validators ------------------------------ 15.53 KiB/25.31 KiB
+prometheus-api-client ------------------------------ 23.53 KiB/26.50 KiB
+typeguard  ------------------------------ 29.98 KiB/29.98 KiB
+execnet    ------------------------------ 39.75 KiB/39.75 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+starlette  ------------------------------ 65.41 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 30.66 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 119.50 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 119.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB   Building antlr4-python3-runtime==4.9.3
+⠹ Preparing packages... (20/79)
+validators ------------------------------ 15.53 KiB/25.31 KiB
+prometheus-api-client ------------------------------ 23.53 KiB/26.50 KiB
+typeguard  ------------------------------ 29.98 KiB/29.98 KiB
+execnet    ------------------------------ 39.75 KiB/39.75 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+starlette  ------------------------------ 65.41 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 62.66 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 119.50 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 119.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+validators ------------------------------ 25.31 KiB/25.31 KiB
+prometheus-api-client ------------------------------ 26.50 KiB/26.50 KiB
+prettytable ------------------------------ 26.86 KiB/26.86 KiB
+typeguard  ------------------------------ 29.98 KiB/29.98 KiB
+execnet    ------------------------------ 39.75 KiB/39.75 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+starlette  ------------------------------ 65.41 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 62.66 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 119.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+validators ------------------------------ 25.31 KiB/25.31 KiB
+prometheus-api-client ------------------------------ 26.50 KiB/26.50 KiB
+prettytable ------------------------------ 26.86 KiB/26.86 KiB
+execnet    ------------------------------ 39.75 KiB/39.75 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+starlette  ------------------------------ 65.41 KiB/65.41 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 119.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+validators ------------------------------ 25.31 KiB/25.31 KiB
+prometheus-api-client ------------------------------ 26.50 KiB/26.50 KiB
+prettytable ------------------------------ 26.86 KiB/26.86 KiB
+execnet    ------------------------------ 39.75 KiB/39.75 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 119.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+click-didyoumean ------------------------------ 3.55 KiB/3.55 KiB
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+validators ------------------------------ 25.31 KiB/25.31 KiB
+prometheus-api-client ------------------------------ 26.50 KiB/26.50 KiB
+prettytable ------------------------------ 26.86 KiB/26.86 KiB
+execnet    ------------------------------ 39.75 KiB/39.75 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 119.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+click-didyoumean ------------------------------ 3.55 KiB/3.55 KiB
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+validators ------------------------------ 25.31 KiB/25.31 KiB
+prettytable ------------------------------ 26.86 KiB/26.86 KiB
+execnet    ------------------------------ 39.75 KiB/39.75 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 119.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+click-didyoumean ------------------------------ 3.55 KiB/3.55 KiB
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+validators ------------------------------ 25.31 KiB/25.31 KiB
+execnet    ------------------------------ 39.75 KiB/39.75 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+fastapi    ------------------------------ 43.27 KiB/57.00 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 119.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 128.00 KiB/378.94 KiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+click-didyoumean ------------------------------ 3.55 KiB/3.55 KiB
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+validators ------------------------------ 25.31 KiB/25.31 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+fastapi    ------------------------------ 57.00 KiB/57.00 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 119.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+click-didyoumean ------------------------------ 3.55 KiB/3.55 KiB
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+fastapi    ------------------------------ 57.00 KiB/57.00 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+websocket-client ------------------------------ 80.68 KiB/80.68 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 119.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+click-didyoumean ------------------------------ 3.55 KiB/3.55 KiB
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+fastapi    ------------------------------ 57.00 KiB/57.00 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 119.51 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 255.51 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+fastapi    ------------------------------ 57.00 KiB/57.00 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 178.25 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+azure-core ------------------------------ 208.30 KiB/208.30 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 234.44 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+fastapi    ------------------------------ 57.00 KiB/57.00 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 178.25 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 234.44 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 178.25 KiB/178.25 KiB
+kombu      ------------------------------ 193.85 KiB/193.85 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 316.09 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 178.25 KiB/178.25 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 316.09 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+pydantic   ------------------------------ 2.65 MiB/2.65 MiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 95.51 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 178.25 KiB/178.25 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 316.09 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+pydantic   ------------------------------ 2.65 MiB/2.65 MiB
+apache-libcloud ------------------------------ 495.51 KiB/3.49 MiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 156.31 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 178.25 KiB/178.25 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 316.09 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+pydantic   ------------------------------ 2.65 MiB/2.65 MiB
+apache-libcloud ------------------------------ 495.51 KiB/3.49 MiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 156.31 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 178.25 KiB/178.25 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 316.09 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+pydantic   ------------------------------ 2.65 MiB/2.65 MiB
+apache-libcloud ------------------------------ 495.51 KiB/3.49 MiB
+uvloop     ------------------------------ 4.22 MiB/4.22 MiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 156.31 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 178.25 KiB/178.25 KiB
+google-auth ------------------------------ 191.51 KiB/217.88 KiB
+coverage   ------------------------------ 218.61 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 316.09 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+pydantic   ------------------------------ 2.65 MiB/2.65 MiB
+apache-libcloud ------------------------------ 495.51 KiB/3.49 MiB
+uvloop     ------------------------------ 4.22 MiB/4.22 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB   Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 156.31 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+websockets ------------------------------ 178.25 KiB/178.25 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+coverage   ------------------------------ 246.40 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 316.09 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+pydantic   ------------------------------ 2.65 MiB/2.65 MiB
+apache-libcloud ------------------------------ 623.51 KiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 6.97 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+cattrs     ------------------------------ 69.08 KiB/69.08 KiB
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 156.31 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+coverage   ------------------------------ 246.40 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 316.09 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+pydantic   ------------------------------ 2.65 MiB/2.65 MiB
+apache-libcloud ------------------------------ 623.51 KiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 6.97 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+beautifulsoup4 ------------------------------ 144.46 KiB/144.46 KiB
+oauthlib   ------------------------------ 156.31 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+coverage   ------------------------------ 246.40 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 316.09 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+pydantic   ------------------------------ 2.65 MiB/2.65 MiB
+apache-libcloud ------------------------------ 623.51 KiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 6.97 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+oauthlib   ------------------------------ 156.31 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+coverage   ------------------------------ 246.40 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 316.09 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+pydantic   ------------------------------ 2.65 MiB/2.65 MiB
+apache-libcloud ------------------------------ 623.51 KiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 6.97 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+oauthlib   ------------------------------ 156.31 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+coverage   ------------------------------ 246.40 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 316.09 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+pydantic   ------------------------------ 2.65 MiB/2.65 MiB
+apache-libcloud ------------------------------ 751.51 KiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 6.97 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+oauthlib   ------------------------------ 156.31 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+coverage   ------------------------------ 246.40 KiB/246.40 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 316.09 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 255.50 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+pydantic   ------------------------------ 2.65 MiB/2.65 MiB
+apache-libcloud ------------------------------ 751.51 KiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 6.97 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+oauthlib   ------------------------------ 156.31 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+contourpy  ------------------------------ 316.09 KiB/316.09 KiB
+dnspython  ------------------------------ 239.52 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 378.94 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 269.24 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+pydantic   ------------------------------ 2.65 MiB/2.65 MiB
+apache-libcloud ------------------------------ 751.51 KiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 6.97 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+oauthlib   ------------------------------ 156.31 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 323.33 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 119.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 378.94 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 382.26 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 479.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+pydantic   ------------------------------ 2.65 MiB/2.65 MiB
+apache-libcloud ------------------------------ 751.51 KiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 6.97 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+oauthlib   ------------------------------ 156.31 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 323.33 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 247.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 378.94 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 382.26 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 607.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 751.51 KiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 6.97 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+oauthlib   ------------------------------ 156.31 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 128.00 KiB/177.01 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 323.33 KiB/323.33 KiB
+redis      ------------------------------ 345.86 KiB/345.86 KiB
+jaseci     ------------------------------ 247.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 378.94 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 382.26 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 607.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 879.51 KiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 6.97 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+oauthlib   ------------------------------ 156.31 KiB/156.31 KiB
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 323.33 KiB/323.33 KiB
+jaseci     ------------------------------ 247.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 378.94 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 382.26 KiB/382.26 KiB
+celery     ------------------------------ 266.37 KiB/410.53 KiB
+pygments   ------------------------------ 607.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.13 MiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 6.97 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 323.33 KiB/323.33 KiB
+jaseci     ------------------------------ 247.52 KiB/370.21 KiB
+azure-storage-blob ------------------------------ 378.94 KiB/378.94 KiB
+prompt-toolkit ------------------------------ 382.26 KiB/382.26 KiB
+celery     ------------------------------ 394.37 KiB/410.53 KiB
+pygments   ------------------------------ 607.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.13 MiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 6.97 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠸ Preparing packages... (37/79)
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 323.33 KiB/323.33 KiB
+jaseci     ------------------------------ 247.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 382.26 KiB/382.26 KiB
+celery     ------------------------------ 394.37 KiB/410.53 KiB
+pygments   ------------------------------ 607.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.13 MiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 6.97 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠼ Preparing packages... (63/79)
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 323.33 KiB/323.33 KiB
+jaseci     ------------------------------ 247.52 KiB/370.21 KiB
+prompt-toolkit ------------------------------ 382.26 KiB/382.26 KiB
+celery     ------------------------------ 394.37 KiB/410.53 KiB
+pygments   ------------------------------ 607.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.13 MiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 7.09 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠼ Preparing packages... (63/79)
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 323.33 KiB/323.33 KiB
+jaseci     ------------------------------ 370.21 KiB/370.21 KiB
+celery     ------------------------------ 394.37 KiB/410.53 KiB
+pygments   ------------------------------ 735.51 KiB/1.17 MiB
+kubernetes ------------------------------ 31.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.13 MiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 7.09 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠼ Preparing packages... (63/79)
+dateparser ------------------------------ 128.00 KiB/308.06 KiB
+dnspython  ------------------------------ 323.33 KiB/323.33 KiB
+jaseci     ------------------------------ 370.21 KiB/370.21 KiB
+celery     ------------------------------ 394.37 KiB/410.53 KiB
+pygments   ------------------------------ 735.51 KiB/1.17 MiB
+kubernetes ------------------------------ 79.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.26 MiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 7.09 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠼ Preparing packages... (63/79)
+dateparser ------------------------------ 255.50 KiB/308.06 KiB
+jaseci     ------------------------------ 370.21 KiB/370.21 KiB
+celery     ------------------------------ 394.37 KiB/410.53 KiB
+pygments   ------------------------------ 863.51 KiB/1.17 MiB
+kubernetes ------------------------------ 143.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.26 MiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 7.37 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠼ Preparing packages... (63/79)
+dateparser ------------------------------ 255.50 KiB/308.06 KiB
+jaseci     ------------------------------ 370.21 KiB/370.21 KiB
+celery     ------------------------------ 394.37 KiB/410.53 KiB
+pygments   ------------------------------ 863.51 KiB/1.17 MiB
+kubernetes ------------------------------ 143.55 KiB/1.68 MiB
+stripe     ------------------------------ 31.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.26 MiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 7.49 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠼ Preparing packages... (63/79)
+dateparser ------------------------------ 255.50 KiB/308.06 KiB
+celery     ------------------------------ 394.37 KiB/410.53 KiB
+pygments   ------------------------------ 863.51 KiB/1.17 MiB
+kubernetes ------------------------------ 271.55 KiB/1.68 MiB
+stripe     ------------------------------ 87.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.26 MiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 7.64 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠼ Preparing packages... (63/79)
+dateparser ------------------------------ 255.50 KiB/308.06 KiB
+celery     ------------------------------ 394.37 KiB/410.53 KiB
+pygments   ------------------------------ 863.51 KiB/1.17 MiB
+kubernetes ------------------------------ 271.55 KiB/1.68 MiB
+stripe     ------------------------------ 87.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.28 MiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB
+lxml       ------------------------------ 7.65 MiB/7.65 MiB                        Building antlr4-python3-runtime==4.9.3
+⠼ Preparing packages... (63/79)
+dateparser ------------------------------ 255.50 KiB/308.06 KiB
+celery     ------------------------------ 394.37 KiB/410.53 KiB
+pygments   ------------------------------ 887.51 KiB/1.17 MiB
+kubernetes ------------------------------ 271.55 KiB/1.68 MiB
+stripe     ------------------------------ 87.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.41 MiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB                       Building antlr4-python3-runtime==4.9.3
+⠼ Preparing packages... (63/79)
+dateparser ------------------------------ 255.50 KiB/308.06 KiB
+pygments   ------------------------------ 887.51 KiB/1.17 MiB
+kubernetes ------------------------------ 271.55 KiB/1.68 MiB
+stripe     ------------------------------ 151.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.41 MiB/3.49 MiB
+jaclang    ------------------------------ 31.55 KiB/4.39 MiB                       Building antlr4-python3-runtime==4.9.3
+⠼ Preparing packages... (63/79)
+dateparser ------------------------------ 255.50 KiB/308.06 KiB
+pygments   ------------------------------ 1.12 MiB/1.17 MiB
+kubernetes ------------------------------ 527.55 KiB/1.68 MiB
+stripe     ------------------------------ 279.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.41 MiB/3.49 MiB
+jaclang    ------------------------------ 87.55 KiB/4.39 MiB                       Building antlr4-python3-runtime==4.9.3
+⠴ Preparing packages... (69/79)
+dateparser ------------------------------ 255.50 KiB/308.06 KiB
+pygments   ------------------------------ 1.12 MiB/1.17 MiB
+kubernetes ------------------------------ 527.55 KiB/1.68 MiB
+stripe     ------------------------------ 279.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.53 MiB/3.49 MiB
+jaclang    ------------------------------ 279.55 KiB/4.39 MiB                      Building antlr4-python3-runtime==4.9.3
+⠴ Preparing packages... (69/79)
+pygments   ------------------------------ 1.12 MiB/1.17 MiB
+kubernetes ------------------------------ 655.55 KiB/1.68 MiB
+stripe     ------------------------------ 407.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.66 MiB/3.49 MiB
+jaclang    ------------------------------ 407.55 KiB/4.39 MiB                      Building antlr4-python3-runtime==4.9.3
+⠴ Preparing packages... (69/79)
+kubernetes ------------------------------ 655.55 KiB/1.68 MiB
+stripe     ------------------------------ 535.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.66 MiB/3.49 MiB
+jaclang    ------------------------------ 407.55 KiB/4.39 MiB                      Building antlr4-python3-runtime==4.9.3
+⠴ Preparing packages... (69/79)
+kubernetes ------------------------------ 783.55 KiB/1.68 MiB
+stripe     ------------------------------ 535.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.66 MiB/3.49 MiB
+jaclang    ------------------------------ 407.55 KiB/4.39 MiB                      Building antlr4-python3-runtime==4.9.3
+⠴ Preparing packages... (69/79)
+kubernetes ------------------------------ 783.55 KiB/1.68 MiB
+stripe     ------------------------------ 535.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 1.93 MiB/3.49 MiB
+jaclang    ------------------------------ 407.55 KiB/4.39 MiB                      Building antlr4-python3-runtime==4.9.3
+⠴ Preparing packages... (69/79)
+kubernetes ------------------------------ 911.55 KiB/1.68 MiB
+stripe     ------------------------------ 919.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 2.05 MiB/3.49 MiB
+jaclang    ------------------------------ 407.55 KiB/4.39 MiB                      Building antlr4-python3-runtime==4.9.3
+⠴ Preparing packages... (69/79)
+kubernetes ------------------------------ 935.55 KiB/1.68 MiB
+stripe     ------------------------------ 919.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 2.05 MiB/3.49 MiB
+jaclang    ------------------------------ 535.55 KiB/4.39 MiB                      Building antlr4-python3-runtime==4.9.3
+⠦ Preparing packages... (71/79)
+kubernetes ------------------------------ 1.16 MiB/1.68 MiB
+stripe     ------------------------------ 919.55 KiB/1.88 MiB
+apache-libcloud ------------------------------ 2.05 MiB/3.49 MiB
+jaclang    ------------------------------ 663.55 KiB/4.39 MiB                      Building antlr4-python3-runtime==4.9.3
+⠦ Preparing packages... (71/79)
+kubernetes ------------------------------ 1.29 MiB/1.68 MiB
+stripe     ------------------------------ 1.05 MiB/1.88 MiB
+apache-libcloud ------------------------------ 2.05 MiB/3.49 MiB
+jaclang    ------------------------------ 663.55 KiB/4.39 MiB                      Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠦ Preparing packages... (71/79)
+kubernetes ------------------------------ 1.31 MiB/1.68 MiB
+stripe     ------------------------------ 1.17 MiB/1.88 MiB
+apache-libcloud ------------------------------ 2.08 MiB/3.49 MiB
+jaclang    ------------------------------ 663.55 KiB/4.39 MiB                      Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠧ Preparing packages... (71/79)
+kubernetes ------------------------------ 1.44 MiB/1.68 MiB
+stripe     ------------------------------ 1.30 MiB/1.88 MiB
+apache-libcloud ------------------------------ 2.20 MiB/3.49 MiB
+jaclang    ------------------------------ 791.55 KiB/4.39 MiB                      Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠧ Preparing packages... (71/79)
+kubernetes ------------------------------ 1.56 MiB/1.68 MiB
+stripe     ------------------------------ 1.30 MiB/1.88 MiB
+apache-libcloud ------------------------------ 2.20 MiB/3.49 MiB
+jaclang    ------------------------------ 919.55 KiB/4.39 MiB                      Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠧ Preparing packages... (71/79)
+stripe     ------------------------------ 1.44 MiB/1.88 MiB
+apache-libcloud ------------------------------ 2.20 MiB/3.49 MiB
+jaclang    ------------------------------ 1.05 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠧ Preparing packages... (71/79)
+stripe     ------------------------------ 1.44 MiB/1.88 MiB
+apache-libcloud ------------------------------ 2.33 MiB/3.49 MiB
+jaclang    ------------------------------ 1.05 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠇ Preparing packages... (72/79)
+stripe     ------------------------------ 1.57 MiB/1.88 MiB
+apache-libcloud ------------------------------ 2.33 MiB/3.49 MiB
+jaclang    ------------------------------ 1.17 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠇ Preparing packages... (72/79)
+stripe     ------------------------------ 1.57 MiB/1.88 MiB
+apache-libcloud ------------------------------ 2.33 MiB/3.49 MiB
+jaclang    ------------------------------ 1.30 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠇ Preparing packages... (72/79)
+stripe     ------------------------------ 1.69 MiB/1.88 MiB
+apache-libcloud ------------------------------ 2.33 MiB/3.49 MiB
+jaclang    ------------------------------ 1.30 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠇ Preparing packages... (72/79)
+stripe     ------------------------------ 1.69 MiB/1.88 MiB
+apache-libcloud ------------------------------ 2.45 MiB/3.49 MiB
+jaclang    ------------------------------ 1.30 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠇ Preparing packages... (72/79)
+stripe     ------------------------------ 1.72 MiB/1.88 MiB
+apache-libcloud ------------------------------ 2.45 MiB/3.49 MiB
+jaclang    ------------------------------ 1.30 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠇ Preparing packages... (72/79)
+apache-libcloud ------------------------------ 2.45 MiB/3.49 MiB
+jaclang    ------------------------------ 1.30 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠋ Preparing packages... (73/79)
+apache-libcloud ------------------------------ 2.45 MiB/3.49 MiB
+jaclang    ------------------------------ 1.32 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠋ Preparing packages... (73/79)
+apache-libcloud ------------------------------ 2.48 MiB/3.49 MiB
+jaclang    ------------------------------ 1.44 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠋ Preparing packages... (73/79)
+apache-libcloud ------------------------------ 2.60 MiB/3.49 MiB
+jaclang    ------------------------------ 1.44 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠋ Preparing packages... (73/79)
+apache-libcloud ------------------------------ 2.60 MiB/3.49 MiB
+jaclang    ------------------------------ 1.69 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+⠙ Preparing packages... (73/79)
+apache-libcloud ------------------------------ 2.60 MiB/3.49 MiB
+jaclang    ------------------------------ 1.69 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+⠙ Preparing packages... (73/79)
+apache-libcloud ------------------------------ 2.60 MiB/3.49 MiB
+jaclang    ------------------------------ 1.69 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+⠙ Preparing packages... (73/79)
+apache-libcloud ------------------------------ 2.73 MiB/3.49 MiB
+jaclang    ------------------------------ 1.69 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+⠙ Preparing packages... (73/79)
+apache-libcloud ------------------------------ 2.85 MiB/3.49 MiB
+jaclang    ------------------------------ 1.84 MiB/4.39 MiB                        Building antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+⠹ Preparing packages... (73/79)
+apache-libcloud ------------------------------ 2.85 MiB/3.49 MiB
+jaclang    ------------------------------ 1.84 MiB/4.39 MiB                           Built antlr4-python3-runtime==4.9.3
+   Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+⠹ Preparing packages... (73/79)
+apache-libcloud ------------------------------ 2.85 MiB/3.49 MiB
+jaclang    ------------------------------ 1.84 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+⠹ Preparing packages... (73/79)
+apache-libcloud ------------------------------ 2.87 MiB/3.49 MiB
+jaclang    ------------------------------ 1.84 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+⠹ Preparing packages... (73/79)
+apache-libcloud ------------------------------ 2.87 MiB/3.49 MiB
+jaclang    ------------------------------ 1.97 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+⠹ Preparing packages... (73/79)
+apache-libcloud ------------------------------ 3.00 MiB/3.49 MiB
+jaclang    ------------------------------ 1.97 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+⠸ Preparing packages... (74/79)
+apache-libcloud ------------------------------ 3.00 MiB/3.49 MiB
+jaclang    ------------------------------ 1.97 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+   Building numpy==1.23.5
+⠸ Preparing packages... (74/79)
+jaclang    ------------------------------ 2.09 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+   Building numpy==1.23.5
+⠸ Preparing packages... (74/79)
+jaclang    ------------------------------ 2.12 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+   Building numpy==1.23.5
+⠸ Preparing packages... (74/79)
+jaclang    ------------------------------ 2.24 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+   Building numpy==1.23.5
+⠸ Preparing packages... (74/79)
+jaclang    ------------------------------ 2.52 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+   Building numpy==1.23.5
+⠼ Preparing packages... (75/79)
+jaclang    ------------------------------ 2.64 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+   Building numpy==1.23.5
+⠼ Preparing packages... (75/79)
+jaclang    ------------------------------ 2.91 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+   Building numpy==1.23.5
+⠼ Preparing packages... (75/79)
+jaclang    ------------------------------ 3.16 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+   Building numpy==1.23.5
+⠼ Preparing packages... (75/79)
+jaclang    ------------------------------ 3.31 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+   Building numpy==1.23.5
+⠴ Preparing packages... (75/79)
+jaclang    ------------------------------ 3.31 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+   Building numpy==1.23.5
+⠴ Preparing packages... (75/79)
+jaclang    ------------------------------ 3.69 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+   Building numpy==1.23.5
+⠦ Preparing packages... (75/79)
+jaclang    ------------------------------ 3.69 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building pandas==2.1.0
+   Building numpy==1.23.5
+jaclang    ------------------------------ 3.69 MiB/4.39 MiB                        Building psycopg2-binary==2.9.5
+   Building numpy==1.23.5
+jaclang    ------------------------------ 3.69 MiB/4.39 MiB                        Building numpy==1.23.5
+jaclang    ------------------------------ 3.69 MiB/4.39 MiB                        Building numpy==1.23.5                                                         × Failed to build `numpy==1.23.5`
+  ├─▶ The build backend returned an error
+  ╰─▶ Call to `setuptools.build_meta:__legacy__.build_wheel` failed (exit
+      status: 1)
+
+      [stderr]
+      Traceback (most recent call last):
+        File "<string>", line 8, in <module>
+        File
+      "/home/minimax/.cache/uv/builds-v0/.tmp4irHIE/lib/python3.12/site-packages/setuptools/__init__.py",
+      line 10, in <module>
+          import distutils.core
+      ModuleNotFoundError: No module named 'distutils'
+
+      hint: `distutils` was removed from the standard library in Python 3.12.
+      Consider adding a constraint (like `numpy >1.23.5`) to avoid building a
+      version of `numpy` that depends on `distutils`.
+  help: `numpy` (v1.23.5) was included because `jaseci` (v1.4.2.6) depends
+        on `numpy`
