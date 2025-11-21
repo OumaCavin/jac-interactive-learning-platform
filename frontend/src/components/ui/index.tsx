@@ -63,7 +63,7 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   className = '',
   disabled,
-  ...props
+  ...restProps
 }) => {
   const baseClasses = 'inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 disabled:opacity-50 disabled:cursor-not-allowed';
   
@@ -102,7 +102,7 @@ export const Button: React.FC<ButtonProps> = ({
       whileTap="tap"
       className={classes}
       disabled={disabled || isLoading}
-      {...props}
+      {...restProps}
     >
       {isLoading ? (
         <LoadingSpinner size="sm" className="mr-2" />
