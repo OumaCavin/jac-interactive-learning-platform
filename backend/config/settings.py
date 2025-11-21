@@ -99,9 +99,6 @@ DATABASES = {
         'PASSWORD': config('DB_PASSWORD', default='jac_password'),
         'HOST': config('DB_HOST', default='localhost'),
         'PORT': config('DB_PORT', default='5432'),
-        'OPTIONS': {
-            'charset': 'utf8',
-        },
         'TEST': {
             'NAME': 'test_jac_learning_db',
         },
