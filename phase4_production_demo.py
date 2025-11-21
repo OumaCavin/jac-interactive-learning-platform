@@ -280,7 +280,7 @@ def main():
     print("🚀 PHASE 4: PRODUCTION DEPLOYMENT & REAL-TIME TESTING")
     print("=" * 60)
     print(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print("Author: MiniMax Agent")
+    print("Author: Cavin Otieno")
     print("Status: LIVE INTEGRATION DEMONSTRATION")
     
     # Initialize components

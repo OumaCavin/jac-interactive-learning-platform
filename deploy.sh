@@ -2,7 +2,7 @@
 
 # JAC Interactive Learning Platform - Production Deployment Script
 # Complete containerized deployment with monitoring and security
-# Author: MiniMax Agent
+# Author: Cavin Otieno
 # Version: 1.0.0
 
 set -e
@@ -26,7 +26,7 @@ print_header() {
     echo "================================================================"
     echo -e "${NC}"
     echo "Generated: $(date)"
-    echo "Author: MiniMax Agent"
+    echo "Author: Cavin Otieno"
     echo "Version: 1.0.0"
     echo ""
 }

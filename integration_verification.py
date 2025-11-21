@@ -294,7 +294,7 @@ def main():
     """Run complete integration verification."""
     print_header("JAC Interactive Learning Platform - Complete Integration Verification")
     print(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print("Author: MiniMax Agent")
+    print("Author: Cavin Otieno")
     
     tests = [
         ("File Structure", verify_file_structure),

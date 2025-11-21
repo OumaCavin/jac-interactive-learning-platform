@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # JAC Interactive Learning Platform - Complete Integration Startup Script
-# Author: MiniMax Agent
+# Author: Cavin Otieno
 # Generated: 2025-11-21 21:34:07
 
 echo "🚀 JAC Interactive Learning Platform - Complete Integration Startup"

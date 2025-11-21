@@ -1,6 +1,6 @@
 # Production Deployment Challenges & Workarounds Documentation
 
-**Author:** MiniMax Agent  
+**Author:** Cavin Otieno  
 **Date:** 2025-11-22  
 **Project:** JAC Interactive Learning Platform  
 
