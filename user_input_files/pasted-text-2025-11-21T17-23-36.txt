@@ -1,0 +1,318 @@
+cavin@DESKTOP-KR7GL8A:~/projects$ git clone https://github.com/OumaCavin/jac-interactive-learning-platform.git
+Cloning into 'jac-interactive-learning-platform'...
+remote: Enumerating objects: 296, done.
+remote: Counting objects: 100% (296/296), done.
+remote: Compressing objects: 100% (232/232), done.
+remote: Total 296 (delta 50), reused 296 (delta 50), pack-reused 0 (from 0)
+Receiving objects: 100% (296/296), 2.11 MiB | 2.25 MiB/s, done.
+Resolving deltas: 100% (50/50), done.
+cavin@DESKTOP-KR7GL8A:~/projects$ cd jac-interactive-learning-platform/
+cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ ls
+COMPLETE_TRANSFORMATION_SUMMARY.md  MONITORING_OBSERVABILITY_GUIDE.md      PROMPT_ENGINEER_QUICK_REFERENCE.md  browser                      phase4_production_demo.py  uv.lock
+CREDENTIALS_TO_UPDATE.md            PHASE_0_COMPLETION_REPORT.md           README.md                           deploy.sh                    pyproject.toml             workspace.json
+DEPLOYMENT_GUIDE.md                 PRODUCTION_DEPLOYMENT.md               SENTRY_ERROR_MONITORING_GUIDE.md    docker-compose.yml           shell_output_save
+FINAL_PROJECT_SUMMARY.md            PRODUCTION_DEPLOYMENT_CHALLENGES.md    SENTRY_PLATFORM_COVERAGE.md         docs                         start_integration.sh
+HOW_TO_GET_SENTRY_DSNS.md           PRODUCTION_DEPLOYMENT_VERIFICATION.md  SENTRY_QUICK_SETUP.md               external_api                 test_integration.py
+INTEGRATION_STATUS_REPORT.md        PROJECT_COMPLETION_REPORT.md           SENTRY_VISUAL_SETUP_GUIDE.md        frontend                     tmp
+JAC_PLATFORM_GENERATION_PROMPT.md   PROJECT_STRUCTURE.md                   backend                             integration_verification.py  user_input_files
+cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ tree
+.
+├── COMPLETE_TRANSFORMATION_SUMMARY.md
+├── CREDENTIALS_TO_UPDATE.md
+├── DEPLOYMENT_GUIDE.md
+├── FINAL_PROJECT_SUMMARY.md
+├── HOW_TO_GET_SENTRY_DSNS.md
+├── INTEGRATION_STATUS_REPORT.md
+├── JAC_PLATFORM_GENERATION_PROMPT.md
+├── MONITORING_OBSERVABILITY_GUIDE.md
+├── PHASE_0_COMPLETION_REPORT.md
+├── PRODUCTION_DEPLOYMENT.md
+├── PRODUCTION_DEPLOYMENT_CHALLENGES.md
+├── PRODUCTION_DEPLOYMENT_VERIFICATION.md
+├── PROJECT_COMPLETION_REPORT.md
+├── PROJECT_STRUCTURE.md
+├── PROMPT_ENGINEER_QUICK_REFERENCE.md
+├── README.md
+├── SENTRY_ERROR_MONITORING_GUIDE.md
+├── SENTRY_PLATFORM_COVERAGE.md
+├── SENTRY_QUICK_SETUP.md
+├── SENTRY_VISUAL_SETUP_GUIDE.md
+├── backend
+│   ├── Dockerfile
+│   ├── README.md
+│   ├── apps
+│   │   ├── agents
+│   │   │   ├── __init__.py
+│   │   │   ├── __pycache__
+│   │   │   │   ├── __init__.cpython-312.pyc
+│   │   │   │   ├── agents_manager.cpython-312.pyc
+│   │   │   │   ├── apps.cpython-312.pyc
+│   │   │   │   ├── base_agent.cpython-312.pyc
+│   │   │   │   ├── content_curator.cpython-312.pyc
+│   │   │   │   ├── models.cpython-312.pyc
+│   │   │   │   ├── serializers.cpython-312.pyc
+│   │   │   │   ├── simple_agents_manager.cpython-312.pyc
+│   │   │   │   ├── simple_base_agent.cpython-312.pyc
+│   │   │   │   ├── simple_models.cpython-312.pyc
+│   │   │   │   ├── urls.cpython-312.pyc
+│   │   │   │   └── views.cpython-312.pyc
+│   │   │   ├── agents_manager.py
+│   │   │   ├── apps.py
+│   │   │   ├── base_agent.py
+│   │   │   ├── content_curator.py
+│   │   │   ├── evaluator.py
+│   │   │   ├── migrations
+│   │   │   │   ├── 0001_initial.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── __pycache__
+│   │   │   │       ├── 0001_initial.cpython-312.pyc
+│   │   │   │       └── __init__.cpython-312.pyc
+│   │   │   ├── models.py
+│   │   │   ├── models_complex.py
+│   │   │   ├── motivator.py
+│   │   │   ├── progress_tracker.py
+│   │   │   ├── quiz_master.py
+│   │   │   ├── serializers.py
+│   │   │   ├── simple_agents_manager.py
+│   │   │   ├── simple_base_agent.py
+│   │   │   ├── simple_models.py
+│   │   │   ├── system_orchestrator.py
+│   │   │   ├── urls.py
+│   │   │   └── views.py
+│   │   ├── assessments
+│   │   │   ├── __init__.py
+│   │   │   ├── __pycache__
+│   │   │   │   ├── __init__.cpython-312.pyc
+│   │   │   │   └── apps.cpython-312.pyc
+│   │   │   └── apps.py
+│   │   ├── content
+│   │   │   ├── __init__.py
+│   │   │   ├── __pycache__
+│   │   │   │   ├── __init__.cpython-312.pyc
+│   │   │   │   └── apps.cpython-312.pyc
+│   │   │   └── apps.py
+│   │   ├── jac_execution
+│   │   │   ├── __init__.py
+│   │   │   ├── __pycache__
+│   │   │   │   ├── __init__.cpython-312.pyc
+│   │   │   │   └── apps.cpython-312.pyc
+│   │   │   └── apps.py
+│   │   ├── knowledge_graph
+│   │   │   ├── __init__.py
+│   │   │   ├── __pycache__
+│   │   │   │   ├── __init__.cpython-312.pyc
+│   │   │   │   └── apps.cpython-312.pyc
+│   │   │   └── apps.py
+│   │   ├── learning
+│   │   │   ├── __pycache__
+│   │   │   │   ├── apps.cpython-312.pyc
+│   │   │   │   ├── jac_code_executor.cpython-312.pyc
+│   │   │   │   ├── models.cpython-312.pyc
+│   │   │   │   ├── serializers.cpython-312.pyc
+│   │   │   │   ├── urls.cpython-312.pyc
+│   │   │   │   └── views.cpython-312.pyc
+│   │   │   ├── apps.py
+│   │   │   ├── jac_code_executor.py
+│   │   │   ├── migrations
+│   │   │   │   ├── 0001_initial.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── __pycache__
+│   │   │   │       ├── 0001_initial.cpython-312.pyc
+│   │   │   │       └── __init__.cpython-312.pyc
+│   │   │   ├── models.py
+│   │   │   ├── serializers.py
+│   │   │   ├── urls.py
+│   │   │   └── views.py
+│   │   ├── progress
+│   │   │   ├── __init__.py
+│   │   │   ├── __pycache__
+│   │   │   │   ├── __init__.cpython-312.pyc
+│   │   │   │   └── apps.cpython-312.pyc
+│   │   │   └── apps.py
+│   │   └── users
+│   │       ├── __init__.py
+│   │       ├── __pycache__
+│   │       │   ├── __init__.cpython-312.pyc
+│   │       │   ├── admin.cpython-312.pyc
+│   │       │   ├── apps.cpython-312.pyc
+│   │       │   ├── models.cpython-312.pyc
+│   │       │   └── signals.cpython-312.pyc
+│   │       ├── admin.py
+│   │       ├── apps.py
+│   │       ├── models.py
+│   │       ├── serializers.py
+│   │       ├── signals.py
+│   │       ├── urls.py
+│   │       └── views.py
+│   ├── config
+│   │   ├── __pycache__
+│   │   │   ├── sentry.cpython-312.pyc
+│   │   │   ├── settings.cpython-312.pyc
+│   │   │   ├── settings_minimal.cpython-312.pyc
+│   │   │   ├── urls.cpython-312.pyc
+│   │   │   └── wsgi.cpython-312.pyc
+│   │   ├── sentry.py
+│   │   ├── settings.py
+│   │   ├── settings_minimal.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   ├── db.sqlite3
+│   ├── logs
+│   │   └── django.log
+│   ├── manage.py
+│   ├── requirements.txt
+│   ├── test_agent_api.py
+│   └── test_phase2_integration.py
+├── browser
+│   ├── browser_extension
+│   │   └── error_capture
+│   │       ├── background.js
+│   │       ├── content.js
+│   │       ├── injector.js
+│   │       └── manifest.json
+│   └── global_browser.py
+├── deploy.sh
+├── docker-compose.yml
+├── docs
+│   ├── README_DOCUMENTATION_INDEX.md
+│   ├── activity_diagram.png
+│   ├── api_reference.yaml
+│   ├── architecture_overview.png
+│   ├── class_diagram.png
+│   ├── component_diagram.png
+│   ├── deployment_architecture.png
+│   ├── multi_agent_system.png
+│   ├── onboarding_guide.md
+│   ├── sequence_diagram.png
+│   └── use_case_diagram.png
+├── external_api
+│   ├── __init__.py
+│   ├── data_sources
+│   │   ├── __init__.py
+│   │   ├── base.py
+│   │   ├── booking_source.py
+│   │   ├── client.py
+│   │   ├── commodities_source.py
+│   │   ├── metal_source.py
+│   │   ├── patents_source.py
+│   │   ├── pinterest_source.py
+│   │   ├── scholar_source.py
+│   │   ├── tripadvisor_source.py
+│   │   ├── twitter_source.py
+│   │   └── yahoo_source.py
+│   ├── function_utils.py
+│   └── mcp_function_list.json
+├── frontend
+│   ├── Dockerfile.prod
+│   ├── README.md
+│   ├── build
+│   │   ├── asset-manifest.json
+│   │   ├── index.html
+│   │   └── static
+│   │       ├── css
+│   │       │   ├── main.a4572ed2.css
+│   │       │   └── main.a4572ed2.css.map
+│   │       └── js
+│   │           ├── 233.e93cb343.chunk.js
+│   │           ├── 233.e93cb343.chunk.js.map
+│   │           ├── 306.20482aa3.chunk.js
+│   │           ├── 306.20482aa3.chunk.js.map
+│   │           ├── 31.83eb9987.chunk.js
+│   │           ├── 31.83eb9987.chunk.js.map
+│   │           ├── 341.44ad7d56.chunk.js
+│   │           ├── 341.44ad7d56.chunk.js.map
+│   │           ├── 453.17e40385.chunk.js
+│   │           ├── 453.17e40385.chunk.js.map
+│   │           ├── 476.eab7fbe9.chunk.js
+│   │           ├── 476.eab7fbe9.chunk.js.map
+│   │           ├── 49.869cf479.chunk.js
+│   │           ├── 49.869cf479.chunk.js.map
+│   │           ├── 532.b5d90cec.chunk.js
+│   │           ├── 532.b5d90cec.chunk.js.map
+│   │           ├── 553.4d467b1d.chunk.js
+│   │           ├── 553.4d467b1d.chunk.js.map
+│   │           ├── 604.524ff8b6.chunk.js
+│   │           ├── 604.524ff8b6.chunk.js.map
+│   │           ├── 643.cf0bcdbe.chunk.js
+│   │           ├── 643.cf0bcdbe.chunk.js.map
+│   │           ├── 663.e92cb885.chunk.js
+│   │           ├── 663.e92cb885.chunk.js.map
+│   │           ├── 756.986a8604.chunk.js
+│   │           ├── 756.986a8604.chunk.js.map
+│   │           ├── 760.e5b4e2f4.chunk.js
+│   │           ├── 760.e5b4e2f4.chunk.js.map
+│   │           ├── 781.887afd28.chunk.js
+│   │           ├── 781.887afd28.chunk.js.map
+│   │           ├── 862.a838085d.chunk.js
+│   │           ├── 862.a838085d.chunk.js.map
+│   │           ├── main.41e27cd1.js
+│   │           ├── main.41e27cd1.js.LICENSE.txt
+│   │           └── main.41e27cd1.js.map
+│   ├── nginx.conf
+│   ├── package.json
+│   ├── pnpm-lock.yaml
+│   ├── public
+│   │   └── index.html
+│   ├── src
+│   │   ├── App.tsx
+│   │   ├── components
+│   │   │   ├── layout
+│   │   │   │   ├── AuthLayout.tsx
+│   │   │   │   └── MainLayout.tsx
+│   │   │   └── ui
+│   │   │       ├── ErrorBoundary.tsx
+│   │   │       ├── LoadingSpinner.tsx
+│   │   │       ├── NotificationProvider.tsx
+│   │   │       └── index.tsx
+│   │   ├── index.css
+│   │   ├── index.tsx
+│   │   ├── pages
+│   │   │   ├── Achievements.tsx
+│   │   │   ├── Chat.tsx
+│   │   │   ├── CodeEditor.tsx
+│   │   │   ├── Dashboard.tsx
+│   │   │   ├── KnowledgeGraph.tsx
+│   │   │   ├── Profile.tsx
+│   │   │   ├── Progress.tsx
+│   │   │   ├── Settings.tsx
+│   │   │   ├── assessments
+│   │   │   │   ├── AssessmentDetail.tsx
+│   │   │   │   └── Assessments.tsx
+│   │   │   ├── auth
+│   │   │   │   ├── LoginPage.tsx
+│   │   │   │   └── RegisterPage.tsx
+│   │   │   └── learning
+│   │   │       ├── LearningPathDetail.tsx
+│   │   │       ├── LearningPaths.tsx
+│   │   │       └── ModuleContent.tsx
+│   │   ├── services
+│   │   │   ├── agentService.ts
+│   │   │   ├── authService.ts
+│   │   │   └── learningService.ts
+│   │   ├── store
+│   │   │   ├── slices
+│   │   │   │   ├── agentSlice.ts
+│   │   │   │   ├── assessmentSlice.ts
+│   │   │   │   ├── authSlice.ts
+│   │   │   │   ├── learningSlice.ts
+│   │   │   │   └── uiSlice.ts
+│   │   │   └── store.ts
+│   │   └── utils
+│   │       └── sentry.ts
+│   ├── tailwind.config.js
+│   └── tsconfig.json
+├── integration_verification.py
+├── phase4_production_demo.py
+├── pyproject.toml
+├── shell_output_save
+│   └── jaclang_1763730699.txt
+├── start_integration.sh
+├── test_integration.py
+├── tmp -> /tmp/workspace_tmp
+├── user_input_files
+│   └── pasted-text-2025-11-21T12-19-52.txt
+├── uv.lock
+└── workspace.json
+
+52 directories, 245 files
+cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 
