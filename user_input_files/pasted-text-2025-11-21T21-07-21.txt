@@ -1,0 +1,1040 @@
+reating jac-nginx                                    ... done
+Attaching to jac-sandbox, jac-interactive-learning-platform_redis_1, jac-interactive-learning-platform_postgres_1, jac-celery-worker, jac-interactive-learning-platform_backend_1, jac-celery-beat, jac-interactive-learning-platform_frontend_1, jac-nginx
+frontend_1       | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+frontend_1       | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+frontend_1       | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+frontend_1       | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+frontend_1       | 10-listen-on-ipv6-by-default.sh: info: /etc/nginx/conf.d/default.conf differs from the packaged version
+postgres_1       | 
+postgres_1       | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres_1       | 
+postgres_1       | 2025-11-21 21:05:28.786 UTC [1] LOG:  starting PostgreSQL 15.15 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres_1       | 2025-11-21 21:05:28.786 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres_1       | 2025-11-21 21:05:28.786 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres_1       | 2025-11-21 21:05:28.792 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres_1       | 2025-11-21 21:05:28.803 UTC [29] LOG:  database system was shut down at 2025-11-21 20:56:25 UTC
+postgres_1       | 2025-11-21 21:05:28.819 UTC [1] LOG:  database system is ready to accept connections
+redis_1          | 1:C 21 Nov 2025 21:05:28.611 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+jac-sandbox      | JAC Sandbox Server starting on port 8080
+jac-sandbox      | Configuration:
+jac-sandbox      |   - Timeout: 30 seconds
+jac-sandbox      |   - Max Memory: 128 MB
+jac-sandbox      |   - Max Output: 1024 bytes
+jac-sandbox      |   - Available languages: Python, JavaScript, Java, C, C++
+jac-sandbox      | 
+jac-sandbox      | Sandbox endpoints:
+jac-sandbox      |   - POST /execute - Execute code
+jac-sandbox      |   - GET  /health - Health check
+jac-nginx        | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+jac-nginx        | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+redis_1          | 1:C 21 Nov 2025 21:05:28.611 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis_1          | 1:C 21 Nov 2025 21:05:28.611 * Redis version=7.4.7, bits=64, commit=00000000, modified=0, pid=1, just started
+redis_1          | 1:C 21 Nov 2025 21:05:28.611 * Configuration loaded
+frontend_1       | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+frontend_1       | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+frontend_1       | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+frontend_1       | /docker-entrypoint.sh: Configuration complete; ready for start up
+frontend_1       | 2025/11/21 21:05:29 [notice] 1#1: using the "epoll" event method
+frontend_1       | 2025/11/21 21:05:29 [notice] 1#1: nginx/1.29.3
+frontend_1       | 2025/11/21 21:05:29 [notice] 1#1: built by gcc 14.2.0 (Alpine 14.2.0) 
+frontend_1       | 2025/11/21 21:05:29 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+frontend_1       | 2025/11/21 21:05:29 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+jac-nginx        | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+frontend_1       | 2025/11/21 21:05:29 [notice] 1#1: start worker processes
+frontend_1       | 2025/11/21 21:05:29 [notice] 1#1: start worker process 29
+jac-nginx        | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+jac-nginx        | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+redis_1          | 1:M 21 Nov 2025 21:05:28.612 * monotonic clock: POSIX clock_gettime
+redis_1          | 1:M 21 Nov 2025 21:05:28.615 * Running mode=standalone, port=6379.
+redis_1          | 1:M 21 Nov 2025 21:05:28.616 * Server initialized
+redis_1          | 1:M 21 Nov 2025 21:05:28.617 * Reading RDB base file on AOF loading...
+jac-nginx        | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+frontend_1       | 2025/11/21 21:05:29 [notice] 1#1: start worker process 30
+frontend_1       | 2025/11/21 21:05:29 [notice] 1#1: start worker process 31
+frontend_1       | 2025/11/21 21:05:29 [notice] 1#1: start worker process 32
+redis_1          | 1:M 21 Nov 2025 21:05:28.618 * Loading RDB produced by version 7.4.7
+redis_1          | 1:M 21 Nov 2025 21:05:28.618 * RDB age 5531 seconds
+redis_1          | 1:M 21 Nov 2025 21:05:28.618 * RDB memory usage when created 0.90 Mb
+redis_1          | 1:M 21 Nov 2025 21:05:28.618 * RDB is base AOF
+jac-nginx        | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+frontend_1       | 2025/11/21 21:05:29 [notice] 1#1: start worker process 33
+frontend_1       | 2025/11/21 21:05:29 [notice] 1#1: start worker process 34
+redis_1          | 1:M 21 Nov 2025 21:05:28.618 * Done loading RDB, keys loaded: 0, keys expired: 0.
+frontend_1       | 2025/11/21 21:05:29 [notice] 1#1: start worker process 35
+frontend_1       | 2025/11/21 21:05:29 [notice] 1#1: start worker process 36
+jac-nginx        | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+jac-nginx        | /docker-entrypoint.sh: Configuration complete; ready for start up
+redis_1          | 1:M 21 Nov 2025 21:05:28.618 * DB loaded from base file appendonly.aof.1.base.rdb: 0.002 seconds
+redis_1          | 1:M 21 Nov 2025 21:05:28.618 * DB loaded from append only file: 0.002 seconds
+redis_1          | 1:M 21 Nov 2025 21:05:28.618 * Opening AOF incr file appendonly.aof.1.incr.aof on server start
+redis_1          | 1:M 21 Nov 2025 21:05:28.618 * Ready to accept connections tcp
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 573, in configure
+jac-celery-beat  |     handler = self.configure_handler(handlers[name])
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 757, in configure_handler
+jac-celery-beat  |     result = factory(**kwargs)
+jac-celery-beat  |              ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1181, in __init__
+jac-celery-beat  |     StreamHandler.__init__(self, self._open())
+jac-celery-beat  |                                  ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1213, in _open
+jac-celery-beat  |     return open_func(self.baseFilename, self.mode,
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  | PermissionError: [Errno 13] Permission denied: '/app/logs/django.log'
+jac-celery-beat  | 
+jac-celery-beat  | The above exception was the direct cause of the following exception:
+jac-celery-beat  | 
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 139, in validate_models
+jac-celery-beat  |     self.django_setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 135, in django_setup
+jac-celery-beat  |     django.setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/__init__.py", line 19, in setup
+jac-celery-beat  |     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/log.py", line 76, in configure_logging
+jac-celery-beat  |     logging_config_func(logging_settings)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 823, in dictConfig
+jac-celery-beat  |     dictConfigClass(config).configure()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 580, in configure
+jac-celery-beat  |     raise ValueError('Unable to configure handler '
+jac-celery-beat  | ValueError: Unable to configure handler 'file'
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 573, in configure
+jac-celery-worker |     handler = self.configure_handler(handlers[name])
+jac-celery-worker |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 757, in configure_handler
+jac-celery-worker |     result = factory(**kwargs)
+jac-celery-worker |              ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1181, in __init__
+jac-celery-worker |     StreamHandler.__init__(self, self._open())
+jac-celery-worker |                                  ^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1213, in _open
+jac-celery-worker |     return open_func(self.baseFilename, self.mode,
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker | PermissionError: [Errno 13] Permission denied: '/app/logs/django.log'
+jac-celery-worker | 
+jac-celery-worker | The above exception was the direct cause of the following exception:
+jac-celery-worker | 
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 139, in validate_models
+jac-celery-worker |     self.django_setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 135, in django_setup
+jac-celery-worker |     django.setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/__init__.py", line 19, in setup
+jac-celery-worker |     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/log.py", line 76, in configure_logging
+jac-celery-worker |     logging_config_func(logging_settings)
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 823, in dictConfig
+jac-celery-worker |     dictConfigClass(config).configure()
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 580, in configure
+jac-celery-worker |     raise ValueError('Unable to configure handler '
+jac-celery-worker | ValueError: Unable to configure handler 'file'
+backend_1        | Exception in thread django-main-thread:
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/usr/local/lib/python3.11/logging/config.py", line 573, in configure
+backend_1        |     handler = self.configure_handler(handlers[name])
+backend_1        |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/logging/config.py", line 757, in configure_handler
+backend_1        |     result = factory(**kwargs)
+backend_1        |              ^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1181, in __init__
+backend_1        |     StreamHandler.__init__(self, self._open())
+backend_1        |                                  ^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1213, in _open
+backend_1        |     return open_func(self.baseFilename, self.mode,
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        | PermissionError: [Errno 13] Permission denied: '/app/logs/django.log'
+backend_1        | 
+backend_1        | The above exception was the direct cause of the following exception:
+backend_1        | 
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/usr/local/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+backend_1        |     self.run()
+backend_1        |   File "/usr/local/lib/python3.11/threading.py", line 982, in run
+backend_1        |     self._target(*self._args, **self._kwargs)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/autoreload.py", line 64, in wrapper
+backend_1        |     fn(*args, **kwargs)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/commands/runserver.py", line 124, in inner_run
+backend_1        |     autoreload.raise_last_exception()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/autoreload.py", line 86, in raise_last_exception
+backend_1        |     raise _exception[1]
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 394, in execute
+backend_1        |     autoreload.check_errors(django.setup)()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/autoreload.py", line 64, in wrapper
+backend_1        |     fn(*args, **kwargs)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/__init__.py", line 19, in setup
+backend_1        |     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/log.py", line 76, in configure_logging
+backend_1        |     logging_config_func(logging_settings)
+backend_1        |   File "/usr/local/lib/python3.11/logging/config.py", line 823, in dictConfig
+backend_1        |     dictConfigClass(config).configure()
+backend_1        |   File "/usr/local/lib/python3.11/logging/config.py", line 580, in configure
+backend_1        |     raise ValueError('Unable to configure handler '
+backend_1        | ValueError: Unable to configure handler 'file'
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 573, in configure
+jac-celery-beat  |     handler = self.configure_handler(handlers[name])
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 757, in configure_handler
+jac-celery-beat  |     result = factory(**kwargs)
+jac-celery-beat  |              ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1181, in __init__
+jac-celery-beat  |     StreamHandler.__init__(self, self._open())
+jac-celery-beat  |                                  ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1213, in _open
+jac-celery-beat  |     return open_func(self.baseFilename, self.mode,
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  | PermissionError: [Errno 13] Permission denied: '/app/logs/django.log'
+jac-celery-beat  | 
+jac-celery-beat  | The above exception was the direct cause of the following exception:
+jac-celery-beat  | 
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 139, in validate_models
+jac-celery-beat  |     self.django_setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 135, in django_setup
+jac-celery-beat  |     django.setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/__init__.py", line 19, in setup
+jac-celery-beat  |     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/log.py", line 76, in configure_logging
+jac-celery-beat  |     logging_config_func(logging_settings)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 823, in dictConfig
+jac-celery-beat  |     dictConfigClass(config).configure()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 580, in configure
+jac-celery-beat  |     raise ValueError('Unable to configure handler '
+jac-celery-beat  | ValueError: Unable to configure handler 'file'
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 573, in configure
+jac-celery-worker |     handler = self.configure_handler(handlers[name])
+jac-celery-worker |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 757, in configure_handler
+jac-celery-worker |     result = factory(**kwargs)
+jac-celery-worker |              ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1181, in __init__
+jac-celery-worker |     StreamHandler.__init__(self, self._open())
+jac-celery-worker |                                  ^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1213, in _open
+jac-celery-worker |     return open_func(self.baseFilename, self.mode,
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker | PermissionError: [Errno 13] Permission denied: '/app/logs/django.log'
+jac-celery-worker | 
+jac-celery-worker | The above exception was the direct cause of the following exception:
+jac-celery-worker | 
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 139, in validate_models
+jac-celery-worker |     self.django_setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 135, in django_setup
+jac-celery-worker |     django.setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/__init__.py", line 19, in setup
+jac-celery-worker |     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/log.py", line 76, in configure_logging
+jac-celery-worker |     logging_config_func(logging_settings)
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 823, in dictConfig
+jac-celery-worker |     dictConfigClass(config).configure()
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 580, in configure
+jac-celery-worker |     raise ValueError('Unable to configure handler '
+jac-celery-worker | ValueError: Unable to configure handler 'file'
+jac-celery-beat exited with code 1
+jac-celery-worker exited with code 1
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 573, in configure
+jac-celery-beat  |     handler = self.configure_handler(handlers[name])
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 757, in configure_handler
+jac-celery-beat  |     result = factory(**kwargs)
+jac-celery-beat  |              ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1181, in __init__
+jac-celery-beat  |     StreamHandler.__init__(self, self._open())
+jac-celery-beat  |                                  ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1213, in _open
+jac-celery-beat  |     return open_func(self.baseFilename, self.mode,
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  | PermissionError: [Errno 13] Permission denied: '/app/logs/django.log'
+jac-celery-beat  | 
+jac-celery-beat  | The above exception was the direct cause of the following exception:
+jac-celery-beat  | 
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 139, in validate_models
+jac-celery-beat  |     self.django_setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 135, in django_setup
+jac-celery-beat  |     django.setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/__init__.py", line 19, in setup
+jac-celery-beat  |     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/log.py", line 76, in configure_logging
+jac-celery-beat  |     logging_config_func(logging_settings)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 823, in dictConfig
+jac-celery-beat  |     dictConfigClass(config).configure()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 580, in configure
+jac-celery-beat  |     raise ValueError('Unable to configure handler '
+jac-celery-beat  | ValueError: Unable to configure handler 'file'
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 573, in configure
+jac-celery-worker |     handler = self.configure_handler(handlers[name])
+jac-celery-worker |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 757, in configure_handler
+jac-celery-worker |     result = factory(**kwargs)
+jac-celery-worker |              ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1181, in __init__
+jac-celery-worker |     StreamHandler.__init__(self, self._open())
+jac-celery-worker |                                  ^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1213, in _open
+jac-celery-worker |     return open_func(self.baseFilename, self.mode,
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker | PermissionError: [Errno 13] Permission denied: '/app/logs/django.log'
+jac-celery-worker | 
+jac-celery-worker | The above exception was the direct cause of the following exception:
+jac-celery-worker | 
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 139, in validate_models
+jac-celery-worker |     self.django_setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 135, in django_setup
+jac-celery-worker |     django.setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/__init__.py", line 19, in setup
+jac-celery-worker |     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/log.py", line 76, in configure_logging
+jac-celery-worker |     logging_config_func(logging_settings)
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 823, in dictConfig
+jac-celery-worker |     dictConfigClass(config).configure()
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 580, in configure
+jac-celery-worker |     raise ValueError('Unable to configure handler '
+jac-celery-worker | ValueError: Unable to configure handler 'file'
+jac-celery-beat exited with code 1
+jac-celery-worker exited with code 1
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 573, in configure
+jac-celery-beat  |     handler = self.configure_handler(handlers[name])
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 757, in configure_handler
+jac-celery-beat  |     result = factory(**kwargs)
+jac-celery-beat  |              ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1181, in __init__
+jac-celery-beat  |     StreamHandler.__init__(self, self._open())
+jac-celery-beat  |                                  ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1213, in _open
+jac-celery-beat  |     return open_func(self.baseFilename, self.mode,
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  | PermissionError: [Errno 13] Permission denied: '/app/logs/django.log'
+jac-celery-beat  | 
+jac-celery-beat  | The above exception was the direct cause of the following exception:
+jac-celery-beat  | 
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 139, in validate_models
+jac-celery-beat  |     self.django_setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 135, in django_setup
+jac-celery-beat  |     django.setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/__init__.py", line 19, in setup
+jac-celery-beat  |     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/log.py", line 76, in configure_logging
+jac-celery-beat  |     logging_config_func(logging_settings)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 823, in dictConfig
+jac-celery-beat  |     dictConfigClass(config).configure()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 580, in configure
+jac-celery-beat  |     raise ValueError('Unable to configure handler '
+jac-celery-beat  | ValueError: Unable to configure handler 'file'
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 573, in configure
+jac-celery-worker |     handler = self.configure_handler(handlers[name])
+jac-celery-worker |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 757, in configure_handler
+jac-celery-worker |     result = factory(**kwargs)
+jac-celery-worker |              ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1181, in __init__
+jac-celery-worker |     StreamHandler.__init__(self, self._open())
+jac-celery-worker |                                  ^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1213, in _open
+jac-celery-worker |     return open_func(self.baseFilename, self.mode,
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker | PermissionError: [Errno 13] Permission denied: '/app/logs/django.log'
+jac-celery-worker | 
+jac-celery-worker | The above exception was the direct cause of the following exception:
+jac-celery-worker | 
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 139, in validate_models
+jac-celery-worker |     self.django_setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 135, in django_setup
+jac-celery-worker |     django.setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/__init__.py", line 19, in setup
+jac-celery-worker |     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/log.py", line 76, in configure_logging
+jac-celery-worker |     logging_config_func(logging_settings)
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 823, in dictConfig
+jac-celery-worker |     dictConfigClass(config).configure()
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 580, in configure
+jac-celery-worker |     raise ValueError('Unable to configure handler '
+jac-celery-worker | ValueError: Unable to configure handler 'file'
+jac-celery-beat exited with code 1
+jac-celery-worker exited with code 1
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 573, in configure
+jac-celery-beat  |     handler = self.configure_handler(handlers[name])
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 757, in configure_handler
+jac-celery-beat  |     result = factory(**kwargs)
+jac-celery-beat  |              ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1181, in __init__
+jac-celery-beat  |     StreamHandler.__init__(self, self._open())
+jac-celery-beat  |                                  ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1213, in _open
+jac-celery-beat  |     return open_func(self.baseFilename, self.mode,
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  | PermissionError: [Errno 13] Permission denied: '/app/logs/django.log'
+jac-celery-beat  | 
+jac-celery-beat  | The above exception was the direct cause of the following exception:
+jac-celery-beat  | 
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 139, in validate_models
+jac-celery-beat  |     self.django_setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 135, in django_setup
+jac-celery-beat  |     django.setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/__init__.py", line 19, in setup
+jac-celery-beat  |     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/log.py", line 76, in configure_logging
+jac-celery-beat  |     logging_config_func(logging_settings)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 823, in dictConfig
+jac-celery-beat  |     dictConfigClass(config).configure()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 580, in configure
+jac-celery-beat  |     raise ValueError('Unable to configure handler '
+jac-celery-beat  | ValueError: Unable to configure handler 'file'
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 573, in configure
+jac-celery-worker |     handler = self.configure_handler(handlers[name])
+jac-celery-worker |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 757, in configure_handler
+jac-celery-worker |     result = factory(**kwargs)
+jac-celery-worker |              ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1181, in __init__
+jac-celery-worker |     StreamHandler.__init__(self, self._open())
+jac-celery-worker |                                  ^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1213, in _open
+jac-celery-worker |     return open_func(self.baseFilename, self.mode,
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker | PermissionError: [Errno 13] Permission denied: '/app/logs/django.log'
+jac-celery-worker | 
+jac-celery-worker | The above exception was the direct cause of the following exception:
+jac-celery-worker | 
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 139, in validate_models
+jac-celery-worker |     self.django_setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 135, in django_setup
+jac-celery-worker |     django.setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/__init__.py", line 19, in setup
+jac-celery-worker |     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/log.py", line 76, in configure_logging
+jac-celery-worker |     logging_config_func(logging_settings)
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 823, in dictConfig
+jac-celery-worker |     dictConfigClass(config).configure()
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 580, in configure
+jac-celery-worker |     raise ValueError('Unable to configure handler '
+jac-celery-worker | ValueError: Unable to configure handler 'file'
+jac-celery-beat exited with code 1
+jac-celery-worker exited with code 1
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 573, in configure
+jac-celery-beat  |     handler = self.configure_handler(handlers[name])
+jac-celery-beat  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 757, in configure_handler
+jac-celery-beat  |     result = factory(**kwargs)
+jac-celery-beat  |              ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1181, in __init__
+jac-celery-beat  |     StreamHandler.__init__(self, self._open())
+jac-celery-beat  |                                  ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1213, in _open
+jac-celery-beat  |     return open_func(self.baseFilename, self.mode,
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  | PermissionError: [Errno 13] Permission denied: '/app/logs/django.log'
+jac-celery-beat  | 
+jac-celery-beat  | The above exception was the direct cause of the following exception:
+jac-celery-beat  | 
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 139, in validate_models
+jac-celery-beat  |     self.django_setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 135, in django_setup
+jac-celery-beat  |     django.setup()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/__init__.py", line 19, in setup
+jac-celery-beat  |     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/log.py", line 76, in configure_logging
+jac-celery-beat  |     logging_config_func(logging_settings)
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 823, in dictConfig
+jac-celery-beat  |     dictConfigClass(config).configure()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/logging/config.py", line 580, in configure
+jac-celery-beat  |     raise ValueError('Unable to configure handler '
+jac-celery-beat  | ValueError: Unable to configure handler 'file'
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 573, in configure
+jac-celery-worker |     handler = self.configure_handler(handlers[name])
+jac-celery-worker |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 757, in configure_handler
+jac-celery-worker |     result = factory(**kwargs)
+jac-celery-worker |              ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1181, in __init__
+jac-celery-worker |     StreamHandler.__init__(self, self._open())
+jac-celery-worker |                                  ^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/__init__.py", line 1213, in _open
+jac-celery-worker |     return open_func(self.baseFilename, self.mode,
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker | PermissionError: [Errno 13] Permission denied: '/app/logs/django.log'
+jac-celery-worker | 
+jac-celery-worker | The above exception was the direct cause of the following exception:
+jac-celery-worker | 
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 139, in validate_models
+jac-celery-worker |     self.django_setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 135, in django_setup
+jac-celery-worker |     django.setup()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/__init__.py", line 19, in setup
+jac-celery-worker |     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/log.py", line 76, in configure_logging
+jac-celery-worker |     logging_config_func(logging_settings)
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 823, in dictConfig
+jac-celery-worker |     dictConfigClass(config).configure()
+jac-celery-worker |   File "/usr/local/lib/python3.11/logging/config.py", line 580, in configure
+jac-celery-worker |     raise ValueError('Unable to configure handler '
+jac-celery-worker | ValueError: Unable to configure handler 'file'
+jac-celery-beat exited with code 1
+jac-celery-worker exited with code 1
