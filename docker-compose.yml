@@ -78,7 +78,6 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4
 
   # React Frontend (Production Build)
   frontend:
