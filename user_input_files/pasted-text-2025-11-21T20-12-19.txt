@@ -1,0 +1,914 @@
+jac-nginx        | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+frontend_1       | 2025/11/21 20:06:31 [notice] 1#1: start worker process 29
+jac-nginx        | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+frontend_1       | 2025/11/21 20:06:31 [notice] 1#1: start worker process 30
+frontend_1       | 2025/11/21 20:06:31 [notice] 1#1: start worker process 31
+frontend_1       | 2025/11/21 20:06:31 [notice] 1#1: start worker process 32
+frontend_1       | 2025/11/21 20:06:31 [notice] 1#1: start worker process 33
+frontend_1       | 2025/11/21 20:06:31 [notice] 1#1: start worker process 34
+frontend_1       | 2025/11/21 20:06:31 [notice] 1#1: start worker process 35
+frontend_1       | 2025/11/21 20:06:31 [notice] 1#1: start worker process 36
+jac-nginx        | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+jac-nginx        | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+jac-nginx        | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+jac-nginx        | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+jac-nginx        | /docker-entrypoint.sh: Configuration complete; ready for start up
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-sandbox exited with code 2
+jac-sandbox      | python: can't open file '/app/jac_sandbox_server.py': [Errno 2] No such file or directory
+jac-sandbox      | python: can't open file '/app/jac_sandbox_server.py': [Errno 2] No such file or directory
+jac-sandbox      | python: can't open file '/app/jac_sandbox_server.py': [Errno 2] No such file or directory
+jac-sandbox      | python: can't open file '/app/jac_sandbox_server.py': [Errno 2] No such file or directory
+jac-celery-beat  | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-beat  | Try 'celery --help' for help.
+jac-celery-beat  | 
+jac-celery-beat  | Error: 
+jac-celery-beat  | Unable to load celery application.
+jac-celery-beat  | Module 'config' has no attribute 'celery'
+jac-sandbox      | python: can't open file '/app/jac_sandbox_server.py': [Errno 2] No such file or directory
+jac-celery-worker | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-worker | Try 'celery --help' for help.
+jac-celery-worker | 
+jac-celery-worker | Error: 
+jac-celery-worker | Unable to load celery application.
+jac-celery-worker | Module 'config' has no attribute 'celery'
+jac-celery-beat exited with code 2
+jac-sandbox exited with code 2
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-celery-worker exited with code 2
+jac-interactive-learning-platform_backend_1 exited with code 1
+postgres_1       | 2025-11-21 20:06:34.532 UTC [34] LOG:  invalid length of startup packet
+jac-celery-beat  | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-beat  | Try 'celery --help' for help.
+jac-celery-beat  | 
+jac-celery-beat  | Error: 
+jac-celery-beat  | Unable to load celery application.
+jac-celery-beat  | Module 'config' has no attribute 'celery'
+jac-celery-worker | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-worker | Try 'celery --help' for help.
+jac-celery-worker | 
+jac-celery-worker | Error: 
+jac-celery-worker | Unable to load celery application.
+jac-celery-worker | Module 'config' has no attribute 'celery'
+jac-celery-beat exited with code 2
+jac-sandbox      | python: can't open file '/app/jac_sandbox_server.py': [Errno 2] No such file or directory
+jac-sandbox exited with code 2
+jac-celery-worker exited with code 2
+postgres_1       | 2025-11-21 20:06:35.611 UTC [33] LOG:  invalid length of startup packet
+postgres_1       | 2025-11-21 20:06:35.619 UTC [35] LOG:  invalid length of startup packet
+postgres_1       | 2025-11-21 20:06:35.657 UTC [36] LOG:  invalid length of startup packet
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+jac-celery-beat  | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-beat  | Try 'celery --help' for help.
+jac-celery-beat  | 
+jac-celery-beat  | Error: 
+jac-celery-beat  | Unable to load celery application.
+jac-celery-beat  | Module 'config' has no attribute 'celery'
+jac-celery-worker | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-worker | Try 'celery --help' for help.
+jac-celery-worker | 
+jac-celery-worker | Error: 
+jac-celery-worker | Unable to load celery application.
+jac-celery-worker | Module 'config' has no attribute 'celery'
+jac-celery-beat exited with code 2
+jac-celery-worker exited with code 2
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+jac-sandbox      | python: can't open file '/app/jac_sandbox_server.py': [Errno 2] No such file or directory
+jac-celery-beat  | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-beat  | Try 'celery --help' for help.
+jac-celery-beat  | 
+jac-celery-beat  | Error: 
+jac-celery-beat  | Unable to load celery application.
+jac-celery-beat  | Module 'config' has no attribute 'celery'
+jac-sandbox exited with code 2
+jac-celery-worker | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-worker | Try 'celery --help' for help.
+jac-celery-worker | 
+jac-celery-worker | Error: 
+jac-celery-worker | Unable to load celery application.
+jac-celery-worker | Module 'config' has no attribute 'celery'
+jac-celery-beat exited with code 2
+jac-celery-worker exited with code 2
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+postgres_1       | 2025-11-21 20:06:40.468 UTC [44] LOG:  invalid length of startup packet
+jac-celery-beat  | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-beat  | Try 'celery --help' for help.
+jac-celery-beat  | 
+jac-celery-beat  | Error: 
+jac-celery-beat  | Unable to load celery application.
+jac-celery-beat  | Module 'config' has no attribute 'celery'
+jac-celery-worker | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-worker | Try 'celery --help' for help.
+jac-celery-worker | 
+jac-celery-worker | Error: 
+jac-celery-worker | Unable to load celery application.
+jac-celery-worker | Module 'config' has no attribute 'celery'
+jac-celery-beat exited with code 2
+jac-celery-worker exited with code 2
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+jac-sandbox      | python: can't open file '/app/jac_sandbox_server.py': [Errno 2] No such file or directory
+jac-sandbox exited with code 2
+jac-celery-beat  | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-beat  | Try 'celery --help' for help.
+jac-celery-beat  | 
+jac-celery-beat  | Error: 
+jac-celery-beat  | Unable to load celery application.
+jac-celery-beat  | Module 'config' has no attribute 'celery'
+jac-celery-worker | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-worker | Try 'celery --help' for help.
+jac-celery-worker | 
+jac-celery-worker | Error: 
+jac-celery-worker | Unable to load celery application.
+jac-celery-worker | Module 'config' has no attribute 'celery'
+jac-celery-beat exited with code 2
+jac-celery-worker exited with code 2
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+jac-celery-worker | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-worker | Try 'celery --help' for help.
+jac-celery-worker | 
+jac-celery-worker | Error: 
+jac-celery-worker | Unable to load celery application.
+jac-celery-worker | Module 'config' has no attribute 'celery'
+jac-celery-beat  | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-beat  | Try 'celery --help' for help.
+jac-celery-beat  | 
+jac-celery-beat  | Error: 
+jac-celery-beat  | Unable to load celery application.
+jac-celery-beat  | Module 'config' has no attribute 'celery'
+jac-celery-worker exited with code 2
+jac-celery-beat exited with code 2
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+jac-sandbox      | python: can't open file '/app/jac_sandbox_server.py': [Errno 2] No such file or directory
+jac-sandbox exited with code 2
+frontend_1       | 127.0.0.1 - - [21/Nov/2025:20:07:02 +0000] "GET / HTTP/1.1" 200 592 "-" "curl/8.14.1" "-"
+jac-celery-worker | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-worker | Try 'celery --help' for help.
+jac-celery-worker | 
+jac-celery-worker | Error: 
+jac-celery-worker | Unable to load celery application.
+jac-celery-worker | Module 'config' has no attribute 'celery'
+jac-celery-beat  | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-beat  | Try 'celery --help' for help.
+jac-celery-beat  | 
+jac-celery-beat  | Error: 
+jac-celery-beat  | Unable to load celery application.
+jac-celery-beat  | Module 'config' has no attribute 'celery'
+jac-celery-worker exited with code 2
+jac-celery-beat exited with code 2
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+jac-sandbox      | python: can't open file '/app/jac_sandbox_server.py': [Errno 2] No such file or directory
+jac-sandbox exited with code 2
+frontend_1       | 127.0.0.1 - - [21/Nov/2025:20:07:33 +0000] "GET / HTTP/1.1" 200 592 "-" "curl/8.14.1" "-"
+jac-celery-worker | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-worker | Try 'celery --help' for help.
+jac-celery-worker | 
+jac-celery-worker | Error: 
+jac-celery-worker | Unable to load celery application.
+jac-celery-worker | Module 'config' has no attribute 'celery'
+jac-celery-beat  | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-beat  | Try 'celery --help' for help.
+jac-celery-beat  | 
+jac-celery-beat  | Error: 
+jac-celery-beat  | Unable to load celery application.
+jac-celery-beat  | Module 'config' has no attribute 'celery'
+jac-celery-worker exited with code 2
+jac-celery-beat exited with code 2
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+postgres_1       | 2025-11-21 20:07:46.528 UTC [89] LOG:  invalid length of startup packet
+postgres_1       | 2025-11-21 20:07:47.540 UTC [90] LOG:  invalid length of startup packet
+postgres_1       | 2025-11-21 20:07:47.544 UTC [91] LOG:  invalid length of startup packet
+postgres_1       | 2025-11-21 20:07:47.555 UTC [92] LOG:  invalid length of startup packet
+frontend_1       | 127.0.0.1 - - [21/Nov/2025:20:08:03 +0000] "GET / HTTP/1.1" 200 592 "-" "curl/8.14.1" "-"
+jac-sandbox      | python: can't open file '/app/jac_sandbox_server.py': [Errno 2] No such file or directory
+jac-sandbox exited with code 2
+jac-celery-worker | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-worker | Try 'celery --help' for help.
+jac-celery-worker | 
+jac-celery-worker | Error: 
+jac-celery-worker | Unable to load celery application.
+jac-celery-worker | Module 'config' has no attribute 'celery'
+jac-celery-beat  | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-beat  | Try 'celery --help' for help.
+jac-celery-beat  | 
+jac-celery-beat  | Error: 
+jac-celery-beat  | Unable to load celery application.
+jac-celery-beat  | Module 'config' has no attribute 'celery'
+jac-celery-worker exited with code 2
+jac-celery-beat exited with code 2
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+frontend_1       | 127.0.0.1 - - [21/Nov/2025:20:08:34 +0000] "GET / HTTP/1.1" 200 592 "-" "curl/8.14.1" "-"
+frontend_1       | 127.0.0.1 - - [21/Nov/2025:20:09:06 +0000] "GET / HTTP/1.1" 200 592 "-" "curl/8.14.1" "-"
+jac-sandbox      | python: can't open file '/app/jac_sandbox_server.py': [Errno 2] No such file or directory
+jac-sandbox exited with code 2
+jac-celery-worker | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-worker | Try 'celery --help' for help.
+jac-celery-worker | 
+jac-celery-worker | Error: 
+jac-celery-worker | Unable to load celery application.
+jac-celery-worker | Module 'config' has no attribute 'celery'
+jac-celery-beat  | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-beat  | Try 'celery --help' for help.
+jac-celery-beat  | 
+jac-celery-beat  | Error: 
+jac-celery-beat  | Unable to load celery application.
+jac-celery-beat  | Module 'config' has no attribute 'celery'
+jac-celery-worker exited with code 2
+jac-celery-beat exited with code 2
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+frontend_1       | 127.0.0.1 - - [21/Nov/2025:20:09:37 +0000] "GET / HTTP/1.1" 200 592 "-" "curl/8.14.1" "-"
+frontend_1       | 127.0.0.1 - - [21/Nov/2025:20:10:08 +0000] "GET / HTTP/1.1" 200 592 "-" "curl/8.14.1" "-"
+jac-sandbox      | python: can't open file '/app/jac_sandbox_server.py': [Errno 2] No such file or directory
+jac-sandbox exited with code 2
+jac-celery-worker | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-worker | Try 'celery --help' for help.
+jac-celery-worker | 
+jac-celery-worker | Error: 
+jac-celery-worker | Unable to load celery application.
+jac-celery-worker | Module 'config' has no attribute 'celery'
+jac-celery-beat  | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-beat  | Try 'celery --help' for help.
+jac-celery-beat  | 
+jac-celery-beat  | Error: 
+jac-celery-beat  | Unable to load celery application.
+jac-celery-beat  | Module 'config' has no attribute 'celery'
+jac-celery-worker exited with code 2
+jac-celery-beat exited with code 2
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
+frontend_1       | 127.0.0.1 - - [21/Nov/2025:20:10:39 +0000] "GET / HTTP/1.1" 200 592 "-" "curl/8.14.1" "-"
+frontend_1       | 127.0.0.1 - - [21/Nov/2025:20:11:11 +0000] "GET / HTTP/1.1" 200 592 "-" "curl/8.14.1" "-"
+jac-sandbox      | python: can't open file '/app/jac_sandbox_server.py': [Errno 2] No such file or directory
+jac-sandbox exited with code 2
+postgres_1       | 2025-11-21 20:11:40.637 UTC [27] LOG:  checkpoint starting: time
+postgres_1       | 2025-11-21 20:11:40.670 UTC [27] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.016 s, sync=0.003 s, total=0.034 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB
+jac-celery-worker | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-worker | Try 'celery --help' for help.
+jac-celery-worker | 
+jac-celery-worker | Error: 
+jac-celery-worker | Unable to load celery application.
+jac-celery-worker | Module 'config' has no attribute 'celery'
+jac-celery-beat  | Usage: celery [OPTIONS] COMMAND [ARGS]...
+jac-celery-beat  | Try 'celery --help' for help.
+jac-celery-beat  | 
+jac-celery-beat  | Error: 
+jac-celery-beat  | Unable to load celery application.
+jac-celery-beat  | Module 'config' has no attribute 'celery'
+jac-celery-worker exited with code 2
+jac-celery-beat exited with code 2
+frontend_1       | 127.0.0.1 - - [21/Nov/2025:20:11:42 +0000] "GET / HTTP/1.1" 200 592 "-" "curl/8.14.1" "-"
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 22, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 18, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 429, in run_from_argv
+backend_1        |     connections.close_all()
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 84, in close_all
+backend_1        |     for conn in self.all(initialized_only=True):
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 76, in all
+backend_1        |     return [
+backend_1        |            ^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 73, in __iter__
+backend_1        |     return iter(self.settings)
+backend_1        |                 ^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 45, in settings
+backend_1        |     self._settings = self.configure_settings(self._settings)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 148, in configure_settings
+backend_1        |     databases = super().configure_settings(databases)
+backend_1        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/utils/connection.py", line 50, in configure_settings
+backend_1        |     settings = getattr(django_settings, self.settings_name)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 81, in __getattr__
+backend_1        |     self._setup(name)
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 68, in _setup
+backend_1        |     self._wrapped = Settings(settings_module)
+backend_1        |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/conf/__init__.py", line 166, in __init__
+backend_1        |     mod = importlib.import_module(self.SETTINGS_MODULE)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1135, in _find_and_load_unlocked
+backend_1        | ModuleNotFoundError: No module named 'config.settings.production'; 'config.settings' is not a package
+jac-interactive-learning-platform_backend_1 exited with code 1
