@@ -1,0 +1,82 @@
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # Copy the migration file to the container
+docker cp /workspace/backend/apps/users/migrations/0001_initial.py jac-interactive-learning-platform_backend_1:/app/apps/users/migrations/0001_initial.py
+
+# Run migrations
+docker-compose exec backend python manage.py migrate
+
+# Check the status
+docker-compose ps
+lstat /workspace: no such file or directory
+Operations to perform:
+  Apply all migrations: admin, agents, auth, contenttypes, django_celery_beat, learning, sessions
+Running migrations:
+  Applying admin.0001_initial...Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 103, in _execute
+    return self.cursor.execute(sql)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: relation "jac_user" does not exist
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/manage.py", line 22, in <module>
+    main()
+  File "/app/manage.py", line 18, in main
+    execute_from_command_line(sys.argv)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 416, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 460, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 107, in wrapper
+    res = handle_func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/commands/migrate.py", line 353, in handle
+    post_migrate_state = executor.migrate(
+                         ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/migrations/executor.py", line 135, in migrate
+    state = self._migrate_all_forwards(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/migrations/executor.py", line 167, in _migrate_all_forwards
+    state = self.apply_migration(
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/migrations/executor.py", line 252, in apply_migration
+    with self.connection.schema_editor(
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/base/schema.py", line 169, in __exit__
+    self.execute(sql, None)
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/postgresql/schema.py", line 45, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/base/schema.py", line 204, in execute
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 103, in _execute
+    return self.cursor.execute(sql)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: relation "jac_user" does not exist
+
+                    Name                                  Command                   State                                        Ports                                 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+jac-celery-beat                                celery -A config beat -l i ...   Restarting                                                                             
+jac-celery-worker                              celery -A config worker -l ...   Up (unhealthy)   8000/tcp                                                              
+jac-interactive-learning-platform_backend_1    python manage.py runserver ...   Up (unhealthy)   0.0.0.0:8000->8000/tcp,:::8000->8000/tcp                              
+jac-interactive-learning-platform_frontend_1   /docker-entrypoint.sh ngin ...   Up (healthy)     0.0.0.0:3000->80/tcp,:::3000->80/tcp                                  
+jac-interactive-learning-platform_postgres_1   docker-entrypoint.sh postgres    Up (healthy)     0.0.0.0:5432->5432/tcp,:::5432->5432/tcp                              
+jac-interactive-learning-platform_redis_1      docker-entrypoint.sh redis ...   Up (healthy)     0.0.0.0:6379->6379/tcp,:::6379->6379/tcp                              
+jac-nginx                                      /docker-entrypoint.sh ngin ...   Up (healthy)     0.0.0.0:443->443/tcp,:::443->443/tcp, 0.0.0.0:80->80/tcp,:::80->80/tcp
+jac-sandbox                                    python jac_sandbox_server.py     Up (unhealthy)   8000/tcp, 0.0.0.0:8080->8080/tcp,:::8080->8080/tcp                    
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 
