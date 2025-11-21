@@ -36,8 +36,9 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   );
 };
 
-// Button Component - Exclude conflicting framer-motion props
-interface ButtonBaseProps {
+// Button Component - Clean interface without React HTML attribute conflicts
+interface ButtonProps {
+  // Custom component props
   variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
@@ -47,22 +48,29 @@ interface ButtonBaseProps {
   children: React.ReactNode;
   className?: string;
   disabled?: boolean;
+  
+  // Essential button attributes we want to support
+  type?: 'button' | 'submit' | 'reset';
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void;
+  onFocus?: (event: React.FocusEvent<HTMLButtonElement>) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
+  onKeyUp?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
+  onKeyPress?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
+  onMouseEnter?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onMouseLeave?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onTouchStart?: (event: React.TouchEvent<HTMLButtonElement>) => void;
+  onTouchEnd?: (event: React.TouchEvent<HTMLButtonElement>) => void;
+  id?: string;
+  name?: string;
+  value?: string;
+  title?: string;
+  ariaLabel?: string;
+  ariaDescribedBy?: string;
+  role?: string;
+  tabIndex?: number;
+  form?: string;
 }
-
-type ButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 
-  | 'onAnimationStart' 
-  | 'onAnimationEnd' 
-  | 'onAnimationIteration'
-  | 'animate'
-  | 'variants'
-  | 'initial'
-  | 'whileHover'
-  | 'whileTap'
-  | 'whileFocus'
-  | 'whileDrag'
-  | 'exit'
-  | 'transition'
-> & ButtonBaseProps;
 
 const buttonVariants: Variants = {
   initial: { scale: 1 },
@@ -80,7 +88,26 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   className = '',
   disabled,
-  ...restProps
+  type = 'button',
+  onClick,
+  onBlur,
+  onFocus,
+  onKeyDown,
+  onKeyUp,
+  onKeyPress,
+  onMouseEnter,
+  onMouseLeave,
+  onTouchStart,
+  onTouchEnd,
+  id,
+  name,
+  value,
+  title,
+  ariaLabel,
+  ariaDescribedBy,
+  role,
+  tabIndex,
+  form,
 }) => {
   const baseClasses = 'inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 disabled:opacity-50 disabled:cursor-not-allowed';
   
@@ -119,7 +146,26 @@ export const Button: React.FC<ButtonProps> = ({
       whileTap="tap"
       className={classes}
       disabled={disabled || isLoading}
-      {...restProps}
+      type={type}
+      onClick={onClick}
+      onBlur={onBlur}
+      onFocus={onFocus}
+      onKeyDown={onKeyDown}
+      onKeyUp={onKeyUp}
+      onKeyPress={onKeyPress}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      id={id}
+      name={name}
+      value={value}
+      title={title}
+      aria-label={ariaLabel}
+      aria-describedby={ariaDescribedBy}
+      role={role}
+      tabIndex={tabIndex}
+      form={form}
     >
       {isLoading ? (
         <LoadingSpinner size="sm" className="mr-2" />
