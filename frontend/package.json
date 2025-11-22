@@ -44,6 +44,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:production": "react-scripts build",
     "test": "react-scripts test",
     "test:watch": "react-scripts test --watch",
     "test:coverage": "react-scripts test --coverage --watchAll=false",
@@ -52,10 +53,7 @@
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "type-check": "tsc --noEmit",
-    "format": "prettier --write src/**/*.{ts,tsx,css,md}",
-    "dev": "vite",
-    "build:vite": "vite build",
-    "preview": "vite preview"
+    "format": "prettier --write src/**/*.{ts,tsx,css,md}"
   },
   "eslintConfig": {
     "extends": [
