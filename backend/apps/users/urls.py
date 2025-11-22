@@ -9,7 +9,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from .views import (
     UserRegistrationView, UserLoginView, UserProfileView,
     UserDetailView, LearningSummaryView, UserSettingsView,
-    UserStatsView, current_user, logout_view
+    UserStatsView, current_user, logout_view, verify_email, resend_verification_email
 )
 
 # Create router for ViewSets
@@ -22,6 +22,10 @@ urlpatterns = [
     path('auth/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
     path('auth/logout/', logout_view, name='user-logout'),
     path('auth/me/', current_user, name='current-user'),
+    
+    # Email verification URLs
+    path('verify-email/', verify_email, name='verify-email'),
+    path('resend-verification/', resend_verification_email, name='resend-verification'),
     
     # User management URLs
     path('profile/', UserProfileView.as_view(), name='user-profile'),

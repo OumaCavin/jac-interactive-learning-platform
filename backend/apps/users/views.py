@@ -9,6 +9,9 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.utils import timezone
+from django.urls import reverse
+from django.contrib.sites.shortcuts import get_current_site
+from django.conf import settings
 
 from .models import User
 from .serializers import (
@@ -28,6 +31,18 @@ class UserRegistrationView(APIView):
         if serializer.is_valid():
             user = serializer.save()
             
+            # Generate verification URL
+            current_site = get_current_site(request)
+            verification_url = f"{request.scheme}://{current_site.domain}/api/users/verify-email/?token={user.verification_token}"
+            
+            # Send verification email via Celery task
+            try:
+                from config.celery import send_email_verification_task
+                send_email_verification_task.delay(user.id, verification_url)
+            except Exception as e:
+                # If Celery task fails, log the error but don't fail registration
+                print(f"Failed to queue email verification task: {e}")
+            
             # Generate JWT tokens
             refresh = RefreshToken.for_user(user)
             
@@ -36,7 +51,8 @@ class UserRegistrationView(APIView):
                 'tokens': {
                     'refresh': str(refresh),
                     'access': str(refresh.access_token),
-                }
+                },
+                'message': 'Account created successfully! Please check your email to verify your account.'
             }
             
             return Response(response_data, status=status.HTTP_201_CREATED)
@@ -242,4 +258,84 @@ def logout_view(request):
         # This prevents users from being stuck in logged-out state
         return Response({
             "message": "Logged out successfully"
+        }, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def verify_email(request):
+    """Verify user email address using verification token."""
+    token = request.GET.get('token')
+    
+    if not token:
+        return Response({
+            'error': 'Verification token is required'
+        }, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        # Find user by verification token
+        user = User.objects.get(verification_token=token)
+        
+        # Check if token is expired (24 hours)
+        if user.verification_token_expires_at and user.verification_token_expires_at < timezone.now():
+            return Response({
+                'error': 'Verification token has expired. Please request a new one.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Mark user as verified
+        user.is_verified = True
+        user.verification_token = None  # Clear the token
+        user.verification_token_expires_at = None
+        user.save()
+        
+        return Response({
+            'message': 'Email verified successfully! You can now login to your account.',
+            'verified': True
+        }, status=status.HTTP_200_OK)
+        
+    except User.DoesNotExist:
+        return Response({
+            'error': 'Invalid verification token'
+        }, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def resend_verification_email(request):
+    """Resend email verification to user."""
+    email = request.data.get('email')
+    
+    if not email:
+        return Response({
+            'error': 'Email address is required'
+        }, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        user = User.objects.get(email=email.lower())
+        
+        if user.is_verified:
+            return Response({
+                'message': 'Email is already verified.'
+            }, status=status.HTTP_200_OK)
+        
+        # Generate new verification URL
+        current_site = get_current_site(request)
+        verification_url = f"{request.scheme}://{current_site.domain}/api/users/verify-email/?token={user.verification_token}"
+        
+        # Send verification email via Celery task
+        try:
+            from config.celery import send_email_verification_task
+            send_email_verification_task.delay(user.id, verification_url)
+            
+            return Response({
+                'message': 'Verification email has been sent. Please check your inbox.'
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({
+                'error': 'Failed to send verification email. Please try again later.'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            
+    except User.DoesNotExist:
+        return Response({
+            'message': 'If an account with this email exists, a verification email has been sent.'
         }, status=status.HTTP_200_OK)

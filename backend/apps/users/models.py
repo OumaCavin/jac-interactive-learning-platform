@@ -90,6 +90,11 @@ class User(AbstractUser):
     email_notifications = models.BooleanField(default=True)
     push_notifications = models.BooleanField(default=True)
     
+    # Email Verification
+    is_verified = models.BooleanField(default=False)
+    verification_token = models.CharField(max_length=100, null=True, blank=True, unique=True)
+    verification_token_expires_at = models.DateTimeField(null=True, blank=True)
+    
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -181,3 +186,27 @@ class User(AbstractUser):
             'time_spent_hours': self.total_time_spent.total_seconds() / 3600,
             'achievements_count': len(self.achievements),
         }
+    
+    def generate_verification_token(self):
+        """Generate a unique verification token for email verification."""
+        import secrets
+        from datetime import timedelta
+        
+        token = secrets.token_urlsafe(32)
+        self.verification_token = token
+        self.verification_token_expires_at = timezone.now() + timedelta(hours=24)
+        return token
+    
+    def save(self, *args, **kwargs):
+        """Override save to handle verification token generation."""
+        # Generate verification token for new users who haven't been verified yet
+        if not self.pk and not self.is_verified:
+            self.generate_verification_token()
+        
+        # Update last activity timestamp
+        self.last_activity_at = timezone.now()
+        
+        # Calculate level based on points
+        self.level = max(1, self.total_points // 100 + 1)
+        
+        super().save(*args, **kwargs)

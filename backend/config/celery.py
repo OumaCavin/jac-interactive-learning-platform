@@ -72,3 +72,49 @@ def send_welcome_email_task(self, user_id):
     print(f'Sending welcome email to user: {user_id}')
     # Add actual email sending logic here
     return f"Welcome email sent to user {user_id}"
+
+# Email verification task
+@celery_app.task(bind=True, name='users.send_email_verification')
+def send_email_verification_task(self, user_id, verification_url):
+    """Send email verification to user"""
+    from django.contrib.auth import get_user_model
+    from django.core.mail import send_mail
+    from django.template.loader import render_to_string
+    from django.utils.html import strip_tags
+    from django.conf import settings
+    
+    User = get_user_model()
+    try:
+        user = User.objects.get(id=user_id)
+        
+        # Prepare email content
+        subject = 'Verify Your JAC Learning Platform Account'
+        context = {
+            'user': user,
+            'verification_url': verification_url,
+            'platform_name': 'JAC Learning Platform',
+        }
+        
+        # Render HTML email template
+        html_message = render_to_string('emails/verification_email.html', context)
+        plain_message = strip_tags(html_message)
+        
+        # Send email
+        send_mail(
+            subject=subject,
+            message=plain_message,
+            html_message=html_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[user.email],
+            fail_silently=False,
+        )
+        
+        print(f'✅ Email verification sent successfully to: {user.email}')
+        return f"Verification email sent to {user.email}"
+        
+    except User.DoesNotExist:
+        print(f'❌ User with ID {user_id} not found')
+        raise self.retry(countdown=60, max_retries=3)
+    except Exception as e:
+        print(f'❌ Failed to send verification email: {str(e)}')
+        raise self.retry(countdown=300, max_retries=2)
