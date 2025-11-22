@@ -4,6 +4,7 @@
  */
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '../store';
 
 // Types for agent state
 export interface Agent {
@@ -329,8 +330,6 @@ export const {
 } = agentSlice.actions;
 
 // Selectors
-import type { RootState } from '../store';
-
 export const selectAgents = (state: RootState) => state.agents.agents;
 export const selectActiveAgents = (state: RootState) => 
   state.agents.agents.filter(a => state.agents.active_agents.includes(a.id));

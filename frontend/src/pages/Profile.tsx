@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { Card, Button, Badge, ProgressBar } from '../components/ui';
 import { selectAuth, getUserStats } from '../store/slices/authSlice';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../store/store';
 import type { User } from '../services/authService';
 
 const Profile: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { user, isLoading } = useSelector(selectAuth);
   const [activeTab, setActiveTab] = useState<string>('overview');
 

@@ -300,7 +300,7 @@ const KnowledgeGraph: React.FC = () => {
     // Apply concept filter
     if (filters.concept.length > 0) {
       const nodeConcepts = getNodeConcepts(node);
-      if (!nodeConcepts.some(concept => filters.concept.includes(concept))) return false;
+      if (!nodeConcepts.some((concept: string) => filters.concept.includes(concept))) return false;
     }
 
     // Apply status filter

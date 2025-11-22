@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../store/store';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, Button, Badge } from '../components/ui';
 import { 
@@ -27,10 +28,10 @@ interface ChatState {
 
 const Chat: React.FC = () => {
   const dispatch = useDispatch();
-  const agents = useSelector(selectAgents);
-  const selectedAgent = useSelector(selectSelectedAgent);
-  const typing = useSelector(state => selectedAgent ? selectAgentTyping(state, selectedAgent.id) : false);
-  const conversation = useSelector(state => selectedAgent ? selectConversation(state, selectedAgent.id) : []);
+  const agents = useAppSelector(selectAgents);
+  const selectedAgent = useAppSelector(selectSelectedAgent);
+  const typing = useAppSelector(state => selectedAgent ? selectAgentTyping(state, selectedAgent.id) : false);
+  const conversation = useAppSelector(state => selectedAgent ? selectConversation(state, selectedAgent.id) : []);
   
   const [chatState, setChatState] = useState<ChatState>({
     message: '',
@@ -51,16 +52,15 @@ const Chat: React.FC = () => {
     const loadAgents = async () => {
       try {
         const agentsData = await agentService.getAgents();
-        // Filter for chat assistant or available agents
+        // Filter for available agents
         const chatAgents = agentsData.filter(agent => 
-          agent.type === 'chat_assistant' || 
-          agent.status === 'idle' || 
+          agent.status === 'active' || 
           agent.status === 'busy'
         );
         
         // If no chat assistant found, use the first available agent
         if (chatAgents.length > 0 && !selectedAgent) {
-          dispatch(setSelectedAgent(chatAgents[0]));
+          dispatch(setSelectedAgent(chatAgents[0].id));
         }
       } catch (error) {
         console.error('Failed to load agents:', error);
@@ -94,7 +94,7 @@ const Chat: React.FC = () => {
               id: `agent-${msg.id}`,
               agent_id: msg.agent.toString(),
               user_id: msg.user.toString(),
-              content: msg.response,
+              content: msg.response || 'No response',
               type: 'text',
               timestamp: msg.created_at,
               is_read: true
@@ -173,7 +173,7 @@ const Chat: React.FC = () => {
     }
   };
 
-  const handleRateMessage = async (messageId: number, rating: number) => {
+  const handleRateMessage = async (messageId: string, rating: number) => {
     try {
       await agentService.rateChatResponse(messageId, rating);
       // Show success feedback (could add toast notification here)
@@ -198,29 +198,28 @@ const Chat: React.FC = () => {
 
   const getAgentIcon = (agentType: string) => {
     switch (agentType) {
-      case 'chat_assistant': return '🤖';
-      case 'learning_coordinator': return '👩‍🏫';
-      case 'content_generator': return '✍️';
-      case 'code_evaluator': return '💻';
+      case 'content_curator': return '📚';
+      case 'quiz_master': return '❓';
+      case 'evaluator': return '✅';
       case 'progress_tracker': return '📊';
-      case 'knowledge_graph': return '🕸️';
+      case 'motivator': return '💪';
+      case 'orchestrator': return '🎯';
       default: return '🤖';
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'idle': return 'success';
+      case 'active': return 'success';
       case 'busy': return 'warning';
-      case 'error': return 'error';
+      case 'inactive': return 'error';
       default: return 'info';
     }
   };
 
   // Available agents for chat
   const availableAgents = agents.filter(agent => 
-    agent.type === 'chat_assistant' || 
-    agent.status === 'idle' || 
+    agent.status === 'active' || 
     agent.status === 'busy'
   );
 
@@ -264,7 +263,7 @@ const Chat: React.FC = () => {
               {availableAgents.map((agent) => (
                 <button
                   key={agent.id}
-                  onClick={() => dispatch(setSelectedAgent(agent))}
+                  onClick={() => dispatch(setSelectedAgent(agent.id))}
                   className={`w-full text-left p-3 rounded-lg transition-all duration-200 ${
                     selectedAgent?.id === agent.id
                       ? 'bg-white/20 border border-white/30'
@@ -291,12 +290,6 @@ const Chat: React.FC = () => {
                       {agent.status}
                     </Badge>
                   </div>
-                  
-                  {agent.current_task && (
-                    <div className="text-xs text-white/50 mt-1 truncate">
-                      {agent.current_task}
-                    </div>
-                  )}
                 </button>
               ))}
             </div>
@@ -342,11 +335,6 @@ const Chat: React.FC = () => {
                     <Badge variant={getStatusColor(selectedAgent.status)} glass={false}>
                       {selectedAgent.status}
                     </Badge>
-                    {selectedAgent.performance_metrics && (
-                      <Badge variant="info" glass={false} size="sm">
-                        {selectedAgent.performance_metrics.tasks_completed} tasks
-                      </Badge>
-                    )}
                   </div>
                 </div>
               </div>
@@ -394,14 +382,14 @@ const Chat: React.FC = () => {
                           {message.user_id !== 'current-user' && message.content.includes('?') && (
                             <div className="flex space-x-1">
                               <button
-                                onClick={() => handleRateMessage(parseInt(message.id), 1)}
+                                onClick={() => handleRateMessage(message.id, 1)}
                                 className="text-xs text-success-400 hover:text-success-300"
                                 title="Helpful"
                               >
                                 👍
                               </button>
                               <button
-                                onClick={() => handleRateMessage(parseInt(message.id), -1)}
+                                onClick={() => handleRateMessage(message.id, -1)}
                                 className="text-xs text-error-400 hover:text-error-300"
                                 title="Not helpful"
                               >

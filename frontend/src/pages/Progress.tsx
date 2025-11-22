@@ -359,19 +359,13 @@ const Progress: React.FC = () => {
       {/* Weekly Activity Chart */}
       <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
         <h3 className="text-xl font-semibold text-white mb-6">Weekly Activity</h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <AreaChart data={weeklyActivity}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-            <XAxis dataKey="date" stroke="rgba(255,255,255,0.7)" />
-            <YAxis stroke="rgba(255,255,255,0.7)" />
-            <Tooltip 
-              contentStyle={{ 
-                backgroundColor: 'rgba(0,0,0,0.8)', 
-                border: '1px solid rgba(255,255,255,0.2)',
-                borderRadius: '8px',
-                color: 'white'
-              }} 
-            />
+        <div className="h-[300px] flex items-center justify-center text-white/70">
+          <div className="text-center">
+            <div className="text-4xl mb-4">📊</div>
+            <p>Weekly activity chart will be displayed here</p>
+            <p className="text-sm mt-2">Chart temporarily disabled due to technical issues</p>
+          </div>
+        </div>
             <Area 
               type="monotone" 
               dataKey="timeSpent" 
@@ -596,40 +590,24 @@ const Progress: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 text-center">
           <h4 className="text-lg font-semibold text-white mb-4">Average Score Trend</h4>
-          <ResponsiveContainer width="100%" height={200}>
-            <LineChart data={weeklyActivity}>
-              <XAxis dataKey="date" stroke="rgba(255,255,255,0.7)" />
-              <YAxis stroke="rgba(255,255,255,0.7)" />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: 'rgba(0,0,0,0.8)', 
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  borderRadius: '8px',
-                  color: 'white'
-                }} 
-              />
-              <Line type="monotone" dataKey="score" stroke="#10B981" strokeWidth={2} />
-            </LineChart>
-          </ResponsiveContainer>
+          <div className="h-[200px] flex items-center justify-center text-white/70">
+            <div className="text-center">
+              <div className="text-3xl mb-2">📈</div>
+              <p>Score trend chart</p>
+              <p className="text-xs mt-1">Temporarily disabled</p>
+            </div>
+          </div>
         </div>
 
         <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 text-center">
           <h4 className="text-lg font-semibold text-white mb-4">Daily Activity</h4>
-          <ResponsiveContainer width="100%" height={200}>
-            <BarChart data={weeklyActivity}>
-              <XAxis dataKey="date" stroke="rgba(255,255,255,0.7)" />
-              <YAxis stroke="rgba(255,255,255,0.7)" />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: 'rgba(0,0,0,0.8)', 
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  borderRadius: '8px',
-                  color: 'white'
-                }} 
-              />
-              <Bar dataKey="modules" fill="#8B5CF6" />
-            </BarChart>
-          </ResponsiveContainer>
+          <div className="h-[200px] flex items-center justify-center text-white/70">
+            <div className="text-center">
+              <div className="text-3xl mb-2">📊</div>
+              <p>Daily activity chart</p>
+              <p className="text-xs mt-1">Temporarily disabled</p>
+            </div>
+          </div>
         </div>
 
         <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 text-center">
