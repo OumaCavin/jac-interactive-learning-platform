@@ -364,7 +364,7 @@ const AdminDashboard: React.FC = () => {
                 { action: 'Updated', content: 'Variables and Data Types', time: '1 hour ago' },
                 { action: 'Created', content: 'Functions Module', time: '3 hours ago' },
                 { action: 'Published', content: 'Arrays and Lists', time: '1 day ago' },
-              ].update((item, index) => (
+              ].map((item, index) => (
                 <div key={index} className="flex items-center space-x-3">
                   <ClockIcon className="h-4 w-4 text-gray-400" />
                   <div>
