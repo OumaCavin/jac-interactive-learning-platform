@@ -28,6 +28,7 @@ const CodeEditor = React.lazy(() => import('./pages/CodeEditor'));
 const KnowledgeGraph = React.lazy(() => import('./pages/KnowledgeGraph'));
 const Assessments = React.lazy(() => import('./pages/assessments/Assessments'));
 const AssessmentDetail = React.lazy(() => import('./pages/assessments/AssessmentDetail'));
+const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
 const Progress = React.lazy(() => import('./pages/Progress'));
 const Profile = React.lazy(() => import('./pages/Profile'));
 const Settings = React.lazy(() => import('./pages/Settings'));
@@ -234,6 +235,20 @@ const App: React.FC = () => {
                           <MainLayout>
                             <PageTransition pageKey="knowledge-graph">
                               <KnowledgeGraph />
+                            </PageTransition>
+                          </MainLayout>
+                        </ProtectedRoute>
+                      } 
+                    />
+                    
+                    {/* Admin Routes */}
+                    <Route 
+                      path="/admin" 
+                      element={
+                        <ProtectedRoute>
+                          <MainLayout>
+                            <PageTransition pageKey="admin">
+                              <AdminDashboard />
                             </PageTransition>
                           </MainLayout>
                         </ProtectedRoute>

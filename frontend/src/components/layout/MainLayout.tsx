@@ -24,17 +24,6 @@ interface MainLayoutProps {
   children: React.ReactNode;
 }
 
-const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-  { name: 'Learning Paths', href: '/learning', icon: BookOpenIcon },
-  { name: 'Code Editor', href: '/code-editor', icon: CodeBracketIcon },
-  { name: 'Knowledge Graph', href: '/knowledge-graph', icon: AcademicCapIcon },
-  { name: 'Assessments', href: '/assessments', icon: ChartBarIcon },
-  { name: 'Progress', href: '/progress', icon: ChartBarIcon },
-  { name: 'Chat', href: '/chat', icon: ChatBubbleLeftRightIcon },
-  { name: 'Achievements', href: '/achievements', icon: TrophyIcon },
-];
-
 const userNavigation = [
   { name: 'Profile', href: '/profile', icon: UserIcon },
   { name: 'Settings', href: '/settings', icon: CogIcon },
@@ -49,6 +38,26 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   
   const user = useSelector((state: RootState) => state.auth.user);
   const notifications = useSelector((state: RootState) => state.ui.notifications);
+
+  // Build navigation based on user permissions
+  const baseNavigation = [
+    { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
+    { name: 'Learning Paths', href: '/learning', icon: BookOpenIcon },
+    { name: 'Code Editor', href: '/code-editor', icon: CodeBracketIcon },
+    { name: 'Knowledge Graph', href: '/knowledge-graph', icon: AcademicCapIcon },
+    { name: 'Assessments', href: '/assessments', icon: ChartBarIcon },
+    { name: 'Progress', href: '/progress', icon: ChartBarIcon },
+    { name: 'Chat', href: '/chat', icon: ChatBubbleLeftRightIcon },
+    { name: 'Achievements', href: '/achievements', icon: TrophyIcon },
+  ];
+
+  // Add admin navigation for staff users
+  const adminNavigation = user?.is_staff ? [
+    { name: 'Admin Dashboard', href: '/admin', icon: CogIcon },
+  ] : [];
+
+  // Combine navigation arrays
+  const navigation = [...baseNavigation, ...adminNavigation];
 
   const handleLogout = async () => {
     try {

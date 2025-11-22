@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     gcc \
     libc6-dev \
     libpq-dev \
+    netcat-openbsd \
     && rm -rf /var/lib/apt/lists/*
 
 # Set work directory
@@ -68,5 +69,27 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8000/api/health/ || exit 1
 
+# Create entrypoint script to handle migrations and initialization
+RUN echo '#!/bin/bash\n\
+set -e\n\
+\n\
+echo "🚀 Starting JAC Learning Platform..."\n\
+\n\
+# Wait for database to be ready\n\
+echo "📡 Waiting for database..."\n\
+while ! nc -z postgres 5432; do\n\
+  sleep 0.1\n\
+done\n\
+echo "✅ Database is ready!"\n\
+\n\
+# Run migrations and initialize platform\n\
+echo "📦 Running platform initialization..."\n\
+python manage.py initialize_platform --username=admin --email=admin@jacplatform.com --password=admin123 || echo "Initialization skipped (already done)"\n\
+\n\
+# Start the server\n\
+echo "🌐 Starting Django server..."\n\
+exec python manage.py runserver 0.0.0.0:8000\n\
+' > /app/entrypoint.sh && chmod +x /app/entrypoint.sh
+
 # Default command (can be overridden)
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["/app/entrypoint.sh"]
