@@ -1,0 +1,1044 @@
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-beat  |     run_checks()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-beat  |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-beat  |     return check_resolver(resolver)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-beat  |     return check_method()
+jac-celery-beat  |            ^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-beat  |     for pattern in self.url_patterns:
+jac-celery-beat  |                    ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-beat  |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-beat  |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-beat  |     return import_module(self.urlconf_name)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-beat  |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-beat  |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-beat  |                         ^^^^^
+jac-celery-beat  | NameError: name 'views' is not defined
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-beat  |     run_checks()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-beat  |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-beat  |     return check_resolver(resolver)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-beat  |     return check_method()
+jac-celery-beat  |            ^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-beat  |     for pattern in self.url_patterns:
+jac-celery-beat  |                    ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-beat  |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-beat  |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-beat  |     return import_module(self.urlconf_name)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-beat  |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-beat  |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-beat  |                         ^^^^^
+jac-celery-beat  | NameError: name 'views' is not defined
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-beat  |     run_checks()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-beat  |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-beat  |     return check_resolver(resolver)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-beat  |     return check_method()
+jac-celery-beat  |            ^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-beat  |     for pattern in self.url_patterns:
+jac-celery-beat  |                    ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-beat  |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-beat  |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-beat  |     return import_module(self.urlconf_name)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-beat  |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-beat  |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-beat  |                         ^^^^^
+jac-celery-beat  | NameError: name 'views' is not defined
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-beat  |     run_checks()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-beat  |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-beat  |     return check_resolver(resolver)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-beat  |     return check_method()
+jac-celery-beat  |            ^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-beat  |     for pattern in self.url_patterns:
+jac-celery-beat  |                    ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-beat  |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-beat  |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-beat  |     return import_module(self.urlconf_name)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-beat  |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-beat  |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-beat  |                         ^^^^^
+jac-celery-beat  | NameError: name 'views' is not defined
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-beat  |     run_checks()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-beat  |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-beat  |     return check_resolver(resolver)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-beat  |     return check_method()
+jac-celery-beat  |            ^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-beat  |     for pattern in self.url_patterns:
+jac-celery-beat  |                    ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-beat  |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-beat  |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-beat  |     return import_module(self.urlconf_name)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-beat  |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-beat  |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-beat  |                         ^^^^^
+jac-celery-beat  | NameError: name 'views' is not defined
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-beat  |     run_checks()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-beat  |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-beat  |     return check_resolver(resolver)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-beat  |     return check_method()
+jac-celery-beat  |            ^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-beat  |     for pattern in self.url_patterns:
+jac-celery-beat  |                    ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-beat  |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-beat  |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-beat  |     return import_module(self.urlconf_name)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-beat  |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-beat  |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-beat  |                         ^^^^^
+jac-celery-beat  | NameError: name 'views' is not defined
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-beat  |     run_checks()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-beat  |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-beat  |     return check_resolver(resolver)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-beat  |     return check_method()
+jac-celery-beat  |            ^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-beat  |     for pattern in self.url_patterns:
+jac-celery-beat  |                    ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-beat  |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-beat  |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-beat  |     return import_module(self.urlconf_name)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-beat  |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-beat  |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-beat  |                         ^^^^^
+jac-celery-beat  | NameError: name 'views' is not defined
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-beat  |     run_checks()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-beat  |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-beat  |     return check_resolver(resolver)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-beat  |     return check_method()
+jac-celery-beat  |            ^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-beat  |     for pattern in self.url_patterns:
+jac-celery-beat  |                    ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-beat  |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-beat  |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-beat  |     return import_module(self.urlconf_name)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-beat  |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-beat  |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-beat  |                         ^^^^^
+jac-celery-beat  | NameError: name 'views' is not defined
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-beat  |     run_checks()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-beat  |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-beat  |     return check_resolver(resolver)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-beat  |     return check_method()
+jac-celery-beat  |            ^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-beat  |     for pattern in self.url_patterns:
+jac-celery-beat  |                    ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-beat  |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-beat  |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-beat  |     return import_module(self.urlconf_name)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-beat  |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-beat  |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-beat  |                         ^^^^^
+jac-celery-beat  | NameError: name 'views' is not defined
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-beat  |     run_checks()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-beat  |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-beat  |     return check_resolver(resolver)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-beat  |     return check_method()
+jac-celery-beat  |            ^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-beat  |     for pattern in self.url_patterns:
+jac-celery-beat  |                    ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-beat  |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-beat  |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-beat  |     return import_module(self.urlconf_name)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-beat  |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-beat  |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-beat  |                         ^^^^^
+jac-celery-beat  | NameError: name 'views' is not defined
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-beat  |     run_checks()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-beat  |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-beat  |     return check_resolver(resolver)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-beat  |     return check_method()
+jac-celery-beat  |            ^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-beat  |     for pattern in self.url_patterns:
+jac-celery-beat  |                    ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-beat  |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-beat  |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-beat  |     return import_module(self.urlconf_name)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-beat  |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-beat  |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-beat  |                         ^^^^^
+jac-celery-beat  | NameError: name 'views' is not defined
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | Traceback (most recent call last):
+jac-celery-beat  |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-beat  |     sys.exit(main())
+jac-celery-beat  |              ^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-beat  |     sys.exit(_main())
+jac-celery-beat  |              ^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-beat  |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-beat  |     return self.main(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-beat  |     rv = self.invoke(ctx)
+jac-celery-beat  |          ^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-beat  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-beat  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-beat  |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-beat  |     return callback(*args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-beat  |     return f(get_current_context(), *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-beat  |     return f(ctx, *args, **kwargs)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/bin/beat.py", line 72, in beat
+jac-celery-beat  |     return beat().run()
+jac-celery-beat  |            ^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 82, in run
+jac-celery-beat  |     self.init_loader()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/apps/beat.py", line 132, in init_loader
+jac-celery-beat  |     self.app.loader.init_worker()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-beat  |     self.import_default_modules()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-beat  |     raise response
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-beat  |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-beat  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-beat  |     self.worker_fixup.validate_models()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-beat  |     run_checks()
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-beat  |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-beat  |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-beat  |     return check_resolver(resolver)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-beat  |     return check_method()
+jac-celery-beat  |            ^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-beat  |     for pattern in self.url_patterns:
+jac-celery-beat  |                    ^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-beat  |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-beat  |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-beat  |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-beat  |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-beat  |     return import_module(self.urlconf_name)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-beat  |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-beat  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-beat  |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-beat  |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-beat  |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-beat  |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-beat  |                         ^^^^^
+jac-celery-beat  | NameError: name 'views' is not defined
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 

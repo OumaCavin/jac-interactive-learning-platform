@@ -1,0 +1,1044 @@
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-worker |     return check_resolver(resolver)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-worker |     return check_method()
+jac-celery-worker |            ^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-worker |     for pattern in self.url_patterns:
+jac-celery-worker |                    ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-worker |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-worker |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-worker |     return import_module(self.urlconf_name)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-worker |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-worker |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-worker |                         ^^^^^
+jac-celery-worker | NameError: name 'views' is not defined
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-worker |     run_checks()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-worker |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-worker |     return check_resolver(resolver)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-worker |     return check_method()
+jac-celery-worker |            ^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-worker |     for pattern in self.url_patterns:
+jac-celery-worker |                    ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-worker |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-worker |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-worker |     return import_module(self.urlconf_name)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-worker |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-worker |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-worker |                         ^^^^^
+jac-celery-worker | NameError: name 'views' is not defined
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-worker |     run_checks()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-worker |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-worker |     return check_resolver(resolver)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-worker |     return check_method()
+jac-celery-worker |            ^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-worker |     for pattern in self.url_patterns:
+jac-celery-worker |                    ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-worker |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-worker |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-worker |     return import_module(self.urlconf_name)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-worker |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-worker |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-worker |                         ^^^^^
+jac-celery-worker | NameError: name 'views' is not defined
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-worker |     run_checks()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-worker |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-worker |     return check_resolver(resolver)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-worker |     return check_method()
+jac-celery-worker |            ^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-worker |     for pattern in self.url_patterns:
+jac-celery-worker |                    ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-worker |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-worker |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-worker |     return import_module(self.urlconf_name)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-worker |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-worker |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-worker |                         ^^^^^
+jac-celery-worker | NameError: name 'views' is not defined
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-worker |     run_checks()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-worker |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-worker |     return check_resolver(resolver)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-worker |     return check_method()
+jac-celery-worker |            ^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-worker |     for pattern in self.url_patterns:
+jac-celery-worker |                    ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-worker |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-worker |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-worker |     return import_module(self.urlconf_name)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-worker |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-worker |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-worker |                         ^^^^^
+jac-celery-worker | NameError: name 'views' is not defined
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-worker |     run_checks()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-worker |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-worker |     return check_resolver(resolver)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-worker |     return check_method()
+jac-celery-worker |            ^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-worker |     for pattern in self.url_patterns:
+jac-celery-worker |                    ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-worker |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-worker |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-worker |     return import_module(self.urlconf_name)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-worker |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-worker |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-worker |                         ^^^^^
+jac-celery-worker | NameError: name 'views' is not defined
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-worker |     run_checks()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-worker |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-worker |     return check_resolver(resolver)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-worker |     return check_method()
+jac-celery-worker |            ^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-worker |     for pattern in self.url_patterns:
+jac-celery-worker |                    ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-worker |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-worker |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-worker |     return import_module(self.urlconf_name)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-worker |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-worker |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-worker |                         ^^^^^
+jac-celery-worker | NameError: name 'views' is not defined
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-worker |     run_checks()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-worker |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-worker |     return check_resolver(resolver)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-worker |     return check_method()
+jac-celery-worker |            ^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-worker |     for pattern in self.url_patterns:
+jac-celery-worker |                    ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-worker |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-worker |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-worker |     return import_module(self.urlconf_name)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-worker |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-worker |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-worker |                         ^^^^^
+jac-celery-worker | NameError: name 'views' is not defined
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-worker |     run_checks()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-worker |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-worker |     return check_resolver(resolver)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-worker |     return check_method()
+jac-celery-worker |            ^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-worker |     for pattern in self.url_patterns:
+jac-celery-worker |                    ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-worker |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-worker |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-worker |     return import_module(self.urlconf_name)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-worker |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-worker |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-worker |                         ^^^^^
+jac-celery-worker | NameError: name 'views' is not defined
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-worker |     run_checks()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-worker |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-worker |     return check_resolver(resolver)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-worker |     return check_method()
+jac-celery-worker |            ^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-worker |     for pattern in self.url_patterns:
+jac-celery-worker |                    ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-worker |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-worker |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-worker |     return import_module(self.urlconf_name)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-worker |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-worker |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-worker |                         ^^^^^
+jac-celery-worker | NameError: name 'views' is not defined
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-worker |     run_checks()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-worker |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-worker |     return check_resolver(resolver)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-worker |     return check_method()
+jac-celery-worker |            ^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-worker |     for pattern in self.url_patterns:
+jac-celery-worker |                    ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-worker |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-worker |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-worker |     return import_module(self.urlconf_name)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-worker |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-worker |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-worker |                         ^^^^^
+jac-celery-worker | NameError: name 'views' is not defined
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-worker |     run_checks()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-worker |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-worker |     return check_resolver(resolver)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-worker |     return check_method()
+jac-celery-worker |            ^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-worker |     for pattern in self.url_patterns:
+jac-celery-worker |                    ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-worker |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-worker |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-worker |     return import_module(self.urlconf_name)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-worker |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-worker |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-worker |                         ^^^^^
+jac-celery-worker | NameError: name 'views' is not defined
+jac-celery-worker | Traceback (most recent call last):
+jac-celery-worker |   File "/usr/local/bin/celery", line 8, in <module>
+jac-celery-worker |     sys.exit(main())
+jac-celery-worker |              ^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/__main__.py", line 15, in main
+jac-celery-worker |     sys.exit(_main())
+jac-celery-worker |              ^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 231, in main
+jac-celery-worker |     return celery(auto_envvar_prefix="CELERY")
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+jac-celery-worker |     return self.main(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+jac-celery-worker |     rv = self.invoke(ctx)
+jac-celery-worker |          ^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1873, in invoke
+jac-celery-worker |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+jac-celery-worker |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+jac-celery-worker |     return ctx.invoke(self.callback, **ctx.params)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+jac-celery-worker |     return callback(*args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 34, in new_func
+jac-celery-worker |     return f(get_current_context(), *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/base.py", line 135, in caller
+jac-celery-worker |     return f(ctx, *args, **kwargs)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/bin/worker.py", line 348, in worker
+jac-celery-worker |     worker = app.Worker(
+jac-celery-worker |              ^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/worker/worker.py", line 94, in __init__
+jac-celery-worker |     self.app.loader.init_worker()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 110, in init_worker
+jac-celery-worker |     self.import_default_modules()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/loaders/base.py", line 104, in import_default_modules
+jac-celery-worker |     raise response
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+jac-celery-worker |     response = receiver(signal=self, sender=sender, **named)
+jac-celery-worker |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 101, in on_import_modules
+jac-celery-worker |     self.worker_fixup.validate_models()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 141, in validate_models
+jac-celery-worker |     run_checks()
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+jac-celery-worker |     new_errors = check(app_configs=app_configs, databases=databases)
+jac-celery-worker |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+jac-celery-worker |     return check_resolver(resolver)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+jac-celery-worker |     return check_method()
+jac-celery-worker |            ^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 531, in check
+jac-celery-worker |     for pattern in self.url_patterns:
+jac-celery-worker |                    ^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+jac-celery-worker |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+jac-celery-worker |                        ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+jac-celery-worker |     res = instance.__dict__[self.name] = self.func(instance)
+jac-celery-worker |                                          ^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+jac-celery-worker |     return import_module(self.urlconf_name)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+jac-celery-worker |     return _bootstrap._gcd_import(name[level:], package, level)
+jac-celery-worker |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+jac-celery-worker |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+jac-celery-worker |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+jac-celery-worker |   File "/app/config/urls.py", line 34, in <module>
+jac-celery-worker |     path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+jac-celery-worker |                         ^^^^^
+jac-celery-worker | NameError: name 'views' is not defined
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 
