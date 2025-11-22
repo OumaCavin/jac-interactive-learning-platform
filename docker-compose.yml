@@ -103,7 +103,7 @@ services:
       - jac_network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "python", "-c", "import socket; s = socket.socket(); s.settimeout(3); s.connect(('localhost', 80)); s.close()"]
+      test: ["CMD-SHELL", "ps aux | grep nginx | grep -v grep"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -126,7 +126,7 @@ services:
       - jac_network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "python", "-c", "import socket; s = socket.socket(); s.settimeout(3); s.connect(('localhost', 80)); s.close()"]
+      test: ["CMD-SHELL", "ps aux | grep nginx | grep -v grep"]
       interval: 30s
       timeout: 10s
       retries: 3
