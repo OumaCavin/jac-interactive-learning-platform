@@ -255,6 +255,8 @@ export const selectCurrentModule = (state: { learning: LearningState }) => {
 };
 export const selectUserLearningPaths = (state: { learning: LearningState }) => 
   state.learning.user_learning_paths;
+export const selectUserModuleProgress = (state: { learning: LearningState }) => 
+  state.learning.user_module_progress;
 export const selectLearningFilters = (state: { learning: LearningState }) => 
   state.learning.filters;
 export const selectLearningSearchQuery = (state: { learning: LearningState }) => 
