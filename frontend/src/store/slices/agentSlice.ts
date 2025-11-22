@@ -329,26 +329,28 @@ export const {
 } = agentSlice.actions;
 
 // Selectors
-export const selectAgents = (state: { agents: AgentState }) => state.agents.agents;
-export const selectActiveAgents = (state: { agents: AgentState }) => 
+import type { RootState } from '../store';
+
+export const selectAgents = (state: RootState) => state.agents.agents;
+export const selectActiveAgents = (state: RootState) => 
   state.agents.agents.filter(a => state.agents.active_agents.includes(a.id));
-export const selectAgentById = (state: { agents: AgentState }, agentId: string) => 
+export const selectAgentById = (state: RootState, agentId: string) => 
   state.agents.agents.find(a => a.id === agentId);
-export const selectConversations = (state: { agents: AgentState }) => state.agents.conversations;
-export const selectConversation = (state: { agents: AgentState }, agentId: string) => 
+export const selectConversations = (state: RootState) => state.agents.conversations;
+export const selectConversation = (state: RootState, agentId: string) => 
   state.agents.conversations[agentId] || [];
-export const selectUnreadCounts = (state: { agents: AgentState }) => state.agents.unread_counts;
-export const selectRecommendations = (state: { agents: AgentState }) => state.agents.recommendations;
-export const selectPendingRecommendations = (state: { agents: AgentState }) => 
+export const selectUnreadCounts = (state: RootState) => state.agents.unread_counts;
+export const selectRecommendations = (state: RootState) => state.agents.recommendations;
+export const selectPendingRecommendations = (state: RootState) => 
   state.agents.pending_recommendations;
-export const selectTasks = (state: { agents: AgentState }) => state.agents.tasks;
-export const selectActiveTasks = (state: { agents: AgentState }) => state.agents.active_tasks;
-export const selectSelectedAgent = (state: { agents: AgentState }) => {
+export const selectTasks = (state: RootState) => state.agents.tasks;
+export const selectActiveTasks = (state: RootState) => state.agents.active_tasks;
+export const selectSelectedAgent = (state: RootState) => {
   const agentId = state.agents.selected_agent;
   return agentId ? state.agents.agents.find(a => a.id === agentId) : null;
 };
-export const selectChatVisible = (state: { agents: AgentState }) => state.agents.chat_visible;
-export const selectAgentTyping = (state: { agents: AgentState }, agentId: string) => 
+export const selectChatVisible = (state: RootState) => state.agents.chat_visible;
+export const selectAgentTyping = (state: RootState, agentId: string) => 
   state.agents.isTyping[agentId] || false;
 
 // Export reducer
