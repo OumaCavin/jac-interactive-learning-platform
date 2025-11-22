@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { Card, Button, Input, Badge } from '../components/ui';
 import { updateProfile, selectAuth, clearError } from '../store/slices/authSlice';
+import { useAppDispatch } from '../store/store';
 import type { User } from '../services/authService';
 
 interface SettingsFormData {
@@ -35,7 +36,7 @@ interface SettingsFormData {
 }
 
 const Settings: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { user, isLoading, error } = useSelector(selectAuth);
   
   const [formData, setFormData] = useState<SettingsFormData>({
