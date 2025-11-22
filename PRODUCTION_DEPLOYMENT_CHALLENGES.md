@@ -350,6 +350,52 @@ private loadUserFromStorage(): void {
 
 **Resolution:** Frontend now properly initializes and handles initialization errors gracefully.
 
+#### Challenge 7.4: Backend API Endpoint 404 Errors
+**Error:** Frontend calls returning 404 errors despite backend being running  
+**Root Cause:** API path mismatch between frontend and backend configurations  
+**Symptoms:**
+- Learning paths showing "Failed to load learning path" with 404 errors
+- Authentication failing with login/logout errors
+- All frontend API calls hitting wrong endpoints
+- Console errors: `GET http://localhost:8000/learning/learning-paths/ 404 (Not Found)`
+
+**Frontend Path Issues:**
+- Frontend was calling: `/learning/learning-paths/` (duplicate `/learning/` prefix)
+- Backend expected: `/learning-paths/` (base URL already includes `/api/learning/`)
+
+**Backend Configuration Issues:**
+- Users app was commented out in backend URLs, preventing authentication endpoints
+- `/api/users/` path was disabled, breaking all auth-related functionality
+
+**Files Affected:** 
+- `frontend/src/services/learningService.ts` (API path corrections)
+- `backend/config/urls.py` (enabled users app)
+
+**Resolution Applied:**
+1. **Fixed Frontend Paths:** Removed redundant `/learning/` prefixes from all API calls
+   ```typescript
+   // Before (WRONG)
+   api.get('/learning/learning-paths/')
+   // Results in: http://localhost:8000/api/learning/learning/learning-paths/
+   
+   // After (CORRECT)
+   api.get('/learning-paths/')
+   // Results in: http://localhost:8000/api/learning/learning-paths/
+   ```
+
+2. **Enabled Backend Users App:** Uncommented users URL configuration
+   ```python
+   # backend/config/urls.py
+   path('api/users/', include('apps.users.urls')),  # Was commented out
+   ```
+
+**Result:** All API endpoints now work correctly:
+- ✅ Learning paths load properly
+- ✅ Authentication (login/logout/register) functions
+- ✅ User profile and settings pages load
+- ✅ Dashboard shows real data instead of blank sections
+- ✅ Code editor works with backend execution service
+
 ## Key Learnings & Best Practices
 
 1. **TypeScript File Extensions**: Always use `.tsx` for files containing JSX
@@ -361,6 +407,9 @@ private loadUserFromStorage(): void {
 7. **Alpine Health Checks**: Use process-based checks for maximum compatibility
 8. **Docker Cleanup**: Complete system cleanup needed for ContainerConfig errors
 9. **Health Check Design**: Match health check tools to available utilities in base images
+10. **API Path Consistency**: Ensure frontend API paths don't duplicate backend URL prefixes
+11. **Backend App Configuration**: Verify all Django apps are properly included in URL configurations
+12. **Frontend-Backend Communication**: Test API endpoints with curl/Postman before frontend integration
 10. **Iterative Problem Solving**: Test each solution before proceeding to next approach
 
 ## Conclusion
