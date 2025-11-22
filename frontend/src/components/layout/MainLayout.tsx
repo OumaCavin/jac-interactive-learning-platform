@@ -18,7 +18,7 @@ import {
   MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
 import { logoutUser } from '../../store/slices/authSlice';
-import { RootState } from '../../../store/store';
+import { RootState } from '../../store/store';
 
 interface MainLayoutProps {
   children: React.ReactNode;
