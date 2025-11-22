@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
-import { authService } from './services/authService';
+import { authService } from '../services/authService';
 
 // Types
 interface Achievement {

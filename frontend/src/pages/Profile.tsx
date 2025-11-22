@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Card, Button, Badge, ProgressBar } from '../components/ui';
 import { selectAuth, getUserStats } from '../store/slices/authSlice';
 import { useDispatch } from 'react-redux';
-import type { User } from './services/authService';
+import type { User } from '../services/authService';
 
 const Profile: React.FC = () => {
   const dispatch = useDispatch();
