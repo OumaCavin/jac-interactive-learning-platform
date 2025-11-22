@@ -24,6 +24,8 @@ export class ErrorBoundary extends React.Component<
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error('Error caught by boundary:', error, errorInfo);
+    console.error('Error stack:', error.stack);
+    console.error('Component stack:', errorInfo.componentStack);
   }
 
   render() {
@@ -35,11 +37,31 @@ export class ErrorBoundary extends React.Component<
             <p className="text-white/80 mb-6">
               We're sorry, but something unexpected happened. Please try refreshing the page.
             </p>
+            
+            {this.state.error && (
+              <details className="mb-6 text-left">
+                <summary className="text-white/80 cursor-pointer">Error Details</summary>
+                <div className="mt-2 p-3 bg-black/20 rounded text-white/70 text-sm font-mono">
+                  {this.state.error.message}
+                </div>
+              </details>
+            )}
+            
             <button
               onClick={() => window.location.reload()}
-              className="glass-button-primary"
+              className="glass-button-primary mr-3"
             >
               Refresh Page
+            </button>
+            
+            <button
+              onClick={() => {
+                localStorage.clear();
+                window.location.reload();
+              }}
+              className="glass-button-secondary"
+            >
+              Clear Storage & Refresh
             </button>
           </div>
         </div>

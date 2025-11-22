@@ -140,11 +140,18 @@ class AuthService {
     try {
       const userStr = localStorage.getItem('current_user');
       if (userStr) {
-        this.currentUser = JSON.parse(userStr);
+        // Validate JSON before parsing
+        if (typeof userStr === 'string' && userStr.trim().length > 0) {
+          this.currentUser = JSON.parse(userStr);
+        }
       }
     } catch (error) {
       console.error('Failed to load user from storage:', error);
+      // Clear potentially corrupted data
       localStorage.removeItem('current_user');
+      localStorage.removeItem('token');
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
     }
   }
 
@@ -287,10 +294,10 @@ class AuthService {
    * Check if user is authenticated
    */
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('token') || localStorage.getItem('access_token');
-    if (!token) return false;
-
     try {
+      const token = localStorage.getItem('token') || localStorage.getItem('access_token');
+      if (!token) return false;
+
       // For mock tokens (simple check)
       if (token.startsWith('mock-jwt-token-')) {
         return true;
@@ -299,13 +306,19 @@ class AuthService {
       // For real JWT tokens (decode to check expiration)
       const tokenParts = token.split('.');
       if (tokenParts.length === 3) {
-        const payload = JSON.parse(atob(tokenParts[1]));
-        const currentTime = Date.now() / 1000;
-        return payload.exp > currentTime;
+        try {
+          const payload = JSON.parse(atob(tokenParts[1]));
+          const currentTime = Date.now() / 1000;
+          return payload.exp > currentTime;
+        } catch (decodeError) {
+          console.warn('Failed to decode JWT token:', decodeError);
+          return false;
+        }
       }
       
       return false;
     } catch (error) {
+      console.error('Error checking authentication:', error);
       return false;
     }
   }
