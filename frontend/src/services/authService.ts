@@ -281,11 +281,18 @@ class AuthService {
     try {
       const refreshToken = localStorage.getItem('refresh_token');
       if (refreshToken) {
-        await this.apiClient.post('/users/auth/logout/', { refresh: refreshToken });
+        try {
+          await this.apiClient.post('/users/auth/logout/', { refresh: refreshToken });
+        } catch (apiError) {
+          // Don't fail logout if backend call fails
+          console.warn('Backend logout failed, continuing with local logout:', apiError);
+        }
       }
     } catch (error) {
       console.error('Logout error:', error);
+      // Don't let logout fail completely
     } finally {
+      // Always clear local storage regardless of backend response
       this.clearUserFromStorage();
     }
   }

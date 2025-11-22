@@ -50,9 +50,21 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const user = useSelector((state: RootState) => state.auth.user);
   const notifications = useSelector((state: RootState) => state.ui.notifications);
 
-  const handleLogout = () => {
-    (dispatch as any)(logoutUser());
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      await (dispatch as any)(logoutUser()).unwrap();
+    } catch (error) {
+      console.error('Logout failed:', error);
+    } finally {
+      // Clear any stored tokens first
+      localStorage.removeItem('token');
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      localStorage.removeItem('current_user');
+      
+      // Navigate to login
+      navigate('/login');
+    }
   };
 
   const isActivePath = (path: string) => {
