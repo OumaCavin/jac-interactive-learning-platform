@@ -1,0 +1,405 @@
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker-compose up --build --force-recreate
+Building backend
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon   1.47MB
+Step 1/19 : FROM python:3.11-slim as dependencies
+ ---> 040af88f5bce
+Step 2/19 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1     PIP_NO_CACHE_DIR=1     PIP_DISABLE_PIP_VERSION_CHECK=1
+ ---> Using cache
+ ---> c9cf25072c92
+Step 3/19 : RUN apt-get update && apt-get install -y     build-essential     curl     gcc     libc6-dev     libpq-dev     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 86aa39a8d1b0
+Step 4/19 : WORKDIR /app
+ ---> Using cache
+ ---> 4d8a28fa7ebc
+Step 5/19 : COPY requirements.txt .
+ ---> Using cache
+ ---> cdc20d686618
+Step 6/19 : RUN pip install --no-cache-dir -r requirements.txt
+ ---> Using cache
+ ---> 02f193dfbf72
+Step 7/19 : FROM python:3.11-slim as application
+ ---> 040af88f5bce
+Step 8/19 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1
+ ---> Using cache
+ ---> 37a0ca28e5b8
+Step 9/19 : RUN groupadd -r jac && useradd -r -g jac jac
+ ---> Using cache
+ ---> a3f61298d0c6
+Step 10/19 : RUN apt-get update && apt-get install -y     libpq5     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 41a99c8542ee
+Step 11/19 : WORKDIR /app
+ ---> Using cache
+ ---> ec2db4356837
+Step 12/19 : COPY --from=dependencies /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
+ ---> Using cache
+ ---> 4aa7147f6d3f
+Step 13/19 : COPY --from=dependencies /usr/local/bin/ /usr/local/bin/
+ ---> Using cache
+ ---> 4e982f110602
+Step 14/19 : COPY . .
+ ---> Using cache
+ ---> ffa4fdbaa5a9
+Step 15/19 : RUN mkdir -p logs media static &&     chown -R jac:jac /app
+ ---> Using cache
+ ---> ea264d62e176
+Step 16/19 : USER jac
+ ---> Using cache
+ ---> 6dd90c7cc90f
+Step 17/19 : EXPOSE 8000
+ ---> Using cache
+ ---> 100cae6a77ba
+Step 18/19 : HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3     CMD curl -f http://localhost:8000/api/health/ || exit 1
+ ---> Using cache
+ ---> 4c75c9699888
+Step 19/19 : CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+ ---> Using cache
+ ---> dbef7d411ddd
+Successfully built dbef7d411ddd
+Successfully tagged jac-interactive-learning-platform_backend:latest
+Building frontend
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  4.008MB
+Step 1/23 : FROM node:22-alpine as builder
+ ---> d14f4a9e34c6
+Step 2/23 : WORKDIR /app
+ ---> Using cache
+ ---> 78b58a08e299
+Step 3/23 : COPY package*.json ./
+ ---> Using cache
+ ---> 37a8f62c97eb
+Step 4/23 : COPY pnpm-lock.yaml ./
+ ---> Using cache
+ ---> 729a8dd0c43a
+Step 5/23 : COPY tsconfig.json ./
+ ---> Using cache
+ ---> 7692cadd5ceb
+Step 6/23 : COPY tailwind.config.js ./
+ ---> Using cache
+ ---> 6721ffc10f41
+Step 7/23 : RUN npm install -g npm@latest
+ ---> Using cache
+ ---> 070f919b0b32
+Step 8/23 : RUN npm install -g pnpm
+ ---> Using cache
+ ---> 963514870ddf
+Step 9/23 : RUN pnpm install --frozen-lockfile --prod=false
+ ---> Using cache
+ ---> a66d38384ee2
+Step 10/23 : COPY src/ ./src/
+ ---> Using cache
+ ---> a3b30fdc6b81
+Step 11/23 : COPY public/ ./public/
+ ---> Using cache
+ ---> 7bb7d951090f
+Step 12/23 : ARG REACT_APP_API_URL
+ ---> Using cache
+ ---> 802e4cd1c1d5
+Step 13/23 : ARG REACT_APP_WS_URL
+ ---> Using cache
+ ---> e160aca2e6f6
+Step 14/23 : ENV REACT_APP_API_URL=$REACT_APP_API_URL
+ ---> Using cache
+ ---> 35f4a7efe703
+Step 15/23 : ENV REACT_APP_WS_URL=$REACT_APP_WS_URL
+ ---> Using cache
+ ---> d3316a78579b
+Step 16/23 : ENV NODE_ENV=production
+ ---> Using cache
+ ---> 247420156013
+Step 17/23 : RUN pnpm build
+ ---> Using cache
+ ---> ef8f8e5c17bd
+Step 18/23 : FROM nginx:alpine
+ ---> d4918ca78576
+Step 19/23 : COPY --from=builder /app/build /usr/share/nginx/html
+ ---> Using cache
+ ---> ddb4057d12e8
+Step 20/23 : COPY nginx.conf /etc/nginx/conf.d/default.conf
+ ---> Using cache
+ ---> 37c9b0c2f22e
+Step 21/23 : EXPOSE 80
+ ---> Using cache
+ ---> f7091fc6b002
+Step 22/23 : HEALTHCHECK --interval=30s --timeout=10s --retries=3     CMD wget --no-verbose --tries=1 --spider http://localhost/ || exit 1
+ ---> Using cache
+ ---> 32150048a74c
+Step 23/23 : CMD ["nginx", "-g", "daemon off;"]
+ ---> Using cache
+ ---> aa9ea034746e
+Successfully built aa9ea034746e
+Successfully tagged jac-interactive-learning-platform_frontend:latest
+Building celery-worker
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon   1.47MB
+Step 1/19 : FROM python:3.11-slim as dependencies
+ ---> 040af88f5bce
+Step 2/19 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1     PIP_NO_CACHE_DIR=1     PIP_DISABLE_PIP_VERSION_CHECK=1
+ ---> Using cache
+ ---> c9cf25072c92
+Step 3/19 : RUN apt-get update && apt-get install -y     build-essential     curl     gcc     libc6-dev     libpq-dev     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 86aa39a8d1b0
+Step 4/19 : WORKDIR /app
+ ---> Using cache
+ ---> 4d8a28fa7ebc
+Step 5/19 : COPY requirements.txt .
+ ---> Using cache
+ ---> cdc20d686618
+Step 6/19 : RUN pip install --no-cache-dir -r requirements.txt
+ ---> Using cache
+ ---> 02f193dfbf72
+Step 7/19 : FROM python:3.11-slim as application
+ ---> 040af88f5bce
+Step 8/19 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1
+ ---> Using cache
+ ---> 37a0ca28e5b8
+Step 9/19 : RUN groupadd -r jac && useradd -r -g jac jac
+ ---> Using cache
+ ---> a3f61298d0c6
+Step 10/19 : RUN apt-get update && apt-get install -y     libpq5     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 41a99c8542ee
+Step 11/19 : WORKDIR /app
+ ---> Using cache
+ ---> ec2db4356837
+Step 12/19 : COPY --from=dependencies /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
+ ---> Using cache
+ ---> 4aa7147f6d3f
+Step 13/19 : COPY --from=dependencies /usr/local/bin/ /usr/local/bin/
+ ---> Using cache
+ ---> 4e982f110602
+Step 14/19 : COPY . .
+ ---> Using cache
+ ---> ffa4fdbaa5a9
+Step 15/19 : RUN mkdir -p logs media static &&     chown -R jac:jac /app
+ ---> Using cache
+ ---> ea264d62e176
+Step 16/19 : USER jac
+ ---> Using cache
+ ---> 6dd90c7cc90f
+Step 17/19 : EXPOSE 8000
+ ---> Using cache
+ ---> 100cae6a77ba
+Step 18/19 : HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3     CMD curl -f http://localhost:8000/api/health/ || exit 1
+ ---> Using cache
+ ---> 4c75c9699888
+Step 19/19 : CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+ ---> Using cache
+ ---> dbef7d411ddd
+Successfully built dbef7d411ddd
+Successfully tagged jac-interactive-learning-platform_celery-worker:latest
+Building celery-beat
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon   1.47MB
+Step 1/19 : FROM python:3.11-slim as dependencies
+ ---> 040af88f5bce
+Step 2/19 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1     PIP_NO_CACHE_DIR=1     PIP_DISABLE_PIP_VERSION_CHECK=1
+ ---> Using cache
+ ---> c9cf25072c92
+Step 3/19 : RUN apt-get update && apt-get install -y     build-essential     curl     gcc     libc6-dev     libpq-dev     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 86aa39a8d1b0
+Step 4/19 : WORKDIR /app
+ ---> Using cache
+ ---> 4d8a28fa7ebc
+Step 5/19 : COPY requirements.txt .
+ ---> Using cache
+ ---> cdc20d686618
+Step 6/19 : RUN pip install --no-cache-dir -r requirements.txt
+ ---> Using cache
+ ---> 02f193dfbf72
+Step 7/19 : FROM python:3.11-slim as application
+ ---> 040af88f5bce
+Step 8/19 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1
+ ---> Using cache
+ ---> 37a0ca28e5b8
+Step 9/19 : RUN groupadd -r jac && useradd -r -g jac jac
+ ---> Using cache
+ ---> a3f61298d0c6
+Step 10/19 : RUN apt-get update && apt-get install -y     libpq5     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 41a99c8542ee
+Step 11/19 : WORKDIR /app
+ ---> Using cache
+ ---> ec2db4356837
+Step 12/19 : COPY --from=dependencies /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
+ ---> Using cache
+ ---> 4aa7147f6d3f
+Step 13/19 : COPY --from=dependencies /usr/local/bin/ /usr/local/bin/
+ ---> Using cache
+ ---> 4e982f110602
+Step 14/19 : COPY . .
+ ---> Using cache
+ ---> ffa4fdbaa5a9
+Step 15/19 : RUN mkdir -p logs media static &&     chown -R jac:jac /app
+ ---> Using cache
+ ---> ea264d62e176
+Step 16/19 : USER jac
+ ---> Using cache
+ ---> 6dd90c7cc90f
+Step 17/19 : EXPOSE 8000
+ ---> Using cache
+ ---> 100cae6a77ba
+Step 18/19 : HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3     CMD curl -f http://localhost:8000/api/health/ || exit 1
+ ---> Using cache
+ ---> 4c75c9699888
+Step 19/19 : CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+ ---> Using cache
+ ---> dbef7d411ddd
+Successfully built dbef7d411ddd
+Successfully tagged jac-interactive-learning-platform_celery-beat:latest
+Building jac-sandbox
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon   1.47MB
+Step 1/19 : FROM python:3.11-slim as dependencies
+ ---> 040af88f5bce
+Step 2/19 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1     PIP_NO_CACHE_DIR=1     PIP_DISABLE_PIP_VERSION_CHECK=1
+ ---> Using cache
+ ---> c9cf25072c92
+Step 3/19 : RUN apt-get update && apt-get install -y     build-essential     curl     gcc     libc6-dev     libpq-dev     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 86aa39a8d1b0
+Step 4/19 : WORKDIR /app
+ ---> Using cache
+ ---> 4d8a28fa7ebc
+Step 5/19 : COPY requirements.txt .
+ ---> Using cache
+ ---> cdc20d686618
+Step 6/19 : RUN pip install --no-cache-dir -r requirements.txt
+ ---> Using cache
+ ---> 02f193dfbf72
+Step 7/19 : FROM python:3.11-slim as application
+ ---> 040af88f5bce
+Step 8/19 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1
+ ---> Using cache
+ ---> 37a0ca28e5b8
+Step 9/19 : RUN groupadd -r jac && useradd -r -g jac jac
+ ---> Using cache
+ ---> a3f61298d0c6
+Step 10/19 : RUN apt-get update && apt-get install -y     libpq5     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 41a99c8542ee
+Step 11/19 : WORKDIR /app
+ ---> Using cache
+ ---> ec2db4356837
+Step 12/19 : COPY --from=dependencies /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
+ ---> Using cache
+ ---> 4aa7147f6d3f
+Step 13/19 : COPY --from=dependencies /usr/local/bin/ /usr/local/bin/
+ ---> Using cache
+ ---> 4e982f110602
+Step 14/19 : COPY . .
+ ---> Using cache
+ ---> ffa4fdbaa5a9
+Step 15/19 : RUN mkdir -p logs media static &&     chown -R jac:jac /app
+ ---> Using cache
+ ---> ea264d62e176
+Step 16/19 : USER jac
+ ---> Using cache
+ ---> 6dd90c7cc90f
+Step 17/19 : EXPOSE 8000
+ ---> Using cache
+ ---> 100cae6a77ba
+Step 18/19 : HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3     CMD curl -f http://localhost:8000/api/health/ || exit 1
+ ---> Using cache
+ ---> 4c75c9699888
+Step 19/19 : CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+ ---> Using cache
+ ---> dbef7d411ddd
+Successfully built dbef7d411ddd
+Successfully tagged jac-interactive-learning-platform_jac-sandbox:latest
+Recreating jac-interactive-learning-platform_redis_1 ... 
+Recreating jac-interactive-learning-platform_postgres_1 ... 
+Recreating jac-sandbox                                  ... 
+
+ERROR: for jac-interactive-learning-platform_postgres_1  'ContainerConfig'
+
+ERROR: for jac-interactive-learning-platform_redis_1  'ContainerConfig'
+
+ERROR: for jac-sandbox  'ContainerConfig'
+
+ERROR: for postgres  'ContainerConfig'
+
+ERROR: for redis  'ContainerConfig'
+
+ERROR: for jac-sandbox  'ContainerConfig'
+Traceback (most recent call last):
+  File "/usr/bin/docker-compose", line 33, in <module>
+    sys.exit(load_entry_point('docker-compose==1.29.2', 'console_scripts', 'docker-compose')())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/cli/main.py", line 81, in main
+    command_func()
+  File "/usr/lib/python3/dist-packages/compose/cli/main.py", line 203, in perform_command
+    handler(command, command_options)
+  File "/usr/lib/python3/dist-packages/compose/metrics/decorator.py", line 18, in wrapper
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/cli/main.py", line 1186, in up
+    to_attach = up(False)
+                ^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/cli/main.py", line 1166, in up
+    return self.project.up(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/project.py", line 697, in up
+    results, errors = parallel.parallel_execute(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/parallel.py", line 108, in parallel_execute
+    raise error_to_reraise
+  File "/usr/lib/python3/dist-packages/compose/parallel.py", line 206, in producer
+    result = func(obj)
+             ^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/project.py", line 679, in do
+    return service.execute_convergence_plan(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 579, in execute_convergence_plan
+    return self._execute_convergence_recreate(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 499, in _execute_convergence_recreate
+    containers, errors = parallel_execute(
+                         ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/parallel.py", line 108, in parallel_execute
+    raise error_to_reraise
+  File "/usr/lib/python3/dist-packages/compose/parallel.py", line 206, in producer
+    result = func(obj)
+             ^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 494, in recreate
+    return self.recreate_container(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 612, in recreate_container
+    new_container = self.create_container(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 330, in create_container
+    container_options = self._get_container_create_options(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 921, in _get_container_create_options
+    container_options, override_options = self._build_container_volume_options(
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 960, in _build_container_volume_options
+    binds, affinity = merge_volume_bindings(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 1548, in merge_volume_bindings
+    old_volumes, old_mounts = get_container_data_volumes(
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 1579, in get_container_data_volumes
+    container.image_config['ContainerConfig'].get('Volumes') or {}
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'ContainerConfig'
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 
