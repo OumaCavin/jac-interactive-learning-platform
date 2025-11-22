@@ -5,7 +5,7 @@ import { Card, Button, Badge } from '../components/ui';
 import { 
   agentService, 
   ChatMessage 
-} from '../services/agentService';
+} from './services/agentService';
 import { 
   selectAgents, 
   selectSelectedAgent,

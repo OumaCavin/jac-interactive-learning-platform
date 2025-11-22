@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, Button, Badge } from '../components/ui';
 import { selectAuth } from '../store/slices/authSlice';
-import { learningService, CodeExecutionRequest, CodeExecutionResponse } from '../services/learningService';
+import { learningService, CodeExecutionRequest, CodeExecutionResponse } from './services/learningService';
 import { toast } from 'react-hot-toast';
 
 interface ExecutionResult {

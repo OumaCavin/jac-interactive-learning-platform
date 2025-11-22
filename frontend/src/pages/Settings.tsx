@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { Card, Button, Input, Badge } from '../components/ui';
 import { updateProfile, selectAuth, clearError } from '../store/slices/authSlice';
-import type { User } from '../services/authService';
+import type { User } from './services/authService';
 
 interface SettingsFormData {
   // Personal Information

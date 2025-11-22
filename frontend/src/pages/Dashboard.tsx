@@ -15,9 +15,9 @@ import {
 } from '@heroicons/react/24/outline';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
-import { learningService, LearningPath } from '../services/learningService';
+import { learningService, LearningPath } from './services/learningService';
 // Note: agentService removed to avoid unused import warning
-// import { agentService } from '../services/agentService';
+// import { agentService } from './services/agentService';
 
 interface DashboardStats {
   totalModulesCompleted: number;
