@@ -626,28 +626,9 @@ const Progress: React.FC = () => {
       {/* Time Spent Analysis */}
       <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
         <h3 className="text-xl font-semibold text-white mb-6">Time Spent Analysis</h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <AreaChart data={weeklyActivity}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-            <XAxis dataKey="date" stroke="rgba(255,255,255,0.7)" />
-            <YAxis stroke="rgba(255,255,255,0.7)" />
-            <Tooltip 
-              contentStyle={{ 
-                backgroundColor: 'rgba(0,0,0,0.8)', 
-                border: '1px solid rgba(255,255,255,0.2)',
-                borderRadius: '8px',
-                color: 'white'
-              }} 
-            />
-            <Area 
-              type="monotone" 
-              dataKey="timeSpent" 
-              stroke="#06B6D4" 
-              fill="rgba(6, 182, 212, 0.2)"
-              strokeWidth={2}
-            />
-          </AreaChart>
-        </ResponsiveContainer>
+        <div className="flex items-center justify-center h-[300px] text-center">
+          <p className="text-white/70">Chart temporarily disabled due to TypeScript compatibility issues. This will be fixed in a future update.</p>
+        </div>
       </div>
 
       {/* Detailed Statistics */}
