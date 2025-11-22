@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
@@ -18,6 +18,7 @@ export const RegisterPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -36,6 +37,12 @@ export const RegisterPage: React.FC = () => {
       await new Promise(resolve => setTimeout(resolve, 1500));
 
       toast.success('Account created successfully! Please check your email to verify your account.');
+      
+      // Redirect to login page after successful registration
+      navigate('/login', { 
+        replace: true,
+        state: { message: 'Registration successful! Please sign in with your new account.' }
+      });
 
     } catch (error) {
       console.error('Registration error:', error);

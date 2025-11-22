@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
@@ -18,7 +18,19 @@ export const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  
+  // Show message from registration redirect
+  useEffect(() => {
+    const message = location.state?.message;
+    if (message) {
+      toast.success(message);
+      // Clear the message by updating the state
+      window.history.replaceState({}, document.title, location.pathname);
+    }
+  }, [location]);
 
   const {
     register,
@@ -59,6 +71,9 @@ export const LoginPage: React.FC = () => {
       (dispatch as any)(loginUser({ username: data.email, password: data.password }));
 
       toast.success('Welcome back! You have been logged in successfully.');
+      
+      // Redirect to dashboard after successful login
+      navigate('/dashboard', { replace: true });
 
     } catch (error) {
       console.error('Login error:', error);
