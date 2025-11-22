@@ -1,17 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Editor } from '@monaco-editor/react';
+import { useDispatch, useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  PlayIcon,
-  StopIcon,
-  DocumentDuplicateIcon,
-  CogIcon,
-  CheckCircleIcon,
-  ExclamationCircleIcon,
-  ClockIcon,
-} from '@heroicons/react/24/outline';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/store';
+import { Card, Button, Badge } from '../components/ui';
+import { selectAuth } from '../store/slices/authSlice';
 import { learningService, CodeExecutionRequest, CodeExecutionResponse } from '../services/learningService';
 import { toast } from 'react-hot-toast';
 
@@ -24,8 +15,8 @@ interface ExecutionResult {
 }
 
 const LANGUAGES = [
-  { id: 'python', name: 'Python', ext: 'py' },
-  { id: 'jac', name: 'JAC (Jaseci)', ext: 'jac' },
+  { id: 'python', name: 'Python', ext: 'py', icon: '🐍' },
+  { id: 'jac', name: 'JAC (Jaseci)', ext: 'jac', icon: '⚡' },
 ];
 
 const TEMPLATES = {
@@ -42,7 +33,9 @@ def fibonacci(n):
 print("Fibonacci sequence:")
 for i in range(10):
     print(f"fib({i}) = {fibonacci(i)}")
-`,
+
+# Try your own code below:
+# print("Hello, World!")`,
   jac: `// JAC Template
 // Welcome to JAC (Jaseci Architecture Code)!
 
@@ -65,6 +58,9 @@ walker hello_world {
     person_2 = spawn node.person(name="Bob", age=30);
     
     report {"message": "JAC execution completed!", "result": "success"};
+    
+    // Try your own code below:
+    // print("Your JAC code here!");
 }`
 };
 
@@ -73,49 +69,24 @@ const INITIAL_CODE = {
   jac: TEMPLATES.jac,
 };
 
-export const CodeEditor: React.FC = () => {
+const CodeEditor: React.FC = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector(selectAuth);
+  
   const [selectedLanguage, setSelectedLanguage] = useState<'python' | 'jac'>('python');
   const [code, setCode] = useState(INITIAL_CODE.python);
   const [output, setOutput] = useState('');
   const [isExecuting, setIsExecuting] = useState(false);
   const [executionResult, setExecutionResult] = useState<ExecutionResult | null>(null);
-  const [editorSettings, setEditorSettings] = useState({
-    fontSize: 14,
-    theme: 'vs-dark',
-    minimap: true,
-    wordWrap: 'on' as const,
-  });
+  const [showSettings, setShowSettings] = useState(false);
   
-  // TODO: Use user data when implementing user-specific features
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { user } = useSelector((state: RootState) => state.auth);
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     setCode(INITIAL_CODE[selectedLanguage]);
     setOutput('');
     setExecutionResult(null);
   }, [selectedLanguage]);
-
-  const handleEditorDidMount = (editor: any, monaco: any) => {
-    editorRef.current = editor;
-    
-    // Add custom themes for JAC
-    monaco.editor.defineTheme('jac-dark', {
-      base: 'vs-dark',
-      inherit: true,
-      rules: [
-        { token: 'comment', foreground: '6A9955', fontStyle: 'italic' },
-        { token: 'keyword', foreground: '569CD6' },
-        { token: 'string', foreground: 'CE9178' },
-        { token: 'number', foreground: 'B5CEA8' },
-      ],
-      colors: {
-        'editor.background': '#1e1e1e',
-        'editor.foreground': '#d4d4d4',
-      }
-    });
-  };
 
   const executeCode = async () => {
     if (!code.trim()) {
@@ -124,7 +95,7 @@ export const CodeEditor: React.FC = () => {
     }
 
     setIsExecuting(true);
-    setOutput('');
+    setOutput('🚀 Executing code...\n\n');
     setExecutionResult(null);
 
     try {
@@ -148,17 +119,19 @@ export const CodeEditor: React.FC = () => {
       };
 
       setExecutionResult(result);
-      setOutput(response.output || response.error || 'No output');
-
+      
       if (response.success) {
+        setOutput(`✅ Code executed successfully!\n\n${response.output || 'No output produced'}`);
         toast.success('Code executed successfully!');
       } else {
+        setOutput(`❌ Execution failed\n\n${response.error || 'Unknown error occurred'}`);
         toast.error('Code execution failed');
       }
 
     } catch (error: any) {
       console.error('Execution error:', error);
       const errorMessage = error.response?.data?.detail || error.message || 'Execution failed';
+      
       setExecutionResult({
         success: false,
         output: '',
@@ -166,7 +139,8 @@ export const CodeEditor: React.FC = () => {
         executionTime: 0,
         memoryUsage: 0,
       });
-      setOutput(`Error: ${errorMessage}`);
+      
+      setOutput(`💥 Execution Error\n\n${errorMessage}\n\nTip: Check your syntax and try again.`);
       toast.error('Code execution failed');
     } finally {
       setIsExecuting(false);
@@ -197,142 +171,189 @@ export const CodeEditor: React.FC = () => {
     return `${seconds.toFixed(2)}s`;
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      executeCode();
+    }
+  };
+
+  const insertAtCursor = (text: string) => {
+    if (editorRef.current) {
+      const textarea = editorRef.current;
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const newCode = code.substring(0, start) + text + code.substring(end);
+      setCode(newCode);
+      
+      // Restore cursor position
+      setTimeout(() => {
+        textarea.selectionStart = textarea.selectionEnd = start + text.length;
+        textarea.focus();
+      }, 0);
+    }
+  };
+
+  const quickInsertButtons = [
+    { label: 'Print', text: '\nprint("Hello, World!")', lang: ['python'] },
+    { label: 'For Loop', text: '\nfor i in range(10):\n    print(i)', lang: ['python'] },
+    { label: 'If/Else', text: '\nif condition:\n    print("True")\nelse:\n    print("False")', lang: ['python'] },
+    { label: 'Walker', text: '\nwalker my_walker {\n    can print;\n    print("Hello from JAC!");\n}', lang: ['jac'] },
+    { label: 'Node', text: '\nnode my_node {\n    has name, value;\n}', lang: ['jac'] },
+    { label: 'Report', text: '\nreport {"status": "completed", "result": "success"};', lang: ['jac'] },
+  ];
+
   return (
-    <div className="h-screen flex flex-col bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">Code Editor</h1>
-            <p className="text-gray-600 mt-1">
-              Write and execute {selectedLanguage.toUpperCase()} code with real-time feedback
-            </p>
-          </div>
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-3xl font-bold text-white flex items-center space-x-3">
+            <span>💻</span>
+            <span>Code Editor</span>
+          </h1>
+          <p className="text-white/70 mt-2">
+            Write and execute {selectedLanguage.toUpperCase()} code with real-time feedback
+          </p>
+        </div>
+        
+        <div className="flex items-center space-x-4">
+          {/* Language Selector */}
+          <select
+            value={selectedLanguage}
+            onChange={(e) => setSelectedLanguage(e.target.value as 'python' | 'jac')}
+            className="glass rounded-xl px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-white/30"
+          >
+            {LANGUAGES.map((lang) => (
+              <option key={lang.id} value={lang.id} className="bg-gray-800">
+                {lang.icon} {lang.name}
+              </option>
+            ))}
+          </select>
           
-          <div className="flex items-center gap-4">
-            {/* Language Selector */}
-            <select
-              value={selectedLanguage}
-              onChange={(e) => setSelectedLanguage(e.target.value as 'python' | 'jac')}
-              className="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-            >
-              {LANGUAGES.map((lang) => (
-                <option key={lang.id} value={lang.id}>
-                  {lang.name}
-                </option>
-              ))}
-            </select>
-            
-            {/* Editor Settings */}
-            <button
-              onClick={() => setEditorSettings(prev => ({ ...prev, theme: prev.theme === 'vs-dark' ? 'jac-dark' : 'vs-dark' }))}
-              className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
-              title="Toggle Theme"
-            >
-              <CogIcon className="h-5 w-5" />
-            </button>
-          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setShowSettings(!showSettings)}
+          >
+            ⚙️ Settings
+          </Button>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 flex overflow-hidden">
-        {/* Code Editor */}
-        <div className="flex-1 flex flex-col">
-          <div className="flex-1 relative">
-            <Editor
-              height="100%"
-              language={selectedLanguage === 'jac' ? 'javascript' : selectedLanguage}
-              value={code}
-              onChange={(value: string | undefined) => setCode(value || '')}
-              theme={editorSettings.theme}
-              options={{
-                fontSize: editorSettings.fontSize,
-                minimap: { enabled: editorSettings.minimap },
-                wordWrap: editorSettings.wordWrap,
-                scrollBeyondLastLine: false,
-                automaticLayout: true,
-                tabSize: 2,
-                insertSpaces: true,
-                folding: true,
-                lineNumbers: 'on',
-                roundedSelection: false,
-                cursorStyle: 'line',
-                cursorBlinking: 'blink',
-                glyphMargin: true,
-                guides: {
-                  indentation: true,
-                  bracketPairs: true,
-                },
-                suggestOnTriggerCharacters: true,
-                quickSuggestions: true,
-                parameterHints: {
-                  enabled: true,
-                },
-              }}
-              onMount={handleEditorDidMount}
-            />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-200px)]">
+        {/* Code Editor Panel */}
+        <Card variant="glass" padding="none" className="flex flex-col h-full">
+          <div className="p-4 border-b border-white/20">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <span className="text-2xl">{LANGUAGES.find(l => l.id === selectedLanguage)?.icon}</span>
+                <h3 className="text-lg font-semibold text-white">
+                  {LANGUAGES.find(l => l.id === selectedLanguage)?.name} Editor
+                </h3>
+              </div>
+              
+              <div className="flex items-center space-x-2">
+                <Badge variant="info" glass={false} size="sm">
+                  {code.split('\n').length} lines
+                </Badge>
+              </div>
+            </div>
           </div>
           
           {/* Editor Controls */}
-          <div className="bg-white border-t border-gray-200 px-6 py-3 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              {!isExecuting ? (
-                <button
-                  onClick={executeCode}
-                  className="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+          <div className="p-4 border-b border-white/20">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center space-x-2">
+                {!isExecuting ? (
+                  <Button
+                    onClick={executeCode}
+                    variant="success"
+                    size="sm"
+                  >
+                    🚀 Run Code
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={stopExecution}
+                    variant="error"
+                    size="sm"
+                  >
+                    ⏹️ Stop
+                  </Button>
+                )}
+                
+                <Button
+                  onClick={duplicateCode}
+                  variant="ghost"
+                  size="sm"
                 >
-                  <PlayIcon className="h-4 w-4" />
-                  Run Code
-                </button>
-              ) : (
-                <button
-                  onClick={stopExecution}
-                  className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                  📋 Copy
+                </Button>
+                
+                <Button
+                  onClick={resetCode}
+                  variant="ghost"
+                  size="sm"
                 >
-                  <StopIcon className="h-4 w-4" />
-                  Stop
-                </button>
-              )}
+                  🔄 Reset
+                </Button>
+              </div>
               
-              <button
-                onClick={duplicateCode}
-                className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
-              >
-                <DocumentDuplicateIcon className="h-4 w-4" />
-                Copy
-              </button>
-              
-              <button
-                onClick={resetCode}
-                className="px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
-              >
-                Reset
-              </button>
+              <div className="text-xs text-white/60">
+                Press Ctrl+Enter to run
+              </div>
             </div>
             
-            <div className="text-sm text-gray-500">
-              Lines: {code.split('\n').length} | Characters: {code.length}
+            {/* Quick Insert Buttons */}
+            <div className="flex flex-wrap gap-2">
+              {quickInsertButtons
+                .filter(btn => btn.lang.includes(selectedLanguage))
+                .map((btn) => (
+                  <button
+                    key={btn.label}
+                    onClick={() => insertAtCursor(btn.text)}
+                    className="text-xs px-3 py-1 bg-white/10 hover:bg-white/20 text-white/80 hover:text-white rounded-full transition-colors"
+                  >
+                    + {btn.label}
+                  </button>
+                ))}
             </div>
           </div>
-        </div>
+          
+          {/* Code Input */}
+          <div className="flex-1 p-4">
+            <textarea
+              ref={editorRef}
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              onKeyDown={handleKeyPress}
+              placeholder={`Write your ${selectedLanguage} code here...`}
+              className="w-full h-full resize-none glass rounded-xl p-4 text-white font-mono text-sm placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent"
+              style={{
+                background: 'rgba(255, 255, 255, 0.05)',
+                backdropFilter: 'blur(10px)',
+              }}
+            />
+          </div>
+        </Card>
 
         {/* Output Panel */}
-        <div className="w-1/2 bg-white border-l border-gray-200 flex flex-col">
-          <div className="bg-gray-50 border-b border-gray-200 px-4 py-3">
-            <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
-              <span className="text-sm font-medium">Output</span>
+        <Card variant="glass" padding="none" className="flex flex-col h-full">
+          <div className="p-4 border-b border-white/20">
+            <h3 className="text-lg font-semibold text-white flex items-center space-x-2">
+              <span>📺</span>
+              <span>Output</span>
               {isExecuting && (
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                  className="h-4 w-4 border-2 border-primary-600 border-t-transparent rounded-full"
+                  className="h-4 w-4 border-2 border-primary-400 border-t-transparent rounded-full"
                 />
               )}
             </h3>
           </div>
           
-          <div className="flex-1 p-4 font-mono text-sm overflow-auto bg-gray-900 text-green-400">
+          <div className="flex-1 p-4 overflow-auto">
             <AnimatePresence mode="wait">
               {isExecuting ? (
                 <motion.div
@@ -340,12 +361,12 @@ export const CodeEditor: React.FC = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 text-white"
                 >
                   <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '200ms' }} />
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '400ms' }} />
+                    <div className="w-2 h-2 bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <div className="w-2 h-2 bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '200ms' }} />
+                    <div className="w-2 h-2 bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '400ms' }} />
                   </div>
                   <span>Executing {selectedLanguage} code...</span>
                 </motion.div>
@@ -355,12 +376,13 @@ export const CodeEditor: React.FC = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="whitespace-pre-wrap"
+                  className="font-mono text-sm whitespace-pre-wrap text-white/90"
                 >
                   {output}
                 </motion.div>
               ) : (
-                <div className="text-gray-500 italic">
+                <div className="text-white/50 italic text-center py-8">
+                  <div className="text-4xl mb-4">🚀</div>
                   Execute your code to see the output here...
                 </div>
               )}
@@ -372,37 +394,107 @@ export const CodeEditor: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="border-t border-gray-200 p-4 bg-gray-50"
+              className="border-t border-white/20 p-4"
             >
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-1">
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2">
                     {executionResult.success ? (
-                      <CheckCircleIcon className="h-4 w-4 text-green-600" />
+                      <>
+                        <span className="text-success-400">✅</span>
+                        <span className="text-sm font-medium text-success-400">Success</span>
+                      </>
                     ) : (
-                      <ExclamationCircleIcon className="h-4 w-4 text-red-600" />
+                      <>
+                        <span className="text-error-400">❌</span>
+                        <span className="text-sm font-medium text-error-400">Failed</span>
+                      </>
                     )}
-                    <span className={`text-sm font-medium ${
-                      executionResult.success ? 'text-green-600' : 'text-red-600'
-                    }`}>
-                      {executionResult.success ? 'Success' : 'Failed'}
-                    </span>
                   </div>
                   
-                  <div className="flex items-center gap-1 text-gray-600">
-                    <ClockIcon className="h-4 w-4" />
-                    <span className="text-sm">{formatTime(executionResult.executionTime)}</span>
+                  <div className="flex items-center space-x-1 text-white/70">
+                    <span className="text-sm">⏱️ {formatTime(executionResult.executionTime)}</span>
                   </div>
                   
-                  <div className="text-sm text-gray-600">
-                    Memory: {executionResult.memoryUsage}MB
+                  <div className="text-sm text-white/70">
+                    💾 {executionResult.memoryUsage}MB
                   </div>
                 </div>
+                
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setExecutionResult(null)}
+                >
+                  Clear Results
+                </Button>
               </div>
             </motion.div>
           )}
-        </div>
+        </Card>
       </div>
+
+      {/* Settings Panel */}
+      <AnimatePresence>
+        {showSettings && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="mt-6"
+          >
+            <Card variant="glass" padding="md">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center space-x-2">
+                <span>⚙️</span>
+                <span>Editor Settings</span>
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-white mb-2">
+                    Execution Timeout (seconds)
+                  </label>
+                  <input
+                    type="number"
+                    min="5"
+                    max="120"
+                    defaultValue="30"
+                    className="glass rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-white mb-2">
+                    Memory Limit (MB)
+                  </label>
+                  <input
+                    type="number"
+                    min="64"
+                    max="1024"
+                    step="64"
+                    defaultValue="512"
+                    className="glass rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-white mb-2">
+                    Auto Save
+                  </label>
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      defaultChecked
+                      className="rounded border-white/20 bg-white/10 text-primary-500 focus:ring-white/30"
+                    />
+                    <span className="text-sm text-white/80">Enable auto-save</span>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
