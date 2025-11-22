@@ -26,12 +26,12 @@ router.register(r'path-ratings', PathRatingViewSet, basename='pathrating')
 router.register(r'recommendations', LearningRecommendationViewSet, basename='learningrecommendation')
 
 urlpatterns = [
-    # API endpoints
-    path('api/', include(router.urls)),
+    # API endpoints - Note: No 'api/' prefix here since main config provides it
+    path('', include(router.urls)),
     
     # Code execution endpoints
-    path('api/code/execute/', CodeExecutionAPIView.as_view(), name='code-execute'),
-    path('api/progress/', LearningProgressAPIView.as_view(), name='learning-progress'),
+    path('code/execute/', CodeExecutionAPIView.as_view(), name='code-execute'),
+    path('progress/', LearningProgressAPIView.as_view(), name='learning-progress'),
     
     # Additional learning endpoints can be added here
 ]
