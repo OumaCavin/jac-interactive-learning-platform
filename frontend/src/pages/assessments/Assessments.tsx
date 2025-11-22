@@ -456,8 +456,8 @@ const Assessments: React.FC = () => {
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={performanceData}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-            <XAxis dataKey="date" stroke="rgba(255,255,255,0.7)" />
-            <YAxis stroke="rgba(255,255,255,0.7)" />
+            <XAxis dataKey="date" stroke="rgba(255,255,255,0.7)" {...({} as any)} />
+            <YAxis stroke="rgba(255,255,255,0.7)" {...({} as any)} />
             <Tooltip 
               contentStyle={{ 
                 backgroundColor: 'rgba(0,0,0,0.8)', 
@@ -751,7 +751,7 @@ const Assessments: React.FC = () => {
               { range: 'Below 60%', count: attempts.filter(a => a.percentage < 60).length }
             ]}>
               <XAxis dataKey="range" stroke="rgba(255,255,255,0.7)" />
-              <YAxis stroke="rgba(255,255,255,0.7)" />
+              <YAxis stroke="rgba(255,255,255,0.7)" {...({} as any)} />
               <Tooltip 
                 contentStyle={{ 
                   backgroundColor: 'rgba(0,0,0,0.8)', 
@@ -809,8 +809,8 @@ const Assessments: React.FC = () => {
             time: a.timeTaken 
           }))}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-            <XAxis dataKey="date" stroke="rgba(255,255,255,0.7)" />
-            <YAxis stroke="rgba(255,255,255,0.7)" />
+            <XAxis dataKey="date" stroke="rgba(255,255,255,0.7)" {...({} as any)} />
+            <YAxis stroke="rgba(255,255,255,0.7)" {...({} as any)} />
             <Tooltip 
               contentStyle={{ 
                 backgroundColor: 'rgba(0,0,0,0.8)', 
