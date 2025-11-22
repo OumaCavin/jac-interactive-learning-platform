@@ -12,6 +12,7 @@ export interface User {
   email: string;
   first_name: string;
   last_name: string;
+  is_staff?: boolean; // Admin/staff flag
   bio?: string;
   profile_image?: string;
   learning_style: 'visual' | 'auditory' | 'kinesthetic' | 'reading';
