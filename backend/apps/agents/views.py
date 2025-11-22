@@ -831,7 +831,7 @@ def system_health_check(request):
     
     # Check Redis connection (optional for health check)
     try:
-        redis_host = os.getenv('DB_HOST', 'redis')
+        redis_host = os.getenv('REDIS_HOST', 'redis')
         redis_password = None
         
         # Parse Redis URL for password
