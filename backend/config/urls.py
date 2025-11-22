@@ -17,6 +17,7 @@ from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularSwaggerView,
 )
+from apps.agents import views as agents_views
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
@@ -31,7 +32,7 @@ urlpatterns = [
     path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
     # API Health Check  
-    path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+    path('api/health/', agents_views.system_health_check, name='health_check'),  # Direct health endpoint
     
     # API endpoints
     # path('api/users/', include('apps.users.urls')),
