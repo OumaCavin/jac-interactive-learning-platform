@@ -30,6 +30,9 @@ urlpatterns = [
     path('api/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
+    # API Health Check  
+    path('api/health/', views.system_health_check, name='health_check'),  # Direct health endpoint
+    
     # API endpoints
     # path('api/users/', include('apps.users.urls')),
     path('api/learning/', include('apps.learning.urls')),

@@ -19,6 +19,9 @@ router.register(r'metrics', views.AgentMetricsViewSet, basename='metric')
 app_name = 'agents'
 
 urlpatterns = [
+    # Health check endpoint for Docker health checks
+    path('health/', views.system_health_check, name='system_health'),
+    
     # API Views
     path('workflow/', views.AgentWorkflowAPIView.as_view(), name='workflow'),
     path('coordinate/', views.AgentCoordinationAPIView.as_view(), name='coordinate'),

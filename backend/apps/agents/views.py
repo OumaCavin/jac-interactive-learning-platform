@@ -798,3 +798,59 @@ class AgentLifecycleAPIView(APIView):
         )
         
         return Response(lifecycle_result)
+
+
+# Simple health check function for Docker health checks
+def system_health_check(request):
+    """
+    Simple system health check endpoint
+    Used for Docker health checks and monitoring
+    """
+    from django.http import JsonResponse
+    from django.db import connection
+    import redis
+    import os
+    from django.utils import timezone
+    
+    health_status = {
+        'status': 'healthy',
+        'timestamp': str(timezone.now()),
+        'service': 'jac-interactive-learning-platform',
+        'version': '1.0.0',
+        'environment': os.getenv('ENVIRONMENT', 'development')
+    }
+    
+    # Check database connection
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+        health_status['database'] = 'healthy'
+    except Exception as e:
+        health_status['database'] = f'unhealthy: {str(e)}'
+        health_status['status'] = 'unhealthy'
+    
+    # Check Redis connection (optional for health check)
+    try:
+        redis_host = os.getenv('DB_HOST', 'redis')
+        redis_password = None
+        
+        # Parse Redis URL for password
+        redis_url = os.getenv('CELERY_BROKER_URL', '')
+        if 'redis://:' in redis_url:
+            redis_password = redis_url.split('redis://:')[1].split('@')[0]
+            
+        r = redis.Redis(
+            host=redis_host,
+            port=6379,
+            password=redis_password,
+            socket_connect_timeout=3,
+            socket_timeout=3
+        )
+        r.ping()
+        health_status['redis'] = 'healthy'
+    except Exception as e:
+        health_status['redis'] = f'unavailable: {str(e)}'
+        # Don't mark as unhealthy since Redis might not be critical for basic health
+    
+    status_code = 200 if health_status['status'] == 'healthy' else 503
+    return JsonResponse(health_status, status=status_code)
