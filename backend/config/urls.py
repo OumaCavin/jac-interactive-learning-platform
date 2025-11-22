@@ -35,7 +35,7 @@ urlpatterns = [
     path('api/health/', agents_views.system_health_check, name='health_check'),  # Direct health endpoint
     
     # API endpoints
-    # path('api/users/', include('apps.users.urls')),
+    path('api/users/', include('apps.users.urls')),
     path('api/learning/', include('apps.learning.urls')),
     path('api/agents/', include('apps.agents.urls')),
     
