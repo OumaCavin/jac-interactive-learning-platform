@@ -1,0 +1,48 @@
+sentry.ts:11 Error monitoring not configured - using fallback implementation
+(anonymous) @ sentry.ts:11
+learning-paths/:1  Failed to load resource: the server responded with a status of 404 (Not Found)
+Dashboard.tsx:275 Failed to load dashboard data: H
+u @ Dashboard.tsx:275
+await in u
+(anonymous) @ Dashboard.tsx:227
+rl @ react-dom.production.min.js:243
+Su @ react-dom.production.min.js:285
+(anonymous) @ react-dom.production.min.js:281
+S @ scheduler.production.min.js:13
+T @ scheduler.production.min.js:14
+learning-paths/:1  Failed to load resource: the server responded with a status of 404 (Not Found)
+Dashboard.tsx:275 Failed to load dashboard data: H
+u @ Dashboard.tsx:275
+await in u
+(anonymous) @ Dashboard.tsx:227
+rl @ react-dom.production.min.js:243
+Su @ react-dom.production.min.js:285
+(anonymous) @ react-dom.production.min.js:281
+S @ scheduler.production.min.js:13
+T @ scheduler.production.min.js:14
+learningService.ts:122  GET http://localhost:8000/learning/learning-paths/ 404 (Not Found)
+(anonymous) @ xhr.js:198
+xhr @ xhr.js:15
+pt @ dispatchRequest.js:51
+Promise.then
+_request @ Axios.js:163
+request @ Axios.js:40
+e.2763.W.forEach.wt.<computed> @ Axios.js:211
+(anonymous) @ bind.js:12
+getLearningPaths @ learningService.ts:122
+u @ Dashboard.tsx:235
+(anonymous) @ Dashboard.tsx:227
+rl @ react-dom.production.min.js:243
+Su @ react-dom.production.min.js:285
+(anonymous) @ react-dom.production.min.js:281
+S @ scheduler.production.min.js:13
+T @ scheduler.production.min.js:14
+Dashboard.tsx:275 Failed to load dashboard data: H {message: 'Request failed with status code 404', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}code: "ERR_BAD_REQUEST"config: adapter: (3) ['xhr', 'http', 'fetch']allowAbsoluteUrls: truebaseURL: "http://localhost:8000"data: undefinedenv: {FormData: ƒ, Blob: ƒ}headers: ke {Accept: 'application/json, text/plain, */*', Content-Type: 'application/json', Authorization: 'Bearer mock-jwt-token-1763829684586'}maxBodyLength: -1maxContentLength: -1method: "get"timeout: 30000transformRequest: [ƒ]transformResponse: [ƒ]transitional: {silentJSONParsing: true, forcedJSONParsing: true, clarifyTimeoutError: false}url: "/learning/learning-paths/"validateStatus: ƒ (e)xsrfCookieName: "XSRF-TOKEN"xsrfHeaderName: "X-XSRF-TOKEN"[[Prototype]]: Objectmessage: "Request failed with status code 404"name: "AxiosError"request: XMLHttpRequest {onreadystatechange: null, readyState: 4, timeout: 30000, withCredentials: false, upload: XMLHttpRequestUpload, …}response: config: adapter: Array(3)0: "xhr"1: "http"2: "fetch"length: 3[[Prototype]]: Array(0)at: ƒ at()length: 1name: "at"arguments: (...)caller: (...)[[Prototype]]: ƒ ()[[Scopes]]: Scopes[0]concat: ƒ concat()constructor: ƒ Array()copyWithin: ƒ copyWithin()entries: ƒ entries()every: ƒ every()fill: ƒ fill()filter: ƒ filter()find: ƒ find()findIndex: ƒ findIndex()findLast: ƒ findLast()findLastIndex: ƒ findLastIndex()flat: ƒ flat()flatMap: ƒ flatMap()forEach: ƒ forEach()includes: ƒ includes()indexOf: ƒ indexOf()join: ƒ join()keys: ƒ keys()lastIndexOf: ƒ lastIndexOf()length: 0map: ƒ map()pop: ƒ pop()push: ƒ push()reduce: ƒ reduce()reduceRight: ƒ reduceRight()reverse: ƒ reverse()shift: ƒ shift()slice: ƒ slice()some: ƒ some()sort: ƒ sort()splice: ƒ splice()toLocaleString: ƒ toLocaleString()toReversed: ƒ toReversed()toSorted: ƒ toSorted()toSpliced: ƒ toSpliced()toString: ƒ toString()unshift: ƒ unshift()values: ƒ values()with: ƒ with()Symbol(Symbol.iterator): ƒ values()Symbol(Symbol.unscopables): {at: true, copyWithin: true, entries: true, fill: true, find: true, …}[[Prototype]]: ObjectallowAbsoluteUrls: truebaseURL: "http://localhost:8000"data: undefinedenv: {FormData: ƒ, Blob: ƒ}headers: ke {Accept: 'application/json, text/plain, */*', Content-Type: 'application/json', Authorization: 'Bearer mock-jwt-token-1763829684586'}maxBodyLength: -1maxContentLength: -1method: "get"timeout: 30000transformRequest: [ƒ]transformResponse: [ƒ]transitional: {silentJSONParsing: true, forcedJSONParsing: true, clarifyTimeoutError: false}url: "/learning/learning-paths/"validateStatus: ƒ (e)xsrfCookieName: "XSRF-TOKEN"xsrfHeaderName: "X-XSRF-TOKEN"[[Prototype]]: Objectdata: "\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <title>Not Found</title>\n</head>\n<body>\n  <h1>Not Found</h1><p>The requested resource was not found on this server.</p>\n</body>\n</html>\n"headers: ke {content-length: '179', content-type: 'text/html; charset=utf-8'}request: XMLHttpRequest {onreadystatechange: null, readyState: 4, timeout: 30000, withCredentials: false, upload: XMLHttpRequestUpload, …}status: 404statusText: "Not Found"[[Prototype]]: Objectstatus: 404stack: "AxiosError: Request failed with status code 404\n    at Te (http://localhost:3000/static/js/main.9c484b12.js:2:44581)\n    at XMLHttpRequest.g (http://localhost:3000/static/js/main.9c484b12.js:2:49347)\n    at wt.request (http://localhost:3000/static/js/main.9c484b12.js:2:60925)\n    at async u (http://localhost:3000/static/js/244.feffd922.chunk.js:1:6318)"[[Prototype]]: Errorconstructor: ƒ H(e,t,n,r,o)from: (e,t,n,r,o,i)=> {…}ECONNABORTED: "ECONNABORTED"ERR_BAD_OPTION: "ERR_BAD_OPTION"ERR_BAD_OPTION_VALUE: "ERR_BAD_OPTION_VALUE"ERR_BAD_REQUEST: "ERR_BAD_REQUEST"ERR_BAD_RESPONSE: "ERR_BAD_RESPONSE"ERR_CANCELED: "ERR_CANCELED"ERR_DEPRECATED: "ERR_DEPRECATED"ERR_FR_TOO_MANY_REDIRECTS: "ERR_FR_TOO_MANY_REDIRECTS"ERR_INVALID_URL: "ERR_INVALID_URL"ERR_NETWORK: "ERR_NETWORK"ERR_NOT_SUPPORT: "ERR_NOT_SUPPORT"ETIMEDOUT: "ETIMEDOUT"length: 5name: "H"prototype: Errorconstructor: ƒ H(e,t,n,r,o)from: (e,t,n,r,o,i)=> {…}length: 6name: ""arguments: (...)caller: (...)[[FunctionLocation]]: AxiosError.js:83[[Prototype]]: ƒ ()apply: ƒ apply()length: 2name: "apply"arguments: (...)caller: (...)[[Prototype]]: ƒ ()[[Scopes]]: Scopes[0]arguments: (...)bind: ƒ bind()call: ƒ call()caller: (...)constructor: ƒ Function()length: 0name: ""toString: ƒ toString()Symbol(Symbol.hasInstance): ƒ [Symbol.hasInstance]()get arguments: ƒ arguments()set arguments: ƒ arguments()get caller: ƒ caller()set caller: ƒ caller()[[FunctionLocation]]: [[Prototype]]: Object[[Scopes]]: Scopes[0][[Scopes]]: Scopes[3]ECONNABORTED: "ECONNABORTED"ERR_BAD_OPTION: "ERR_BAD_OPTION"ERR_BAD_OPTION_VALUE: "ERR_BAD_OPTION_VALUE"ERR_BAD_REQUEST: "ERR_BAD_REQUEST"ERR_BAD_RESPONSE: "ERR_BAD_RESPONSE"ERR_CANCELED: "ERR_CANCELED"ERR_DEPRECATED: "ERR_DEPRECATED"ERR_FR_TOO_MANY_REDIRECTS: "ERR_FR_TOO_MANY_REDIRECTS"ERR_INVALID_URL: "ERR_INVALID_URL"ERR_NETWORK: "ERR_NETWORK"ERR_NOT_SUPPORT: "ERR_NOT_SUPPORT"ETIMEDOUT: "ETIMEDOUT"length: 5name: "H"prototype: Error {isAxiosError: true, toJSON: ƒ}super: {name: 'Error', message: '', toString: ƒ}arguments: (...)caller: (...)[[FunctionLocation]]: AxiosError.js:16[[Prototype]]: ƒ ()[[Scopes]]: Scopes[3]toJSON: ƒ ()isAxiosError: true[[Prototype]]: Objectsuper: {name: 'Error', message: '', toString: ƒ}arguments: (...)caller: (...)[[FunctionLocation]]: AxiosError.js:16[[Prototype]]: ƒ ()[[Scopes]]: Scopes[3]toJSON: ƒ ()isAxiosError: true[[Prototype]]: Object
+u @ Dashboard.tsx:275
+await in u
+(anonymous) @ Dashboard.tsx:227
+rl @ react-dom.production.min.js:243
+Su @ react-dom.production.min.js:285
+(anonymous) @ react-dom.production.min.js:281
+S @ scheduler.production.min.js:13
+T @ scheduler.production.min.js:14
