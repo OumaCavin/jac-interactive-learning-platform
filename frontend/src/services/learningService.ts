@@ -119,52 +119,52 @@ export interface UserModuleProgress {
 export const learningService = {
   // Learning Paths
   getLearningPaths: (): Promise<LearningPath[]> =>
-    api.get('/learning-paths/').then(res => res.data),
+    api.get('/learning/learning-paths/').then(res => res.data),
 
   getLearningPath: (id: number): Promise<LearningPath> =>
-    api.get(`/learning-paths/${id}/`).then(res => res.data),
+    api.get(`/learning/learning-paths/${id}/`).then(res => res.data),
 
   // Modules
   getModules: (pathId: number): Promise<Module[]> =>
-    api.get(`/modules/?learning_path=${pathId}`).then(res => res.data),
+    api.get(`/learning/modules/?learning_path=${pathId}`).then(res => res.data),
 
   getModule: (id: number): Promise<Module> =>
-    api.get(`/modules/${id}/`).then(res => res.data),
+    api.get(`/learning/modules/${id}/`).then(res => res.data),
 
   // Code Execution
   executeCode: (request: CodeExecutionRequest): Promise<CodeExecutionResponse> =>
-    api.post('/code/execute/', request).then(res => res.data),
+    api.post('/learning/code/execute/', request).then(res => res.data),
 
   // Code Submissions
   createCodeSubmission: (data: Partial<CodeSubmission>): Promise<CodeSubmission> =>
-    api.post('/code-submissions/', data).then(res => res.data),
+    api.post('/learning/code-submissions/', data).then(res => res.data),
 
   getCodeSubmission: (id: number): Promise<CodeSubmission> =>
-    api.get(`/code-submissions/${id}/`).then(res => res.data),
+    api.get(`/learning/code-submissions/${id}/`).then(res => res.data),
 
   getUserSubmissions: (userId: number): Promise<CodeSubmission[]> =>
-    api.get(`/code-submissions/?user=${userId}`).then(res => res.data),
+    api.get(`/learning/code-submissions/?user=${userId}`).then(res => res.data),
 
   getModuleSubmissions: (moduleId: number): Promise<CodeSubmission[]> =>
-    api.get(`/code-submissions/?module=${moduleId}`).then(res => res.data),
+    api.get(`/learning/code-submissions/?module=${moduleId}`).then(res => res.data),
 
   // User Progress
   getUserModuleProgress: (userId: number, moduleId: number): Promise<UserModuleProgress> =>
-    api.get(`/user-module-progress/?user=${userId}&module=${moduleId}`).then(res => res.data),
+    api.get(`/learning/user-module-progress/?user=${userId}&module=${moduleId}`).then(res => res.data),
 
   updateModuleProgress: (userId: number, moduleId: number, data: Partial<UserModuleProgress>): Promise<UserModuleProgress> =>
-    api.patch(`/user-module-progress/?user=${userId}&module=${moduleId}`, data).then(res => res.data),
+    api.patch(`/learning/user-module-progress/?user=${userId}&module=${moduleId}`, data).then(res => res.data),
 
   // AI Code Review
   getAICodeReview: (submissionId: number): Promise<any> =>
-    api.get(`/ai-code-reviews/?submission=${submissionId}`).then(res => res.data),
+    api.get(`/learning/ai-code-reviews/?submission=${submissionId}`).then(res => res.data),
 
   createAICodeReview: (data: any): Promise<any> =>
-    api.post('/ai-code-reviews/', data).then(res => res.data),
+    api.post('/learning/ai-code-reviews/', data).then(res => res.data),
 
   // Test Cases
   getTestCases: (moduleId: number): Promise<any[]> =>
-    api.get(`/test-cases/?module=${moduleId}`).then(res => res.data),
+    api.get(`/learning/test-cases/?module=${moduleId}`).then(res => res.data),
 };
 
 export default api;
