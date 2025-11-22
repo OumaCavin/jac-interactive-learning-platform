@@ -1,0 +1,83 @@
+Successfully built 846c5ddb96d6
+Successfully tagged jac-interactive-learning-platform_jac-sandbox:latest
+Creating network "jac-interactive-learning-platform_jac_network" with driver "bridge"
+Creating jac-sandbox                                  ... done
+Creating jac-interactive-learning-platform_redis_1    ... done
+Creating jac-interactive-learning-platform_postgres_1 ... done
+Creating jac-celery-beat                              ... done
+Creating jac-interactive-learning-platform_backend_1  ... done
+Creating jac-celery-worker                            ... done
+Creating jac-interactive-learning-platform_frontend_1 ... done
+Creating jac-nginx                                    ... done
+Attaching to jac-celery-worker
+Attaching to jac-celery-beat
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform/backend/config$ docker-compose logs celery-worker
+Attaching to jac-celery-worker
+jac-celery-worker |  
+jac-celery-worker |  -------------- celery@7af3241e0d20 v5.5.3 (immunity)
+jac-celery-worker | --- ***** ----- 
+jac-celery-worker | -- ******* ---- Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.41 2025-11-22 00:45:47
+jac-celery-worker | - *** --- * --- 
+jac-celery-worker | - ** ---------- [config]
+jac-celery-worker | - ** ---------- .> app:         config:0x7474eebcc7d0
+jac-celery-worker | - ** ---------- .> transport:   redis://:**@redis:6379/0
+jac-celery-worker | - ** ---------- .> results:     redis://:**@redis:6379/0
+jac-celery-worker | - *** --- * --- .> concurrency: 2 (prefork)
+jac-celery-worker | -- ******* ---- .> task events: ON
+jac-celery-worker | --- ***** ----- 
+jac-celery-worker |  -------------- [queues]
+jac-celery-worker |                 .> celery           exchange=celery(direct) key=celery
+jac-celery-worker |                 
+jac-celery-worker | 
+jac-celery-worker | [tasks]
+jac-celery-worker |   . config.celery.debug_task
+jac-celery-worker |   . content.process_content
+jac-celery-worker |   . users.send_welcome_email
+jac-celery-worker | 
+jac-celery-worker | [2025-11-22 00:45:47,340: INFO/MainProcess] Connected to redis://:**@redis:6379/0
+jac-celery-worker | [2025-11-22 00:45:47,346: INFO/MainProcess] mingle: searching for neighbors
+jac-celery-worker | [2025-11-22 00:45:48,360: INFO/MainProcess] mingle: all alone
+jac-celery-worker | [2025-11-22 00:45:48,372: INFO/MainProcess] celery@7af3241e0d20 ready.
+jac-celery-worker | [2025-11-22 04:00:00,438: INFO/MainProcess] Task celery.backend_cleanup[b00c47e7-6669-4b79-9a0d-ac7dde6fe142] received
+jac-celery-worker | [2025-11-22 04:00:00,585: INFO/ForkPoolWorker-2] Task celery.backend_cleanup[b00c47e7-6669-4b79-9a0d-ac7dde6fe142] succeeded in 0.08389823699690169s: None
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform/backend/config$ docker-compose logs celery-beat
+Attaching to jac-celery-beat
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | __    -    ... __   -        _
+jac-celery-beat  | LocalTime -> 2025-11-22 00:45:47
+jac-celery-beat  | Configuration ->
+jac-celery-beat  |     . broker -> redis://:**@redis:6379/0
+jac-celery-beat  |     . loader -> celery.loaders.app.AppLoader
+jac-celery-beat  |     . scheduler -> django_celery_beat.schedulers.DatabaseScheduler
+jac-celery-beat  | 
+jac-celery-beat  |     . logfile -> [stderr]@%INFO
+jac-celery-beat  |     . maxinterval -> 5.00 seconds (5s)
+jac-celery-beat  | [2025-11-22 00:45:47,033: INFO/MainProcess] beat: Starting...
+jac-celery-beat  | [2025-11-22 04:00:00,123: INFO/MainProcess] Scheduler: Sending due task celery.backend_cleanup (celery.backend_cleanup)
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform/backend/config$ docker-compose logs celery-beat
+Attaching to jac-celery-beat
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | __    -    ... __   -        _
+jac-celery-beat  | LocalTime -> 2025-11-22 00:45:47
+jac-celery-beat  | Configuration ->
+jac-celery-beat  |     . broker -> redis://:**@redis:6379/0
+jac-celery-beat  |     . loader -> celery.loaders.app.AppLoader
+jac-celery-beat  |     . scheduler -> django_celery_beat.schedulers.DatabaseScheduler
+jac-celery-beat  | 
+jac-celery-beat  |     . logfile -> [stderr]@%INFO
+jac-celery-beat  |     . maxinterval -> 5.00 seconds (5s)
+jac-celery-beat  | [2025-11-22 00:45:47,033: INFO/MainProcess] beat: Starting...
+jac-celery-beat  | [2025-11-22 04:00:00,123: INFO/MainProcess] Scheduler: Sending due task celery.backend_cleanup (celery.backend_cleanup)
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform/backend/config$ docker-compose ps
+                    Name                                  Command                   State                                        Ports                                 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+jac-celery-beat                                celery -A config beat -l i ...   Up (unhealthy)   8000/tcp                                                              
+jac-celery-worker                              celery -A config worker -l ...   Up (unhealthy)   8000/tcp                                                              
+jac-interactive-learning-platform_backend_1    python manage.py runserver ...   Up (unhealthy)   0.0.0.0:8000->8000/tcp,:::8000->8000/tcp                              
+jac-interactive-learning-platform_frontend_1   /docker-entrypoint.sh ngin ...   Up (healthy)     0.0.0.0:3000->80/tcp,:::3000->80/tcp                                  
+jac-interactive-learning-platform_postgres_1   docker-entrypoint.sh postgres    Up (healthy)     0.0.0.0:5432->5432/tcp,:::5432->5432/tcp                              
+jac-interactive-learning-platform_redis_1      docker-entrypoint.sh redis ...   Up (healthy)     0.0.0.0:6379->6379/tcp,:::6379->6379/tcp                              
+jac-nginx                                      /docker-entrypoint.sh ngin ...   Up (healthy)     0.0.0.0:443->443/tcp,:::443->443/tcp, 0.0.0.0:80->80/tcp,:::80->80/tcp
+jac-sandbox                                    python jac_sandbox_server.py     Up (unhealthy)   8000/tcp, 0.0.0.0:8080->8080/tcp,:::8080->8080/tcp                    
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform/backend/config$ 
