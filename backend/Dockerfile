@@ -55,12 +55,14 @@ COPY --from=dependencies /usr/local/bin/ /usr/local/bin/
 # Copy application code
 COPY . .
 
+# Create directories for logs and media first
+RUN mkdir -p logs media static
+
 # Make entrypoint executable before changing ownership
 RUN chmod +x /app/entrypoint.sh
 
-# Create directories for logs and media
-RUN mkdir -p logs media static && \
-    chown -R jac:jac /app
+# Change ownership after setting permissions
+RUN chown -R jac:jac /app
 
 # Switch to non-root user
 USER jac
