@@ -125,25 +125,6 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
 SESSION_COOKIE_AGE = 86400  # 24 hours
 
-# Development Environment Auth Configuration
-if config('ENVIRONMENT', default='development') == 'development':
-    # For development, allow mock tokens and make some endpoints public
-    REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = (
-        'apps.learning.middleware.MockJWTAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    )
-    
-    # Allow public access to learning paths for development
-    REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = (
-        'rest_framework.permissions.AllowAny',
-    )
-else:
-    # Production: Strict authentication
-    REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = (
-        'rest_framework.permissions.IsAuthenticated',
-    )
-
 # Celery Configuration
 CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='redis://redis_password@redis:6379/0')
 CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default='redis://redis_password@redis:6379/0')
@@ -217,6 +198,25 @@ REST_FRAMEWORK = {
         'jac_execution': '50/hour',
     }
 }
+
+# Development Environment Auth Configuration
+if config('ENVIRONMENT', default='development') == 'development':
+    # For development, allow mock tokens and make some endpoints public
+    REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = (
+        'apps.learning.middleware.MockJWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+    
+    # Allow public access to learning paths for development
+    REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = (
+        'rest_framework.permissions.AllowAny',
+    )
+else:
+    # Production: Strict authentication
+    REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = (
+        'rest_framework.permissions.IsAuthenticated',
+    )
 
 # JWT Configuration
 from datetime import timedelta
