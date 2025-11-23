@@ -104,7 +104,7 @@ export const LoginPage: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Email Field */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-800 mb-1">
               Email address
             </label>
             <input
@@ -118,7 +118,7 @@ export const LoginPage: React.FC = () => {
               type="email"
               id="email"
               autoComplete="email"
-              className={`w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
+              className={`w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-500 focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
                 errors.email ? 'border-red-300' : 'border-gray-300'
               }`}
               placeholder="Enter your email"
@@ -130,7 +130,7 @@ export const LoginPage: React.FC = () => {
 
           {/* Password Field */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-800 mb-1">
               Password
             </label>
             <div className="relative">
@@ -145,7 +145,7 @@ export const LoginPage: React.FC = () => {
                 type={showPassword ? 'text' : 'password'}
                 id="password"
                 autoComplete="current-password"
-                className={`w-full px-3 py-2 pr-10 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
+                className={`w-full px-3 py-2 pr-10 border rounded-md shadow-sm placeholder-gray-500 focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
                   errors.password ? 'border-red-300' : 'border-gray-300'
                 }`}
                 placeholder="Enter your password"
@@ -176,13 +176,13 @@ export const LoginPage: React.FC = () => {
                 type="checkbox"
                 className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
               />
-              <label htmlFor="rememberMe" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="rememberMe" className="ml-2 block text-sm text-gray-800 font-medium">
                 Remember me
               </label>
             </div>
             <Link
               to="/forgot-password"
-              className="text-sm text-primary-600 hover:text-primary-700 font-medium"
+              className="text-sm text-primary-700 hover:text-primary-800 font-semibold"
             >
               Forgot password?
             </Link>
@@ -211,23 +211,23 @@ export const LoginPage: React.FC = () => {
           </motion.button>
 
           {/* Demo Credentials */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h4 className="text-sm font-medium text-blue-800 mb-2">Demo Credentials</h4>
-            <p className="text-xs text-blue-700 mb-1">
+          <div className="bg-gray-100 border border-gray-400 rounded-lg p-4">
+            <h4 className="text-sm font-medium text-gray-800 mb-2">Demo Credentials</h4>
+            <p className="text-xs text-gray-700 mb-1">
               <strong>Email:</strong> demo@example.com
             </p>
-            <p className="text-xs text-blue-700">
+            <p className="text-xs text-gray-700">
               <strong>Password:</strong> demo123
             </p>
           </div>
 
           {/* Sign Up Link */}
           <div className="text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-700">
               Don't have an account?{' '}
               <Link
                 to="/register"
-                className="text-primary-600 hover:text-primary-700 font-medium"
+                className="text-primary-700 hover:text-primary-800 font-semibold"
               >
                 Sign up for free
               </Link>

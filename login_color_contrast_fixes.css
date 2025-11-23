@@ -1,0 +1,40 @@
+/* Login Page Color Contrast Fixes */
+
+/* 1. Fix placeholder text contrast */
+.login-page input::placeholder {
+  color: #6B7280 !important; /* gray-500 instead of gray-400 */
+  opacity: 1;
+}
+
+/* 2. Fix demo credentials section contrast */
+.login-page .demo-credentials {
+  background-color: #F3F4F6; /* gray-100 for better contrast */
+  border-color: #9CA3AF; /* gray-400 for border */
+}
+
+.login-page .demo-credentials h4 {
+  color: #1F2937; /* gray-800 instead of blue-800 */
+  font-weight: 600;
+}
+
+.login-page .demo-credentials p {
+  color: #374151; /* gray-700 instead of blue-700 */
+}
+
+/* 3. Improve remember me label contrast */
+.login-page .remember-me-label {
+  color: #1F2937; /* gray-800 instead of gray-700 */
+  font-weight: 500;
+}
+
+/* 4. Enhance forgot password link */
+.login-page .forgot-password-link {
+  color: #0369A1; /* primary-700 instead of primary-600 */
+  font-weight: 600;
+}
+
+/* 5. Improve sign up link contrast */
+.login-page .signup-link {
+  color: #0369A1; /* primary-700 instead of primary-600 */
+  font-weight: 600;
+}
