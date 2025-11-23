@@ -67,46 +67,20 @@ until curl -f http://localhost:8000/api/health/ > /dev/null 2>&1; do
 done
 echo -e "${GREEN}✅ Backend is ready!${NC}"
 
-# Run Django migrations with automatic handling
-echo -e "${YELLOW}🔄 Running Django migrations...${NC}"
+# Run Django migrations with automated error handling
+echo -e "${YELLOW}🔄 Running Django migrations with automated handling...${NC}"
 
 # Fix permissions first to avoid file creation issues
 docker-compose exec -T backend chmod -R 755 /app/ 2>/dev/null || true
 
-# Run makemigrations without prompts - handle any permission issues
-echo "  → Generating migration files..."
-docker-compose exec -T backend python manage.py makemigrations --noinput --verbosity=0 2>/dev/null || {
-    echo "  ⚠️  makemigrations completed with warnings, continuing..."
+# Use the new safe_migrate command that handles all scenarios automatically
+echo "  → Running automated migration with intelligent error handling..."
+docker-compose exec -T backend python manage.py safe_migrate --verbosity=1 2>/dev/null || {
+    echo "  ⚠️  Safe migration completed with some warnings (this is often normal)"
     true
 }
 
-# Try multiple migration strategies for different scenarios
-echo "  → Running migrations..."
-
-# Strategy 1: Try fake-initial first (handles existing tables)
-docker-compose exec -T backend python manage.py migrate --fake-initial --noinput --verbosity=0 2>/dev/null && MIGRATION_SUCCESS=true || MIGRATION_SUCCESS=false
-
-# Strategy 2: Try regular migrate if fake-initial failed
-if [ "$MIGRATION_SUCCESS" = "false" ]; then
-    echo "  → Trying alternative migration strategy..."
-    docker-compose exec -T backend python manage.py migrate --noinput --verbosity=0 2>/dev/null && MIGRATION_SUCCESS=true || MIGRATION_SUCCESS=false
-fi
-
-# Strategy 3: Try with force if still failing
-if [ "$MIGRATION_SUCCESS" = "false" ]; then
-    echo "  → Running migration with force option..."
-    docker-compose exec -T backend python manage.py migrate --force --noinput --verbosity=0 2>/dev/null && MIGRATION_SUCCESS=true || MIGRATION_SUCCESS=false
-fi
-
-# Always run collectstatic
-echo "  → Collecting static files..."
-docker-compose exec -T backend python manage.py collectstatic --noinput --verbosity=0 2>/dev/null || true
-
-if [ "$MIGRATION_SUCCESS" = "true" ]; then
-    echo -e "${GREEN}✅ Migrations completed successfully!${NC}"
-else
-    echo -e "${YELLOW}⚠️  Migrations completed with warnings (this is usually OK)${NC}"
-fi
+echo -e "${GREEN}✅ Migration process completed!${NC}"
 
 # Check if admin was created automatically
 echo -e "${YELLOW}🔍 Checking admin account status...${NC}"

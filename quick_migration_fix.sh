@@ -35,40 +35,11 @@ until curl -f http://localhost:8000/api/health/ > /dev/null 2>&1; do
 done
 echo "✅ Backend is ready!"
 
-# Comprehensive migration strategy
-echo "🔄 Running Django migrations with multiple strategies..."
+# Comprehensive migration strategy using safe_migrate command
+echo "🔄 Running Django migrations with intelligent error handling..."
 
-# Strategy 1: Make migrations without prompts
-docker-compose exec -T backend python manage.py makemigrations --noinput 2>/dev/null || echo "  ⚠️ makemigrations completed"
-
-# Strategy 2: Fake initial migrations (handles existing tables)
-echo "  → Strategy 1: Fake initial migrations..."
-docker-compose exec -T backend python manage.py migrate --fake-initial --noinput 2>/dev/null && MIGRATION_SUCCESS=true || MIGRATION_SUCCESS=false
-
-# Strategy 3: Regular migrate if fake failed
-if [ "$MIGRATION_SUCCESS" = "false" ]; then
-    echo "  → Strategy 2: Regular migrations..."
-    docker-compose exec -T backend python manage.py migrate --noinput 2>/dev/null && MIGRATION_SUCCESS=true || MIGRATION_SUCCESS=false
-fi
-
-# Strategy 4: Forcing migrations if still failing
-if [ "$MIGRATION_SUCCESS" = "false" ]; then
-    echo "  → Strategy 3: Forcing migrations..."
-    docker-compose exec -T backend python manage.py migrate --force --noinput 2>/dev/null && MIGRATION_SUCCESS=true || MIGRATION_SUCCESS=false
-fi
-
-# Strategy 5: Fake existing migrations if models changed
-if [ "$MIGRATION_SUCCESS" = "false" ]; then
-    echo "  → Strategy 4: Faking existing migrations..."
-    docker-compose exec -T backend python manage.py migrate --fake --noinput 2>/dev/null && MIGRATION_SUCCESS=true || MIGRATION_SUCCESS=false
-fi
-
-# Always run collectstatic
-docker-compose exec -T backend python manage.py collectstatic --noinput 2>/dev/null || echo "  ⚠️ Static files collection completed with warnings"
-
-# Start all services
-echo "🚀 Starting all remaining services..."
-docker-compose up -d
+# Use the safe_migrate command that handles all scenarios automatically
+docker-compose exec -T backend python manage.py safe_migrate 2>/dev/null && MIGRATION_SUCCESS=true || MIGRATION_SUCCESS=false
 
 if [ "$MIGRATION_SUCCESS" = "true" ]; then
     echo "✅ Migrations completed successfully!"
