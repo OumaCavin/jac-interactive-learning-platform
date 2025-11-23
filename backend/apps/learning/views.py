@@ -15,7 +15,7 @@ from datetime import datetime, timedelta
 import json
 
 from .models import (
-    LearningPath, Module, UserLearningPath, UserModuleProgress,
+    LearningPath, Module, Lesson, Assessment, Question, UserLearningPath, UserModuleProgress,
     PathRating, LearningRecommendation, CodeSubmission, TestCase,
     CodeExecutionLog, AICodeReview
 )
@@ -25,7 +25,8 @@ from .serializers import (
     LearningRecommendationSerializer, CodeSubmissionSerializer, CodeSubmissionCreateSerializer,
     CodeSubmissionReviewSerializer, TestCaseSerializer, CodeExecutionLogSerializer,
     AICodeReviewSerializer, CodeExecutionRequestSerializer, CodeExecutionResponseSerializer,
-    LearningProgressSerializer
+    LearningProgressSerializer, LessonSerializer, LessonCreateSerializer,
+    AssessmentSerializer, AssessmentCreateSerializer, QuestionSerializer, QuestionCreateSerializer
 )
 
 # Import our JAC code execution engine
@@ -439,3 +440,48 @@ class LearningRecommendationViewSet(viewsets.ModelViewSet):
         recommendation = self.get_object()
         recommendation.mark_acted_upon()
         return Response({'message': 'Recommendation marked as acted upon'})
+
+
+class LessonViewSet(viewsets.ModelViewSet):
+    """ViewSet for lessons"""
+    
+    queryset = Lesson.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return LessonCreateSerializer
+        return LessonSerializer
+    
+    def get_queryset(self):
+        return Lesson.objects.all().select_related('module', 'module__learning_path')
+
+
+class AssessmentViewSet(viewsets.ModelViewSet):
+    """ViewSet for assessments"""
+    
+    queryset = Assessment.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return AssessmentCreateSerializer
+        return AssessmentSerializer
+    
+    def get_queryset(self):
+        return Assessment.objects.all().select_related('module', 'module__learning_path')
+
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    """ViewSet for questions"""
+    
+    queryset = Question.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return QuestionCreateSerializer
+        return QuestionSerializer
+    
+    def get_queryset(self):
+        return Question.objects.all().select_related('assessment', 'assessment__module')

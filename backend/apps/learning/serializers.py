@@ -311,3 +311,93 @@ class CodeExecutionResponseSerializer(serializers.Serializer):
     recommendations = serializers.ListField(
         child=serializers.CharField()
     )
+
+
+class LessonSerializer(serializers.ModelSerializer):
+    """Serializer for lessons"""
+    
+    learning_path_name = serializers.CharField(source='module.learning_path.name', read_only=True)
+    module_title = serializers.CharField(source='module.title', read_only=True)
+    
+    class Meta:
+        model = Lesson
+        fields = [
+            'id', 'module', 'learning_path_name', 'module_title', 'lesson_type',
+            'title', 'content', 'code_examples', 'quiz_questions', 'interactive_demo',
+            'media_urls', 'estimated_duration_minutes', 'difficulty_rating',
+            'prerequisites', 'learning_objectives', 'is_published', 'order_index',
+            'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+
+class LessonCreateSerializer(serializers.ModelSerializer):
+    """Serializer for creating lessons"""
+    
+    class Meta:
+        model = Lesson
+        fields = [
+            'module', 'lesson_type', 'title', 'content', 'code_examples',
+            'quiz_questions', 'interactive_demo', 'media_urls',
+            'estimated_duration_minutes', 'difficulty_rating', 'prerequisites',
+            'learning_objectives', 'is_published', 'order_index'
+        ]
+
+
+class AssessmentSerializer(serializers.ModelSerializer):
+    """Serializer for assessments"""
+    
+    learning_path_name = serializers.CharField(source='module.learning_path.name', read_only=True)
+    module_title = serializers.CharField(source='module.title', read_only=True)
+    
+    class Meta:
+        model = Assessment
+        fields = [
+            'id', 'module', 'learning_path_name', 'module_title', 'assessment_type',
+            'title', 'description', 'time_limit_minutes', 'max_attempts',
+            'passing_score_percentage', 'instructions', 'rubric_criteria',
+            'is_published', 'is_mandatory', 'order_index', 'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+
+class AssessmentCreateSerializer(serializers.ModelSerializer):
+    """Serializer for creating assessments"""
+    
+    class Meta:
+        model = Assessment
+        fields = [
+            'module', 'assessment_type', 'title', 'description',
+            'time_limit_minutes', 'max_attempts', 'passing_score_percentage',
+            'instructions', 'rubric_criteria', 'is_published', 'is_mandatory',
+            'order_index'
+        ]
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+    """Serializer for questions"""
+    
+    assessment_title = serializers.CharField(source='assessment.title', read_only=True)
+    
+    class Meta:
+        model = Question
+        fields = [
+            'id', 'assessment', 'assessment_title', 'question_type', 'question_text',
+            'question_data', 'answer_options', 'correct_answer', 'explanation',
+            'hints', 'code_template', 'test_cases', 'points_value', 'difficulty_level',
+            'order_index', 'time_limit_seconds', 'is_required', 'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+
+class QuestionCreateSerializer(serializers.ModelSerializer):
+    """Serializer for creating questions"""
+    
+    class Meta:
+        model = Question
+        fields = [
+            'assessment', 'question_type', 'question_text', 'question_data',
+            'answer_options', 'correct_answer', 'explanation', 'hints',
+            'code_template', 'test_cases', 'points_value', 'difficulty_level',
+            'order_index', 'time_limit_seconds', 'is_required'
+        ]

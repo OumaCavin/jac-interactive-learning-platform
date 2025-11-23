@@ -8,8 +8,8 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from .views import (
-    LearningPathViewSet, ModuleViewSet, CodeSubmissionViewSet,
-    TestCaseViewSet, UserLearningPathViewSet, UserModuleProgressViewSet,
+    LearningPathViewSet, ModuleViewSet, LessonViewSet, AssessmentViewSet, QuestionViewSet,
+    CodeSubmissionViewSet, TestCaseViewSet, UserLearningPathViewSet, UserModuleProgressViewSet,
     PathRatingViewSet, LearningRecommendationViewSet,
     CodeExecutionAPIView, LearningProgressAPIView
 )
@@ -18,6 +18,9 @@ from .views import (
 router = DefaultRouter()
 router.register(r'learning-paths', LearningPathViewSet, basename='learningpath')
 router.register(r'modules', ModuleViewSet, basename='module')
+router.register(r'lessons', LessonViewSet, basename='lesson')
+router.register(r'assessments', AssessmentViewSet, basename='assessment')
+router.register(r'questions', QuestionViewSet, basename='question')
 router.register(r'code-submissions', CodeSubmissionViewSet, basename='codesubmission')
 router.register(r'test-cases', TestCaseViewSet, basename='testcase')
 router.register(r'user-learning-paths', UserLearningPathViewSet, basename='userlearningpath')
