@@ -52,12 +52,14 @@ WORKDIR /app
 COPY --from=dependencies /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
 COPY --from=dependencies /usr/local/bin/ /usr/local/bin/
 
-# Copy application code
+# Copy application code and entrypoint script
+COPY entrypoint.sh .
 COPY . .
 
 # Create directories for logs and media
 RUN mkdir -p logs media static && \
-    chown -R jac:jac /app
+    chown -R jac:jac /app && \
+    chmod +x /app/entrypoint.sh
 
 # Switch to non-root user
 USER jac
@@ -68,28 +70,6 @@ EXPOSE 8000
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8000/api/health/ || exit 1
-
-# Create entrypoint script to handle migrations and initialization
-RUN echo '#!/bin/bash\n\
-set -e\n\
-\n\
-echo "🚀 Starting JAC Learning Platform..."\n\
-\n\
-# Wait for database to be ready\n\
-echo "📡 Waiting for database..."\n\
-while ! nc -z postgres 5432; do\n\
-  sleep 0.1\n\
-done\n\
-echo "✅ Database is ready!"\n\
-\n\
-# Run migrations and initialize platform\n\
-echo "📦 Running platform initialization..."\n\
-python manage.py initialize_platform --username=admin --email=admin@jacplatform.com --password=admin123 || echo "Initialization skipped (already done)"\n\
-\n\
-# Start the server\n\
-echo "🌐 Starting Django server..."\n\
-exec python manage.py runserver 0.0.0.0:8000\n\
-' > /app/entrypoint.sh && chmod +x /app/entrypoint.sh
 
 # Default command (can be overridden)
 CMD ["/app/entrypoint.sh"]
