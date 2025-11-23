@@ -363,10 +363,10 @@ const Achievements: React.FC = () => {
             {achievement.icon}
           </div>
           <div>
-            <h3 className={`text-lg font-semibold ${achievement.unlocked ? 'text-white' : 'text-white/60'}`}>
+            <h3 className={`text-lg font-semibold ${achievement.unlocked ? 'text-gray-900' : 'text-gray-700'}`}>
               {achievement.title}
             </h3>
-            <p className={`text-sm ${achievement.unlocked ? 'text-white/80' : 'text-white/50'}`}>
+            <p className={`text-sm ${achievement.unlocked ? 'text-gray-700' : 'text-gray-500'}`}>
               {achievement.description}
             </p>
           </div>
@@ -466,8 +466,8 @@ const Achievements: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         className="bg-white/10 backdrop-blur-lg rounded-lg p-4 text-center"
       >
-        <div className="text-2xl font-bold text-white mb-1">{stats.unlocked}</div>
-        <div className="text-sm text-white/70">Unlocked</div>
+        <div className="text-2xl font-bold text-gray-900 mb-1">{stats.unlocked}</div>
+        <div className="text-sm text-gray-700">Unlocked</div>
       </motion.div>
       
       <motion.div 
@@ -476,8 +476,8 @@ const Achievements: React.FC = () => {
         transition={{ delay: 0.1 }}
         className="bg-white/10 backdrop-blur-lg rounded-lg p-4 text-center"
       >
-        <div className="text-2xl font-bold text-yellow-400 mb-1">{stats.totalPoints}</div>
-        <div className="text-sm text-white/70">Total Points</div>
+        <div className="text-2xl font-bold text-gray-900 mb-1">{stats.totalPoints}</div>
+        <div className="text-sm text-gray-700">Total Points</div>
       </motion.div>
       
       <motion.div 
@@ -487,7 +487,7 @@ const Achievements: React.FC = () => {
         className="bg-white/10 backdrop-blur-lg rounded-lg p-4 text-center"
       >
         <div className="text-2xl font-bold text-green-400 mb-1">{completionPercentage}%</div>
-        <div className="text-sm text-white/70">Completed</div>
+        <div className="text-sm text-gray-700">Completed</div>
       </motion.div>
       
       <motion.div 
@@ -497,20 +497,20 @@ const Achievements: React.FC = () => {
         className="bg-white/10 backdrop-blur-lg rounded-lg p-4 text-center"
       >
         <div className="text-2xl font-bold text-purple-400 mb-1">{stats.byDifficulty.gold + stats.byDifficulty.platinum}</div>
-        <div className="text-sm text-white/70">Rare+</div>
+        <div className="text-sm text-gray-700">Rare+</div>
       </motion.div>
     </div>
   );
 
   const renderCategoryProgress = () => (
     <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 mb-8">
-      <h3 className="text-lg font-semibold text-white mb-4">Progress by Category</h3>
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">Progress by Category</h3>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         {Object.entries(stats.byCategory).map(([category, count]) => (
           <div key={category} className="text-center">
             <div className="text-xl mb-2">{categories.find(c => c.id === category)?.icon}</div>
-            <div className="text-lg font-bold text-white">{count}</div>
-            <div className="text-sm text-white/70 capitalize">{category}</div>
+            <div className="text-lg font-bold text-gray-900">{count}</div>
+            <div className="text-sm text-gray-700 capitalize">{category}</div>
           </div>
         ))}
       </div>
@@ -525,8 +525,8 @@ const Achievements: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         className="text-center mb-8"
       >
-        <h1 className="text-4xl font-bold text-white mb-4">Achievements & Badges</h1>
-        <p className="text-white/80 max-w-2xl mx-auto">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Achievements & Badges</h1>
+        <p className="text-gray-700 max-w-2xl mx-auto">
           Track your learning progress and unlock achievements as you advance through your JAC journey
         </p>
       </motion.div>
@@ -570,11 +570,11 @@ const Achievements: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               {/* Category Filter */}
               <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">Category</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
                 <select
                   value={activeCategory}
                   onChange={(e) => setActiveCategory(e.target.value)}
-                  className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white"
+                  className="w-full bg-white/90 border border-gray-300 rounded-lg px-3 py-2 text-gray-900"
                 >
                   {categories.map(category => (
                     <option key={category.id} value={category.id} className="bg-gray-800">
@@ -586,11 +586,11 @@ const Achievements: React.FC = () => {
 
               {/* Difficulty Filter */}
               <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">Difficulty</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Difficulty</label>
                 <select
                   value={activeDifficulty}
                   onChange={(e) => setActiveDifficulty(e.target.value)}
-                  className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white"
+                  className="w-full bg-white/90 border border-gray-300 rounded-lg px-3 py-2 text-gray-900"
                 >
                   {difficulties.map(difficulty => (
                     <option key={difficulty.id} value={difficulty.id} className="bg-gray-800">
@@ -631,8 +631,8 @@ const Achievements: React.FC = () => {
           {filteredAchievements.length === 0 && (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">🏆</div>
-              <h3 className="text-xl font-semibold text-white mb-2">No achievements found</h3>
-              <p className="text-white/70">Try adjusting your filters to see more achievements</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No achievements found</h3>
+              <p className="text-gray-700">Try adjusting your filters to see more achievements</p>
             </div>
           )}
         </>
@@ -659,7 +659,7 @@ const Achievements: React.FC = () => {
                   {selectedAchievement.icon}
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-white">{selectedAchievement.title}</h2>
+                  <h2 className="text-xl font-bold text-gray-900">{selectedAchievement.title}</h2>
                   <span className={`text-xs px-2 py-1 rounded-full bg-gradient-to-r ${getDifficultyColor(selectedAchievement.difficulty)} text-white font-medium`}>
                     {selectedAchievement.difficulty.toUpperCase()}
                   </span>
@@ -673,7 +673,7 @@ const Achievements: React.FC = () => {
               </button>
             </div>
 
-            <p className="text-white/80 mb-4">{selectedAchievement.description}</p>
+            <p className="text-gray-700 mb-4">{selectedAchievement.description}</p>
 
             <div className="space-y-3">
               <div className="flex items-center justify-between">
