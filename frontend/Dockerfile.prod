@@ -18,8 +18,13 @@ COPY tailwind.config.js ./
 RUN npm install -g npm@latest
 RUN npm install -g pnpm
 
-# Install dependencies
-RUN pnpm install --frozen-lockfile --prod=false
+# Install dependencies with timeout and retry configuration
+RUN pnpm config set fetch-timeout 300000 && \
+    pnpm config set fetch-retries 5 && \
+    pnpm config set fetch-retry-mintimeout 30000 && \
+    pnpm config set fetch-retry-maxtimeout 60000 && \
+    pnpm config set network-timeout 300000 && \
+    pnpm install --frozen-lockfile --prod=false
 
 # Copy source code
 COPY src/ ./src/
@@ -35,7 +40,8 @@ ENV REACT_APP_WS_URL=$REACT_APP_WS_URL
 ENV NODE_ENV=production
 
 # Build the application
-RUN pnpm build
+RUN pnpm config set network-timeout 300000 && \
+    pnpm build
 
 # Stage 2: Serve with Nginx
 FROM nginx:alpine
