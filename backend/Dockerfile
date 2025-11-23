@@ -58,14 +58,36 @@ COPY --from=dependencies /usr/local/bin/ /usr/local/bin/
 # Copy application code
 COPY . .
 
-# Create directories for logs and media first
+# Create directories for logs and media
 RUN mkdir -p logs media static
 
-# Explicitly ensure entrypoint.sh exists and is executable
-RUN ls -la /app/entrypoint.sh || (echo "entrypoint.sh not found!" && exit 1)
-RUN chmod +x /app/entrypoint.sh && ls -la /app/entrypoint.sh
+# Create inline Python entrypoint to avoid bash script permission issues
+RUN echo 'import subprocess' > /tmp/entrypoint.py && \
+    echo 'import time' >> /tmp/entrypoint.py && \
+    echo 'import socket' >> /tmp/entrypoint.py && \
+    echo 'import os' >> /tmp/entrypoint.py && \
+    echo '' >> /tmp/entrypoint.py && \
+    echo 'print("🚀 Starting JAC Learning Platform...")' >> /tmp/entrypoint.py && \
+    echo 'print("📡 Waiting for database...")' >> /tmp/entrypoint.py && \
+    echo 'while True:' >> /tmp/entrypoint.py && \
+    echo '    try:' >> /tmp/entrypoint.py && \
+    echo '        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:' >> /tmp/entrypoint.py && \
+    echo '            s.settimeout(1)' >> /tmp/entrypoint.py && \
+    echo '            result = s.connect_ex(("postgres", 5432))' >> /tmp/entrypoint.py && \
+    echo '            if result == 0:' >> /tmp/entrypoint.py && \
+    echo '                break' >> /tmp/entrypoint.py && \
+    echo '    except Exception:' >> /tmp/entrypoint.py && \
+    echo '        pass' >> /tmp/entrypoint.py && \
+    echo '    print("  Database not ready yet, retrying...")' >> /tmp/entrypoint.py && \
+    echo '    time.sleep(1)' >> /tmp/entrypoint.py && \
+    echo 'print("✅ Database is ready!")' >> /tmp/entrypoint.py && \
+    echo 'print("📦 Running platform initialization...")' >> /tmp/entrypoint.py && \
+    echo 'subprocess.run(["python", "manage.py", "migrate"], check=False)' >> /tmp/entrypoint.py && \
+    echo 'subprocess.run(["python", "manage.py", "initialize_platform", "--username=admin", "--email=admin@jacplatform.com", "--password=admin123"], check=False)' >> /tmp/entrypoint.py && \
+    echo 'print("🌐 Starting Django server...")' >> /tmp/entrypoint.py && \
+    echo 'os.execvp("python", ["python", "manage.py", "runserver", "0.0.0.0:8000"])' >> /tmp/entrypoint.py
 
-# Change ownership after setting permissions
+# Change ownership to non-root user
 RUN chown -R jac:jac /app
 
 # Switch to non-root user
@@ -79,4 +101,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8000/api/health/ || exit 1
 
 # Default command (can be overridden)
-CMD ["/app/entrypoint.sh"]
+CMD ["python", "/tmp/entrypoint.py"]
