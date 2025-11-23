@@ -65,7 +65,7 @@ urlpatterns = [
     # Fallback endpoints without /api/ prefix (for frontend compatibility)
     path('users/', include('apps.users.urls')),
     path('learning/', include('apps.learning.urls')),
-    path('agents/', include('apps.agents.urls')),
+    # Note: agents endpoints are only available via /api/agents/ to avoid namespace conflicts
     
     # Health check endpoints without /api/ prefix
     path('health/static/', lambda request: JsonResponse({
