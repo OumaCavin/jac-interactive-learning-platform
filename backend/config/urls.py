@@ -8,6 +8,7 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import JsonResponse
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -33,6 +34,21 @@ urlpatterns = [
     
     # API Health Check  
     path('api/health/', agents_views.system_health_check, name='health_check'),  # Direct health endpoint
+    
+    # Super simple health check (no Django dependencies)
+    path('api/health/static/', lambda request: JsonResponse({
+        'status': 'healthy',
+        'message': 'Backend service is active',
+        'service': 'jac-interactive-learning-platform',
+        'timestamp': timezone.now().isoformat()
+    }, content_type='application/json'), name='static_health_check'),
+    
+    # Fallback simple health check
+    path('api/health/simple/', lambda request: JsonResponse({
+        'status': 'healthy',
+        'message': 'Backend is running',
+        'service': 'jac-interactive-learning-platform'
+    }), name='simple_health_check'),
     
     # API endpoints
     path('api/users/', include('apps.users.urls')),

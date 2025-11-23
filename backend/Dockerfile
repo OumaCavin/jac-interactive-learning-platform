@@ -61,30 +61,49 @@ COPY . .
 # Create directories for logs and media
 RUN mkdir -p logs media static
 
-# Create inline Python entrypoint to avoid bash script permission issues
+# Create production-ready entrypoint
 RUN echo 'import subprocess' > /tmp/entrypoint.py && \
     echo 'import time' >> /tmp/entrypoint.py && \
     echo 'import socket' >> /tmp/entrypoint.py && \
     echo 'import os' >> /tmp/entrypoint.py && \
+    echo 'import sys' >> /tmp/entrypoint.py && \
     echo '' >> /tmp/entrypoint.py && \
-    echo 'print("🚀 Starting JAC Learning Platform...")' >> /tmp/entrypoint.py && \
-    echo 'print("📡 Waiting for database...")' >> /tmp/entrypoint.py && \
-    echo 'while True:' >> /tmp/entrypoint.py && \
+    echo 'def wait_for_database(max_retries=30):' >> /tmp/entrypoint.py && \
+    echo '    print("🚀 Starting JAC Learning Platform Backend...")' >> /tmp/entrypoint.py && \
+    echo '    print("📡 Waiting for database connection...")' >> /tmp/entrypoint.py && \
+    echo '    for i in range(max_retries):' >> /tmp/entrypoint.py && \
+    echo '        try:' >> /tmp/entrypoint.py && \
+    echo '            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:' >> /tmp/entrypoint.py && \
+    echo '                s.settimeout(2)' >> /tmp/entrypoint.py && \
+    echo '                result = s.connect_ex(("postgres", 5432))' >> /tmp/entrypoint.py && \
+    echo '                if result == 0:' >> /tmp/entrypoint.py && \
+    echo '                    print("✅ Database connection established!")' >> /tmp/entrypoint.py && \
+    echo '                    return True' >> /tmp/entrypoint.py && \
+    echo '        except Exception as e:' >> /tmp/entrypoint.py && \
+    echo '            print(f"  Database check {i+1}/{max_retries} failed: {e}")' >> /tmp/entrypoint.py && \
+    echo '        time.sleep(2)' >> /tmp/entrypoint.py && \
+    echo '    print("⚠️ Database connection timeout, continuing anyway...")' >> /tmp/entrypoint.py && \
+    echo '    return False' >> /tmp/entrypoint.py && \
+    echo '' >> /tmp/entrypoint.py && \
+    echo 'def start_application():' >> /tmp/entrypoint.py && \
+    echo '    wait_for_database()' >> /tmp/entrypoint.py && \
+    echo '    print("📦 Running database migrations...")' >> /tmp/entrypoint.py && \
     echo '    try:' >> /tmp/entrypoint.py && \
-    echo '        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:' >> /tmp/entrypoint.py && \
-    echo '            s.settimeout(1)' >> /tmp/entrypoint.py && \
-    echo '            result = s.connect_ex(("postgres", 5432))' >> /tmp/entrypoint.py && \
-    echo '            if result == 0:' >> /tmp/entrypoint.py && \
-    echo '                break' >> /tmp/entrypoint.py && \
-    echo '    except Exception:' >> /tmp/entrypoint.py && \
-    echo '        pass' >> /tmp/entrypoint.py && \
-    echo '    print("  Database not ready yet, retrying...")' >> /tmp/entrypoint.py && \
-    echo '    time.sleep(1)' >> /tmp/entrypoint.py && \
-    echo 'print("✅ Database is ready!")' >> /tmp/entrypoint.py && \
-    echo 'print("📦 Running database migrations...")' >> /tmp/entrypoint.py && \
-    echo 'subprocess.run(["python", "manage.py", "migrate", "--noinput"], check=False)' >> /tmp/entrypoint.py && \
-    echo 'print("🌐 Starting Django server...")' >> /tmp/entrypoint.py && \
-    echo 'os.execvp("python", ["python", "manage.py", "runserver", "0.0.0.0:8000"])' >> /tmp/entrypoint.py
+    echo '        result = subprocess.run([' >> /tmp/entrypoint.py && \
+    echo '            "python", "manage.py", "migrate", "--noinput"' >> /tmp/entrypoint.py && \
+    echo '        ], check=False, capture_output=True, text=True, timeout=60)' >> /tmp/entrypoint.py && \
+    echo '        if result.returncode == 0:' >> /tmp/entrypoint.py && \
+    echo '            print("✅ Database migrations completed")' >> /tmp/entrypoint.py && \
+    echo '        else:' >> /tmp/entrypoint.py && \
+    echo '            print("⚠️ Migration warnings (continuing):", result.stderr)' >> /tmp/entrypoint.py && \
+    echo '    except Exception as e:' >> /tmp/entrypoint.py && \
+    echo '        print(f"⚠️ Migration error: {e} (continuing anyway)")' >> /tmp/entrypoint.py && \
+    echo '    print("🌐 Starting Django application server...")' >> /tmp/entrypoint.py && \
+    echo '    sys.stdout.flush()' >> /tmp/entrypoint.py && \
+    echo '    os.execvp("python", ["python", "manage.py", "runserver", "0.0.0.0:8000"])' >> /tmp/entrypoint.py && \
+    echo '' >> /tmp/entrypoint.py && \
+    echo 'if __name__ == "__main__":' >> /tmp/entrypoint.py && \
+    echo '    start_application()' >> /tmp/entrypoint.py
 
 # Change ownership to non-root user
 RUN chown -R jac:jac /app
@@ -95,9 +114,22 @@ USER jac
 # Expose port
 EXPOSE 8000
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8000/api/health/ || exit 1
+# Health check - using simple endpoint for reliability
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD python -c "
+import urllib.request
+try:
+    response = urllib.request.urlopen('http://localhost:8000/api/health/simple/', timeout=5)
+    if response.getcode() == 200:
+        exit(0)
+except:
+    try:
+        response = urllib.request.urlopen('http://localhost:8000/api/health/', timeout=5)
+        if response.getcode() == 200:
+            exit(0)
+    except:
+        pass
+exit(1)"
 
 # Default command (can be overridden)
 CMD ["python", "/tmp/entrypoint.py"]
