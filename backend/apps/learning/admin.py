@@ -8,8 +8,9 @@ from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from .models import (
-    LearningPath, Module, Lesson, Assessment, Question,
-    UserProgress, LearningPathEnrollment, AssessmentAttempt
+    LearningPath, Module, UserLearningPath, UserModuleProgress,
+    PathRating, LearningRecommendation, CodeSubmission, TestCase,
+    CodeExecutionLog, AICodeReview
 )
 
 
@@ -123,149 +124,20 @@ class ModuleAdmin(admin.ModelAdmin):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
-@admin.register(Lesson)
-class LessonAdmin(admin.ModelAdmin):
-    """Admin interface for Lesson model."""
+
+
+
+@admin.register(UserModuleProgress)
+class UserModuleProgressAdmin(admin.ModelAdmin):
+    """Admin interface for UserModuleProgress model."""
     
     list_display = (
-        'title', 'module', 'lesson_type', 'order',
-        'estimated_duration', 'is_published'
+        'user', 'module', 'status', 'progress_percentage',
+        'time_spent', 'overall_score', 'last_activity_at'
     )
     
     list_filter = (
-        'module', 'lesson_type', 'is_published', 'created_at'
-    )
-    
-    search_fields = ('title', 'content', 'module__title')
-    
-    readonly_fields = ('created_at', 'updated_at', 'id')
-    
-    fieldsets = (
-        ('Basic Information', {
-            'fields': ('id', 'title', 'module', 'order')
-        }),
-        ('Content', {
-            'fields': ('lesson_type', 'content', 'code_example')
-        }),
-        ('Interactive Elements', {
-            'fields': ('quiz_questions', 'interactive_demo')
-        }),
-        ('Media', {
-            'fields': ('video_url', 'audio_url', 'resources')
-        }),
-        ('Publishing', {
-            'fields': ('is_published', 'estimated_duration')
-        }),
-        ('Metadata', {
-            'fields': ('created_at', 'updated_at')
-        }),
-    )
-    
-    def get_queryset(self, request):
-        """Optimize queryset with related fields."""
-        qs = super().get_queryset(request)
-        return qs.select_related('module', 'module__learning_path')
-
-
-@admin.register(Assessment)
-class AssessmentAdmin(admin.ModelAdmin):
-    """Admin interface for Assessment model."""
-    
-    list_display = (
-        'title', 'assessment_type', 'difficulty_level',
-        'time_limit', 'max_attempts', 'is_published'
-    )
-    
-    list_filter = (
-        'assessment_type', 'difficulty_level', 'is_published', 'created_at'
-    )
-    
-    search_fields = ('title', 'description')
-    
-    readonly_fields = ('created_at', 'updated_at', 'id', 'average_score')
-    
-    fieldsets = (
-        ('Basic Information', {
-            'fields': ('id', 'title', 'description')
-        }),
-        ('Assessment Settings', {
-            'fields': (
-                'assessment_type', 'difficulty_level',
-                'time_limit', 'max_attempts', 'passing_score'
-            )
-        }),
-        ('Questions', {
-            'fields': ('questions',)
-        }),
-        ('Publishing', {
-            'fields': ('is_published',)
-        }),
-        ('Statistics', {
-            'fields': ('average_score', 'created_at', 'updated_at'),
-            'classes': ('collapse',)
-        }),
-    )
-    
-    filter_horizontal = ('questions',)
-
-
-@admin.register(Question)
-class QuestionAdmin(admin.ModelAdmin):
-    """Admin interface for Question model."""
-    
-    list_display = (
-        'question_text', 'question_type', 'difficulty_level',
-        'points', 'assessment'
-    )
-    
-    list_filter = (
-        'question_type', 'difficulty_level', 'created_at'
-    )
-    
-    search_fields = ('question_text', 'assessment__title')
-    
-    readonly_fields = ('created_at', 'updated_at', 'id')
-    
-    fieldsets = (
-        ('Basic Information', {
-            'fields': ('id', 'assessment', 'question_text')
-        }),
-        ('Question Details', {
-            'fields': (
-                'question_type', 'difficulty_level', 'points',
-                'explanation', 'hints'
-            )
-        }),
-        ('Question Content', {
-            'fields': (
-                'question_options', 'correct_answer',
-                'code_template', 'test_cases'
-            )
-        }),
-        ('Metadata', {
-            'fields': ('created_at', 'updated_at')
-        }),
-    )
-    
-    filter_horizontal = ('question_options',)
-    
-    def get_queryset(self, request):
-        """Optimize queryset with related fields."""
-        qs = super().get_queryset(request)
-        return qs.select_related('assessment')
-
-
-@admin.register(UserProgress)
-class UserProgressAdmin(admin.ModelAdmin):
-    """Admin interface for UserProgress model."""
-    
-    list_display = (
-        'user', 'module', 'status', 'completion_percentage',
-        'time_spent', 'last_accessed', 'completed_at'
-    )
-    
-    list_filter = (
-        'status', 'completion_percentage', 'last_accessed', 'completed_at'
+        'status', 'progress_percentage', 'last_activity_at'
     )
     
     search_fields = (
@@ -273,7 +145,7 @@ class UserProgressAdmin(admin.ModelAdmin):
     )
     
     readonly_fields = (
-        'id', 'created_at', 'updated_at', 'last_accessed', 'completed_at'
+        'id', 'created_at', 'updated_at', 'last_activity_at'
     )
     
     fieldsets = (
@@ -282,13 +154,16 @@ class UserProgressAdmin(admin.ModelAdmin):
         }),
         ('Progress', {
             'fields': (
-                'status', 'completion_percentage', 'score',
-                'time_spent', 'attempts_count'
+                'status', 'progress_percentage', 'time_spent',
+                'quiz_score', 'coding_score', 'overall_score'
             )
+        }),
+        ('Feedback', {
+            'fields': ('user_notes', 'feedback')
         }),
         ('Timestamps', {
             'fields': (
-                'started_at', 'last_accessed', 'completed_at',
+                'started_at', 'completed_at', 'last_activity_at',
                 'created_at', 'updated_at'
             )
         }),
@@ -300,17 +175,17 @@ class UserProgressAdmin(admin.ModelAdmin):
         return qs.select_related('user', 'module')
 
 
-@admin.register(LearningPathEnrollment)
-class LearningPathEnrollmentAdmin(admin.ModelAdmin):
-    """Admin interface for LearningPathEnrollment model."""
+@admin.register(UserLearningPath)
+class UserLearningPathAdmin(admin.ModelAdmin):
+    """Admin interface for UserLearningPath model."""
     
     list_display = (
         'user', 'learning_path', 'status', 'progress_percentage',
-        'enrolled_at', 'completed_at'
+        'current_module_order', 'last_activity_at'
     )
     
     list_filter = (
-        'status', 'progress_percentage', 'enrolled_at', 'completed_at'
+        'status', 'progress_percentage', 'last_activity_at'
     )
     
     search_fields = (
@@ -318,60 +193,30 @@ class LearningPathEnrollmentAdmin(admin.ModelAdmin):
     )
     
     readonly_fields = (
-        'id', 'enrolled_at', 'completed_at', 'created_at', 'updated_at'
+        'id', 'last_activity_at', 'created_at', 'updated_at'
+    )
+    
+    fieldsets = (
+        ('User & Learning Path', {
+            'fields': ('user', 'learning_path')
+        }),
+        ('Progress', {
+            'fields': (
+                'status', 'progress_percentage', 'current_module_order'
+            )
+        }),
+        ('Timestamps', {
+            'fields': (
+                'started_at', 'completed_at', 'last_activity_at',
+                'created_at', 'updated_at'
+            )
+        }),
     )
     
     def get_queryset(self, request):
         """Optimize queryset with related fields."""
         qs = super().get_queryset(request)
         return qs.select_related('user', 'learning_path')
-
-
-@admin.register(AssessmentAttempt)
-class AssessmentAttemptAdmin(admin.ModelAdmin):
-    """Admin interface for AssessmentAttempt model."""
-    
-    list_display = (
-        'user', 'assessment', 'status', 'score', 'time_taken',
-        'attempted_at'
-    )
-    
-    list_filter = (
-        'status', 'score', 'attempted_at'
-    )
-    
-    search_fields = (
-        'user__username', 'user__email', 'assessment__title'
-    )
-    
-    readonly_fields = (
-        'id', 'attempted_at', 'created_at', 'updated_at'
-    )
-    
-    fieldsets = (
-        ('User & Assessment', {
-            'fields': ('user', 'assessment', 'attempt_number')
-        }),
-        ('Attempt Details', {
-            'fields': (
-                'status', 'score', 'time_taken',
-                'started_at', 'completed_at'
-            )
-        }),
-        ('Response Data', {
-            'fields': ('responses', 'feedback'),
-            'classes': ('collapse',)
-        }),
-        ('Metadata', {
-            'fields': ('attempted_at', 'created_at', 'updated_at'),
-            'classes': ('collapse',)
-        }),
-    )
-    
-    def get_queryset(self, request):
-        """Optimize queryset with related fields."""
-        qs = super().get_queryset(request)
-        return qs.select_related('user', 'assessment')
 
 
 # Custom admin site configuration
