@@ -16,6 +16,7 @@ import { NotificationProvider } from './components/ui/NotificationProvider';
 // Layout Components
 import { MainLayout } from './components/layout/MainLayout';
 import { AuthLayout } from './components/layout/AuthLayout';
+import AdminRoute from './components/auth/AdminRoute';
 
 // Pages (using React.lazy for code splitting)
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
@@ -245,13 +246,13 @@ const App: React.FC = () => {
                     <Route 
                       path="/admin" 
                       element={
-                        <ProtectedRoute>
+                        <AdminRoute>
                           <MainLayout>
                             <PageTransition pageKey="admin">
                               <AdminDashboard />
                             </PageTransition>
                           </MainLayout>
-                        </ProtectedRoute>
+                        </AdminRoute>
                       } 
                     />
 

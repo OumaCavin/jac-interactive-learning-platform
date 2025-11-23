@@ -214,6 +214,7 @@ class AuthService {
           email: credentials.username,
           first_name: 'Demo',
           last_name: 'User',
+          is_staff: false, // Regular demo user - no admin privileges
           bio: 'Demo user for JAC Learning Platform',
           profile_image: undefined,
           learning_style: 'visual',
@@ -253,6 +254,61 @@ class AuthService {
         this.saveUserToStorage(mockUser);
 
         return { user: mockUser, tokens: mockTokens };
+      }
+
+      // Admin demo user
+      if (credentials.username === 'admin@jac.com' && credentials.password === 'admin123') {
+        const adminUser: User = {
+          id: '2',
+          username: 'admin_user',
+          email: credentials.username,
+          first_name: 'Admin',
+          last_name: 'User',
+          is_staff: true, // Admin user with admin privileges
+          bio: 'Administrator account for JAC Learning Platform',
+          profile_image: undefined,
+          learning_style: 'visual',
+          preferred_difficulty: 'advanced',
+          learning_pace: 'fast',
+          total_modules_completed: 45,
+          total_time_spent: '1240 minutes',
+          current_streak: 30,
+          longest_streak: 45,
+          total_points: 5240,
+          level: 8,
+          experience_level: 95,
+          next_level_points: 5500,
+          achievements: [
+            { id: '1', name: 'Platform Administrator', description: 'Full admin access' },
+            { id: '2', name: 'Power User', description: 'Completed 40+ modules' },
+          ],
+          badges: [
+            { id: '1', name: 'Admin Badge', icon: 'shield-check' },
+          ],
+          current_goal: 'Platform Optimization',
+          goal_deadline: '2025-12-31',
+          agent_interaction_level: 'high',
+          preferred_feedback_style: 'brief',
+          dark_mode: false,
+          notifications_enabled: true,
+          email_notifications: true,
+          push_notifications: true,
+          created_at: '2024-01-01T00:00:00Z',
+          updated_at: '2025-11-23T18:39:00Z',
+        };
+
+        const mockTokens: AuthTokens = {
+          access: 'mock-admin-jwt-token-' + Date.now(),
+          refresh: 'mock-admin-refresh-token-' + Date.now(),
+        };
+
+        // Store tokens and user
+        localStorage.setItem('token', mockTokens.access);
+        localStorage.setItem('access_token', mockTokens.access);
+        localStorage.setItem('refresh_token', mockTokens.refresh);
+        this.saveUserToStorage(adminUser);
+
+        return { user: adminUser, tokens: mockTokens };
       }
 
       // Real API login

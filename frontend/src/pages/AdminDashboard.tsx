@@ -48,13 +48,9 @@ const AdminDashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is superuser
-    if (!user || !user.is_staff) {
-      return;
-    }
-    
+    // Load admin data (AdminRoute already checked admin privileges)
     loadAdminData();
-  }, [user]);
+  }, []);
 
   const loadAdminData = async () => {
     setIsLoading(true);
@@ -98,20 +94,7 @@ const AdminDashboard: React.FC = () => {
     }, 1000);
   };
 
-  // Check if user has admin privileges
-  if (!user || !user.is_staff) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-red-50 to-red-100 flex items-center justify-center">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md text-center">
-          <XCircleIcon className="h-16 w-16 text-red-500 mx-auto mb-4" />
-          <h2 className="text-xl font-bold text-gray-900 mb-2">Access Denied</h2>
-          <p className="text-gray-600">
-            You need administrator privileges to access this page.
-          </p>
-        </div>
-      </div>
-    );
-  }
+  // Admin privileges are already checked by AdminRoute component
 
   const tabs = [
     { id: 'overview', name: 'Overview', icon: ChartBarIcon },
