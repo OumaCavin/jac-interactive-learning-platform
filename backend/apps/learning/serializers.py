@@ -7,7 +7,7 @@ Serializers for code submissions, learning paths, and progress tracking
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import (
-    LearningPath, Module, UserLearningPath, UserModuleProgress,
+    LearningPath, Module, Lesson, UserLearningPath, UserModuleProgress,
     PathRating, LearningRecommendation, CodeSubmission, TestCase,
     CodeExecutionLog, AICodeReview
 )
