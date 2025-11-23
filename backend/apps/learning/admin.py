@@ -75,13 +75,13 @@ class ModuleAdmin(admin.ModelAdmin):
     """Admin interface for Module model."""
     
     list_display = (
-        'title', 'learning_path', 'order', 'difficulty_level',
-        'estimated_duration', 'is_published', 'created_by'
+        'title', 'learning_path', 'order', 'difficulty_rating',
+        'duration_minutes', 'is_published'
     )
     
     list_filter = (
-        'learning_path', 'difficulty_level', 'is_published',
-        'created_at', 'jac_concepts'
+        'learning_path', 'difficulty_rating', 'is_published',
+        'created_at', 'content_type'
     )
     
     search_fields = ('title', 'description', 'learning_path__name')
@@ -92,35 +92,35 @@ class ModuleAdmin(admin.ModelAdmin):
         ('Basic Information', {
             'fields': ('id', 'title', 'description', 'learning_path', 'order')
         }),
-        ('Learning Content', {
+        ('Content', {
+            'fields': ('content', 'content_type')
+        }),
+        ('Structure', {
             'fields': (
-                'difficulty_level', 'estimated_duration',
-                'prerequisites', 'jac_concepts', 'tags'
+                'difficulty_rating', 'duration_minutes', 'jac_concepts',
+                'code_examples'
             )
         }),
-        ('Media', {
-            'fields': ('cover_image', 'video_url', 'resources')
+        ('Interactive Elements', {
+            'fields': ('has_quiz', 'has_coding_exercise', 'has_visual_demo')
         }),
         ('Publishing', {
             'fields': ('is_published',)
         }),
         ('Metadata', {
-            'fields': ('created_by', 'created_at', 'updated_at')
+            'fields': ('created_at', 'updated_at')
         }),
     )
     
     def get_queryset(self, request):
         """Optimize queryset with related fields."""
         qs = super().get_queryset(request)
-        return qs.select_related('learning_path', 'created_by')
+        return qs.select_related('learning_path')
     
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         """Filter foreign key relationships."""
         if db_field.name == "learning_path" and not request.user.is_superuser:
             kwargs["queryset"] = kwargs["queryset"].filter(created_by=request.user)
-        elif db_field.name == "created_by" and not request.user.is_superuser:
-            kwargs["queryset"] = kwargs["queryset"].filter(id=request.user.id)
-            kwargs["initial"] = request.user.id
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
@@ -258,7 +258,7 @@ class QuestionAdmin(admin.ModelAdmin):
         }),
     )
     
-    filter_horizontal = ('hints',)
+
     
     def get_queryset(self, request):
         """Optimize queryset with related fields."""
