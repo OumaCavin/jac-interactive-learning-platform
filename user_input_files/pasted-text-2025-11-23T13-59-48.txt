@@ -1,0 +1,159 @@
+Successfully built 029b801e8fa7
+Successfully tagged jac-interactive-learning-platform_jac-sandbox:latest
+Creating jac-sandbox                                  ... done
+Creating jac-interactive-learning-platform_redis_1    ... done
+Creating jac-interactive-learning-platform_postgres_1 ... done
+Creating jac-celery-beat                              ... done
+Creating jac-interactive-learning-platform_backend_1  ... done
+Creating jac-celery-worker                            ... done
+Creating jac-interactive-learning-platform_frontend_1 ... done
+Creating jac-nginx                                    ... done
+⏳ Waiting for database to be ready...
+/var/run/postgresql:5432 - no response
+Database not ready yet, waiting...
+/var/run/postgresql:5432 - accepting connections
+✅ Database is ready!
+⏳ Waiting for backend to be ready...
+Backend not ready yet, waiting...
+✅ Backend is ready!
+🔍 Checking admin account status...
+✅ Admin account already exists
+🔍 Checking service health...
+✅ Backend API is healthy
+✅ Frontend is accessible
+
+🎉 JAC Learning Platform Setup Complete!
+================================================
+📊 Service Status:
+  • Backend API:     http://localhost:8000
+  • Frontend:        http://localhost:3000
+  • Django Admin:    http://localhost:8000/admin/
+  • Admin Dashboard: http://localhost:3000/admin
+
+🔑 Superadmin Credentials:
+  • Username: admin
+  • Email:    admin@jacplatform.com
+  • Password: admin123
+
+📝 Important Notes:
+  • Change the default admin password immediately
+  • Update .env file with production settings
+  • Configure SSL/HTTPS for production
+  • Set up database backups for production
+
+📖 Management Commands:
+  • View logs:     docker-compose logs -f
+  • Stop services: docker-compose down
+  • Restart:       docker-compose restart
+  • Update:        docker-compose up -d --build
+
+🌟 Happy Learning with JAC!
+📋 Container Status:
+                    Name                                  Command                       State                                           Ports                                 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+jac-celery-beat                                celery -A config beat -l i ...   Up (healthy)            8000/tcp                                                              
+jac-celery-worker                              celery -A config worker -l ...   Up (healthy)            8000/tcp                                                              
+jac-interactive-learning-platform_backend_1    python /tmp/entrypoint.py        Up (health: starting)   0.0.0.0:8000->8000/tcp,:::8000->8000/tcp                              
+jac-interactive-learning-platform_frontend_1   /docker-entrypoint.sh ngin ...   Up (healthy)            0.0.0.0:3000->80/tcp,:::3000->80/tcp                                  
+jac-interactive-learning-platform_postgres_1   docker-entrypoint.sh postgres    Up (healthy)            0.0.0.0:5432->5432/tcp,:::5432->5432/tcp                              
+jac-interactive-learning-platform_redis_1      docker-entrypoint.sh redis ...   Up (healthy)            0.0.0.0:6379->6379/tcp,:::6379->6379/tcp                              
+jac-nginx                                      /docker-entrypoint.sh ngin ...   Up (healthy)            0.0.0.0:443->443/tcp,:::443->443/tcp, 0.0.0.0:80->80/tcp,:::80->80/tcp
+jac-sandbox                                    python jac_sandbox_server.py     Up (healthy)            8000/tcp, 0.0.0.0:8080->8080/tcp,:::8080->8080/tcp                    
+
+💡 Tip: Use 'docker-compose logs -f [service]' to follow specific service logs
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ curl http://localhost:8000/api/health/
+{"status": "healthy", "timestamp": "2025-11-23T13:58:01.495618+00:00", "service": "jac-interactive-learning-platform", "version": "1.0.0", "environment": "production", "message": "Backend service is running", "database": "healthy", "redis": "unavailable: Error -2 connecting to redis:6379:6379. Name or se..."}(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker-compose exec backend ps aux
+OCI runtime exec failed: exec failed: unable to start container process: exec: "ps": executable file not found in $PATH: unknown
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker-compose exec backend curl -v http://localhost:8000/api/health/
+* Host localhost:8000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:8000...
+* connect to ::1 port 8000 from ::1 port 59644 failed: Connection refused
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000
+* using HTTP/1.x
+> GET /api/health/ HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/8.14.1
+> Accept: */*
+> 
+* Request completely sent off
+< HTTP/1.1 200 OK
+< Date: Sun, 23 Nov 2025 13:58:25 GMT
+< Server: WSGIServer/0.2 CPython/3.11.14
+< Content-Type: application/json
+< X-Frame-Options: DENY
+< Content-Length: 310
+< X-Content-Type-Options: nosniff
+< Referrer-Policy: same-origin
+< Cross-Origin-Opener-Policy: same-origin
+< Vary: origin
+< 
+* Connection #0 to host localhost left intact
+{"status": "healthy", "timestamp": "2025-11-23T13:58:25.046425+00:00", "service": "jac-interactive-learning-platform", "version": "1.0.0", "environment": "production", "message": "Backend service is running", "database": "healthy", "redis": "unavailable: Error -2 connecting to redis:6379:6379. Name or se..."}(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker-compose exec backend python startup_debug.py
+[DEBUG] Starting backend debug at 2025-11-23 13:59:00.117418
+[DEBUG] Setting up Django...
+[DEBUG] Django setup completed successfully
+[DEBUG] Testing database connection...
+[DEBUG] Database connection successful
+[DEBUG] Testing basic imports...
+[DEBUG] All imports successful
+[DEBUG] Testing health endpoint...
+[DEBUG] Health endpoint response: b'{"status": "healthy", "timestamp": "2025-11-23T13:59:01.597195+00:00", "service": "jac-interactive-learning-platform", "version": "1.0.0", "environment": "production", "message": "Backend service is running", "database": "healthy", "redis": "unavailable: Error -2 connecting to redis:6379:6379. Name or se..."}'
+[DEBUG] All tests passed!
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker-compose logs --tail=50 backend
+Attaching to jac-interactive-learning-platform_backend_1
+backend_1        |                  ^^^^^^^^
+backend_1        | NameError: name 'timezone' is not defined
+backend_1        | Internal Server Error: /api/health/static/
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+backend_1        |     response = get_response(request)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+backend_1        |     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/app/config/urls.py", line 43, in <lambda>
+backend_1        |     'timestamp': timezone.now().isoformat()
+backend_1        |                  ^^^^^^^^
+backend_1        | NameError: name 'timezone' is not defined
+backend_1        | ERROR:django.server:"GET /api/health/static/ HTTP/1.1" 500 145
+backend_1        | "GET /api/health/static/ HTTP/1.1" 500 145
+backend_1        | INFO:django.server:"GET /api/health/simple/ HTTP/1.1" 200 102
+backend_1        | "GET /api/health/simple/ HTTP/1.1" 200 102
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 310
+backend_1        | "GET /api/health/ HTTP/1.1" 200 310
+backend_1        | Internal Server Error: /api/health/static/
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+backend_1        |     response = get_response(request)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+backend_1        |     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/app/config/urls.py", line 43, in <lambda>
+backend_1        |     'timestamp': timezone.now().isoformat()
+backend_1        | ERROR:django.request:Internal Server Error: /api/health/static/
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+backend_1        |     response = get_response(request)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+backend_1        |     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+backend_1        |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/app/config/urls.py", line 43, in <lambda>
+backend_1        |     'timestamp': timezone.now().isoformat()
+backend_1        |                  ^^^^^^^^
+backend_1        | NameError: name 'timezone' is not defined
+backend_1        |                  ^^^^^^^^
+backend_1        | NameError: name 'timezone' is not defined
+backend_1        | ERROR:django.server:"GET /api/health/static/ HTTP/1.1" 500 145
+backend_1        | "GET /api/health/static/ HTTP/1.1" 500 145
+backend_1        | INFO:django.server:- Broken pipe from ('127.0.0.1', 49222)
+backend_1        | - Broken pipe from ('127.0.0.1', 49222)
+backend_1        | INFO:django.server:"GET /api/health/simple/ HTTP/1.1" 200 102
+backend_1        | "GET /api/health/simple/ HTTP/1.1" 200 102
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 
