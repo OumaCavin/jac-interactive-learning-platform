@@ -211,7 +211,7 @@ const CodeEditor: React.FC = () => {
             <span>💻</span>
             <span>Code Editor</span>
           </h1>
-          <p className="text-white/70 mt-2">
+          <p className="text-white/90 mt-2">
             Write and execute {selectedLanguage.toUpperCase()} code with real-time feedback
           </p>
         </div>
@@ -299,7 +299,7 @@ const CodeEditor: React.FC = () => {
                 </Button>
               </div>
               
-              <div className="text-xs text-white/60">
+              <div className="text-xs text-white/85">
                 Press Ctrl+Enter to run
               </div>
             </div>
@@ -412,11 +412,11 @@ const CodeEditor: React.FC = () => {
                     )}
                   </div>
                   
-                  <div className="flex items-center space-x-1 text-white/70">
+                  <div className="flex items-center space-x-1 text-white/90">
                     <span className="text-sm">⏱️ {formatTime(executionResult.executionTime)}</span>
                   </div>
                   
-                  <div className="text-sm text-white/70">
+                  <div className="text-sm text-white/90">
                     💾 {executionResult.memoryUsage}MB
                   </div>
                 </div>

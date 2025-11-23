@@ -265,8 +265,8 @@ export const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   const inputClasses = glass
-    ? 'glass rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent'
-    : 'bg-white/10 backdrop-blur-md rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent';
+    ? 'glass rounded-xl px-4 py-3 text-white placeholder-white/80 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent'
+    : 'bg-white/10 backdrop-blur-md rounded-xl px-4 py-3 text-white placeholder-white/80 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent';
 
   const baseClasses = 'w-full transition-all duration-200';
   const errorClasses = error ? 'border-error-500' : 'border-transparent';
@@ -281,7 +281,7 @@ export const Input: React.FC<InputProps> = ({
       <div className="relative">
         {leftIcon && (
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <span className="text-white/50">{leftIcon}</span>
+            <span className="text-white/80">{leftIcon}</span>
           </div>
         )}
         <input
@@ -290,7 +290,7 @@ export const Input: React.FC<InputProps> = ({
         />
         {rightIcon && (
           <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-            <span className="text-white/50">{rightIcon}</span>
+            <span className="text-white/80">{rightIcon}</span>
           </div>
         )}
       </div>
@@ -338,7 +338,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     <div className={`w-full ${className}`}>
       {showLabel && (
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm text-white/80">Progress</span>
+          <span className="text-sm text-white/90">Progress</span>
           <span className="text-sm text-white">{percentage.toFixed(1)}%</span>
         </div>
       )}

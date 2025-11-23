@@ -292,7 +292,7 @@ const Progress: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-white/70 text-sm">Overall Progress</p>
+              <p className="text-white/90 text-sm">Overall Progress</p>
               <p className="text-2xl font-bold text-white">{getOverallProgress()}%</p>
             </div>
             <div className="text-3xl">🎯</div>
@@ -315,12 +315,12 @@ const Progress: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-white/70 text-sm">Current Streak</p>
+              <p className="text-white/90 text-sm">Current Streak</p>
               <p className="text-2xl font-bold text-orange-400">{stats.currentStreak} days</p>
             </div>
             <div className="text-3xl">🔥</div>
           </div>
-          <p className="text-white/60 text-xs mt-2">Longest: {stats.longestStreak} days</p>
+          <p className="text-white/85 text-xs mt-2">Longest: {stats.longestStreak} days</p>
         </motion.div>
 
         <motion.div 
@@ -331,12 +331,12 @@ const Progress: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-white/70 text-sm">Modules Completed</p>
+              <p className="text-white/90 text-sm">Modules Completed</p>
               <p className="text-2xl font-bold text-green-400">{stats.totalModulesCompleted}</p>
             </div>
             <div className="text-3xl">✅</div>
           </div>
-          <p className="text-white/60 text-xs mt-2">Average score: {stats.averageScore}%</p>
+          <p className="text-white/85 text-xs mt-2">Average score: {stats.averageScore}%</p>
         </motion.div>
 
         <motion.div 
@@ -347,19 +347,19 @@ const Progress: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-white/70 text-sm">Level {stats.level}</p>
+              <p className="text-white/90 text-sm">Level {stats.level}</p>
               <p className="text-2xl font-bold text-purple-400">{stats.totalPoints} pts</p>
             </div>
             <div className="text-3xl">⭐</div>
           </div>
-          <p className="text-white/60 text-xs mt-2">{stats.experienceToNext} to next level</p>
+          <p className="text-white/85 text-xs mt-2">{stats.experienceToNext} to next level</p>
         </motion.div>
       </div>
 
       {/* Weekly Activity Chart */}
       <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
         <h3 className="text-xl font-semibold text-white mb-6">Weekly Activity</h3>
-        <div className="h-[300px] flex items-center justify-center text-white/70">
+        <div className="h-[300px] flex items-center justify-center text-white/90">
           <div className="text-center">
             <div className="text-4xl mb-4">📊</div>
             <p>Weekly activity chart will be displayed here</p>
@@ -374,7 +374,7 @@ const Progress: React.FC = () => {
         <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
           <h4 className="text-lg font-semibold text-white mb-4">Weekly Goal Progress</h4>
           <div className="flex items-center justify-between mb-4">
-            <span className="text-white/70">Modules this week</span>
+            <span className="text-white/90">Modules this week</span>
             <span className="text-white font-semibold">{stats.weeklyProgress} / {stats.weeklyGoal}</span>
           </div>
           <div className="w-full bg-white/20 rounded-full h-3">
@@ -388,7 +388,7 @@ const Progress: React.FC = () => {
         {/* Learning Distribution */}
         <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
           <h4 className="text-lg font-semibold text-white mb-4">Learning Distribution</h4>
-          <div className="h-[200px] flex items-center justify-center text-white/70">
+          <div className="h-[200px] flex items-center justify-center text-white/90">
             <div className="text-center">
               <div className="text-4xl mb-4">🥧</div>
               <p>Learning distribution chart will be displayed here</p>
@@ -421,11 +421,11 @@ const Progress: React.FC = () => {
                   {statusLabels[path.status]}
                 </span>
               </div>
-              <p className="text-white/70 mb-3">{path.description}</p>
+              <p className="text-white/90 mb-3">{path.description}</p>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                 <div>
-                  <span className="text-white/60">Progress:</span>
+                  <span className="text-white/85">Progress:</span>
                   <div className="flex items-center space-x-2 mt-1">
                     <div className="w-16 bg-white/20 rounded-full h-2">
                       <div 
@@ -438,17 +438,17 @@ const Progress: React.FC = () => {
                 </div>
                 
                 <div>
-                  <span className="text-white/60">Modules:</span>
+                  <span className="text-white/85">Modules:</span>
                   <p className="text-white font-medium">{path.completedModules} / {path.totalModules}</p>
                 </div>
                 
                 <div>
-                  <span className="text-white/60">Time Spent:</span>
+                  <span className="text-white/85">Time Spent:</span>
                   <p className="text-white font-medium">{path.timeSpent}</p>
                 </div>
                 
                 <div>
-                  <span className="text-white/60">Average Score:</span>
+                  <span className="text-white/85">Average Score:</span>
                   <p className="text-white font-medium">{path.averageScore}%</p>
                 </div>
               </div>
@@ -456,11 +456,11 @@ const Progress: React.FC = () => {
           </div>
 
           <div className="flex items-center justify-between pt-4 border-t border-white/10">
-            <div className="text-sm text-white/60">
+            <div className="text-sm text-white/85">
               <p>Started: {new Date(path.startedAt).toLocaleDateString()}</p>
               <p>Last activity: {new Date(path.lastActivity).toLocaleDateString()}</p>
             </div>
-            <div className="text-sm text-white/60">
+            <div className="text-sm text-white/85">
               <p>Est. completion: {path.estimatedCompletion}</p>
             </div>
           </div>
@@ -490,13 +490,13 @@ const Progress: React.FC = () => {
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-1">
                   <h4 className="text-white font-medium">{module.title}</h4>
-                  <span className="text-xs text-white/60">{module.learningPath}</span>
+                  <span className="text-xs text-white/85">{module.learningPath}</span>
                   <span className={`px-2 py-1 rounded text-xs font-medium ${statusColors[module.status]} bg-white/10`}>
                     {statusLabels[module.status]}
                   </span>
                 </div>
                 
-                <div className="flex items-center space-x-4 text-sm text-white/70">
+                <div className="flex items-center space-x-4 text-sm text-white/90">
                   <span>Order: {module.order}</span>
                   <span>Time: {module.timeSpent}</span>
                   {module.overallScore && <span>Score: {module.overallScore}%</span>}
@@ -514,7 +514,7 @@ const Progress: React.FC = () => {
                       style={{ width: `${module.progressPercentage}%` }}
                     ></div>
                   </div>
-                  <span className="text-xs text-white/60 mt-1 block">{module.progressPercentage}%</span>
+                  <span className="text-xs text-white/85 mt-1 block">{module.progressPercentage}%</span>
                 </div>
               )}
               
@@ -560,7 +560,7 @@ const Progress: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 text-center">
           <h4 className="text-lg font-semibold text-white mb-4">Average Score Trend</h4>
-          <div className="h-[200px] flex items-center justify-center text-white/70">
+          <div className="h-[200px] flex items-center justify-center text-white/90">
             <div className="text-center">
               <div className="text-3xl mb-2">📈</div>
               <p>Score trend chart</p>
@@ -571,7 +571,7 @@ const Progress: React.FC = () => {
 
         <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 text-center">
           <h4 className="text-lg font-semibold text-white mb-4">Daily Activity</h4>
-          <div className="h-[200px] flex items-center justify-center text-white/70">
+          <div className="h-[200px] flex items-center justify-center text-white/90">
             <div className="text-center">
               <div className="text-3xl mb-2">📊</div>
               <p>Daily activity chart</p>
@@ -585,9 +585,9 @@ const Progress: React.FC = () => {
           <div className="flex justify-center items-center h-40">
             <div className="text-center">
               <div className="text-4xl font-bold text-orange-400 mb-2">{stats.currentStreak}</div>
-              <div className="text-white/70 text-sm">Current Streak</div>
+              <div className="text-white/90 text-sm">Current Streak</div>
               <div className="text-2xl font-bold text-white/90 mt-4">{stats.longestStreak}</div>
-              <div className="text-white/70 text-sm">Longest Streak</div>
+              <div className="text-white/90 text-sm">Longest Streak</div>
             </div>
           </div>
         </div>
@@ -597,7 +597,7 @@ const Progress: React.FC = () => {
       <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
         <h3 className="text-xl font-semibold text-white mb-6">Time Spent Analysis</h3>
         <div className="flex items-center justify-center h-[300px] text-center">
-          <p className="text-white/70">Chart temporarily disabled due to TypeScript compatibility issues. This will be fixed in a future update.</p>
+          <p className="text-white/90">Chart temporarily disabled due to TypeScript compatibility issues. This will be fixed in a future update.</p>
         </div>
       </div>
 
@@ -607,23 +607,23 @@ const Progress: React.FC = () => {
           <h4 className="text-lg font-semibold text-white mb-4">Learning Metrics</h4>
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <span className="text-white/70">Total Modules Completed</span>
+              <span className="text-white/90">Total Modules Completed</span>
               <span className="text-white font-semibold">{stats.totalModulesCompleted}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-white/70">Total Time Spent</span>
+              <span className="text-white/90">Total Time Spent</span>
               <span className="text-white font-semibold">{stats.totalTimeSpent}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-white/70">Average Score</span>
+              <span className="text-white/90">Average Score</span>
               <span className="text-white font-semibold">{stats.averageScore}%</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-white/70">Current Level</span>
+              <span className="text-white/90">Current Level</span>
               <span className="text-white font-semibold">{stats.level}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-white/70">Total Points</span>
+              <span className="text-white/90">Total Points</span>
               <span className="text-white font-semibold">{stats.totalPoints}</span>
             </div>
           </div>
@@ -634,7 +634,7 @@ const Progress: React.FC = () => {
           <div className="space-y-4">
             <div>
               <div className="flex justify-between text-sm mb-2">
-                <span className="text-white/70">Weekly Goal</span>
+                <span className="text-white/90">Weekly Goal</span>
                 <span className="text-white">{stats.weeklyProgress}/{stats.weeklyGoal} modules</span>
               </div>
               <div className="w-full bg-white/20 rounded-full h-2">
@@ -646,7 +646,7 @@ const Progress: React.FC = () => {
             </div>
             <div>
               <div className="flex justify-between text-sm mb-2">
-                <span className="text-white/70">Experience to Next Level</span>
+                <span className="text-white/90">Experience to Next Level</span>
                 <span className="text-white">{stats.experienceToNext} XP</span>
               </div>
               <div className="w-full bg-white/20 rounded-full h-2">
@@ -671,7 +671,7 @@ const Progress: React.FC = () => {
         className="text-center mb-8"
       >
         <h1 className="text-4xl font-bold text-white mb-4">Learning Progress</h1>
-        <p className="text-white/80 max-w-2xl mx-auto">
+        <p className="text-white/90 max-w-2xl mx-auto">
           Track your learning journey and monitor your progress across all modules and learning paths
         </p>
       </motion.div>
@@ -686,7 +686,7 @@ const Progress: React.FC = () => {
               className={`px-6 py-3 rounded-md transition-all duration-300 flex items-center space-x-2 ${
                 activeTab === tab.id 
                   ? 'bg-white/20 text-white' 
-                  : 'text-white/70 hover:text-white hover:bg-white/10'
+                  : 'text-white/90 hover:text-white hover:bg-white/10'
               }`}
             >
               <span>{tab.icon}</span>

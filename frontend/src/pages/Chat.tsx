@@ -230,7 +230,7 @@ const Chat: React.FC = () => {
           <Card variant="glass" padding="lg" className="text-center">
             <div className="text-4xl mb-4">🤖</div>
             <h2 className="text-xl font-semibold text-white mb-2">No AI Agents Available</h2>
-            <p className="text-white/70">
+            <p className="text-white">
               AI agents are currently offline. Please check back later.
             </p>
           </Card>
@@ -278,7 +278,7 @@ const Chat: React.FC = () => {
                       <div className="font-medium text-white truncate">
                         {agent.name}
                       </div>
-                      <div className="text-xs text-white/60 capitalize">
+                      <div className="text-xs text-white/80 capitalize">
                         {agent.type.replace('_', ' ')}
                       </div>
                     </div>
@@ -325,7 +325,7 @@ const Chat: React.FC = () => {
                       <h3 className="text-lg font-semibold text-white">
                         {selectedAgent.name}
                       </h3>
-                      <p className="text-sm text-white/70 capitalize">
+                      <p className="text-sm text-white/90 capitalize">
                         {selectedAgent.type.replace('_', ' ')}
                       </p>
                     </div>
@@ -349,7 +349,7 @@ const Chat: React.FC = () => {
                     <h3 className="text-lg font-semibold text-white mb-2">
                       Start a conversation
                     </h3>
-                    <p className="text-white/70">
+                    <p className="text-white">
                       Ask me anything about your learning journey, coding, or get personalized recommendations!
                     </p>
                   </div>
@@ -375,7 +375,7 @@ const Chat: React.FC = () => {
                           {message.content}
                         </div>
                         <div className="flex items-center justify-between mt-2">
-                          <span className="text-xs text-white/50">
+                          <span className="text-xs text-white/80">
                             {formatTime(message.timestamp)}
                           </span>
                           
@@ -463,7 +463,7 @@ const Chat: React.FC = () => {
                   <button
                     key={suggestion}
                     onClick={() => setChatState(prev => ({ ...prev, message: suggestion }))}
-                    className="text-xs px-3 py-1 bg-white/10 hover:bg-white/20 text-white/80 hover:text-white rounded-full transition-colors"
+                    className="text-xs px-3 py-1 bg-white/10 hover:bg-white/20 text-white hover:text-white rounded-full transition-colors"
                   >
                     {suggestion}
                   </button>

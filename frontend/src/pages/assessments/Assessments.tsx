@@ -393,12 +393,12 @@ const Assessments: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-white/70 text-sm">Completion Rate</p>
+              <p className="text-white/90 text-sm">Completion Rate</p>
               <p className="text-2xl font-bold text-white">{Math.round((stats.completedQuizzes / stats.totalQuizzes) * 100)}%</p>
             </div>
             <div className="text-3xl">✅</div>
           </div>
-          <p className="text-white/60 text-xs mt-2">{stats.completedQuizzes} of {stats.totalQuizzes} quizzes</p>
+          <p className="text-white/85 text-xs mt-2">{stats.completedQuizzes} of {stats.totalQuizzes} quizzes</p>
         </motion.div>
 
         <motion.div 
@@ -409,12 +409,12 @@ const Assessments: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-white/70 text-sm">Average Score</p>
+              <p className="text-white/90 text-sm">Average Score</p>
               <p className="text-2xl font-bold text-green-400">{stats.averageScore}%</p>
             </div>
             <div className="text-3xl">🎯</div>
           </div>
-          <p className="text-white/60 text-xs mt-2">Best: {stats.bestScore}%</p>
+          <p className="text-white/85 text-xs mt-2">Best: {stats.bestScore}%</p>
         </motion.div>
 
         <motion.div 
@@ -425,12 +425,12 @@ const Assessments: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-white/70 text-sm">Pass Rate</p>
+              <p className="text-white/90 text-sm">Pass Rate</p>
               <p className="text-2xl font-bold text-blue-400">{stats.passRate}%</p>
             </div>
             <div className="text-3xl">🏆</div>
           </div>
-          <p className="text-white/60 text-xs mt-2">+{stats.improvement}% this month</p>
+          <p className="text-white/85 text-xs mt-2">+{stats.improvement}% this month</p>
         </motion.div>
 
         <motion.div 
@@ -441,12 +441,12 @@ const Assessments: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-white/70 text-sm">Time Spent</p>
+              <p className="text-white/90 text-sm">Time Spent</p>
               <p className="text-2xl font-bold text-purple-400">{stats.totalTimeSpent}</p>
             </div>
             <div className="text-3xl">⏱️</div>
           </div>
-          <p className="text-white/60 text-xs mt-2">Current streak: {stats.currentStreak} days</p>
+          <p className="text-white/85 text-xs mt-2">Current streak: {stats.currentStreak} days</p>
         </motion.div>
       </div>
 
@@ -455,7 +455,7 @@ const Assessments: React.FC = () => {
         <h3 className="text-xl font-semibold text-white mb-6">Performance Trend</h3>
         <ResponsiveContainer width="100%" height={300}>
           {/* Temporarily disabled due to TypeScript strict JSX issue */}
-          <div className="flex items-center justify-center h-64 text-white/60">
+          <div className="flex items-center justify-center h-64 text-white/90">
             <p>Performance chart temporarily disabled</p>
           </div>
         </ResponsiveContainer>
@@ -479,7 +479,7 @@ const Assessments: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-white font-medium">{attempt.quizTitle}</h4>
-                  <p className="text-white/60 text-sm">
+                  <p className="text-white/85 text-sm">
                     {formatDate(attempt.completedAt)} • {formatTime(attempt.timeTaken)}
                   </p>
                 </div>
@@ -488,7 +488,7 @@ const Assessments: React.FC = () => {
                 <div className={`text-lg font-bold ${getScoreColor(attempt.percentage)}`}>
                   {attempt.percentage}%
                 </div>
-                <div className="text-xs text-white/60">
+                <div className="text-xs text-white/85">
                   Attempt {attempt.attemptNumber}
                 </div>
               </div>
@@ -505,7 +505,7 @@ const Assessments: React.FC = () => {
       <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Difficulty</label>
+            <label className="block text-sm font-medium text-white/90 mb-2">Difficulty</label>
             <select
               value={selectedDifficulty}
               onChange={(e) => setSelectedDifficulty(e.target.value as any)}
@@ -519,7 +519,7 @@ const Assessments: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Status</label>
+            <label className="block text-sm font-medium text-white/90 mb-2">Status</label>
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value as any)}
@@ -533,7 +533,7 @@ const Assessments: React.FC = () => {
           </div>
 
           <div className="flex items-end">
-            <span className="text-white/60 text-sm">
+            <span className="text-white/85 text-sm">
               {getFilteredQuizzes().length} quizzes found
             </span>
           </div>
@@ -564,25 +564,25 @@ const Assessments: React.FC = () => {
                       {difficultyLabels[quiz.difficulty]}
                     </span>
                   </div>
-                  <p className="text-white/70 text-sm mb-3">{quiz.description}</p>
+                  <p className="text-white/90 text-sm mb-3">{quiz.description}</p>
                   
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-white/60">Questions:</span>
+                      <span className="text-white/85">Questions:</span>
                       <span className="text-white">{quiz.questionCount}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-white/60">Points:</span>
+                      <span className="text-white/85">Points:</span>
                       <span className="text-white">{quiz.totalPoints}</span>
                     </div>
                     {quiz.time_limit && (
                       <div className="flex justify-between">
-                        <span className="text-white/60">Time Limit:</span>
+                        <span className="text-white/85">Time Limit:</span>
                         <span className="text-white">{quiz.time_limit} min</span>
                       </div>
                     )}
                     <div className="flex justify-between">
-                      <span className="text-white/60">Passing Score:</span>
+                      <span className="text-white/85">Passing Score:</span>
                       <span className="text-white">{quiz.passing_score}%</span>
                     </div>
                   </div>
@@ -594,7 +594,7 @@ const Assessments: React.FC = () => {
                 {status !== 'not_started' && (
                   <div className="mb-3">
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-white/70">Progress</span>
+                      <span className="text-white/90">Progress</span>
                       <span className="text-white">{Math.round(progress)}%</span>
                     </div>
                     <div className="w-full bg-white/20 rounded-full h-2">
@@ -613,12 +613,12 @@ const Assessments: React.FC = () => {
                       status === 'in_progress' ? 'bg-yellow-400' :
                       'bg-gray-400'
                     }`}></span>
-                    <span className="text-sm text-white/70 capitalize">{status.replace('_', ' ')}</span>
+                    <span className="text-sm text-white/90 capitalize">{status.replace('_', ' ')}</span>
                   </div>
                   
                   {status !== 'not_started' && bestScore > 0 && (
                     <div className="text-sm">
-                      <span className="text-white/70">Best: </span>
+                      <span className="text-white/90">Best: </span>
                       <span className={getScoreColor(bestScore)}>{bestScore}%</span>
                     </div>
                   )}
@@ -627,7 +627,7 @@ const Assessments: React.FC = () => {
 
               {/* Actions */}
               <div className="flex items-center justify-between">
-                <div className="text-xs text-white/60">
+                <div className="text-xs text-white/85">
                   {attemptsRemaining > 0 ? (
                     <span>{attemptsRemaining} attempts remaining</span>
                   ) : (
@@ -656,7 +656,7 @@ const Assessments: React.FC = () => {
         <div className="text-center py-12">
           <div className="text-6xl mb-4">📝</div>
           <h3 className="text-xl font-semibold text-white mb-2">No quizzes found</h3>
-          <p className="text-white/70">Try adjusting your filters to see more quizzes</p>
+          <p className="text-white/90">Try adjusting your filters to see more quizzes</p>
         </div>
       )}
     </div>
@@ -684,7 +684,7 @@ const Assessments: React.FC = () => {
                   
                   <div>
                     <h4 className="text-white font-medium">{attempt.quizTitle}</h4>
-                    <div className="flex items-center space-x-4 text-sm text-white/70">
+                    <div className="flex items-center space-x-4 text-sm text-white/90">
                       <span>{formatDate(attempt.completedAt)}</span>
                       <span>Attempt {attempt.attemptNumber}</span>
                       <span className={`px-2 py-1 rounded-full text-xs bg-gradient-to-r ${difficultyColors[attempt.difficulty]} text-white`}>
@@ -699,7 +699,7 @@ const Assessments: React.FC = () => {
                   <div className={`text-xl font-bold ${getScoreColor(attempt.percentage)}`}>
                     {attempt.percentage}%
                   </div>
-                  <div className="text-sm text-white/60">
+                  <div className="text-sm text-white/85">
                     {attempt.score}/{attempt.maxScore} points
                   </div>
                 </div>
@@ -707,7 +707,7 @@ const Assessments: React.FC = () => {
               
               <div className="mt-3 pt-3 border-t border-white/10">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-white/70">Result:</span>
+                  <span className="text-white/90">Result:</span>
                   <span className={attempt.passed ? 'text-green-400' : 'text-red-400'}>
                     {attempt.passed ? 'Passed' : 'Failed'}
                   </span>
@@ -728,7 +728,7 @@ const Assessments: React.FC = () => {
           <h3 className="text-lg font-semibold text-white mb-4">Score Distribution</h3>
           <ResponsiveContainer width="100%" height={250}>
             {/* Temporarily disabled due to TypeScript strict JSX issue */}
-            <div className="flex items-center justify-center h-64 text-white/60">
+            <div className="flex items-center justify-center h-64 text-white/90">
               <p>Score distribution chart temporarily disabled</p>
             </div>
           </ResponsiveContainer>
@@ -750,11 +750,11 @@ const Assessments: React.FC = () => {
                 <div key={difficulty} className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-white font-medium capitalize">{difficultyLabels[difficulty as keyof typeof difficultyLabels]}</span>
-                    <span className="text-white/70 text-sm">{difficultyAttempts.length} attempts</span>
+                    <span className="text-white/85 text-sm">{difficultyAttempts.length} attempts</span>
                   </div>
                   <div className="flex justify-between items-center text-sm">
-                    <span className="text-white/60">Average Score: {averageScore}%</span>
-                    <span className="text-white/60">Pass Rate: {passRate}%</span>
+                    <span className="text-white/85">Average Score: {averageScore}%</span>
+                    <span className="text-white/85">Pass Rate: {passRate}%</span>
                   </div>
                   <div className="w-full bg-white/20 rounded-full h-2">
                     <div 
@@ -774,7 +774,7 @@ const Assessments: React.FC = () => {
         <h3 className="text-xl font-semibold text-white mb-6">Time Spent Analysis</h3>
         <ResponsiveContainer width="100%" height={300}>
           {/* Temporarily disabled due to TypeScript strict JSX issue */}
-          <div className="flex items-center justify-center h-64 text-white/60">
+          <div className="flex items-center justify-center h-64 text-white/90">
             <p>Time analysis chart temporarily disabled</p>
           </div>
         </ResponsiveContainer>

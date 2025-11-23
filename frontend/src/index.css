@@ -51,6 +51,19 @@ body {
   min-height: 100vh;
 }
 
+/* Improved text contrast for glassmorphic UI */
+.text-white\/60 {
+  opacity: 0.85 !important;
+}
+
+.text-white\/70 {
+  opacity: 0.9 !important;
+}
+
+.text-white\/80 {
+  opacity: 0.95 !important;
+}
+
 /* Dark mode body */
 .dark body {
   color: #f5f5f5;
