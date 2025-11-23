@@ -1,0 +1,217 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block title %}Login | Admin{% endblock %}
+
+{% block extrastyle %}
+<style>
+    /* Additional login-specific styles */
+    .admin-header {
+        text-align: center;
+        margin-bottom: 32px;
+    }
+    
+    .admin-logo {
+        width: 64px;
+        height: 64px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 24px;
+        color: white;
+        font-weight: 700;
+    }
+    
+    .admin-title {
+        color: #1f2937;
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        line-height: 1.2;
+    }
+    
+    .admin-subtitle {
+        color: #6b7280;
+        font-size: 16px;
+        font-weight: 400;
+        margin-bottom: 0;
+    }
+    
+    .form-row {
+        margin-bottom: 24px;
+    }
+    
+    .form-label {
+        display: block;
+        color: #374151;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+    
+    .form-input {
+        width: 100%;
+        padding: 14px 16px;
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 400;
+        color: #1f2937;
+        background: white;
+        transition: all 0.2s ease;
+    }
+    
+    .form-input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    .form-input::placeholder {
+        color: #9ca3af;
+    }
+    
+    .remember-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 32px;
+        gap: 8px;
+    }
+    
+    .remember-row input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: #667eea;
+    }
+    
+    .remember-row label {
+        color: #6b7280;
+        font-size: 14px;
+        cursor: pointer;
+        margin: 0;
+    }
+    
+    .help {
+        margin-top: 8px;
+        font-size: 13px;
+        color: #6b7280;
+    }
+    
+    .help a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    
+    .help a:hover {
+        text-decoration: underline;
+    }
+    
+    /* Loading animation */
+    .login-button.loading {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+    
+    .login-button.loading::after {
+        content: "";
+        width: 16px;
+        height: 16px;
+        margin-left: 8px;
+        border: 2px solid transparent;
+        border-top: 2px solid white;
+        border-radius: 50%;
+        display: inline-block;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+    <div class="admin-logo">JAC</div>
+    <h1 class="admin-title">JAC Learning Platform</h1>
+    <p class="admin-subtitle">Administrative Dashboard</p>
+</div>
+
+<div class="admin-form">
+    {% if form.errors and not form.non_field_errors %}
+        <p class="errornote">
+            {% if form.errors.items|length == 1 %}
+                {% translate "Please correct the error below." %}
+            {% else %}
+                {% translate "Please correct the errors below." %}
+            {% endif %}
+        </p>
+    {% endif %}
+
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <p class="errornote">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form action="{{ app_path }}" method="post" id="login-form">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            {% if field.name != "remember_me" %}
+                <div class="form-row">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.name == "password" and field.errors %}
+                        <div class="help">
+                            {% translate "Forgotten your password or username?" %}<br>
+                            <a href="{% url 'admin_password_reset' %}">{% translate "Reset it" %}</a>.
+                        </div>
+                    {% endif %}
+                    {% if field.help_text %}
+                        <div class="help">{{ field.help_text|safe }}</div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <div class="remember-row">
+            {{ form.remember_me }}
+            <label for="id_remember_me">{{ form.remember_me.label }}</label>
+        </div>
+
+        {% url 'admin_index' as admin_index_url %}
+        {% if admin_index_url %}
+            <input type="hidden" name="next" value="{{ admin_index_url }}">
+        {% else %}
+            <input type="hidden" name="next" value="/admin/">
+        {% endif %}
+
+        <div class="submit-row">
+            <input type="submit" value="{% translate 'Log in' %}" class="login-button">
+        </div>
+    </form>
+</div>
+
+<script>
+    // Add loading animation on form submit
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        const button = this.querySelector('input[type="submit"]');
+        button.classList.add('loading');
+        button.disabled = true;
+    });
+    
+    // Auto-focus username field
+    document.addEventListener('DOMContentLoaded', function() {
+        const usernameField = document.querySelector('input[name="username"]');
+        if (usernameField) {
+            usernameField.focus();
+        }
+    });
+</script>
+{% endblock %}

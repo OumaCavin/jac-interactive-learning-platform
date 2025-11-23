@@ -1,0 +1,71 @@
+/* Custom admin styles to fix missing icons and improve appearance */
+
+/* Fix missing icons */
+.admin .module h2 {
+    position: relative;
+}
+
+.admin .module h2::before {
+    content: "📊";
+    margin-right: 8px;
+}
+
+/* Improve form styling */
+.admin .form-row {
+    margin-bottom: 15px;
+}
+
+.admin .submit-row {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* Fix responsive admin interface */
+@media screen and (max-width: 768px) {
+    .admin #content {
+        margin: 0 10px;
+    }
+    
+    .admin #content-main {
+        float: none;
+        width: auto;
+    }
+    
+    .admin #content-related {
+        float: none;
+        width: auto;
+        margin-left: 0;
+    }
+}
+
+/* Better button styling */
+.admin .submit-row input {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.admin .submit-row input:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* Navigation improvements */
+.admin #navigation {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.admin #navigation a {
+    color: white;
+    text-decoration: none;
+}
+
+.admin #navigation a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
