@@ -51,17 +51,154 @@ body {
   min-height: 100vh;
 }
 
-/* Improved text contrast for glassmorphic UI */
-.text-white\/60 {
-  opacity: 0.85 !important;
+/* COMPREHENSIVE text contrast fixes for glassmorphic UI - MAJOR IMPROVEMENT */
+
+/* Fix all text-white/X opacity classes to be clearly visible */
+.text-white\/40 { opacity: 0.85 !important; }
+.text-white\/50 { opacity: 0.9 !important; }
+.text-white\/60 { opacity: 0.95 !important; }
+.text-white\/70 { opacity: 0.95 !important; }
+.text-white\/80 { opacity: 1.0 !important; }
+.text-white\/85 { opacity: 1.0 !important; }
+.text-white\/90 { opacity: 1.0 !important; }
+.text-white\/95 { opacity: 1.0 !important; }
+
+/* Fix any other common text opacity patterns */
+.text-white\/30 { opacity: 0.85 !important; }
+.text-white\/20 { opacity: 0.9 !important; }
+.text-white\/10 { opacity: 0.95 !important; }
+
+/* Ensure text in code elements is highly visible */
+.font-mono, code, pre {
+  color: rgba(255, 255, 255, 0.95) !important;
 }
 
-.text-white\/70 {
-  opacity: 0.9 !important;
+/* Fix placeholder text opacity */
+.placeholder-white\/50::placeholder {
+  opacity: 0.8 !important;
 }
 
-.text-white\/80 {
-  opacity: 0.95 !important;
+/* Fix any gray text on light backgrounds */
+.text-gray-400 { color: rgba(55, 65, 81, 0.9) !important; }
+.text-gray-500 { color: rgba(75, 85, 99, 0.95) !important; }
+.text-gray-600 { color: rgba(107, 114, 128, 1) !important; }
+
+/* Ensure high contrast for all glass content */
+.glass * {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Fix specific glass elements text */
+.glass .text-white\/70,
+.glass .text-white\/80,
+.glass .text-white\/85,
+.glass .text-white\/90 {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+/* MAIN CONTENT AREA FIXES - Critical for images showing visibility issues */
+
+/* Fix main headers and titles */
+h1, h2, h3, h4, h5, h6 {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Fix paragraph and description text */
+p, span, div {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Fix navigation and sidebar text */
+nav *, aside * {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Fix search placeholder text */
+input::placeholder {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Fix code editor text specifically */
+.monaco-editor,
+.monaco-editor * {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Fix form labels and descriptions */
+label, .label {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Fix metric labels and values */
+.metric-label, .metric-value,
+.text-xs, .text-sm, .text-lg {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Fix performance stats labels */
+.stat-label, .stat-value {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Fix button text */
+button, .button {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Fix background contrast for better readability */
+.glass {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Fix background for main content areas */
+.bg-white\/10 {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.bg-white\/5 {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* COMPREHENSIVE GRAY TEXT FIXES - Fix all gray text visibility issues */
+
+/* Fix gray text classes for better contrast */
+.text-gray-300 { color: rgba(255, 255, 255, 0.9) !important; }
+.text-gray-400 { color: rgba(255, 255, 255, 0.8) !important; }
+.text-gray-500 { color: rgba(255, 255, 255, 0.85) !important; }
+.text-gray-600 { color: rgba(255, 255, 255, 0.9) !important; }
+.text-gray-700 { color: rgba(255, 255, 255, 0.95) !important; }
+.text-gray-800 { color: rgba(255, 255, 255, 0.98) !important; }
+.text-gray-900 { color: rgba(255, 255, 255, 1) !important; }
+
+/* Fix hover states for gray text */
+.text-gray-400:hover,
+.text-gray-500:hover,
+.text-gray-600:hover,
+.text-gray-700:hover,
+.text-gray-800:hover {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Fix navigation specific elements */
+nav, nav * {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Fix sidebar elements specifically */
+.bg-white, .bg-gray-50 {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Fix search input */
+input[type="search"],
+input::placeholder {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
 }
 
 /* Dark mode body */
