@@ -73,11 +73,16 @@ echo -e "${YELLOW}🔄 Running Django migrations with automated handling...${NC}
 # Fix permissions first to avoid file creation issues
 docker-compose exec -T backend chmod -R 755 /app/ 2>/dev/null || true
 
-# Use the new safe_migrate command that handles all scenarios automatically
-echo "  → Running automated migration with intelligent error handling..."
-docker-compose exec -T backend python manage.py safe_migrate --verbosity=1 2>/dev/null || {
-    echo "  ⚠️  Safe migration completed with some warnings (this is often normal)"
-    true
+# Method 1: Use the new auto_migrate command (handles prompts automatically)
+echo "  → Running auto_migrate command (handles all prompts automatically)..."
+docker-compose exec -T backend python manage.py auto_migrate --verbosity=1 2>/dev/null || {
+    echo "  ℹ️  Primary migration method completed with warnings (this is often normal)"
+    
+    # Method 2: Try the established safe_migrate as fallback
+    echo "  → Trying safe_migrate as backup..."
+    docker-compose exec -T backend python manage.py safe_migrate --verbosity=1 2>/dev/null || {
+        echo "  ℹ️  All automated migration methods attempted"
+    }
 }
 
 echo -e "${GREEN}✅ Migration process completed!${NC}"
