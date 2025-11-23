@@ -833,23 +833,45 @@ def system_health_check(request):
     # Only check Redis if it seems available
     try:
         import redis
-        redis_url = os.getenv('CELERY_BROKER_URL', '')
-        if 'redis://' in redis_url and '@' in redis_url:
-            redis_password = redis_url.split('redis://:')[1].split('@')[0]
-            host = 'redis'
-            if 'redis://:' in redis_url and '@' in redis_url:
-                host = redis_url.split('@')[1].split('/')[0] if '@' in redis_url else 'redis'
-                
-            r = redis.Redis(
-                host=host,
-                port=6379,
-                password=redis_password,
-                socket_connect_timeout=2,
-                socket_timeout=2
-            )
-            r.ping()
-            health_status['redis'] = 'healthy'
+        
+        # Get Redis connection details from environment
+        redis_host = os.getenv('REDIS_HOST', 'localhost')  # Fallback to localhost
+        redis_port = int(os.getenv('REDIS_PORT', '6379'))
+        redis_password = os.getenv('REDIS_PASSWORD', 'redis_password')
+        
+        # Try multiple hosts for Docker compatibility
+        redis_hosts = [
+            redis_host,
+            'redis',
+            '127.0.0.1',
+            'localhost'
+        ]
+        
+        redis_connected = False
+        for host in redis_hosts:
+            try:
+                r = redis.Redis(
+                    host=host,
+                    port=redis_port,
+                    password=redis_password,
+                    socket_connect_timeout=3,
+                    socket_timeout=3,
+                    db=0
+                )
+                r.ping()
+                health_status['redis'] = 'healthy'
+                health_status['redis_host'] = host
+                redis_connected = True
+                break
+            except Exception:
+                continue
+        
+        if not redis_connected:
+            health_status['redis'] = 'unavailable: Could not connect to any Redis host'
+            
+    except ImportError:
+        health_status['redis'] = 'unavailable: Redis library not installed'
     except Exception as e:
-        health_status['redis'] = f'unavailable: {str(e)[:50]}...'  # Truncate error message
+        health_status['redis'] = f'unavailable: {str(e)[:100]}...'  # Truncate error message
     
     return JsonResponse(health_status)
