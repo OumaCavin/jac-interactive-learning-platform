@@ -18,13 +18,16 @@ COPY tailwind.config.js ./
 RUN npm install -g npm@latest
 RUN npm install -g pnpm
 
-# Install dependencies with timeout and retry configuration
-RUN pnpm config set fetch-timeout 300000 && \
+# Configure pnpm with multiple registries for better reliability
+RUN pnpm config set registry https://registry.npmjs.org/ && \
+    pnpm config set fetch-timeout 300000 && \
     pnpm config set fetch-retries 5 && \
     pnpm config set fetch-retry-mintimeout 30000 && \
     pnpm config set fetch-retry-maxtimeout 60000 && \
-    pnpm config set network-timeout 300000 && \
-    pnpm install --frozen-lockfile --prod=false
+    pnpm config set network-timeout 300000
+
+# Install dependencies (configurations already set above)
+RUN pnpm install --frozen-lockfile --prod=false
 
 # Copy source code
 COPY src/ ./src/
