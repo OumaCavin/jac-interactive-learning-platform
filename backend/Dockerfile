@@ -58,8 +58,9 @@ COPY . .
 # Create directories for logs and media first
 RUN mkdir -p logs media static
 
-# Make entrypoint executable before changing ownership
-RUN chmod +x /app/entrypoint.sh
+# Explicitly ensure entrypoint.sh exists and is executable
+RUN ls -la /app/entrypoint.sh || (echo "entrypoint.sh not found!" && exit 1)
+RUN chmod +x /app/entrypoint.sh && ls -la /app/entrypoint.sh
 
 # Change ownership after setting permissions
 RUN chown -R jac:jac /app
