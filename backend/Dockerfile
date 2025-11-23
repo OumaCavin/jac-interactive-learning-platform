@@ -81,9 +81,8 @@ RUN echo 'import subprocess' > /tmp/entrypoint.py && \
     echo '    print("  Database not ready yet, retrying...")' >> /tmp/entrypoint.py && \
     echo '    time.sleep(1)' >> /tmp/entrypoint.py && \
     echo 'print("✅ Database is ready!")' >> /tmp/entrypoint.py && \
-    echo 'print("📦 Running platform initialization...")' >> /tmp/entrypoint.py && \
-    echo 'subprocess.run(["python", "manage.py", "migrate"], check=False)' >> /tmp/entrypoint.py && \
-    echo 'subprocess.run(["python", "manage.py", "initialize_platform", "--username=admin", "--email=admin@jacplatform.com", "--password=admin123"], check=False)' >> /tmp/entrypoint.py && \
+    echo 'print("📦 Running database migrations...")' >> /tmp/entrypoint.py && \
+    echo 'subprocess.run(["python", "manage.py", "migrate", "--noinput"], check=False)' >> /tmp/entrypoint.py && \
     echo 'print("🌐 Starting Django server...")' >> /tmp/entrypoint.py && \
     echo 'os.execvp("python", ["python", "manage.py", "runserver", "0.0.0.0:8000"])' >> /tmp/entrypoint.py
 
