@@ -98,8 +98,11 @@ DATABASES = {
         'NAME': config('DB_NAME', default='jac_learning_db'),
         'USER': config('DB_USER', default='jac_user'),
         'PASSWORD': config('DB_PASSWORD', default='jac_password'),
-        'HOST': config('DB_HOST', default='localhost'),
+        'HOST': config('DB_HOST', default='postgres'),
         'PORT': config('DB_PORT', default='5432'),
+        'OPTIONS': {
+            'client_encoding': 'utf8',
+        },
         'TEST': {
             'NAME': 'test_jac_learning_db',
         },
