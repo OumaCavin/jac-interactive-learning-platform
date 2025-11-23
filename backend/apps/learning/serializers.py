@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from .models import (
     LearningPath, Module, Lesson, UserLearningPath, UserModuleProgress,
     PathRating, LearningRecommendation, CodeSubmission, TestCase,
-    CodeExecutionLog, AICodeReview
+    CodeExecutionLog, AICodeReview, Assessment, Question
 )
 
 
