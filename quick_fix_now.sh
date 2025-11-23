@@ -75,12 +75,12 @@ User = get_user_model()
 print(f'User table exists: {User._meta.db_table}')
 print(f'Total fields in User model: {len(User._meta.fields)}')
 required_fields = ['email', 'created_at', 'updated_at', 'last_login_at', 'last_activity_at', 'total_points', 'level']
-for field in required_fields:
-    field_obj = User._meta.get_field(field, None)
-    if field_obj:
-        print(f'✅ {field} - {field_obj.__class__.__name__}')
-    else:
-        print(f'❌ {field} - MISSING')
+for field_name in required_fields:
+    try:
+        field_obj = User._meta.get_field(field_name)
+        print(f'✅ {field_name} - {field_obj.__class__.__name__}')
+    except Exception as e:
+        print(f'❌ {field_name} - MISSING ({e})')
 \"
 "
 
