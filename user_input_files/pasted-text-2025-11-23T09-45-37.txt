@@ -1,0 +1,312 @@
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker ps
+CONTAINER ID   IMAGE                                             COMMAND                  CREATED          STATUS                    PORTS                                                                          NAMES
+32a87a4f6c93   nginx:alpine                                      "/docker-entrypoint.…"   40 minutes ago   Up 40 minutes (healthy)   0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp   jac-nginx
+c5b4cfcfd449   jac-interactive-learning-platform_frontend        "/docker-entrypoint.…"   40 minutes ago   Up 40 minutes (healthy)   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp                                        jac-interactive-learning-platform_frontend_1
+f7f1b9605b8c   jac-interactive-learning-platform_celery-beat     "celery -A config be…"   40 minutes ago   Up 40 minutes (healthy)   8000/tcp                                                                       jac-celery-beat
+c998f2b513e5   jac-interactive-learning-platform_celery-worker   "celery -A config wo…"   40 minutes ago   Up 40 minutes (healthy)   8000/tcp                                                                       jac-celery-worker
+73516aa7d78a   jac-interactive-learning-platform_backend         "python /tmp/entrypo…"   40 minutes ago   Up 40 minutes (healthy)   0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp                                    jac-interactive-learning-platform_backend_1
+157f670df179   redis:7-alpine                                    "docker-entrypoint.s…"   40 minutes ago   Up 40 minutes (healthy)   0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp                                    jac-interactive-learning-platform_redis_1
+0e88e8ee2607   postgres:15-alpine                                "docker-entrypoint.s…"   40 minutes ago   Up 40 minutes (healthy)   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp                                    jac-interactive-learning-platform_postgres_1
+af5e96bf35df   jac-interactive-learning-platform_jac-sandbox     "python jac_sandbox_…"   40 minutes ago   Up 40 minutes (healthy)   8000/tcp, 0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp                          jac-sandbox
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ curl -f http://localhost:8000/api/health/
+{"status": "healthy", "timestamp": "2025-11-23 09:44:49.526861+00:00", "service": "jac-interactive-learning-platform", "version": "1.0.0", "environment": "production", "database": "healthy", "redis": "healthy"}(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker-compose logs backend
+Attaching to jac-interactive-learning-platform_backend_1
+backend_1        | 🚀 Starting JAC Learning Platform...
+backend_1        | 📡 Waiting for database...
+backend_1        |   Database not ready yet, retrying...
+backend_1        |   Database not ready yet, retrying...
+backend_1        |   Database not ready yet, retrying...
+backend_1        | ✅ Database is ready!
+backend_1        | 📦 Running database migrations...
+backend_1        | Operations to perform:
+backend_1        |   Apply all migrations: admin, agents, auth, contenttypes, django_celery_beat, learning, sessions, users
+backend_1        | Running migrations:
+backend_1        |   Applying contenttypes.0001_initial... OK
+backend_1        |   Applying contenttypes.0002_remove_content_type_name... OK
+backend_1        |   Applying auth.0001_initial... OK
+backend_1        |   Applying auth.0002_alter_permission_name_max_length... OK
+backend_1        |   Applying auth.0003_alter_user_email_max_length... OK
+backend_1        |   Applying auth.0004_alter_user_username_opts... OK
+backend_1        |   Applying auth.0005_alter_user_last_login_null... OK
+backend_1        |   Applying auth.0006_require_contenttypes_0002... OK
+backend_1        |   Applying auth.0007_alter_validators_add_error_messages... OK
+backend_1        |   Applying auth.0008_alter_user_username_max_length... OK
+backend_1        |   Applying auth.0009_alter_user_last_name_max_length... OK
+backend_1        |   Applying auth.0010_alter_group_name_max_length... OK
+backend_1        |   Applying auth.0011_update_proxy_permissions... OK
+backend_1        |   Applying auth.0012_alter_user_first_name_max_length... OK
+backend_1        |   Applying users.0001_initial... OK
+backend_1        |   Applying admin.0001_initial... OK
+backend_1        |   Applying admin.0002_logentry_remove_auto_add... OK
+backend_1        |   Applying admin.0003_logentry_add_action_flag_choices... OK
+backend_1        |   Applying agents.0001_initial... OK
+backend_1        |   Applying django_celery_beat.0001_initial... OK
+backend_1        |   Applying django_celery_beat.0002_auto_20161118_0346... OK
+backend_1        |   Applying django_celery_beat.0003_auto_20161209_0049... OK
+backend_1        |   Applying django_celery_beat.0004_auto_20170221_0000... OK
+backend_1        |   Applying django_celery_beat.0005_add_solarschedule_events_choices... OK
+backend_1        |   Applying django_celery_beat.0006_auto_20180322_0932... OK
+backend_1        |   Applying django_celery_beat.0007_auto_20180521_0826... OK
+backend_1        |   Applying django_celery_beat.0008_auto_20180914_1922... OK
+backend_1        |   Applying django_celery_beat.0006_auto_20180210_1226... OK
+backend_1        |   Applying django_celery_beat.0006_periodictask_priority... OK
+backend_1        |   Applying django_celery_beat.0009_periodictask_headers... OK
+backend_1        |   Applying django_celery_beat.0010_auto_20190429_0326... OK
+backend_1        |   Applying django_celery_beat.0011_auto_20190508_0153... OK
+backend_1        |   Applying django_celery_beat.0012_periodictask_expire_seconds... OK
+backend_1        |   Applying django_celery_beat.0013_auto_20200609_0727... OK
+backend_1        |   Applying django_celery_beat.0014_remove_clockedschedule_enabled... OK
+backend_1        |   Applying django_celery_beat.0015_edit_solarschedule_events_choices... OK
+backend_1        |   Applying django_celery_beat.0016_alter_crontabschedule_timezone... OK
+backend_1        |   Applying django_celery_beat.0017_alter_crontabschedule_month_of_year... OK
+backend_1        |   Applying django_celery_beat.0018_improve_crontab_helptext... OK
+backend_1        |   Applying django_celery_beat.0019_alter_periodictasks_options... OK
+backend_1        |   Applying learning.0001_initial... OK
+backend_1        |   Applying sessions.0001_initial... OK
+backend_1        | 🌐 Starting Django server...
+backend_1        | Watching for file changes with StatReloader
+backend_1        | Performing system checks...
+backend_1        | 
+backend_1        | System check identified no issues (0 silenced).
+backend_1        | November 23, 2025 - 09:04:03
+backend_1        | Django version 5.2.8, using settings 'config.settings'
+backend_1        | Starting development server at http://0.0.0.0:8000/
+backend_1        | Quit the server with CONTROL-C.
+backend_1        | 
+backend_1        | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+backend_1        | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | WARNING:django.request:Not Found: /
+backend_1        | Not Found: /
+backend_1        | WARNING:django.server:"GET / HTTP/1.1" 404 179
+backend_1        | "GET / HTTP/1.1" 404 179
+backend_1        | "OPTIONS /learning/learning-paths/ HTTP/1.1" 200 0
+backend_1        | INFO:django.server:"OPTIONS /learning/learning-paths/ HTTP/1.1" 200 0
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "OPTIONS /learning/learning-paths/ HTTP/1.1" 200 0
+backend_1        | INFO:django.server:"OPTIONS /learning/learning-paths/ HTTP/1.1" 200 0
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.request:Not Found: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 404 179
+backend_1        | INFO:django.server:"OPTIONS /users/stats/ HTTP/1.1" 200 0
+backend_1        | "OPTIONS /users/stats/ HTTP/1.1" 200 0
+backend_1        | WARNING:django.request:Not Found: /users/stats/
+backend_1        | WARNING:django.server:"GET /users/stats/ HTTP/1.1" 404 179
+backend_1        | Not Found: /users/stats/
+backend_1        | "GET /users/stats/ HTTP/1.1" 404 179
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+backend_1        | "GET /api/health/ HTTP/1.1" 200 210
+backend_1        | INFO:django.server:"GET /api/health/ HTTP/1.1" 200 210
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 
