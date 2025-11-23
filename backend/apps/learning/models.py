@@ -157,6 +157,253 @@ class Module(models.Model):
         ).aggregate(avg_score=Avg('score'))['avg_score'] or 0
 
 
+class Lesson(models.Model):
+    """
+    Represents a lesson within a module.
+    """
+    LESSON_TYPE_CHOICES = [
+        ('text', 'Text Lesson'),
+        ('video', 'Video Lesson'),
+        ('interactive', 'Interactive Content'),
+        ('code_tutorial', 'Code Tutorial'),
+        ('quiz', 'Quiz'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='lessons')
+    title = models.CharField(max_length=200)
+    order = models.PositiveIntegerField()
+    lesson_type = models.CharField(
+        max_length=20, 
+        choices=LESSON_TYPE_CHOICES, 
+        default='text'
+    )
+    
+    # Content
+    content = models.TextField(blank=True, help_text='Lesson content in markdown or HTML')
+    code_example = models.TextField(blank=True, help_text='Code examples for this lesson')
+    
+    # Interactive elements
+    quiz_questions = models.JSONField(default=list, blank=True, help_text='Quiz questions data')
+    interactive_demo = models.JSONField(default=dict, blank=True, help_text='Interactive demo configuration')
+    
+    # Media
+    video_url = models.URLField(blank=True, help_text='URL to lesson video')
+    audio_url = models.URLField(blank=True, help_text='URL to lesson audio')
+    resources = models.JSONField(default=list, blank=True, help_text='Additional resources for this lesson')
+    
+    # Publishing
+    is_published = models.BooleanField(default=False)
+    estimated_duration = models.PositiveIntegerField(
+        null=True, 
+        blank=True, 
+        help_text='Estimated duration in minutes'
+    )
+    
+    # Metadata
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_lesson'
+        ordering = ['module', 'order']
+        unique_together = ['module', 'order']
+        indexes = [
+            models.Index(fields=['module', 'order']),
+            models.Index(fields=['lesson_type']),
+            models.Index(fields=['is_published']),
+        ]
+    
+    def __str__(self):
+        return f"{self.module.title} - {self.title}"
+    
+    @property
+    def module_title(self):
+        """Get the title of the parent module."""
+        return self.module.title
+    
+    @property
+    def learning_path(self):
+        """Get the learning path this lesson belongs to."""
+        return self.module.learning_path
+
+
+class Assessment(models.Model):
+    """
+    Represents an assessment/quiz within a module.
+    """
+    ASSESSMENT_TYPE_CHOICES = [
+        ('quiz', 'Quiz'),
+        ('exam', 'Examination'),
+        ('assignment', 'Assignment'),
+        ('project', 'Project'),
+        ('practical', 'Practical Test'),
+    ]
+    
+    DIFFICULTY_CHOICES = [
+        ('beginner', 'Beginner'),
+        ('intermediate', 'Intermediate'),
+        ('advanced', 'Advanced'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    
+    # Settings
+    assessment_type = models.CharField(
+        max_length=20, 
+        choices=ASSESSMENT_TYPE_CHOICES, 
+        default='quiz'
+    )
+    difficulty_level = models.CharField(
+        max_length=20, 
+        choices=DIFFICULTY_CHOICES, 
+        default='beginner'
+    )
+    
+    # Timing and scoring
+    time_limit = models.PositiveIntegerField(
+        null=True, 
+        blank=True, 
+        help_text='Time limit in minutes'
+    )
+    max_attempts = models.PositiveIntegerField(
+        default=3, 
+        help_text='Maximum number of attempts allowed'
+    )
+    passing_score = models.FloatField(
+        default=70.0, 
+        help_text='Minimum score to pass (percentage)'
+    )
+    
+    # Relationships
+    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='assessments')
+    questions = models.ManyToManyField('self', blank=True, help_text='Related questions')
+    
+    # Publishing
+    is_published = models.BooleanField(default=False)
+    
+    # Statistics (calculated field)
+    average_score = models.FloatField(default=0.0)
+    
+    # Metadata
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_assessment'
+        ordering = ['title']
+        indexes = [
+            models.Index(fields=['assessment_type']),
+            models.Index(fields=['difficulty_level']),
+            models.Index(fields=['is_published']),
+            models.Index(fields=['created_at']),
+        ]
+    
+    def __str__(self):
+        return f"{self.title} ({self.assessment_type})"
+    
+    @property
+    def question_count(self):
+        """Get total number of questions in this assessment."""
+        return self.questions.count()
+    
+    @property
+    def module_title(self):
+        """Get the title of the parent module."""
+        return self.module.title
+
+
+class Question(models.Model):
+    """
+    Represents a question within an assessment.
+    """
+    QUESTION_TYPE_CHOICES = [
+        ('multiple_choice', 'Multiple Choice'),
+        ('true_false', 'True/False'),
+        ('short_answer', 'Short Answer'),
+        ('essay', 'Essay'),
+        ('code', 'Code Challenge'),
+        ('drag_drop', 'Drag and Drop'),
+    ]
+    
+    DIFFICULTY_CHOICES = [
+        ('beginner', 'Beginner'),
+        ('intermediate', 'Intermediate'),
+        ('advanced', 'Advanced'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='question_set')
+    question_text = models.TextField()
+    
+    # Question details
+    question_type = models.CharField(
+        max_length=20, 
+        choices=QUESTION_TYPE_CHOICES, 
+        default='multiple_choice'
+    )
+    difficulty_level = models.CharField(
+        max_length=20, 
+        choices=DIFFICULTY_CHOICES, 
+        default='beginner'
+    )
+    points = models.FloatField(
+        default=1.0, 
+        help_text='Points awarded for correct answer'
+    )
+    
+    # Content
+    question_options = models.JSONField(
+        default=list, 
+        blank=True, 
+        help_text='Answer options for multiple choice questions'
+    )
+    correct_answer = models.JSONField(
+        default=dict, 
+        blank=True, 
+        help_text='Correct answer data'
+    )
+    code_template = models.TextField(
+        blank=True, 
+        help_text='Code template for coding questions'
+    )
+    test_cases = models.JSONField(
+        default=list, 
+        blank=True, 
+        help_text='Test cases for code validation'
+    )
+    
+    # Guidance
+    explanation = models.TextField(
+        blank=True, 
+        help_text='Explanation of the correct answer'
+    )
+    hints = models.JSONField(
+        default=list, 
+        blank=True, 
+        help_text='Hints to help users answer'
+    )
+    
+    # Metadata
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_question'
+        ordering = ['assessment', 'id']
+        indexes = [
+            models.Index(fields=['assessment']),
+            models.Index(fields=['question_type']),
+            models.Index(fields=['difficulty_level']),
+            models.Index(fields=['created_at']),
+        ]
+    
+    def __str__(self):
+        return f"Q: {self.question_text[:50]}..."
+
+
 class UserLearningPath(models.Model):
     """
     Tracks user progress through learning paths.

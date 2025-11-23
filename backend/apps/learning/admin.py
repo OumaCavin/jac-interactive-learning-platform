@@ -8,9 +8,9 @@ from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from .models import (
-    LearningPath, Module, UserLearningPath, UserModuleProgress,
-    PathRating, LearningRecommendation, CodeSubmission, TestCase,
-    CodeExecutionLog, AICodeReview
+    LearningPath, Module, Lesson, Assessment, Question,
+    UserLearningPath, UserModuleProgress, PathRating, LearningRecommendation,
+    CodeSubmission, TestCase, CodeExecutionLog, AICodeReview
 )
 
 
@@ -122,6 +122,148 @@ class ModuleAdmin(admin.ModelAdmin):
             kwargs["queryset"] = kwargs["queryset"].filter(id=request.user.id)
             kwargs["initial"] = request.user.id
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+
+@admin.register(Lesson)
+class LessonAdmin(admin.ModelAdmin):
+    """Admin interface for Lesson model."""
+    
+    list_display = (
+        'title', 'module', 'lesson_type', 'order',
+        'estimated_duration', 'is_published'
+    )
+    
+    list_filter = (
+        'module', 'lesson_type', 'is_published', 'created_at'
+    )
+    
+    search_fields = ('title', 'content', 'module__title')
+    
+    readonly_fields = ('created_at', 'updated_at', 'id')
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('id', 'title', 'module', 'order')
+        }),
+        ('Content', {
+            'fields': ('lesson_type', 'content', 'code_example')
+        }),
+        ('Interactive Elements', {
+            'fields': ('quiz_questions', 'interactive_demo')
+        }),
+        ('Media', {
+            'fields': ('video_url', 'audio_url', 'resources')
+        }),
+        ('Publishing', {
+            'fields': ('is_published', 'estimated_duration')
+        }),
+        ('Metadata', {
+            'fields': ('created_at', 'updated_at')
+        }),
+    )
+    
+    def get_queryset(self, request):
+        """Optimize queryset with related fields."""
+        qs = super().get_queryset(request)
+        return qs.select_related('module', 'module__learning_path')
+
+
+@admin.register(Assessment)
+class AssessmentAdmin(admin.ModelAdmin):
+    """Admin interface for Assessment model."""
+    
+    list_display = (
+        'title', 'assessment_type', 'difficulty_level',
+        'time_limit', 'max_attempts', 'is_published', 'average_score'
+    )
+    
+    list_filter = (
+        'assessment_type', 'difficulty_level', 'is_published', 'created_at'
+    )
+    
+    search_fields = ('title', 'description', 'module__title')
+    
+    readonly_fields = ('created_at', 'updated_at', 'id', 'average_score', 'question_count')
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('id', 'title', 'description', 'module')
+        }),
+        ('Assessment Settings', {
+            'fields': (
+                'assessment_type', 'difficulty_level',
+                'time_limit', 'max_attempts', 'passing_score'
+            )
+        }),
+        ('Questions', {
+            'fields': ('questions',)
+        }),
+        ('Publishing', {
+            'fields': ('is_published',)
+        }),
+        ('Statistics', {
+            'fields': ('average_score', 'question_count', 'created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    filter_horizontal = ('questions',)
+    
+    def get_queryset(self, request):
+        """Optimize queryset with related fields."""
+        qs = super().get_queryset(request)
+        return qs.select_related('module')
+    
+    def question_count(self, obj):
+        """Display question count."""
+        return obj.question_count
+    question_count.short_description = 'Questions'
+
+
+@admin.register(Question)
+class QuestionAdmin(admin.ModelAdmin):
+    """Admin interface for Question model."""
+    
+    list_display = (
+        'question_text', 'question_type', 'difficulty_level',
+        'points', 'assessment'
+    )
+    
+    list_filter = (
+        'question_type', 'difficulty_level', 'created_at'
+    )
+    
+    search_fields = ('question_text', 'assessment__title')
+    
+    readonly_fields = ('created_at', 'updated_at', 'id')
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('id', 'assessment', 'question_text')
+        }),
+        ('Question Details', {
+            'fields': (
+                'question_type', 'difficulty_level', 'points',
+                'explanation', 'hints'
+            )
+        }),
+        ('Question Content', {
+            'fields': (
+                'question_options', 'correct_answer',
+                'code_template', 'test_cases'
+            )
+        }),
+        ('Metadata', {
+            'fields': ('created_at', 'updated_at')
+        }),
+    )
+    
+    filter_horizontal = ('hints',)
+    
+    def get_queryset(self, request):
+        """Optimize queryset with related fields."""
+        qs = super().get_queryset(request)
+        return qs.select_related('assessment', 'assessment__module')
 
 
 
