@@ -3,10 +3,20 @@ set -e
 
 echo "🚀 Starting JAC Learning Platform..."
 
+# Verify script has execute permissions
+if [ ! -x "$0" ]; then
+    echo "❌ Error: Script does not have execute permissions!"
+    echo "Current permissions: $(ls -la "$0")"
+    exit 1
+fi
+
+echo "✅ Entrypoint script has correct permissions"
+
 # Wait for database to be ready
 echo "📡 Waiting for database..."
 while ! nc -z postgres 5432; do
-  sleep 0.1
+  echo "  Database not ready yet, retrying..."
+  sleep 1
 done
 echo "✅ Database is ready!"
 
