@@ -74,15 +74,7 @@ services:
       - jac_network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request, time; 
-             for url in ['http://localhost:8000/api/health/simple/', 'http://localhost:8000/api/health/']:
-                 try: 
-                     response = urllib.request.urlopen(url, timeout=5)
-                     if response.getcode() == 200: 
-                         print('OK'); exit(0)
-                 except: 
-                     continue
-             print('FAIL'); exit(1)"]
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/api/health/static/ > /dev/null 2>&1 && exit 0 || curl -f http://localhost:8000/api/health/simple/ > /dev/null 2>&1 && exit 0 || curl -f http://localhost:8000/api/health/ > /dev/null 2>&1 && exit 0 || exit 1"]
       interval: 45s
       timeout: 15s
       retries: 5
