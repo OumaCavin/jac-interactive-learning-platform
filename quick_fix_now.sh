@@ -39,13 +39,16 @@ cd /app
 echo 'Step 1: Collecting static files (prevents prompts)...'
 python manage.py collectstatic --noinput --clear 2>/dev/null || true
 
-echo 'Step 2: Running makemigrations...'
-python manage.py makemigrations --merge --noinput || true
+echo 'Step 2: Running makemigrations with explicit app targeting...'
+python manage.py makemigrations users learning --merge --noinput || true
 
-echo 'Step 3: Running migrate...'
+echo 'Step 3: Checking for unmigrated changes...'
+python manage.py makemigrations --dry-run --noinput || true
+
+echo 'Step 4: Running migrate...'
 python manage.py migrate --noinput || true
 
-echo 'Step 4: Creating superuser...'
+echo 'Step 5: Creating superuser...'
 python manage.py shell -c \"
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -57,13 +60,28 @@ if not User.objects.filter(username='admin').exists():
         first_name='Admin',
         last_name='User'
     )
-    print('Superuser created')
+    print('Superuser created successfully')
 else:
-    print('Superuser exists')
+    print('Superuser already exists')
 \" 2>/dev/null || echo 'Superuser creation attempted'
 
-echo 'Step 5: Final status check...'
+echo 'Step 6: Final status check...'
 python manage.py showmigrations
+
+echo 'Step 7: Verifying User model fields...'
+python manage.py shell -c \"
+from django.contrib.auth import get_user_model
+User = get_user_model()
+print(f'User table exists: {User._meta.db_table}')
+print(f'Total fields in User model: {len(User._meta.fields)}')
+required_fields = ['email', 'created_at', 'updated_at', 'last_login_at', 'last_activity_at', 'total_points', 'level']
+for field in required_fields:
+    field_obj = User._meta.get_field(field, None)
+    if field_obj:
+        print(f'✅ {field} - {field_obj.__class__.__name__}')
+    else:
+        print(f'❌ {field} - MISSING')
+\"
 "
 
 echo "✅ Migration fix completed!"
