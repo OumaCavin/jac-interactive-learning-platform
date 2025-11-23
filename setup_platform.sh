@@ -67,6 +67,13 @@ until curl -f http://localhost:8000/api/health/ > /dev/null 2>&1; do
 done
 echo -e "${GREEN}✅ Backend is ready!${NC}"
 
+# Run Django migrations
+echo -e "${YELLOW}🔄 Running Django migrations...${NC}"
+docker-compose exec -T backend python manage.py makemigrations
+docker-compose exec -T backend python manage.py migrate --noinput
+docker-compose exec -T backend python manage.py collectstatic --noinput
+echo -e "${GREEN}✅ Migrations completed!${NC}"
+
 # Check if admin was created automatically
 echo -e "${YELLOW}🔍 Checking admin account status...${NC}"
 ADMIN_EXISTS=$(docker-compose exec -T backend python manage.py shell -c "
