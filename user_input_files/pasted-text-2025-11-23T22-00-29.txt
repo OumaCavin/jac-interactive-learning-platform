@@ -1,0 +1,406 @@
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker-compose logs --tail=50 -f
+Attaching to jac-nginx, jac-interactive-learning-platform_frontend_1, jac-celery-worker, jac-interactive-learning-platform_backend_1, jac-celery-beat, jac-interactive-learning-platform_postgres_1, jac-sandbox, jac-interactive-learning-platform_redis_1
+jac-celery-worker |  
+jac-celery-worker |  -------------- celery@2786b7890a1f v5.5.3 (immunity)
+jac-celery-worker | --- ***** ----- 
+jac-celery-worker | -- ******* ---- Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.41 2025-11-23 21:52:31
+jac-celery-worker | - *** --- * --- 
+jac-celery-worker | - ** ---------- [config]
+jac-celery-worker | - ** ---------- .> app:         config:0x7e6e4f2921d0
+jac-celery-worker | - ** ---------- .> transport:   redis://:**@redis:6379/0
+jac-celery-worker | - ** ---------- .> results:     redis://:**@redis:6379/0
+jac-celery-worker | - *** --- * --- .> concurrency: 2 (prefork)
+jac-celery-worker | -- ******* ---- .> task events: ON
+jac-celery-worker | --- ***** ----- 
+jac-celery-worker |  -------------- [queues]
+jac-celery-worker |                 .> celery           exchange=celery(direct) key=celery
+jac-celery-worker |                 
+jac-celery-worker | 
+jac-celery-worker | [tasks]
+jac-celery-worker |   . config.celery.debug_task
+jac-celery-worker |   . content.process_content
+jac-celery-worker |   . users.send_email_verification
+jac-celery-worker |   . users.send_welcome_email
+jac-celery-worker | 
+jac-celery-worker | [2025-11-23 21:52:32,151: INFO/MainProcess] Connected to redis://:**@redis:6379/0
+jac-celery-worker | [2025-11-23 21:52:32,171: INFO/MainProcess] mingle: searching for neighbors
+jac-celery-worker | [2025-11-23 21:52:33,182: INFO/MainProcess] mingle: all alone
+jac-celery-worker | [2025-11-23 21:52:33,203: INFO/MainProcess] celery@2786b7890a1f ready.
+jac-celery-beat  | [2025-11-23 21:52:36,395: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,395: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,395: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,395: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,395: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,395: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,395: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,395: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,395: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,395: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] django.db.utils
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] .
+jac-celery-beat  | [2025-11-23 21:52:36,396: WARNING/MainProcess] ProgrammingError
+jac-celery-beat  | [2025-11-23 21:52:36,397: WARNING/MainProcess] : 
+jac-celery-beat  | [2025-11-23 21:52:36,397: WARNING/MainProcess] relation "django_celery_beat_crontabschedule" does not exist
+jac-celery-beat  | LINE 1: ...django_celery_beat_crontabschedule"."minute" FROM "django_ce...
+jac-celery-beat  |                                                              ^
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | __    -    ... __   -        _
+jac-celery-beat  | LocalTime -> 2025-11-23 21:52:40
+jac-celery-beat  | Configuration ->
+jac-celery-beat  |     . broker -> redis://:**@redis:6379/0
+jac-celery-beat  |     . loader -> celery.loaders.app.AppLoader
+jac-celery-beat  |     . scheduler -> django_celery_beat.schedulers.DatabaseScheduler
+jac-celery-beat  | 
+jac-celery-beat  |     . logfile -> [stderr]@%INFO
+jac-celery-beat  |     . maxinterval -> 5.00 seconds (5s)
+jac-celery-beat  | [2025-11-23 21:52:40,490: INFO/MainProcess] beat: Starting...
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+redis_1          | 1:C 23 Nov 2025 21:52:28.800 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis_1          | 1:C 23 Nov 2025 21:52:28.806 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis_1          | 1:C 23 Nov 2025 21:52:28.806 * Redis version=7.4.7, bits=64, commit=00000000, modified=0, pid=1, just started
+redis_1          | 1:C 23 Nov 2025 21:52:28.806 * Configuration loaded
+redis_1          | 1:M 23 Nov 2025 21:52:28.806 * monotonic clock: POSIX clock_gettime
+redis_1          | 1:M 23 Nov 2025 21:52:28.812 * Running mode=standalone, port=6379.
+redis_1          | 1:M 23 Nov 2025 21:52:28.815 * Server initialized
+redis_1          | 1:M 23 Nov 2025 21:52:28.841 * Creating AOF base file appendonly.aof.1.base.rdb on server start
+redis_1          | 1:M 23 Nov 2025 21:52:28.862 * Creating AOF incr file appendonly.aof.1.incr.aof on server start
+redis_1          | 1:M 23 Nov 2025 21:52:28.862 * Ready to accept connections tcp
+postgres_1       | performing post-bootstrap initialization ... ok
+postgres_1       | initdb: warning: enabling "trust" authentication for local connections
+postgres_1       | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+postgres_1       | syncing data to disk ... ok
+postgres_1       | 
+postgres_1       | 
+postgres_1       | Success. You can now start the database server using:
+postgres_1       | 
+postgres_1       |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+postgres_1       | 
+postgres_1       | waiting for server to start....2025-11-23 21:52:31.137 UTC [41] LOG:  starting PostgreSQL 15.15 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres_1       | 2025-11-23 21:52:31.141 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres_1       | 2025-11-23 21:52:31.156 UTC [44] LOG:  database system was shut down at 2025-11-23 21:52:30 UTC
+postgres_1       | 2025-11-23 21:52:31.171 UTC [41] LOG:  database system is ready to accept connections
+postgres_1       |  done
+postgres_1       | server started
+postgres_1       | CREATE DATABASE
+postgres_1       | 
+postgres_1       | 
+postgres_1       | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init.sql
+postgres_1       | psql:/docker-entrypoint-initdb.d/init.sql: error: could not read from input file: Is a directory
+postgres_1       | 
+postgres_1       | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres_1       | 
+postgres_1       | 2025-11-23 21:52:31.973 UTC [1] LOG:  starting PostgreSQL 15.15 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres_1       | 2025-11-23 21:52:31.974 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres_1       | 2025-11-23 21:52:31.974 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres_1       | 2025-11-23 21:52:31.995 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres_1       | 2025-11-23 21:52:32.005 UTC [35] LOG:  database system was interrupted; last known up at 2025-11-23 21:52:31 UTC
+postgres_1       | 2025-11-23 21:52:32.006 UTC [36] FATAL:  the database system is starting up
+postgres_1       | 2025-11-23 21:52:32.281 UTC [35] LOG:  database system was not properly shut down; automatic recovery in progress
+postgres_1       | 2025-11-23 21:52:32.286 UTC [35] LOG:  redo starts at 0/15098D8
+postgres_1       | 2025-11-23 21:52:32.300 UTC [35] LOG:  invalid record length at 0/192D438: wanted 24, got 0
+postgres_1       | 2025-11-23 21:52:32.301 UTC [35] LOG:  redo done at 0/192D3F0 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.01 s
+postgres_1       | 2025-11-23 21:52:32.310 UTC [33] LOG:  checkpoint starting: end-of-recovery immediate wait
+postgres_1       | 2025-11-23 21:52:32.413 UTC [33] LOG:  checkpoint complete: wrote 921 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.023 s, sync=0.072 s, total=0.106 s; sync files=301, longest=0.005 s, average=0.001 s; distance=4238 kB, estimate=4238 kB
+postgres_1       | 2025-11-23 21:52:32.419 UTC [1] LOG:  database system is ready to accept connections
+postgres_1       | 2025-11-23 21:52:36.306 UTC [49] ERROR:  relation "django_celery_beat_crontabschedule" does not exist at character 335
+postgres_1       | 2025-11-23 21:52:36.306 UTC [49] STATEMENT:  SELECT DISTINCT "django_celery_beat_crontabschedule"."timezone" AS "timezone", "django_celery_beat_crontabschedule"."month_of_year", "django_celery_beat_crontabschedule"."day_of_month", "django_celery_beat_crontabschedule"."day_of_week", "django_celery_beat_crontabschedule"."hour", "django_celery_beat_crontabschedule"."minute" FROM "django_celery_beat_crontabschedule" ORDER BY "django_celery_beat_crontabschedule"."month_of_year" ASC, "django_celery_beat_crontabschedule"."day_of_month" ASC, "django_celery_beat_crontabschedule"."day_of_week" ASC, "django_celery_beat_crontabschedule"."hour" ASC, "django_celery_beat_crontabschedule"."minute" ASC, 1 ASC
+postgres_1       | 2025-11-23 21:52:47.845 UTC [67] LOG:  invalid length of startup packet
+postgres_1       | 2025-11-23 21:52:49.035 UTC [68] LOG:  invalid length of startup packet
+postgres_1       | 2025-11-23 21:52:49.050 UTC [69] LOG:  invalid length of startup packet
+postgres_1       | 2025-11-23 21:52:52.175 UTC [73] ERROR:  relation "jac_user" does not exist at character 22
+postgres_1       | 2025-11-23 21:52:52.175 UTC [73] STATEMENT:  SELECT 1 AS "a" FROM "jac_user" WHERE "jac_user"."username" = 'admin' LIMIT 1
+postgres_1       | 2025-11-23 21:56:25.417 UTC [266] ERROR:  relation "jac_user" does not exist at character 1100
+postgres_1       | 2025-11-23 21:56:25.417 UTC [266] STATEMENT:  SELECT "jac_user"."password", "jac_user"."last_login", "jac_user"."is_superuser", "jac_user"."username", "jac_user"."first_name", "jac_user"."last_name", "jac_user"."is_staff", "jac_user"."is_active", "jac_user"."date_joined", "jac_user"."id", "jac_user"."email", "jac_user"."bio", "jac_user"."profile_image", "jac_user"."learning_style", "jac_user"."preferred_difficulty", "jac_user"."learning_pace", "jac_user"."total_modules_completed", "jac_user"."total_time_spent", "jac_user"."current_streak", "jac_user"."longest_streak", "jac_user"."total_points", "jac_user"."level", "jac_user"."achievements", "jac_user"."badges", "jac_user"."current_goal", "jac_user"."goal_deadline", "jac_user"."agent_interaction_level", "jac_user"."preferred_feedback_style", "jac_user"."dark_mode", "jac_user"."notifications_enabled", "jac_user"."email_notifications", "jac_user"."push_notifications", "jac_user"."is_verified", "jac_user"."verification_token", "jac_user"."verification_token_expires_at", "jac_user"."created_at", "jac_user"."updated_at", "jac_user"."last_login_at", "jac_user"."last_activity_at" FROM "jac_user" WHERE "jac_user"."username" = 'admin' LIMIT 21
+postgres_1       | 2025-11-23 21:57:25.954 UTC [321] ERROR:  relation "jac_user" does not exist at character 1100
+postgres_1       | 2025-11-23 21:57:25.954 UTC [321] STATEMENT:  SELECT "jac_user"."password", "jac_user"."last_login", "jac_user"."is_superuser", "jac_user"."username", "jac_user"."first_name", "jac_user"."last_name", "jac_user"."is_staff", "jac_user"."is_active", "jac_user"."date_joined", "jac_user"."id", "jac_user"."email", "jac_user"."bio", "jac_user"."profile_image", "jac_user"."learning_style", "jac_user"."preferred_difficulty", "jac_user"."learning_pace", "jac_user"."total_modules_completed", "jac_user"."total_time_spent", "jac_user"."current_streak", "jac_user"."longest_streak", "jac_user"."total_points", "jac_user"."level", "jac_user"."achievements", "jac_user"."badges", "jac_user"."current_goal", "jac_user"."goal_deadline", "jac_user"."agent_interaction_level", "jac_user"."preferred_feedback_style", "jac_user"."dark_mode", "jac_user"."notifications_enabled", "jac_user"."email_notifications", "jac_user"."push_notifications", "jac_user"."is_verified", "jac_user"."verification_token", "jac_user"."verification_token_expires_at", "jac_user"."created_at", "jac_user"."updated_at", "jac_user"."last_login_at", "jac_user"."last_activity_at" FROM "jac_user" WHERE "jac_user"."username" = 'demod@example.com' LIMIT 21
+postgres_1       | 2025-11-23 21:57:43.891 UTC [33] LOG:  checkpoint starting: time
+postgres_1       | 2025-11-23 21:58:07.473 UTC [33] LOG:  checkpoint complete: wrote 220 buffers (1.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=23.429 s, sync=0.130 s, total=23.585 s; sync files=247, longest=0.011 s, average=0.001 s; distance=1329 kB, estimate=3948 kB
+frontend_1       | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+frontend_1       | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+frontend_1       | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+frontend_1       | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+frontend_1       | 10-listen-on-ipv6-by-default.sh: info: /etc/nginx/conf.d/default.conf differs from the packaged version
+frontend_1       | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+frontend_1       | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+frontend_1       | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+frontend_1       | /docker-entrypoint.sh: Configuration complete; ready for start up
+frontend_1       | 2025/11/23 21:52:29 [notice] 1#1: using the "epoll" event method
+frontend_1       | 2025/11/23 21:52:29 [notice] 1#1: nginx/1.29.3
+frontend_1       | 2025/11/23 21:52:29 [notice] 1#1: built by gcc 14.2.0 (Alpine 14.2.0) 
+frontend_1       | 2025/11/23 21:52:29 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+frontend_1       | 2025/11/23 21:52:29 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+frontend_1       | 2025/11/23 21:52:29 [notice] 1#1: start worker processes
+frontend_1       | 2025/11/23 21:52:29 [notice] 1#1: start worker process 29
+frontend_1       | 2025/11/23 21:52:29 [notice] 1#1: start worker process 30
+frontend_1       | 2025/11/23 21:52:29 [notice] 1#1: start worker process 31
+frontend_1       | 2025/11/23 21:52:29 [notice] 1#1: start worker process 32
+frontend_1       | 2025/11/23 21:52:29 [notice] 1#1: start worker process 33
+frontend_1       | 2025/11/23 21:52:29 [notice] 1#1: start worker process 34
+frontend_1       | 2025/11/23 21:52:29 [notice] 1#1: start worker process 35
+frontend_1       | 2025/11/23 21:52:29 [notice] 1#1: start worker process 36
+frontend_1       | 172.20.0.1 - - [23/Nov/2025:21:52:52 +0000] "GET / HTTP/1.1" 200 592 "-" "curl/8.5.0" "-"
+frontend_1       | 172.20.0.1 - - [23/Nov/2025:21:53:14 +0000] "GET /dashboard HTTP/1.1" 304 0 "http://localhost:3000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
+frontend_1       | 172.20.0.1 - - [23/Nov/2025:21:53:14 +0000] "GET /login HTTP/1.1" 304 0 "http://localhost:3000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
+frontend_1       | 172.20.0.1 - - [23/Nov/2025:21:53:31 +0000] "GET /admin HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0" "-"
+frontend_1       | 172.20.0.1 - - [23/Nov/2025:21:53:31 +0000] "GET /login HTTP/1.1" 304 0 "http://localhost:3000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0" "-"
+frontend_1       | 172.20.0.1 - - [23/Nov/2025:21:56:47 +0000] "GET /admin HTTP/1.1" 200 592 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
+frontend_1       | 172.20.0.1 - - [23/Nov/2025:21:56:47 +0000] "GET /static/css/main.f56ca8f1.css HTTP/1.1" 200 13389 "http://localhost:3000/admin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
+frontend_1       | 172.20.0.1 - - [23/Nov/2025:21:56:47 +0000] "GET /static/js/main.97468a56.js HTTP/1.1" 200 141654 "http://localhost:3000/admin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
+frontend_1       | 172.20.0.1 - - [23/Nov/2025:21:56:47 +0000] "GET /static/js/717.8dd4d3fe.chunk.js HTTP/1.1" 200 2001 "http://localhost:3000/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
+frontend_1       | 172.20.0.1 - - [23/Nov/2025:21:56:47 +0000] "GET /static/js/705.2f37c7df.chunk.js HTTP/1.1" 200 9518 "http://localhost:3000/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
+frontend_1       | 2025/11/23 21:56:47 [error] 29#29: *9 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:3000", referrer: "http://localhost:3000/login"
+frontend_1       | 172.20.0.1 - - [23/Nov/2025:21:56:47 +0000] "GET /favicon.ico HTTP/1.1" 404 592 "http://localhost:3000/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
+frontend_1       | 2025/11/23 21:56:47 [error] 29#29: *9 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:3000", referrer: "http://localhost:3000/login"
+frontend_1       | 172.20.0.1 - - [23/Nov/2025:21:56:47 +0000] "GET /favicon.ico HTTP/1.1" 404 592 "http://localhost:3000/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
+frontend_1       | 172.20.0.1 - - [23/Nov/2025:21:57:25 +0000] "GET /static/js/244.d4fab5b4.chunk.js HTTP/1.1" 200 4431 "http://localhost:3000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
+frontend_1       | 172.20.0.1 - - [23/Nov/2025:21:57:26 +0000] "GET /login HTTP/1.1" 200 592 "http://localhost:3000/dashboard" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
+jac-nginx        | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+jac-nginx        | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+jac-nginx        | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+jac-nginx        | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+jac-nginx        | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+jac-nginx        | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+jac-nginx        | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+jac-nginx        | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+jac-nginx        | /docker-entrypoint.sh: Configuration complete; ready for start up
+jac-sandbox      | JAC Sandbox Server starting on port 8080
+jac-sandbox      | Configuration:
+jac-sandbox      |   - Timeout: 30 seconds
+jac-sandbox      |   - Max Memory: 128 MB
+jac-sandbox      |   - Max Output: 1024 bytes
+jac-sandbox      |   - Available languages: Python, JavaScript, Java, C, C++
+jac-sandbox      | 
+jac-sandbox      | Sandbox endpoints:
+jac-sandbox      |   - POST /execute - Execute code
+jac-sandbox      |   - GET  /health - Health check
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | Unauthorized: /learning/learning-paths/
+backend_1        | "GET /learning/learning-paths/ HTTP/1.1" 401 58
+backend_1        | WARNING:django.request:Unauthorized: /learning/learning-paths/
+backend_1        | WARNING:django.server:"GET /learning/learning-paths/ HTTP/1.1" 401 58
