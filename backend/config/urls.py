@@ -11,6 +11,7 @@ from django.conf.urls.static import static
 from django.http import JsonResponse
 from django.utils import timezone
 from django.contrib import admin
+from .custom_admin import custom_admin_site
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -26,8 +27,8 @@ from apps.agents import views as agents_views
 router = DefaultRouter()
 
 urlpatterns = [
-    # Django Admin Interface
-    path('admin/', admin.site.urls),
+    # Django Admin Interface (Custom Styled)
+    path('admin/', custom_admin_site.urls),
     
     # API Documentation
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
