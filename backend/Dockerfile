@@ -46,6 +46,7 @@ RUN groupadd -r jac && useradd -r -g jac jac
 # Install runtime dependencies
 RUN apt-get update && apt-get install -y \
     libpq5 \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Set work directory
@@ -114,22 +115,14 @@ USER jac
 # Expose port
 EXPOSE 8000
 
-# Health check - using simple endpoint for reliability
-HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-    CMD python -c "
-import urllib.request
-try:
-    response = urllib.request.urlopen('http://localhost:8000/api/health/simple/', timeout=5)
-    if response.getcode() == 200:
-        exit(0)
-except:
-    try:
-        response = urllib.request.urlopen('http://localhost:8000/api/health/', timeout=5)
-        if response.getcode() == 200:
-            exit(0)
-    except:
-        pass
-exit(1)"
+# Create health check script
+RUN echo '#!/bin/bash' > /tmp/healthcheck.sh && \
+    echo 'curl -f http://localhost:8000/api/health/static/ > /dev/null 2>&1 && exit 0 || curl -f http://localhost:8000/api/health/simple/ > /dev/null 2>&1 && exit 0 || curl -f http://localhost:8000/api/health/ > /dev/null 2>&1 && exit 0 || exit 1' >> /tmp/healthcheck.sh && \
+    chmod +x /tmp/healthcheck.sh
+
+# Health check - using simple curl-based approach
+HEALTHCHECK --interval=45s --timeout=10s --start-period=90s --retries=5 \
+    CMD /tmp/healthcheck.sh
 
 # Default command (can be overridden)
 CMD ["python", "/tmp/entrypoint.py"]
