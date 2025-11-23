@@ -52,14 +52,15 @@ WORKDIR /app
 COPY --from=dependencies /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
 COPY --from=dependencies /usr/local/bin/ /usr/local/bin/
 
-# Copy application code and entrypoint script
-COPY entrypoint.sh .
+# Copy application code
 COPY . .
+
+# Make entrypoint executable before changing ownership
+RUN chmod +x /app/entrypoint.sh
 
 # Create directories for logs and media
 RUN mkdir -p logs media static && \
-    chown -R jac:jac /app && \
-    chmod +x /app/entrypoint.sh
+    chown -R jac:jac /app
 
 # Switch to non-root user
 USER jac
