@@ -30,8 +30,7 @@ def debug_backend_startup():
         
         # Test basic imports
         print("[DEBUG] Testing basic imports...")
-        from django.contrib.auth.models import User
-        from apps.users.models import UserProfile
+        from apps.users.models import User
         from apps.learning.models import LearningPath
         print("[DEBUG] All imports successful")
         
