@@ -27,8 +27,11 @@ WORKDIR /app
 # Copy requirements first for better caching
 COPY requirements.txt .
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies with retry, timeout, and fallback mirror
+RUN pip install --no-cache-dir --default-timeout=300 --retries=5 \
+    -r requirements.txt || \
+    (echo "Primary PyPI mirror failed, trying alternative" && \
+     pip install --no-cache-dir --default-timeout=300 --retries=5 --index-url https://pypi.douban.com/simple/ -r requirements.txt)
 
 # Stage 2: Application
 FROM python:3.11-slim as application
