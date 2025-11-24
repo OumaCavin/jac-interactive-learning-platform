@@ -6,6 +6,36 @@ import { selectAuth, getUserStats } from '../store/slices/authSlice';
 import { useAppDispatch } from '../store/store';
 import type { User } from '../services/authService';
 
+// TypeScript interfaces for Profile component
+interface ProfileStats {
+  totalModulesCompleted: number;
+  totalTimeSpent: string;
+  currentStreak: number;
+  longestStreak: number;
+  averageScore: number;
+  totalPoints: number;
+  level: number;
+  achievements: number;
+}
+
+interface Achievement {
+  title: string;
+  description: string;
+  icon?: string;
+  earned_date?: string;
+}
+
+interface Badge {
+  name?: string;
+}
+
+interface ProfileForm {
+  firstName: string;
+  lastName: string;
+  email: string;
+  bio: string;
+}
+
 const Profile: React.FC = () => {
   const dispatch = useAppDispatch();
   const { user, isLoading } = useSelector(selectAuth);
@@ -496,7 +526,7 @@ const Profile: React.FC = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8" role="main" aria-label="User profile and settings">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold text-white">User Profile</h1>
         <Button

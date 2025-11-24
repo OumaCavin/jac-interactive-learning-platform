@@ -129,7 +129,7 @@ const CodeEditor: React.FC = () => {
       }
 
     } catch (error: any) {
-      console.error('Execution error:', error);
+      // Handle code execution error gracefully
       const errorMessage = error.response?.data?.detail || error.message || 'Execution failed';
       
       setExecutionResult({

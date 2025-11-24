@@ -138,8 +138,9 @@ const KnowledgeGraph: React.FC = () => {
 
   // Initialize graph data
   useEffect(() => {
-    const graphNodes: GraphNode[] = [];
-    const graphEdges: GraphEdge[] = [];
+    try {
+      const graphNodes: GraphNode[] = [];
+      const graphEdges: GraphEdge[] = [];
 
     // Add learning path nodes
     MOCK_LEARNING_PATHS.forEach((path, index) => {
@@ -250,6 +251,10 @@ const KnowledgeGraph: React.FC = () => {
 
     setNodes(graphNodes);
     setEdges(graphEdges);
+    } catch (error) {
+      // Handle graph data initialization error gracefully
+      console.warn('Error initializing knowledge graph data:', error);
+    }
   }, [userLearningPaths, userModuleProgress]);
 
   // Get color for difficulty level

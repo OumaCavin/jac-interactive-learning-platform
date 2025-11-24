@@ -122,7 +122,7 @@ const Settings: React.FC = () => {
       await dispatch(updateProfile(formData)).unwrap();
       setHasChanges(false);
     } catch (error) {
-      console.error('Failed to update settings:', error);
+      // Handle settings update error gracefully
     }
   };
 

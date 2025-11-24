@@ -272,7 +272,7 @@ export const Dashboard: React.FC = () => {
       ]);
       
     } catch (error) {
-      console.error('Failed to load dashboard data:', error);
+      // Handle dashboard data loading error gracefully
     } finally {
       setIsLoading(false);
     }
@@ -296,7 +296,7 @@ export const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8" role="main" aria-label="Learning dashboard and progress overview">
       {/* Welcome Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

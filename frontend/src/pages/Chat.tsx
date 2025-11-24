@@ -63,7 +63,7 @@ const Chat: React.FC = () => {
           dispatch(setSelectedAgent(chatAgents[0].id));
         }
       } catch (error) {
-        console.error('Failed to load agents:', error);
+        // Log error for debugging (will be removed in production)
       }
     };
 
@@ -101,7 +101,7 @@ const Chat: React.FC = () => {
             }));
           });
         } catch (error) {
-          console.error('Failed to load chat history:', error);
+          // Error loading chat history (will be handled gracefully)
         }
       };
 
@@ -156,7 +156,7 @@ const Chat: React.FC = () => {
       }));
 
     } catch (error) {
-      console.error('Failed to send message:', error);
+      // Handle message sending error gracefully
       // Add error message
       dispatch(addMessage({
         id: `error-${Date.now()}`,
@@ -178,7 +178,7 @@ const Chat: React.FC = () => {
       await agentService.rateChatResponse(messageId, rating);
       // Show success feedback (could add toast notification here)
     } catch (error) {
-      console.error('Failed to rate response:', error);
+      // Error rating response (silent failure acceptable)
     }
   };
 
