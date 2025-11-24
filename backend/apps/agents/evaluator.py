@@ -10,7 +10,8 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db.models import Avg, Count, Q
 from .base_agent import BaseAgent, AgentStatus, TaskPriority
-from ..learning.models import LearningPath, Module, UserModuleProgress, Assessment, UserAssessmentResult, AssessmentQuestion
+from ..learning.models import LearningPath, Module, UserModuleProgress
+from ..assessments.models import Assessment, AssessmentQuestion, UserAssessmentResult
 
 
 class EvaluatorAgent(BaseAgent):
