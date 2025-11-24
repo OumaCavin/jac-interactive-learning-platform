@@ -14,8 +14,8 @@ class JacExecutionConfig(AppConfig):
     verbose_name = 'JAC Code Execution'
     
     def ready(self):
-        """Import signal handlers and initialize execution environment when Django starts."""
-        import apps.jac_execution.signals  # Import any signal handlers if defined
+        """Initialize execution environment when Django starts."""
+        # import apps.jac_execution.signals  # No signals defined yet
         
         # Initialize execution environment
         self._setup_execution_environment()
