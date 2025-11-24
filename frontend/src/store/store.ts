@@ -12,6 +12,7 @@ import uiReducer from './slices/uiSlice';
 import learningReducer from './slices/learningSlice';
 import assessmentReducer from './slices/assessmentSlice';
 import agentReducer from './slices/agentSlice';
+import adminReducer from './slices/adminSlice';
 
 // Configure the Redux store
 export const store = configureStore({
@@ -21,6 +22,7 @@ export const store = configureStore({
     learning: learningReducer,
     assessments: assessmentReducer,
     agents: agentReducer,
+    admin: adminReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

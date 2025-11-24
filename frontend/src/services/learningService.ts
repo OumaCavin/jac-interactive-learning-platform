@@ -167,4 +167,24 @@ export const learningService = {
     api.get(`/learning/test-cases/?module=${moduleId}`).then(res => res.data),
 };
 
+  // Admin Analytics
+  getLearningPathAnalytics: (pathId?: number): Promise<any> =>
+    api.get(`/learning/admin/analytics/${pathId ? `?path_id=${pathId}` : ''}`).then(res => res.data),
+
+  getCompletionTrends: (timeframe: 'week' | 'month' | 'quarter' | 'year' = 'month'): Promise<any[]> =>
+    api.get(`/learning/admin/completion-trends/?timeframe=${timeframe}`).then(res => res.data),
+
+  getUserJourneyAnalytics: (pathId: number): Promise<any> =>
+    api.get(`/learning/admin/user-journey/?path_id=${pathId}`).then(res => res.data),
+
+  getPerformanceInsights: (): Promise<any[]> =>
+    api.get('/learning/admin/insights/').then(res => res.data),
+
+  bulkUpdateLearningPaths: (pathIds: number[], updates: any): Promise<any> =>
+    api.patch('/learning/learning-paths/bulk-update/', { path_ids: pathIds, updates }).then(res => res.data),
+
+  reorderModules: (pathId: number, moduleOrder: number[]): Promise<any> =>
+    api.post(`/learning/learning-paths/${pathId}/reorder-modules/`, { module_order: moduleOrder }).then(res => res.data),
+};
+
 export default api;
