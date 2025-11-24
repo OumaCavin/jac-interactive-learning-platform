@@ -6,10 +6,11 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { loginUser } from '../../store/slices/authSlice';
+import { authService } from '../../services/authService';
 import { toast } from 'react-hot-toast';
 
 interface LoginFormData {
-  email: string;
+  email: string; // Keeping email for form, but using as username for backend
   password: string;
   rememberMe: boolean;
 }
@@ -42,42 +43,26 @@ export const LoginPage: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // Mock authentication - in real app, this would call your auth service
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Use actual authentication service instead of mock
+      const result = await authService.login({
+        username: data.email, // Using email as username for the backend
+        password: data.password
+      });
 
-      // Simulate successful login
-      // TODO: Remove mock data when backend integration is ready
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const mockUser = {
-        id: 1,
-        email: data.email,
-        name: 'John Doe',
-        avatar: null,
-        role: 'student' as const,
-        preferences: {
-          theme: 'light',
-          notifications: true,
-          language: 'en',
-        },
-      };
-
-      // Mock token
-      const mockToken = 'mock-jwt-token-' + Date.now();
-
-      // Store token in localStorage
-      localStorage.setItem('token', mockToken);
-
-      // Update Redux state
-      (dispatch as any)(loginUser({ username: data.email, password: data.password }));
+      // Update Redux state with actual user data and tokens
+      dispatch(loginUser({
+        username: data.email,
+        password: data.password
+      }));
 
       toast.success('Welcome back! You have been logged in successfully.');
       
       // Redirect to dashboard after successful login
       navigate('/dashboard', { replace: true });
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Login error:', error);
-      toast.error('Invalid email or password. Please try again.');
+      toast.error(error.message || 'Login failed. Please check your credentials.');
     } finally {
       setIsLoading(false);
     }

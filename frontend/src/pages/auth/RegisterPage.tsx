@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
+import { authService } from '../../services/authService';
 
 interface RegisterFormData {
   name: string;
@@ -33,8 +34,15 @@ export const RegisterPage: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // Mock registration - in real app, this would call your auth service
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Use actual registration service instead of mock
+      await authService.register({
+        username: data.email, // Using email as username for the backend
+        email: data.email,
+        password: data.password,
+        password_confirm: data.confirmPassword,
+        first_name: data.name.split(' ')[0] || data.name,
+        last_name: data.name.split(' ').slice(1).join(' ') || ''
+      });
 
       toast.success('Account created successfully! Please check your email to verify your account.');
       
@@ -44,9 +52,9 @@ export const RegisterPage: React.FC = () => {
         state: { message: 'Registration successful! Please sign in with your new account.' }
       });
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Registration error:', error);
-      toast.error('Failed to create account. Please try again.');
+      toast.error(error.message || 'Failed to create account. Please try again.');
     } finally {
       setIsLoading(false);
     }
