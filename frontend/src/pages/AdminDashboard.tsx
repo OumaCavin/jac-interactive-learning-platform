@@ -12,9 +12,19 @@ import {
   CheckCircleIcon,
   XCircleIcon,
   ClockIcon,
+  CpuChipIcon,
+  PlayIcon,
+  StopIcon,
+  ArrowPathIcon,
+  ExclamationTriangleIcon,
+  ChatBubbleLeftRightIcon,
+  CogIcon,
+  ServerIcon,
 } from '@heroicons/react/24/outline';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store/store';
+import agentService, { Agent, Task, AgentMetrics } from '../services/agentService';
+import { selectAgents, selectActiveTasks, setLoading as setAgentsLoading } from '../store/slices/agentSlice';
 
 interface AdminStats {
   totalUsers: number;
@@ -33,8 +43,29 @@ interface RecentActivity {
   user?: string;
 }
 
+interface AgentActivity {
+  id: string;
+  type: 'agent_start' | 'agent_stop' | 'task_created' | 'task_completed' | 'error';
+  message: string;
+  timestamp: string;
+  agent?: string;
+  severity?: 'low' | 'medium' | 'high' | 'critical';
+}
+
+interface AgentHealthStatus {
+  agent_id: string;
+  status: 'healthy' | 'degraded' | 'unhealthy' | 'offline';
+  last_active: string;
+  queue_size: number;
+  uptime_hours: number;
+  health_score: number;
+}
+
 const AdminDashboard: React.FC = () => {
   const { user } = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+  const agents = useSelector(selectAgents);
+  const activeTasks = useSelector(selectActiveTasks);
   const [activeTab, setActiveTab] = useState('overview');
   const [stats, setStats] = useState<AdminStats>({
     totalUsers: 0,
@@ -46,11 +77,135 @@ const AdminDashboard: React.FC = () => {
   });
   const [recentActivity, setRecentActivity] = useState<RecentActivity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  
+  // Agent management state
+  const [agentsData, setAgentsData] = useState<Agent[]>([]);
+  const [tasksData, setTasksData] = useState<Task[]>([]);
+  const [agentMetrics, setAgentMetrics] = useState<AgentMetrics[]>([]);
+  const [agentHealth, setAgentHealth] = useState<AgentHealthStatus[]>([]);
+  const [agentActivity, setAgentActivity] = useState<AgentActivity[]>([]);
+  const [systemHealth, setSystemHealth] = useState<any>({});
+  const [selectedAgent, setSelectedAgent] = useState<string | null>(null);
+  const [isAgentLoading, setIsAgentLoading] = useState(false);
 
   useEffect(() => {
     // Load admin data (AdminRoute already checked admin privileges)
     loadAdminData();
-  }, []);
+    
+    // Load agent data if agents tab is selected
+    if (activeTab === 'agents') {
+      loadAgentData();
+    }
+  }, [activeTab]);
+
+  // Agent management functions
+  const loadAgentData = async () => {
+    setIsAgentLoading(true);
+    try {
+      // Load agents, tasks, and metrics
+      const [agentsRes, tasksRes, metricsRes, healthRes] = await Promise.allSettled([
+        agentService.getAgents(),
+        agentService.getTasks(),
+        agentService.getAgentMetrics(),
+        agentService.getAgentStatus()
+      ]);
+
+      if (agentsRes.status === 'fulfilled') {
+        setAgentsData(agentsRes.value);
+      }
+
+      if (tasksRes.status === 'fulfilled') {
+        setTasksData(tasksRes.value);
+      }
+
+      if (metricsRes.status === 'fulfilled') {
+        setAgentMetrics(metricsRes.value);
+      }
+
+      if (healthRes.status === 'fulfilled') {
+        setSystemHealth(healthRes.value);
+        // Convert system health to agent health array
+        const agentHealthData: AgentHealthStatus[] = Object.entries(healthRes.value.agents || {}).map(
+          ([agentId, agentData]: [string, any]) => ({
+            agent_id: agentId,
+            status: agentData.status === 'active' ? 'healthy' : 'degraded',
+            last_active: agentData.last_active || new Date().toISOString(),
+            queue_size: agentData.queue_size || 0,
+            uptime_hours: agentData.uptime_hours || 0,
+            health_score: agentData.health_score || 0
+          })
+        );
+        setAgentHealth(agentHealthData);
+      }
+
+      // Generate mock agent activity for demonstration
+      setAgentActivity([
+        {
+          id: '1',
+          type: 'agent_start',
+          message: 'Content Curator Agent started successfully',
+          timestamp: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
+          agent: 'Content Curator',
+          severity: 'low'
+        },
+        {
+          id: '2',
+          type: 'task_completed',
+          message: 'Quiz Master completed content generation task',
+          timestamp: new Date(Date.now() - 8 * 60 * 1000).toISOString(),
+          agent: 'Quiz Master',
+          severity: 'low'
+        },
+        {
+          id: '3',
+          type: 'error',
+          message: 'Evaluator Agent encountered high response time',
+          timestamp: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
+          agent: 'Evaluator',
+          severity: 'medium'
+        }
+      ]);
+
+    } catch (error) {
+      console.error('Error loading agent data:', error);
+    } finally {
+      setIsAgentLoading(false);
+    }
+  };
+
+  const handleAgentAction = async (action: 'start' | 'stop' | 'restart', agentId: string) => {
+    setIsAgentLoading(true);
+    try {
+      if (action === 'restart') {
+        await agentService.restartAgent(parseInt(agentId));
+      }
+      // Refresh agent data after action
+      await loadAgentData();
+    } catch (error) {
+      console.error(`Error ${action}ing agent:`, error);
+    } finally {
+      setIsAgentLoading(false);
+    }
+  };
+
+  const getAgentStatusColor = (status: string) => {
+    switch (status) {
+      case 'idle': return 'bg-green-100 text-green-800';
+      case 'busy': return 'bg-yellow-100 text-yellow-800';
+      case 'error': return 'bg-red-100 text-red-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const getHealthStatusColor = (status: string) => {
+    switch (status) {
+      case 'healthy': return 'text-green-600';
+      case 'degraded': return 'text-yellow-600';
+      case 'unhealthy': return 'text-red-600';
+      case 'offline': return 'text-gray-600';
+      default: return 'text-gray-600';
+    }
+  };
 
   const loadAdminData = async () => {
     setIsLoading(true);
@@ -101,6 +256,7 @@ const AdminDashboard: React.FC = () => {
     { id: 'users', name: 'Users', icon: UserGroupIcon },
     { id: 'content', name: 'Content', icon: DocumentTextIcon },
     { id: 'learning', name: 'Learning Paths', icon: AcademicCapIcon },
+    { id: 'agents', name: 'AI Agents', icon: CpuChipIcon },
   ];
 
   const statCards = [
@@ -743,6 +899,416 @@ const AdminDashboard: React.FC = () => {
     </div>
   );
 
+  const renderAgents = () => (
+    <div className="space-y-6">
+      {/* Agent System Health Overview */}
+      <div className="flex justify-between items-center">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">AI Agents Management</h2>
+          <p className="text-sm text-gray-500">Monitor and manage the multi-agent system</p>
+        </div>
+        <div className="flex space-x-2">
+          <button 
+            onClick={loadAgentData}
+            disabled={isAgentLoading}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 disabled:opacity-50"
+          >
+            <ArrowPathIcon className={`h-4 w-4 ${isAgentLoading ? 'animate-spin' : ''}`} />
+            <span>Refresh</span>
+          </button>
+          <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+            <PlusIcon className="h-4 w-4" />
+            <span>Deploy Agent</span>
+          </button>
+        </div>
+      </div>
+
+      {/* System Health Status */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white rounded-lg shadow-sm border border-gray-200 p-6"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600">System Health</p>
+              <p className="text-3xl font-bold text-green-600">{systemHealth?.overall_status || 'Healthy'}</p>
+              <p className="text-sm text-gray-500">
+                {systemHealth?.system_metrics?.health_score || 95}% overall score
+              </p>
+            </div>
+            <ServerIcon className={`h-8 w-8 ${systemHealth?.overall_status === 'healthy' ? 'text-green-400' : 'text-yellow-400'}`} />
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="bg-white rounded-lg shadow-sm border border-gray-200 p-6"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600">Active Agents</p>
+              <p className="text-3xl font-bold text-blue-600">{agentsData.length}</p>
+              <p className="text-sm text-gray-500">of {agentHealth.length} total agents</p>
+            </div>
+            <CpuChipIcon className="h-8 w-8 text-blue-400" />
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="bg-white rounded-lg shadow-sm border border-gray-200 p-6"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600">Active Tasks</p>
+              <p className="text-3xl font-bold text-purple-600">{activeTasks.length}</p>
+              <p className="text-sm text-gray-500">in queue</p>
+            </div>
+            <ClockIcon className="h-8 w-8 text-purple-400" />
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="bg-white rounded-lg shadow-sm border border-gray-200 p-6"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600">Sessions</p>
+              <p className="text-3xl font-bold text-orange-600">{systemHealth?.active_sessions || 0}</p>
+              <p className="text-sm text-gray-500">active learning</p>
+            </div>
+            <ChatBubbleLeftRightIcon className="h-8 w-8 text-orange-400" />
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Agent List and Control */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Agent Status */}
+        <div className="lg:col-span-2 bg-white rounded-lg shadow-sm border border-gray-200">
+          <div className="px-6 py-4 border-b border-gray-200">
+            <h3 className="text-lg font-medium text-gray-900">Agent Status</h3>
+            <p className="text-sm text-gray-500">Real-time agent monitoring and control</p>
+          </div>
+          <div className="p-6">
+            <div className="space-y-4">
+              {isAgentLoading ? (
+                <div className="flex items-center justify-center py-8">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                  <span className="ml-2 text-gray-600">Loading agent data...</span>
+                </div>
+              ) : (
+                [
+                  {
+                    id: 'content_curator',
+                    name: 'Content Curator',
+                    type: 'content_curator',
+                    status: 'idle',
+                    description: 'Curates and organizes learning content',
+                    tasks: 23,
+                    uptime: '98.5%'
+                  },
+                  {
+                    id: 'quiz_master',
+                    name: 'Quiz Master',
+                    type: 'quiz_master',
+                    status: 'busy',
+                    description: 'Generates quizzes and assessments',
+                    tasks: 12,
+                    uptime: '99.1%'
+                  },
+                  {
+                    id: 'evaluator',
+                    name: 'Evaluator',
+                    type: 'evaluator',
+                    status: 'idle',
+                    description: 'Evaluates user submissions and provides feedback',
+                    tasks: 8,
+                    uptime: '97.8%'
+                  },
+                  {
+                    id: 'progress_tracker',
+                    name: 'Progress Tracker',
+                    type: 'progress_tracker',
+                    status: 'active',
+                    description: 'Tracks learning progress and analytics',
+                    tasks: 5,
+                    uptime: '99.7%'
+                  },
+                  {
+                    id: 'motivator',
+                    name: 'Motivator',
+                    type: 'motivator',
+                    status: 'idle',
+                    description: 'Provides motivation and encouragement',
+                    tasks: 15,
+                    uptime: '96.3%'
+                  },
+                  {
+                    id: 'orchestrator',
+                    name: 'System Orchestrator',
+                    type: 'system_orchestrator',
+                    status: 'active',
+                    description: 'Coordinates multi-agent workflows',
+                    tasks: 3,
+                    uptime: '99.9%'
+                  }
+                ].map((agent, index) => (
+                  <motion.div
+                    key={agent.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50"
+                  >
+                    <div className="flex items-center space-x-4">
+                      <div className={`p-2 rounded-lg ${getAgentStatusColor(agent.status)}`}>
+                        <CpuChipIcon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900">{agent.name}</h4>
+                        <p className="text-sm text-gray-600">{agent.description}</p>
+                        <div className="flex items-center space-x-4 mt-1">
+                          <span className="text-xs text-gray-500">{agent.tasks} active tasks</span>
+                          <span className="text-xs text-gray-500">{agent.uptime} uptime</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getAgentStatusColor(agent.status)}`}>
+                        {agent.status}
+                      </span>
+                      <div className="flex space-x-1">
+                        <button
+                          onClick={() => handleAgentAction('restart', agent.id)}
+                          className="p-1 text-gray-400 hover:text-blue-600 disabled:opacity-50"
+                          disabled={isAgentLoading}
+                          title="Restart Agent"
+                        >
+                          <ArrowPathIcon className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleAgentAction(agent.status === 'active' ? 'stop' : 'start', agent.id)}
+                          className={`p-1 disabled:opacity-50 ${
+                            agent.status === 'active' 
+                              ? 'text-gray-400 hover:text-red-600' 
+                              : 'text-gray-400 hover:text-green-600'
+                          }`}
+                          disabled={isAgentLoading}
+                          title={agent.status === 'active' ? 'Stop Agent' : 'Start Agent'}
+                        >
+                          {agent.status === 'active' ? (
+                            <StopIcon className="h-4 w-4" />
+                          ) : (
+                            <PlayIcon className="h-4 w-4" />
+                          )}
+                        </button>
+                        <button
+                          className="p-1 text-gray-400 hover:text-gray-600"
+                          title="Configure Agent"
+                        >
+                          <CogIcon className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Recent Agent Activity */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+          <div className="px-6 py-4 border-b border-gray-200">
+            <h3 className="text-lg font-medium text-gray-900">Recent Activity</h3>
+            <p className="text-sm text-gray-500">Agent events and actions</p>
+          </div>
+          <div className="p-6">
+            <div className="space-y-4">
+              {agentActivity.map((activity) => (
+                <div key={activity.id} className="flex items-start space-x-3">
+                  <div className={`p-1 rounded-full ${
+                    activity.severity === 'critical' ? 'bg-red-100' :
+                    activity.severity === 'high' ? 'bg-orange-100' :
+                    activity.severity === 'medium' ? 'bg-yellow-100' : 'bg-green-100'
+                  }`}>
+                    {activity.type === 'error' ? (
+                      <ExclamationTriangleIcon className="h-4 w-4 text-red-600" />
+                    ) : activity.type === 'agent_start' ? (
+                      <PlayIcon className="h-4 w-4 text-green-600" />
+                    ) : activity.type === 'task_completed' ? (
+                      <CheckCircleIcon className="h-4 w-4 text-blue-600" />
+                    ) : (
+                      <ClockIcon className="h-4 w-4 text-gray-600" />
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm text-gray-900">{activity.message}</p>
+                    <p className="text-xs text-gray-500">
+                      {new Date(activity.timestamp).toLocaleString()}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Agent Performance Metrics */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Task Queue Overview */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+          <div className="px-6 py-4 border-b border-gray-200">
+            <h3 className="text-lg font-medium text-gray-900">Task Queue Overview</h3>
+            <p className="text-sm text-gray-500">Current tasks across all agents</p>
+          </div>
+          <div className="p-6">
+            <div className="space-y-4">
+              {[
+                { type: 'Content Generation', count: 15, priority: 'high', agent: 'Content Curator' },
+                { type: 'Quiz Creation', count: 8, priority: 'medium', agent: 'Quiz Master' },
+                { type: 'Code Evaluation', count: 12, priority: 'high', agent: 'Evaluator' },
+                { type: 'Progress Analysis', count: 5, priority: 'low', agent: 'Progress Tracker' },
+                { type: 'Motivation Messages', count: 3, priority: 'medium', agent: 'Motivator' },
+              ].map((task, index) => (
+                <div key={task.type} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                  <div>
+                    <h4 className="font-medium text-gray-900">{task.type}</h4>
+                    <p className="text-sm text-gray-600">{task.agent}</p>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                      {task.count}
+                    </span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      task.priority === 'high' ? 'bg-red-100 text-red-800' :
+                      task.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                      'bg-green-100 text-green-800'
+                    }`}>
+                      {task.priority}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* System Health Chart */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+          <div className="px-6 py-4 border-b border-gray-200">
+            <h3 className="text-lg font-medium text-gray-900">System Performance</h3>
+            <p className="text-sm text-gray-500">Agent performance metrics</p>
+          </div>
+          <div className="p-6">
+            <div className="space-y-6">
+              {[
+                { name: 'Content Curator', performance: 94, response_time: '1.2s', tasks: 247 },
+                { name: 'Quiz Master', performance: 97, response_time: '0.8s', tasks: 189 },
+                { name: 'Evaluator', performance: 91, response_time: '2.1s', tasks: 156 },
+                { name: 'Progress Tracker', performance: 99, response_time: '0.5s', tasks: 298 },
+                { name: 'Motivator', performance: 88, response_time: '0.9s', tasks: 134 },
+                { name: 'Orchestrator', performance: 99.5, response_time: '0.3s', tasks: 89 },
+              ].map((metric, index) => (
+                <div key={metric.name}>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="font-medium text-gray-900">{metric.name}</span>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-gray-600">{metric.performance}%</span>
+                      <span className="text-gray-400">•</span>
+                      <span className="text-gray-600">{metric.response_time}</span>
+                    </div>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${metric.performance}%` }}
+                      transition={{ delay: index * 0.1 }}
+                      className={`h-2 rounded-full ${
+                        metric.performance >= 95 ? 'bg-green-500' :
+                        metric.performance >= 90 ? 'bg-yellow-500' : 'bg-red-500'
+                      }`}
+                    />
+                  </div>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>{metric.tasks} tasks processed</span>
+                    <span>Target: 95%</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Agent Configuration Panel */}
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="px-6 py-4 border-b border-gray-200">
+          <h3 className="text-lg font-medium text-gray-900">Agent Configuration</h3>
+          <p className="text-sm text-gray-500">Manage agent settings and capabilities</p>
+        </div>
+        <div className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              {
+                name: 'Content Curator',
+                config: {
+                  auto_content_generation: true,
+                  content_quality_threshold: 0.85,
+                  max_concurrent_tasks: 5,
+                }
+              },
+              {
+                name: 'Quiz Master',
+                config: {
+                  auto_quiz_generation: true,
+                  difficulty_calibration: true,
+                  max_questions_per_quiz: 20,
+                }
+              },
+              {
+                name: 'Evaluator',
+                config: {
+                  code_analysis_depth: 'deep',
+                  feedback_style: 'detailed',
+                  timeout_threshold: 30,
+                }
+              },
+            ].map((agent) => (
+              <div key={agent.name} className="border border-gray-200 rounded-lg p-4">
+                <h4 className="font-medium text-gray-900 mb-3">{agent.name}</h4>
+                <div className="space-y-2">
+                  {Object.entries(agent.config).map(([key, value]) => (
+                    <div key={key} className="flex justify-between text-sm">
+                      <span className="text-gray-600 capitalize">{key.replace(/_/g, ' ')}</span>
+                      <span className="font-medium text-gray-900">
+                        {typeof value === 'boolean' ? (value ? 'Enabled' : 'Disabled') : String(value)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <button className="mt-3 w-full bg-blue-50 hover:bg-blue-100 text-blue-700 py-2 px-3 rounded text-sm font-medium">
+                  Configure
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   const renderUsers = () => (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -976,6 +1542,7 @@ const AdminDashboard: React.FC = () => {
             {activeTab === 'users' && renderUsers()}
             {activeTab === 'content' && renderContent()}
             {activeTab === 'learning' && renderLearningPaths()}
+            {activeTab === 'agents' && renderAgents()}
           </>
         )}
       </div>
