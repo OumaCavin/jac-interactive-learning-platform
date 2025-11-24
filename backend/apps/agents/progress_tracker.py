@@ -11,7 +11,7 @@ from django.utils import timezone
 from django.db.models import Avg, Count, Q, Sum
 from datetime import datetime, timedelta
 from .base_agent import BaseAgent, AgentStatus, TaskPriority
-from ..learning.models import LearningPath, Module, UserModuleProgress, LearningContent, UserLearningPath, UserAssessmentResult
+from ..learning.models import LearningPath, Module, UserModuleProgress, UserLearningPath, UserAssessmentResult
 
 
 class ProgressTrackerAgent(BaseAgent):

@@ -236,7 +236,7 @@ class MotivatorAgent(BaseAgent):
         
         return motivation_response
     
-    def _track_engagement(self, params: Dict[str, Any]) -> Dict[str, Any] -> Dict[str, Any]:
+    def _track_engagement(self, params: Dict[str, Any]) -> Dict[str, Any]:
         """Track and analyze user engagement patterns"""
         user = params.get('user')
         learning_path_id = params.get('learning_path_id')

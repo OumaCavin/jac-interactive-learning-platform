@@ -9,6 +9,7 @@ from .simple_models import (
     SimpleTask as Task, 
     SimpleAgentMetrics as AgentMetrics,
     ChatMessage,
+    LearningSession,
     AgentType,
     TaskStatus,
     TaskPriority

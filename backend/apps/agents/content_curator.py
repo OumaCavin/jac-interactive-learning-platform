@@ -9,7 +9,7 @@ from typing import Dict, Any, List, Optional
 from django.contrib.auth.models import User
 from django.utils import timezone
 from .base_agent import BaseAgent, AgentStatus, TaskPriority
-from ..learning.models import LearningPath, Module, Lesson, LearningContent
+from ..learning.models import LearningPath, Module, Lesson
 
 
 class ContentCuratorAgent(BaseAgent):
@@ -85,7 +85,7 @@ class ContentCuratorAgent(BaseAgent):
         curated_items = []
         
         # Filter and organize content based on criteria
-        content_items = LearningContent.objects.filter(
+        content_items = Module.objects.filter(
             topic__icontains=topic,
             difficulty_level=difficulty_level,
             content_type=content_type,
@@ -134,7 +134,7 @@ class ContentCuratorAgent(BaseAgent):
         preferred_topics = self._extract_preferred_topics(user_progress)
         
         # Generate recommendations based on patterns
-        candidate_content = LearningContent.objects.filter(
+        candidate_content = Module.objects.filter(
             is_published=True,
             difficulty_level=preferred_difficulty
         ).exclude(
@@ -225,8 +225,8 @@ class ContentCuratorAgent(BaseAgent):
             return {'error': 'Content ID required for validation'}
         
         try:
-            content = LearningContent.objects.get(id=content_id)
-        except LearningContent.DoesNotExist:
+            content = Module.objects.get(id=content_id)
+        except Module.DoesNotExist:
             return {'error': 'Content not found'}
         
         validation_results = {
@@ -340,7 +340,7 @@ class ContentCuratorAgent(BaseAgent):
         }
     
     # Helper methods for content processing
-    def _calculate_relevance(self, content: LearningContent, topic: str) -> float:
+    def _calculate_relevance(self, content: Module, topic: str) -> float:
         """Calculate content relevance score"""
         if not topic:
             return 0.5

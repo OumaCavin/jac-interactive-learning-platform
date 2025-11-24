@@ -16,13 +16,13 @@ import time
 
 # Import simplified models and agents for standalone operation
 # Note: This is a simplified version for initial testing
-# from .models import Agent, Task, AgentCommunication, LearningSession
-# from .content_curator import ContentCuratorAgent
-# from .quiz_master import QuizMasterAgent
-# from .evaluator import EvaluatorAgent
-# from .progress_tracker import ProgressTrackerAgent
-# from .motivator import MotivatorAgent
-# from .system_orchestrator import SystemOrchestratorAgent
+from .models import Agent, Task
+from .content_curator import ContentCuratorAgent
+from .quiz_master import QuizMasterAgent
+from .evaluator import EvaluatorAgent
+from .progress_tracker import ProgressTrackerAgent
+from .motivator import MotivatorAgent
+from .system_orchestrator import SystemOrchestratorAgent
 
 
 class AgentsManager:

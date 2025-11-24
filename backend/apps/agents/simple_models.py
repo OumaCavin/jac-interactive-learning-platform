@@ -234,3 +234,39 @@ class ChatMessage(models.Model):
         if self.feedback_rating:
             return '⭐' * self.feedback_rating
         return ''
+
+
+class LearningSession(models.Model):
+    """Model for tracking learning sessions"""
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    session_id = models.CharField(max_length=100, unique=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='learning_sessions')
+    session_type = models.CharField(max_length=50, default='learning')
+    learning_path_id = models.UUIDField(blank=True, null=True)
+    session_data = models.JSONField(default=dict, blank=True)
+    started_at = models.DateTimeField(default=timezone.now)
+    ended_at = models.DateTimeField(blank=True, null=True)
+    performance_score = models.FloatField(blank=True, null=True)
+    agents_involved = models.ManyToManyField(SimpleAgent, related_name='sessions', blank=True)
+    
+    class Meta:
+        db_table = 'learning_sessions'
+        ordering = ['-started_at']
+        indexes = [
+            models.Index(fields=['user']),
+            models.Index(fields=['session_type']),
+            models.Index(fields=['started_at']),
+        ]
+    
+    def __str__(self):
+        return f"Session {self.session_id} - {self.user.username}"
+    
+    @property
+    def duration(self):
+        """Calculate session duration in seconds"""
+        if self.ended_at:
+            return (self.ended_at - self.started_at).total_seconds()
+        elif self.started_at:
+            return (timezone.now() - self.started_at).total_seconds()
+        return 0
