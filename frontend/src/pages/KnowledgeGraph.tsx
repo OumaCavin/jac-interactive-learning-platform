@@ -10,16 +10,25 @@ import {
   BookOpenIcon,
   AcademicCapIcon,
   CodeBracketIcon,
-  StarIcon
+  StarIcon,
+  ExclamationTriangleIcon,
+  ArrowDownTrayIcon
 } from '@heroicons/react/24/outline';
 import { useSelector } from 'react-redux';
 import { selectLearning, selectUserLearningPaths, selectUserModuleProgress } from '../store/slices/learningSlice';
 import { selectUser } from '../store/slices/authSlice';
+import knowledgeGraphService, { 
+  GraphData, 
+  KnowledgeNode, 
+  KnowledgeEdge, 
+  GraphAnalytics,
+  GraphSearchParams 
+} from '../services/knowledgeGraphService';
 
-// Types for knowledge graph
+// Types for knowledge graph visualization
 interface GraphNode {
   id: string;
-  type: 'learning_path' | 'module' | 'concept';
+  type: KnowledgeNode['node_type'];
   label: string;
   x: number;
   y: number;
@@ -27,7 +36,7 @@ interface GraphNode {
   vy?: number;
   size: number;
   color: string;
-  data: any;
+  data: KnowledgeNode;
   isCompleted?: boolean;
   progress?: number;
 }
@@ -35,8 +44,9 @@ interface GraphNode {
 interface GraphEdge {
   source: string;
   target: string;
-  type: 'prerequisite' | 'contains' | 'related' | 'mastery';
+  type: KnowledgeEdge['edge_type'];
   strength: number;
+  data: KnowledgeEdge;
 }
 
 interface LayoutType {
@@ -44,71 +54,18 @@ interface LayoutType {
   value: 'force' | 'hierarchical' | 'circular' | 'grid';
 }
 
-// Mock JAC Programming Concepts
-const JAC_CONCEPTS = [
-  { id: 'variables', name: 'Variables', category: 'fundamentals', difficulty: 'beginner' },
-  { id: 'data_types', name: 'Data Types', category: 'fundamentals', difficulty: 'beginner' },
-  { id: 'operators', name: 'Operators', category: 'fundamentals', difficulty: 'beginner' },
-  { id: 'control_flow', name: 'Control Flow', category: 'logic', difficulty: 'beginner' },
-  { id: 'loops', name: 'Loops', category: 'logic', difficulty: 'beginner' },
-  { id: 'functions', name: 'Functions', category: 'structure', difficulty: 'intermediate' },
-  { id: 'arrays', name: 'Arrays', category: 'data_structures', difficulty: 'intermediate' },
-  { id: 'objects', name: 'Objects', category: 'data_structures', difficulty: 'intermediate' },
-  { id: 'classes', name: 'Classes', category: 'oop', difficulty: 'intermediate' },
-  { id: 'inheritance', name: 'Inheritance', category: 'oop', difficulty: 'advanced' },
-  { id: 'polymorphism', name: 'Polymorphism', category: 'oop', difficulty: 'advanced' },
-  { id: 'algorithms', name: 'Algorithms', category: 'advanced', difficulty: 'advanced' },
-  { id: 'data_structures', name: 'Data Structures', category: 'advanced', difficulty: 'advanced' },
-  { id: 'recursion', name: 'Recursion', category: 'advanced', difficulty: 'advanced' },
-  { id: 'async_programming', name: 'Async Programming', category: 'advanced', difficulty: 'advanced' }
-];
+// Graph loading and error states
+interface LoadingState {
+  graph: boolean;
+  analytics: boolean;
+  search: boolean;
+}
 
-// Mock Learning Paths
-const MOCK_LEARNING_PATHS = [
-  {
-    id: 'path-1',
-    title: 'JAC Programming Fundamentals',
-    description: 'Learn the basics of JAC programming language',
-    difficulty: 'beginner' as const,
-    moduleCount: 8,
-    averageRating: 4.8,
-    concepts: ['variables', 'data_types', 'operators', 'control_flow', 'loops']
-  },
-  {
-    id: 'path-2', 
-    title: 'Object-Oriented Programming',
-    description: 'Master OOP concepts in JAC',
-    difficulty: 'intermediate' as const,
-    moduleCount: 6,
-    averageRating: 4.6,
-    concepts: ['functions', 'arrays', 'objects', 'classes']
-  },
-  {
-    id: 'path-3',
-    title: 'Advanced JAC Development',
-    description: 'Advanced topics and algorithms',
-    difficulty: 'advanced' as const,
-    moduleCount: 10,
-    averageRating: 4.9,
-    concepts: ['inheritance', 'polymorphism', 'algorithms', 'data_structures', 'recursion', 'async_programming']
-  }
-];
-
-// Mock Modules with concepts
-const MOCK_MODULES = [
-  { id: 'mod-1', title: 'Introduction to Variables', learningPath: 'path-1', concepts: ['variables'], difficulty: 'beginner', order: 1 },
-  { id: 'mod-2', title: 'Data Types and Type Conversion', learningPath: 'path-1', concepts: ['data_types'], difficulty: 'beginner', order: 2 },
-  { id: 'mod-3', title: 'Basic Operators', learningPath: 'path-1', concepts: ['operators'], difficulty: 'beginner', order: 3 },
-  { id: 'mod-4', title: 'Control Structures', learningPath: 'path-1', concepts: ['control_flow'], difficulty: 'beginner', order: 4 },
-  { id: 'mod-5', title: 'Loops and Iteration', learningPath: 'path-1', concepts: ['loops'], difficulty: 'beginner', order: 5 },
-  { id: 'mod-6', title: 'Functions and Methods', learningPath: 'path-2', concepts: ['functions'], difficulty: 'intermediate', order: 1 },
-  { id: 'mod-7', title: 'Working with Arrays', learningPath: 'path-2', concepts: ['arrays'], difficulty: 'intermediate', order: 2 },
-  { id: 'mod-8', title: 'Objects and Properties', learningPath: 'path-2', concepts: ['objects'], difficulty: 'intermediate', order: 3 },
-  { id: 'mod-9', title: 'Classes and Instances', learningPath: 'path-2', concepts: ['classes'], difficulty: 'intermediate', order: 4 },
-  { id: 'mod-10', title: 'Inheritance Patterns', learningPath: 'path-3', concepts: ['inheritance'], difficulty: 'advanced', order: 1 },
-  { id: 'mod-11', title: 'Algorithm Design', learningPath: 'path-3', concepts: ['algorithms'], difficulty: 'advanced', order: 2 },
-  { id: 'mod-12', title: 'Recursion Techniques', learningPath: 'path-3', concepts: ['recursion'], difficulty: 'advanced', order: 3 }
-];
+interface ErrorState {
+  graph: string | null;
+  analytics: string | null;
+  search: string | null;
+}
 
 const KnowledgeGraph: React.FC = () => {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -119,6 +76,7 @@ const KnowledgeGraph: React.FC = () => {
   const [filters, setFilters] = useState({
     difficulty: [] as string[],
     concept: [] as string[],
+    nodeTypes: [] as string[],
     showCompleted: true,
     showInProgress: true,
     showNotStarted: true
@@ -130,132 +88,187 @@ const KnowledgeGraph: React.FC = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [showStats, setShowStats] = useState(true);
   const [selectedConcept, setSelectedConcept] = useState<string | null>(null);
+  const [analytics, setAnalytics] = useState<GraphAnalytics | null>(null);
+  
+  // Loading and error states
+  const [loading, setLoading] = useState<LoadingState>({
+    graph: true,
+    analytics: false,
+    search: false
+  });
+  
+  const [errors, setErrors] = useState<ErrorState>({
+    graph: null,
+    analytics: null,
+    search: null
+  });
   
   const user = useSelector(selectUser);
   const learningPaths = useSelector(selectLearning).learning_paths;
   const userLearningPaths = useSelector(selectUserLearningPaths);
   const userModuleProgress = useSelector(selectUserModuleProgress);
 
-  // Initialize graph data
-  useEffect(() => {
+  // Load knowledge graph data from API
+  const loadGraphData = useCallback(async () => {
+    setLoading(prev => ({ ...prev, graph: true }));
+    setErrors(prev => ({ ...prev, graph: null }));
+    
     try {
-      const graphNodes: GraphNode[] = [];
-      const graphEdges: GraphEdge[] = [];
-
-    // Add learning path nodes
-    MOCK_LEARNING_PATHS.forEach((path, index) => {
-      const userPathProgress = userLearningPaths.find(p => p.learning_path === path.id);
-      const isCompleted = userPathProgress?.status === 'completed';
+      const graphData: GraphData = await knowledgeGraphService.getCompleteGraph();
       
-      graphNodes.push({
-        id: path.id,
-        type: 'learning_path',
-        label: path.title,
-        x: Math.cos((index / MOCK_LEARNING_PATHS.length) * 2 * Math.PI) * 300 + 400,
-        y: Math.sin((index / MOCK_LEARNING_PATHS.length) * 2 * Math.PI) * 200 + 300,
-        size: 40,
-        color: getDifficultyColor(path.difficulty),
-        data: path,
-        isCompleted,
-        progress: userPathProgress?.progress_percentage || 0
-      });
-
-      // Add edges from learning path to concepts
-      path.concepts.forEach(conceptId => {
-        const concept = JAC_CONCEPTS.find(c => c.id === conceptId);
-        if (concept) {
-          graphEdges.push({
-            source: path.id,
-            target: `concept-${conceptId}`,
-            type: 'contains',
-            strength: 1
-          });
+      // Convert backend nodes to visualization nodes
+      const graphNodes: GraphNode[] = graphData.nodes.map((node, index) => {
+        const userPathProgress = userLearningPaths.find(p => p.learning_path === node.id);
+        const userModule = userModuleProgress.find(p => p.module === node.id);
+        const isCompleted = userPathProgress?.status === 'completed' || userModule?.status === 'completed';
+        const progress = userPathProgress?.progress_percentage || userModule?.progress_percentage || 0;
+        
+        // Calculate position based on node type and index
+        let x = node.x_position || 400;
+        let y = node.y_position || 300;
+        let size = 20;
+        
+        switch (node.node_type) {
+          case 'learning_path':
+            size = 40;
+            if (!node.x_position || !node.y_position) {
+              x = Math.cos((index / graphData.nodes.filter(n => n.node_type === 'learning_path').length) * 2 * Math.PI) * 300 + 400;
+              y = Math.sin((index / graphData.nodes.filter(n => n.node_type === 'learning_path').length) * 2 * Math.PI) * 200 + 300;
+            }
+            break;
+          case 'module':
+            size = 25;
+            if (!node.x_position || !node.y_position) {
+              x = 400 + (Math.random() - 0.5) * 100;
+              y = 300 + (Math.random() - 0.5) * 100;
+            }
+            break;
+          case 'concept':
+            size = 15;
+            if (!node.x_position || !node.y_position) {
+              const conceptIndex = graphData.nodes.filter(n => n.node_type === 'concept').indexOf(node);
+              x = Math.cos((conceptIndex / graphData.nodes.filter(n => n.node_type === 'concept').length) * 2 * Math.PI) * 400 + 400;
+              y = Math.sin((conceptIndex / graphData.nodes.filter(n => n.node_type === 'concept').length) * 2 * Math.PI) * 300 + 300;
+            }
+            break;
+          default:
+            size = 20;
         }
-      });
-    });
-
-    // Add module nodes
-    MOCK_MODULES.forEach((module, index) => {
-      const parentPath = graphNodes.find(n => n.id === module.learningPath);
-      const userModule = userModuleProgress.find(p => p.module === module.id);
-      const isCompleted = userModule?.status === 'completed';
-      
-      graphNodes.push({
-        id: module.id,
-        type: 'module',
-        label: module.title,
-        x: (parentPath?.x || 400) + (Math.random() - 0.5) * 100,
-        y: (parentPath?.y || 300) + (Math.random() - 0.5) * 100,
-        size: 25,
-        color: getDifficultyColor(module.difficulty),
-        data: module,
-        isCompleted,
-        progress: userModule?.progress_percentage || 0
+        
+        return {
+          id: node.id,
+          type: node.node_type,
+          label: node.title,
+          x,
+          y,
+          size,
+          color: getDifficultyColor(node.difficulty_level),
+          data: node,
+          isCompleted,
+          progress
+        };
       });
 
-      // Add edges from module to concepts
-      module.concepts.forEach(conceptId => {
-        graphEdges.push({
-          source: module.id,
-          target: `concept-${conceptId}`,
-          type: 'contains',
-          strength: 1
-        });
-      });
+      // Convert backend edges to visualization edges
+      const graphEdges: GraphEdge[] = graphData.edges.map(edge => ({
+        source: edge.source_node,
+        target: edge.target_node,
+        type: edge.edge_type,
+        strength: edge.strength,
+        data: edge
+      }));
 
-      // Add prerequisite edges (simplified)
-      if (module.order > 1) {
-        const prevModule = MOCK_MODULES.find(m => m.learningPath === module.learningPath && m.order === module.order - 1);
-        if (prevModule) {
-          graphEdges.push({
-            source: prevModule.id,
-            target: module.id,
-            type: 'prerequisite',
-            strength: 0.8
-          });
-        }
-      }
-    });
-
-    // Add concept nodes
-    JAC_CONCEPTS.forEach((concept, index) => {
-      const relatedModules = MOCK_MODULES.filter(m => m.concepts.includes(concept.id));
-      const avgProgress = relatedModules.length > 0 
-        ? relatedModules.reduce((sum, m) => {
-            const userModule = userModuleProgress.find(p => p.module === m.id);
-            return sum + (userModule?.progress_percentage || 0);
-          }, 0) / relatedModules.length
-        : 0;
-
-      graphNodes.push({
-        id: `concept-${concept.id}`,
-        type: 'concept',
-        label: concept.name,
-        x: Math.cos((index / JAC_CONCEPTS.length) * 2 * Math.PI) * 400 + 400,
-        y: Math.sin((index / JAC_CONCEPTS.length) * 2 * Math.PI) * 300 + 300,
-        size: 15,
-        color: getCategoryColor(concept.category),
-        data: { ...concept, modules: relatedModules, progress: avgProgress }
-      });
-
-      // Add prerequisite relationships between concepts (simplified)
-      if (concept.id === 'data_types' || concept.id === 'variables' || concept.id === 'operators') {
-        graphEdges.push({
-          source: 'concept-variables',
-          target: `concept-${concept.id}`,
-          type: 'prerequisite',
-          strength: 0.6
-        });
-      }
-    });
-
-    setNodes(graphNodes);
-    setEdges(graphEdges);
-    } catch (error) {
-      // Handle graph data initialization error gracefully
-      console.warn('Error initializing knowledge graph data:', error);
+      setNodes(graphNodes);
+      setEdges(graphEdges);
+    } catch (error: any) {
+      console.error('Error loading knowledge graph:', error);
+      setErrors(prev => ({ 
+        ...prev, 
+        graph: error.message || 'Failed to load knowledge graph data' 
+      }));
+    } finally {
+      setLoading(prev => ({ ...prev, graph: false }));
     }
   }, [userLearningPaths, userModuleProgress]);
+
+  // Load analytics data
+  const loadAnalytics = useCallback(async () => {
+    setLoading(prev => ({ ...prev, analytics: true }));
+    setErrors(prev => ({ ...prev, analytics: null }));
+    
+    try {
+      const analyticsData = await knowledgeGraphService.getGraphAnalytics();
+      setAnalytics(analyticsData);
+    } catch (error: any) {
+      console.error('Error loading analytics:', error);
+      setErrors(prev => ({ 
+        ...prev, 
+        analytics: error.message || 'Failed to load graph analytics' 
+      }));
+    } finally {
+      setLoading(prev => ({ ...prev, analytics: false }));
+    }
+  }, []);
+
+  // Search graph
+  const searchGraph = useCallback(async (query: string, searchFilters?: Partial<GraphSearchParams>) => {
+    if (!query.trim()) {
+      // If no query, reload the complete graph
+      loadGraphData();
+      return;
+    }
+
+    setLoading(prev => ({ ...prev, search: true }));
+    setErrors(prev => ({ ...prev, search: null }));
+    
+    try {
+      const searchParams: GraphSearchParams = {
+        query: query.trim(),
+        node_types: searchFilters?.nodeTypes,
+        difficulty_levels: searchFilters?.difficulty_levels,
+        limit: 100
+      };
+      
+      const searchResults = await knowledgeGraphService.searchGraph(searchParams);
+      
+      // Convert search results to visualization format
+      const graphNodes: GraphNode[] = searchResults.nodes.map(node => ({
+        id: node.id,
+        type: node.node_type,
+        label: node.title,
+        x: node.x_position || 400,
+        y: node.y_position || 300,
+        size: node.node_type === 'learning_path' ? 40 : node.node_type === 'module' ? 25 : 15,
+        color: getDifficultyColor(node.difficulty_level),
+        data: node
+      }));
+
+      const graphEdges: GraphEdge[] = searchResults.edges.map(edge => ({
+        source: edge.source_node,
+        target: edge.target_node,
+        type: edge.edge_type,
+        strength: edge.strength,
+        data: edge
+      }));
+
+      setNodes(graphNodes);
+      setEdges(graphEdges);
+    } catch (error: any) {
+      console.error('Error searching graph:', error);
+      setErrors(prev => ({ 
+        ...prev, 
+        search: error.message || 'Failed to search knowledge graph' 
+      }));
+    } finally {
+      setLoading(prev => ({ ...prev, search: false }));
+    }
+  }, [loadGraphData]);
+
+  // Initialize graph data and analytics on component mount
+  useEffect(() => {
+    loadGraphData();
+    loadAnalytics();
+  }, [loadGraphData, loadAnalytics]);
 
   // Get color for difficulty level
   const getDifficultyColor = (difficulty: string) => {
@@ -267,17 +280,28 @@ const KnowledgeGraph: React.FC = () => {
     }
   };
 
-  // Get color for concept category
-  const getCategoryColor = (category: string) => {
+  // Get color for node type
+  const getNodeTypeColor = (nodeType: string) => {
     const colors = {
-      fundamentals: '#3B82F6',
-      logic: '#8B5CF6', 
-      structure: '#10B981',
-      data_structures: '#F59E0B',
-      oop: '#EF4444',
-      advanced: '#6366F1'
+      learning_path: '#3B82F6',
+      module: '#10B981',
+      concept: '#8B5CF6',
+      lesson: '#F59E0B',
+      assessment: '#EF4444'
     };
-    return colors[category as keyof typeof colors] || '#6B7280';
+    return colors[nodeType as keyof typeof colors] || '#6B7280';
+  };
+
+  // Get node icon based on type
+  const getNodeIcon = (type: string) => {
+    switch (type) {
+      case 'learning_path': return '📚';
+      case 'module': return '📖';
+      case 'concept': return '💡';
+      case 'lesson': return '📝';
+      case 'assessment': return '✅';
+      default: return '●';
+    }
   };
 
   // Handle node click
@@ -294,18 +318,17 @@ const KnowledgeGraph: React.FC = () => {
 
   // Filter nodes based on search and filters
   const filteredNodes = nodes.filter(node => {
-    const matchesSearch = node.label.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = node.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         node.data.description?.toLowerCase().includes(searchQuery.toLowerCase());
     
     // Apply difficulty filter
     if (filters.difficulty.length > 0) {
-      const nodeDifficulty = getNodeDifficulty(node);
-      if (!filters.difficulty.includes(nodeDifficulty)) return false;
+      if (!filters.difficulty.includes(node.data.difficulty_level)) return false;
     }
 
-    // Apply concept filter
-    if (filters.concept.length > 0) {
-      const nodeConcepts = getNodeConcepts(node);
-      if (!nodeConcepts.some((concept: string) => filters.concept.includes(concept))) return false;
+    // Apply node type filter
+    if (filters.nodeTypes.length > 0) {
+      if (!filters.nodeTypes.includes(node.type)) return false;
     }
 
     // Apply status filter
@@ -318,24 +341,41 @@ const KnowledgeGraph: React.FC = () => {
     return matchesSearch;
   });
 
-  // Get node difficulty
-  const getNodeDifficulty = (node: GraphNode) => {
-    if (node.data?.difficulty) return node.data.difficulty;
-    return 'beginner';
-  };
+  // Handle search input change with debouncing
+  const handleSearchChange = useCallback((query: string) => {
+    setSearchQuery(query);
+    // Debounce search to avoid too many API calls
+    const timeoutId = setTimeout(() => {
+      if (query.trim()) {
+        searchGraph(query, {
+          node_types: filters.nodeTypes.length > 0 ? filters.nodeTypes : undefined,
+          difficulty_levels: filters.difficulty.length > 0 ? filters.difficulty : undefined
+        });
+      } else {
+        loadGraphData();
+      }
+    }, 500);
 
-  // Get node concepts
-  const getNodeConcepts = (node: GraphNode) => {
-    if (node.type === 'concept') {
-      return [node.data.id];
-    }
-    if (node.data?.concepts) {
-      return node.data.concepts;
-    }
-    return [];
-  };
+    return () => clearTimeout(timeoutId);
+  }, [filters.nodeTypes, filters.difficulty, searchGraph, loadGraphData]);
 
-  // Calculate statistics
+  // Handle filter changes
+  const handleFilterChange = useCallback((filterType: string, value: any) => {
+    setFilters(prev => ({
+      ...prev,
+      [filterType]: value
+    }));
+    
+    // If we have an active search, re-search with new filters
+    if (searchQuery.trim()) {
+      searchGraph(searchQuery, {
+        node_types: filterType === 'nodeTypes' ? value : filters.nodeTypes,
+        difficulty_levels: filterType === 'difficulty' ? value : filters.difficulty
+      });
+    }
+  }, [searchQuery, filters.nodeTypes, filters.difficulty, searchGraph]);
+
+  // Calculate statistics from current graph data
   const stats = {
     totalPaths: nodes.filter(n => n.type === 'learning_path').length,
     totalModules: nodes.filter(n => n.type === 'module').length,
@@ -344,7 +384,9 @@ const KnowledgeGraph: React.FC = () => {
     completedModules: nodes.filter(n => n.type === 'module' && n.isCompleted).length,
     averageProgress: nodes.filter(n => n.type === 'learning_path' || n.type === 'module')
       .reduce((sum, node) => sum + (node.progress || 0), 0) / 
-      Math.max(nodes.filter(n => n.type === 'learning_path' || n.type === 'module').length, 1)
+      Math.max(nodes.filter(n => n.type === 'learning_path' || n.type === 'module').length, 1),
+    totalNodes: nodes.length,
+    totalEdges: edges.length
   };
 
   return (
@@ -360,11 +402,17 @@ const KnowledgeGraph: React.FC = () => {
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
               type="text"
-              placeholder="Search nodes..."
+              placeholder="Search concepts, modules, paths..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-64"
+              onChange={(e) => handleSearchChange(e.target.value)}
+              disabled={loading.search}
+              className="pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-64 disabled:opacity-50"
             />
+            {loading.search && (
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <ArrowPathIcon className="w-4 h-4 text-gray-400 animate-spin" />
+              </div>
+            )}
           </div>
 
           {/* Control Buttons */}
@@ -375,6 +423,18 @@ const KnowledgeGraph: React.FC = () => {
             >
               <AdjustmentsHorizontalIcon className="w-4 h-4" />
               Filters
+            </button>
+            
+            <button
+              onClick={() => {
+                loadGraphData();
+                loadAnalytics();
+              }}
+              disabled={loading.graph || loading.analytics}
+              className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white hover:bg-white/20 transition-colors flex items-center gap-2 disabled:opacity-50"
+            >
+              <ArrowPathIcon className={`w-4 h-4 ${loading.graph || loading.analytics ? 'animate-spin' : ''}`} />
+              Refresh
             </button>
             
             <select
@@ -391,10 +451,42 @@ const KnowledgeGraph: React.FC = () => {
         </div>
       </div>
 
+      {/* Error States */}
+      {(errors.graph || errors.search) && (
+        <div className="mb-6 bg-red-500/10 border border-red-500/20 rounded-lg p-4">
+          <div className="flex items-center gap-2 text-red-400">
+            <ExclamationTriangleIcon className="w-5 h-5" />
+            <span className="font-medium">Error Loading Data</span>
+          </div>
+          <p className="text-red-300 mt-2">
+            {errors.graph || errors.search}
+          </p>
+          <button
+            onClick={() => {
+              setErrors({ graph: null, analytics: null, search: null });
+              loadGraphData();
+            }}
+            className="mt-3 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 rounded-lg text-red-300 transition-colors flex items-center gap-2"
+          >
+            <ArrowPathIcon className="w-4 h-4" />
+            Retry
+          </button>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* Main Graph Area */}
         <div className="lg:col-span-3">
           <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 h-[600px] relative overflow-hidden">
+            {/* Loading Overlay */}
+            {loading.graph && (
+              <div className="absolute inset-0 bg-black/20 backdrop-blur-sm z-10 flex items-center justify-center">
+                <div className="text-center">
+                  <ArrowPathIcon className="w-8 h-8 text-white animate-spin mx-auto mb-2" />
+                  <p className="text-white">Loading knowledge graph...</p>
+                </div>
+              </div>
+            )}
             {/* Graph Controls */}
             <div className="absolute top-4 right-4 z-10 flex gap-2">
               <button
@@ -525,7 +617,7 @@ const KnowledgeGraph: React.FC = () => {
 
             {/* Legend */}
             <div className="absolute bottom-4 left-4 bg-black/20 backdrop-blur-sm rounded-lg p-3 text-white text-sm">
-              <div className="flex items-center gap-4">
+              <div className="grid grid-cols-2 gap-2">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-blue-500"></div>
                   <span>Learning Paths</span>
@@ -537,6 +629,29 @@ const KnowledgeGraph: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-purple-500"></div>
                   <span>Concepts</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-amber-500"></div>
+                  <span>Lessons</span>
+                </div>
+              </div>
+              
+              {/* Edge Types Legend */}
+              <div className="mt-3 pt-3 border-t border-white/20">
+                <div className="text-xs text-gray-300 mb-1">Relationships:</div>
+                <div className="grid grid-cols-1 gap-1 text-xs">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-0.5 bg-red-500"></div>
+                    <span>Prerequisite</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-0.5 bg-blue-500"></div>
+                    <span>Contains</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-0.5 bg-purple-500"></div>
+                    <span>Related</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -555,8 +670,17 @@ const KnowledgeGraph: React.FC = () => {
               <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
                 <AcademicCapIcon className="w-5 h-5" />
                 Statistics
+                {loading.analytics && <ArrowPathIcon className="w-4 h-4 animate-spin" />}
               </h3>
               <div className="space-y-3 text-sm">
+                <div className="flex justify-between text-white">
+                  <span>Total Nodes:</span>
+                  <span className="font-semibold">{stats.totalNodes}</span>
+                </div>
+                <div className="flex justify-between text-white">
+                  <span>Total Edges:</span>
+                  <span className="font-semibold">{stats.totalEdges}</span>
+                </div>
                 <div className="flex justify-between text-white">
                   <span>Learning Paths:</span>
                   <span className="font-semibold">{stats.completedPaths}/{stats.totalPaths}</span>
@@ -573,6 +697,37 @@ const KnowledgeGraph: React.FC = () => {
                   <span>Avg. Progress:</span>
                   <span className="font-semibold">{stats.averageProgress.toFixed(1)}%</span>
                 </div>
+                
+                {/* Analytics from backend if available */}
+                {analytics && !loading.analytics && (
+                  <>
+                    <div className="border-t border-white/20 pt-3 mt-3">
+                      <h4 className="text-sm font-medium text-gray-300 mb-2">Analytics</h4>
+                      {analytics.completion_statistics && (
+                        <div className="space-y-2">
+                          <div className="flex justify-between text-white">
+                            <span>Completed Paths:</span>
+                            <span className="font-semibold">{analytics.completion_statistics.completed_paths}</span>
+                          </div>
+                          <div className="flex justify-between text-white">
+                            <span>In Progress:</span>
+                            <span className="font-semibold">{analytics.completion_statistics.in_progress_paths}</span>
+                          </div>
+                          <div className="flex justify-between text-white">
+                            <span>Completion Rate:</span>
+                            <span className="font-semibold">{analytics.completion_statistics.average_completion_rate.toFixed(1)}%</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                )}
+                
+                {errors.analytics && (
+                  <div className="text-red-400 text-xs">
+                    {errors.analytics}
+                  </div>
+                )}
               </div>
             </motion.div>
           )}
@@ -588,6 +743,36 @@ const KnowledgeGraph: React.FC = () => {
               >
                 <h3 className="text-lg font-semibold text-white mb-4">Filters</h3>
                 
+                {/* Node Type Filter */}
+                <div className="mb-4">
+                  <label className="text-sm text-gray-300 mb-2 block">Node Types</label>
+                  <div className="space-y-2">
+                    {[
+                      { value: 'learning_path', label: 'Learning Paths', icon: '📚' },
+                      { value: 'module', label: 'Modules', icon: '📖' },
+                      { value: 'concept', label: 'Concepts', icon: '💡' },
+                      { value: 'lesson', label: 'Lessons', icon: '📝' },
+                      { value: 'assessment', label: 'Assessments', icon: '✅' }
+                    ].map((nodeType) => (
+                      <label key={nodeType.value} className="flex items-center text-white text-sm">
+                        <input
+                          type="checkbox"
+                          checked={filters.nodeTypes.includes(nodeType.value)}
+                          onChange={(e) => {
+                            const updatedTypes = e.target.checked
+                              ? [...filters.nodeTypes, nodeType.value]
+                              : filters.nodeTypes.filter(t => t !== nodeType.value);
+                            handleFilterChange('nodeTypes', updatedTypes);
+                          }}
+                          className="mr-2 rounded"
+                        />
+                        <span className="mr-2">{nodeType.icon}</span>
+                        <span className="capitalize">{nodeType.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Difficulty Filter */}
                 <div className="mb-4">
                   <label className="text-sm text-gray-300 mb-2 block">Difficulty</label>
@@ -598,17 +783,10 @@ const KnowledgeGraph: React.FC = () => {
                           type="checkbox"
                           checked={filters.difficulty.includes(difficulty)}
                           onChange={(e) => {
-                            if (e.target.checked) {
-                              setFilters(prev => ({
-                                ...prev,
-                                difficulty: [...prev.difficulty, difficulty]
-                              }));
-                            } else {
-                              setFilters(prev => ({
-                                ...prev,
-                                difficulty: prev.difficulty.filter(d => d !== difficulty)
-                              }));
-                            }
+                            const updatedDifficulty = e.target.checked
+                              ? [...filters.difficulty, difficulty]
+                              : filters.difficulty.filter(d => d !== difficulty);
+                            handleFilterChange('difficulty', updatedDifficulty);
                           }}
                           className="mr-2 rounded"
                         />
@@ -675,10 +853,10 @@ const KnowledgeGraph: React.FC = () => {
                     <span className="ml-2 capitalize">{selectedNode.type.replace('_', ' ')}</span>
                   </div>
                   
-                  {selectedNode.data?.difficulty && (
+                  {selectedNode.data?.difficulty_level && (
                     <div>
                       <span className="text-gray-300">Difficulty:</span>
-                      <span className="ml-2 capitalize">{selectedNode.data.difficulty}</span>
+                      <span className="ml-2 capitalize">{selectedNode.data.difficulty_level}</span>
                     </div>
                   )}
                   
@@ -686,6 +864,33 @@ const KnowledgeGraph: React.FC = () => {
                     <div>
                       <span className="text-gray-300">Description:</span>
                       <p className="mt-1 text-gray-100">{selectedNode.data.description}</p>
+                    </div>
+                  )}
+                  
+                  {selectedNode.data?.learning_objectives && selectedNode.data.learning_objectives.length > 0 && (
+                    <div>
+                      <span className="text-gray-300">Learning Objectives:</span>
+                      <ul className="mt-1 list-disc list-inside text-gray-100">
+                        {selectedNode.data.learning_objectives.map((objective: string, index: number) => (
+                          <li key={index} className="text-xs">{objective}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  
+                  {selectedNode.data?.prerequisites && selectedNode.data.prerequisites.length > 0 && (
+                    <div>
+                      <span className="text-gray-300">Prerequisites:</span>
+                      <div className="mt-1 flex flex-wrap gap-1">
+                        {selectedNode.data.prerequisites.map((prereq: string) => (
+                          <span
+                            key={prereq}
+                            className="px-2 py-1 bg-red-500/20 text-red-300 rounded text-xs"
+                          >
+                            {prereq}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   )}
                   
@@ -708,21 +913,22 @@ const KnowledgeGraph: React.FC = () => {
                     </div>
                   )}
                   
-                  {selectedNode.data?.concepts && (
+                  {selectedNode.data?.view_count !== undefined && (
                     <div>
-                      <span className="text-gray-300">Concepts:</span>
-                      <div className="mt-1 flex flex-wrap gap-1">
-                        {selectedNode.data.concepts.map((concept: string) => (
-                          <span
-                            key={concept}
-                            className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-xs"
-                          >
-                            {concept}
-                          </span>
-                        ))}
-                      </div>
+                      <span className="text-gray-300">Views:</span>
+                      <span className="ml-2">{selectedNode.data.view_count}</span>
                     </div>
                   )}
+                  
+                  <div className="pt-2 border-t border-white/20">
+                    <button
+                      onClick={() => selectedNode && knowledgeGraphService.incrementNodeView(selectedNode.id)}
+                      className="text-blue-400 hover:text-blue-300 text-xs flex items-center gap-1"
+                    >
+                      <ArrowDownTrayIcon className="w-3 h-3" />
+                      Mark as Viewed
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -733,20 +939,13 @@ const KnowledgeGraph: React.FC = () => {
   );
 
   // Helper functions
-  function getNodeIcon(type: string) {
-    switch (type) {
-      case 'learning_path': return '📚';
-      case 'module': return '📖';
-      case 'concept': return '💡';
-      default: return '●';
-    }
-  }
-
   function getNodeTypeIcon(type: string) {
     switch (type) {
       case 'learning_path': return <BookOpenIcon className="w-5 h-5" />;
       case 'module': return <AcademicCapIcon className="w-5 h-5" />;
       case 'concept': return <CodeBracketIcon className="w-5 h-5" />;
+      case 'lesson': return <StarIcon className="w-5 h-5" />;
+      case 'assessment': return <StarIcon className="w-5 h-5" />;
       default: return <StarIcon className="w-5 h-5" />;
     }
   }
@@ -754,8 +953,10 @@ const KnowledgeGraph: React.FC = () => {
   function getEdgeColor(type: string) {
     switch (type) {
       case 'prerequisite': return '#EF4444';
+      case 'prerequisite_of': return '#EF4444';
       case 'contains': return '#3B82F6';
       case 'related': return '#8B5CF6';
+      case 'leads_to': return '#10B981';
       case 'mastery': return '#10B981';
       default: return '#6B7280';
     }
