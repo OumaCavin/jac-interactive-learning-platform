@@ -401,3 +401,260 @@ class QuestionCreateSerializer(serializers.ModelSerializer):
             'code_template', 'test_cases', 'points_value', 'difficulty_level',
             'order_index', 'time_limit_seconds', 'is_required'
         ]
+
+
+# ============================================================================
+# ASSESSMENT API SERIALIZERS
+# ============================================================================
+
+from .models import AssessmentAttempt, UserAssessmentResult
+from django.utils import timezone
+
+
+class QuizListSerializer(serializers.ModelSerializer):
+    """Serializer for quiz listing response"""
+    
+    learning_path_name = serializers.CharField(source='module.learning_path.name', read_only=True, allow_null=True)
+    module_title = serializers.CharField(source='module.title', read_only=True, allow_null=True)
+    question_count = serializers.SerializerMethodField()
+    average_score = serializers.SerializerMethodField()
+    total_attempts = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Assessment
+        fields = [
+            'id', 'title', 'description', 'difficulty_level',
+            'learning_path_name', 'module_title',
+            'time_limit', 'max_attempts', 'passing_score',
+            'is_published', 'average_score', 'question_count',
+            'total_attempts', 'created_at', 'updated_at'
+        ]
+    
+    def get_question_count(self, obj):
+        return obj.questions.count()
+    
+    def get_average_score(self, obj):
+        from django.db.models import Avg
+        attempts = AssessmentAttempt.objects.filter(assessment=obj, status='completed')
+        if attempts.exists():
+            return attempts.aggregate(avg_score=Avg('score'))['avg_score'] or 0
+        return 0
+    
+    def get_total_attempts(self, obj):
+        return AssessmentAttempt.objects.filter(assessment=obj).count()
+
+
+class QuizDetailSerializer(serializers.ModelSerializer):
+    """Serializer for detailed quiz information"""
+    
+    learning_path_name = serializers.CharField(source='module.learning_path.name', read_only=True, allow_null=True)
+    module_title = serializers.CharField(source='module.title', read_only=True, allow_null=True)
+    questions = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Assessment
+        fields = [
+            'id', 'title', 'description', 'difficulty_level',
+            'learning_path_name', 'module_title',
+            'time_limit', 'max_attempts', 'passing_score',
+            'is_published', 'questions', 'created_at', 'updated_at'
+        ]
+    
+    def get_questions(self, obj):
+        questions = obj.question_set.all().order_by('id')
+        question_data = []
+        for question in questions:
+            question_data.append({
+                'id': str(question.id),
+                'type': question.question_type,
+                'text': question.question_text,
+                'options': question.question_options,
+                'difficulty': question.difficulty_level,
+                'points': question.points
+            })
+        return question_data
+
+
+class AttemptListSerializer(serializers.ModelSerializer):
+    """Serializer for listing user assessment attempts"""
+    
+    assessment_title = serializers.CharField(source='assessment.title', read_only=True)
+    assessment_type = serializers.CharField(source='assessment.assessment_type', read_only=True)
+    module_title = serializers.CharField(source='module.title', read_only=True, allow_null=True)
+    percentage_score = serializers.SerializerMethodField()
+    is_passed_text = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = AssessmentAttempt
+        fields = [
+            'id', 'assessment', 'assessment_title', 'assessment_type',
+            'module', 'module_title', 'attempt_number', 'status',
+            'score', 'max_score', 'passing_score', 'is_passed',
+            'percentage_score', 'is_passed_text', 'time_spent',
+            'started_at', 'completed_at', 'feedback'
+        ]
+        read_only_fields = [
+            'id', 'attempt_number', 'status', 'started_at', 'completed_at'
+        ]
+    
+    def get_percentage_score(self, obj):
+        if obj.score is not None and obj.max_score > 0:
+            return round((obj.score / obj.max_score) * 100, 2)
+        return 0
+    
+    def get_is_passed_text(self, obj):
+        return "Passed" if obj.is_passed else "Failed"
+
+
+class AttemptDetailSerializer(serializers.ModelSerializer):
+    """Serializer for detailed attempt information"""
+    
+    assessment_title = serializers.CharField(source='assessment.title', read_only=True)
+    assessment_type = serializers.CharField(source='assessment.assessment_type', read_only=True)
+    percentage_score = serializers.SerializerMethodField()
+    duration_minutes = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = AssessmentAttempt
+        fields = [
+            'id', 'assessment', 'assessment_title', 'assessment_type',
+            'attempt_number', 'status', 'score', 'max_score',
+            'passing_score', 'is_passed', 'percentage_score',
+            'time_spent', 'duration_minutes', 'answers', 'feedback',
+            'started_at', 'completed_at'
+        ]
+        read_only_fields = [
+            'id', 'attempt_number', 'status', 'started_at', 'completed_at'
+        ]
+    
+    def get_percentage_score(self, obj):
+        if obj.score is not None and obj.max_score > 0:
+            return round((obj.score / obj.max_score) * 100, 2)
+        return 0
+    
+    def get_duration_minutes(self, obj):
+        if obj.time_spent:
+            return round(obj.time_spent.total_seconds() / 60, 2)
+        return 0
+
+
+class StartAttemptSerializer(serializers.Serializer):
+    """Serializer for starting a new assessment attempt"""
+    
+    def create(self, validated_data):
+        user = self.context['request'].user
+        assessment = self.context['assessment']
+        
+        # Get attempt number
+        last_attempt = AssessmentAttempt.objects.filter(
+            user=user,
+            assessment=assessment
+        ).order_by('-attempt_number').first()
+        
+        attempt_number = (last_attempt.attempt_number + 1) if last_attempt else 1
+        
+        # Check if user has reached max attempts
+        if attempt_number > assessment.max_attempts:
+            raise serializers.ValidationError(
+                f"Maximum attempts ({assessment.max_attempts}) reached for this assessment"
+            )
+        
+        # Create new attempt
+        attempt = AssessmentAttempt.objects.create(
+            user=user,
+            assessment=assessment,
+            attempt_number=attempt_number,
+            status='in_progress'
+        )
+        
+        return attempt
+
+
+class SubmitAttemptSerializer(serializers.Serializer):
+    """Serializer for submitting an assessment attempt"""
+    
+    answers = serializers.JSONField()
+    time_taken = serializers.IntegerField(required=False, help_text='Time taken in seconds')
+    
+    def validate(self, data):
+        attempt = self.instance
+        if attempt.status != 'in_progress':
+            raise serializers.ValidationError("Can only submit attempts that are in progress")
+        
+        return data
+    
+    def update(self, instance, validated_data):
+        from datetime import timedelta
+        
+        answers = validated_data.get('answers', {})
+        time_taken = validated_data.get('time_taken', 0)
+        
+        # Calculate score (simplified scoring logic)
+        score = self._calculate_score(instance.assessment, answers)
+        
+        # Update attempt
+        instance.status = 'completed'
+        instance.completed_at = timezone.now()
+        instance.score = score
+        instance.answers = answers
+        instance.time_spent = timedelta(seconds=time_taken)
+        instance.is_passed = score >= instance.passing_score
+        
+        # Add feedback
+        if instance.is_passed:
+            instance.feedback = f"Congratulations! You passed with {score:.1f}%."
+        else:
+            instance.feedback = f"You scored {score:.1f}%. The passing score is {instance.passing_score:.1f}%."
+        
+        instance.save()
+        
+        return instance
+    
+    def _calculate_score(self, assessment, answers):
+        """Calculate score based on answers (simplified logic)"""
+        if not assessment.questions.exists():
+            return 0
+        
+        total_points = 0
+        earned_points = 0
+        
+        for question in assessment.questions.all():
+            total_points += question.points
+            
+            # Get user answer for this question
+            user_answer = answers.get(str(question.id))
+            if user_answer is not None:
+                # Simple scoring - in real implementation, this would be more sophisticated
+                if self._is_answer_correct(question, user_answer):
+                    earned_points += question.points
+        
+        if total_points > 0:
+            return (earned_points / total_points) * 100
+        return 0
+    
+    def _is_answer_correct(self, question, user_answer):
+        """Check if user answer is correct"""
+        correct_answer = question.correct_answer
+        
+        # Handle different question types
+        if question.question_type == 'multiple_choice':
+            return user_answer in correct_answer
+        elif question.question_type == 'true_false':
+            return str(user_answer).lower() == str(correct_answer).lower()
+        else:
+            # For other types, do simple string comparison
+            return str(user_answer).strip().lower() == str(correct_answer).strip().lower()
+
+
+class AssessmentStatsSerializer(serializers.Serializer):
+    """Serializer for assessment statistics"""
+    
+    total_assessments = serializers.IntegerField()
+    completed_assessments = serializers.IntegerField()
+    average_score = serializers.FloatField()
+    total_attempts = serializers.IntegerField()
+    passed_attempts = serializers.IntegerField()
+    pass_rate = serializers.FloatField()
+    total_time_spent = serializers.DurationField()
+    best_score = serializers.FloatField()
+    recent_attempts = AttemptListSerializer(many=True, read_only=True)

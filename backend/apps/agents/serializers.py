@@ -327,3 +327,99 @@ class AgentLifecycleSerializer(serializers.Serializer):
         required=False
     )
     config = serializers.JSONField(default=dict)
+
+
+# ============================================================================
+# CHAT ASSISTANT SERIALIZERS
+# ============================================================================
+
+class ChatMessageSerializer(serializers.ModelSerializer):
+    """Serializer for ChatMessage model"""
+    
+    user_username = serializers.CharField(source='user.username', read_only=True)
+    is_user_message = serializers.BooleanField(read_only=True)
+    is_agent_response = serializers.BooleanField(read_only=True)
+    rating_stars = serializers.CharField(read_only=True)
+    
+    class Meta:
+        model = ChatMessage
+        fields = [
+            'id', 'user', 'user_username', 'session_id', 'message', 'response',
+            'agent_type', 'message_type', 'metadata', 'feedback_rating',
+            'feedback_comment', 'created_at', 'updated_at', 'is_user_message',
+            'is_agent_response', 'rating_stars'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at', 'is_user_message', 'is_agent_response', 'rating_stars']
+
+
+class ChatMessageCreateSerializer(serializers.ModelSerializer):
+    """Serializer for creating chat messages"""
+    
+    class Meta:
+        model = ChatMessage
+        fields = ['session_id', 'message', 'agent_type']
+    
+    def create(self, validated_data):
+        user = self.context['request'].user
+        validated_data['user'] = user
+        validated_data['message_type'] = 'user'
+        
+        # Generate a response based on the message (simplified AI response)
+        message = validated_data.get('message', '')
+        response = self._generate_mock_response(message)
+        validated_data['response'] = response
+        
+        return ChatMessage.objects.create(**validated_data)
+    
+    def _generate_mock_response(self, message):
+        """Generate a mock AI response based on the user message"""
+        message_lower = message.lower()
+        
+        # Simple response patterns
+        if 'hello' in message_lower or 'hi' in message_lower:
+            return "Hello! I'm your JAC learning assistant. How can I help you learn JAC programming today?"
+        elif 'jac' in message_lower or 'jaseci' in message_lower:
+            return "JAC (Jaseci) is a powerful programming language for AI and machine learning. Would you like me to explain some concepts or help you with a specific topic?"
+        elif 'help' in message_lower:
+            return "I can help you with JAC programming concepts, syntax, best practices, and learning path recommendations. What specific topic would you like to explore?"
+        elif 'tutorial' in message_lower or 'learn' in message_lower:
+            return "Great! I can guide you through JAC programming tutorials. Are you interested in starting with basics like nodes and edges, or do you have a specific concept in mind?"
+        elif 'error' in message_lower or 'bug' in message_lower:
+            return "I'd be happy to help debug your JAC code. Could you share the specific error message or code that's causing issues?"
+        else:
+            return f"That's an interesting question about: '{message}'. While I continue learning, I recommend checking the JAC documentation or asking more specific questions about JAC syntax, nodes, edges, or AI patterns."
+
+
+class ChatMessageRateSerializer(serializers.ModelSerializer):
+    """Serializer for rating chat messages"""
+    
+    class Meta:
+        model = ChatMessage
+        fields = ['feedback_rating', 'feedback_comment']
+
+
+class ChatHistorySerializer(serializers.Serializer):
+    """Serializer for chat history response"""
+    
+    session_id = serializers.CharField()
+    messages = ChatMessageSerializer(many=True)
+    total_messages = serializers.IntegerField()
+    has_more = serializers.BooleanField()
+
+
+class SendMessageRequestSerializer(serializers.Serializer):
+    """Serializer for send message request"""
+    
+    message = serializers.CharField(max_length=2000)
+    session_id = serializers.CharField(max_length=100, required=False, allow_blank=True)
+    agent_type = serializers.ChoiceField(
+        choices=[
+            ('content_curator', 'Content Curator'),
+            ('quiz_master', 'Quiz Master'),
+            ('evaluator', 'Evaluator'),
+            ('progress_tracker', 'Progress Tracker'),
+            ('motivator', 'Motivator'),
+            ('system_orchestrator', 'System Orchestrator')
+        ],
+        default='system_orchestrator'
+    )

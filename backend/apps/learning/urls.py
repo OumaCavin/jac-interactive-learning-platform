@@ -11,7 +11,9 @@ from .views import (
     LearningPathViewSet, ModuleViewSet, LessonViewSet, AssessmentViewSet, QuestionViewSet,
     CodeSubmissionViewSet, TestCaseViewSet, UserLearningPathViewSet, UserModuleProgressViewSet,
     PathRatingViewSet, LearningRecommendationViewSet,
-    CodeExecutionAPIView, LearningProgressAPIView
+    CodeExecutionAPIView, LearningProgressAPIView,
+    QuizAPIView, QuizDetailAPIView, AttemptAPIView, StartAttemptAPIView,
+    SubmitAttemptAPIView, AttemptDetailAPIView, AssessmentStatsAPIView
 )
 
 # Create router for ViewSets
@@ -35,6 +37,15 @@ urlpatterns = [
     # Code execution endpoints
     path('code/execute/', CodeExecutionAPIView.as_view(), name='code-execute'),
     path('progress/', LearningProgressAPIView.as_view(), name='learning-progress'),
+    
+    # Assessment API endpoints
+    path('assessment/quizzes/', QuizAPIView.as_view(), name='assessment-quizzes'),
+    path('assessment/quizzes/<uuid:quiz_id>/', QuizDetailAPIView.as_view(), name='assessment-quiz-detail'),
+    path('assessment/quizzes/<uuid:quiz_id>/start/', StartAttemptAPIView.as_view(), name='assessment-start-attempt'),
+    path('assessment/attempts/', AttemptAPIView.as_view(), name='assessment-attempts'),
+    path('assessment/attempts/<uuid:attempt_id>/', AttemptDetailAPIView.as_view(), name='assessment-attempt-detail'),
+    path('assessment/attempts/<uuid:attempt_id>/submit/', SubmitAttemptAPIView.as_view(), name='assessment-submit-attempt'),
+    path('assessment/stats/', AssessmentStatsAPIView.as_view(), name='assessment-stats'),
     
     # Additional learning endpoints can be added here
 ]

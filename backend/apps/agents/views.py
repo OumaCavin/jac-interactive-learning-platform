@@ -875,3 +875,194 @@ def system_health_check(request):
         health_status['redis'] = f'unavailable: {str(e)[:100]}...'  # Truncate error message
     
     return JsonResponse(health_status)
+
+
+# ============================================================================
+# CHAT ASSISTANT API VIEWS
+# ============================================================================
+
+from .models import ChatMessage
+from .serializers import (
+    ChatMessageSerializer, ChatMessageCreateSerializer, ChatMessageRateSerializer,
+    ChatHistorySerializer, SendMessageRequestSerializer
+)
+
+
+class ChatAssistantAPIView(APIView):
+    """
+    Chat Assistant API for handling user interactions with AI agents
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def post(self, request):
+        """
+        Send a message to the chat assistant
+        POST /api/agents/chat-assistant/message/
+        """
+        serializer = SendMessageRequestSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        data = serializer.validated_data
+        
+        # Generate or use provided session_id
+        session_id = data.get('session_id')
+        if not session_id:
+            session_id = f"session_{request.user.id}_{int(timezone.now().timestamp())}"
+        
+        # Create user message
+        message_data = {
+            'session_id': session_id,
+            'message': data['message'],
+            'agent_type': data.get('agent_type', 'system_orchestrator'),
+            'message_type': 'user'
+        }
+        
+        user_message = ChatMessageCreateSerializer(
+            data=message_data,
+            context={'request': request}
+        )
+        
+        if not user_message.is_valid():
+            return Response(user_message.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        created_message = user_message.save()
+        
+        # Get the created message with full serializer data
+        response_serializer = ChatMessageSerializer(created_message)
+        
+        return Response(response_serializer.data, status=status.HTTP_201_CREATED)
+    
+    def get(self, request):
+        """
+        Get chat history for a session
+        GET /api/agents/chat-assistant/history/?session_id=xxx
+        """
+        session_id = request.query_params.get('session_id')
+        if not session_id:
+            return Response(
+                {'error': 'session_id parameter is required'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Pagination parameters
+        limit = int(request.query_params.get('limit', 50))
+        offset = int(request.query_params.get('offset', 0))
+        
+        # Get messages for the session
+        messages = ChatMessage.objects.filter(
+            user=request.user,
+            session_id=session_id
+        ).order_by('created_at')[offset:offset + limit]
+        
+        # Get total count for pagination
+        total_count = ChatMessage.objects.filter(
+            user=request.user,
+            session_id=session_id
+        ).count()
+        
+        # Serialize messages
+        message_serializer = ChatMessageSerializer(messages, many=True)
+        
+        # Create response with pagination info
+        response_data = {
+            'session_id': session_id,
+            'messages': message_serializer.data,
+            'total_messages': total_count,
+            'has_more': (offset + limit) < total_count,
+            'pagination': {
+                'limit': limit,
+                'offset': offset,
+                'count': len(message_serializer.data)
+            }
+        }
+        
+        return Response(response_data)
+
+
+class RateChatMessageAPIView(APIView):
+    """
+    API view for rating chat messages
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def post(self, request, message_id):
+        """
+        Rate a chat message
+        POST /api/agents/chat-assistant/rate/{message_id}/
+        """
+        try:
+            message = ChatMessage.objects.get(
+                id=message_id,
+                user=request.user,
+                message_type='agent'
+            )
+        except ChatMessage.DoesNotExist:
+            return Response(
+                {'error': 'Chat message not found'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        serializer = ChatMessageRateSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Update the message with rating
+        for attr, value in serializer.validated_data.items():
+            setattr(message, attr, value)
+        
+        message.save()
+        
+        return Response({
+            'message': 'Rating submitted successfully',
+            'feedback_rating': message.feedback_rating,
+            'feedback_comment': message.feedback_comment
+        })
+
+
+class ChatSessionListAPIView(APIView):
+    """
+    API view for listing user's chat sessions
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request):
+        """
+        Get list of user's chat sessions with latest message info
+        GET /api/agents/chat-assistant/sessions/
+        """
+        from django.db.models import Max, Count
+        
+        # Get distinct session IDs with latest message and message count
+        sessions = ChatMessage.objects.filter(
+            user=request.user
+        ).values('session_id').annotate(
+            latest_message=Max('created_at'),
+            message_count=Count('id')
+        ).order_by('-latest_message')
+        
+        session_list = []
+        for session in sessions:
+            # Get the first and last message for preview
+            session_messages = ChatMessage.objects.filter(
+                user=request.user,
+                session_id=session['session_id']
+            ).order_by('created_at')
+            
+            first_message = session_messages.first()
+            last_message = session_messages.last()
+            
+            session_data = {
+                'session_id': session['session_id'],
+                'message_count': session['message_count'],
+                'latest_message': session['latest_message'],
+                'first_message_preview': first_message.message[:100] if first_message else '',
+                'last_message_preview': last_message.message[:100] if last_message else '',
+                'agent_type': last_message.agent_type if last_message else 'system_orchestrator'
+            }
+            session_list.append(session_data)
+        
+        return Response({
+            'sessions': session_list,
+            'total_sessions': len(session_list)
+        })

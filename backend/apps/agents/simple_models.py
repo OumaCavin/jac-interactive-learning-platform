@@ -167,3 +167,65 @@ class SimpleAgentMetrics(models.Model):
     
     def __str__(self):
         return f"{self.agent.name}: {self.metric_name} = {self.metric_value}"
+
+
+class ChatMessage(models.Model):
+    """Model for storing chat conversations with agents"""
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chat_messages')
+    session_id = models.CharField(max_length=100, db_index=True)
+    message = models.TextField(help_text='User message')
+    response = models.TextField(help_text='Agent response')
+    agent_type = models.CharField(
+        max_length=50,
+        choices=AgentType.choices,
+        default=AgentType.SYSTEM_ORCHESTRATOR
+    )
+    message_type = models.CharField(
+        max_length=20,
+        choices=[
+            ('user', 'User Message'),
+            ('agent', 'Agent Response'),
+            ('system', 'System Message'),
+        ],
+        default='user'
+    )
+    metadata = models.JSONField(default=dict, blank=True, help_text='Additional message metadata')
+    feedback_rating = models.PositiveIntegerField(
+        null=True, 
+        blank=True,
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
+        help_text='User rating from 1-5'
+    )
+    feedback_comment = models.TextField(blank=True, help_text='User feedback comment')
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'chat_messages'
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['user', 'session_id']),
+            models.Index(fields=['session_id', 'created_at']),
+            models.Index(fields=['agent_type']),
+            models.Index(fields=['feedback_rating']),
+        ]
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.agent_type} ({self.session_id})"
+    
+    @property
+    def is_user_message(self):
+        return self.message_type == 'user'
+    
+    @property
+    def is_agent_response(self):
+        return self.message_type == 'agent'
+    
+    @property
+    def rating_stars(self):
+        """Return star representation of rating"""
+        if self.feedback_rating:
+            return '⭐' * self.feedback_rating
+        return ''

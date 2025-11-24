@@ -31,6 +31,12 @@ urlpatterns = [
     path('validate/', views.AgentWorkflowValidationAPIView.as_view(), name='validate'),
     path('lifecycle/', views.AgentLifecycleAPIView.as_view(), name='lifecycle'),
     
+    # Chat Assistant Endpoints
+    path('chat-assistant/message/', views.ChatAssistantAPIView.as_view(), name='chat-message'),
+    path('chat-assistant/history/', views.ChatAssistantAPIView.as_view(), name='chat-history'),
+    path('chat-assistant/rate/<uuid:message_id>/', views.RateChatMessageAPIView.as_view(), name='chat-rate'),
+    path('chat-assistant/sessions/', views.ChatSessionListAPIView.as_view(), name='chat-sessions'),
+    
     # Include router URLs
     path('', include(router.urls)),
 ]
