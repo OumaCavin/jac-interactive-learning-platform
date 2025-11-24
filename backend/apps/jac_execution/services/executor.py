@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 from django.conf import settings
 from django.utils import timezone
-from .models import SecuritySettings
+from ..models import SecuritySettings
 
 # Try to import psutil, but make it optional
 try:
@@ -374,7 +374,7 @@ class ExecutionService:
         
         if save_result:
             # Create execution record
-            from .models import CodeExecution
+            from ..models import CodeExecution
             execution_record = CodeExecution.objects.create(
                 user=user,
                 language=language,
@@ -424,7 +424,7 @@ class ExecutionService:
     
     def _update_user_session(self, user, execution_record):
         """Update user's execution session statistics."""
-        from .models import CodeExecutionSession
+        from ..models import CodeExecutionSession
         from django.utils import timezone
         
         # Get or create active session
@@ -440,7 +440,7 @@ class ExecutionService:
     def get_execution_history(self, user, limit: int = 50, 
                              language: Optional[str] = None) -> List[Dict]:
         """Get user's execution history."""
-        from .models import CodeExecution
+        from ..models import CodeExecution
         
         queryset = CodeExecution.objects.filter(user=user)
         
@@ -463,7 +463,7 @@ class ExecutionService:
     
     def get_user_statistics(self, user) -> Dict:
         """Get user execution statistics."""
-        from .models import CodeExecution, CodeExecutionSession
+        from ..models import CodeExecution, CodeExecutionSession
         
         # Execution stats
         total_executions = CodeExecution.objects.filter(user=user).count()
