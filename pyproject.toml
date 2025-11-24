@@ -53,27 +53,6 @@ dependencies = [
  "mypy>=1.16.1",
  # PDF处理
  "weasyprint>=65.1",
- "django>=5.2.8",
- "djangorestframework>=3.16.1",
- "django-cors-headers>=4.9.0",
- "djangorestframework-simplejwt>=5.5.1",
- "psycopg2-binary>=2.9.11",
- "django-redis>=6.0.0",
- "celery[redis]>=5.5.3",
- "django-mptt>=0.18.0",
- "pygments>=2.19.2",
- "ast-decompiler>=0.8.0",
- "django-debug-toolbar>=6.1.0",
- "django-extensions>=4.1",
- "django-allauth>=65.13.1",
- "cryptography>=46.0.3",
- "pytest>=9.0.1",
- "pytest-django>=4.11.1",
- "factory-boy>=3.3.3",
- "python-decouple>=3.8",
- "drf-spectacular>=0.29.0",
- "sentry-sdk>=2.45.0",
- "django-celery-beat>=2.8.1",
 ]
 
 [build-system]
