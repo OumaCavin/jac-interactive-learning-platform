@@ -3,6 +3,7 @@ Migration for content app
 """
 
 from django.db import migrations, models
+import django.core.validators
 import uuid
 
 
@@ -27,7 +28,7 @@ class Migration(migrations.Migration):
                 ('estimated_duration', models.PositiveIntegerField(default=30)),
                 ('tags', models.JSONField(default=list)),
                 ('topic', models.CharField(blank=True, max_length=100)),
-                ('quality_rating', models.FloatField(blank=True, null=True, validators=[models.MinValueValidator(1.0), models.MaxValueValidator(5.0)])),
+                ('quality_rating', models.FloatField(blank=True, null=True, validators=[django.core.validators.MinValueValidator(1.0), django.core.validators.MaxValueValidator(5.0)])),
                 ('learning_path', models.ForeignKey(blank=True, null=True, on_delete=models.CASCADE, related_name='content_items', to='learning.learningpath')),
                 ('module', models.ForeignKey(blank=True, help_text='Primary module using this content', null=True, on_delete=models.CASCADE, related_name='content_items', to='learning.module')),
                 ('is_published', models.BooleanField(default=False)),
@@ -72,7 +73,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('recommendation_id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
                 ('recommendation_type', models.CharField(choices=[('personalized', 'Personalized'), ('based_on_progress', 'Progress-based'), ('similar_users', 'Similar users'), ('trending', 'Trending')], default='personalized', max_length=20)),
-                ('match_score', models.FloatField(help_text='Match score from 0.0 to 1.0', validators=[models.MinValueValidator(0.0), models.MaxValueValidator(1.0)])),
+                ('match_score', models.FloatField(help_text='Match score from 0.0 to 1.0', validators=[django.core.validators.MinValueValidator(0.0), django.core.validators.MaxValueValidator(1.0)])),
                 ('reasoning', models.JSONField(default=dict)),
                 ('is_viewed', models.BooleanField(default=False)),
                 ('is_dismissed', models.BooleanField(default=False)),

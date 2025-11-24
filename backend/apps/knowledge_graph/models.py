@@ -6,7 +6,7 @@ representation and adaptive learning paths in the JAC Learning Platform.
 """
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
 import uuid
@@ -57,7 +57,7 @@ class KnowledgeNode(models.Model):
     prerequisites = models.JSONField(default=list, blank=True, help_text="Required prior knowledge")
     
     # Metadata
-    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
@@ -185,7 +185,7 @@ class ConceptRelation(models.Model):
     related_nodes = models.ManyToManyField(KnowledgeNode, blank=True, help_text="Knowledge nodes that demonstrate this relationship")
     
     # Metadata
-    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
@@ -259,7 +259,7 @@ class LearningGraph(models.Model):
     successful_completions = models.IntegerField(default=0)
     
     # Metadata
-    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     version = models.CharField(max_length=20, default='1.0.0')
@@ -361,7 +361,7 @@ class LearningGraphEdge(models.Model):
             models.Index(fields=['learning_graph']),
             models.Index(fields=['knowledge_edge']),
             models.Index(fields=['display_order']),
-            models.Index(['edge_priority']),
+            models.Index(fields=['edge_priority'], name='edge_priority_idx'),
         ]
     
     def __str__(self):
@@ -392,7 +392,7 @@ class LearningPath(models.Model):
     )
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, help_text="User following this learning path")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, help_text="User following this learning path")
     learning_graph = models.ForeignKey(LearningGraph, on_delete=models.CASCADE, help_text="Source learning graph")
     
     # Path Configuration
@@ -492,7 +492,7 @@ class UserKnowledgeState(models.Model):
     )
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, help_text="User whose knowledge state is being tracked")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, help_text="User whose knowledge state is being tracked")
     knowledge_node = models.ForeignKey(KnowledgeNode, on_delete=models.CASCADE, help_text="Knowledge concept being tracked")
     
     # Knowledge State

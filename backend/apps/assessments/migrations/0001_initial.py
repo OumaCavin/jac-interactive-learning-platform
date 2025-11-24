@@ -29,6 +29,7 @@ class Migration(migrations.Migration):
                 ('passing_score', models.FloatField(default=70.0)),
                 ('answers', models.JSONField(default=dict, help_text='User answers to questions')),
                 ('feedback', models.JSONField(default=dict, help_text='Detailed feedback for each question')),
+                ('assessment', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='attempts', to='assessments.assessment')),
                 ('module', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='assessment_attempts', to='learning.module')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='assessment_attempts', to=settings.AUTH_USER_MODEL)),
             ],

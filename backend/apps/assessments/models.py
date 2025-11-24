@@ -103,7 +103,7 @@ class AssessmentAttempt(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assessment_attempts')
     
     # Assessment details
-    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='attempts')
+    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='attempts', null=True, blank=True)
     module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='assessment_attempts')
     
     # Status and timing
