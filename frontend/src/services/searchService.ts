@@ -3,9 +3,7 @@
  * Handles search functionality with backend API integration
  */
 
-import axios from 'axios';
-
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+import { apiClient } from './apiClient';
 
 export interface SearchResult {
   id: string;
@@ -41,23 +39,8 @@ export interface SearchRequest {
 class SearchService {
   private baseURL: string;
 
-  constructor(baseURL: string = API_BASE) {
-    this.baseURL = baseURL;
-  }
-
-  /**
-   * Configure axios instance with authentication
-   */
-  private getAxiosInstance() {
-    const token = localStorage.getItem('access_token');
-    
-    return axios.create({
-      baseURL: this.baseURL,
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token && { Authorization: `Bearer ${token}` })
-      },
-    });
+  constructor() {
+    this.baseURL = '/api';
   }
 
   /**
@@ -65,8 +48,18 @@ class SearchService {
    */
   async search(request: SearchRequest): Promise<SearchResponse> {
     try {
-      const axiosInstance = this.getAxiosInstance();
-      const response = await axiosInstance.post('/api/search/search/search/', request);
+      const params = new URLSearchParams({ q: request.query });
+      if (request.content_types?.length) {
+        params.append('content_types', request.content_types.join(','));
+      }
+      if (request.limit) {
+        params.append('limit', request.limit.toString());
+      }
+      if (request.offset) {
+        params.append('offset', request.offset.toString());
+      }
+
+      const response = await apiClient.get(`/search/search/?${params}`);
       return response.data;
     } catch (error: any) {
       console.error('Search API error:', error);
@@ -94,8 +87,7 @@ class SearchService {
     }
 
     try {
-      const axiosInstance = this.getAxiosInstance();
-      const response = await axiosInstance.get('/api/search/search/suggestions/', {
+      const response = await apiClient.get('/search/search/suggestions/', {
         params: { query, limit }
       });
       return response.data.suggestions || [];
@@ -108,12 +100,12 @@ class SearchService {
   /**
    * Track user click on search result
    */
-  async trackClick(query: string, resultUrl: string): Promise<void> {
+  async trackClick(query: string, resultId: string, resultType: string): Promise<void> {
     try {
-      const axiosInstance = this.getAxiosInstance();
-      await axiosInstance.post('/api/search/search/track_click/', {
+      await apiClient.post('/search/search/track_click/', {
         query,
-        result_url: resultUrl
+        result_id: resultId,
+        result_type: resultType
       });
     } catch (error: any) {
       console.error('Track click API error:', error);
@@ -126,8 +118,7 @@ class SearchService {
    */
   async getSearchHistory(): Promise<any[]> {
     try {
-      const axiosInstance = this.getAxiosInstance();
-      const response = await axiosInstance.get('/api/search/history/');
+      const response = await apiClient.get('/search/history/');
       return response.data || [];
     } catch (error: any) {
       console.error('Search history API error:', error);
@@ -136,28 +127,14 @@ class SearchService {
   }
 
   /**
-   * Clear user's search history
-   */
-  async clearSearchHistory(): Promise<void> {
-    try {
-      const axiosInstance = this.getAxiosInstance();
-      await axiosInstance.delete('/api/search/history/clear/');
-    } catch (error: any) {
-      console.error('Clear search history API error:', error);
-      throw error;
-    }
-  }
-
-  /**
    * Get popular search terms
    */
-  async getPopularSearches(limit: number = 10): Promise<string[]> {
+  async getPopularSearches(limit: number = 10): Promise<any[]> {
     try {
-      const axiosInstance = this.getAxiosInstance();
-      const response = await axiosInstance.get('/api/search/popular/popular/', {
+      const response = await apiClient.get('/search/popular/popular/', {
         params: { limit }
       });
-      return response.data.popular_searches || [];
+      return response.data || [];
     } catch (error: any) {
       console.error('Popular searches API error:', error);
       return [];
@@ -167,13 +144,12 @@ class SearchService {
   /**
    * Get trending search terms
    */
-  async getTrendingSearches(limit: number = 10): Promise<string[]> {
+  async getTrendingSearches(limit: number = 10): Promise<any[]> {
     try {
-      const axiosInstance = this.getAxiosInstance();
-      const response = await axiosInstance.get('/api/search/popular/trending/', {
+      const response = await apiClient.get('/search/popular/trending/', {
         params: { limit }
       });
-      return response.data.trending_searches || [];
+      return response.data || [];
     } catch (error: any) {
       console.error('Trending searches API error:', error);
       return [];
