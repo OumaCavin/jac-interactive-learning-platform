@@ -106,9 +106,18 @@ const CodeExecutionPanel = () => {
 
     try {
       const token = localStorage.getItem('access_token');
-      const endpoint = saveToHistory ? 'execute' : 'quick-execute';
+      let endpoint, method;
       
-      const response = await fetch(`${API_BASE}/executions/${endpoint}/`, {
+      if (saveToHistory) {
+        endpoint = 'api/executions/execute/';
+        method = 'POST';
+      } else {
+        endpoint = 'api/executions/quick-execute/';
+        method = 'POST';
+      }
+      
+      const response = await fetch(`${API_BASE}/${endpoint}`, {
+        method,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
