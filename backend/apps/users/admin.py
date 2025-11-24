@@ -13,45 +13,62 @@ class UserAdmin(BaseUserAdmin):
     
     list_display = (
         'username', 'email', 'first_name', 'last_name', 
-        'learning_level', 'preferred_learning_style', 
+        'level', 'total_points', 'learning_style', 
         'is_staff', 'is_active', 'date_joined'
     )
     
     list_filter = (
         'is_staff', 'is_superuser', 'is_active', 
-        'preferred_learning_style', 'learning_level', 
+        'learning_style', 'preferred_difficulty', 'learning_pace',
+        'agent_interaction_level', 'preferred_feedback_style',
+        'dark_mode', 'notifications_enabled', 'is_verified',
         'date_joined', 'last_login'
     )
     
     search_fields = ('username', 'email', 'first_name', 'last_name')
     
     readonly_fields = (
-        'id', 'date_joined', 'last_login', 'last_activity'
+        'id', 'date_joined', 'last_login', 'last_login_at', 
+        'created_at', 'updated_at', 'last_activity_at',
+        'verification_token'
     )
     
     fieldsets = (
         ('Basic Information', {
-            'fields': ('username', 'email', 'password', 'first_name', 'last_name')
+            'fields': ('username', 'email', 'password', 'first_name', 'last_name', 'bio', 'profile_image')
         }),
         ('Learning Preferences', {
             'fields': (
-                'preferred_learning_style', 'learning_level'
+                'learning_style', 'preferred_difficulty', 'learning_pace',
+                'agent_interaction_level', 'preferred_feedback_style'
             )
         }),
-        ('Platform Activity', {
+        ('Progress Tracking', {
             'fields': (
-                'total_study_time', 'streak_days', 'last_activity'
+                'total_modules_completed', 'total_time_spent',
+                'current_streak', 'longest_streak', 'total_points', 'level',
+                'current_goal', 'goal_deadline'
             ),
             'classes': ('collapse',)
         }),
-        ('Preferences', {
-            'fields': ('notifications_enabled',)
+        ('Gamification', {
+            'fields': ('achievements', 'badges'),
+            'classes': ('collapse',)
+        }),
+        ('Platform Preferences', {
+            'fields': (
+                'dark_mode', 'notifications_enabled', 
+                'email_notifications', 'push_notifications'
+            )
+        }),
+        ('Email Verification', {
+            'fields': ('is_verified', 'verification_token', 'verification_token_expires_at')
         }),
         ('Permissions', {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
         }),
         ('Important dates', {
-            'fields': ('date_joined', 'last_login')
+            'fields': ('date_joined', 'last_login', 'last_login_at', 'created_at', 'updated_at', 'last_activity_at')
         }),
     )
     
