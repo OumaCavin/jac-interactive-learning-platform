@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { authService } from '../../services/authService';
-import { learningService } from '../../services/learningService';
+// import { learningService } from '../../services/learningService'; // Will be used in real implementation
 
 // Types
 interface Quiz {
@@ -866,7 +866,7 @@ const Assessments: React.FC = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8" role="main" aria-label="Assessments page">
       {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
@@ -881,18 +881,21 @@ const Assessments: React.FC = () => {
 
       {/* Tab Navigation */}
       <div className="flex justify-center mb-8">
-        <div className="bg-white/10 backdrop-blur-lg rounded-lg p-1">
+        <div className="bg-white/10 backdrop-blur-lg rounded-lg p-1" role="tablist" aria-label="Assessment categories">
           {tabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
+              role="tab"
+              aria-selected={activeTab === tab.id}
+              aria-controls={`tabpanel-${tab.id}`}
               className={`px-6 py-3 rounded-md transition-all duration-300 flex items-center space-x-2 ${
                 activeTab === tab.id 
                   ? 'bg-white/20 text-white' 
                   : 'text-white/70 hover:text-white hover:bg-white/10'
               }`}
             >
-              <span>{tab.icon}</span>
+              <span role="img" aria-label={tab.label}>{tab.icon}</span>
               <span>{tab.label}</span>
             </button>
           ))}
@@ -900,7 +903,7 @@ const Assessments: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="min-h-[600px]">
+      <div className="min-h-[600px]" role="tabpanel" id={`tabpanel-${activeTab}`} aria-labelledby={`tab-${activeTab}`}>
         {activeTab === 'overview' && renderOverview()}
         {activeTab === 'available' && renderAvailable()}
         {activeTab === 'history' && renderHistory()}

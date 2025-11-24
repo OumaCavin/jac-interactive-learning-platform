@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
+import { useParams, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { authService } from '../../services/authService';
 
@@ -170,6 +171,8 @@ const mockQuiz: Quiz = {
 };
 
 const AssessmentDetail: React.FC = () => {
+  const { assessmentId } = useParams<{ assessmentId: string }>();
+  const navigate = useNavigate();
   const [quiz, setQuiz] = useState<Quiz>(mockQuiz);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<{ [questionId: string]: string | string[] }>({});
@@ -183,12 +186,18 @@ const AssessmentDetail: React.FC = () => {
   const user = useSelector((state: any) => state.auth.user) || authService.getCurrentUser();
 
   useEffect(() => {
+    // Handle route parameter - in a real app, this would fetch the quiz by ID
+    if (assessmentId && assessmentId !== '1') {
+      // For now, we'll use the mock quiz but in a real app, you'd fetch based on assessmentId
+      console.log('Loading assessment ID:', assessmentId);
+    }
+    
     // Initialize timer if quiz has time limit
     if (quiz.time_limit && !showResults) {
       setTimeRemaining(quiz.time_limit * 60); // Convert to seconds
       setIsTimerActive(true);
     }
-  }, [quiz, showResults]);
+  }, [assessmentId, quiz, showResults]);
 
   useEffect(() => {
     // Timer countdown
@@ -347,18 +356,23 @@ const AssessmentDetail: React.FC = () => {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         className="bg-white/10 backdrop-blur-lg rounded-lg p-6"
+        role="article"
+        aria-label={`Question ${index + 1} of ${quiz.questions.length}`}
       >
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-semibold text-white">
             Question {index + 1} of {quiz.questions.length}
           </h3>
           <div className="flex items-center space-x-4">
-            <span className="text-sm text-white/70">{question.points} points</span>
+            <span className="text-sm text-white/70" aria-label={`Question worth ${question.points} points`}>
+              {question.points} points
+            </span>
             <span className={`px-2 py-1 rounded-full text-xs bg-gradient-to-r ${
               question.difficulty <= 2 ? 'from-green-400 to-green-600' :
               question.difficulty <= 3 ? 'from-yellow-400 to-yellow-600' :
               'from-red-400 to-red-600'
-            } text-white`}>
+            } text-white`}
+                  aria-label={`Difficulty level: ${question.difficulty} out of 5`}>
               Difficulty: {question.difficulty}
             </span>
           </div>
@@ -596,7 +610,7 @@ const AssessmentDetail: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8" role="main" aria-label="Assessment detail page">
       {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
@@ -607,14 +621,20 @@ const AssessmentDetail: React.FC = () => {
         <p className="text-white/80 mb-4">{quiz.description}</p>
         
         <div className="flex items-center justify-center space-x-6 text-sm">
-          <span className="text-white/70">{quiz.questions.length} questions</span>
-          <span className="text-white/70">{quiz.questions.reduce((sum, q) => sum + q.points, 0)} total points</span>
+          <span className="text-white/70" aria-label={`Total questions: ${quiz.questions.length}`}>
+            {quiz.questions.length} questions
+          </span>
+          <span className="text-white/70" aria-label={`Total points: ${quiz.questions.reduce((sum, q) => sum + q.points, 0)}`}>
+            {quiz.questions.reduce((sum, q) => sum + q.points, 0)} total points
+          </span>
           {quiz.time_limit && (
-            <span className={`font-medium ${timeRemaining && timeRemaining < 300 ? 'text-red-400' : 'text-white'}`}>
+            <span className={`font-medium ${timeRemaining && timeRemaining < 300 ? 'text-red-400' : 'text-white'}`} 
+                  aria-label={`Time remaining: ${timeRemaining ? formatTime(timeRemaining) : formatTime(quiz.time_limit * 60)}`}>
               ⏱️ {timeRemaining ? formatTime(timeRemaining) : formatTime(quiz.time_limit * 60)}
             </span>
           )}
-          <span className={`px-3 py-1 rounded-full text-xs bg-gradient-to-r ${quiz.difficulty === 'easy' ? 'from-green-400 to-green-600' : quiz.difficulty === 'medium' ? 'from-yellow-400 to-yellow-600' : 'from-red-400 to-red-600'} text-white`}>
+          <span className={`px-3 py-1 rounded-full text-xs bg-gradient-to-r ${quiz.difficulty === 'easy' ? 'from-green-400 to-green-600' : quiz.difficulty === 'medium' ? 'from-yellow-400 to-yellow-600' : 'from-red-400 to-red-600'} text-white`}
+                aria-label={`Difficulty level: ${quiz.difficulty}`}>
             {quiz.difficulty.toUpperCase()}
           </span>
         </div>
