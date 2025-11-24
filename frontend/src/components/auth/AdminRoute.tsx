@@ -8,7 +8,6 @@ import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { XCircleIcon } from '@heroicons/react/24/outline';
-import { useSelector as useReduxSelector } from 'react-redux';
 
 interface AdminRouteProps {
   children: React.ReactNode;

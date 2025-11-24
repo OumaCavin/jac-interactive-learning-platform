@@ -5,7 +5,7 @@ interface AuthLayoutProps {
   children: React.ReactNode;
 }
 
-export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
+const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen flex">
       {/* Left side - Branding and background */}
@@ -99,3 +99,5 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
     </div>
   );
 };
+
+export default AuthLayout;
