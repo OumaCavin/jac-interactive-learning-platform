@@ -1,0 +1,1 @@
+exec(open('/workspace/complete_setup.py').read())
