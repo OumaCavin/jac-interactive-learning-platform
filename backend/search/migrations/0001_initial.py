@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('results_count', models.PositiveIntegerField(default=0)),
                 ('clicked_result', models.CharField(blank=True, max_length=255, null=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='search_queries', to='users.user')),
+                ('user', models.ForeignKey(blank=True, null=True, on_delete=models.deletion.CASCADE, related_name='search_queries', to='users.user')),
             ],
             options={
                 'verbose_name': 'Search Query',

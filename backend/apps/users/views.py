@@ -164,36 +164,57 @@ class UserSettingsView(APIView):
     def get(self, request):
         """Get user settings."""
         user = request.user
-        settings = {
-            'learning_style': user.learning_style,
-            'preferred_difficulty': user.preferred_difficulty,
-            'learning_pace': user.learning_pace,
-            'agent_interaction_level': user.agent_interaction_level,
-            'preferred_feedback_style': user.preferred_feedback_style,
-            'dark_mode': user.dark_mode,
-            'notifications_enabled': user.notifications_enabled,
-            'email_notifications': user.email_notifications,
-            'push_notifications': user.push_notifications,
-        }
-        return Response(settings)
+        
+        # Use UserSerializer to return complete user settings data
+        serializer = UserSerializer(user)
+        settings_data = serializer.data
+        
+        # Return complete user settings including all required fields
+        return Response(settings_data)
     
     def put(self, request):
         """Update user settings."""
         user = request.user
+        serializer = UserProfileSerializer(user, data=request.data, partial=True)
         
-        # Update allowed settings
-        allowed_settings = [
-            'learning_style', 'preferred_difficulty', 'learning_pace',
-            'agent_interaction_level', 'preferred_feedback_style',
-            'dark_mode', 'notifications_enabled', 'email_notifications', 'push_notifications'
-        ]
+        if serializer.is_valid():
+            serializer.save()
+            
+            # Return the updated user data
+            updated_user = UserSerializer(user)
+            return Response(updated_user.data)
         
-        for setting, value in request.data.items():
-            if setting in allowed_settings:
-                setattr(user, setting, value)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def patch(self, request):
+        """Partially update user settings."""
+        return self.put(request)
+    
+    def post(self, request):
+        """Reset user settings to defaults."""
+        user = request.user
+        
+        # Reset settings to defaults
+        user.learning_style = 'visual'
+        user.preferred_difficulty = 'beginner'
+        user.learning_pace = 'moderate'
+        user.agent_interaction_level = 'moderate'
+        user.preferred_feedback_style = 'detailed'
+        user.dark_mode = True
+        user.notifications_enabled = True
+        user.email_notifications = True
+        user.push_notifications = True
+        user.current_goal = ''
+        user.goal_deadline = None
         
         user.save()
-        return Response({'message': 'Settings updated successfully'})
+        
+        # Return the reset settings
+        serializer = UserSerializer(user)
+        return Response({
+            'message': 'Settings reset to defaults successfully',
+            'settings': serializer.data
+        })
 
 
 class UserStatsView(APIView):

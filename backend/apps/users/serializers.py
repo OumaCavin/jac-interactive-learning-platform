@@ -106,8 +106,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            'bio', 'profile_image', 'learning_style', 'preferred_difficulty',
-            'learning_pace', 'agent_interaction_level', 'preferred_feedback_style',
+            'first_name', 'last_name', 'email', 'bio', 'profile_image',
+            'learning_style', 'preferred_difficulty', 'learning_pace',
+            'agent_interaction_level', 'preferred_feedback_style',
             'dark_mode', 'notifications_enabled', 'email_notifications', 'push_notifications',
             'current_goal', 'goal_deadline'
         ]
@@ -132,9 +133,34 @@ class UserProfileSerializer(serializers.ModelSerializer):
         if value not in valid_levels:
             raise serializers.ValidationError("Invalid interaction level.")
         return value
+    
+    def validate_learning_pace(self, value):
+        """Validate learning pace choice."""
+        valid_paces = ['slow', 'moderate', 'fast']
+        if value not in valid_paces:
+            raise serializers.ValidationError("Invalid learning pace.")
+        return value
+    
+    def validate_preferred_feedback_style(self, value):
+        """Validate preferred feedback style choice."""
+        valid_styles = ['detailed', 'brief', 'encouraging']
+        if value not in valid_styles:
+            raise serializers.ValidationError("Invalid feedback style.")
+        return value
+    
+    def validate_email(self, value):
+        """Validate email format and uniqueness."""
+        if not value:
+            raise serializers.ValidationError("Email is required.")
+        
+        # Check if email is unique (excluding current user)
+        if User.objects.filter(email=value).exclude(pk=self.instance.pk).exists():
+            raise serializers.ValidationError("A user with this email already exists.")
+        
+        return value
 
 
-class UserProfileSerializer(serializers.ModelSerializer):
+class UserProfileDetailSerializer(serializers.ModelSerializer):
     """Serializer for UserProfile model."""
     
     user = UserSerializer(read_only=True)
