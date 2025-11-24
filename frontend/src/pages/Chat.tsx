@@ -3,10 +3,9 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../store/store';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, Button, Badge } from '../components/ui';
-import { 
-  agentService, 
+import agentService, {
   ChatMessage 
-} from '../services/agentServiceStub';
+} from '../services/agentService';
 import { 
   selectAgents, 
   selectSelectedAgent,
