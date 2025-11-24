@@ -65,7 +65,7 @@ class Assessment(models.Model):
     )
     
     # Relationships
-    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='assessments')
+    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='assessment_app_assessments')
     
     # Publishing
     is_published = models.BooleanField(default=False)
@@ -78,7 +78,7 @@ class Assessment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     class Meta:
-        db_table = 'jac_assessment'
+        db_table = 'assessment_app_assessments'
         verbose_name = 'Assessment'
         verbose_name_plural = 'Assessments'
         ordering = ['-created_at']

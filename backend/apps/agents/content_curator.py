@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from .base_agent import BaseAgent, AgentStatus, TaskPriority
 from ..learning.models import LearningPath, Module, Lesson
+from ..content.models import Content, ContentRecommendation, ContentAnalytics
 
 
 class ContentCuratorAgent(BaseAgent):
@@ -85,7 +86,7 @@ class ContentCuratorAgent(BaseAgent):
         curated_items = []
         
         # Filter and organize content based on criteria
-        content_items = Module.objects.filter(
+        content_items = Content.objects.filter(
             topic__icontains=topic,
             difficulty_level=difficulty_level,
             content_type=content_type,
@@ -124,7 +125,7 @@ class ContentCuratorAgent(BaseAgent):
         recommendations = []
         
         # Get user's learning history and preferences
-        user_progress = Module.objects.filter(
+        user_progress = Content.objects.filter(
             learning_path__user=user,
             status='completed'
         ).order_by('-updated_at')[:5]
@@ -134,11 +135,11 @@ class ContentCuratorAgent(BaseAgent):
         preferred_topics = self._extract_preferred_topics(user_progress)
         
         # Generate recommendations based on patterns
-        candidate_content = Module.objects.filter(
+        candidate_content = Content.objects.filter(
             is_published=True,
             difficulty_level=preferred_difficulty
         ).exclude(
-            id__in=Module.objects.filter(
+            id__in=Content.objects.filter(
                 learning_path__user=user
             ).values_list('content_id', flat=True)
         )[:20]
@@ -180,7 +181,7 @@ class ContentCuratorAgent(BaseAgent):
             return {'error': 'Learning path not found'}
         
         # Analyze current path structure
-        modules = Module.objects.filter(learning_path=learning_path).order_by('order')
+        modules = Content.objects.filter(learning_path=learning_path).order_by('order')
         
         optimization_suggestions = []
         
@@ -225,7 +226,7 @@ class ContentCuratorAgent(BaseAgent):
             return {'error': 'Content ID required for validation'}
         
         try:
-            content = Module.objects.get(id=content_id)
+            content = Content.objects.get(content_id=content_id)
         except Module.DoesNotExist:
             return {'error': 'Content not found'}
         

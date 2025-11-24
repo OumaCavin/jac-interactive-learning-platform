@@ -60,6 +60,7 @@ urlpatterns = [
     # API endpoints with /api/ prefix (primary)
     path('api/users/', include('apps.users.urls')),  # Users app now properly installed
     path('api/learning/', include('apps.learning.urls')),
+    path('api/content/', include('apps.content.urls')),
     path('api/agents/', include('apps.agents.urls')),
     path('api/assessments/', include('apps.assessments.urls')),
     

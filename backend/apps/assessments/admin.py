@@ -15,11 +15,11 @@ class AssessmentQuestionAdmin(admin.ModelAdmin):
     Admin interface for AssessmentQuestion model
     """
     list_display = [
-        'title', 'module', 'question_type', 'difficulty', 'points', 
+        'title', 'module', 'question_type', 'difficulty_level', 'points', 
         'is_active', 'version', 'created_at'
     ]
     list_filter = [
-        'question_type', 'difficulty', 'is_active', 'module', 'created_at'
+        'question_type', 'difficulty_level', 'is_active', 'module', 'created_at'
     ]
     search_fields = ['title', 'question_text']
     readonly_fields = ['question_id', 'created_at', 'updated_at']
@@ -29,7 +29,7 @@ class AssessmentQuestionAdmin(admin.ModelAdmin):
             'fields': ('question_id', 'module', 'title', 'question_text')
         }),
         ('Question Details', {
-            'fields': ('question_type', 'difficulty', 'options')
+            'fields': ('question_type', 'difficulty_level', 'options')
         }),
         ('Answer', {
             'fields': ('correct_answer', 'explanation', 'points')
