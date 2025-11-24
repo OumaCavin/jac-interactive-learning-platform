@@ -172,7 +172,7 @@ class AssessmentQuestion(models.Model):
     
     # Core identification
     question_id = models.UUIDField(primary_key=True, editable=False, unique=True)
-    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='assessment_questions')
+    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='assessment_questions', null=True, blank=True)
     module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='assessment_questions')
     
     # Question content
