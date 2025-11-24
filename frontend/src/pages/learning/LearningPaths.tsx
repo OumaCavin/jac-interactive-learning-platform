@@ -27,6 +27,9 @@ const DIFFICULTY_LEVELS = [
   { value: 'advanced', label: 'Advanced', color: 'bg-red-100 text-red-800' },
 ];
 
+// Mock learner count - in real app this would come from API
+const LEARNER_COUNT = 1200;
+
 const LearningPathCard: React.FC<{ path: LearningPath; delay: number }> = ({ path, delay }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -94,7 +97,7 @@ const LearningPathCard: React.FC<{ path: LearningPath; delay: number }> = ({ pat
           
           <div className="flex items-center space-x-1">
             <UserGroupIcon className="h-4 w-4" />
-            <span>1.2k learners</span>
+            <span>{(LEARNER_COUNT / 1000).toFixed(1)}k learners</span>
           </div>
         </div>
 

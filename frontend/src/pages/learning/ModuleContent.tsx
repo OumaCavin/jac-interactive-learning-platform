@@ -190,7 +190,7 @@ const ModuleContent: React.FC = () => {
 
   const handleBookmark = () => {
     // In a real app, you would save/bookmark this module
-    console.log('Module bookmarked');
+    // toast.success('Module bookmarked successfully');
   };
 
   const getModuleTypeIcon = (type: string) => {
