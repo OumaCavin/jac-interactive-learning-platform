@@ -1,84 +1,123 @@
 """
-Django admin configuration for the Users app.
+Admin interface for the users app.
 """
 
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User
+from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from .models import User, UserProfile
 
 
 @admin.register(User)
-class UserAdmin(BaseUserAdmin):
-    """Admin interface for the custom User model."""
+class UserAdmin(DjangoUserAdmin):
+    """
+    Admin interface for the User model.
+    """
     
     list_display = (
-        'username', 'email', 'first_name', 'last_name', 
-        'level', 'total_points', 'learning_style', 
-        'is_staff', 'is_active', 'created_at'
+        'username', 'email', 'first_name', 'last_name',
+        'preferred_learning_style', 'learning_level', 'is_active',
+        'date_joined', 'last_login'
     )
     
     list_filter = (
-        'is_staff', 'is_superuser', 'is_active', 'learning_style',
-        'preferred_difficulty', 'learning_pace', 'agent_interaction_level',
-        'preferred_feedback_style', 'created_at', 'last_activity_at'
+        'is_active', 'is_staff', 'is_superuser', 'is_verified',
+        'preferred_learning_style', 'learning_level',
+        'date_joined', 'last_login'
     )
     
-    search_fields = ('username', 'email', 'first_name', 'last_name')
+    search_fields = (
+        'username', 'first_name', 'last_name', 'email'
+    )
     
     readonly_fields = (
-        'id', 'created_at', 'updated_at', 'last_login_at', 
-        'last_activity_at', 'level', 'experience_level', 'next_level_points'
+        'date_joined', 'last_login', 'last_activity',
+        'total_study_time', 'streak_days', 'email_verified'
     )
     
     fieldsets = (
-        ('Basic Information', {
-            'fields': ('username', 'email', 'password', 'first_name', 'last_name')
+        ('Personal Info', {
+            'fields': (
+                'username', 'password', 'email',
+                'first_name', 'last_name'
+            )
         }),
-        ('Profile', {
-            'fields': ('bio', 'profile_image')
+        ('Permissions', {
+            'fields': (
+                'is_active', 'is_staff', 'is_superuser',
+                'is_verified', 'groups', 'user_permissions'
+            )
         }),
         ('Learning Preferences', {
             'fields': (
-                'learning_style', 'preferred_difficulty', 'learning_pace'
+                'preferred_learning_style', 'learning_level'
             )
         }),
-        ('Progress Tracking', {
+        ('Platform Activity', {
             'fields': (
-                'total_modules_completed', 'total_time_spent', 
-                'current_streak', 'longest_streak', 'total_points', 'level'
-            )
+                'total_study_time', 'streak_days',
+                'last_activity', 'notifications_enabled'
+            ),
+            'classes': ('collapse',)
         }),
-        ('Gamification', {
-            'fields': ('achievements', 'badges', 'current_goal', 'goal_deadline')
-        }),
-        ('Agent Preferences', {
-            'fields': ('agent_interaction_level', 'preferred_feedback_style')
-        }),
-        ('Platform Preferences', {
-            'fields': ('dark_mode', 'notifications_enabled', 'email_notifications', 'push_notifications')
-        }),
-        ('Permissions', {
-            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
-        }),
-        ('Important dates', {
-            'fields': ('created_at', 'updated_at', 'last_login_at', 'last_activity_at')
-        }),
-        ('Computed Values', {
-            'fields': ('experience_level', 'next_level_points'),
+        ('Important Dates', {
+            'fields': ('date_joined', 'last_login'),
             'classes': ('collapse',)
         }),
     )
     
-    def get_readonly_fields(self, request, obj=None):
-        """Make some fields readonly for non-superusers."""
-        readonly = list(self.readonly_fields)
-        if not request.user.is_superuser:
-            readonly.extend(['is_superuser', 'groups', 'user_permissions'])
-        return readonly
+    def save_model(self, request, obj, form, change):
+        """
+        Override save_model to handle custom fields.
+        """
+        super().save_model(request, obj, form, change)
+
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    """
+    Admin interface for the UserProfile model.
+    """
     
-    def get_exclude(self, request, obj=None):
-        """Exclude password field from admin form."""
-        exclude = []
-        if not request.user.is_superuser:
-            exclude.extend(['is_superuser', 'groups', 'user_permissions'])
-        return exclude
+    list_display = (
+        'user', 'location', 'modules_completed',
+        'lessons_completed', 'total_points', 'created_at'
+    )
+    
+    list_filter = (
+        'created_at', 'updated_at', 'location'
+    )
+    
+    search_fields = (
+        'user__username', 'user__email', 'location', 'bio'
+    )
+    
+    readonly_fields = (
+        'created_at', 'updated_at'
+    )
+    
+    fieldsets = (
+        ('User', {
+            'fields': ('user',)
+        }),
+        ('Personal Info', {
+            'fields': ('bio', 'location', 'website')
+        }),
+        ('Learning', {
+            'fields': ('learning_goals', 'current_goals')
+        }),
+        ('Progress', {
+            'fields': (
+                'modules_completed', 'lessons_completed',
+                'assessments_completed', 'average_lesson_score',
+                'total_points'
+            )
+        }),
+        ('Achievements', {
+            'fields': ('badges', 'achievements'),
+            'classes': ('collapse',)
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )

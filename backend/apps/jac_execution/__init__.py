@@ -61,10 +61,9 @@ default_app_config = 'apps.jac_execution.apps.JacExecutionConfig'
 # Safe imports of execution components
 try:
     # Import code execution engine components
-    # These imports will work once the executors and models are implemented
-    from .executors import CodeExecutor, JacCodeExecutor, PythonCodeExecutor
     from .models import ExecutionRequest, ExecutionResult
-    from .sandbox import SandboxManager, SecurityManager
+    from .services.executor import CodeExecutor, JacCodeExecutor, PythonCodeExecutor
+    from .services.translator import JacCodeTranslator, PythonCodeTranslator
     
     # Export main execution components
     __all__ = [
@@ -73,8 +72,8 @@ try:
         'PythonCodeExecutor',
         'ExecutionRequest',
         'ExecutionResult',
-        'SandboxManager',
-        'SecurityManager'
+        'JacCodeTranslator',
+        'PythonCodeTranslator'
     ]
     
 except ImportError as e:

@@ -46,8 +46,8 @@ default_app_config = 'apps.users.apps.UsersConfig'
 # Users app is enabled and properly configured
 __all__ = []
 
-# Signal handlers are automatically imported by UsersConfig.ready()
-# No manual imports needed here to avoid AppRegistryNotReady errors
+# IMPORTANT: No model imports here to avoid AppRegistryNotReady errors
+# All model imports should be done within functions or Django's signal handlers
 
 # Package metadata
 __version__ = "1.0.0"

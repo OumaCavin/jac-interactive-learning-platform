@@ -1,42 +1,28 @@
 """
-URL routing for the Users app.
+URL patterns for the users app.
 """
 
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from rest_framework_simplejwt.views import TokenRefreshView
+from django.urls import path
+from . import views
 
-from .views import (
-    UserRegistrationView, UserLoginView, UserProfileView,
-    UserDetailView, LearningSummaryView, UserSettingsView,
-    UserStatsView, current_user, logout_view, verify_email, resend_verification_email
-)
-
-# Create router for ViewSets
-router = DefaultRouter()
+app_name = 'users'
 
 urlpatterns = [
-    # Authentication URLs
-    path('auth/register/', UserRegistrationView.as_view(), name='user-register'),
-    path('auth/login/', UserLoginView.as_view(), name='user-login'),
-    path('auth/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
-    path('auth/logout/', logout_view, name='user-logout'),
-    path('auth/me/', current_user, name='current-user'),
+    # Authentication
+    path('register/', views.UserRegistrationView.as_view(), name='register'),
     
-    # Email verification URLs
-    path('verify-email/', verify_email, name='verify-email'),
-    path('resend-verification/', resend_verification_email, name='resend-verification'),
+    # User profile
+    path('profile/', views.UserProfileView.as_view(), name='profile'),
+    path('profile/detailed/', views.UserProfileDetailView.as_view(), name='profile-detail'),
     
-    # User management URLs
-    path('profile/', UserProfileView.as_view(), name='user-profile'),
-    path('settings/', UserSettingsView.as_view(), name='user-settings'),
-    path('stats/', UserStatsView.as_view(), name='user-stats'),
-    path('learning-summary/', LearningSummaryView.as_view(), name='learning-summary'),
+    # User dashboard
+    path('dashboard/', views.user_dashboard, name='dashboard'),
     
-    # User detail URLs
-    path('<str:user_id>/', UserDetailView.as_view(), name='user-detail'),
-    path('<str:user_id>/learning-summary/', LearningSummaryView.as_view(), name='user-learning-summary'),
+    # Activity
+    path('activity/', views.update_activity, name='update-activity'),
     
-    # Include router URLs
-    path('', include(router.urls)),
+    # Admin endpoints
+    path('stats/', views.user_stats, name='user-stats'),
+    path('list/', views.UserListView.as_view(), name='user-list'),
+    path('search/', views.UserSearchView.as_view(), name='user-search'),
 ]

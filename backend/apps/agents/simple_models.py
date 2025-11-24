@@ -5,14 +5,18 @@ These models track basic agent instances without dependencies on other apps.
 """
 
 from django.db import models
-from django.contrib.auth import get_user_model
-from django.conf import settings
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 from enum import Enum
 import uuid
 
-User = get_user_model()
+# Defer user model import to avoid AppRegistryNotReady errors
+def get_user_model():
+    """Get the user model, deferring import to avoid circular dependencies."""
+    from django.contrib.auth import get_user_model
+    return get_user_model()
+
+User = None  # Will be set lazily
 
 
 class AgentType(models.TextChoices):
@@ -57,7 +61,7 @@ class SimpleAgent(models.Model):
     status = models.CharField(max_length=20, default='idle')
     config = models.JSONField(default=dict, blank=True)
     capabilities = models.JSONField(default=list, blank=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    created_by = models.ForeignKey('django.contrib.auth.get_user_model()', on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     last_active = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
@@ -105,7 +109,7 @@ class SimpleTask(models.Model):
         default=TaskPriority.MEDIUM
     )
     assigned_by = models.ForeignKey(
-        User, 
+        'django.contrib.auth.get_user_model()', 
         on_delete=models.CASCADE, 
         related_name='assigned_tasks',
         null=True, 
@@ -173,7 +177,7 @@ class ChatMessage(models.Model):
     """Model for storing chat conversations with agents"""
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chat_messages')
+    user = models.ForeignKey('django.contrib.auth.get_user_model()', on_delete=models.CASCADE, related_name='chat_messages')
     session_id = models.CharField(max_length=100, db_index=True)
     message = models.TextField(help_text='User message')
     response = models.TextField(help_text='Agent response')
