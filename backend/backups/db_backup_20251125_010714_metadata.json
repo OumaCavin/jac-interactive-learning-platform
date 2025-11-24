@@ -1,0 +1,10 @@
+{
+  "backup_name": "db_backup_20251125_010714",
+  "timestamp": "20251125_010714",
+  "description": "Test backup before admin verification",
+  "original_db_path": "/workspace/backend/db.sqlite3",
+  "backup_path": "/workspace/backend/backups/db_backup_20251125_010714.sqlite3",
+  "file_hash": "41309862a3b93c9b30307d8b4f6c824b4e2e6186818c84ba0b60b29444a1f46e",
+  "file_size": 913408,
+  "created_at": "2025-11-25T01:07:14.593516"
+}
