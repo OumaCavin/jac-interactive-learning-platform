@@ -1,45 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { Card, Button, Input, Badge } from '../components/ui';
-import { updateProfile, selectAuth, clearError } from '../store/slices/authSlice';
+import { selectAuth } from '../store/slices/authSlice';
 import { useAppDispatch } from '../store/store';
 import type { User } from '../services/authService';
+import { settingsService, UserSettings, UpdateSettingsData } from '../services/settingsService';
 
-interface SettingsFormData {
-  // Personal Information
-  first_name: string;
-  last_name: string;
-  email: string;
-  bio: string;
-  
-  // Learning Preferences
-  learning_style: User['learning_style'];
-  preferred_difficulty: User['preferred_difficulty'];
-  learning_pace: User['learning_pace'];
-  
-  // Goal Settings
-  current_goal: string;
-  goal_deadline: string;
-  
-  // Agent Settings
-  agent_interaction_level: User['agent_interaction_level'];
-  preferred_feedback_style: User['preferred_feedback_style'];
-  
-  // Notification Settings
-  notifications_enabled: boolean;
-  email_notifications: boolean;
-  push_notifications: boolean;
-  
-  // Display Settings
-  dark_mode: boolean;
-}
+// Use the UpdateSettingsData interface from settingsService instead of defining our own
 
 const Settings: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { user, isLoading, error } = useSelector(selectAuth);
+  const { user } = useSelector(selectAuth);
   
-  const [formData, setFormData] = useState<SettingsFormData>({
+  // Settings-specific loading and error states
+  const [isSettingsLoading, setIsSettingsLoading] = useState(false);
+  const [settingsError, setSettingsError] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  
+  const [formData, setFormData] = useState<UpdateSettingsData>({
     first_name: '',
     last_name: '',
     email: '',
@@ -60,33 +39,53 @@ const Settings: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('profile');
   const [hasChanges, setHasChanges] = useState(false);
 
-  // Load user data into form
-  useEffect(() => {
-    if (user) {
+  // Load user settings from backend
+  const loadUserSettings = useCallback(async () => {
+    if (!user) return;
+    
+    setIsSettingsLoading(true);
+    setSettingsError(null);
+    
+    try {
+      const settings = await settingsService.getUserSettings();
+      
+      // Update form data with settings from backend
       setFormData({
-        first_name: user.first_name || '',
-        last_name: user.last_name || '',
-        email: user.email || '',
-        bio: user.bio || '',
-        learning_style: user.learning_style || 'visual',
-        preferred_difficulty: user.preferred_difficulty || 'beginner',
-        learning_pace: user.learning_pace || 'moderate',
-        current_goal: user.current_goal || '',
-        goal_deadline: user.goal_deadline || '',
-        agent_interaction_level: user.agent_interaction_level || 'moderate',
-        preferred_feedback_style: user.preferred_feedback_style || 'detailed',
-        notifications_enabled: user.notifications_enabled ?? true,
-        email_notifications: user.email_notifications ?? true,
-        push_notifications: user.push_notifications ?? true,
-        dark_mode: user.dark_mode ?? true,
+        first_name: settings.first_name || '',
+        last_name: settings.last_name || '',
+        email: settings.email || '',
+        bio: settings.bio || '',
+        learning_style: settings.learning_style || 'visual',
+        preferred_difficulty: settings.preferred_difficulty || 'beginner',
+        learning_pace: settings.learning_pace || 'moderate',
+        current_goal: settings.current_goal || '',
+        goal_deadline: settings.goal_deadline || '',
+        agent_interaction_level: settings.agent_interaction_level || 'moderate',
+        preferred_feedback_style: settings.preferred_feedback_style || 'detailed',
+        notifications_enabled: settings.notifications_enabled ?? true,
+        email_notifications: settings.email_notifications ?? true,
+        push_notifications: settings.push_notifications ?? true,
+        dark_mode: settings.dark_mode ?? true,
       });
+    } catch (error) {
+      console.error('Failed to load user settings:', error);
+      setSettingsError(error instanceof Error ? error.message : 'Failed to load settings');
+    } finally {
+      setIsSettingsLoading(false);
     }
   }, [user]);
 
-  // Clear error when component mounts
+  // Load user data into form when component mounts or user changes
   useEffect(() => {
-    dispatch(clearError());
-  }, [dispatch]);
+    if (user) {
+      loadUserSettings();
+    }
+  }, [user, loadUserSettings]);
+
+  // Clear settings error when active section changes
+  useEffect(() => {
+    setSettingsError(null);
+  }, [activeSection]);
 
   // Check for changes
   useEffect(() => {
@@ -112,17 +111,50 @@ const Settings: React.FC = () => {
     }
   }, [formData, user]);
 
-  const handleInputChange = (field: keyof SettingsFormData, value: any) => {
+  const handleInputChange = (field: keyof UpdateSettingsData, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate settings data
+    const validation = settingsService.validateSettingsData(formData);
+    if (!validation.isValid) {
+      setSettingsError(validation.errors.join(', '));
+      return;
+    }
+    
+    setIsSaving(true);
+    setSettingsError(null);
+    
     try {
-      await dispatch(updateProfile(formData)).unwrap();
+      const updatedSettings = await settingsService.updateUserSettings(formData);
       setHasChanges(false);
+      
+      // Update local state with returned data
+      setFormData({
+        first_name: updatedSettings.first_name || '',
+        last_name: updatedSettings.last_name || '',
+        email: updatedSettings.email || '',
+        bio: updatedSettings.bio || '',
+        learning_style: updatedSettings.learning_style || 'visual',
+        preferred_difficulty: updatedSettings.preferred_difficulty || 'beginner',
+        learning_pace: updatedSettings.learning_pace || 'moderate',
+        current_goal: updatedSettings.current_goal || '',
+        goal_deadline: updatedSettings.goal_deadline || '',
+        agent_interaction_level: updatedSettings.agent_interaction_level || 'moderate',
+        preferred_feedback_style: updatedSettings.preferred_feedback_style || 'detailed',
+        notifications_enabled: updatedSettings.notifications_enabled ?? true,
+        email_notifications: updatedSettings.email_notifications ?? true,
+        push_notifications: updatedSettings.push_notifications ?? true,
+        dark_mode: updatedSettings.dark_mode ?? true,
+      });
     } catch (error) {
-      // Handle settings update error gracefully
+      console.error('Failed to update settings:', error);
+      setSettingsError(error instanceof Error ? error.message : 'Failed to save settings');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -171,7 +203,18 @@ const Settings: React.FC = () => {
 
         {/* Settings Content */}
         <div className="lg:col-span-3">
-          <form onSubmit={handleSubmit}>
+          {/* Loading indicator */}
+          {isSettingsLoading && (
+            <Card variant="glass" padding="lg" className="mb-6">
+              <div className="flex items-center justify-center py-8">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+                <span className="ml-3 text-white">Loading your settings...</span>
+              </div>
+            </Card>
+          )}
+
+          {!isSettingsLoading && (
+            <form onSubmit={handleSubmit}>
             <Card variant="glass" padding="lg">
               {/* Profile Information Section */}
               {activeSection === 'profile' && (
@@ -537,8 +580,17 @@ const Settings: React.FC = () => {
 
               {/* Form Actions */}
               <div className="flex items-center justify-between pt-6 border-t border-white/20">
-                {error && (
-                  <p className="text-sm text-error-400">{error}</p>
+                {settingsError && (
+                  <div className="flex-1 mr-4">
+                    <p className="text-sm text-error-400">{settingsError}</p>
+                    <button
+                      type="button"
+                      onClick={() => setSettingsError(null)}
+                      className="text-xs text-white/60 hover:text-white/80 mt-1"
+                    >
+                      Dismiss
+                    </button>
+                  </div>
                 )}
                 
                 <div className="flex space-x-3">
@@ -547,26 +599,10 @@ const Settings: React.FC = () => {
                     variant="ghost"
                     onClick={() => {
                       if (user) {
-                        setFormData({
-                          first_name: user.first_name || '',
-                          last_name: user.last_name || '',
-                          email: user.email || '',
-                          bio: user.bio || '',
-                          learning_style: user.learning_style || 'visual',
-                          preferred_difficulty: user.preferred_difficulty || 'beginner',
-                          learning_pace: user.learning_pace || 'moderate',
-                          current_goal: user.current_goal || '',
-                          goal_deadline: user.goal_deadline || '',
-                          agent_interaction_level: user.agent_interaction_level || 'moderate',
-                          preferred_feedback_style: user.preferred_feedback_style || 'detailed',
-                          notifications_enabled: user.notifications_enabled ?? true,
-                          email_notifications: user.email_notifications ?? true,
-                          push_notifications: user.push_notifications ?? true,
-                          dark_mode: user.dark_mode ?? true,
-                        });
+                        loadUserSettings();
                       }
                     }}
-                    disabled={isLoading || !hasChanges}
+                    disabled={isSettingsLoading || isSaving || !hasChanges}
                   >
                     Reset Changes
                   </Button>
@@ -574,15 +610,16 @@ const Settings: React.FC = () => {
                   <Button
                     type="submit"
                     variant="primary"
-                    isLoading={isLoading}
-                    disabled={!hasChanges}
+                    isLoading={isSaving}
+                    disabled={!hasChanges || isSettingsLoading}
                   >
                     Save Settings
                   </Button>
                 </div>
               </div>
             </Card>
-          </form>
+            </form>
+          )}
         </div>
       </div>
     </div>
