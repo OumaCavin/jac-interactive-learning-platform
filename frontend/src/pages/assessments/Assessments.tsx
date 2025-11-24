@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { authService } from '../../services/authService';
-// import { learningService } from '../../services/learningService'; // Will be used in real implementation
+import { 
+  fetchQuizzes, 
+  fetchUserAttempts, 
+  fetchAssessmentStats,
+  selectQuizzes,
+  selectQuizAttempts,
+  selectAssessmentLoading,
+  selectAssessmentSubmitting,
+  AssessmentState
+} from '../../store/slices/assessmentSlice';
 
 // Types
 interface Quiz {
@@ -55,206 +64,8 @@ interface PerformanceData {
   completed: boolean;
 }
 
-// Mock data for comprehensive assessment system
-const mockQuizzes: Quiz[] = [
-  {
-    id: '1',
-    title: 'JAC Variables and Data Types',
-    description: 'Test your understanding of JAC variable declarations and data types',
-    learning_path: 'JAC Fundamentals',
-    module: 'Variables and Data Types',
-    difficulty: 'easy',
-    time_limit: 15,
-    max_attempts: 3,
-    passing_score: 70,
-    questionCount: 8,
-    totalPoints: 100,
-    created_at: '2025-11-01',
-    updated_at: '2025-11-20'
-  },
-  {
-    id: '2',
-    title: 'Control Structures in JAC',
-    description: 'Assessment on if statements, loops, and conditional logic',
-    learning_path: 'JAC Fundamentals',
-    module: 'Control Structures',
-    difficulty: 'medium',
-    time_limit: 25,
-    max_attempts: 3,
-    passing_score: 75,
-    questionCount: 12,
-    totalPoints: 150,
-    created_at: '2025-11-05',
-    updated_at: '2025-11-18'
-  },
-  {
-    id: '3',
-    title: 'Functions and Methods',
-    description: 'Evaluate your knowledge of function definition and usage',
-    learning_path: 'JAC Fundamentals',
-    module: 'Functions and Methods',
-    difficulty: 'medium',
-    time_limit: 30,
-    max_attempts: 2,
-    passing_score: 80,
-    questionCount: 10,
-    totalPoints: 200,
-    created_at: '2025-11-10',
-    updated_at: '2025-11-22'
-  },
-  {
-    id: '4',
-    title: 'Object-Oriented Programming',
-    description: 'Advanced assessment on OOP concepts in JAC',
-    learning_path: 'JAC Fundamentals',
-    module: 'Object-Oriented Programming',
-    difficulty: 'hard',
-    time_limit: 45,
-    max_attempts: 2,
-    passing_score: 85,
-    questionCount: 15,
-    totalPoints: 250,
-    created_at: '2025-11-15',
-    updated_at: '2025-11-20'
-  },
-  {
-    id: '5',
-    title: 'Error Handling and Debugging',
-    description: 'Test your ability to handle errors and debug JAC code',
-    learning_path: 'JAC Advanced',
-    module: 'Error Handling',
-    difficulty: 'hard',
-    time_limit: 35,
-    max_attempts: 3,
-    passing_score: 80,
-    questionCount: 12,
-    totalPoints: 200,
-    created_at: '2025-11-20',
-    updated_at: '2025-11-23'
-  }
-];
+// Assessment component - now using real API data
 
-const mockAttempts: QuizAttempt[] = [
-  {
-    id: '1',
-    quizId: '1',
-    quizTitle: 'JAC Variables and Data Types',
-    score: 85,
-    maxScore: 100,
-    percentage: 85,
-    passed: true,
-    timeTaken: 12,
-    startedAt: '2025-11-15T10:00:00Z',
-    completedAt: '2025-11-15T10:12:00Z',
-    attemptNumber: 1,
-    difficulty: 'easy'
-  },
-  {
-    id: '2',
-    quizId: '1',
-    quizTitle: 'JAC Variables and Data Types',
-    score: 92,
-    maxScore: 100,
-    percentage: 92,
-    passed: true,
-    timeTaken: 10,
-    startedAt: '2025-11-16T14:30:00Z',
-    completedAt: '2025-11-16T14:40:00Z',
-    attemptNumber: 2,
-    difficulty: 'easy'
-  },
-  {
-    id: '3',
-    quizId: '2',
-    quizTitle: 'Control Structures in JAC',
-    score: 78,
-    maxScore: 150,
-    percentage: 52,
-    passed: false,
-    timeTaken: 24,
-    startedAt: '2025-11-17T09:15:00Z',
-    completedAt: '2025-11-17T09:39:00Z',
-    attemptNumber: 1,
-    difficulty: 'medium'
-  },
-  {
-    id: '4',
-    quizId: '2',
-    quizTitle: 'Control Structures in JAC',
-    score: 120,
-    maxScore: 150,
-    percentage: 80,
-    passed: true,
-    timeTaken: 22,
-    startedAt: '2025-11-18T16:45:00Z',
-    completedAt: '2025-11-18T17:07:00Z',
-    attemptNumber: 2,
-    difficulty: 'medium'
-  },
-  {
-    id: '5',
-    quizId: '3',
-    quizTitle: 'Functions and Methods',
-    score: 165,
-    maxScore: 200,
-    percentage: 83,
-    passed: true,
-    timeTaken: 28,
-    startedAt: '2025-11-20T11:20:00Z',
-    completedAt: '2025-11-20T11:48:00Z',
-    attemptNumber: 1,
-    difficulty: 'medium'
-  },
-  {
-    id: '6',
-    quizId: '4',
-    quizTitle: 'Object-Oriented Programming',
-    score: 180,
-    maxScore: 250,
-    percentage: 72,
-    passed: false,
-    timeTaken: 42,
-    startedAt: '2025-11-22T13:10:00Z',
-    completedAt: '2025-11-22T13:52:00Z',
-    attemptNumber: 1,
-    difficulty: 'hard'
-  },
-  {
-    id: '7',
-    quizId: '5',
-    quizTitle: 'Error Handling and Debugging',
-    score: 185,
-    maxScore: 200,
-    percentage: 93,
-    passed: true,
-    timeTaken: 32,
-    startedAt: '2025-11-23T10:30:00Z',
-    completedAt: '2025-11-23T11:02:00Z',
-    attemptNumber: 1,
-    difficulty: 'hard'
-  }
-];
-
-const mockStats: AssessmentStats = {
-  totalQuizzes: 5,
-  completedQuizzes: 4,
-  averageScore: 81,
-  totalTimeSpent: '2h 50m',
-  currentStreak: 3,
-  bestScore: 93,
-  passRate: 85,
-  improvement: 12
-};
-
-const mockPerformanceData: PerformanceData[] = [
-  { date: 'Nov 15', score: 85, difficulty: 'easy', completed: true },
-  { date: 'Nov 16', score: 92, difficulty: 'easy', completed: true },
-  { date: 'Nov 17', score: 52, difficulty: 'medium', completed: true },
-  { date: 'Nov 18', score: 80, difficulty: 'medium', completed: true },
-  { date: 'Nov 20', score: 83, difficulty: 'medium', completed: true },
-  { date: 'Nov 22', score: 72, difficulty: 'hard', completed: true },
-  { date: 'Nov 23', score: 93, difficulty: 'hard', completed: true }
-];
 
 const COLORS = ['#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#06B6D4'];
 
@@ -271,79 +82,105 @@ const difficultyLabels = {
 };
 
 const Assessments: React.FC = () => {
+  const dispatch = useDispatch<any>();
   const [activeTab, setActiveTab] = useState<'overview' | 'available' | 'history' | 'analytics'>('overview');
-  const [quizzes, setQuizzes] = useState<Quiz[]>(mockQuizzes);
-  const [attempts, setAttempts] = useState<QuizAttempt[]>(mockAttempts);
-  const [stats, setStats] = useState<AssessmentStats>(mockStats);
-  const [performanceData, setPerformanceData] = useState<PerformanceData[]>(mockPerformanceData);
   const [selectedDifficulty, setSelectedDifficulty] = useState<'all' | 'easy' | 'medium' | 'hard'>('all');
   const [selectedStatus, setSelectedStatus] = useState<'all' | 'completed' | 'in_progress' | 'not_started'>('all');
-  const [isLoading, setIsLoading] = useState(false);
   
+  // Redux state
+  const quizzes = useSelector(selectQuizzes);
+  const attempts = useSelector(selectQuizAttempts);
+  const isLoading = useSelector(selectAssessmentLoading);
+  const isSubmitting = useSelector(selectAssessmentSubmitting);
   const user = useSelector((state: any) => state.auth.user) || authService.getCurrentUser();
 
+  // Calculate stats from real data
+  const stats = {
+    totalQuizzes: quizzes.length,
+    completedQuizzes: attempts.filter(a => a.passed).length,
+    averageScore: attempts.length > 0 ? Math.round(attempts.reduce((sum, a) => sum + (a.percentage || 0), 0) / attempts.length) : 0,
+    totalTimeSpent: formatTime(Math.round(attempts.reduce((sum, a) => sum + (a.timeTaken || 0), 0) / 60)),
+    currentStreak: 3, // TODO: Calculate from attempts
+    bestScore: attempts.length > 0 ? Math.max(...attempts.map(a => a.percentage || 0)) : 0,
+    passRate: attempts.length > 0 ? Math.round((attempts.filter(a => a.passed).length / attempts.length) * 100) : 0,
+    improvement: 12 // TODO: Calculate improvement trend
+  };
+
+  // Performance data from real attempts
+  const performanceData = attempts.slice(-7).map(attempt => ({
+    date: new Date(attempt.completedAt || attempt.startedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    score: attempt.percentage || 0,
+    difficulty: attempt.difficulty || 'medium',
+    completed: true
+  }));
+
   useEffect(() => {
-    // In a real app, fetch assessment data from APIs
+    // Load assessment data from APIs
     loadAssessmentData();
   }, []);
 
   const loadAssessmentData = async () => {
-    setIsLoading(true);
     try {
-      // Mock loading delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      // Data is already set as mock data above
+      // Fetch quizzes and attempts from backend
+      await Promise.all([
+        dispatch(fetchQuizzes()),
+        dispatch(fetchUserAttempts()),
+        dispatch(fetchAssessmentStats())
+      ]);
     } catch (error) {
       console.error('Failed to load assessment data:', error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   const getFilteredQuizzes = () => {
     return quizzes.filter(quiz => {
-      const difficultyMatch = selectedDifficulty === 'all' || quiz.difficulty === selectedDifficulty;
+      const difficulty = quiz.difficulty || 'medium'; // Handle API data
+      const difficultyMatch = selectedDifficulty === 'all' || difficulty === selectedDifficulty;
+      
+      // Check status based on attempts - handle missing fields gracefully
       const statusMatch = selectedStatus === 'all' || 
-        (selectedStatus === 'completed' && attempts.some(a => a.quizId === quiz.id && a.passed)) ||
-        (selectedStatus === 'in_progress' && attempts.some(a => a.quizId === quiz.id && !a.passed)) ||
-        (selectedStatus === 'not_started' && !attempts.some(a => a.quizId === quiz.id));
+        (selectedStatus === 'completed' && attempts.some(a => a.quiz === quiz.id && a.passed)) ||
+        (selectedStatus === 'in_progress' && attempts.some(a => a.quiz === quiz.id && !a.passed)) ||
+        (selectedStatus === 'not_started' && !attempts.some(a => a.quiz === quiz.id));
       
       return difficultyMatch && statusMatch;
     });
   };
 
   const getQuizStatus = (quizId: string) => {
-    const quizAttempts = attempts.filter(a => a.quizId === quizId);
+    const quizAttempts = attempts.filter(a => a.quiz === quizId); // Handle API field name
     if (quizAttempts.length === 0) return 'not_started';
     
     const bestAttempt = quizAttempts.reduce((best, current) => 
-      current.percentage > best.percentage ? current : best
+      (current.percentage || 0) > (best.percentage || 0) ? current : best
     );
     
     return bestAttempt.passed ? 'completed' : 'in_progress';
   };
 
   const getBestScore = (quizId: string) => {
-    const quizAttempts = attempts.filter(a => a.quizId === quizId);
+    const quizAttempts = attempts.filter(a => a.quiz === quizId);
     if (quizAttempts.length === 0) return 0;
     
-    return Math.max(...quizAttempts.map(a => a.percentage));
+    return Math.max(...quizAttempts.map(a => a.percentage || 0));
   };
 
   const getAttemptsRemaining = (quizId: string) => {
     const quiz = quizzes.find(q => q.id === quizId);
     if (!quiz) return 0;
     
-    const quizAttempts = attempts.filter(a => a.quizId === quizId);
-    return Math.max(0, quiz.max_attempts - quizAttempts.length);
+    const maxAttempts = quiz.max_attempts || quiz.max_attempts || 3; // Handle API field name
+    const quizAttempts = attempts.filter(a => a.quiz === quizId);
+    return Math.max(0, maxAttempts - quizAttempts.length);
   };
 
   const getQuizProgress = (quizId: string) => {
-    const quizAttempts = attempts.filter(a => a.quizId === quizId);
+    const quizAttempts = attempts.filter(a => a.quiz === quizId);
     const quiz = quizzes.find(q => q.id === quizId);
     if (!quiz) return 0;
     
-    return (quizAttempts.length / quiz.max_attempts) * 100;
+    const maxAttempts = quiz.max_attempts || quiz.max_attempts || 3;
+    return (quizAttempts.length / maxAttempts) * 100;
   };
 
   const formatTime = (minutes: number) => {
@@ -465,35 +302,41 @@ const Assessments: React.FC = () => {
       <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6">
         <h3 className="text-xl font-semibold text-white mb-6">Recent Activity</h3>
         <div className="space-y-4">
-          {attempts.slice(-5).reverse().map((attempt, index) => (
-            <motion.div
-              key={attempt.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="flex items-center justify-between p-4 bg-white/5 rounded-lg"
-            >
-              <div className="flex items-center space-x-4">
-                <div className="text-2xl">
-                  {attempt.passed ? '✅' : '❌'}
+          {attempts.slice(-5).reverse().map((attempt, index) => {
+            // Find the quiz for this attempt
+            const quiz = quizzes.find(q => q.id === attempt.quiz);
+            const quizTitle = quiz?.title || 'Unknown Quiz';
+            
+            return (
+              <motion.div
+                key={attempt.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="flex items-center justify-between p-4 bg-white/5 rounded-lg"
+              >
+                <div className="flex items-center space-x-4">
+                  <div className="text-2xl">
+                    {attempt.passed ? '✅' : '❌'}
+                  </div>
+                  <div>
+                    <h4 className="text-white font-medium">{quizTitle}</h4>
+                    <p className="text-white/85 text-sm">
+                      {formatDate(attempt.completed_at || attempt.started_at)} • {formatTime(attempt.time_taken || 0)}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-white font-medium">{attempt.quizTitle}</h4>
-                  <p className="text-white/85 text-sm">
-                    {formatDate(attempt.completedAt)} • {formatTime(attempt.timeTaken)}
-                  </p>
+                <div className="text-right">
+                  <div className={`text-lg font-bold ${getScoreColor(attempt.percentage || 0)}`}>
+                    {attempt.percentage || 0}%
+                  </div>
+                  <div className="text-xs text-white/85">
+                    Attempt {index + 1}
+                  </div>
                 </div>
-              </div>
-              <div className="text-right">
-                <div className={`text-lg font-bold ${getScoreColor(attempt.percentage)}`}>
-                  {attempt.percentage}%
-                </div>
-                <div className="text-xs text-white/85">
-                  Attempt {attempt.attemptNumber}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -560,8 +403,8 @@ const Assessments: React.FC = () => {
                 <div className="flex-1">
                   <div className="flex items-center space-x-2 mb-2">
                     <h3 className="text-lg font-semibold text-white">{quiz.title}</h3>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${difficultyColors[quiz.difficulty]} text-white`}>
-                      {difficultyLabels[quiz.difficulty]}
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${difficultyColors[quiz.difficulty || 'medium']} text-white`}>
+                      {difficultyLabels[quiz.difficulty || 'medium']}
                     </span>
                   </div>
                   <p className="text-white/90 text-sm mb-3">{quiz.description}</p>
@@ -569,11 +412,11 @@ const Assessments: React.FC = () => {
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="text-white/85">Questions:</span>
-                      <span className="text-white">{quiz.questionCount}</span>
+                      <span className="text-white">{quiz.questionCount || quiz.questions?.length || 0}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-white/85">Points:</span>
-                      <span className="text-white">{quiz.totalPoints}</span>
+                      <span className="text-white">{quiz.totalPoints || 100}</span>
                     </div>
                     {quiz.time_limit && (
                       <div className="flex justify-between">
@@ -583,7 +426,7 @@ const Assessments: React.FC = () => {
                     )}
                     <div className="flex justify-between">
                       <span className="text-white/85">Passing Score:</span>
-                      <span className="text-white">{quiz.passing_score}%</span>
+                      <span className="text-white">{quiz.passing_score || 70}%</span>
                     </div>
                   </div>
                 </div>
@@ -668,53 +511,60 @@ const Assessments: React.FC = () => {
         <h3 className="text-xl font-semibold text-white mb-6">Assessment History</h3>
         
         <div className="space-y-4">
-          {attempts.slice().reverse().map((attempt, index) => (
-            <motion.div
-              key={attempt.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.05 }}
-              className="bg-white/5 rounded-lg p-4"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className="text-2xl">
-                    {attempt.passed ? '✅' : '❌'}
+          {attempts.slice().reverse().map((attempt, index) => {
+            // Find the quiz for this attempt
+            const quiz = quizzes.find(q => q.id === attempt.quiz);
+            const quizTitle = quiz?.title || 'Unknown Quiz';
+            const difficulty = attempt.difficulty || 'medium';
+            
+            return (
+              <motion.div
+                key={attempt.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="bg-white/5 rounded-lg p-4"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <div className="text-2xl">
+                      {attempt.passed ? '✅' : '❌'}
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-white font-medium">{quizTitle}</h4>
+                      <div className="flex items-center space-x-4 text-sm text-white/90">
+                        <span>{formatDate(attempt.completed_at || attempt.started_at)}</span>
+                        <span>Attempt {index + 1}</span>
+                        <span className={`px-2 py-1 rounded-full text-xs bg-gradient-to-r ${difficultyColors[difficulty]} text-white`}>
+                          {difficultyLabels[difficulty]}
+                        </span>
+                        <span>{formatTime(attempt.time_taken || 0)}</span>
+                      </div>
+                    </div>
                   </div>
                   
-                  <div>
-                    <h4 className="text-white font-medium">{attempt.quizTitle}</h4>
-                    <div className="flex items-center space-x-4 text-sm text-white/90">
-                      <span>{formatDate(attempt.completedAt)}</span>
-                      <span>Attempt {attempt.attemptNumber}</span>
-                      <span className={`px-2 py-1 rounded-full text-xs bg-gradient-to-r ${difficultyColors[attempt.difficulty]} text-white`}>
-                        {difficultyLabels[attempt.difficulty]}
-                      </span>
-                      <span>{formatTime(attempt.timeTaken)}</span>
+                  <div className="text-right">
+                    <div className={`text-xl font-bold ${getScoreColor(attempt.percentage || 0)}`}>
+                      {attempt.percentage || 0}%
+                    </div>
+                    <div className="text-sm text-white/85">
+                      {attempt.score || 0}/{attempt.max_score || 100} points
                     </div>
                   </div>
                 </div>
                 
-                <div className="text-right">
-                  <div className={`text-xl font-bold ${getScoreColor(attempt.percentage)}`}>
-                    {attempt.percentage}%
-                  </div>
-                  <div className="text-sm text-white/85">
-                    {attempt.score}/{attempt.maxScore} points
+                <div className="mt-3 pt-3 border-t border-white/10">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-white/90">Result:</span>
+                    <span className={attempt.passed ? 'text-green-400' : 'text-red-400'}>
+                      {attempt.passed ? 'Passed' : 'Failed'}
+                    </span>
                   </div>
                 </div>
-              </div>
-              
-              <div className="mt-3 pt-3 border-t border-white/10">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-white/90">Result:</span>
-                  <span className={attempt.passed ? 'text-green-400' : 'text-red-400'}>
-                    {attempt.passed ? 'Passed' : 'Failed'}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -738,9 +588,9 @@ const Assessments: React.FC = () => {
           <h3 className="text-lg font-semibold text-white mb-4">Performance by Difficulty</h3>
           <div className="space-y-4">
             {['easy', 'medium', 'hard'].map(difficulty => {
-              const difficultyAttempts = attempts.filter(a => a.difficulty === difficulty);
+              const difficultyAttempts = attempts.filter(a => (a.difficulty || 'medium') === difficulty);
               const averageScore = difficultyAttempts.length > 0 
-                ? Math.round(difficultyAttempts.reduce((sum, a) => sum + a.percentage, 0) / difficultyAttempts.length)
+                ? Math.round(difficultyAttempts.reduce((sum, a) => sum + (a.percentage || 0), 0) / difficultyAttempts.length)
                 : 0;
               const passRate = difficultyAttempts.length > 0
                 ? Math.round((difficultyAttempts.filter(a => a.passed).length / difficultyAttempts.length) * 100)
@@ -800,19 +650,28 @@ const Assessments: React.FC = () => {
             <div className="flex justify-between">
               <span className="text-white/70">Average Time</span>
               <span className="text-white font-semibold">
-                {formatTime(Math.round(attempts.reduce((sum, a) => sum + a.timeTaken, 0) / attempts.length))}
+                {attempts.length > 0 
+                  ? formatTime(Math.round(attempts.reduce((sum, a) => sum + (a.time_taken || 0), 0) / attempts.length))
+                  : '0m'
+                }
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-white/70">Fastest Completion</span>
               <span className="text-white font-semibold">
-                {formatTime(Math.min(...attempts.map(a => a.timeTaken)))}
+                {attempts.length > 0 
+                  ? formatTime(Math.min(...attempts.map(a => a.time_taken || 0)))
+                  : '0m'
+                }
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-white/70">Longest Time</span>
               <span className="text-white font-semibold">
-                {formatTime(Math.max(...attempts.map(a => a.timeTaken)))}
+                {attempts.length > 0 
+                  ? formatTime(Math.max(...attempts.map(a => a.time_taken || 0)))
+                  : '0m'
+                }
               </span>
             </div>
           </div>

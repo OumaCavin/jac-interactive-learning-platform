@@ -165,6 +165,28 @@ export const learningService = {
   // Test Cases
   getTestCases: (moduleId: number): Promise<any[]> =>
     api.get(`/learning/test-cases/?module=${moduleId}`).then(res => res.data),
+
+  // Assessment APIs
+  getQuizzes: (): Promise<any[]> =>
+    api.get('/learning/assessment/quizzes/').then(res => res.data),
+
+  getQuiz: (quizId: string): Promise<any> =>
+    api.get(`/learning/assessment/quizzes/${quizId}/`).then(res => res.data),
+
+  startQuizAttempt: (quizId: string): Promise<any> =>
+    api.post(`/learning/assessment/quizzes/${quizId}/start/`).then(res => res.data),
+
+  getUserAttempts: (): Promise<any[]> =>
+    api.get('/learning/assessment/attempts/').then(res => res.data),
+
+  getAttempt: (attemptId: string): Promise<any> =>
+    api.get(`/learning/assessment/attempts/${attemptId}/`).then(res => res.data),
+
+  submitAttempt: (attemptId: string, answers: any): Promise<any> =>
+    api.post(`/learning/assessment/attempts/${attemptId}/submit/`, { answers }).then(res => res.data),
+
+  getAssessmentStats: (): Promise<any> =>
+    api.get('/learning/assessment/stats/').then(res => res.data),
 };
 
   // Admin Analytics

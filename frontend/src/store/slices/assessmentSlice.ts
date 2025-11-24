@@ -3,7 +3,81 @@
  * Manages quizzes, assessments, and evaluation state
  */
 
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { learningService } from '../../services/learningService';
+
+// Async thunks for API calls
+export const fetchQuizzes = createAsyncThunk(
+  'assessments/fetchQuizzes',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await learningService.getQuizzes();
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.detail || 'Failed to fetch quizzes');
+    }
+  }
+);
+
+export const fetchQuiz = createAsyncThunk(
+  'assessments/fetchQuiz',
+  async (quizId: string, { rejectWithValue }) => {
+    try {
+      const response = await learningService.getQuiz(quizId);
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.detail || 'Failed to fetch quiz');
+    }
+  }
+);
+
+export const fetchUserAttempts = createAsyncThunk(
+  'assessments/fetchUserAttempts',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await learningService.getUserAttempts();
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.detail || 'Failed to fetch attempts');
+    }
+  }
+);
+
+export const startQuizAttempt = createAsyncThunk(
+  'assessments/startQuizAttempt',
+  async (quizId: string, { rejectWithValue }) => {
+    try {
+      const response = await learningService.startQuizAttempt(quizId);
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.detail || 'Failed to start attempt');
+    }
+  }
+);
+
+export const submitQuizAttempt = createAsyncThunk(
+  'assessments/submitQuizAttempt',
+  async ({ attemptId, answers }: { attemptId: string; answers: any }, { rejectWithValue }) => {
+    try {
+      const response = await learningService.submitAttempt(attemptId, answers);
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.detail || 'Failed to submit attempt');
+    }
+  }
+);
+
+export const fetchAssessmentStats = createAsyncThunk(
+  'assessments/fetchAssessmentStats',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await learningService.getAssessmentStats();
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.detail || 'Failed to fetch stats');
+    }
+  }
+);
 
 // Types for assessment state
 export interface Quiz {
@@ -102,99 +176,6 @@ const assessmentSlice = createSlice({
   name: 'assessments',
   initialState,
   reducers: {
-    // Data actions
-    setQuizzes: (state, action: PayloadAction<Quiz[]>) => {
-      state.quizzes = action.payload;
-    },
-    addQuiz: (state, action: PayloadAction<Quiz>) => {
-      state.quizzes.push(action.payload);
-    },
-    updateQuiz: (state, action: PayloadAction<Quiz>) => {
-      const index = state.quizzes.findIndex(q => q.id === action.payload.id);
-      if (index !== -1) {
-        state.quizzes[index] = action.payload;
-      }
-    },
-    removeQuiz: (state, action: PayloadAction<string>) => {
-      state.quizzes = state.quizzes.filter(q => q.id !== action.payload);
-    },
-    
-    setQuizAttempts: (state, action: PayloadAction<QuizAttempt[]>) => {
-      state.quiz_attempts = action.payload;
-    },
-    addQuizAttempt: (state, action: PayloadAction<QuizAttempt>) => {
-      state.quiz_attempts.push(action.payload);
-    },
-    updateQuizAttempt: (state, action: PayloadAction<QuizAttempt>) => {
-      const index = state.quiz_attempts.findIndex(a => a.id === action.payload.id);
-      if (index !== -1) {
-        state.quiz_attempts[index] = action.payload;
-      }
-    },
-    
-    // Current assessment
-    setCurrentQuiz: (state, action: PayloadAction<string | null>) => {
-      state.current_quiz = action.payload;
-    },
-    setCurrentAttempt: (state, action: PayloadAction<string | null>) => {
-      state.current_attempt = action.payload;
-    },
-    
-    // UI state
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.isLoading = action.payload;
-    },
-    setSubmitting: (state, action: PayloadAction<boolean>) => {
-      state.isSubmitting = action.payload;
-    },
-    setError: (state, action: PayloadAction<string | null>) => {
-      state.error = action.payload;
-    },
-    clearError: (state) => {
-      state.error = null;
-    },
-    
-    // Timer
-    setTimeRemaining: (state, action: PayloadAction<number>) => {
-      state.time_remaining = action.payload;
-    },
-    decrementTimeRemaining: (state) => {
-      if (state.time_remaining && state.time_remaining > 0) {
-        state.time_remaining -= 1;
-      } else {
-        state.is_timer_active = false;
-      }
-    },
-    setTimerActive: (state, action: PayloadAction<boolean>) => {
-      state.is_timer_active = action.payload;
-    },
-    startTimer: (state, action: PayloadAction<number>) => {
-      state.time_remaining = action.payload;
-      state.is_timer_active = true;
-    },
-    stopTimer: (state) => {
-      state.is_timer_active = false;
-    },
-    
-    // Results
-    setLastAttemptResult: (state, action: PayloadAction<{
-      score: number;
-      max_score: number;
-      passed: boolean;
-      feedback: string;
-    }>) => {
-      state.last_attempt_result = action.payload;
-    },
-    clearLastAttemptResult: (state) => {
-      state.last_attempt_result = undefined;
-    },
-    
-    // Answer management
-    updateAnswer: (state, action: PayloadAction<{ questionId: string; answer: string | string[] }>) => {
-      // This would typically be handled in a separate attempt slice
-      // For now, we'll store current answers in the current attempt
-    },
-    
     // Reset
     resetAssessment: (state) => {
       state.current_quiz = null;
@@ -206,42 +187,93 @@ const assessmentSlice = createSlice({
       state.error = null;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      // Fetch Quizzes
+      .addCase(fetchQuizzes.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchQuizzes.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.quizzes = action.payload;
+      })
+      .addCase(fetchQuizzes.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
+      
+      // Fetch User Attempts
+      .addCase(fetchUserAttempts.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserAttempts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.quiz_attempts = action.payload;
+      })
+      .addCase(fetchUserAttempts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
+      
+      // Fetch Assessment Stats
+      .addCase(fetchAssessmentStats.fulfilled, (state, action) => {
+        // Store stats in a separate field if needed
+        // For now, we'll integrate it with the existing data structure
+      })
+      
+      // Start Quiz Attempt
+      .addCase(startQuizAttempt.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(startQuizAttempt.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.current_attempt = action.payload.id;
+        // Add the new attempt to the list
+        state.quiz_attempts.push(action.payload);
+      })
+      .addCase(startQuizAttempt.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
+      
+      // Submit Quiz Attempt
+      .addCase(submitQuizAttempt.pending, (state) => {
+        state.isSubmitting = true;
+        state.error = null;
+      })
+      .addCase(submitQuizAttempt.fulfilled, (state, action) => {
+        state.isSubmitting = false;
+        state.last_attempt_result = {
+          score: action.payload.score,
+          max_score: action.payload.max_score,
+          passed: action.payload.passed,
+          feedback: action.payload.feedback || ''
+        };
+        // Update the attempt in the list
+        const index = state.quiz_attempts.findIndex(a => a.id === action.payload.id);
+        if (index !== -1) {
+          state.quiz_attempts[index] = action.payload;
+        }
+      })
+      .addCase(submitQuizAttempt.rejected, (state, action) => {
+        state.isSubmitting = false;
+        state.error = action.payload as string;
+      });
+  },
 });
 
 // Export actions
 export const {
-  // Data
-  setQuizzes,
-  addQuiz,
-  updateQuiz,
-  removeQuiz,
-  setQuizAttempts,
-  addQuizAttempt,
-  updateQuizAttempt,
-  
-  // Current assessment
-  setCurrentQuiz,
-  setCurrentAttempt,
-  
-  // UI state
-  setLoading,
-  setSubmitting,
-  setError,
-  clearError,
-  
-  // Timer
-  setTimeRemaining,
-  decrementTimeRemaining,
-  setTimerActive,
-  startTimer,
-  stopTimer,
-  
-  // Results
-  setLastAttemptResult,
-  clearLastAttemptResult,
-  
-  // Answer management
-  updateAnswer,
+  // Async thunks
+  fetchQuizzes,
+  fetchQuiz,
+  fetchUserAttempts,
+  startQuizAttempt,
+  submitQuizAttempt,
+  fetchAssessmentStats,
   
   // Reset
   resetAssessment,
