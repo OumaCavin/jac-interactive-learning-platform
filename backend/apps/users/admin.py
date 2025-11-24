@@ -1,51 +1,37 @@
 """
-Admin interface for the users app.
+Django admin configuration for the Users app.
 """
 
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
-from .models import User, UserProfile
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from .models import User
 
 
 @admin.register(User)
-class UserAdmin(DjangoUserAdmin):
-    """
-    Admin interface for the User model.
-    """
+class UserAdmin(BaseUserAdmin):
+    """Admin interface for the custom User model."""
     
     list_display = (
-        'username', 'email', 'first_name', 'last_name',
-        'preferred_learning_style', 'learning_level', 'is_active',
-        'date_joined', 'last_login'
+        'username', 'email', 'first_name', 'last_name', 
+        'learning_level', 'preferred_learning_style', 
+        'is_staff', 'is_active', 'date_joined'
     )
     
     list_filter = (
-        'is_active', 'is_staff', 'is_superuser', 'is_verified',
-        'preferred_learning_style', 'learning_level',
+        'is_staff', 'is_superuser', 'is_active', 
+        'preferred_learning_style', 'learning_level', 
         'date_joined', 'last_login'
     )
     
-    search_fields = (
-        'username', 'first_name', 'last_name', 'email'
-    )
+    search_fields = ('username', 'email', 'first_name', 'last_name')
     
     readonly_fields = (
-        'date_joined', 'last_login', 'last_activity',
-        'total_study_time', 'streak_days', 'email_verified'
+        'id', 'date_joined', 'last_login', 'last_activity'
     )
     
     fieldsets = (
-        ('Personal Info', {
-            'fields': (
-                'username', 'password', 'email',
-                'first_name', 'last_name'
-            )
-        }),
-        ('Permissions', {
-            'fields': (
-                'is_active', 'is_staff', 'is_superuser',
-                'is_verified', 'groups', 'user_permissions'
-            )
+        ('Basic Information', {
+            'fields': ('username', 'email', 'password', 'first_name', 'last_name')
         }),
         ('Learning Preferences', {
             'fields': (
@@ -54,70 +40,24 @@ class UserAdmin(DjangoUserAdmin):
         }),
         ('Platform Activity', {
             'fields': (
-                'total_study_time', 'streak_days',
-                'last_activity', 'notifications_enabled'
+                'total_study_time', 'streak_days', 'last_activity'
             ),
             'classes': ('collapse',)
         }),
-        ('Important Dates', {
-            'fields': ('date_joined', 'last_login'),
-            'classes': ('collapse',)
+        ('Preferences', {
+            'fields': ('notifications_enabled',)
+        }),
+        ('Permissions', {
+            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
+        }),
+        ('Important dates', {
+            'fields': ('date_joined', 'last_login')
         }),
     )
     
-    def save_model(self, request, obj, form, change):
-        """
-        Override save_model to handle custom fields.
-        """
-        super().save_model(request, obj, form, change)
-
-
-@admin.register(UserProfile)
-class UserProfileAdmin(admin.ModelAdmin):
-    """
-    Admin interface for the UserProfile model.
-    """
-    
-    list_display = (
-        'user', 'location', 'modules_completed',
-        'lessons_completed', 'total_points', 'created_at'
-    )
-    
-    list_filter = (
-        'created_at', 'updated_at', 'location'
-    )
-    
-    search_fields = (
-        'user__username', 'user__email', 'location', 'bio'
-    )
-    
-    readonly_fields = (
-        'created_at', 'updated_at'
-    )
-    
-    fieldsets = (
-        ('User', {
-            'fields': ('user',)
-        }),
-        ('Personal Info', {
-            'fields': ('bio', 'location', 'website')
-        }),
-        ('Learning', {
-            'fields': ('learning_goals', 'current_goals')
-        }),
-        ('Progress', {
-            'fields': (
-                'modules_completed', 'lessons_completed',
-                'assessments_completed', 'average_lesson_score',
-                'total_points'
-            )
-        }),
-        ('Achievements', {
-            'fields': ('badges', 'achievements'),
-            'classes': ('collapse',)
-        }),
-        ('Timestamps', {
-            'fields': ('created_at', 'updated_at'),
-            'classes': ('collapse',)
-        }),
-    )
+    def get_readonly_fields(self, request, obj=None):
+        """Make some fields readonly for non-superusers."""
+        readonly = list(self.readonly_fields)
+        if not request.user.is_superuser:
+            readonly.extend(['is_superuser', 'groups', 'user_permissions'])
+        return readonly

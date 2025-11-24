@@ -207,7 +207,8 @@ class AssessmentAdmin(admin.ModelAdmin):
         }),
     )
     
-    filter_horizontal = ('questions',)
+    # Note: Questions are managed through AssessmentQuestion model, not directly
+    # filter_horizontal = ('assessment_questions',)  # Commented out as related field not suitable for filter_horizontal
     
     def get_queryset(self, request):
         """Optimize queryset with related fields."""
