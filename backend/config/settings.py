@@ -53,7 +53,7 @@ LOCAL_APPS = [
     'apps.progress',
     'apps.agents',
     'apps.knowledge_graph',
-    # 'apps.jac_execution',  # Temporarily disabled due to import issues
+    'apps.jac_execution',
     'apps.management',
 ]
 

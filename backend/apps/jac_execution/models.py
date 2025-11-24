@@ -7,11 +7,12 @@ results, and execution history in the JAC Learning Platform.
 
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
 import uuid
 import json
 
 # Use lazy import to avoid circular dependencies
-def get_user_model():
+def get_lazy_user_model():
     """Get the user model, deferring import to avoid circular dependencies."""
     from django.contrib.auth import get_user_model
     return get_user_model()
@@ -37,7 +38,7 @@ class CodeExecution(models.Model):
     ]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey('django.contrib.auth.get_user_model()', on_delete=models.CASCADE, related_name='code_executions')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='code_executions')
     
     # Code execution details
     language = models.CharField(max_length=10, choices=LANGUAGE_CHOICES, default='python')
@@ -116,7 +117,7 @@ class ExecutionTemplate(models.Model):
     # Template metadata
     is_public = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    created_by = models.ForeignKey('django.contrib.auth.get_user_model()', on_delete=models.CASCADE, related_name='execution_templates')
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='execution_templates')
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -144,7 +145,7 @@ class CodeExecutionSession(models.Model):
     """
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey('django.contrib.auth.get_user_model()', on_delete=models.CASCADE, related_name='execution_sessions')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='execution_sessions')
     session_id = models.CharField(max_length=255, unique=True)
     
     # Session statistics

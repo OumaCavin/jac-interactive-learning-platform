@@ -58,22 +58,22 @@ Created: 2025-11-24
 # Django App Configuration
 default_app_config = 'apps.jac_execution.apps.JacExecutionConfig'
 
-# Safe imports of execution components
+# Safe imports of execution components - models and services will be imported lazily
 try:
-    # Import code execution engine components
-    from .models import ExecutionRequest, ExecutionResult
-    from .services.executor import CodeExecutor, JacCodeExecutor, PythonCodeExecutor
-    from .services.translator import JacCodeTranslator, PythonCodeTranslator
+    # Import code execution engine components (lazy imports to avoid circular dependencies)
+    # from .models import ExecutionRequest, ExecutionResult  # Moved to avoid circular imports
+    # from .services.executor import CodeExecutor, JacCodeExecutor, PythonCodeExecutor
+    # from .services.translator import JacCodeTranslator, PythonCodeTranslator
     
     # Export main execution components
     __all__ = [
-        'CodeExecutor',
-        'JacCodeExecutor', 
-        'PythonCodeExecutor',
-        'ExecutionRequest',
-        'ExecutionResult',
-        'JacCodeTranslator',
-        'PythonCodeTranslator'
+        # 'CodeExecutor',
+        # 'JacCodeExecutor', 
+        # 'PythonCodeExecutor',
+        # 'ExecutionRequest',
+        # 'ExecutionResult',
+        # 'JacCodeTranslator',
+        # 'PythonCodeTranslator'
     ]
     
 except ImportError as e:
@@ -82,7 +82,8 @@ except ImportError as e:
     
     # Provide basic execution functionality from learning app
     try:
-        from apps.learning.jac_code_executor import CodeExecutionResult, CodeExecutionRequest
+        # Lazy import to avoid circular dependencies
+        # from apps.learning.jac_code_executor import CodeExecutionResult, CodeExecutionRequest
         __all__.extend(['CodeExecutionResult', 'CodeExecutionRequest'])
     except ImportError:
         pass
