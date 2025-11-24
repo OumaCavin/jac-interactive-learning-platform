@@ -5,7 +5,7 @@ interface AuthLayoutProps {
   children: React.ReactNode;
 }
 
-const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
+export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen flex">
       {/* Left side - Branding and background */}
@@ -71,7 +71,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
           className="w-full max-w-md mx-auto"
         >
           {/* Logo for mobile */}
-          <div className="lg:hidden mb-8">
+          <div className="lg:hidden mb-8" role="banner">
             <h1 className="text-2xl font-bold text-center text-gray-900">
               JAC Learning Platform
             </h1>
@@ -81,7 +81,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
           </div>
 
           {/* Auth form container */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+          <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100" role="main" aria-label="Authentication form">
             {children}
           </div>
 
@@ -99,5 +99,3 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
     </div>
   );
 };
-
-export default AuthLayout;
