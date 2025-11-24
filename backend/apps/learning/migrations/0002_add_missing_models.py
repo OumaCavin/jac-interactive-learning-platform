@@ -161,7 +161,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddIndex(
             model_name='userachievement',
-            index=models.models.Index(fields=['user', 'unlocked_at'], name='jac_userac_user_id_unlocke_7aed4a_idx'),
+            index=models.Index(fields=['user', 'unlocked_at'], name='jac_userac_user_id_unlocke_7aed4a_idx'),
         ),
         migrations.AddIndex(
             model_name='userachievement',

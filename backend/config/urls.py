@@ -17,10 +17,10 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from drf_spectacular.views import (
-    SpectacularAPIView,
-    SpectacularSwaggerView,
-)
+# from drf_spectacular.views import (
+#     SpectacularAPIView,
+#     SpectacularSwaggerView,
+# )
 from apps.agents import views as agents_views
 
 # Create a router and register our viewsets with it.
@@ -30,9 +30,9 @@ urlpatterns = [
     # Django Admin Interface (Custom Styled)
     path('admin/', custom_admin_site.urls),
     
-    # API Documentation
-    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    # API Documentation (Commented out - requires drf_spectacular)
+    # path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    # path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     
     # JWT Authentication
     path('api/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -58,12 +58,12 @@ urlpatterns = [
     }), name='simple_health_check'),
     
     # API endpoints with /api/ prefix (primary)
-    path('api/users/', include('apps.users.urls')),
+    # path('api/users/', include('apps.users.urls')),  # Commented out - users app not in INSTALLED_APPS
     path('api/learning/', include('apps.learning.urls')),
     path('api/agents/', include('apps.agents.urls')),
     
     # Fallback endpoints without /api/ prefix (for frontend compatibility)
-    path('users/', include('apps.users.urls')),
+    # path('users/', include('apps.users.urls')),  # Commented out - users app not in INSTALLED_APPS
     path('learning/', include('apps.learning.urls')),
     # Note: agents endpoints are only available via /api/agents/ to avoid namespace conflicts
     

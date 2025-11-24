@@ -43,58 +43,16 @@ Created: 2025-11-24
 # Django App Configuration
 default_app_config = 'apps.users.apps.UsersConfig'
 
-# Safe imports of user components with error handling
-try:
-    # Import core user components
-    from .models import User, UserProfile
-    from .serializers import UserSerializer, UserProfileSerializer
-    from .views import (
-        UserRegistrationView, 
-        UserLoginView, 
-        UserProfileView,
-        UserPreferencesView
-    )
-    
-    # Export main components for easy import
-    __all__ = [
-        'User',
-        'UserProfile', 
-        'UserSerializer',
-        'UserProfileSerializer',
-        'UserRegistrationView',
-        'UserLoginView', 
-        'UserProfileView',
-        'UserPreferencesView'
-    ]
-    
-except ImportError as e:
-    # Handle missing components gracefully
-    __all__ = []
-    
-    # For backward compatibility, provide minimal imports
-    try:
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-        __all__.append('User')
-    except ImportError:
-        pass
+# Users app is disabled - not in INSTALLED_APPS
+# All imports removed to avoid AppRegistryNotReady errors
+__all__ = []
 
-# Signal handlers are automatically imported by UsersConfig.ready()
+# Signal handlers are automatically imported by UsersConfig.ready() (commented out)
 
 # Package metadata
 __version__ = "1.0.0"
 __author__ = "MiniMax Agent"
 
-# Verify Django User model configuration
-import django
-from django.conf import settings
-
-# Check if custom user model is properly configured
-if hasattr(settings, 'AUTH_USER_MODEL'):
-    auth_user_model = settings.AUTH_USER_MODEL
-else:
-    auth_user_model = 'auth.User'
-
-# Add metadata for verification
-__django_user_model__ = auth_user_model
+# Note: Users app disabled since not in INSTALLED_APPS
+# All imports commented out to avoid AppRegistryNotReady errors
 __app_ready__ = True

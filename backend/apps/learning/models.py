@@ -279,7 +279,7 @@ class Assessment(models.Model):
     
     # Relationships
     module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='assessments')
-    questions = models.ManyToManyField('self', blank=True, help_text='Related questions')
+    # Questions are managed through AssessmentQuestion model for proper relationship handling
     
     # Publishing
     is_published = models.BooleanField(default=False)

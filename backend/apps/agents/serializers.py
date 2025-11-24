@@ -7,6 +7,7 @@ Serializers for the agent models and API interactions
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import Agent, Task, AgentMetrics
+from .simple_models import ChatMessage
 # from .models import Agent, Task, AgentCommunication, AgentMetrics, LearningSession
 
 
