@@ -16,17 +16,21 @@ This package provides:
 - Multi-agent learning assistance
 - Personalized learning experiences
 
-Author: Cavin Otieno
+Author: MiniMax Agent
 Created: 2025-11-24
 """
 
 # Django App Configuration
 default_app_config = 'apps.learning.apps.LearningConfig'
 
-# Import middleware for easy access (optional)
+# Safe imports of learning components
 try:
     from .middleware import MockJWTAuthentication
     __all__ = ['MockJWTAuthentication']
 except ImportError:
-    # Middleware might not be available during app loading
+    # Handle case where middleware might not be available
     pass
+
+# Package metadata
+__version__ = "1.0.0"
+__author__ = "MiniMax Agent"
