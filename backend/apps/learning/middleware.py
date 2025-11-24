@@ -4,10 +4,8 @@ This middleware allows mock tokens from frontend to pass through Django authenti
 """
 
 import jwt
-from django.contrib.auth.models import AnonymousUser
 from django.conf import settings
 from rest_framework import authentication, exceptions
-from rest_framework_simplejwt.backends import TokenBackend
 
 
 class MockJWTAuthentication(authentication.BaseAuthentication):
@@ -60,6 +58,7 @@ class MockJWTAuthentication(authentication.BaseAuthentication):
         # For real JWT tokens, try standard JWT authentication
         if settings.ENVIRONMENT == 'production':
             try:
+                from rest_framework_simplejwt.backends import TokenBackend
                 token_backend = TokenBackend(
                     algorithm='HS256',
                     signing_key=settings.SECRET_KEY,

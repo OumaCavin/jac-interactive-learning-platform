@@ -7,6 +7,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import MinLengthValidator
 from django.utils import timezone
+from datetime import timedelta
 import uuid
 
 
@@ -52,7 +53,7 @@ class User(AbstractUser):
     
     # Progress Tracking
     total_modules_completed = models.PositiveIntegerField(default=0)
-    total_time_spent = models.DurationField(default=0)
+    total_time_spent = models.DurationField(default=timedelta)
     current_streak = models.PositiveIntegerField(default=0)
     longest_streak = models.PositiveIntegerField(default=0)
     total_points = models.PositiveIntegerField(default=0)

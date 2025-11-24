@@ -92,20 +92,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
 
 # Database
+# Database
+# Temporarily using SQLite for testing - switch back to PostgreSQL in production
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default='jac_learning_db'),
-        'USER': config('DB_USER', default='jac_user'),
-        'PASSWORD': config('DB_PASSWORD', default='jac_password'),
-        'HOST': config('DB_HOST', default='postgres'),
-        'PORT': config('DB_PORT', default='5432'),
-        'OPTIONS': {
-            'client_encoding': 'utf8',
-        },
-        'TEST': {
-            'NAME': 'test_jac_learning_db',
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

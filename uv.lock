@@ -352,6 +352,18 @@ wheels = [
 ]
 
 [[package]]
+name = "cron-descriptor"
+version = "2.0.6"
+source = { registry = "http://mirrors.cloud.aliyuncs.com/pypi/simple" }
+dependencies = [
+    { name = "typing-extensions" },
+]
+sdist = { url = "http://mirrors.cloud.aliyuncs.com/pypi/packages/7c/31/0b21d1599656b2ffa6043e51ca01041cd1c0f6dacf5a3e2b620ed120e7d8/cron_descriptor-2.0.6.tar.gz", hash = "sha256:e39d2848e1d8913cfb6e3452e701b5eec662ee18bea8cc5aa53ee1a7bb217157" }
+wheels = [
+    { url = "http://mirrors.cloud.aliyuncs.com/pypi/packages/21/cc/361326a54ad92e2e12845ad15e335a4e14b8953665007fb514d3393dfb0f/cron_descriptor-2.0.6-py3-none-any.whl", hash = "sha256:3a1c0d837c0e5a32e415f821b36cf758eb92d510e6beff8fbfe4fa16573d93d6" },
+]
+
+[[package]]
 name = "cryptography"
 version = "46.0.3"
 source = { registry = "http://mirrors.cloud.aliyuncs.com/pypi/simple" }
@@ -451,6 +463,23 @@ wheels = [
 ]
 
 [[package]]
+name = "django-celery-beat"
+version = "2.8.1"
+source = { registry = "http://mirrors.cloud.aliyuncs.com/pypi/simple" }
+dependencies = [
+    { name = "celery" },
+    { name = "cron-descriptor" },
+    { name = "django" },
+    { name = "django-timezone-field" },
+    { name = "python-crontab" },
+    { name = "tzdata" },
+]
+sdist = { url = "http://mirrors.cloud.aliyuncs.com/pypi/packages/aa/11/0c8b412869b4fda72828572068312b10aafe7ccef7b41af3633af31f9d4b/django_celery_beat-2.8.1.tar.gz", hash = "sha256:dfad0201c0ac50c91a34700ef8fa0a10ee098cc7f3375fe5debed79f2204f80a" }
+wheels = [
+    { url = "http://mirrors.cloud.aliyuncs.com/pypi/packages/61/e5/3a0167044773dee989b498e9a851fc1663bea9ab879f1179f7b8a827ac10/django_celery_beat-2.8.1-py3-none-any.whl", hash = "sha256:da2b1c6939495c05a551717509d6e3b79444e114a027f7b77bf3727c2a39d171" },
+]
+
+[[package]]
 name = "django-cors-headers"
 version = "4.9.0"
 source = { registry = "http://mirrors.cloud.aliyuncs.com/pypi/simple" }
@@ -523,6 +552,18 @@ dependencies = [
 sdist = { url = "http://mirrors.cloud.aliyuncs.com/pypi/packages/08/53/dbcfa1e528e0d6c39947092625b2c89274b5d88f14d357cee53c4d6dbbd4/django_redis-6.0.0.tar.gz", hash = "sha256:2d9cb12a20424a4c4dde082c6122f486628bae2d9c2bee4c0126a4de7fda00dd" }
 wheels = [
     { url = "http://mirrors.cloud.aliyuncs.com/pypi/packages/7e/79/055dfcc508cfe9f439d9f453741188d633efa9eab90fc78a67b0ab50b137/django_redis-6.0.0-py3-none-any.whl", hash = "sha256:20bf0063a8abee567eb5f77f375143c32810c8700c0674ced34737f8de4e36c0" },
+]
+
+[[package]]
+name = "django-timezone-field"
+version = "7.1"
+source = { registry = "http://mirrors.cloud.aliyuncs.com/pypi/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "http://mirrors.cloud.aliyuncs.com/pypi/packages/ba/5b/0dbe271fef3c2274b83dbcb1b19fa3dacf1f7e542382819294644e78ea8b/django_timezone_field-7.1.tar.gz", hash = "sha256:b3ef409d88a2718b566fabe10ea996f2838bc72b22d3a2900c0aa905c761380c" }
+wheels = [
+    { url = "http://mirrors.cloud.aliyuncs.com/pypi/packages/ec/09/7a808392a751a24ffa62bec00e3085a9c1a151d728c323a5bab229ea0e58/django_timezone_field-7.1-py3-none-any.whl", hash = "sha256:93914713ed882f5bccda080eda388f7006349f25930b6122e9b07bf8db49c4b4" },
 ]
 
 [[package]]
@@ -1504,6 +1545,15 @@ wheels = [
 ]
 
 [[package]]
+name = "python-crontab"
+version = "3.3.0"
+source = { registry = "http://mirrors.cloud.aliyuncs.com/pypi/simple" }
+sdist = { url = "http://mirrors.cloud.aliyuncs.com/pypi/packages/99/7f/c54fb7e70b59844526aa4ae321e927a167678660ab51dda979955eafb89a/python_crontab-3.3.0.tar.gz", hash = "sha256:007c8aee68dddf3e04ec4dce0fac124b93bd68be7470fc95d2a9617a15de291b" }
+wheels = [
+    { url = "http://mirrors.cloud.aliyuncs.com/pypi/packages/47/42/bb4afa5b088f64092036221843fc989b7db9d9d302494c1f8b024ee78a46/python_crontab-3.3.0-py3-none-any.whl", hash = "sha256:739a778b1a771379b75654e53fd4df58e5c63a9279a63b5dfe44c0fcc3ee7884" },
+]
+
+[[package]]
 name = "python-dateutil"
 version = "2.9.0.post0"
 source = { registry = "http://mirrors.cloud.aliyuncs.com/pypi/simple" }
@@ -2021,6 +2071,7 @@ dependencies = [
     { name = "cryptography" },
     { name = "django" },
     { name = "django-allauth" },
+    { name = "django-celery-beat" },
     { name = "django-cors-headers" },
     { name = "django-debug-toolbar" },
     { name = "django-extensions" },
@@ -2083,6 +2134,7 @@ requires-dist = [
     { name = "cryptography", specifier = ">=46.0.3" },
     { name = "django", specifier = ">=5.2.8" },
     { name = "django-allauth", specifier = ">=65.13.1" },
+    { name = "django-celery-beat", specifier = ">=2.8.1" },
     { name = "django-cors-headers", specifier = ">=4.9.0" },
     { name = "django-debug-toolbar", specifier = ">=6.1.0" },
     { name = "django-extensions", specifier = ">=4.1" },
