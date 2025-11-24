@@ -96,8 +96,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Use default User Model
-# AUTH_USER_MODEL = 'users.User'
+# Use custom User Model
+AUTH_USER_MODEL = 'users.User'
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'

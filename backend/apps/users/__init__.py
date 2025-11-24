@@ -43,16 +43,15 @@ Created: 2025-11-24
 # Django App Configuration
 default_app_config = 'apps.users.apps.UsersConfig'
 
-# Users app is disabled - not in INSTALLED_APPS
-# All imports removed to avoid AppRegistryNotReady errors
+# Users app is enabled and properly configured
 __all__ = []
 
-# Signal handlers are automatically imported by UsersConfig.ready() (commented out)
+# Signal handlers are automatically imported by UsersConfig.ready()
+# No manual imports needed here to avoid AppRegistryNotReady errors
 
 # Package metadata
 __version__ = "1.0.0"
 __author__ = "MiniMax Agent"
 
-# Note: Users app disabled since not in INSTALLED_APPS
-# All imports commented out to avoid AppRegistryNotReady errors
+# Users app is ready for Django app registry
 __app_ready__ = True
