@@ -160,6 +160,19 @@ export const learningService = {
   getAssessmentStats: (): Promise<any> =>
     apiClient.get('/learning/assessment/stats/').then(res => res.data),
 
+  // Direct Assessment API endpoints
+  getAssessmentQuestions: (moduleId?: string): Promise<any[]> =>
+    apiClient.get(`/assessments/questions/${moduleId ? `?module_id=${moduleId}` : ''}`).then(res => res.data),
+
+  getAssessmentAttempt: (attemptId: string): Promise<any> =>
+    apiClient.get(`/assessments/attempts/${attemptId}/`).then(res => res.data),
+
+  getAssessmentStats: (moduleId?: string): Promise<any> =>
+    apiClient.get(`/assessments/stats/${moduleId ? `?module_id=${moduleId}` : ''}`).then(res => res.data),
+
+  checkAssessmentAnswer: (questionId: string, answer: string): Promise<any> =>
+    apiClient.post(`/assessments/questions/${questionId}/check_answer/`, { answer }).then(res => res.data),
+
   // Admin Analytics
   getLearningPathAnalytics: (pathId?: number): Promise<any> =>
     apiClient.get(`/learning/admin/analytics/${pathId ? `?path_id=${pathId}` : ''}`).then(res => res.data),

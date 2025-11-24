@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { authService } from '../../services/authService';
+import { 
+  fetchQuiz,
+  startQuizAttempt,
+  submitQuizAttempt,
+  selectAssessmentLoading,
+  selectAssessmentSubmitting
+} from '../../store/slices/assessmentSlice';
+import { learningService } from '../../services/learningService';
+import { apiClient } from '../../services/apiClient';
 
 // Types
 interface Question {
@@ -52,128 +61,35 @@ interface QuizResult {
   }[];
 }
 
-// Mock quiz data with questions
-const mockQuiz: Quiz = {
-  id: '1',
-  title: 'JAC Variables and Data Types',
-  description: 'Test your understanding of JAC variable declarations and data types',
-  learning_path: 'JAC Fundamentals',
-  module: 'Variables and Data Types',
-  difficulty: 'easy',
-  time_limit: 15,
-  max_attempts: 3,
-  passing_score: 70,
-  created_at: '2025-11-01',
-  updated_at: '2025-11-20',
-  questions: [
-    {
-      id: '1',
-      type: 'multiple_choice',
-      question: 'What is the correct way to declare a variable in JAC?',
-      options: [
-        'var name = "John";',
-        'let name = "John";',
-        'name := "John";',
-        'name = "John";'
-      ],
-      correct_answer: 'var name = "John";',
-      explanation: 'In JAC, variables are declared using the "var" keyword followed by the assignment operator "=".',
-      jac_concept: 'variable_declaration',
-      difficulty: 1,
-      points: 10
-    },
-    {
-      id: '2',
-      type: 'multiple_choice',
-      question: 'Which of the following is a valid JAC data type?',
-      options: ['string', 'int', 'boolean', 'All of the above'],
-      correct_answer: 'All of the above',
-      explanation: 'JAC supports all standard data types including string, int, boolean, and more.',
-      jac_concept: 'data_types',
-      difficulty: 1,
-      points: 10
-    },
-    {
-      id: '3',
-      type: 'true_false',
-      question: 'JAC variable names are case-sensitive.',
-      correct_answer: 'true',
-      explanation: 'Yes, JAC variable names are case-sensitive, meaning "myVar" and "myvar" would be different variables.',
-      jac_concept: 'naming_conventions',
-      difficulty: 2,
-      points: 8
-    },
-    {
-      id: '4',
-      type: 'multiple_choice',
-      question: 'What will be the output of the following JAC code?\n\n```jac\nvar x = 10;\nvar y = "5";\nvar result = x + y;\nprint(result);\n```',
-      options: [
-        '15',
-        '"105"',
-        'Error',
-        'undefined'
-      ],
-      correct_answer: '"105"',
-      explanation: 'In JAC, when adding a number and a string, the number is converted to string and concatenated.',
-      jac_concept: 'type_coercion',
-      difficulty: 2,
-      points: 12
-    },
-    {
-      id: '5',
-      type: 'multiple_choice',
-      question: 'Which keyword is used to declare a constant in JAC?',
-      options: ['const', 'final', 'static', 'JAC does not have constants'],
-      correct_answer: 'const',
-      explanation: 'JAC uses the "const" keyword to declare constants that cannot be reassigned.',
-      jac_concept: 'constants',
-      difficulty: 1,
-      points: 10
-    },
-    {
-      id: '6',
-      type: 'short_answer',
-      question: 'Write a JAC statement to declare a variable named "count" with an initial value of 0.',
-      correct_answer: 'var count = 0;',
-      explanation: 'The correct syntax is "var count = 0;" using the var keyword and assignment operator.',
-      jac_concept: 'variable_declaration',
-      difficulty: 2,
-      points: 15
-    },
-    {
-      id: '7',
-      type: 'multiple_choice',
-      question: 'What is the result of typeof null in JAC?',
-      options: ['"null"', '"undefined"', '"object"', 'Error'],
-      correct_answer: '"object"',
-      explanation: 'In JAC, typeof null returns "object", which is a historical quirk inherited from JavaScript.',
-      jac_concept: 'typeof_operator',
-      difficulty: 3,
-      points: 12
-    },
-    {
-      id: '8',
-      type: 'jac_specific',
-      question: 'In JAC, what is the difference between "=" and ":=" assignment operators?',
-      options: [
-        'They are identical',
-        '":=" creates a reference, "=" creates a copy',
-        '":=" is for constants, "=" is for variables',
-        '":=" is only for objects, "=" is for primitives'
-      ],
-      correct_answer: '":=" creates a reference, "=" creates a copy',
-      explanation: 'In JAC, ":=" creates a reference assignment while "=" creates a copy assignment.',
-      jac_concept: 'assignment_operators',
-      difficulty: 3,
-      points: 15
-    }
-  ]
+// API service for assessments
+const assessmentService = {
+  getQuiz: async (quizId: string): Promise<any> => {
+    return await learningService.getQuiz(quizId);
+  },
+  
+  getQuizQuestions: async (moduleId?: string): Promise<Question[]> => {
+    const response = await learningService.getAssessmentQuestions(moduleId);
+    return response;
+  },
+  
+  startAttempt: async (quizId: string): Promise<any> => {
+    // Create attempt via Redux thunk
+    const result = await dispatch(startQuizAttempt(quizId)).unwrap();
+    return result;
+  },
+  
+  submitAttempt: async (attemptId: string, answers: any): Promise<any> => {
+    // Submit attempt via Redux thunk
+    const result = await dispatch(submitQuizAttempt({ attemptId, answers })).unwrap();
+    return result;
+  }
 };
 
 const AssessmentDetail: React.FC = () => {
   const { assessmentId } = useParams<{ assessmentId: string }>();
   const navigate = useNavigate();
-  const [quiz, setQuiz] = useState<Quiz>(mockQuiz);
+  const dispatch = useDispatch();
+  const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<{ [questionId: string]: string | string[] }>({});
   const [timeRemaining, setTimeRemaining] = useState<number | undefined>(undefined);
@@ -182,22 +98,99 @@ const AssessmentDetail: React.FC = () => {
   const [showResults, setShowResults] = useState(false);
   const [quizResult, setQuizResult] = useState<QuizResult | null>(null);
   const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: Set<number> }>({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [currentAttempt, setCurrentAttempt] = useState<any>(null);
   
   const user = useSelector((state: any) => state.auth.user) || authService.getCurrentUser();
+  const isLoading = useSelector(selectAssessmentLoading);
+  const isAttemptSubmitting = useSelector(selectAssessmentSubmitting);
 
   useEffect(() => {
-    // Handle route parameter - in a real app, this would fetch the quiz by ID
-    if (assessmentId && assessmentId !== '1') {
-      // For now, we'll use the mock quiz but in a real app, you'd fetch based on assessmentId
-      console.log('Loading assessment ID:', assessmentId);
+    // Load assessment data from backend
+    loadAssessmentData();
+  }, [assessmentId]);
+
+  const loadAssessmentData = async () => {
+    if (!assessmentId) {
+      setError('Assessment ID is required');
+      setLoading(false);
+      return;
     }
-    
-    // Initialize timer if quiz has time limit
-    if (quiz.time_limit && !showResults) {
-      setTimeRemaining(quiz.time_limit * 60); // Convert to seconds
-      setIsTimerActive(true);
+
+    try {
+      setLoading(true);
+      setError(null);
+
+      // Load quiz data from backend
+      const quizData = await assessmentService.getQuiz(assessmentId);
+      
+      // Transform backend data to frontend format if needed
+      const transformedQuiz: Quiz = {
+        id: quizData.id,
+        title: quizData.title,
+        description: quizData.description,
+        learning_path: quizData.learning_path,
+        module: quizData.module,
+        difficulty: quizData.difficulty_level || 'medium', // Map backend field
+        time_limit: quizData.time_limit,
+        max_attempts: quizData.max_attempts,
+        passing_score: quizData.passing_score,
+        created_at: quizData.created_at,
+        updated_at: quizData.updated_at,
+        questions: transformQuestions(quizData.questions || [])
+      };
+
+      setQuiz(transformedQuiz);
+
+      // Initialize timer if quiz has time limit
+      if (transformedQuiz.time_limit && !showResults) {
+        setTimeRemaining(transformedQuiz.time_limit * 60); // Convert to seconds
+        setIsTimerActive(true);
+      }
+
+      // Start a new attempt
+      try {
+        const attemptData = await assessmentService.startAttempt(assessmentId);
+        setCurrentAttempt(attemptData);
+      } catch (attemptError) {
+        console.warn('Failed to start attempt:', attemptError);
+        // Continue without attempt for now - user can start attempt manually
+      }
+      
+    } catch (error: any) {
+      console.error('Failed to load assessment:', error);
+      setError(error.response?.data?.detail || 'Failed to load assessment');
+      toast.error('Failed to load assessment');
+    } finally {
+      setLoading(false);
     }
-  }, [assessmentId, quiz, showResults]);
+  };
+
+  const transformQuestions = (backendQuestions: any[]): Question[] => {
+    return backendQuestions.map(q => ({
+      id: q.question_id || q.id,
+      type: mapQuestionType(q.question_type),
+      question: q.question_text,
+      options: q.options || [],
+      correct_answer: q.correct_answer,
+      explanation: q.explanation,
+      jac_concept: q.tags?.[0] || '', // Use first tag as concept
+      difficulty: q.difficulty_level === 'easy' ? 1 : q.difficulty_level === 'medium' ? 2 : 3,
+      points: q.points
+    }));
+  };
+
+  const mapQuestionType = (backendType: string): Question['type'] => {
+    const typeMap: { [key: string]: Question['type'] } = {
+      'multiple_choice': 'multiple_choice',
+      'true_false': 'true_false',
+      'short_answer': 'short_answer',
+      'code_question': 'code_completion',
+      'essay': 'short_answer'
+    };
+    return typeMap[backendType] || 'multiple_choice';
+  };
 
   useEffect(() => {
     // Timer countdown
@@ -207,7 +200,9 @@ const AssessmentDetail: React.FC = () => {
         setTimeRemaining(prev => {
           if (prev && prev <= 1) {
             setIsTimerActive(false);
-            handleSubmitQuiz();
+            if (currentAttempt) {
+              handleSubmitQuiz();
+            }
             return 0;
           }
           return prev ? prev - 1 : 0;
@@ -215,7 +210,7 @@ const AssessmentDetail: React.FC = () => {
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [isTimerActive, timeRemaining]);
+  }, [isTimerActive, timeRemaining, currentAttempt]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -272,60 +267,57 @@ const AssessmentDetail: React.FC = () => {
   };
 
   const handleSubmitQuiz = async () => {
+    if (!currentAttempt || !quiz) {
+      toast.error('No active attempt found');
+      return;
+    }
+
     setIsSubmitting(true);
     setIsTimerActive(false);
 
     try {
-      // Calculate results
-      const detailedResults = quiz.questions.map(question => {
-        const userAnswer = answers[question.id];
-        const isCorrect = Array.isArray(userAnswer) 
-          ? userAnswer.length === 1 && userAnswer[0] === question.correct_answer
-          : userAnswer === question.correct_answer;
-
-        return {
-          questionId: question.id,
-          userAnswer: userAnswer || '',
-          correctAnswer: question.correct_answer,
-          isCorrect,
-          points: isCorrect ? question.points : 0,
-          explanation: question.explanation
-        };
-      });
-
-      const totalScore = detailedResults.reduce((sum, result) => sum + result.points, 0);
-      const maxScore = quiz.questions.reduce((sum, question) => sum + question.points, 0);
-      const percentage = Math.round((totalScore / maxScore) * 100);
-      const passed = percentage >= quiz.passing_score;
-
-      const result: QuizResult = {
-        id: `result_${Date.now()}`,
-        score: totalScore,
-        maxScore,
-        percentage,
-        passed,
-        timeTaken: quiz.time_limit ? (quiz.time_limit * 60 - (timeRemaining || 0)) / 60 : 0,
-        answers,
-        feedback: passed 
-          ? `Congratulations! You passed the assessment with ${percentage}%.`
-          : `You scored ${percentage}%. The passing score is ${quiz.passing_score}%. You can retake this assessment.`,
-        detailedResults
+      // Submit attempt to backend
+      const result = await assessmentService.submitAttempt(currentAttempt.attempt_id, answers);
+      
+      // Transform backend result to frontend format
+      const quizResult: QuizResult = {
+        id: result.attempt_id,
+        score: result.score || 0,
+        maxScore: result.max_score || 100,
+        percentage: result.score || 0,
+        passed: result.is_passed || false,
+        timeTaken: result.duration_minutes || 0,
+        answers: result.answers || {},
+        feedback: result.feedback || '',
+        detailedResults: transformDetailedResults(result.feedback || {})
       };
 
-      setQuizResult(result);
+      setQuizResult(quizResult);
       setShowResults(true);
       
-      if (passed) {
+      if (quizResult.passed) {
         toast.success('🎉 Congratulations! You passed the assessment!');
       } else {
-        toast.error('Assessment completed. You can review your answers and retake if needed.');
+        toast.error(`You scored ${quizResult.percentage}%. You can retake this assessment.`);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error submitting quiz:', error);
-      toast.error('Failed to submit assessment. Please try again.');
+      const errorMessage = error.response?.data?.detail || 'Failed to submit assessment. Please try again.';
+      toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const transformDetailedResults = (backendFeedback: any): QuizResult['detailedResults'] => {
+    return Object.entries(backendFeedback).map(([questionId, feedback]: [string, any]) => ({
+      questionId,
+      userAnswer: feedback.user_answer || '',
+      correctAnswer: feedback.correct_answer || '',
+      isCorrect: feedback.is_correct || false,
+      points: feedback.points_earned || 0,
+      explanation: feedback.explanation
+    }));
   };
 
   const handleRetakeQuiz = () => {
@@ -336,6 +328,8 @@ const AssessmentDetail: React.FC = () => {
     setIsTimerActive(!!quiz.time_limit);
     setShowResults(false);
     setQuizResult(null);
+    // Reload data for new attempt
+    loadAssessmentData();
   };
 
   const getAnsweredCount = () => {
@@ -345,6 +339,41 @@ const AssessmentDetail: React.FC = () => {
   const getUnansweredCount = () => {
     return quiz.questions.length - getAnsweredCount();
   };
+
+  const currentQuestion = quiz.questions[currentQuestionIndex];
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+            <p className="text-white">Loading assessment...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error || !quiz) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <div className="text-6xl mb-4">❌</div>
+          <h1 className="text-2xl font-bold text-white mb-4">Assessment Not Found</h1>
+          <p className="text-white/80 mb-6">{error || 'The requested assessment could not be found.'}</p>
+          <button
+            onClick={() => navigate('/assessments')}
+            className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
+          >
+            ← Back to Assessments
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const renderQuestion = (question: Question, index: number) => {
     const userAnswer = answers[question.id];
