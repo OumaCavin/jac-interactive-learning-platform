@@ -65,7 +65,7 @@ const CodeTranslationPanel = ({
         direction: finalDirection
       };
 
-      const response = await fetch(`${API_BASE}/api/translation/quick_translate/`, {
+      const response = await fetch(`${API_BASE}/quick-translate/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
