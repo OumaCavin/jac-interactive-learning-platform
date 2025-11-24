@@ -71,7 +71,7 @@ class MockJWTAuthentication(authentication.BaseAuthentication):
                 user_id = user_data.get('user_id')
                 
                 if user_id:
-                    from django.contrib.auth.models import User
+                    from apps.users.models import User
                     try:
                         user = User.objects.get(id=user_id)
                         return (user, token)
