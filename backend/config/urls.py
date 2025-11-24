@@ -64,12 +64,14 @@ urlpatterns = [
     path('api/agents/', include('apps.agents.urls')),
     path('api/assessments/', include('apps.assessments.urls')),
     path('api/jac-execution/', include('apps.jac_execution.urls')),  # JAC execution engine
+    path('api/search/', include('search.urls')),  # Search functionality
     
     # Fallback endpoints without /api/ prefix (for frontend compatibility)
     path('users/', include('apps.users.urls')),  # Users app now properly installed
     path('learning/', include('apps.learning.urls')),
     path('assessments/', include('apps.assessments.urls')),
     path('jac-execution/', include('apps.jac_execution.urls')),  # JAC execution engine
+    path('search/', include('search.urls')),  # Search functionality fallback
     # Note: agents endpoints are only available via /api/agents/ to avoid namespace conflicts
     
     # Health check endpoints without /api/ prefix

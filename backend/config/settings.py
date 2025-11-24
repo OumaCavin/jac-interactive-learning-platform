@@ -55,6 +55,7 @@ LOCAL_APPS = [
     'apps.knowledge_graph',
     'apps.jac_execution',
     'apps.management',
+    'search',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

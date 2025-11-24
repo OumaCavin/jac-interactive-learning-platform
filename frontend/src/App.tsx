@@ -35,6 +35,7 @@ const Profile = React.lazy(() => import('./pages/Profile'));
 const Settings = React.lazy(() => import('./pages/Settings'));
 const Achievements = React.lazy(() => import('./pages/Achievements'));
 const Chat = React.lazy(() => import('./pages/Chat'));
+const SearchResultsPage = React.lazy(() => import('./pages/search/SearchResultsPage'));
 
 // Create Query Client
 const queryClient = new QueryClient({
@@ -346,6 +347,20 @@ const App: React.FC = () => {
                           <MainLayout>
                             <PageTransition pageKey="chat">
                               <Chat />
+                            </PageTransition>
+                          </MainLayout>
+                        </ProtectedRoute>
+                      } 
+                    />
+
+                    {/* Search Results */}
+                    <Route 
+                      path="/search" 
+                      element={
+                        <ProtectedRoute>
+                          <MainLayout>
+                            <PageTransition pageKey="search-results">
+                              <SearchResultsPage />
                             </PageTransition>
                           </MainLayout>
                         </ProtectedRoute>

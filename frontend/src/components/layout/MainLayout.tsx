@@ -15,10 +15,10 @@ import {
   Bars3Icon,
   XMarkIcon,
   BellIcon,
-  MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
 import { logoutUser } from '../../store/slices/authSlice';
 import { RootState } from '../../store/store';
+import { Search } from '../search/Search';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -205,19 +205,11 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
           <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
             <div className="flex flex-1">
-              <form className="relative w-full max-w-lg" action="#" method="GET">
-                <label htmlFor="search-field" className="sr-only">
-                  Search
-                </label>
-                <MagnifyingGlassIcon className="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400" />
-                <input
-                  id="search-field"
-                  className="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
-                  placeholder="Search learning paths, modules..."
-                  type="search"
-                  name="search"
-                />
-              </form>
+              <Search 
+                placeholder="Search learning paths, modules..."
+                fullWidth={true}
+                className="max-w-2xl"
+              />
             </div>
 
             <div className="flex items-center gap-x-4 lg:gap-x-6">
