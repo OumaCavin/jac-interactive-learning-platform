@@ -10,8 +10,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db.models import Avg, Count, Q
 from .base_agent import BaseAgent, AgentStatus, TaskPriority
-from ..learning.models import LearningPath, Module, UserProgress, Assessment
-from ..assessment.models import UserAssessmentResult, AssessmentQuestion
+from ..learning.models import LearningPath, Module, UserModuleProgress, Assessment, UserAssessmentResult, AssessmentQuestion
 
 
 class EvaluatorAgent(BaseAgent):
@@ -573,7 +572,7 @@ class EvaluatorAgent(BaseAgent):
         start_date = end_date - timedelta(days=timeframe)
         
         # Get user progress data
-        progress_query = UserProgress.objects.filter(
+        progress_query = UserModuleProgress.objects.filter(
             user=user,
             updated_at__gte=start_date
         )

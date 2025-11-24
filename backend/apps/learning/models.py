@@ -777,3 +777,278 @@ class AICodeReview(models.Model):
     
     def __str__(self):
         return f"AI Review - {self.review_type} for {self.submission.submission_id}"
+
+
+class AssessmentAttempt(models.Model):
+    """
+    Represents an attempt by a user at taking an assessment.
+    """
+    ATTEMPT_STATUS_CHOICES = [
+        ('in_progress', 'In Progress'),
+        ('completed', 'Completed'),
+        ('abandoned', 'Abandoned'),
+        ('timed_out', 'Timed Out'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assessment_attempts')
+    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='attempts')
+    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='assessment_attempts', null=True, blank=True)
+    
+    # Attempt details
+    attempt_number = models.PositiveIntegerField(default=1)
+    status = models.CharField(max_length=20, choices=ATTEMPT_STATUS_CHOICES, default='in_progress')
+    started_at = models.DateTimeField(auto_now_add=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+    
+    # Scoring
+    score = models.FloatField(null=True, blank=True)
+    max_score = models.FloatField(default=100.0)
+    passing_score = models.FloatField(default=70.0)
+    is_passed = models.BooleanField(default=False)
+    
+    # Time tracking
+    time_spent = models.DurationField(default=0)
+    time_limit = models.PositiveIntegerField(null=True, blank=True, help_text='Time limit in minutes')
+    
+    # Results
+    answers = models.JSONField(default=dict, help_text='User answers for each question')
+    feedback = models.TextField(blank=True)
+    
+    class Meta:
+        db_table = 'jac_assessment_attempts'
+        ordering = ['-started_at']
+        indexes = [
+            models.Index(fields=['user', 'assessment']),
+            models.Index(fields=['status', 'started_at']),
+            models.Index(fields=['assessment', 'attempt_number']),
+        ]
+        unique_together = ['user', 'assessment', 'attempt_number']
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.assessment.title} (Attempt {self.attempt_number})"
+    
+    def complete_attempt(self, score: float, answers: dict, feedback: str = ""):
+        """Mark attempt as completed with results."""
+        self.score = score
+        self.answers = answers
+        self.feedback = feedback
+        self.is_passed = score >= self.passing_score
+        self.status = 'completed'
+        self.completed_at = timezone.now()
+        if self.started_at:
+            self.time_spent = self.completed_at - self.started_at
+        self.save()
+
+
+class UserAssessmentResult(models.Model):
+    """
+    Aggregated results for user's assessment performance across multiple attempts.
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assessment_results')
+    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='user_results')
+    
+    # Aggregated statistics
+    best_score = models.FloatField(default=0.0)
+    average_score = models.FloatField(default=0.0)
+    total_attempts = models.PositiveIntegerField(default=0)
+    passed_attempts = models.PositiveIntegerField(default=0)
+    total_time_spent = models.DurationField(default=0)
+    
+    # Performance metrics
+    first_attempt_score = models.FloatField(null=True, blank=True)
+    last_attempt_score = models.FloatField(null=True, blank=True)
+    improvement_rate = models.FloatField(default=0.0)
+    
+    # Dates
+    first_attempt_date = models.DateTimeField(null=True, blank=True)
+    last_attempt_date = models.DateTimeField(null=True, blank=True)
+    passed_date = models.DateTimeField(null=True, blank=True)
+    
+    # Status
+    is_completed = models.BooleanField(default=False)
+    completion_date = models.DateTimeField(null=True, blank=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_user_assessment_results'
+        unique_together = ['user', 'assessment']
+        indexes = [
+            models.Index(fields=['user', 'assessment']),
+            models.Index(fields=['is_completed', 'best_score']),
+        ]
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.assessment.title} (Best: {self.best_score}%)"
+    
+    def update_from_attempts(self, attempts_queryset):
+        """Update result statistics from related assessment attempts."""
+        attempts = list(attempts_queryset.order_by('started_at'))
+        
+        if not attempts:
+            return
+        
+        self.total_attempts = len(attempts)
+        self.first_attempt_date = attempts[0].started_at
+        self.last_attempt_date = attempts[-1].started_at
+        
+        # Calculate scores
+        scores = [a.score for a in attempts if a.score is not None]
+        if scores:
+            self.best_score = max(scores)
+            self.average_score = sum(scores) / len(scores)
+            self.first_attempt_score = scores[0]
+            self.last_attempt_score = scores[-1]
+            
+            if len(scores) > 1:
+                self.improvement_rate = ((scores[-1] - scores[0]) / max(scores[0], 1)) * 100
+        
+        # Calculate passed attempts
+        passed_attempts = [a for a in attempts if a.is_passed]
+        self.passed_attempts = len(passed_attempts)
+        
+        if passed_attempts and not self.passed_date:
+            self.passed_date = passed_attempts[0].completed_at
+        
+        # Calculate total time
+        self.total_time_spent = sum((a.time_spent or 0) for a in attempts)
+        
+        # Check completion
+        self.is_completed = any(a.is_passed for a in attempts)
+        if self.is_completed and not self.completion_date:
+            self.completion_date = self.passed_date
+        
+        self.save()
+
+
+class AssessmentQuestion(models.Model):
+    """
+    Extended question model that links questions to assessments with additional metadata.
+    """
+    DIFFICULTY_CHOICES = [
+        ('easy', 'Easy'),
+        ('medium', 'Medium'),
+        ('hard', 'Hard'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='assessment_questions')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='assessment_links')
+    
+    # Question metadata
+    difficulty_level = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES, default='medium')
+    points = models.FloatField(default=1.0)
+    order = models.PositiveIntegerField(default=0)
+    
+    # Question customization for this assessment
+    question_text_override = models.TextField(blank=True, help_text='Override default question text for this assessment')
+    options_override = models.JSONField(default=list, blank=True, help_text='Override default options for multiple choice')
+    correct_answer_override = models.JSONField(default=list, blank=True, help_text='Override correct answer')
+    
+    # Statistics (calculated fields)
+    total_attempts = models.PositiveIntegerField(default=0)
+    correct_attempts = models.PositiveIntegerField(default=0)
+    average_time = models.FloatField(default=0.0, help_text='Average time in seconds')
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_assessment_questions'
+        ordering = ['assessment', 'order']
+        unique_together = ['assessment', 'question']
+        indexes = [
+            models.Index(fields=['assessment', 'order']),
+            models.Index(fields=['difficulty_level']),
+        ]
+    
+    def __str__(self):
+        return f"{self.assessment.title} - {self.question.question_text[:50]}..."
+    
+    @property
+    def accuracy_rate(self):
+        """Calculate accuracy rate for this question."""
+        if self.total_attempts == 0:
+            return 0.0
+        return (self.correct_attempts / self.total_attempts) * 100
+
+
+class Achievement(models.Model):
+    """
+    Achievement system for tracking user accomplishments.
+    """
+    ACHIEVEMENT_TYPE_CHOICES = [
+        ('completion', 'Completion'),
+        ('performance', 'Performance'),
+        ('streak', 'Streak'),
+        ('skill', 'Skill'),
+        ('engagement', 'Engagement'),
+        ('collaboration', 'Collaboration'),
+    ]
+    
+    RARITY_CHOICES = [
+        ('common', 'Common'),
+        ('uncommon', 'Uncommon'),
+        ('rare', 'Rare'),
+        ('epic', 'Epic'),
+        ('legendary', 'Legendary'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField()
+    achievement_type = models.CharField(max_length=20, choices=ACHIEVEMENT_TYPE_CHOICES)
+    rarity = models.CharField(max_length=20, choices=RARITY_CHOICES, default='common')
+    
+    # Achievement requirements
+    requirements = models.JSONField(default=dict, help_text='Requirements to unlock this achievement')
+    icon = models.CharField(max_length=200, blank=True, help_text='Icon URL or name')
+    badge_color = models.CharField(max_length=20, default='blue', help_text='CSS color class')
+    
+    # Statistics
+    unlock_count = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_achievements'
+        ordering = ['achievement_type', 'rarity', 'name']
+        indexes = [
+            models.Index(fields=['achievement_type']),
+            models.Index(fields=['rarity']),
+            models.Index(fields=['is_active']),
+        ]
+    
+    def __str__(self):
+        return f"{self.name} ({self.rarity})"
+
+
+class UserAchievement(models.Model):
+    """
+    Tracks user achievements that have been unlocked.
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_achievements')
+    achievement = models.ForeignKey(Achievement, on_delete=models.CASCADE, related_name='user_achievements')
+    
+    # Achievement context
+    unlocked_at = models.DateTimeField(auto_now_add=True)
+    context = models.JSONField(default=dict, help_text='Context when achievement was unlocked')
+    progress_at_unlock = models.JSONField(default=dict, help_text='User progress at time of unlock')
+    
+    class Meta:
+        db_table = 'jac_user_achievements'
+        unique_together = ['user', 'achievement']
+        ordering = ['-unlocked_at']
+        indexes = [
+            models.Index(fields=['user', 'unlocked_at']),
+            models.Index(fields=['achievement']),
+        ]
+    
+    def __str__(self):
+        return f"{self.user.username} unlocked {self.achievement.name}"

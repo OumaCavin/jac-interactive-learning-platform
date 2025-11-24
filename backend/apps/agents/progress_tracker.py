@@ -11,8 +11,7 @@ from django.utils import timezone
 from django.db.models import Avg, Count, Q, Sum
 from datetime import datetime, timedelta
 from .base_agent import BaseAgent, AgentStatus, TaskPriority
-from ..learning.models import LearningPath, Module, UserProgress, LearningContent
-from ..assessment.models import UserAssessmentResult
+from ..learning.models import LearningPath, Module, UserModuleProgress, LearningContent, UserLearningPath, UserAssessmentResult
 
 
 class ProgressTrackerAgent(BaseAgent):
@@ -699,7 +698,7 @@ class ProgressTrackerAgent(BaseAgent):
         start_date = end_date - timedelta(days=90)  # Last 90 days
         
         # Query progress data
-        progress_query = UserProgress.objects.filter(
+        progress_query = UserModuleProgress.objects.filter(
             user=user,
             updated_at__gte=start_date
         ).order_by('-updated_at')
@@ -843,7 +842,7 @@ class ProgressTrackerAgent(BaseAgent):
         end_date = timezone.now()
         start_date = end_date - timedelta(days=days)
         
-        recent_progress = UserProgress.objects.filter(
+        recent_progress = UserModuleProgress.objects.filter(
             user=user,
             updated_at__gte=start_date,
             updated_at__lte=end_date

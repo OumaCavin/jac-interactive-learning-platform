@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db.models import Q
 from .base_agent import BaseAgent, AgentStatus, TaskPriority
-from ..learning.models import LearningPath, Module, UserProgress
+from ..learning.models import LearningPath, Module, UserModuleProgress, UserLearningPath
 from .content_curator import ContentCuratorAgent
 from .quiz_master import QuizMasterAgent
 from .evaluator import EvaluatorAgent

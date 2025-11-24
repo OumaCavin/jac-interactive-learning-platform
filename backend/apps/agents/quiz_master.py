@@ -10,8 +10,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db.models import Avg, Count
 from .base_agent import BaseAgent, AgentStatus, TaskPriority
-from ..learning.models import LearningPath, Module, Quiz, Question, UserProgress
-from ..assessment.models import Assessment, AssessmentQuestion, UserAssessmentResult
+from ..learning.models import LearningPath, Module, Quiz, Question, UserModuleProgress, UserLearningPath, Assessment, UserAssessmentResult, AssessmentQuestion
 
 
 class QuizMasterAgent(BaseAgent):
@@ -285,7 +284,7 @@ class QuizMasterAgent(BaseAgent):
             return {'error': 'User parameter required'}
         
         # Get user's learning history
-        user_progress = UserProgress.objects.filter(
+        user_progress = UserModuleProgress.objects.filter(
             user=user,
             module__content__topic__icontains=topic
         ).order_by('-updated_at')[:10]
@@ -752,7 +751,7 @@ class QuizMasterAgent(BaseAgent):
     def _analyze_user_performance(self, user: User, topic: str) -> Dict[str, Any]:
         """Analyze user's performance history for a topic"""
         # Get user's progress data
-        progress_data = UserProgress.objects.filter(
+        progress_data = UserModuleProgress.objects.filter(
             user=user,
             module__content__topic__icontains=topic
         ).order_by('-updated_at')[:20]

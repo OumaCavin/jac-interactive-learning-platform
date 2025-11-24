@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db.models import Avg, Count, Q
 from .base_agent import BaseAgent, AgentStatus, TaskPriority
-from ..learning.models import LearningPath, Module, UserProgress, Achievement
+from ..learning.models import LearningPath, Module, UserModuleProgress, Achievement, UserLearningPath, UserAssessmentResult
 import random
 import json
 
@@ -565,7 +565,7 @@ class MotivatorAgent(BaseAgent):
     def _gather_user_context(self, user: User, context: str) -> Dict[str, Any]:
         """Gather context for personalized encouragement"""
         # Get recent user activity
-        recent_progress = UserProgress.objects.filter(
+        recent_progress = UserModuleProgress.objects.filter(
             user=user
         ).order_by('-updated_at')[:5]
         
@@ -622,7 +622,7 @@ class MotivatorAgent(BaseAgent):
     def _gather_comprehensive_user_data(self, user: User) -> Dict[str, Any]:
         """Gather comprehensive user data for motivation messages"""
         # Get learning progress
-        learning_progress = UserProgress.objects.filter(user=user).order_by('-updated_at')[:10]
+        learning_progress = UserModuleProgress.objects.filter(user=user).order_by('-updated_at')[:10]
         
         # Get achievements
         achievements = Achievement.objects.filter(user=user).order_by('-awarded_at')[:5]
@@ -688,7 +688,7 @@ class MotivatorAgent(BaseAgent):
         end_date = timezone.now()
         start_date = end_date - timedelta(days=period)
         
-        progress_data = UserProgress.objects.filter(
+        progress_data = UserModuleProgress.objects.filter(
             user=user,
             updated_at__gte=start_date,
             updated_at__lte=end_date
