@@ -146,10 +146,6 @@ class Migration(migrations.Migration):
             field=models.DateTimeField(null=True, blank=True),
         ),
         
-        # Update last_activity field to have proper auto_now_add behavior
-        migrations.AlterField(
-            model_name='user',
-            name='last_activity',
-            field=models.DateTimeField(blank=True, null=True),
-        ),
+        # Note: last_activity field will be renamed to last_activity_at in next migration
+        # to match current model definition
     ]
