@@ -16,7 +16,7 @@ This package provides:
 - Multi-agent learning assistance
 - Personalized learning experiences
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-24
 """
 
