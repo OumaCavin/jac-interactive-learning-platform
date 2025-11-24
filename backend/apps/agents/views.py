@@ -1066,3 +1066,149 @@ class ChatSessionListAPIView(APIView):
             'sessions': session_list,
             'total_sessions': len(session_list)
         })
+
+
+class AgentStatusAPIView(APIView):
+    """
+    API endpoint for getting current status of all agents
+    Provides comprehensive agent health and performance information
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request):
+        """Get current status of all agents"""
+        try:
+            # Get all agents
+            agents = Agent.objects.all()
+            agent_status = {}
+            
+            for agent in agents:
+                # Get current task queue size for this agent
+                pending_tasks = Task.objects.filter(
+                    agent=agent, 
+                    status='pending'
+                ).count()
+                
+                # Calculate uptime in hours
+                uptime_seconds = (timezone.now() - agent.created_at).total_seconds()
+                uptime_hours = round(uptime_seconds / 3600, 2)
+                
+                # Calculate health score based on recent activity
+                health_score = self._calculate_agent_health_score(agent)
+                
+                agent_status[agent.agent_id] = {
+                    'id': agent.id,
+                    'name': agent.name,
+                    'agent_type': agent.agent_type,
+                    'status': agent.status.lower(),
+                    'last_active': agent.updated_at.isoformat() if agent.updated_at else agent.created_at.isoformat(),
+                    'current_task': agent.current_task,
+                    'queue_size': pending_tasks,
+                    'uptime_hours': uptime_hours,
+                    'health_score': health_score,
+                    'capabilities': agent.capabilities or [],
+                    'config': agent.config or {}
+                }
+            
+            # Get system-wide metrics
+            system_metrics = self._get_system_metrics()
+            
+            return Response({
+                'agents': agent_status,
+                'system_metrics': system_metrics,
+                'total_agents': len(agent_status),
+                'healthy_agents': len([a for a in agent_status.values() if a['health_score'] >= 90]),
+                'timestamp': timezone.now().isoformat()
+            })
+            
+        except Exception as e:
+            return Response({
+                'error': f'Failed to retrieve agent status: {str(e)}',
+                'timestamp': timezone.now().isoformat()
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    def _calculate_agent_health_score(self, agent):
+        """
+        Calculate health score for an agent based on various factors
+        Returns score from 0-100
+        """
+        try:
+            base_score = 100
+            
+            # Penalize for old last activity
+            if agent.updated_at:
+                minutes_since_update = (timezone.now() - agent.updated_at).total_seconds() / 60
+                if minutes_since_update > 60:  # 1 hour
+                    base_score -= 20
+                elif minutes_since_update > 30:  # 30 minutes
+                    base_score -= 10
+                elif minutes_since_update > 10:  # 10 minutes
+                    base_score -= 5
+            
+            # Penalize for high task queue
+            queue_size = Task.objects.filter(agent=agent, status='pending').count()
+            if queue_size > 20:
+                base_score -= 15
+            elif queue_size > 10:
+                base_score -= 10
+            elif queue_size > 5:
+                base_score -= 5
+            
+            # Bonus for active status
+            if agent.status.lower() == 'active':
+                base_score += 5
+            
+            # Ensure score is within bounds
+            return max(0, min(100, base_score))
+            
+        except Exception:
+            # Return default score if calculation fails
+            return 85
+    
+    def _get_system_metrics(self):
+        """
+        Get system-wide metrics and health information
+        """
+        try:
+            total_agents = Agent.objects.count()
+            active_agents = Agent.objects.filter(status='active').count()
+            total_tasks = Task.objects.count()
+            pending_tasks = Task.objects.filter(status='pending').count()
+            
+            # Get active learning sessions
+            try:
+                from .models import LearningSession
+                active_sessions = LearningSession.objects.filter(status='active').count()
+            except ImportError:
+                active_sessions = 0
+            
+            # Calculate overall system health
+            if total_agents > 0:
+                health_ratio = active_agents / total_agents
+                overall_health = 95 if health_ratio >= 0.8 else 85 if health_ratio >= 0.6 else 75
+            else:
+                overall_health = 0
+            
+            return {
+                'overall_status': 'healthy' if overall_health >= 90 else 'degraded' if overall_health >= 70 else 'unhealthy',
+                'health_score': overall_health,
+                'total_agents': total_agents,
+                'active_agents': active_agents,
+                'inactive_agents': total_agents - active_agents,
+                'total_tasks': total_tasks,
+                'pending_tasks': pending_tasks,
+                'active_sessions': active_sessions,
+                'system_load': 'low',  # Could be calculated based on active tasks per agent
+                'last_updated': timezone.now().isoformat()
+            }
+            
+        except Exception:
+            return {
+                'overall_status': 'unknown',
+                'health_score': 0,
+                'total_agents': 0,
+                'active_agents': 0,
+                'pending_tasks': 0,
+                'active_sessions': 0,
+                'last_updated': timezone.now().isoformat()
+            }

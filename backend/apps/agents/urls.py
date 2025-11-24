@@ -39,4 +39,7 @@ urlpatterns = [
     
     # Include router URLs
     path('', include(router.urls)),
+    
+    # Agent status endpoint (for frontend compatibility)
+    path('agents/status/', views.AgentStatusAPIView.as_view(), name='agents-status'),
 ]
