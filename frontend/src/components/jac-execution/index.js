@@ -7,6 +7,7 @@ export { default as OutputWindow } from './OutputWindow';
 export { default as TemplateSelector } from './TemplateSelector';
 export { default as ExecutionHistory } from './ExecutionHistory';
 export { default as SecuritySettings } from './SecuritySettings';
+export { default as CodeTranslationPanel } from './CodeTranslationPanel';
 
 // Component metadata for easy importing
 export const componentInfo = {
@@ -27,7 +28,8 @@ export const componentInfo = {
       'OutputWindow', 
       'TemplateSelector',
       'ExecutionHistory',
-      'SecuritySettings'
+      'SecuritySettings',
+      'CodeTranslationPanel'
     ]
   },
   'CodeEditor': {
@@ -86,6 +88,19 @@ export const componentInfo = {
       'Rate limiting configuration'
     ],
     dependencies: []
+  },
+  'CodeTranslationPanel': {
+    name: 'CodeTranslationPanel',
+    description: 'Bidirectional code translation between JAC and Python',
+    features: [
+      'JAC to Python conversion',
+      'Python to JAC conversion',
+      'Side-by-side code comparison',
+      'Translation validation and error reporting',
+      'Copy and download translated code',
+      'Load translated code to editor'
+    ],
+    dependencies: ['CodeEditor']
   }
 };
 

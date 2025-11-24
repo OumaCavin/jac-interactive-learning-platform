@@ -13,8 +13,8 @@
     {
       "name": "Python Syntax Validation",
       "status": "pass",
-      "message": "All 10 Python files have valid syntax",
-      "details": "Files tested: [PosixPath('__init__.py'), PosixPath('admin.py'), PosixPath('apps.py'), PosixPath('models.py'), PosixPath('serializers.py'), PosixPath('urls.py'), PosixPath('views.py'), PosixPath('migrations/0001_initial.py'), PosixPath('migrations/__init__.py'), PosixPath('services/executor.py')]"
+      "message": "All 12 Python files have valid syntax",
+      "details": "Files tested: [PosixPath('__init__.py'), PosixPath('admin.py'), PosixPath('apps.py'), PosixPath('models.py'), PosixPath('serializers.py'), PosixPath('urls.py'), PosixPath('views.py'), PosixPath('migrations/0001_initial.py'), PosixPath('migrations/__init__.py'), PosixPath('serializers/translation_serializers.py'), PosixPath('services/executor.py'), PosixPath('services/translator.py')]"
     },
     {
       "name": "Model Definitions",
@@ -61,7 +61,7 @@
     {
       "name": "Documentation Quality",
       "status": "pass",
-      "message": "Good documentation coverage: 8/10 files",
+      "message": "Good documentation coverage: 10/12 files",
       "details": "__init__.py: 2 docstrings; admin.py: 28 docstrings; apps.py: 10 docstrings..."
     }
   ]

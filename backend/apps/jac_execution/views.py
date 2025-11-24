@@ -493,3 +493,212 @@ class LanguageSupportView(APIView):
             'max_execution_time': getattr(SecuritySettings.objects.first(), 'max_execution_time', 5.0),
             'max_output_size': getattr(SecuritySettings.objects.first(), 'max_output_size', 10240)
         })
+
+
+# =============================================================================
+# Code Translation Views
+# =============================================================================
+
+class CodeTranslationViewSet(viewsets.ViewSet):
+    """
+    ViewSet for code translation operations between JAC and Python.
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    
+    @action(detail=False, methods=['post'])
+    def translate(self, request):
+        """
+        Translate code from one language to another.
+        """
+        from .serializers.translation_serializers import CodeTranslationSerializer
+        from .services.translator import CodeTranslator, TranslationDirection
+        
+        serializer = CodeTranslationSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        source_code = serializer.validated_data['source_code']
+        source_language = serializer.validated_data['source_language']
+        target_language = serializer.validated_data['target_language']
+        
+        try:
+            # Determine translation direction
+            if source_language == 'jac' and target_language == 'python':
+                direction = TranslationDirection.JAC_TO_PYTHON
+            elif source_language == 'python' and target_language == 'jac':
+                direction = TranslationDirection.PYTHON_TO_JAC
+            else:
+                return Response({
+                    'error': 'Invalid language combination. Only JAC ↔ Python translation is supported.'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Perform translation
+            translator = CodeTranslator()
+            result = translator.translate_code(source_code, direction)
+            
+            # Return result
+            response_data = {
+                'success': result.success,
+                'translated_code': result.translated_code,
+                'source_language': result.source_language,
+                'target_language': result.target_language,
+                'errors': result.errors,
+                'warnings': result.warnings,
+                'metadata': result.metadata
+            }
+            
+            if result.success:
+                return Response(response_data, status=status.HTTP_200_OK)
+            else:
+                return Response(response_data, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+                
+        except Exception as e:
+            return Response({
+                'success': False,
+                'error': f'Translation failed: {str(e)}',
+                'source_language': source_language,
+                'target_language': target_language,
+                'errors': [str(e)],
+                'warnings': [],
+                'metadata': {}
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    @action(detail=False, methods=['post'])
+    def quick_translate(self, request):
+        """
+        Quick translation without additional validation or metadata.
+        """
+        from .serializers.translation_serializers import QuickTranslationSerializer
+        from .services.translator import CodeTranslator, TranslationDirection
+        
+        serializer = QuickTranslationSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        code = serializer.validated_data['code']
+        direction = serializer.validated_data['direction']
+        
+        try:
+            # Determine translation direction
+            if direction == 'jac_to_python':
+                translation_direction = TranslationDirection.JAC_TO_PYTHON
+                source_lang, target_lang = 'JAC', 'Python'
+            elif direction == 'python_to_jac':
+                translation_direction = TranslationDirection.PYTHON_TO_JAC
+                source_lang, target_lang = 'Python', 'JAC'
+            else:
+                return Response({
+                    'error': 'Invalid translation direction'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Perform translation
+            translator = CodeTranslator()
+            result = translator.translate_code(code, translation_direction)
+            
+            return Response({
+                'success': result.success,
+                'translated_code': result.translated_code,
+                'source_language': source_lang,
+                'target_language': target_lang,
+                'errors': result.errors,
+                'warnings': result.warnings
+            }, status=status.HTTP_200_OK if result.success else status.HTTP_422_UNPROCESSABLE_ENTITY)
+            
+        except Exception as e:
+            return Response({
+                'success': False,
+                'error': f'Quick translation failed: {str(e)}',
+                'translated_code': '',
+                'errors': [str(e)],
+                'warnings': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    @action(detail=False, methods=['get'])
+    def supported_languages(self, request):
+        """
+        Get supported languages for translation.
+        """
+        return Response({
+            'languages': {
+                'jac': {
+                    'name': 'JAC',
+                    'description': 'JAC Programming Language',
+                    'extensions': ['.jac'],
+                    'can_translate_to': ['python']
+                },
+                'python': {
+                    'name': 'Python',
+                    'description': 'Python Programming Language',
+                    'extensions': ['.py'],
+                    'can_translate_to': ['jac']
+                }
+            },
+            'translation_pairs': ['jac_to_python', 'python_to_jac'],
+            'notes': [
+                'Translation preserves functionality but may differ in syntax',
+                'Generated code should be tested before use',
+                'Some language-specific features may not translate perfectly'
+            ]
+        })
+
+
+class QuickTranslationView(APIView):
+    """
+    Standalone view for quick translation operations.
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def post(self, request):
+        """
+        Perform quick code translation between JAC and Python.
+        """
+        from .serializers.translation_serializers import QuickTranslationSerializer
+        from .services.translator import CodeTranslator, TranslationDirection
+        
+        serializer = QuickTranslationSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        code = serializer.validated_data['code']
+        direction = serializer.validated_data['direction']
+        
+        try:
+            # Determine translation direction
+            if direction == 'jac_to_python':
+                translation_direction = TranslationDirection.JAC_TO_PYTHON
+                source_lang, target_lang = 'JAC', 'Python'
+            elif direction == 'python_to_jac':
+                translation_direction = TranslationDirection.PYTHON_TO_JAC
+                source_lang, target_lang = 'Python', 'JAC'
+            else:
+                return Response({
+                    'success': False,
+                    'error': 'Invalid translation direction. Use "jac_to_python" or "python_to_jac"'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Perform translation
+            translator = CodeTranslator()
+            result = translator.translate_code(code, translation_direction)
+            
+            return Response({
+                'success': result.success,
+                'translated_code': result.translated_code,
+                'source_language': source_lang,
+                'target_language': target_lang,
+                'errors': result.errors,
+                'warnings': result.warnings,
+                'metadata': {
+                    'original_length': len(code),
+                    'translated_length': len(result.translated_code),
+                    'direction': direction
+                }
+            }, status=status.HTTP_200_OK if result.success else status.HTTP_422_UNPROCESSABLE_ENTITY)
+            
+        except Exception as e:
+            return Response({
+                'success': False,
+                'error': f'Translation failed: {str(e)}',
+                'translated_code': '',
+                'errors': [str(e)],
+                'warnings': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

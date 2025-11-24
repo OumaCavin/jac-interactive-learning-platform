@@ -16,13 +16,16 @@ import {
   History,
   Settings,
   Save,
-  Share
+  Share,
+  ArrowRightLeft,
+  X
 } from 'lucide-react';
 import CodeEditor from './CodeEditor';
 import OutputWindow from './OutputWindow';
 import TemplateSelector from './TemplateSelector';
 import ExecutionHistory from './ExecutionHistory';
 import SecuritySettings from './SecuritySettings';
+import CodeTranslationPanel from './CodeTranslationPanel';
 
 const CodeExecutionPanel = () => {
   const [code, setCode] = useState('# Welcome to JAC Code Executor\nprint("Hello, JAC Learning Platform!")');
@@ -37,6 +40,7 @@ const CodeExecutionPanel = () => {
   const [executionId, setExecutionId] = useState(null);
   const [showHistory, setShowHistory] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [showTranslation, setShowTranslation] = useState(false);
   const [templates, setTemplates] = useState([]);
   const [userStats, setUserStats] = useState(null);
   const [supportedLanguages, setSupportedLanguages] = useState({});
@@ -273,6 +277,14 @@ const CodeExecutionPanel = () => {
             </button>
             
             <button
+              onClick={() => setShowTranslation(!showTranslation)}
+              className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg"
+              title="Code Translation"
+            >
+              <ArrowRightLeft className="w-5 h-5" />
+            </button>
+            
+            <button
               onClick={() => setShowSettings(!showSettings)}
               className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg"
               title="Settings"
@@ -432,6 +444,28 @@ const CodeExecutionPanel = () => {
           )}
         </div>
       </div>
+
+      {/* Translation Panel */}
+      {showTranslation && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-xl max-w-6xl w-full mx-4 max-h-[90vh] overflow-hidden relative">
+            <CodeTranslationPanel
+              originalCode={code}
+              onCodeChange={setCode}
+              currentLanguage={language}
+              onLanguageChange={setLanguage}
+              className="border-0 rounded-lg"
+            />
+            <button
+              onClick={() => setShowTranslation(false)}
+              className="absolute top-4 right-4 p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg z-10"
+              title="Close Translation"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Settings Panel */}
       {showSettings && (

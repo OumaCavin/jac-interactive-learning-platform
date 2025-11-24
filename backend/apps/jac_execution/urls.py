@@ -14,7 +14,9 @@ from .views import (
     SecuritySettingsViewSet,
     QuickExecutionView,
     ExecutionStatusView,
-    LanguageSupportView
+    LanguageSupportView,
+    CodeTranslationViewSet,
+    QuickTranslationView
 )
 
 # Create router for ViewSets
@@ -23,6 +25,7 @@ router.register(r'executions', CodeExecutionViewSet, basename='execution')
 router.register(r'templates', ExecutionTemplateViewSet, basename='template')
 router.register(r'sessions', CodeExecutionSessionViewSet, basename='session')
 router.register(r'security', SecuritySettingsViewSet, basename='security')
+router.register(r'translation', CodeTranslationViewSet, basename='translation')
 
 app_name = 'jac_execution'
 
@@ -34,4 +37,7 @@ urlpatterns = [
     path('api/quick-execute/', QuickExecutionView.as_view(), name='quick-execute'),
     path('api/execution/<uuid:execution_id>/', ExecutionStatusView.as_view(), name='execution-status'),
     path('api/languages/', LanguageSupportView.as_view(), name='language-support'),
+    
+    # Translation endpoints
+    path('api/quick-translate/', QuickTranslationView.as_view(), name='quick-translate'),
 ]
