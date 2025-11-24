@@ -12,7 +12,7 @@ from rest_framework.views import APIView
 from .models import User, UserProfile
 from .serializers import (
     UserSerializer, UserProfileSerializer, UserRegistrationSerializer,
-    UserUpdateSerializer, UserStatsSerializer
+    UserStatsSerializer
 )
 
 User = get_user_model()
