@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
                 ('completed_at', models.DateTimeField(blank=True, null=True)),
                 ('next_review', models.DateTimeField(blank=True, null=True)),
                 ('review_count', models.PositiveIntegerField(default=0)),
-                ('easiness_factor', models.FloatField(default=2.5)),
+                ('ease_factor', models.FloatField(default=2.5)),
                 ('interval_days', models.PositiveIntegerField(default=1)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),

@@ -33,7 +33,7 @@ def create_user_gamification_records(sender, instance, created, **kwargs):
         LearningStreak.objects.get_or_create(user=instance)
 
 
-@receiver(post_save, sender='learning.ModuleProgress')
+@receiver(post_save, sender='learning.UserModuleProgress')
 def update_gamification_on_module_completion(sender, instance, created, **kwargs):
     """Update gamification when module is completed"""
     if instance.is_completed and not created:  # Only on completion updates
@@ -117,7 +117,7 @@ def update_gamification_on_code_execution(sender, instance, created, **kwargs):
         _update_achievement_progress(user, 'code_executions', 1)
 
 
-@receiver(post_save, sender='agents.AgentCommunication')
+# @receiver(post_save, sender='agents.AgentCommunication')  # TEMPORARILY DISABLED
 def update_gamification_on_agent_chat(sender, instance, created, **kwargs):
     """Update gamification when user chats with AI agents"""
     if created:

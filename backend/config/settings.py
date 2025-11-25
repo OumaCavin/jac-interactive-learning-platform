@@ -51,11 +51,12 @@ LOCAL_APPS = [
     'apps.learning',
     'apps.content',
     'apps.assessments',
-    'apps.progress',
+    # 'apps.progress',  # Temporarily disabled due to import issues
     'apps.agents',
     'apps.knowledge_graph',
     'apps.jac_execution',
     'apps.gamification',
+    'apps.collaboration',
     'apps.management',
 ]
 

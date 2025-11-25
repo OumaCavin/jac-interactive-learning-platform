@@ -221,7 +221,7 @@ class AchievementProgressSerializer(serializers.ModelSerializer):
         return round((obj.current_count / obj.target_count) * 100, 1)
 
 
-class GamificationOverviewSerializer(serializersSerializer):
+class GamificationOverviewSerializer(serializers.Serializer):
     """Comprehensive gamification overview serializer"""
     
     total_points = serializers.IntegerField()
