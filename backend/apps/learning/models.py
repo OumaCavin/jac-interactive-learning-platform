@@ -98,20 +98,18 @@ class Module(models.Model):
         ],
         default='markdown'
     )
-    
-    # Structure
     order = models.PositiveIntegerField()
     duration_minutes = models.PositiveIntegerField()
     difficulty_rating = models.PositiveIntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)],
-        help_text='Difficulty rating from 1 (easiest) to 5 (hardest)'
+        help_text='Difficulty rating from 1 (easiest) to 5 (hardest)',
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
     
     # JAC-specific content
     jac_concepts = models.JSONField(default=list, blank=True, help_text='JAC concepts covered in this module')
     code_examples = models.JSONField(default=list, blank=True)
     
-    # Interactive elements
+    # Features
     has_quiz = models.BooleanField(default=False)
     has_coding_exercise = models.BooleanField(default=False)
     has_visual_demo = models.BooleanField(default=False)
@@ -135,273 +133,25 @@ class Module(models.Model):
         return f"{self.learning_path.name} - {self.title}"
     
     @property
-    def completion_rate(self):
-        """Get completion rate for this module."""
-        from django.db.models import Count
-        total_users = UserModuleProgress.objects.filter(module=self).count()
-        if total_users == 0:
-            return 0
-        completed_users = UserModuleProgress.objects.filter(
+    def total_users(self):
+        """Get total number of users who have started this module."""
+        return UserModuleProgress.objects.filter(module=self).count()
+    
+    @property
+    def completed_users(self):
+        """Get number of users who completed this module."""
+        return UserModuleProgress.objects.filter(
             module=self, 
             status='completed'
         ).count()
-        return (completed_users / total_users) * 100
     
     @property
-    def average_score(self):
-        """Get average quiz/score for this module."""
-        from django.db.models import Avg
-        from apps.assessments.models import AssessmentAttempt
-        return AssessmentAttempt.objects.filter(
-            module=self
-        ).aggregate(avg_score=Avg('score'))['avg_score'] or 0
-
-
-class Lesson(models.Model):
-    """
-    Represents a lesson within a module.
-    """
-    LESSON_TYPE_CHOICES = [
-        ('text', 'Text Lesson'),
-        ('video', 'Video Lesson'),
-        ('interactive', 'Interactive Content'),
-        ('code_tutorial', 'Code Tutorial'),
-        ('quiz', 'Quiz'),
-    ]
-    
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='lessons')
-    title = models.CharField(max_length=200)
-    order = models.PositiveIntegerField()
-    lesson_type = models.CharField(
-        max_length=20, 
-        choices=LESSON_TYPE_CHOICES, 
-        default='text'
-    )
-    
-    # Content
-    content = models.TextField(blank=True, help_text='Lesson content in markdown or HTML')
-    code_example = models.TextField(blank=True, help_text='Code examples for this lesson')
-    
-    # Interactive elements
-    quiz_questions = models.JSONField(default=list, blank=True, help_text='Quiz questions data')
-    interactive_demo = models.JSONField(default=dict, blank=True, help_text='Interactive demo configuration')
-    
-    # Media
-    video_url = models.URLField(blank=True, help_text='URL to lesson video')
-    audio_url = models.URLField(blank=True, help_text='URL to lesson audio')
-    resources = models.JSONField(default=list, blank=True, help_text='Additional resources for this lesson')
-    
-    # Publishing
-    is_published = models.BooleanField(default=False)
-    estimated_duration = models.PositiveIntegerField(
-        null=True, 
-        blank=True, 
-        help_text='Estimated duration in minutes'
-    )
-    
-    # Metadata
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
-    class Meta:
-        db_table = 'jac_lesson'
-        ordering = ['module', 'order']
-        unique_together = ['module', 'order']
-        indexes = [
-            models.Index(fields=['module', 'order']),
-            models.Index(fields=['lesson_type']),
-            models.Index(fields=['is_published']),
-        ]
-    
-    def __str__(self):
-        return f"{self.module.title} - {self.title}"
-    
-    @property
-    def module_title(self):
-        """Get the title of the parent module."""
-        return self.module.title
-    
-    @property
-    def learning_path(self):
-        """Get the learning path this lesson belongs to."""
-        return self.module.learning_path
-
-
-class Assessment(models.Model):
-    """
-    Represents an assessment/quiz within a module.
-    """
-    ASSESSMENT_TYPE_CHOICES = [
-        ('quiz', 'Quiz'),
-        ('exam', 'Examination'),
-        ('assignment', 'Assignment'),
-        ('project', 'Project'),
-        ('practical', 'Practical Test'),
-    ]
-    
-    DIFFICULTY_CHOICES = [
-        ('beginner', 'Beginner'),
-        ('intermediate', 'Intermediate'),
-        ('advanced', 'Advanced'),
-    ]
-    
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    
-    # Settings
-    assessment_type = models.CharField(
-        max_length=20, 
-        choices=ASSESSMENT_TYPE_CHOICES, 
-        default='quiz'
-    )
-    difficulty_level = models.CharField(
-        max_length=20, 
-        choices=DIFFICULTY_CHOICES, 
-        default='beginner'
-    )
-    
-    # Timing and scoring
-    time_limit = models.PositiveIntegerField(
-        null=True, 
-        blank=True, 
-        help_text='Time limit in minutes'
-    )
-    max_attempts = models.PositiveIntegerField(
-        default=3, 
-        help_text='Maximum number of attempts allowed'
-    )
-    passing_score = models.FloatField(
-        default=70.0, 
-        help_text='Minimum score to pass (percentage)'
-    )
-    
-    # Relationships
-    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='assessments')
-    # Questions are managed through AssessmentQuestion model for proper relationship handling
-    
-    # Publishing
-    is_published = models.BooleanField(default=False)
-    
-    # Statistics (calculated field)
-    average_score = models.FloatField(default=0.0)
-    
-    # Metadata
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
-    class Meta:
-        db_table = 'jac_assessment'
-        ordering = ['title']
-        indexes = [
-            models.Index(fields=['assessment_type']),
-            models.Index(fields=['difficulty_level']),
-            models.Index(fields=['is_published']),
-            models.Index(fields=['created_at']),
-        ]
-    
-    def __str__(self):
-        return f"{self.title} ({self.assessment_type})"
-    
-    @property
-    def question_count(self):
-        """Get total number of questions in this assessment."""
-        return self.questions.count()
-    
-    @property
-    def module_title(self):
-        """Get the title of the parent module."""
-        return self.module.title
-
-
-class Question(models.Model):
-    """
-    Represents a question within an assessment.
-    """
-    QUESTION_TYPE_CHOICES = [
-        ('multiple_choice', 'Multiple Choice'),
-        ('true_false', 'True/False'),
-        ('short_answer', 'Short Answer'),
-        ('essay', 'Essay'),
-        ('code', 'Code Challenge'),
-        ('drag_drop', 'Drag and Drop'),
-    ]
-    
-    DIFFICULTY_CHOICES = [
-        ('beginner', 'Beginner'),
-        ('intermediate', 'Intermediate'),
-        ('advanced', 'Advanced'),
-    ]
-    
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='question_set')
-    question_text = models.TextField()
-    
-    # Question details
-    question_type = models.CharField(
-        max_length=20, 
-        choices=QUESTION_TYPE_CHOICES, 
-        default='multiple_choice'
-    )
-    difficulty_level = models.CharField(
-        max_length=20, 
-        choices=DIFFICULTY_CHOICES, 
-        default='beginner'
-    )
-    points = models.FloatField(
-        default=1.0, 
-        help_text='Points awarded for correct answer'
-    )
-    
-    # Content
-    question_options = models.JSONField(
-        default=list, 
-        blank=True, 
-        help_text='Answer options for multiple choice questions'
-    )
-    correct_answer = models.JSONField(
-        default=dict, 
-        blank=True, 
-        help_text='Correct answer data'
-    )
-    code_template = models.TextField(
-        blank=True, 
-        help_text='Code template for coding questions'
-    )
-    test_cases = models.JSONField(
-        default=list, 
-        blank=True, 
-        help_text='Test cases for code validation'
-    )
-    
-    # Guidance
-    explanation = models.TextField(
-        blank=True, 
-        help_text='Explanation of the correct answer'
-    )
-    hints = models.JSONField(
-        default=list, 
-        blank=True, 
-        help_text='Hints to help users answer'
-    )
-    
-    # Metadata
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
-    class Meta:
-        db_table = 'jac_question'
-        ordering = ['assessment', 'id']
-        indexes = [
-            models.Index(fields=['assessment']),
-            models.Index(fields=['question_type']),
-            models.Index(fields=['difficulty_level']),
-            models.Index(fields=['created_at']),
-        ]
-    
-    def __str__(self):
-        return f"Q: {self.question_text[:50]}..."
+    def completion_rate(self):
+        """Get completion rate as percentage."""
+        total = self.total_users
+        if total == 0:
+            return 0
+        return (self.completed_users / total) * 100
 
 
 class UserLearningPath(models.Model):
@@ -423,6 +173,14 @@ class UserLearningPath(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='not_started')
     progress_percentage = models.PositiveIntegerField(default=0)
     current_module_order = models.PositiveIntegerField(default=0)
+    time_spent = models.DurationField(default=0)
+    
+    # Scores
+    overall_score = models.PositiveIntegerField(null=True, blank=True)
+    
+    # Notes and feedback
+    user_notes = models.TextField(blank=True)
+    feedback = models.TextField(blank=True)
     
     # Timing
     started_at = models.DateTimeField(null=True, blank=True)
@@ -436,29 +194,16 @@ class UserLearningPath(models.Model):
         unique_together = ['user', 'learning_path']
         indexes = [
             models.Index(fields=['user', 'status']),
+            models.Index(fields=['learning_path', 'status']),
             models.Index(fields=['status', 'last_activity_at']),
         ]
     
     def __str__(self):
         return f"{self.user.username} - {self.learning_path.name}"
     
-    def start_path(self):
-        """Mark path as started."""
-        if self.status == 'not_started':
-            self.status = 'in_progress'
-            self.started_at = timezone.now()
-            self.save()
-    
-    def complete_path(self):
-        """Mark path as completed."""
-        self.status = 'completed'
-        self.progress_percentage = 100
-        self.completed_at = timezone.now()
-        self.save()
-    
     def get_completion_percentage(self):
-        """Calculate current completion percentage."""
-        total_modules = self.learning_path.module_count
+        """Calculate completion percentage based on completed modules."""
+        total_modules = self.learning_path.modules.count()
         if total_modules == 0:
             return 0
         
@@ -468,7 +213,21 @@ class UserLearningPath(models.Model):
             status='completed'
         ).count()
         
-        return (completed_modules / total_modules) * 100
+        return int((completed_modules / total_modules) * 100)
+    
+    def start_learning_path(self):
+        """Mark learning path as started."""
+        if self.status == 'not_started':
+            self.status = 'in_progress'
+            self.started_at = timezone.now()
+            self.save()
+    
+    def complete_learning_path(self):
+        """Mark learning path as completed."""
+        self.status = 'completed'
+        self.progress_percentage = 100
+        self.completed_at = timezone.now()
+        self.save()
 
 
 class UserModuleProgress(models.Model):
@@ -544,23 +303,12 @@ class UserModuleProgress(models.Model):
             self.module.order
         )
         user_path.save()
-        
-        # Update user statistics (commented out for default User model)
-        # self.user.total_modules_completed += 1
-        # self.user.total_time_spent += self.time_spent
-        # self.user.add_points(10)  # Points for completing a module
-        # self.user.update_streak()
-        # self.user.save()
     
     def add_time_spent(self, minutes):
         """Add time spent to the module."""
         from datetime import timedelta
         self.time_spent += timedelta(minutes=minutes)
         self.save()
-        
-        # Update user total time (commented out for default User model)
-        # self.user.total_time_spent += timedelta(minutes=minutes)
-        # self.user.save()
 
 
 class PathRating(models.Model):
@@ -573,7 +321,7 @@ class PathRating(models.Model):
     
     rating = models.PositiveIntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(5)],
-        help_text='Rating from 1 (poor) to 5 (excellent)'
+        help_text='Rating from 1 to 5 stars'
     )
     review = models.TextField(blank=True)
     
@@ -584,403 +332,19 @@ class PathRating(models.Model):
         db_table = 'jac_path_rating'
         unique_together = ['user', 'learning_path']
         indexes = [
-            models.Index(fields=['learning_path', 'rating']),
+            models.Index(fields=['learning_path']),
+            models.Index(fields=['user']),
         ]
     
     def __str__(self):
-        return f"{self.user.username} - {self.learning_path.name} ({self.rating}/5)"
-
-
-class LearningRecommendation(models.Model):
-    """
-    AI-generated learning recommendations for users.
-    """
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recommendations')
-    
-    recommendation_type = models.CharField(
-        max_length=30,
-        choices=[
-            ('next_module', 'Next Module Recommendation'),
-            ('skill_gap', 'Skill Gap Analysis'),
-            ('review_topic', 'Review Topic Suggestion'),
-            ('challenging_exercise', 'Challenging Exercise'),
-        ]
-    )
-    
-    # Recommendation content
-    learning_path = models.ForeignKey(LearningPath, on_delete=models.CASCADE, null=True, blank=True)
-    module = models.ForeignKey(Module, on_delete=models.CASCADE, null=True, blank=True)
-    content = models.JSONField(help_text='Recommendation details and reasoning')
-    priority_score = models.FloatField(default=0.0, help_text='AI-calculated priority score')
-    
-    # Status tracking
-    is_dismissed = models.BooleanField(default=False)
-    is_acted_upon = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    expires_at = models.DateTimeField()
-    
-    class Meta:
-        db_table = 'jac_learning_recommendation'
-        indexes = [
-            models.Index(fields=['user', 'recommendation_type']),
-            models.Index(fields=['user', 'is_dismissed', 'expires_at']),
-        ]
-    
-    def __str__(self):
-        return f"{self.user.username} - {self.recommendation_type}"
-    
-    def is_expired(self):
-        """Check if recommendation has expired."""
-        return timezone.now() > self.expires_at
-    
-    def dismiss(self):
-        """Mark recommendation as dismissed."""
-        self.is_dismissed = True
-        self.save()
-    
-    def mark_acted_upon(self):
-        """Mark recommendation as acted upon."""
-        self.is_acted_upon = True
-        self.save()
-
-
-# ============================================================================
-# JAC CODE EXECUTION MODELS
-# ============================================================================
-
-class CodeSubmission(models.Model):
-    """Code submission for JAC code evaluation"""
-    
-    STATUS_CHOICES = [
-        ('pending', 'Pending Review'),
-        ('processing', 'Processing'),
-        ('passed', 'Passed'),
-        ('failed', 'Failed'),
-        ('error', 'Execution Error'),
-        ('timeout', 'Timeout'),
-    ]
-    
-    LANGUAGE_CHOICES = [
-        ('python', 'Python'),
-        ('jac', 'JAC (Jaseci)'),
-        ('javascript', 'JavaScript'),
-    ]
-    
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    submission_id = models.CharField(max_length=100, unique=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='code_submissions')
-    learning_path = models.ForeignKey(LearningPath, on_delete=models.CASCADE, null=True, blank=True, related_name='code_submissions')
-    module = models.ForeignKey(Module, on_delete=models.CASCADE, null=True, blank=True, related_name='code_submissions')
-    
-    # Code details
-    task_title = models.CharField(max_length=200)
-    task_description = models.TextField()
-    code = models.TextField()
-    language = models.CharField(max_length=20, choices=LANGUAGE_CHOICES, default='python')
-    
-    # Execution results
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    execution_result = models.JSONField(default=dict, blank=True)
-    ai_feedback = models.TextField(blank=True)
-    score = models.FloatField(null=True, blank=True)
-    execution_time = models.FloatField(null=True, blank=True)
-    memory_usage = models.FloatField(null=True, blank=True)
-    
-    # Metadata
-    submitted_at = models.DateTimeField(default=timezone.now)
-    reviewed_at = models.DateTimeField(null=True, blank=True)
-    reviewer_agent_id = models.CharField(max_length=100, blank=True)
-    
-    class Meta:
-        db_table = 'jac_code_submissions'
-        ordering = ['-submitted_at']
-        indexes = [
-            models.Index(fields=['user', 'status']),
-            models.Index(fields=['language']),
-            models.Index(fields=['submission_id']),
-        ]
-    
-    def __str__(self):
-        return f"{self.task_title} - {self.user.username} ({self.status})"
-
-
-class TestCase(models.Model):
-    """Test cases for code validation"""
-    
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='test_cases')
-    task_title = models.CharField(max_length=200)
-    test_input = models.JSONField(default=dict)
-    expected_output = models.JSONField(default=dict)
-    test_description = models.TextField(blank=True)
-    is_required = models.BooleanField(default=True)
-    points = models.FloatField(default=1.0)
-    created_at = models.DateTimeField(default=timezone.now)
-    
-    class Meta:
-        db_table = 'jac_test_cases'
-        ordering = ['created_at']
-    
-    def __str__(self):
-        return f"Test for {self.task_title}"
-
-
-class CodeExecutionLog(models.Model):
-    """Detailed logs of code execution for debugging and analytics"""
-    
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    submission = models.ForeignKey(CodeSubmission, on_delete=models.CASCADE, related_name='execution_logs')
-    execution_id = models.CharField(max_length=100)
-    output = models.TextField(blank=True)
-    error_output = models.TextField(blank=True)
-    execution_time = models.FloatField()
-    memory_usage = models.FloatField(null=True, blank=True)
-    created_at = models.DateTimeField(default=timezone.now)
-    
-    class Meta:
-        db_table = 'jac_code_execution_logs'
-        ordering = ['-created_at']
-        indexes = [
-            models.Index(fields=['execution_id']),
-            models.Index(fields=['submission']),
-        ]
-    
-    def __str__(self):
-        return f"Execution {self.execution_id} for {self.submission.submission_id}"
-
-
-class AICodeReview(models.Model):
-    """AI-generated code reviews and feedback"""
-    
-    REVIEW_TYPES = [
-        ('syntax', 'Syntax Analysis'),
-        ('logic', 'Logic Review'),
-        ('performance', 'Performance Analysis'),
-        ('security', 'Security Assessment'),
-        ('style', 'Code Style'),
-        ('best_practices', 'Best Practices'),
-    ]
-    
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    submission = models.ForeignKey(CodeSubmission, on_delete=models.CASCADE, related_name='ai_reviews')
-    review_type = models.CharField(max_length=20, choices=REVIEW_TYPES)
-    findings = models.JSONField(default=dict)
-    suggestions = models.TextField(blank=True)
-    score = models.FloatField(null=True, blank=True)
-    agent_id = models.CharField(max_length=100)
-    created_at = models.DateTimeField(default=timezone.now)
-    
-    class Meta:
-        db_table = 'jac_ai_code_reviews'
-        ordering = ['-created_at']
-    
-    def __str__(self):
-        return f"AI Review - {self.review_type} for {self.submission.submission_id}"
-
-
-class AssessmentAttempt(models.Model):
-    """
-    Represents an attempt by a user at taking an assessment.
-    """
-    ATTEMPT_STATUS_CHOICES = [
-        ('in_progress', 'In Progress'),
-        ('completed', 'Completed'),
-        ('abandoned', 'Abandoned'),
-        ('timed_out', 'Timed Out'),
-    ]
-    
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='learning_assessment_attempts')
-    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='attempts')
-    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='learning_assessment_attempts', null=True, blank=True)
-    
-    # Attempt details
-    attempt_number = models.PositiveIntegerField(default=1)
-    status = models.CharField(max_length=20, choices=ATTEMPT_STATUS_CHOICES, default='in_progress')
-    started_at = models.DateTimeField(auto_now_add=True)
-    completed_at = models.DateTimeField(null=True, blank=True)
-    
-    # Scoring
-    score = models.FloatField(null=True, blank=True)
-    max_score = models.FloatField(default=100.0)
-    passing_score = models.FloatField(default=70.0)
-    is_passed = models.BooleanField(default=False)
-    
-    # Time tracking
-    time_spent = models.DurationField(default=0)
-    time_limit = models.PositiveIntegerField(null=True, blank=True, help_text='Time limit in minutes')
-    
-    # Results
-    answers = models.JSONField(default=dict, help_text='User answers for each question')
-    feedback = models.TextField(blank=True)
-    
-    class Meta:
-        db_table = 'jac_assessment_attempts'
-        ordering = ['-started_at']
-        indexes = [
-            models.Index(fields=['user', 'assessment']),
-            models.Index(fields=['status', 'started_at']),
-            models.Index(fields=['assessment', 'attempt_number']),
-        ]
-        unique_together = ['user', 'assessment', 'attempt_number']
-    
-    def __str__(self):
-        return f"{self.user.username} - {self.assessment.title} (Attempt {self.attempt_number})"
-    
-    def complete_attempt(self, score: float, answers: dict, feedback: str = ""):
-        """Mark attempt as completed with results."""
-        self.score = score
-        self.answers = answers
-        self.feedback = feedback
-        self.is_passed = score >= self.passing_score
-        self.status = 'completed'
-        self.completed_at = timezone.now()
-        if self.started_at:
-            self.time_spent = self.completed_at - self.started_at
-        self.save()
-
-
-class UserAssessmentResult(models.Model):
-    """
-    Aggregated results for user's assessment performance across multiple attempts.
-    """
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='learning_assessment_results')
-    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='user_results')
-    
-    # Aggregated statistics
-    best_score = models.FloatField(default=0.0)
-    average_score = models.FloatField(default=0.0)
-    total_attempts = models.PositiveIntegerField(default=0)
-    passed_attempts = models.PositiveIntegerField(default=0)
-    total_time_spent = models.DurationField(default=0)
-    
-    # Performance metrics
-    first_attempt_score = models.FloatField(null=True, blank=True)
-    last_attempt_score = models.FloatField(null=True, blank=True)
-    improvement_rate = models.FloatField(default=0.0)
-    
-    # Dates
-    first_attempt_date = models.DateTimeField(null=True, blank=True)
-    last_attempt_date = models.DateTimeField(null=True, blank=True)
-    passed_date = models.DateTimeField(null=True, blank=True)
-    
-    # Status
-    is_completed = models.BooleanField(default=False)
-    completion_date = models.DateTimeField(null=True, blank=True)
-    
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
-    class Meta:
-        db_table = 'jac_user_assessment_results'
-        unique_together = ['user', 'assessment']
-        indexes = [
-            models.Index(fields=['user', 'assessment']),
-            models.Index(fields=['is_completed', 'best_score']),
-        ]
-    
-    def __str__(self):
-        return f"{self.user.username} - {self.assessment.title} (Best: {self.best_score}%)"
-    
-    def update_from_attempts(self, attempts_queryset):
-        """Update result statistics from related assessment attempts."""
-        attempts = list(attempts_queryset.order_by('started_at'))
-        
-        if not attempts:
-            return
-        
-        self.total_attempts = len(attempts)
-        self.first_attempt_date = attempts[0].started_at
-        self.last_attempt_date = attempts[-1].started_at
-        
-        # Calculate scores
-        scores = [a.score for a in attempts if a.score is not None]
-        if scores:
-            self.best_score = max(scores)
-            self.average_score = sum(scores) / len(scores)
-            self.first_attempt_score = scores[0]
-            self.last_attempt_score = scores[-1]
-            
-            if len(scores) > 1:
-                self.improvement_rate = ((scores[-1] - scores[0]) / max(scores[0], 1)) * 100
-        
-        # Calculate passed attempts
-        passed_attempts = [a for a in attempts if a.is_passed]
-        self.passed_attempts = len(passed_attempts)
-        
-        if passed_attempts and not self.passed_date:
-            self.passed_date = passed_attempts[0].completed_at
-        
-        # Calculate total time
-        self.total_time_spent = sum((a.time_spent or 0) for a in attempts)
-        
-        # Check completion
-        self.is_completed = any(a.is_passed for a in attempts)
-        if self.is_completed and not self.completion_date:
-            self.completion_date = self.passed_date
-        
-        self.save()
-
-
-class AssessmentQuestion(models.Model):
-    """
-    Extended question model that links questions to assessments with additional metadata.
-    """
-    DIFFICULTY_CHOICES = [
-        ('easy', 'Easy'),
-        ('medium', 'Medium'),
-        ('hard', 'Hard'),
-    ]
-    
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='assessment_questions')
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='assessment_links')
-    
-    # Question metadata
-    difficulty_level = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES, default='medium')
-    points = models.FloatField(default=1.0)
-    order = models.PositiveIntegerField(default=0)
-    
-    # Question customization for this assessment
-    question_text_override = models.TextField(blank=True, help_text='Override default question text for this assessment')
-    options_override = models.JSONField(default=list, blank=True, help_text='Override default options for multiple choice')
-    correct_answer_override = models.JSONField(default=list, blank=True, help_text='Override correct answer')
-    
-    # Statistics (calculated fields)
-    total_attempts = models.PositiveIntegerField(default=0)
-    correct_attempts = models.PositiveIntegerField(default=0)
-    average_time = models.FloatField(default=0.0, help_text='Average time in seconds')
-    
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
-    class Meta:
-        db_table = 'jac_assessment_questions'
-        ordering = ['assessment', 'order']
-        unique_together = ['assessment', 'question']
-        indexes = [
-            models.Index(fields=['assessment', 'order']),
-            models.Index(fields=['difficulty_level']),
-        ]
-    
-    def __str__(self):
-        return f"{self.assessment.title} - {self.question.question_text[:50]}..."
-    
-    @property
-    def accuracy_rate(self):
-        """Calculate accuracy rate for this question."""
-        if self.total_attempts == 0:
-            return 0.0
-        return (self.correct_attempts / self.total_attempts) * 100
+        return f"{self.user.username} - {self.learning_path.name} ({self.rating} stars)"
 
 
 class Achievement(models.Model):
     """
-    Achievement system for tracking user accomplishments.
+    System achievements that users can unlock.
     """
-    ACHIEVEMENT_TYPE_CHOICES = [
+    ACHIEVEMENT_TYPES = [
         ('completion', 'Completion'),
         ('performance', 'Performance'),
         ('streak', 'Streak'),
@@ -1000,10 +364,10 @@ class Achievement(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
-    achievement_type = models.CharField(max_length=20, choices=ACHIEVEMENT_TYPE_CHOICES)
+    achievement_type = models.CharField(max_length=20, choices=ACHIEVEMENT_TYPES)
     rarity = models.CharField(max_length=20, choices=RARITY_CHOICES, default='common')
     
-    # Achievement requirements
+    # Requirements
     requirements = models.JSONField(default=dict, help_text='Requirements to unlock this achievement')
     icon = models.CharField(max_length=200, blank=True, help_text='Icon URL or name')
     badge_color = models.CharField(max_length=20, default='blue', help_text='CSS color class')
@@ -1012,6 +376,7 @@ class Achievement(models.Model):
     unlock_count = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
     
+    # Metadata
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -1025,30 +390,664 @@ class Achievement(models.Model):
         ]
     
     def __str__(self):
-        return f"{self.name} ({self.rarity})"
+        return self.name
 
 
-class UserAchievement(models.Model):
+class Assessment(models.Model):
     """
-    Tracks user achievements that have been unlocked.
+    Represents assessments, quizzes, and exams.
     """
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_achievements')
-    achievement = models.ForeignKey(Achievement, on_delete=models.CASCADE, related_name='user_achievements')
+    ASSESSMENT_TYPES = [
+        ('quiz', 'Quiz'),
+        ('exam', 'Examination'),
+        ('assignment', 'Assignment'),
+        ('project', 'Project'),
+        ('practical', 'Practical Test'),
+    ]
     
-    # Achievement context
-    unlocked_at = models.DateTimeField(auto_now_add=True)
-    context = models.JSONField(default=dict, help_text='Context when achievement was unlocked')
-    progress_at_unlock = models.JSONField(default=dict, help_text='User progress at time of unlock')
+    DIFFICULTY_LEVELS = [
+        ('beginner', 'Beginner'),
+        ('intermediate', 'Intermediate'),
+        ('advanced', 'Advanced'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    assessment_type = models.CharField(max_length=20, choices=ASSESSMENT_TYPES, default='quiz')
+    difficulty_level = models.CharField(max_length=20, choices=DIFFICULTY_LEVELS, default='beginner')
+    
+    # Configuration
+    time_limit = models.PositiveIntegerField(null=True, blank=True, help_text='Time limit in minutes')
+    max_attempts = models.PositiveIntegerField(default=3, help_text='Maximum number of attempts allowed')
+    passing_score = models.FloatField(default=70.0, help_text='Minimum score to pass (percentage)')
+    
+    # Metadata
+    is_published = models.BooleanField(default=False)
+    average_score = models.FloatField(default=0.0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
     class Meta:
-        db_table = 'jac_user_achievements'
-        unique_together = ['user', 'achievement']
-        ordering = ['-unlocked_at']
+        db_table = 'jac_assessment'
+        ordering = ['title']
+    
+    def __str__(self):
+        return self.title
+
+
+class AssessmentQuestion(models.Model):
+    """
+    Questions for assessments.
+    """
+    DIFFICULTY_LEVELS = [
+        ('easy', 'Easy'),
+        ('medium', 'Medium'),
+        ('hard', 'Hard'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='questions')
+    
+    # Question data
+    difficulty_level = models.CharField(max_length=20, choices=DIFFICULTY_LEVELS, default='medium')
+    points = models.FloatField(default=1.0)
+    order = models.PositiveIntegerField(default=0)
+    
+    # Content (using base64 encoded question data)
+    question_data = models.JSONField(default=dict, help_text='Base64 encoded question content')
+    
+    # Overrides for specific assessments
+    question_text_override = models.TextField(blank=True, help_text='Override default question text for this assessment')
+    options_override = models.JSONField(blank=True, default=list, help_text='Override default options for multiple choice')
+    correct_answer_override = models.JSONField(blank=True, default=list, help_text='Override correct answer')
+    
+    # Performance tracking
+    total_attempts = models.PositiveIntegerField(default=0)
+    correct_attempts = models.PositiveIntegerField(default=0)
+    average_time = models.FloatField(default=0.0, help_text='Average time in seconds')
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_assessment_questions'
+        ordering = ['assessment', 'order']
+    
+    def __str__(self):
+        return f"Question {self.order} - {self.assessment.title}"
+
+
+class AssessmentAttempt(models.Model):
+    """
+    Tracks user attempts at assessments.
+    """
+    STATUS_CHOICES = [
+        ('in_progress', 'In Progress'),
+        ('completed', 'Completed'),
+        ('abandoned', 'Abandoned'),
+        ('timed_out', 'Timed Out'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assessment_attempts')
+    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='attempts')
+    
+    # Attempt tracking
+    attempt_number = models.PositiveIntegerField(default=1)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='in_progress')
+    
+    # Timing
+    started_at = models.DateTimeField(auto_now_add=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+    time_spent = models.DurationField(default=0)
+    time_limit = models.PositiveIntegerField(null=True, blank=True, help_text='Time limit in minutes')
+    
+    # Scores
+    score = models.FloatField(null=True, blank=True)
+    max_score = models.FloatField(default=100.0)
+    passing_score = models.FloatField(default=70.0)
+    is_passed = models.BooleanField(default=False)
+    
+    # Responses
+    answers = models.JSONField(default=dict, help_text='User answers for each question')
+    feedback = models.TextField(blank=True)
+    
+    class Meta:
+        db_table = 'jac_assessment_attempts'
+        ordering = ['-started_at']
         indexes = [
-            models.Index(fields=['user', 'unlocked_at']),
-            models.Index(fields=['achievement']),
+            models.Index(fields=['user', 'assessment']),
+            models.Index(fields=['assessment', 'status']),
+            models.Index(fields=['started_at']),
         ]
     
     def __str__(self):
-        return f"{self.user.username} unlocked {self.achievement.name}"
+        return f"{self.user.username} - {self.assessment.title} (Attempt {self.attempt_number})"
+    
+    def calculate_score(self):
+        """Calculate final score based on answers."""
+        if not self.answers:
+            return 0
+        
+        total_points = 0
+        earned_points = 0
+        
+        for question in self.assessment.questions.all():
+            total_points += question.points
+            
+            if str(question.id) in self.answers:
+                user_answer = self.answers[str(question.id)]
+                correct_answer = question.correct_answer_override or question.question_data.get('correct_answer', [])
+                
+                if user_answer in correct_answer:
+                    earned_points += question.points
+        
+        if total_points > 0:
+            self.score = (earned_points / total_points) * 100
+            self.is_passed = self.score >= self.passing_score
+        
+        self.save()
+        return self.score
+
+
+class CodeSubmission(models.Model):
+    """
+    Tracks code submissions for exercises and projects.
+    """
+    LANGUAGE_CHOICES = [
+        ('python', 'Python'),
+        ('jac', 'JAC (Jaseci)'),
+        ('javascript', 'JavaScript'),
+    ]
+    
+    STATUS_CHOICES = [
+        ('pending', 'Pending Review'),
+        ('processing', 'Processing'),
+        ('passed', 'Passed'),
+        ('failed', 'Failed'),
+        ('error', 'Execution Error'),
+        ('timeout', 'Timeout'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='code_submissions')
+    
+    # Submission details
+    submission_id = models.CharField(max_length=100, unique=True)
+    task_title = models.CharField(max_length=200)
+    task_description = models.TextField()
+    code = models.TextField()
+    language = models.CharField(max_length=20, choices=LANGUAGE_CHOICES, default='python')
+    
+    # Execution results
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    execution_result = models.JSONField(blank=True, default=dict)
+    ai_feedback = models.TextField(blank=True)
+    
+    # Performance metrics
+    score = models.FloatField(null=True, blank=True)
+    execution_time = models.FloatField(null=True, blank=True)
+    memory_usage = models.FloatField(null=True, blank=True)
+    
+    # Metadata
+    submitted_at = models.DateTimeField(auto_now_add=True)
+    reviewed_at = models.DateTimeField(null=True, blank=True)
+    reviewer_agent_id = models.CharField(max_length=100, blank=True)
+    
+    class Meta:
+        db_table = 'jac_code_submissions'
+        ordering = ['-submitted_at']
+        indexes = [
+            models.Index(fields=['user', 'status']),
+            models.Index(fields=['status']),
+            models.Index(fields=['submitted_at']),
+        ]
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.task_title}"
+
+
+class CodeExecutionLog(models.Model):
+    """
+    Logs code execution attempts.
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    submission = models.ForeignKey(CodeSubmission, on_delete=models.CASCADE, related_name='execution_logs')
+    
+    execution_id = models.CharField(max_length=100)
+    output = models.TextField(blank=True)
+    error_output = models.TextField(blank=True)
+    execution_time = models.FloatField()
+    memory_usage = models.FloatField(null=True, blank=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        db_table = 'jac_code_execution_logs'
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"Execution {self.execution_id} - {self.submission.task_title}"
+
+
+class AICodeReview(models.Model):
+    """
+    AI-generated code reviews and feedback.
+    """
+    REVIEW_TYPES = [
+        ('syntax', 'Syntax Analysis'),
+        ('logic', 'Logic Review'),
+        ('performance', 'Performance Analysis'),
+        ('security', 'Security Assessment'),
+        ('style', 'Code Style'),
+        ('best_practices', 'Best Practices'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    submission = models.ForeignKey(CodeSubmission, on_delete=models.CASCADE, related_name='ai_reviews')
+    
+    review_type = models.CharField(max_length=20, choices=REVIEW_TYPES)
+    findings = models.JSONField(default=dict)
+    suggestions = models.TextField(blank=True)
+    score = models.FloatField(null=True, blank=True)
+    
+    agent_id = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        db_table = 'jac_ai_code_reviews'
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.review_type} review - {self.submission.task_title}"
+
+
+class LearningRecommendation(models.Model):
+    """
+    AI-generated learning recommendations for users.
+    """
+    RECOMMENDATION_TYPES = [
+        ('next_module', 'Next Module Recommendation'),
+        ('skill_gap', 'Skill Gap Analysis'),
+        ('review_topic', 'Review Topic Suggestion'),
+        ('challenging_exercise', 'Challenging Exercise'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='learning_recommendations')
+    
+    recommendation_type = models.CharField(max_length=30, choices=RECOMMENDATION_TYPES)
+    content = models.JSONField(help_text='Recommendation details and reasoning')
+    priority_score = models.FloatField(default=0.0, help_text='AI-calculated priority score')
+    
+    # Status
+    is_dismissed = models.BooleanField(default=False)
+    is_acted_upon = models.BooleanField(default=False)
+    
+    # Timing
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    
+    class Meta:
+        db_table = 'jac_learning_recommendation'
+        ordering = ['-priority_score', '-created_at']
+    
+    def __str__(self):
+        return f"{self.recommendation_type} for {self.user.username}"
+
+
+# ===== ADAPTIVE LEARNING MODELS =====
+
+class UserDifficultyProfile(models.Model):
+    """
+    Tracks individual user difficulty profiles for adaptive learning.
+    """
+    DIFFICULTY_LEVELS = [
+        ('very_beginner', 'Very Beginner'),
+        ('beginner', 'Beginner'),
+        ('intermediate', 'Intermediate'),
+        ('advanced', 'Advanced'),
+        ('expert', 'Expert'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='difficulty_profile')
+    
+    # Current skill levels
+    current_difficulty = models.CharField(max_length=20, choices=DIFFICULTY_LEVELS, default='beginner')
+    jac_knowledge_level = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
+    problem_solving_level = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
+    coding_skill_level = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
+    
+    # Learning patterns
+    learning_speed = models.FloatField(default=1.0, help_text='How quickly user learns new concepts')
+    retention_rate = models.FloatField(default=0.8, help_text='How well user retains information')
+    preferred_challenge_increase = models.FloatField(default=0.2, help_text='How much difficulty should increase per success')
+    challenge_tolerance = models.FloatField(default=0.7, help_text='How much challenge user can handle')
+    
+    # Performance metrics
+    recent_accuracy = models.FloatField(default=0.5, help_text='Recent accuracy percentage')
+    success_streak = models.PositiveIntegerField(default=0)
+    last_difficulty_change = models.DateTimeField(null=True, blank=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_user_difficulty_profile'
+        indexes = [
+            models.Index(fields=['user']),
+            models.Index(fields=['current_difficulty']),
+            models.Index(fields=['updated_at']),
+        ]
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.current_difficulty}"
+    
+    def get_overall_skill_level(self):
+        """Calculate overall skill level based on all dimensions."""
+        return (self.jac_knowledge_level + self.problem_solving_level + self.coding_skill_level) / 3
+    
+    def should_increase_difficulty(self):
+        """Determine if user difficulty should be increased based on recent performance."""
+        if self.recent_accuracy >= 0.8 and self.success_streak >= 3:
+            return True
+        return False
+    
+    def should_decrease_difficulty(self):
+        """Determine if user difficulty should be decreased based on recent performance."""
+        if self.recent_accuracy < 0.5 or self.success_streak == 0:
+            return True
+        return False
+    
+    def adjust_difficulty(self, performance_score):
+        """Adjust user difficulty based on performance score (0.0 to 1.0)."""
+        if performance_score >= 0.8:
+            # Increase difficulty
+            self._increase_difficulty()
+        elif performance_score <= 0.4:
+            # Decrease difficulty  
+            self._decrease_difficulty()
+        
+        # Update recent accuracy
+        self.recent_accuracy = (self.recent_accuracy * 0.7) + (performance_score * 0.3)
+        
+        # Update success streak
+        if performance_score >= 0.7:
+            self.success_streak += 1
+        else:
+            self.success_streak = 0
+            
+        self.last_difficulty_change = timezone.now()
+        self.save()
+        
+        return self.current_difficulty
+    
+    def _increase_difficulty(self):
+        """Increase user difficulty level."""
+        difficulty_order = ['very_beginner', 'beginner', 'intermediate', 'advanced', 'expert']
+        current_index = difficulty_order.index(self.current_difficulty)
+        
+        if current_index < len(difficulty_order) - 1:
+            self.current_difficulty = difficulty_order[current_index + 1]
+            # Increase individual skill levels
+            self.jac_knowledge_level = min(10, self.jac_knowledge_level + 1)
+            self.problem_solving_level = min(10, self.problem_solving_level + 1)
+            self.coding_skill_level = min(10, self.coding_skill_level + 1)
+    
+    def _decrease_difficulty(self):
+        """Decrease user difficulty level."""
+        difficulty_order = ['very_beginner', 'beginner', 'intermediate', 'advanced', 'expert']
+        current_index = difficulty_order.index(self.current_difficulty)
+        
+        if current_index > 0:
+            self.current_difficulty = difficulty_order[current_index - 1]
+            # Decrease individual skill levels
+            self.jac_knowledge_level = max(1, self.jac_knowledge_level - 1)
+            self.problem_solving_level = max(1, self.problem_solving_level - 1)
+            self.coding_skill_level = max(1, self.coding_skill_level - 1)
+
+
+class AdaptiveChallenge(models.Model):
+    """
+    Stores AI-generated challenges with adaptive difficulty tracking.
+    """
+    CHALLENGE_TYPES = [
+        ('quiz', 'Multiple Choice Quiz'),
+        ('coding', 'Coding Exercise'),
+        ('debug', 'Debugging Challenge'),
+        ('scenario', 'Problem Scenario'),
+        ('project', 'Mini Project'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    
+    # Challenge details
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    challenge_type = models.CharField(max_length=20, choices=CHALLENGE_TYPES)
+    content = models.TextField()  # JSON or structured content for the challenge
+    
+    # Difficulty and adaptation
+    difficulty_level = models.CharField(max_length=20, choices=UserDifficultyProfile.DIFFICULTY_LEVELS)
+    skill_dimensions = models.JSONField(default=dict, help_text='What skills this challenge targets')
+    estimated_time = models.PositiveIntegerField(help_text='Estimated completion time in minutes')
+    
+    # AI generation metadata
+    generated_by_agent = models.CharField(max_length=50, help_text='Which AI agent generated this')
+    generation_prompt = models.TextField(help_text='The prompt used to generate this challenge')
+    adaptation_rules = models.JSONField(default=dict, help_text='Rules for adapting this challenge')
+    
+    # Performance tracking
+    success_rate = models.FloatField(default=0.0, help_text='Overall success rate for this challenge')
+    average_completion_time = models.PositiveIntegerField(default=0, help_text='Average completion time in minutes')
+    total_attempts = models.PositiveIntegerField(default=0)
+    successful_attempts = models.PositiveIntegerField(default=0)
+    
+    # Metadata
+    is_active = models.BooleanField(default=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_challenges')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_adaptive_challenge'
+        indexes = [
+            models.Index(fields=['challenge_type']),
+            models.Index(fields=['difficulty_level']),
+            models.Index(fields=['is_active']),
+            models.Index(fields=['success_rate']),
+        ]
+    
+    def __str__(self):
+        return f"{self.title} ({self.difficulty_level})"
+    
+    def update_success_metrics(self, completed, completion_time):
+        """Update success metrics based on user performance."""
+        self.total_attempts += 1
+        if completed:
+            self.successful_attempts += 1
+            
+        # Update average completion time using running average
+        if self.total_attempts == 1:
+            self.average_completion_time = completion_time
+        else:
+            self.average_completion_time = int(
+                (self.average_completion_time * (self.total_attempts - 1) + completion_time) / self.total_attempts
+            )
+        
+        # Update success rate
+        self.success_rate = self.successful_attempts / self.total_attempts
+        
+        self.save()
+
+
+class UserChallengeAttempt(models.Model):
+    """
+    Tracks individual user attempts at adaptive challenges.
+    """
+    ATTEMPT_STATUS = [
+        ('started', 'Started'),
+        ('in_progress', 'In Progress'),
+        ('completed', 'Completed'),
+        ('failed', 'Failed'),
+        ('abandoned', 'Abandoned'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='challenge_attempts')
+    challenge = models.ForeignKey(AdaptiveChallenge, on_delete=models.CASCADE, related_name='attempts')
+    
+    # Attempt details
+    status = models.CharField(max_length=20, choices=ATTEMPT_STATUS, default='started')
+    score = models.FloatField(null=True, blank=True, help_text='Final score (0.0 to 1.0)')
+    time_spent = models.PositiveIntegerField(help_text='Time spent in minutes')
+    responses = models.JSONField(default=dict, help_text='User responses to challenge')
+    feedback = models.TextField(blank=True, help_text='AI-generated feedback')
+    
+    # Adaptive learning feedback
+    difficulty_feedback = models.TextField(blank=True, help_text='Was the difficulty appropriate?')
+    learning_insights = models.JSONField(default=dict, help_text='AI insights about learning pattern')
+    
+    # Timing
+    started_at = models.DateTimeField(auto_now_add=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+    
+    class Meta:
+        db_table = 'jac_user_challenge_attempt'
+        unique_together = ['user', 'challenge', 'started_at']
+        indexes = [
+            models.Index(fields=['user', 'status']),
+            models.Index(fields=['challenge', 'status']),
+            models.Index(fields=['score']),
+            models.Index(fields=['started_at']),
+        ]
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.challenge.title} ({self.status})"
+    
+    def complete_attempt(self, score, responses, feedback=None):
+        """Mark attempt as completed with scores and feedback."""
+        self.status = 'completed'
+        self.score = score
+        self.responses = responses
+        self.feedback = feedback or ""
+        self.completed_at = timezone.now()
+        self.time_spent = int((self.completed_at - self.started_at).total_seconds() / 60)
+        self.save()
+        
+        # Update challenge metrics
+        self.challenge.update_success_metrics(True, self.time_spent)
+        
+        # Update user difficulty profile
+        if hasattr(self.user, 'difficulty_profile'):
+            self.user.difficulty_profile.adjust_difficulty(score)
+        
+        return self.score
+    
+    def fail_attempt(self, feedback=None):
+        """Mark attempt as failed."""
+        self.status = 'failed'
+        self.feedback = feedback or ""
+        self.completed_at = timezone.now()
+        self.time_spent = int((self.completed_at - self.started_at).total_seconds() / 60)
+        self.save()
+        
+        # Update challenge metrics
+        self.challenge.update_success_metrics(False, self.time_spent)
+        
+        # Update user difficulty profile
+        if hasattr(self.user, 'difficulty_profile'):
+            self.user.difficulty_profile.adjust_difficulty(self.score or 0.0)
+    
+    def get_difficulty_rating(self):
+        """Get user's rating of challenge difficulty (1-5 scale)."""
+        if 'difficulty_rating' in self.responses:
+            return self.responses['difficulty_rating']
+        return None
+
+
+class SpacedRepetitionSession(models.Model):
+    """
+    Manages spaced repetition sessions for optimal review timing.
+    """
+    REVIEW_STATUS = [
+        ('scheduled', 'Scheduled'),
+        ('ready', 'Ready for Review'),
+        ('completed', 'Completed'),
+        ('delayed', 'Delayed'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='spaced_repetition_sessions')
+    challenge = models.ForeignKey(AdaptiveChallenge, on_delete=models.CASCADE, related_name='review_sessions')
+    
+    # Spaced repetition data
+    review_stage = models.PositiveIntegerField(default=1)  # 1, 2, 3, etc. based on SM-2 algorithm
+    ease_factor = models.FloatField(default=2.5)  # SM-2 ease factor
+    interval_days = models.PositiveIntegerField(default=1)  # Days until next review
+    
+    # Timing
+    scheduled_for = models.DateTimeField()
+    completed_at = models.DateTimeField(null=True, blank=True)
+    
+    # Performance
+    quality_rating = models.PositiveIntegerField(null=True, blank=True, help_text='User rating 0-5 for recall quality')
+    status = models.CharField(max_length=20, choices=REVIEW_STATUS, default='scheduled')
+    
+    # Metadata
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_spaced_repetition_session'
+        indexes = [
+            models.Index(fields=['user', 'scheduled_for']),
+            models.Index(fields=['status']),
+            models.Index(fields=['scheduled_for']),
+        ]
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.challenge.title} (Stage {self.review_stage})"
+    
+    def complete_review(self, quality_rating):
+        """Complete review and calculate next review date using SM-2 algorithm."""
+        self.quality_rating = quality_rating
+        self.completed_at = timezone.now()
+        self.status = 'completed'
+        
+        # SM-2 algorithm implementation
+        if quality_rating >= 3:  # Correct response
+            if self.review_stage == 1:
+                self.interval_days = 1
+            elif self.review_stage == 2:
+                self.interval_days = 6
+            else:
+                self.interval_days = round(self.interval_days * self.ease_factor)
+            
+            self.review_stage += 1
+        else:  # Incorrect response - reset
+            self.review_stage = 1
+            self.interval_days = 1
+        
+        # Update ease factor
+        self.ease_factor = self.ease_factor + (0.1 - (5 - quality_rating) * (0.08 + (5 - quality_rating) * 0.02))
+        if self.ease_factor < 1.3:
+            self.ease_factor = 1.3
+        
+        # Schedule next review
+        self.scheduled_for = timezone.now() + timezone.timedelta(days=self.interval_days)
+        self.status = 'scheduled'
+        self.save()
+        
+        return self.scheduled_for
+    
+    def is_due_for_review(self):
+        """Check if this session is due for review."""
+        return self.status == 'ready' and self.scheduled_for <= timezone.now()
+    
+    def mark_as_ready(self):
+        """Mark session as ready for review."""
+        self.status = 'ready'
+        self.save()

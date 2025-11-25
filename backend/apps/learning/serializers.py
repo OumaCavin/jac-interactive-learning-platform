@@ -658,3 +658,251 @@ class AssessmentStatsSerializer(serializers.Serializer):
     total_time_spent = serializers.DurationField()
     best_score = serializers.FloatField()
     recent_attempts = AttemptListSerializer(many=True, read_only=True)
+
+
+# ============================================================================
+# ADAPTIVE LEARNING SERIALIZERS
+# ============================================================================
+
+import json
+
+
+class UserDifficultyProfileSerializer(serializers.ModelSerializer):
+    """Serializer for UserDifficultyProfile model."""
+    user_username = serializers.CharField(source='user.username', read_only=True)
+    overall_skill_level = serializers.ReadOnlyField()
+    should_increase_difficulty = serializers.ReadOnlyField()
+    should_decrease_difficulty = serializers.ReadOnlyField()
+    
+    class Meta:
+        model = UserDifficultyProfile
+        fields = [
+            'id', 'user', 'user_username', 'current_difficulty', 'jac_knowledge_level',
+            'problem_solving_level', 'coding_skill_level', 'learning_speed',
+            'retention_rate', 'preferred_challenge_increase', 'challenge_tolerance',
+            'recent_accuracy', 'success_streak', 'last_difficulty_change',
+            'created_at', 'updated_at', 'overall_skill_level',
+            'should_increase_difficulty', 'should_decrease_difficulty'
+        ]
+        read_only_fields = ['id', 'user', 'user_username', 'last_difficulty_change', 
+                           'created_at', 'updated_at', 'overall_skill_level', 
+                           'should_increase_difficulty', 'should_decrease_difficulty']
+
+
+class AdaptiveChallengeSerializer(serializers.ModelSerializer):
+    """Serializer for AdaptiveChallenge model."""
+    created_by_username = serializers.CharField(source='created_by.username', read_only=True)
+    
+    class Meta:
+        model = AdaptiveChallenge
+        fields = [
+            'id', 'title', 'description', 'challenge_type', 'content',
+            'difficulty_level', 'skill_dimensions', 'estimated_time',
+            'generated_by_agent', 'generation_prompt', 'adaptation_rules',
+            'success_rate', 'average_completion_time', 'total_attempts',
+            'successful_attempts', 'is_active', 'created_by', 'created_by_username',
+            'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'generated_by_agent', 'generation_prompt',
+                           'success_rate', 'average_completion_time', 'total_attempts',
+                           'successful_attempts', 'created_by', 'created_by_username',
+                           'created_at', 'updated_at']
+
+
+class ChallengeContentField(serializers.Field):
+    """Custom field to handle challenge content as JSON."""
+    
+    def to_representation(self, value):
+        if isinstance(value, str):
+            try:
+                return json.loads(value)
+            except (json.JSONDecodeError, TypeError):
+                return {'content': value}
+        return value
+    
+    def to_internal_value(self, data):
+        if isinstance(data, dict):
+            return json.dumps(data)
+        return str(data)
+
+
+class AdaptiveChallengeDetailSerializer(serializers.ModelSerializer):
+    """Detailed serializer for AdaptiveChallenge with parsed content."""
+    created_by_username = serializers.CharField(source='created_by.username', read_only=True)
+    content = ChallengeContentField()
+    
+    class Meta:
+        model = AdaptiveChallenge
+        fields = [
+            'id', 'title', 'description', 'challenge_type', 'content',
+            'difficulty_level', 'skill_dimensions', 'estimated_time',
+            'generated_by_agent', 'adaptation_rules', 'success_rate',
+            'average_completion_time', 'total_attempts', 'successful_attempts',
+            'is_active', 'created_by', 'created_by_username', 'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'generated_by_agent', 'success_rate',
+                           'average_completion_time', 'total_attempts', 'successful_attempts',
+                           'created_by', 'created_by_username', 'created_at', 'updated_at']
+
+
+class UserChallengeAttemptSerializer(serializers.ModelSerializer):
+    """Serializer for UserChallengeAttempt model."""
+    user_username = serializers.CharField(source='user.username', read_only=True)
+    challenge_title = serializers.CharField(source='challenge.title', read_only=True)
+    difficulty_rating = serializers.ReadOnlyField(source='get_difficulty_rating')
+    
+    class Meta:
+        model = UserChallengeAttempt
+        fields = [
+            'id', 'user', 'user_username', 'challenge', 'challenge_title',
+            'status', 'score', 'time_spent', 'responses', 'feedback',
+            'difficulty_feedback', 'learning_insights', 'started_at',
+            'completed_at', 'difficulty_rating'
+        ]
+        read_only_fields = ['id', 'user', 'user_username', 'challenge', 'challenge_title',
+                           'started_at', 'completed_at', 'difficulty_rating']
+
+
+class UserChallengeAttemptCreateSerializer(serializers.ModelSerializer):
+    """Serializer for creating new challenge attempts."""
+    
+    class Meta:
+        model = UserChallengeAttempt
+        fields = ['challenge']
+        read_only_fields = ['id', 'user', 'challenge', 'status', 'started_at']
+
+
+class UserChallengeAttemptSubmitSerializer(serializers.ModelSerializer):
+    """Serializer for submitting challenge responses."""
+    
+    class Meta:
+        model = UserChallengeAttempt
+        fields = ['responses', 'feedback']
+
+
+class ChallengeSubmissionResponseSerializer(serializers.Serializer):
+    """Serializer for challenge submission response."""
+    success = serializers.BooleanField()
+    score = serializers.FloatField(required=False)
+    feedback = serializers.CharField(required=False, allow_blank=True)
+    next_steps = serializers.ListField(child=serializers.CharField(), required=False)
+    difficulty_adjustment = serializers.DictField(required=False)
+
+
+class SpacedRepetitionSessionSerializer(serializers.ModelSerializer):
+    """Serializer for SpacedRepetitionSession model."""
+    user_username = serializers.CharField(source='user.username', read_only=True)
+    challenge_title = serializers.CharField(source='challenge.title', read_only=True)
+    is_due_for_review = serializers.ReadOnlyField()
+    
+    class Meta:
+        model = SpacedRepetitionSession
+        fields = [
+            'id', 'user', 'user_username', 'challenge', 'challenge_title',
+            'review_stage', 'ease_factor', 'interval_days', 'scheduled_for',
+            'completed_at', 'quality_rating', 'status', 'created_at', 'updated_at',
+            'is_due_for_review'
+        ]
+        read_only_fields = ['id', 'user', 'user_username', 'challenge', 'challenge_title',
+                           'created_at', 'updated_at', 'is_due_for_review']
+
+
+class SpacedRepetitionReviewSerializer(serializers.Serializer):
+    """Serializer for completing spaced repetition reviews."""
+    quality_rating = serializers.IntegerField(min_value=0, max_value=5)
+
+
+class ChallengeGenerationRequestSerializer(serializers.Serializer):
+    """Serializer for challenge generation requests."""
+    challenge_type = serializers.ChoiceField(
+        choices=['quiz', 'coding', 'debug', 'scenario', 'project'],
+        required=False, allow_blank=True
+    )
+    specific_topic = serializers.CharField(max_length=200, required=False, allow_blank=True)
+
+
+class ChallengeGenerationResponseSerializer(serializers.Serializer):
+    """Serializer for challenge generation responses."""
+    success = serializers.BooleanField()
+    challenge = AdaptiveChallengeDetailSerializer(required=False)
+    attempt_id = serializers.UUIDField(required=False)
+    personalization = serializers.DictField(required=False)
+    error = serializers.CharField(required=False)
+
+
+class PerformanceAnalysisSerializer(serializers.Serializer):
+    """Serializer for performance analysis results."""
+    success = serializers.BooleanField()
+    user_id = serializers.UUIDField()
+    analysis_period = serializers.CharField()
+    performance_data = serializers.DictField()
+    difficulty_metrics = serializers.DictField()
+    learning_patterns = serializers.DictField()
+    recommendations = serializers.DictField()
+    generated_at = serializers.DateTimeField()
+
+
+class DifficultyAdjustmentSerializer(serializers.Serializer):
+    """Serializer for difficulty adjustment requests."""
+    adjustment_type = serializers.ChoiceField(choices=['increase', 'decrease', 'maintain'])
+
+
+class DifficultyAdjustmentResponseSerializer(serializers.Serializer):
+    """Serializer for difficulty adjustment responses."""
+    success = serializers.BooleanField()
+    adjustment_applied = serializers.BooleanField()
+    old_difficulty = serializers.CharField(required=False)
+    new_difficulty = serializers.CharField(required=False)
+    adjustment_date = serializers.DateTimeField(required=False)
+    message = serializers.CharField()
+
+
+class DueReviewSerializer(serializers.Serializer):
+    """Serializer for due review challenges."""
+    session_id = serializers.UUIDField()
+    challenge = AdaptiveChallengeDetailSerializer()
+    review_stage = serializers.IntegerField()
+    ease_factor = serializers.FloatField()
+    scheduled_for = serializers.DateTimeField()
+
+
+class DueReviewsResponseSerializer(serializers.Serializer):
+    """Serializer for response containing due reviews."""
+    reviews = serializers.ListField(child=DueReviewSerializer())
+
+
+# ===== COMPOSITE SERIALIZERS =====
+
+class UserLearningSummarySerializer(serializers.Serializer):
+    """Serializer for user learning summary with adaptive features."""
+    user_username = serializers.CharField()
+    difficulty_profile = UserDifficultyProfileSerializer()
+    recent_attempts = UserChallengeAttemptSerializer(many=True)
+    due_reviews = SpacedRepetitionSessionSerializer(many=True)
+    performance_summary = serializers.DictField()
+    recommendations = LearningRecommendationSerializer(many=True)
+
+
+class ChallengeAnalyticsSerializer(serializers.Serializer):
+    """Serializer for challenge analytics."""
+    challenge_id = serializers.UUIDField()
+    title = serializers.CharField()
+    challenge_type = serializers.CharField()
+    difficulty_level = serializers.CharField()
+    success_rate = serializers.FloatField()
+    average_completion_time = serializers.FloatField()
+    total_attempts = serializers.IntegerField()
+    user_performance = serializers.DictField()
+
+
+class LearningProgressSerializer(serializers.Serializer):
+    """Serializer for comprehensive learning progress."""
+    user_id = serializers.UUIDField()
+    current_difficulty = serializers.CharField()
+    skill_levels = serializers.DictField()
+    recent_performance = serializers.DictField()
+    learning_velocity = serializers.FloatField()
+    engagement_score = serializers.FloatField()
+    next_recommended_challenge = AdaptiveChallengeSerializer()
+    spaced_repetition_count = serializers.IntegerField()
+    recommendations = LearningRecommendationSerializer(many=True)

@@ -13,7 +13,10 @@ from .views import (
     PathRatingViewSet, LearningRecommendationViewSet,
     CodeExecutionAPIView, LearningProgressAPIView,
     QuizAPIView, QuizDetailAPIView, AttemptAPIView, StartAttemptAPIView,
-    SubmitAttemptAPIView, AttemptDetailAPIView, AssessmentStatsAPIView
+    SubmitAttemptAPIView, AttemptDetailAPIView, AssessmentStatsAPIView,
+    # Adaptive Learning Views
+    AdaptiveChallengeViewSet, UserDifficultyProfileViewSet, SpacedRepetitionViewSet,
+    PerformanceAnalyticsView, ChallengeRecommendationsView
 )
 
 # Create router for ViewSets
@@ -29,6 +32,11 @@ router.register(r'user-learning-paths', UserLearningPathViewSet, basename='userl
 router.register(r'user-module-progress', UserModuleProgressViewSet, basename='usermoduleprogress')
 router.register(r'path-ratings', PathRatingViewSet, basename='pathrating')
 router.register(r'recommendations', LearningRecommendationViewSet, basename='learningrecommendation')
+
+# Adaptive Learning ViewSets
+router.register(r'adaptive-challenges', AdaptiveChallengeViewSet, basename='adaptivechallenge')
+router.register(r'difficulty-profile', UserDifficultyProfileViewSet, basename='difficultyprofile')
+router.register(r'spaced-repetition', SpacedRepetitionViewSet, basename='spacedrepetition')
 
 urlpatterns = [
     # API endpoints - Note: No 'api/' prefix here since main config provides it
@@ -46,6 +54,10 @@ urlpatterns = [
     path('assessment/attempts/<uuid:attempt_id>/', AttemptDetailAPIView.as_view(), name='assessment-attempt-detail'),
     path('assessment/attempts/<uuid:attempt_id>/submit/', SubmitAttemptAPIView.as_view(), name='assessment-submit-attempt'),
     path('assessment/stats/', AssessmentStatsAPIView.as_view(), name='assessment-stats'),
+    
+    # Adaptive Learning API endpoints
+    path('performance/analytics/', PerformanceAnalyticsView.as_view(), name='performance-analytics'),
+    path('recommendations/challenges/', ChallengeRecommendationsView.as_view(), name='challenge-recommendations'),
     
     # Additional learning endpoints can be added here
 ]
