@@ -239,4 +239,24 @@ if __name__ == "__main__":
         sys.exit(0)
     else:
         print("💥 Failed to fix migration issues")
-        sys.exit(1)
+        sys.exit(1)#!/usr/bin/env python3
+"""
+Script to remove conflicting Django migration files
+"""
+import os
+
+# Remove the older migration file
+migration_file = '/workspace/backend/apps/assessments/migrations/0002_auto_20251125.py'
+if os.path.exists(migration_file):
+    os.remove(migration_file)
+    print(f"Removed: {migration_file}")
+else:
+    print(f"File not found: {migration_file}")
+
+# List remaining migration files
+migration_dir = '/workspace/backend/apps/assessments/migrations/'
+files = os.listdir(migration_dir)
+migration_files = [f for f in files if f.startswith('0002') and f.endswith('.py')]
+print('Remaining migration files:')
+for f in migration_files:
+    print(f'  {f}')
