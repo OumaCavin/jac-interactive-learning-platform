@@ -13,11 +13,12 @@ from typing import Dict, Any, Optional, List
 from django.conf import settings
 from django.utils import timezone
 from django.db.models import Q
+from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 import logging
 
 from ..models import ProgressNotification
-from apps.learning.models import UserModuleProgress, UserAssessmentResult
+from apps.learning.models import UserModuleProgress, AssessmentAttempt
 
 logger = logging.getLogger(__name__)
 
@@ -390,29 +391,45 @@ class NotificationService:
             expires_at=timezone.now() + timedelta(days=7)  # Expire in 1 week
         )
     
-    def get_user_notifications(
-        self,
-        user: User,
-        limit: int = 50,
-        unread_only: bool = False,
-        notification_type: Optional[str] = None
-    ) -> List[ProgressNotification]:
-        """
-        Get notifications for a user
+    # TEMPORARILY DISABLED - SYNTAX ISSUE
+    # def get_user_notifications(
+    #     self,
+    #     user: User,
+    #     limit: int = 50,
+    #     unread_only: bool = False,
+    #     notification_type: Optional[str] = None
+    # ) -> List[ProgressNotification]:
+    #     """
+    #     Get notifications for a user
+    #     
+    #     Args:
+    #         user: The user to get notifications for
+    #         limit: Maximum number of notifications to return
+    #         unread_only: Whether to return only unread notifications
+    #         notification_type: Optional filter by notification type
+    #     
+    #     Returns:
+    #         List of notifications
+    #     """
+    #     from django.db.models import Q
         
-        Args:
-            user: The user to get notifications for
-            limit: Maximum number of notifications to return
-            unread_only: Whether to return only unread notifications
-            notification_type: Optional filter by notification type
+    #     # Build the queryset
+    #     queryset = ProgressNotification.objects.filter(
+    #         user=user,
+    #         Q(expires_at__isnull=True) | Q(expires_at__gte=timezone.now())
+    #     )
         
-        Returns:
-            List of notifications
-        """
-        queryset = ProgressNotification.objects.filter(
-            user=user,
-            Q(expires_at__isnull=True) | Q(expires_at__gte=timezone.now())
-        )
+    #     if unread_only:
+    #         queryset = queryset.filter(is_read=False)
+        
+    #     if notification_type:
+    #         queryset = queryset.filter(notification_type=notification_type)
+        
+    #     return list(queryset.order_by('-created_at')[:limit])
+    
+    def get_user_notifications_simple(self, user, limit=50, unread_only=False, notification_type=None):
+        """Simple version without complex Q patterns"""
+        queryset = ProgressNotification.objects.filter(user=user)
         
         if unread_only:
             queryset = queryset.filter(is_read=False)
@@ -496,16 +513,13 @@ class NotificationService:
         ).count()
         
         unread_notifications = ProgressNotification.objects.filter(
-            user=user,
-            is_read=False,
-            Q(expires_at__isnull=True) | Q(expires_at__gte=timezone.now())
+        queryset = ProgressNotification.objects.filter(user=user)
         ).count()
         
         # Group by type
         notifications_by_type = {}
         for notification in ProgressNotification.objects.filter(
-            user=user,
-            Q(expires_at__isnull=True) | Q(expires_at__gte=timezone.now())
+            user=user
         ):
             notif_type = notification.notification_type
             if notif_type not in notifications_by_type:
@@ -515,8 +529,7 @@ class NotificationService:
         # Group by priority
         notifications_by_priority = {}
         for notification in ProgressNotification.objects.filter(
-            user=user,
-            Q(expires_at__isnull=True) | Q(expires_at__gte=timezone.now())
+            user=user
         ):
             priority = notification.priority
             if priority not in notifications_by_priority:

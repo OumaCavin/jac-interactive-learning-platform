@@ -1035,5 +1035,641 @@ class PredictiveAnalyticsService:
         return {'uncertainty': 'medium', 'data_quality': 'good'}
     
     def _calculate_statistical_significance(self, data: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """Calculate statistical significance (placeholder)"""
-        return {'significance': 'moderate', 'p_value': 0.15}
+        """Calculate statistical significance using appropriate tests."""
+        try:
+            if not data or len(data) < 6:
+                return {'significance': 'insufficient_data', 'p_value': 1.0, 'test_used': 'none'}
+            
+            # Extract scores for analysis
+            scores = []
+            for record in data:
+                if 'score' in record and record['score'] is not None:
+                    scores.append(record['score'])
+            
+            if len(scores) < 6:
+                return {'significance': 'insufficient_scores', 'p_value': 1.0, 'test_used': 'none'}
+            
+            scores = np.array(scores)
+            
+            # Test for normality
+            try:
+                shapiro_stat, shapiro_p = stats.shapiro(scores)
+                is_normal = shapiro_p > 0.05
+            except:
+                # Fallback: use basic normality assessment
+                is_normal = abs(stats.skew(scores)) < 2 and abs(stats.kurtosis(scores)) < 7
+            
+            # Select appropriate statistical test
+            if is_normal and len(scores) >= 8:
+                # One-sample t-test against neutral score (50)
+                t_stat, p_value = stats.ttest_1samp(scores, 50)
+                test_used = 'one_sample_t_test'
+                
+                significance_level = 'high' if p_value < 0.01 else 'moderate' if p_value < 0.05 else 'low'
+                
+            else:
+                # Non-parametric test: Wilcoxon signed-rank test
+                try:
+                    wilcoxon_stat, p_value = stats.wilcoxon(scores - 50, alternative='two-sided')
+                    test_used = 'wilcoxon_signed_rank'
+                    
+                    significance_level = 'high' if p_value < 0.01 else 'moderate' if p_value < 0.05 else 'low'
+                    
+                except:
+                    # Fallback: simple comparison
+                    mean_score = np.mean(scores)
+                    p_value = 0.05 if abs(mean_score - 50) > 10 else 0.5
+                    test_used = 'simple_comparison'
+                    significance_level = 'low'
+            
+            # Calculate effect size (Cohen's d)
+            cohens_d = (np.mean(scores) - 50) / np.std(scores) if np.std(scores) > 0 else 0
+            
+            # Additional descriptive statistics
+            median_score = np.median(scores)
+            q1, q3 = np.percentile(scores, [25, 75])
+            
+            return {
+                'significance': significance_level,
+                'p_value': p_value,
+                'test_used': test_used,
+                'sample_size': len(scores),
+                'mean_score': np.mean(scores),
+                'median_score': median_score,
+                'standard_deviation': np.std(scores),
+                'cohens_d': cohens_d,
+                'effect_size_interpretation': 'large' if abs(cohens_d) > 0.8 else 'medium' if abs(cohens_d) > 0.5 else 'small',
+                'distribution': 'normal' if is_normal else 'non_normal',
+                'quartiles': {'Q1': q1, 'Q3': q3, 'IQR': q3 - q1},
+                'confidence_interval': self._calculate_mean_confidence_interval(scores, 0.95)
+            }
+            
+        except Exception as e:
+            logger.error(f"Error calculating statistical significance: {e}")
+            return {'significance': 'calculation_error', 'p_value': 1.0, 'test_used': 'error'}
+    
+    # Helper methods for advanced statistical analysis
+    
+    def _analyze_learning_rhythm(self, historical_data: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Analyze user learning rhythm patterns."""
+        try:
+            # Extract timestamps and analyze patterns
+            timestamps = []
+            for record in historical_data:
+                if 'date' in record and record['date']:
+                    timestamps.append(record['date'])
+            
+            if len(timestamps) < 3:
+                return {'rhythm_type': 'insufficient_data', 'consistency': 0}
+            
+            # Calculate time intervals between learning sessions
+            intervals = []
+            sorted_timestamps = sorted(timestamps)
+            for i in range(1, len(sorted_timestamps)):
+                if hasattr(sorted_timestamps[i], 'date') and hasattr(sorted_timestamps[i-1], 'date'):
+                    interval = (sorted_timestamps[i].date() - sorted_timestamps[i-1].date()).days
+                    intervals.append(interval)
+            
+            if not intervals:
+                return {'rhythm_type': 'irregular', 'consistency': 0}
+            
+            avg_interval = np.mean(intervals)
+            interval_std = np.std(intervals)
+            
+            # Determine rhythm type
+            if interval_std / avg_interval < 0.3:
+                rhythm_type = 'consistent'
+            elif interval_std / avg_interval < 0.6:
+                rhythm_type = 'moderate'
+            else:
+                rhythm_type = 'irregular'
+            
+            consistency = 1 - (interval_std / max(avg_interval, 1))
+            
+            return {
+                'rhythm_type': rhythm_type,
+                'consistency': max(0, consistency),
+                'average_interval_days': avg_interval,
+                'interval_variability': interval_std
+            }
+            
+        except Exception as e:
+            logger.error(f"Error analyzing learning rhythm: {e}")
+            return {'rhythm_type': 'error', 'consistency': 0}
+    
+    def _analyze_difficulty_progression(self, historical_data: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Analyze difficulty progression patterns."""
+        try:
+            # Extract difficulty levels and scores
+            difficulty_scores = {}
+            for record in historical_data:
+                difficulty = record.get('difficulty_level', 1)
+                score = record.get('score', 0)
+                if score > 0:  # Only include records with valid scores
+                    if difficulty not in difficulty_scores:
+                        difficulty_scores[difficulty] = []
+                    difficulty_scores[difficulty].append(score)
+            
+            if len(difficulty_scores) < 2:
+                return {'progression_type': 'insufficient_data', 'trend': 'unknown'}
+            
+            # Calculate average scores per difficulty
+            avg_scores = {diff: np.mean(scores) for diff, scores in difficulty_scores.items()}
+            difficulties = sorted(avg_scores.keys())
+            
+            # Determine progression trend
+            if len(difficulties) >= 3:
+                # Fit linear trend
+                trend_slope = np.polyfit(difficulties, [avg_scores[diff] for diff in difficulties], 1)[0]
+                
+                if trend_slope > 5:
+                    progression_type = 'improving'
+                elif trend_slope < -5:
+                    progression_type = 'declining'
+                else:
+                    progression_type = 'stable'
+            else:
+                # Simple comparison
+                first_avg = avg_scores[difficulties[0]]
+                last_avg = avg_scores[difficulties[-1]]
+                
+                if last_avg > first_avg + 10:
+                    progression_type = 'improving'
+                elif last_avg < first_avg - 10:
+                    progression_type = 'declining'
+                else:
+                    progression_type = 'stable'
+            
+            return {
+                'progression_type': progression_type,
+                'difficulty_scores': avg_scores,
+                'difficulty_range': [min(difficulties), max(difficulties)],
+                'score_range': [min(avg_scores.values()), max(avg_scores.values())]
+            }
+            
+        except Exception as e:
+            logger.error(f"Error analyzing difficulty progression: {e}")
+            return {'progression_type': 'error', 'trend': 'unknown'}
+    
+    def _analyze_time_preferences(self, historical_data: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Analyze time-of-day preferences."""
+        try:
+            # Extract hour information
+            hours = []
+            for record in historical_data:
+                if 'date' in record and record['date']:
+                    if hasattr(record['date'], 'hour'):
+                        hours.append(record['date'].hour)
+                    elif hasattr(record['date'], 'time'):
+                        hours.append(record['date'].time().hour)
+            
+            if len(hours) < 3:
+                return {'preferred_time': 'insufficient_data', 'peak_hours': []}
+            
+            # Analyze peak hours
+            hour_counts = {}
+            for hour in range(24):
+                hour_counts[hour] = hours.count(hour)
+            
+            # Find top 3 peak hours
+            sorted_hours = sorted(hour_counts.items(), key=lambda x: x[1], reverse=True)
+            peak_hours = [hour for hour, count in sorted_hours[:3] if count > 0]
+            
+            # Determine time preference
+            if peak_hours:
+                avg_peak_hour = np.mean(peak_hours)
+                if 6 <= avg_peak_hour < 12:
+                    preferred_time = 'morning'
+                elif 12 <= avg_peak_hour < 18:
+                    preferred_time = 'afternoon'
+                elif 18 <= avg_peak_hour < 22:
+                    preferred_time = 'evening'
+                else:
+                    preferred_time = 'night'
+            else:
+                preferred_time = 'irregular'
+            
+            return {
+                'preferred_time': preferred_time,
+                'peak_hours': peak_hours,
+                'activity_distribution': hour_counts,
+                'peak_hour_intensity': max(hour_counts.values()) if hour_counts else 0
+            }
+            
+        except Exception as e:
+            logger.error(f"Error analyzing time preferences: {e}")
+            return {'preferred_time': 'error', 'peak_hours': []}
+    
+    def _classify_user_type(self, learning_rhythm: Dict[str, Any], difficulty_progression: Dict[str, Any], time_preferences: Dict[str, Any]) -> str:
+        """Classify user type based on patterns."""
+        try:
+            consistency = learning_rhythm.get('consistency', 0)
+            progression_type = difficulty_progression.get('progression_type', 'stable')
+            preferred_time = time_preferences.get('preferred_time', 'irregular')
+            
+            # Classification logic
+            if consistency > 0.7 and progression_type == 'improving':
+                if preferred_time in ['morning', 'afternoon']:
+                    return 'systematic'
+                else:
+                    return 'consistent'
+            elif consistency < 0.4:
+                return 'sporadic'
+            elif progression_type == 'declining':
+                return 'struggling'
+            elif progression_type == 'improving':
+                return 'fast_learner'
+            else:
+                return 'typical'
+                
+        except Exception as e:
+            logger.error(f"Error classifying user type: {e}")
+            return 'unknown'
+    
+    def _calculate_pattern_strength(self, learning_rhythm: Dict[str, Any], difficulty_progression: Dict[str, Any]) -> float:
+        """Calculate the strength of identified patterns."""
+        try:
+            rhythm_consistency = learning_rhythm.get('consistency', 0)
+            
+            # Simple pattern strength calculation
+            pattern_strength = rhythm_consistency
+            
+            return min(1.0, max(0.0, pattern_strength))
+            
+        except Exception as e:
+            logger.error(f"Error calculating pattern strength: {e}")
+            return 0.5
+    
+    def _calculate_adaptability_score(self, historical_data: List[Dict[str, Any]]) -> float:
+        """Calculate user adaptability score based on learning flexibility."""
+        try:
+            if len(historical_data) < 3:
+                return 0.5
+            
+            # Analyze score variations and difficulty adaptations
+            scores = [record.get('score', 0) for record in historical_data if record.get('score') is not None]
+            difficulties = [record.get('difficulty_level', 1) for record in historical_data if record.get('difficulty_level') is not None]
+            
+            if len(scores) < 2:
+                return 0.5
+            
+            # Calculate adaptability based on score consistency relative to difficulty
+            score_variation = np.std(scores) / np.mean(scores) if np.mean(scores) > 0 else 1
+            
+            # Lower variation with changing difficulties indicates higher adaptability
+            adaptability = 1 - min(1.0, score_variation)
+            
+            return max(0.0, min(1.0, adaptability))
+            
+        except Exception as e:
+            logger.error(f"Error calculating adaptability score: {e}")
+            return 0.5
+    
+    def _calculate_pattern_consistency(self, historical_data: List[Dict[str, Any]]) -> float:
+        """Calculate pattern consistency from historical data."""
+        try:
+            if len(historical_data) < 3:
+                return 0.5
+            
+            # Analyze score consistency over time
+            scores = [record.get('score', 0) for record in historical_data if record.get('score') is not None]
+            
+            if len(scores) < 2:
+                return 0.5
+            
+            # Calculate coefficient of variation
+            mean_score = np.mean(scores)
+            std_score = np.std(scores)
+            
+            if mean_score > 0:
+                cv = std_score / mean_score
+                consistency = 1 - min(1.0, cv)  # Lower CV = higher consistency
+            else:
+                consistency = 0
+            
+            return max(0.0, consistency)
+            
+        except Exception as e:
+            logger.error(f"Error calculating pattern consistency: {e}")
+            return 0.5
+    
+    def _calculate_prediction_intervals(self, values: np.ndarray) -> Dict[str, Any]:
+        """Calculate prediction intervals for values."""
+        try:
+            if len(values) < 3:
+                return {'relative_width': 1.0}
+            
+            mean_val = np.mean(values)
+            std_val = np.std(values)
+            
+            # 95% prediction interval (approximately ±2 std deviations)
+            margin = 2 * std_val
+            lower_bound = mean_val - margin
+            upper_bound = mean_val + margin
+            
+            # Calculate relative width
+            range_val = upper_bound - lower_bound
+            relative_width = range_val / abs(mean_val) if mean_val != 0 else range_val
+            
+            return {
+                'mean': mean_val,
+                'std': std_val,
+                'prediction_interval': [lower_bound, upper_bound],
+                'relative_width': relative_width
+            }
+            
+        except Exception as e:
+            logger.error(f"Error calculating prediction intervals: {e}")
+            return {'relative_width': 1.0}
+    
+    def _calculate_model_uncertainty(self, values: np.ndarray) -> float:
+        """Calculate model uncertainty using entropy."""
+        try:
+            if len(values) < 3:
+                return 0.5
+            
+            # Discretize values into bins for entropy calculation
+            n_bins = min(10, max(3, len(values) // 2))
+            hist, _ = np.histogram(values, bins=n_bins)
+            
+            # Normalize to probabilities
+            probabilities = hist / np.sum(hist)
+            probabilities = probabilities[probabilities > 0]  # Remove zero probabilities
+            
+            # Calculate entropy
+            if len(probabilities) > 1:
+                entropy = -np.sum(probabilities * np.log2(probabilities))
+                max_entropy = np.log2(len(probabilities))
+                uncertainty = entropy / max_entropy if max_entropy > 0 else 0
+            else:
+                uncertainty = 0
+            
+            return uncertainty
+            
+        except Exception as e:
+            logger.error(f"Error calculating model uncertainty: {e}")
+            return 0.5
+    
+    def _calculate_data_uncertainty(self, data: List[Dict[str, Any]]) -> float:
+        """Calculate data uncertainty based on completeness and quality."""
+        try:
+            total_records = len(data)
+            if total_records == 0:
+                return 1.0
+            
+            # Count missing or invalid data
+            missing_scores = sum(1 for record in data if not record.get('score') or record['score'] is None)
+            missing_difficulty = sum(1 for record in data if not record.get('difficulty_level'))
+            
+            # Calculate uncertainty based on missing data percentage
+            missing_percentage = (missing_scores + missing_difficulty) / (total_records * 2)
+            data_uncertainty = min(1.0, missing_percentage)
+            
+            return data_uncertainty
+            
+        except Exception as e:
+            logger.error(f"Error calculating data uncertainty: {e}")
+            return 0.5
+    
+    def _classify_uncertainty_level(self, uncertainty_score: float) -> str:
+        """Classify uncertainty level based on score."""
+        if uncertainty_score < 0.3:
+            return 'low'
+        elif uncertainty_score < 0.6:
+            return 'moderate'
+        else:
+            return 'high'
+    
+    def _generate_uncertainty_recommendations(self, uncertainty_score: float) -> List[str]:
+        """Generate recommendations based on uncertainty level."""
+        recommendations = []
+        
+        if uncertainty_score > 0.7:
+            recommendations.extend([
+                "Collect more data points to reduce uncertainty",
+                "Consider additional validation metrics",
+                "Review data quality and completeness"
+            ])
+        elif uncertainty_score > 0.4:
+            recommendations.extend([
+                "Monitor prediction accuracy closely",
+                "Consider ensemble methods for robustness"
+            ])
+        else:
+            recommendations.append("Uncertainty levels are acceptable for current predictions")
+        
+        return recommendations
+    
+    def _calculate_cv_uncertainty(self, X: pd.DataFrame, y: pd.Series) -> float:
+        """Calculate cross-validation uncertainty."""
+        try:
+            from sklearn.model_selection import cross_val_score
+            from sklearn.linear_model import LinearRegression
+            
+            if len(X) < 5:
+                return 0.8  # High uncertainty for small samples
+            
+            # Simple cross-validation
+            model = LinearRegression()
+            try:
+                cv_scores = cross_val_score(model, X, y, cv=min(5, len(X)//2), scoring='neg_mean_squared_error')
+                cv_uncertainty = np.std(cv_scores) / np.abs(np.mean(cv_scores)) if np.mean(cv_scores) != 0 else 1
+                return min(1.0, cv_uncertainty)
+            except:
+                return 0.5  # Default uncertainty if CV fails
+                
+        except Exception as e:
+            logger.error(f"Error calculating CV uncertainty: {e}")
+            return 0.6
+    
+    def _assess_model_stability(self, X: pd.DataFrame, y: pd.Series) -> float:
+        """Assess model stability using coefficient of variation."""
+        try:
+            if len(X) < 5:
+                return 0.5
+            
+            # Simple stability assessment based on data characteristics
+            feature_cv = []
+            for col in X.select_dtypes(include=[np.number]).columns:
+                mean_val = X[col].mean()
+                std_val = X[col].std()
+                if mean_val != 0:
+                    feature_cv.append(std_val / abs(mean_val))
+            
+            if feature_cv:
+                avg_cv = np.mean(feature_cv)
+                stability = 1 - min(1.0, avg_cv)  # Lower CV = higher stability
+            else:
+                stability = 0.5
+            
+            return max(0.0, stability)
+            
+        except Exception as e:
+            logger.error(f"Error assessing model stability: {e}")
+            return 0.5
+    
+    def _assess_feature_stability(self, X: pd.DataFrame) -> float:
+        """Assess feature stability."""
+        try:
+            if X.empty:
+                return 0.5
+            
+            # Check for near-zero variance features
+            near_zero_var = 0
+            total_features = X.shape[1]
+            
+            if total_features > 0:
+                for col in X.select_dtypes(include=[np.number]).columns:
+                    if X[col].var() < 0.01:
+                        near_zero_var += 1
+                
+                stable_features_ratio = 1 - (near_zero_var / total_features)
+            else:
+                stable_features_ratio = 0.5
+            
+            return max(0.0, stable_features_ratio)
+            
+        except Exception as e:
+            logger.error(f"Error assessing feature stability: {e}")
+            return 0.5
+    
+    def _generate_model_uncertainty_recommendations(self, uncertainty_score: float, sample_size: int) -> List[str]:
+        """Generate recommendations for model uncertainty."""
+        recommendations = []
+        
+        if uncertainty_score > 0.7:
+            recommendations.extend([
+                "Increase training data size",
+                "Consider feature selection to reduce noise",
+                "Use ensemble methods for better stability"
+            ])
+        elif uncertainty_score > 0.4:
+            recommendations.extend([
+                "Monitor model performance over time",
+                "Consider cross-validation for validation"
+            ])
+        
+        if sample_size < 20:
+            recommendations.append("Collect more training samples for better stability")
+        
+        return recommendations
+    
+    def _assess_data_consistency(self, data: List[Dict[str, Any]]) -> float:
+        """Assess data consistency."""
+        try:
+            scores = [record.get('score', 0) for record in data if record.get('score') is not None]
+            
+            if len(scores) < 3:
+                return 0.5
+            
+            # Calculate consistency based on score variation
+            mean_score = np.mean(scores)
+            std_score = np.std(scores)
+            
+            if mean_score > 0:
+                cv = std_score / mean_score
+                consistency = 1 - min(1.0, cv)
+            else:
+                consistency = 0
+            
+            return max(0.0, consistency)
+            
+        except Exception as e:
+            logger.error(f"Error assessing data consistency: {e}")
+            return 0.5
+    
+    def _assess_data_accuracy(self, data: List[Dict[str, Any]]) -> float:
+        """Assess data accuracy using outlier detection."""
+        try:
+            scores = [record.get('score', 0) for record in data if record.get('score') is not None]
+            
+            if len(scores) < 5:
+                return 0.5
+            
+            # Simple outlier detection using IQR
+            Q1 = np.percentile(scores, 25)
+            Q3 = np.percentile(scores, 75)
+            IQR = Q3 - Q1
+            
+            lower_bound = Q1 - 1.5 * IQR
+            upper_bound = Q3 + 1.5 * IQR
+            
+            outliers = sum(1 for score in scores if score < lower_bound or score > upper_bound)
+            outlier_rate = outliers / len(scores)
+            
+            # Accuracy is inverse of outlier rate (fewer outliers = higher accuracy)
+            accuracy = max(0.0, 1 - outlier_rate)
+            
+            return accuracy
+            
+        except Exception as e:
+            logger.error(f"Error assessing data accuracy: {e}")
+            return 0.5
+    
+    def _assess_data_timeliness(self, data: List[Dict[str, Any]]) -> float:
+        """Assess data timeliness based on recency."""
+        try:
+            if not data:
+                return 0.0
+            
+            # Check for recent data (simple implementation)
+            recent_records = 0
+            total_records = len(data)
+            
+            for record in data:
+                if 'date' in record and record['date']:
+                    # Assume data older than 30 days is not timely
+                    if hasattr(record['date'], 'days'):
+                        days_old = record['date'].days
+                    else:
+                        days_old = 30  # Default assumption
+                    
+                    if days_old <= 30:
+                        recent_records += 1
+            
+            timeliness = recent_records / total_records if total_records > 0 else 0
+            return timeliness
+            
+        except Exception as e:
+            logger.error(f"Error assessing data timeliness: {e}")
+            return 0.5
+    
+    def _generate_data_improvement_recommendations(self, overall_uncertainty: float, completeness_scores: Dict[str, float]) -> List[str]:
+        """Generate recommendations for data improvement."""
+        recommendations = []
+        
+        if overall_uncertainty > 0.6:
+            recommendations.extend([
+                "Focus on improving data completeness",
+                "Implement data validation procedures",
+                "Consider data source quality assessment"
+            ])
+        elif overall_uncertainty > 0.4:
+            recommendations.append("Monitor data quality metrics regularly")
+        
+        # Specific recommendations based on completeness
+        for metric, score in completeness_scores.items():
+            if score < 0.8:
+                recommendations.append(f"Improve {metric} data collection")
+        
+        return recommendations
+    
+    def _calculate_mean_confidence_interval(self, values: np.ndarray, confidence_level: float) -> List[float]:
+        """Calculate confidence interval for the mean."""
+        try:
+            if len(values) < 2:
+                return [0, 0]
+            
+            mean_val = np.mean(values)
+            std_err = stats.sem(values)  # Standard error of the mean
+            
+            # Calculate confidence interval
+            alpha = 1 - confidence_level
+            t_critical = stats.t.ppf(1 - alpha/2, df=len(values)-1)
+            margin = t_critical * std_err
+            
+            return [mean_val - margin, mean_val + margin]
+            
+        except Exception as e:
+            logger.error(f"Error calculating confidence interval: {e}")
+            return [0, 0]

@@ -2143,7 +2143,7 @@ class ProgressTrackerAgent(BaseAgent):
         
         return breakdown
     
-    def _generate_comparative_analysis(self, data: Dict[str, Any], user: User) -> Dict[str, Any]:
+    async def _generate_comparative_analysis(self, data: Dict[str, Any], user: User) -> Dict[str, Any]:
         """Generate comprehensive comparative analysis"""
         # Get peer comparison data
         peer_comparison = await self._analyze_peer_performance(user, data)
