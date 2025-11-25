@@ -17,7 +17,6 @@ from ..models import (
     UserDifficultyProfile, UserChallengeAttempt, UserModuleProgress, 
     AdaptiveChallenge, SpacedRepetitionSession
 )
-from ...progress.services.analytics_service import AnalyticsService
 
 User = get_user_model()
 
@@ -28,7 +27,7 @@ class DifficultyAdjustmentService:
     """
     
     def __init__(self):
-        self.analytics_service = AnalyticsService()
+        pass
         
     def analyze_user_performance(self, user_id: str, time_window_days: int = 30) -> Dict[str, Any]:
         """

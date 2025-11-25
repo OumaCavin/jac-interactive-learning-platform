@@ -15,22 +15,28 @@ from datetime import datetime, timedelta
 import json
 
 from .models import (
-    LearningPath, Module, Lesson, Assessment, Question, UserLearningPath, UserModuleProgress,
-    PathRating, LearningRecommendation, CodeSubmission, TestCase,
-    CodeExecutionLog, AICodeReview
+    LearningPath, Module, Lesson, Assessment, AssessmentQuestion, AssessmentAttempt,
+    UserLearningPath, UserModuleProgress, PathRating, LearningRecommendation,
+    UserDifficultyProfile, AdaptiveChallenge, UserChallengeAttempt, SpacedRepetitionSession
 )
 from .serializers import (
     LearningPathSerializer, LearningPathCreateSerializer, ModuleSerializer, ModuleCreateSerializer,
     UserLearningPathSerializer, UserModuleProgressSerializer, PathRatingSerializer,
-    LearningRecommendationSerializer, CodeSubmissionSerializer, CodeSubmissionCreateSerializer,
-    CodeSubmissionReviewSerializer, TestCaseSerializer, CodeExecutionLogSerializer,
-    AICodeReviewSerializer, CodeExecutionRequestSerializer, CodeExecutionResponseSerializer,
+    LearningRecommendationSerializer,
     LearningProgressSerializer, LessonSerializer, LessonCreateSerializer,
-    AssessmentSerializer, AssessmentCreateSerializer, QuestionSerializer, QuestionCreateSerializer
+    AssessmentSerializer, AssessmentCreateSerializer, AssessmentQuestionSerializer, AssessmentAttemptSerializer,
+    UserDifficultyProfileSerializer, AdaptiveChallengeSerializer, AdaptiveChallengeDetailSerializer,
+    UserChallengeAttemptSerializer, UserChallengeAttemptCreateSerializer, UserChallengeAttemptSubmitSerializer,
+    SpacedRepetitionSessionSerializer, SpacedRepetitionReviewSerializer,
+    ChallengeGenerationRequestSerializer, ChallengeGenerationResponseSerializer,
+    PerformanceAnalysisSerializer, DifficultyAdjustmentSerializer, DifficultyAdjustmentResponseSerializer,
+    DueReviewSerializer, DueReviewsResponseSerializer, UserLearningSummarySerializer,
+    ChallengeAnalyticsSerializer
 )
 
-# Import our JAC code execution engine
-from .jac_code_executor import code_executor, CodeEvaluatorAgent
+# Import our adaptive learning services
+from .services.adaptive_challenge_service import AdaptiveChallengeService
+from .services.difficulty_adjustment_service import DifficultyAdjustmentService
 
 
 class LearningPathViewSet(viewsets.ModelViewSet):
@@ -157,155 +163,6 @@ class ModuleViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-class CodeSubmissionViewSet(viewsets.ModelViewSet):
-    """ViewSet for code submissions"""
-    
-    permission_classes = [permissions.IsAuthenticated]
-    
-    def get_serializer_class(self):
-        if self.action == 'create':
-            return CodeSubmissionCreateSerializer
-        return CodeSubmissionSerializer
-    
-    def get_queryset(self):
-        user = self.request.user
-        if user.is_staff:
-            return CodeSubmission.objects.all()
-        return CodeSubmission.objects.filter(user=user)
-    
-    @action(detail=True, methods=['post'])
-    def execute(self, request, pk=None):
-        """Execute code submission"""
-        submission = self.get_object()
-        
-        if submission.status != 'pending':
-            return Response({
-                'error': 'Code already executed'
-            }, status=status.HTTP_400_BAD_REQUEST)
-        
-        # Update status to processing
-        submission.status = 'processing'
-        submission.save()
-        
-        try:
-            # Execute code using our JAC code execution engine
-            evaluator = CodeEvaluatorAgent(agent_id='evaluator-agent')
-            result = evaluator.evaluate_code_submission(
-                code=submission.code,
-                language=submission.language,
-                user_id=request.user.id,
-                task_id=submission.submission_id
-            )
-            
-            # Update submission with results
-            submission.status = 'passed' if result['success'] else 'failed'
-            submission.execution_result = {
-                'output': result.get('output', ''),
-                'error': result.get('error', ''),
-                'status': result.get('status', 'error')
-            }
-            submission.execution_time = result.get('execution_time', 0.0)
-            submission.ai_feedback = json.dumps(result.get('recommendations', []))
-            submission.score = result.get('performance_metrics', {}).get('code_complexity', 0)
-            submission.reviewed_at = timezone.now()
-            submission.reviewer_agent_id = 'evaluator-agent'
-            submission.save()
-            
-            serializer = CodeSubmissionSerializer(submission)
-            return Response(serializer.data)
-            
-        except Exception as e:
-            submission.status = 'error'
-            submission.execution_result = {'error': str(e)}
-            submission.reviewed_at = timezone.now()
-            submission.save()
-            
-            return Response({
-                'error': f'Execution failed: {str(e)}'
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
-    @action(detail=True, methods=['post'])
-    def review(self, request, pk=None):
-        """Manually review code submission"""
-        submission = self.get_object()
-        serializer = CodeSubmissionReviewSerializer(data=request.data)
-        
-        if serializer.is_valid():
-            # Update submission
-            for attr, value in serializer.validated_data.items():
-                setattr(submission, attr, value)
-            
-            submission.reviewed_at = timezone.now()
-            submission.save()
-            
-            result_serializer = CodeSubmissionSerializer(submission)
-            return Response(result_serializer.data)
-        
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    @action(detail=True, methods=['get'])
-    def execution_logs(self, request, pk=None):
-        """Get execution logs for submission"""
-        submission = self.get_object()
-        logs = submission.execution_logs.all()
-        serializer = CodeExecutionLogSerializer(logs, many=True)
-        return Response(serializer.data)
-    
-    @action(detail=True, methods=['get'])
-    def ai_reviews(self, request, pk=None):
-        """Get AI reviews for submission"""
-        submission = self.get_object()
-        reviews = submission.ai_reviews.all()
-        serializer = AICodeReviewSerializer(reviews, many=True)
-        return Response(serializer.data)
-
-
-class CodeExecutionAPIView(APIView):
-    """API endpoint for direct code execution"""
-    
-    permission_classes = [permissions.IsAuthenticated]
-    
-    def post(self, request):
-        """Execute code directly without submission"""
-        serializer = CodeExecutionRequestSerializer(data=request.data)
-        
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-        try:
-            # Execute code using our engine
-            request_data = serializer.validated_data
-            result = code_executor.execute_code(
-                code=request_data['code'],
-                language=request_data['language'],
-                user_id=request.user.id,
-                task_id=request_data.get('task_id')
-            )
-            
-            # Format response
-            response_data = {
-                'execution_id': result.execution_id,
-                'status': result.status,
-                'success': result.status == 'success',
-                'output': result.output,
-                'error': result.error,
-                'execution_time': result.execution_time,
-                'timestamp': result.created_at.isoformat(),
-                'code_analysis': {},  # Could be enhanced
-                'security_assessment': {},  # Could be enhanced
-                'performance_metrics': {
-                    'execution_time': result.execution_time,
-                    'memory_usage': result.memory_usage
-                },
-                'recommendations': []  # Could be enhanced
-            }
-            
-            return Response(response_data)
-            
-        except Exception as e:
-            return Response({
-                'error': f'Execution failed: {str(e)}'
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class LearningProgressAPIView(APIView):
@@ -331,16 +188,6 @@ class LearningProgressAPIView(APIView):
             user=user, status='completed'
         ).count()
         
-        total_submissions = CodeSubmission.objects.filter(user=user).count()
-        successful_submissions = CodeSubmission.objects.filter(
-            user=user, status='passed'
-        ).count()
-        
-        # Calculate average score
-        avg_score = CodeSubmission.objects.filter(
-            user=user, score__isnull=False
-        ).aggregate(avg_score=Avg('score'))['avg_score'] or 0.0
-        
         # Calculate total study time (convert minutes to hours)
         total_time_minutes = UserModuleProgress.objects.filter(
             user=user
@@ -353,28 +200,15 @@ class LearningProgressAPIView(APIView):
             'in_progress_paths': in_progress_paths,
             'total_modules': total_modules,
             'completed_modules': completed_modules,
-            'total_code_submissions': total_submissions,
-            'successful_submissions': successful_submissions,
-            'average_score': round(avg_score, 2),
+            'total_challenges': UserChallengeAttempt.objects.filter(user=user).count(),
+            'successful_challenges': UserChallengeAttempt.objects.filter(
+                user=user, status='completed'
+            ).count(),
             'total_study_time': round(total_study_time, 2)
         }
         
         serializer = LearningProgressSerializer(progress_data)
         return Response(serializer.data)
-
-
-class TestCaseViewSet(viewsets.ModelViewSet):
-    """ViewSet for test cases"""
-    
-    queryset = TestCase.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
-    serializer_class = TestCaseSerializer
-    
-    def get_queryset(self):
-        user = self.request.user
-        if user.is_staff:
-            return TestCase.objects.all()
-        return TestCase.objects.filter(module__is_published=True)
 
 
 class UserLearningPathViewSet(viewsets.ReadOnlyModelViewSet):
@@ -472,26 +306,12 @@ class AssessmentViewSet(viewsets.ModelViewSet):
         return Assessment.objects.all().select_related('module', 'module__learning_path')
 
 
-class QuestionViewSet(viewsets.ModelViewSet):
-    """ViewSet for questions"""
-    
-    queryset = Question.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
-    
-    def get_serializer_class(self):
-        if self.action == 'create':
-            return QuestionCreateSerializer
-        return QuestionSerializer
-    
-    def get_queryset(self):
-        return Question.objects.all().select_related('assessment', 'assessment__module')
-
 
 # ============================================================================
 # ASSESSMENT API VIEWS
 # ============================================================================
 
-from .models import AssessmentAttempt, UserAssessmentResult
+from .models import AssessmentAttempt
 from .serializers import (
     QuizListSerializer, QuizDetailSerializer, AttemptListSerializer, AttemptDetailSerializer,
     StartAttemptSerializer, SubmitAttemptSerializer, AssessmentStatsSerializer

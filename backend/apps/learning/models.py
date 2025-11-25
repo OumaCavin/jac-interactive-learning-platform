@@ -230,6 +230,53 @@ class UserLearningPath(models.Model):
         self.save()
 
 
+class Lesson(models.Model):
+    """
+    Individual lessons within a module
+    """
+    LESSON_TYPE_CHOICES = [
+        ('text', 'Text Lesson'),
+        ('video', 'Video Lesson'),
+        ('interactive', 'Interactive Content'),
+        ('code_tutorial', 'Code Tutorial'),
+        ('quiz', 'Quiz'),
+    ]
+    
+    # Core identification
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    module = models.ForeignKey('Module', on_delete=models.CASCADE, related_name='lessons')
+    title = models.CharField(max_length=200)
+    order = models.PositiveIntegerField()
+    
+    # Content type and data
+    lesson_type = models.CharField(max_length=20, choices=LESSON_TYPE_CHOICES, default='text')
+    content = models.TextField(blank=True, help_text='Lesson content in markdown or HTML')
+    code_example = models.TextField(blank=True, help_text='Code examples for this lesson')
+    
+    # Interactive content
+    quiz_questions = models.JSONField(blank=True, default=list, help_text='Quiz questions data')
+    interactive_demo = models.JSONField(blank=True, default=dict, help_text='Interactive demo configuration')
+    
+    # Media resources
+    video_url = models.URLField(blank=True, help_text='URL to lesson video')
+    audio_url = models.URLField(blank=True, help_text='URL to lesson audio')
+    resources = models.JSONField(blank=True, default=list, help_text='Additional resources for this lesson')
+    
+    # Metadata
+    is_published = models.BooleanField(default=False)
+    estimated_duration = models.PositiveIntegerField(blank=True, help_text='Estimated duration in minutes', null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'jac_lesson'
+        ordering = ['module', 'order']
+        unique_together = ('module', 'order')
+    
+    def __str__(self):
+        return f"{self.module.title} - Lesson {self.order}: {self.title}"
+
+
 class UserModuleProgress(models.Model):
     """
     Tracks user progress through individual modules.

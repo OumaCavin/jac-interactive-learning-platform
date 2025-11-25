@@ -12,6 +12,7 @@ import uuid
 from typing import Dict, Any, Optional, List
 from django.conf import settings
 from django.utils import timezone
+from django.contrib.auth.models import User
 from django.db.models import Q, Count, Sum, Avg, Max, Min, StdDev
 from django.db.models.functions import TruncDate, TruncWeek
 from datetime import datetime, timedelta
@@ -19,8 +20,7 @@ import logging
 
 from ..models import LearningAnalytics
 from apps.learning.models import (
-    LearningPath, Module, UserLearningPath, UserModuleProgress,
-    UserAssessmentResult
+    LearningPath, Module, UserLearningPath, UserModuleProgress
 )
 from apps.agents.progress_tracker import ProgressTrackerAgent
 

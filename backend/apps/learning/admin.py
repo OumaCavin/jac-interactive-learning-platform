@@ -8,9 +8,10 @@ from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from .models import (
-    LearningPath, Module, Lesson, Assessment, Question,
+    LearningPath, Module, Lesson,
     UserLearningPath, UserModuleProgress, PathRating, LearningRecommendation,
-    CodeSubmission, TestCase, CodeExecutionLog, AICodeReview
+    Assessment, AssessmentQuestion, AssessmentAttempt,
+    UserDifficultyProfile, AdaptiveChallenge, UserChallengeAttempt, SpacedRepetitionSession
 )
 
 
@@ -219,54 +220,6 @@ class AssessmentAdmin(admin.ModelAdmin):
         """Display question count."""
         return obj.question_count
     question_count.short_description = 'Questions'
-
-
-@admin.register(Question)
-class QuestionAdmin(admin.ModelAdmin):
-    """Admin interface for Question model."""
-    
-    list_display = (
-        'question_text', 'question_type', 'difficulty_level',
-        'points', 'assessment'
-    )
-    
-    list_filter = (
-        'question_type', 'difficulty_level', 'created_at'
-    )
-    
-    search_fields = ('question_text', 'assessment__title')
-    
-    readonly_fields = ('created_at', 'updated_at', 'id')
-    
-    fieldsets = (
-        ('Basic Information', {
-            'fields': ('id', 'assessment', 'question_text')
-        }),
-        ('Question Details', {
-            'fields': (
-                'question_type', 'difficulty_level', 'points',
-                'explanation', 'hints'
-            )
-        }),
-        ('Question Content', {
-            'fields': (
-                'question_options', 'correct_answer',
-                'code_template', 'test_cases'
-            )
-        }),
-        ('Metadata', {
-            'fields': ('created_at', 'updated_at')
-        }),
-    )
-    
-
-    
-    def get_queryset(self, request):
-        """Optimize queryset with related fields."""
-        qs = super().get_queryset(request)
-        return qs.select_related('assessment', 'assessment__module')
-
-
 
 
 
