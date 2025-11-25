@@ -53,6 +53,12 @@ dependencies = [
  "mypy>=1.16.1",
  # PDF处理
  "weasyprint>=65.1",
+ "django>=5.2.8",
+ "djangorestframework>=3.16.1",
+ "google-generativeai>=0.8.5",
+ "python-decouple>=3.8",
+ "djangorestframework-simplejwt>=5.5.1",
+ "django-cors-headers>=4.9.0",
 ]
 
 [build-system]
