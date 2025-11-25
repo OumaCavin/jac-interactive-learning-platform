@@ -64,6 +64,8 @@ urlpatterns = [
     path('api/agents/', include('apps.agents.urls')),
     path('api/assessments/', include('apps.assessments.urls')),
     path('api/jac-execution/', include('apps.jac_execution.urls')),  # JAC execution engine
+    path('api/knowledge-graph/', include('apps.knowledge_graph.urls')),  # Knowledge Graph API
+    # path('api/ai-agents/', include('apps.api_endpoints.ai_agents_urls')),  # AI Multi-Agent System (commented out temporarily)
     path('api/search/', include('search.urls')),  # Search functionality
     
     # Fallback endpoints without /api/ prefix (for frontend compatibility)

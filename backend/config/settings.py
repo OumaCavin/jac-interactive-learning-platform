@@ -130,6 +130,9 @@ CELERY_TIMEZONE = 'UTC'
 JASECCI_URL = config('JASECCI_URL', default='http://localhost:8001')
 JASECCI_API_KEY = config('JASECCI_API_KEY', default='')
 
+# Gemini AI Configuration
+GEMINI_API_KEY = config('GEMINI_API_KEY', default='AIzaSyDxeppnc1cpepvU9OwV0QZ-mUTk-zfeZEM')
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {

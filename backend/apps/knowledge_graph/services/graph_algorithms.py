@@ -901,10 +901,9 @@ class AdaptiveEngine:
         
         # Filter by user's preferred difficulty
         if preferences.get('preferred_difficulty'):
-            graphs = graphs.filter(
-                # This would require additional logic to match user level with graph difficulty
-                pass
-            )
+            # This would require additional logic to match user level with graph difficulty
+            # For now, we'll skip this filter as it needs additional model fields
+            pass
         
         return graphs[:10]  # Return top 10
     

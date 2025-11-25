@@ -402,7 +402,7 @@ class KnowledgeGraphAnalytics:
         thirty_days_ago = timezone.now() - timedelta(days=30)
         
         active_users = UserKnowledgeState.objects.filter(
-            last_reviewed__gte=thirty_days_ ago
+            last_reviewed__gte=thirty_days_ago
         ).values('user').distinct().count()
         
         total_users = User.objects.count()
@@ -989,7 +989,7 @@ class KnowledgeGraphAnalytics:
         user_states = UserKnowledgeState.objects.filter(
             user=user,
             last_reviewed__gte=start_date,
-            last_reviewed__gte=end_date
+            last_reviewed__lte=end_date
         )
         
         # Calculate progression by mastery level

@@ -709,10 +709,7 @@ class QuickTranslationView(APIView):
 # =============================================================================
 
 # Import the JAC execution service
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from jac_executor import jac_executor
+from .jac_executor import jac_executor
 
 
 class JACLearningExecutionAPIView(APIView):

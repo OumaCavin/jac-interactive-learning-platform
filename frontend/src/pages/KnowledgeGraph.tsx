@@ -24,6 +24,12 @@ import knowledgeGraphService, {
   GraphAnalytics,
   GraphSearchParams 
 } from '../services/knowledgeGraphService';
+import { 
+  enhancedKnowledgeGraphService, 
+  aiAgentsService, 
+  enhancedServices 
+} from '../services/knowledgeGraphService';
+import { toast } from 'react-hot-toast';
 
 // Types for knowledge graph visualization
 interface GraphNode {
@@ -90,17 +96,30 @@ const KnowledgeGraph: React.FC = () => {
   const [selectedConcept, setSelectedConcept] = useState<string | null>(null);
   const [analytics, setAnalytics] = useState<GraphAnalytics | null>(null);
   
+  // AI Agent states
+  const [activeView, setActiveView] = useState<'graph' | 'concepts' | 'ai_chat'>('graph');
+  const [availableAgents, setAvailableAgents] = useState<any[]>([]);
+  const [selectedAgent, setSelectedAgent] = useState<string>('learning_assistant');
+  const [chatMessage, setChatMessage] = useState('');
+  const [chatHistory, setChatHistory] = useState<any[]>([]);
+  const [concepts, setConcepts] = useState<KnowledgeNode[]>([]);
+  const [learningPaths, setLearningPaths] = useState<any[]>([]);
+  
   // Loading and error states
   const [loading, setLoading] = useState<LoadingState>({
     graph: true,
     analytics: false,
-    search: false
+    search: false,
+    agents: false,
+    chat: false
   });
   
   const [errors, setErrors] = useState<ErrorState>({
     graph: null,
     analytics: null,
-    search: null
+    search: null,
+    agents: null,
+    chat: null
   });
   
   const user = useSelector(selectUser);
@@ -264,11 +283,87 @@ const KnowledgeGraph: React.FC = () => {
     }
   }, [loadGraphData]);
 
-  // Initialize graph data and analytics on component mount
+  // Initialize graph data, analytics, and AI agents on component mount
   useEffect(() => {
     loadGraphData();
     loadAnalytics();
-  }, [loadGraphData, loadAnalytics]);
+    loadAIAgentData();
+  }, [loadGraphData, loadAnalytics, loadAIAgentData]);
+
+  // Load AI agent data
+  const loadAIAgentData = useCallback(async () => {
+    setLoading(prev => ({ ...prev, agents: true }));
+    setErrors(prev => ({ ...prev, agents: null }));
+    
+    try {
+      const [agentsData, conceptsData, pathsData] = await Promise.all([
+        aiAgentsService.getAvailableAgents(),
+        enhancedKnowledgeGraphService.getConcepts({ limit: 20 }),
+        enhancedKnowledgeGraphService.getLearningPaths()
+      ]);
+
+      if (agentsData.success) {
+        setAvailableAgents(agentsData.data.agents);
+      }
+      if (conceptsData.success) {
+        setConcepts(conceptsData.data.concepts);
+      }
+      if (pathsData.success) {
+        setLearningPaths(pathsData.data.learning_paths);
+      }
+    } catch (error) {
+      console.error('Error loading AI agent data:', error);
+      setErrors(prev => ({ ...prev, agents: 'Failed to load AI agents' }));
+      toast.error('Failed to load AI agents');
+    } finally {
+      setLoading(prev => ({ ...prev, agents: false }));
+    }
+  }, []);
+
+  // Handle chat submission
+  const handleChatSubmit = async () => {
+    if (!chatMessage.trim()) return;
+
+    const userMessage = {
+      type: 'user',
+      content: chatMessage,
+      timestamp: new Date().toISOString(),
+      agent_type: selectedAgent
+    };
+
+    setChatHistory(prev => [...prev, userMessage]);
+    setChatMessage('');
+    setLoading(prev => ({ ...prev, chat: true }));
+
+    try {
+      const response = await aiAgentsService.chat({
+        message: chatMessage,
+        agent_type: selectedAgent,
+        context: {
+          concepts: concepts,
+          learning_paths: learningPaths
+        }
+      });
+
+      if (response.success) {
+        const agentMessage = {
+          type: 'agent',
+          content: response.data.response,
+          agent_name: response.data.agent_info.name,
+          agent_type: response.data.agent_info.type,
+          timestamp: response.data.timestamp,
+          confidence_score: response.data.confidence_score
+        };
+
+        setChatHistory(prev => [...prev, agentMessage]);
+      }
+    } catch (error) {
+      console.error('Error sending chat message:', error);
+      toast.error('Failed to send message to AI agent');
+    } finally {
+      setLoading(prev => ({ ...prev, chat: false }));
+    }
+  };
 
   // Get color for difficulty level
   const getDifficultyColor = (difficulty: string) => {
@@ -474,7 +569,243 @@ const KnowledgeGraph: React.FC = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      {/* Navigation Tabs */}
+      <div className="flex space-x-1 mb-6">
+        {[
+          { key: 'graph', label: 'Knowledge Graph', icon: '🕸️' },
+          { key: 'concepts', label: 'Concepts', icon: '💡' },
+          { key: 'ai_chat', label: 'AI Assistant', icon: '🤖' }
+        ].map((tab) => (
+          <button
+            key={tab.key}
+            onClick={() => setActiveView(tab.key as any)}
+            className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center space-x-2 ${
+              activeView === tab.key
+                ? 'bg-white/20 text-white border border-white/30'
+                : 'text-white/70 hover:text-white hover:bg-white/10'
+            }`}
+          >
+            <span>{tab.icon}</span>
+            <span>{tab.label}</span>
+            {tab.key === 'ai_chat' && loading.agents && (
+              <ArrowPathIcon className="w-4 h-4 animate-spin" />
+            )}
+          </button>
+        ))}
+      </div>
+
+      {activeView === 'ai_chat' ? (
+        // AI Chat Interface
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 h-[600px]">
+          {/* Agent Selection Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 h-full">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center space-x-2">
+                <span>🤖</span>
+                <span>AI Agents</span>
+              </h3>
+              
+              <div className="space-y-2">
+                {availableAgents.map((agent) => (
+                  <button
+                    key={agent.type}
+                    onClick={() => setSelectedAgent(agent.type)}
+                    className={`w-full text-left p-3 rounded-lg transition-all duration-200 ${
+                      selectedAgent === agent.type
+                        ? 'bg-white/20 border border-white/30'
+                        : 'bg-white/5 border border-transparent hover:bg-white/10'
+                    }`}
+                  >
+                    <div className="font-medium text-white text-sm">{agent.name}</div>
+                    <div className="text-xs text-white/80">{agent.role}</div>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {agent.specializations.slice(0, 2).map((spec: string, index: number) => (
+                        <span key={index} className="text-xs px-2 py-1 bg-blue-500/20 text-blue-300 rounded">
+                          {spec}
+                        </span>
+                      ))}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Chat Interface */}
+          <div className="lg:col-span-3">
+            <div className="bg-white/10 backdrop-blur-lg rounded-lg h-full flex flex-col">
+              {/* Chat Header */}
+              <div className="p-4 border-b border-white/20">
+                <h3 className="text-lg font-semibold text-white flex items-center space-x-2">
+                  <span>💬</span>
+                  <span>Chat with AI</span>
+                  <span className="text-sm bg-blue-500/20 text-blue-300 px-2 py-1 rounded">
+                    {availableAgents.find(a => a.type === selectedAgent)?.name || 'Agent'}
+                  </span>
+                </h3>
+              </div>
+
+              {/* Chat Messages */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                <AnimatePresence>
+                  {chatHistory.length === 0 ? (
+                    <div className="text-center py-8">
+                      <div className="text-4xl mb-4">🤖</div>
+                      <h3 className="text-lg font-semibold text-white mb-2">
+                        Start a conversation
+                      </h3>
+                      <p className="text-white">
+                        Ask about JAC programming, get learning recommendations, or request code reviews!
+                      </p>
+                    </div>
+                  ) : (
+                    chatHistory.map((message, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className={`flex ${
+                          message.type === 'user' ? 'justify-end' : 'justify-start'
+                        }`}
+                      >
+                        <div className={`max-w-[80%] ${
+                          message.type === 'user'
+                            ? 'bg-primary-500/20 border-primary-400/30'
+                            : 'bg-white/10 border-white/20'
+                        } border rounded-2xl px-4 py-3`}>
+                          <div className="text-white whitespace-pre-wrap">
+                            {message.content}
+                          </div>
+                          {message.type === 'agent' && message.confidence_score && (
+                            <div className="text-xs text-white/70 mt-2">
+                              Confidence: {(message.confidence_score * 100).toFixed(0)}%
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                    ))
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Chat Input */}
+              <div className="p-4 border-t border-white/20">
+                <div className="flex space-x-3">
+                  <input
+                    type="text"
+                    value={chatMessage}
+                    onChange={(e) => setChatMessage(e.target.value)}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        handleChatSubmit();
+                      }
+                    }}
+                    placeholder="Ask me about JAC programming..."
+                    disabled={loading.chat}
+                    className="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent disabled:opacity-50"
+                  />
+                  <button
+                    onClick={handleChatSubmit}
+                    disabled={!chatMessage.trim() || loading.chat}
+                    className="px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-600 disabled:opacity-50 text-white rounded-lg transition-colors flex items-center space-x-2"
+                  >
+                    {loading.chat ? (
+                      <ArrowPathIcon className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <span>Send</span>
+                    )}
+                  </button>
+                </div>
+                
+                {/* Quick suggestions */}
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {[
+                    "What should I learn first in JAC?",
+                    "Explain Object-Spatial Programming",
+                    "Help me with a coding problem",
+                    "Create a learning path for me"
+                  ].map((suggestion) => (
+                    <button
+                      key={suggestion}
+                      onClick={() => setChatMessage(suggestion)}
+                      className="text-xs px-3 py-1 bg-white/10 hover:bg-white/20 text-white hover:text-white rounded-full transition-colors"
+                    >
+                      {suggestion}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : activeView === 'concepts' ? (
+        // Concepts List View
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {concepts.map((concept, index) => (
+            <motion.div
+              key={concept.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
+              <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 h-full">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-2xl">💡</span>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white">{concept.title}</h3>
+                      <span className={`text-xs px-2 py-1 rounded ${
+                        concept.difficulty_level === 'beginner' ? 'bg-green-500/20 text-green-300' :
+                        concept.difficulty_level === 'intermediate' ? 'bg-yellow-500/20 text-yellow-300' :
+                        concept.difficulty_level === 'advanced' ? 'bg-red-500/20 text-red-300' :
+                        'bg-gray-500/20 text-gray-300'
+                      }`}>
+                        {concept.difficulty_level}
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-xs text-white/70">{concept.view_count} views</span>
+                </div>
+                
+                <p className="text-white/90 text-sm mb-4 line-clamp-3">
+                  {concept.description}
+                </p>
+                
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {concept.tags.slice(0, 3).map((tag, tagIndex) => (
+                    <span key={tagIndex} className="text-xs px-2 py-1 bg-blue-500/20 text-blue-300 rounded">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-white/70 capitalize">
+                    {concept.category.replace('_', ' ')}
+                  </span>
+                  <button
+                    onClick={() => {
+                      enhancedKnowledgeGraphService.trackConceptInteraction({
+                        user_id: user?.id?.toString() || '1',
+                        concept_id: concept.id,
+                        interaction_type: 'view'
+                      }).catch(console.error);
+                    }}
+                    className="text-sm px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded transition-colors"
+                  >
+                    Study
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      ) : (
+        // Knowledge Graph View (original)
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* Main Graph Area */}
         <div className="lg:col-span-3">
           <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 h-[600px] relative overflow-hidden">

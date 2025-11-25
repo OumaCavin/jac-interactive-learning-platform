@@ -18,6 +18,10 @@ router.register(r'graphs', views.LearningGraphViewSet, basename='learninggraph')
 router.register(r'paths', views.LearningPathViewSet, basename='learningpath')
 router.register(r'states', views.UserKnowledgeStateViewSet, basename='userknowledgestate')
 
+# New API endpoints for enhanced functionality
+from apps.api_endpoints.knowledge_graph_api import KnowledgeGraphAPIViewSet
+router.register(r'api-extended', KnowledgeGraphAPIViewSet, basename='knowledge-api-extended')
+
 # Create URL patterns
 urlpatterns = [
     # API v1 endpoints

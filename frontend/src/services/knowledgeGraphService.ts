@@ -346,6 +346,283 @@ class KnowledgeGraphServiceClass {
   }
 }
 
-// Create and export service instance
+// Enhanced API endpoints for JAC knowledge graph and AI agents
+export const enhancedKnowledgeGraphService = {
+  // Get all concepts with filtering and pagination
+  getConcepts: async (params: {
+    node_type?: string;
+    difficulty_level?: string;
+    category?: string;
+    search?: string;
+    limit?: number;
+    offset?: number;
+  } = {}): Promise<{ success: boolean; data: { concepts: any[]; pagination: any } }> => {
+    try {
+      const queryParams = new URLSearchParams();
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          queryParams.append(key, value.toString());
+        }
+      });
+      const response = await apiClient.get(`/api/knowledge-graph/api-extended/concepts/?${queryParams.toString()}`);
+      return response.data;
+    } catch (error: any) {
+      console.error('Error fetching concepts:', error);
+      throw new Error(error.response?.data?.error || 'Failed to fetch concepts');
+    }
+  },
+
+  // Get concept relationships and connections
+  getConceptRelations: async (conceptId: string, params: {
+    relation_type?: string;
+    depth?: number;
+  } = {}): Promise<{ success: boolean; data: { relationships: any[]; depth: number; total_relations: number } }> => {
+    try {
+      const queryParams = new URLSearchParams({ concept_id: conceptId });
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          queryParams.append(key, value.toString());
+        }
+      });
+      const response = await apiClient.get(`/api/knowledge-graph/api-extended/concept_relations/?${queryParams.toString()}`);
+      return response.data;
+    } catch (error: any) {
+      console.error('Error fetching concept relations:', error);
+      throw new Error(error.response?.data?.error || 'Failed to fetch concept relations');
+    }
+  },
+
+  // Get available learning paths
+  getLearningPaths: async (params: {
+    user_id?: string;
+    difficulty_level?: string;
+    category?: string;
+  } = {}): Promise<{ success: boolean; data: { learning_paths: any[] } }> => {
+    try {
+      const queryParams = new URLSearchParams();
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          queryParams.append(key, value.toString());
+        }
+      });
+      const response = await apiClient.get(`/api/knowledge-graph/api-extended/learning_paths/?${queryParams.toString()}`);
+      return response.data;
+    } catch (error: any) {
+      console.error('Error fetching learning paths:', error);
+      throw new Error(error.response?.data?.error || 'Failed to fetch learning paths');
+    }
+  },
+
+  // Get personalized recommendations
+  getPersonalizedRecommendations: async (userId: string): Promise<{ success: boolean; data: any }> => {
+    try {
+      const response = await apiClient.get(`/api/knowledge-graph/api-extended/personalized_recommendations/?user_id=${userId}`);
+      return response.data;
+    } catch (error: any) {
+      console.error('Error fetching personalized recommendations:', error);
+      throw new Error(error.response?.data?.error || 'Failed to fetch personalized recommendations');
+    }
+  },
+
+  // Track concept interaction
+  trackConceptInteraction: async (data: {
+    user_id: string;
+    concept_id: string;
+    interaction_type: 'view' | 'study' | 'practice' | 'mastered';
+  }): Promise<{ success: boolean; message: string; data: any }> => {
+    try {
+      const response = await apiClient.post('/api/knowledge-graph/api-extended/track_concept_interaction/', data);
+      return response.data;
+    } catch (error: any) {
+      console.error('Error tracking concept interaction:', error);
+      throw new Error(error.response?.data?.error || 'Failed to track concept interaction');
+    }
+  },
+
+  // Populate JAC knowledge graph (admin only)
+  populateJACKnowledgeGraph: async (): Promise<{ success: boolean; message: string; data: any }> => {
+    try {
+      const response = await apiClient.post('/api/knowledge-graph/api-extended/populate_jac_knowledge_graph/');
+      return response.data;
+    } catch (error: any) {
+      console.error('Error populating JAC knowledge graph:', error);
+      throw new Error(error.response?.data?.error || 'Failed to populate JAC knowledge graph');
+    }
+  }
+};
+
+// AI Multi-Agent System Service
+export const aiAgentsService = {
+  // Get available AI agents
+  getAvailableAgents: async (): Promise<{ success: boolean; data: { agents: any[]; total_agents: number } }> => {
+    try {
+      const response = await apiClient.get('/api/ai-agents/ai-agents/available_agents/');
+      return response.data;
+    } catch (error: any) {
+      console.error('Error fetching available agents:', error);
+      throw new Error(error.response?.data?.error || 'Failed to fetch available agents');
+    }
+  },
+
+  // Chat with AI agents
+  chat: async (data: {
+    message: string;
+    agent_type?: string;
+    session_id?: string;
+    context?: any;
+  }): Promise<{ success: boolean; data: any }> => {
+    try {
+      const response = await apiClient.post('/api/ai-agents/ai-agents/chat/', data);
+      return response.data;
+    } catch (error: any) {
+      console.error('Error chatting with AI agent:', error);
+      throw new Error(error.response?.data?.error || 'Failed to chat with AI agent');
+    }
+  },
+
+  // Multi-agent collaboration
+  multiAgentCollaboration: async (data: {
+    message: string;
+    context?: any;
+  }): Promise<{ success: boolean; data: any }> => {
+    try {
+      const response = await apiClient.post('/api/ai-agents/ai-agents/multi_agent_collaboration/', data);
+      return response.data;
+    } catch (error: any) {
+      console.error('Error with multi-agent collaboration:', error);
+      throw new Error(error.response?.data?.error || 'Failed with multi-agent collaboration');
+    }
+  },
+
+  // Generate learning content
+  generateLearningContent: async (data: {
+    topic: string;
+    difficulty?: string;
+    content_type?: string;
+    learning_objectives?: string[];
+    include_examples?: boolean;
+  }): Promise<{ success: boolean; data: any }> => {
+    try {
+      const response = await apiClient.post('/api/ai-agents/ai-agents/generate_learning_content/', data);
+      return response.data;
+    } catch (error: any) {
+      console.error('Error generating learning content:', error);
+      throw new Error(error.response?.data?.error || 'Failed to generate learning content');
+    }
+  },
+
+  // Review code with AI
+  reviewCode: async (data: {
+    code: string;
+    language?: string;
+    review_type?: string;
+  }): Promise<{ success: boolean; data: any }> => {
+    try {
+      const response = await apiClient.post('/api/ai-agents/ai-agents/review_code/', data);
+      return response.data;
+    } catch (error: any) {
+      console.error('Error getting code review:', error);
+      throw new Error(error.response?.data?.error || 'Failed to get code review');
+    }
+  },
+
+  // Get learning path recommendations
+  getLearningPathRecommendation: async (data: {
+    learning_goals: string[];
+    time_available?: string;
+    preferred_difficulty?: string;
+  }): Promise<{ success: boolean; data: any }> => {
+    try {
+      const response = await apiClient.post('/api/ai-agents/ai-agents/get_learning_path_recommendation/', data);
+      return response.data;
+    } catch (error: any) {
+      console.error('Error getting learning path recommendation:', error);
+      throw new Error(error.response?.data?.error || 'Failed to get learning path recommendation');
+    }
+  }
+};
+
+// Combined service functions for enhanced functionality
+export const enhancedServices = {
+  // Get comprehensive learning assistance
+  getLearningAssistance: async (userQuery: string, userId: string) => {
+    try {
+      // Get personalized recommendations
+      const recommendations = await enhancedKnowledgeGraphService.getPersonalizedRecommendations(userId);
+      
+      // Get agent response
+      const agentResponse = await aiAgentsService.chat({
+        message: userQuery,
+        agent_type: 'learning_assistant',
+        context: {
+          personalized_recommendations: recommendations.data,
+          user_id: userId
+        }
+      });
+
+      return {
+        recommendations: recommendations.data,
+        agent_response: agentResponse.data,
+        success: true
+      };
+    } catch (error) {
+      console.error('Error getting learning assistance:', error);
+      return { success: false, error };
+    }
+  },
+
+  // Get code review with knowledge context
+  getCodeReviewWithContext: async (code: string, language: string, userId: string) => {
+    try {
+      // Get relevant concepts
+      const concepts = await enhancedKnowledgeGraphService.getConcepts({
+        search: language,
+        limit: 5
+      });
+
+      // Get code review
+      const review = await aiAgentsService.reviewCode({
+        code,
+        language,
+        review_type: 'comprehensive'
+      });
+
+      return {
+        code_review: review.data,
+        relevant_concepts: concepts.data.concepts,
+        success: true
+      };
+    } catch (error) {
+      console.error('Error getting code review:', error);
+      return { success: false, error };
+    }
+  },
+
+  // Generate personalized learning path
+  generatePersonalizedPath: async (goals: string[], userId: string) => {
+    try {
+      // Get user knowledge state
+      const recommendations = await enhancedKnowledgeGraphService.getPersonalizedRecommendations(userId);
+      
+      // Get AI path recommendation
+      const aiPath = await aiAgentsService.getLearningPathRecommendation({
+        learning_goals: goals,
+        preferred_difficulty: 'intermediate'
+      });
+
+      return {
+        ai_path_recommendation: aiPath.data,
+        personalized_recommendations: recommendations.data,
+        success: true
+      };
+    } catch (error) {
+      console.error('Error generating personalized path:', error);
+      return { success: false, error };
+    }
+  }
+};
+
+// Create and export service instances
 const knowledgeGraphService = new KnowledgeGraphServiceClass();
+export { enhancedKnowledgeGraphService, aiAgentsService, enhancedServices };
 export default knowledgeGraphService;
