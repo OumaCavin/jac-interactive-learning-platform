@@ -702,3 +702,439 @@ class QuickTranslationView(APIView):
                 'errors': [str(e)],
                 'warnings': []
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+# =============================================================================
+# JAC-Specific Learning Views
+# =============================================================================
+
+# Import the JAC execution service
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from jac_executor import jac_executor
+
+
+class JACLearningExecutionAPIView(APIView):
+    """
+    API View for JAC-specific code execution with learning feedback
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def post(self, request):
+        """
+        Execute JAC code with learning feedback
+        POST /api/jac-learning/execute/
+        """
+        code = request.data.get('code', '')
+        language = request.data.get('language', 'jac')
+        
+        if not code:
+            return Response({
+                'success': False,
+                'error': 'Code is required'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            # Execute the code using JAC executor
+            result = jac_executor.execute_code(code, language)
+            
+            return Response({
+                'success': result['success'],
+                'output': result.get('execution', {}).get('output', []),
+                'error': result.get('execution', {}).get('error'),
+                'execution_details': {
+                    'variables': result.get('execution', {}).get('variables', {}),
+                    'graph': result.get('execution', {}).get('graph', {}),
+                    'walkers': result.get('execution', {}).get('walkers', {}),
+                    'execution_time': result.get('execution', {}).get('execution_time', 0),
+                    'memory_usage': result.get('execution', {}).get('memory_usage', 0)
+                },
+                'suggestions': result.get('suggestions', []),
+                'learning_tips': result.get('learning_tips', []),
+                'validation': result.get('validation', {}),
+                'timestamp': timezone.now().isoformat()
+            })
+            
+        except Exception as e:
+            return Response({
+                'success': False,
+                'error': str(e),
+                'output': [],
+                'execution_time': 0,
+                'timestamp': timezone.now().isoformat()
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class JACLearningValidationAPIView(APIView):
+    """
+    API View for JAC code validation
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def post(self, request):
+        """
+        Validate JAC code syntax
+        POST /api/jac-learning/validate/
+        """
+        code = request.data.get('code', '')
+        language = request.data.get('language', 'jac')
+        
+        if not code:
+            return Response({
+                'is_valid': False,
+                'errors': ['Code is required'],
+                'warnings': [],
+                'timestamp': timezone.now().isoformat()
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            # Validate the code using JAC validator
+            validation_result = jac_executor.validator.validate_code(code)
+            
+            return Response({
+                'is_valid': validation_result['is_valid'],
+                'errors': validation_result['errors'],
+                'warnings': validation_result['warnings'],
+                'syntax_highlights': validation_result.get('syntax_highlights', {}),
+                'line_count': validation_result['line_count'],
+                'timestamp': timezone.now().isoformat()
+            })
+            
+        except Exception as e:
+            return Response({
+                'is_valid': False,
+                'errors': [f'Validation failed: {str(e)}'],
+                'warnings': [],
+                'timestamp': timezone.now().isoformat()
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class JACLearningSyntaxReferenceAPIView(APIView):
+    """
+    API View for JAC syntax reference
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request):
+        """
+        Get JAC syntax reference
+        GET /api/jac-learning/syntax-reference/
+        """
+        try:
+            syntax_reference = jac_executor.get_syntax_reference()
+            
+            return Response({
+                'keywords': syntax_reference['keywords'],
+                'operators': syntax_reference['operators'],
+                'types': syntax_reference['types'],
+                'examples': syntax_reference['examples'],
+                'timestamp': timezone.now().isoformat()
+            })
+            
+        except Exception as e:
+            return Response({
+                'error': f'Failed to retrieve syntax reference: {str(e)}'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class JACLearningEvaluationAPIView(APIView):
+    """
+    API View for JAC code evaluation with AI feedback
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def post(self, request):
+        """
+        Evaluate JAC code with AI feedback
+        POST /api/jac-learning/evaluate/
+        """
+        code = request.data.get('code', '')
+        test_cases = request.data.get('test_cases', [])
+        
+        if not code:
+            return Response({
+                'error': 'Code is required',
+                'timestamp': timezone.now().isoformat()
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            # Execute the code first
+            execution_result = jac_executor.execute_code(code)
+            
+            # Generate AI feedback based on code analysis
+            feedback = self._generate_code_feedback(code, execution_result, test_cases)
+            
+            return Response({
+                'execution_result': execution_result,
+                'ai_feedback': feedback,
+                'test_results': self._evaluate_test_cases(code, test_cases) if test_cases else [],
+                'score': self._calculate_code_score(execution_result, feedback),
+                'timestamp': timezone.now().isoformat()
+            })
+            
+        except Exception as e:
+            return Response({
+                'error': f'Code evaluation failed: {str(e)}',
+                'execution_result': {'success': False, 'error': str(e)},
+                'ai_feedback': {'error': 'Evaluation could not be completed'},
+                'timestamp': timezone.now().isoformat()
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    def _generate_code_feedback(self, code: str, execution_result: dict, test_cases: list) -> dict:
+        """Generate AI feedback for the code"""
+        feedback = {
+            'summary': '',
+            'strengths': [],
+            'improvements': [],
+            'suggestions': [],
+            'concept_understanding': {},
+            'syntax_score': 0,
+            'logic_score': 0,
+            'style_score': 0
+        }
+        
+        # Analyze syntax
+        if execution_result.get('validation', {}).get('is_valid', True):
+            feedback['strengths'].append('Correct JAC syntax and structure')
+            feedback['syntax_score'] = 90
+        else:
+            errors = execution_result.get('validation', {}).get('errors', [])
+            feedback['improvements'].extend([f'Fix syntax: {error}' for error in errors])
+            feedback['syntax_score'] = max(0, 90 - len(errors) * 15)
+        
+        # Analyze code concepts
+        concepts_found = []
+        
+        if 'node' in code:
+            concepts_found.append('Object-oriented programming with nodes')
+            feedback['strengths'].append('Good use of JAC node definitions')
+        
+        if 'edge' in code or any(op in code for op in ['++>', '<++', '<++>']):
+            concepts_found.append('Spatial programming with edges')
+            feedback['strengths'].append('Excellent use of spatial operators')
+        
+        if 'walker' in code:
+            concepts_found.append('Graph traversal with walkers')
+            feedback['strengths'].append('Understanding of JAC walker concept')
+        
+        if 'with entry' in code:
+            concepts_found.append('Program entry points')
+            feedback['strengths'].append('Proper use of entry blocks')
+        
+        if not concepts_found:
+            feedback['improvements'].append('Try using more JAC-specific features like nodes, edges, or walkers')
+        
+        feedback['concept_understanding'] = {
+            'concepts_used': concepts_found,
+            'recommended_next': self._get_next_concepts(concepts_found)
+        }
+        
+        # Generate overall feedback
+        if execution_result.get('success'):
+            if len(concepts_found) >= 2:
+                feedback['summary'] = 'Excellent work! You\'re using multiple JAC concepts effectively.'
+                feedback['logic_score'] = 85
+            else:
+                feedback['summary'] = 'Good start! Try incorporating more JAC graph features.'
+                feedback['logic_score'] = 70
+        else:
+            feedback['summary'] = 'Let\'s debug this together. Check the execution errors for guidance.'
+            feedback['logic_score'] = 50
+        
+        # Style score (simplified)
+        if len(code.split('\n')) > 5:
+            feedback['style_score'] = 80
+        else:
+            feedback['style_score'] = 60
+        
+        # Add learning suggestions
+        feedback['suggestions'] = jac_executor._generate_suggestions(
+            code, 
+            execution_result.get('validation', {}), 
+            execution_result.get('execution', {})
+        )
+        
+        return feedback
+    
+    def _get_next_concepts(self, concepts_found: list) -> list:
+        """Recommend next concepts to learn based on current understanding"""
+        concept_paths = {
+            'Object-oriented programming with nodes': ['edges', 'spatial operators', 'walker classes'],
+            'Spatial programming with edges': ['walker traversal', 'node abilities', 'graph queries'],
+            'Graph traversal with walkers': ['walker abilities', 'state management', 'advanced traversal'],
+            'Program entry points': ['node definitions', 'variable types', 'basic syntax']
+        }
+        
+        recommendations = set()
+        for concept in concepts_found:
+            if concept in concept_paths:
+                recommendations.update(concept_paths[concept])
+        
+        return list(recommendations)[:3]
+    
+    def _evaluate_test_cases(self, code: str, test_cases: list) -> list:
+        """Evaluate code against test cases"""
+        results = []
+        
+        for i, test_case in enumerate(test_cases):
+            # Simplified test case evaluation
+            result = {
+                'test_case': i + 1,
+                'input': test_case.get('input', {}),
+                'expected_output': test_case.get('expected_output', {}),
+                'actual_output': {},
+                'passed': False,
+                'error': None
+            }
+            results.append(result)
+        
+        return results
+    
+    def _calculate_code_score(self, execution_result: dict, feedback: dict) -> int:
+        """Calculate overall code score"""
+        weights = {
+            'syntax': 0.3,
+            'logic': 0.4,
+            'style': 0.3
+        }
+        
+        syntax_score = feedback.get('syntax_score', 0)
+        logic_score = feedback.get('logic_score', 0)
+        style_score = feedback.get('style_score', 0)
+        
+        # Execution bonus/penalty
+        exec_score = 100 if execution_result.get('success') else 50
+        
+        total_score = (
+            weights['syntax'] * syntax_score +
+            weights['logic'] * logic_score +
+            weights['style'] * style_score
+        ) * (exec_score / 100)
+        
+        return max(0, min(100, int(total_score)))
+
+
+class JACLearningSuggestionsAPIView(APIView):
+    """
+    API View for JAC code suggestions
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def post(self, request):
+        """
+        Get code suggestions based on partial code
+        POST /api/jac-learning/suggestions/
+        """
+        code = request.data.get('code', '')
+        
+        try:
+            suggestions = self._analyze_code_for_suggestions(code)
+            
+            return Response({
+                'suggestions': suggestions,
+                'autocomplete': self._get_autocomplete_suggestions(code),
+                'templates': self._get_code_templates(code),
+                'timestamp': timezone.now().isoformat()
+            })
+            
+        except Exception as e:
+            return Response({
+                'error': f'Failed to generate suggestions: {str(e)}'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    def _analyze_code_for_suggestions(self, code: str) -> list:
+        """Analyze code and provide specific suggestions"""
+        suggestions = []
+        
+        # Check for common JAC patterns
+        if 'node ' in code and '}' not in code:
+            suggestions.append({
+                'type': 'syntax',
+                'message': 'Don\'t forget to close the node definition with \'}\'',
+                'line_suggestion': 'Complete node definition'
+            })
+        
+        if 'walker ' in code and 'can ' not in code:
+            suggestions.append({
+                'type': 'structure',
+                'message': 'Consider adding abilities to your walker with \'can\' statements',
+                'line_suggestion': 'Define walker abilities'
+            })
+        
+        if '++>' in code and 'with entry' not in code:
+            suggestions.append({
+                'type': 'structure',
+                'message': 'Wrap your code in a \'with entry {}\' block',
+                'line_suggestion': 'Add entry block'
+            })
+        
+        # Add general learning suggestions
+        if len(code.split('\n')) < 5:
+            suggestions.append({
+                'type': 'learning',
+                'message': 'Try creating a simple example with nodes and spatial connections',
+                'line_suggestion': 'Expand your code'
+            })
+        
+        return suggestions
+    
+    def _get_autocomplete_suggestions(self, code: str) -> list:
+        """Get autocomplete suggestions for current code position"""
+        last_line = code.split('\n')[-1].strip()
+        
+        # Simple autocomplete for JAC keywords
+        if last_line.startswith('n'):
+            return ['node', 'null']
+        elif last_line.startswith('e'):
+            return ['edge', 'else']
+        elif last_line.startswith('w'):
+            return ['walker', 'with', 'while', 'with entry']
+        elif last_line.startswith('c'):
+            return ['can', 'class']
+        elif last_line.startswith('h'):
+            return ['has']
+        elif last_line.startswith('s'):
+            return ['spawn', 'str']
+        
+        return []
+    
+    def _get_code_templates(self, code: str) -> list:
+        """Get code templates based on current context"""
+        templates = []
+        
+        # Check context to suggest appropriate templates
+        if 'node' not in code:
+            templates.append({
+                'name': 'Basic Node',
+                'description': 'Simple node with properties',
+                'code': '''node Person {
+    has name: str;
+    has age: int;
+}'''
+            })
+        
+        if 'walker' not in code and 'node' in code:
+            templates.append({
+                'name': 'Basic Walker',
+                'description': 'Simple walker to traverse nodes',
+                'code': '''walker GreetPeople {
+    can greet with Person entry {
+        print(f"Hello, {here.name}!");
+        visit [-->];
+    }
+}'''
+            })
+        
+        if 'spatial' not in code and 'node' in code:
+            templates.append({
+                'name': 'Graph Creation',
+                'description': 'Create a simple graph with connections',
+                'code': '''with entry {
+    alice = Person(name="Alice", age=25);
+    bob = Person(name="Bob", age=30);
+    alice ++> bob;
+}'''
+            })
+        
+        return templates

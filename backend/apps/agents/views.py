@@ -928,10 +928,53 @@ class ChatAssistantAPIView(APIView):
         
         created_message = user_message.save()
         
-        # Get the created message with full serializer data
-        response_serializer = ChatMessageSerializer(created_message)
+        # Import AI service
+        from .ai_chat_service import ai_service
         
-        return Response(response_serializer.data, status=status.HTTP_201_CREATED)
+        # Generate AI response
+        ai_response_data = ai_service.process_message(
+            message=data['message'],
+            agent_type=data.get('agent_type', 'system_orchestrator'),
+            session_id=session_id
+        )
+        
+        # Create AI response message
+        ai_message_data = {
+            'session_id': session_id,
+            'message': ai_response_data['response'],
+            'agent_type': ai_response_data['agent_type'],
+            'message_type': 'agent',
+            'metadata': {
+                'suggestions': ai_response_data.get('suggestions', []),
+                'code_examples': ai_response_data.get('code_examples', []),
+                'related_topics': ai_response_data.get('related_topics', []),
+                'has_quiz': 'quiz' in ai_response_data and ai_response_data['quiz'] is not None
+            }
+        }
+        
+        ai_message = ChatMessageCreateSerializer(
+            data=ai_message_data,
+            context={'request': request}
+        )
+        
+        if ai_message.is_valid():
+            created_ai_message = ai_message.save()
+            
+            # Return both user message and AI response
+            response = {
+                'user_message': ChatMessageSerializer(created_message).data,
+                'ai_response': ChatMessageSerializer(created_ai_message).data,
+                'suggestions': ai_response_data.get('suggestions', []),
+                'related_topics': ai_response_data.get('related_topics', []),
+                'code_examples': ai_response_data.get('code_examples', []),
+                'timestamp': ai_response_data['timestamp']
+            }
+            
+            return Response(response, status=status.HTTP_201_CREATED)
+        else:
+            # If AI message creation fails, still return user message
+            response_serializer = ChatMessageSerializer(created_message)
+            return Response(response_serializer.data, status=status.HTTP_201_CREATED)
     
     def get(self, request):
         """

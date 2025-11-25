@@ -107,7 +107,26 @@ const CodeEditor: React.FC = () => {
       };
 
       const startTime = Date.now();
-      const response: CodeExecutionResponse = await learningService.executeCode(request);
+      let response: CodeExecutionResponse;
+      
+      // Use JAC-specific execution for better functionality
+      if (selectedLanguage === 'jac') {
+        const jacResult = await learningService.executeJacCode(
+          code.trim(), 
+          selectedLanguage, 
+          undefined // test cases can be added later
+        );
+        response = {
+          success: jacResult.success,
+          output: typeof jacResult.output === 'string' ? jacResult.output : JSON.stringify(jacResult.output),
+          error: jacResult.error,
+          execution_time: jacResult.execution_details?.execution_time || (endTime - startTime) / 1000,
+          memory_usage: 0 // Not available in current response
+        };
+      } else {
+        // Use generic execution for other languages
+        response = await learningService.executeCode(request);
+      }
       const endTime = Date.now();
 
       const result: ExecutionResult = {

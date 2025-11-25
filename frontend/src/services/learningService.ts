@@ -173,6 +173,41 @@ export const learningService = {
   checkAssessmentAnswer: (questionId: string, answer: string): Promise<any> =>
     apiClient.post(`/assessments/questions/${questionId}/check_answer/`, { answer }).then(res => res.data),
 
+  // JAC Code Execution (using correct backend endpoints)
+  executeCode: (code: string, language: string = 'jac'): Promise<any> =>
+    apiClient.post('/jac-execution/api/quick-execute/', { code, language, stdin: '' }).then(res => res.data),
+
+  validateCode: (code: string, language: string = 'jac'): Promise<any> =>
+    apiClient.post('/jac-execution/api/validate/', { code, language }).then(res => res.data),
+
+  // JAC-specific execution methods
+  executeJacCode: (code: string, language: 'python' | 'jac' = 'jac', testCases?: any[]): Promise<any> =>
+    apiClient.post('/jac-execution/api/execute/', { 
+      code, 
+      language, 
+      stdin: '',
+      test_cases: testCases 
+    }).then(res => res.data),
+
+  validateJacCode: (code: string, language: string = 'jac'): Promise<any> =>
+    apiClient.post('/jac-execution/api/validate/', { code, language }).then(res => res.data),
+
+  getJacExecutionHistory: (limit: number = 10): Promise<any> =>
+    apiClient.get(`/jac-execution/api/executions/?limit=${limit}`).then(res => res.data),
+
+  getJacTemplates: (): Promise<any> =>
+    apiClient.get('/jac-execution/api/templates/').then(res => res.data),
+
+  getSyntaxReference: (): Promise<any> =>
+    apiClient.get('/jac-execution/api/syntax-reference/').then(res => res.data),
+
+  // Code Evaluation and Feedback
+  evaluateCode: (code: string, testCases?: any[]): Promise<any> =>
+    apiClient.post('/jac-execution/api/evaluate/', { code, test_cases: testCases }).then(res => res.data),
+
+  getCodeSuggestions: (code: string): Promise<any> =>
+    apiClient.post('/jac-execution/api/suggestions/', { code }).then(res => res.data),
+
   // Admin Analytics
   getLearningPathAnalytics: (pathId?: number): Promise<any> =>
     apiClient.get(`/learning/admin/analytics/${pathId ? `?path_id=${pathId}` : ''}`).then(res => res.data),
