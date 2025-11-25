@@ -373,3 +373,70 @@ class ProgressGoalCreateSerializer(serializers.Serializer):
         if data['target_date'] <= data['start_date']:
             raise serializers.ValidationError("Target date must be after start date")
         return data
+
+
+class MLPredictionsSerializer(serializers.Serializer):
+    """
+    Serializer for machine learning predictions
+    """
+    ensemble_prediction = serializers.DictField()
+    prediction_confidence = serializers.FloatField()
+    prediction_horizon_days = serializers.IntegerField()
+    model_count = serializers.IntegerField()
+    data_points_used = serializers.IntegerField()
+    features_engineered = serializers.IntegerField()
+    ml_predictions = serializers.DictField()
+
+
+class HistoricalTrendsSerializer(serializers.Serializer):
+    """
+    Serializer for historical trend analysis
+    """
+    trends_analysis = serializers.DictField()
+    analysis_period_days = serializers.IntegerField()
+    data_quality_score = serializers.FloatField()
+    recommendations = serializers.ListField(child=serializers.CharField())
+
+
+class AdaptivePredictionsSerializer(serializers.Serializer):
+    """
+    Serializer for adaptive prediction algorithms
+    """
+    user_pattern_analysis = serializers.DictField()
+    optimal_model = serializers.CharField()
+    adaptive_parameters = serializers.DictField()
+    adaptive_predictions = serializers.DictField()
+    model_performance = serializers.DictField()
+    adaptation_strategy = serializers.CharField()
+
+
+class ConfidenceCalculationsSerializer(serializers.Serializer):
+    """
+    Serializer for statistical confidence calculations
+    """
+    confidence_analysis = serializers.DictField()
+    confidence_level = serializers.FloatField()
+    sample_size = serializers.IntegerField()
+    statistical_significance = serializers.CharField()
+
+
+class ComprehensivePredictiveAnalyticsSerializer(serializers.Serializer):
+    """
+    Serializer for comprehensive predictive analytics
+    """
+    ml_predictions = MLPredictionsSerializer()
+    historical_trends = HistoricalTrendsSerializer()
+    adaptive_predictions = AdaptivePredictionsSerializer()
+    confidence_analysis = ConfidenceCalculationsSerializer()
+    summary_insights = serializers.DictField()
+    metadata = serializers.DictField()
+
+
+class PredictiveDashboardSerializer(serializers.Serializer):
+    """
+    Serializer for predictive analytics dashboard data
+    """
+    predictions = serializers.DictField()
+    trends = serializers.DictField()
+    confidence = serializers.DictField()
+    charts = serializers.DictField(required=False)

@@ -26,6 +26,11 @@ from .views import (
     ProgressSummaryAPIView, ProgressAnalyticsAPIView, CreateProgressSnapshotAPIView,
     TrackUserProgressAPIView
 )
+from .views_predictive import (
+    MLPredictionsAPIView, HistoricalTrendsAPIView, AdaptivePredictionsAPIView,
+    ConfidenceCalculationsAPIView, ComprehensivePredictiveAnalyticsAPIView,
+    predictive_dashboard_data
+)
 
 # Create a router and register our viewsets with it
 router = DefaultRouter()
@@ -57,4 +62,20 @@ urlpatterns = [
     # Shorter URLs for common operations
     path('api/v1/progress/summary/', ProgressSummaryAPIView.as_view(), name='progress-summary-short'),
     path('api/v1/progress/analytics/', ProgressAnalyticsAPIView.as_view(), name='progress-analytics-short'),
+    
+    # Predictive Analytics Endpoints
+    path('api/v1/predict/ml/', MLPredictionsAPIView.as_view(), name='ml-predictions'),
+    path('api/v1/predict/trends/', HistoricalTrendsAPIView.as_view(), name='historical-trends'),
+    path('api/v1/predict/adaptive/', AdaptivePredictionsAPIView.as_view(), name='adaptive-predictions'),
+    path('api/v1/predict/confidence/', ConfidenceCalculationsAPIView.as_view(), name='confidence-calculations'),
+    path('api/v1/predict/comprehensive/', ComprehensivePredictiveAnalyticsAPIView.as_view(), name='comprehensive-predictive'),
+    path('api/v1/predict/dashboard/', predictive_dashboard_data, name='predictive-dashboard'),
+    
+    # Alternative endpoints without API version
+    path('api/predict/ml/', MLPredictionsAPIView.as_view(), name='ml-predictions-no-version'),
+    path('api/predict/trends/', HistoricalTrendsAPIView.as_view(), name='historical-trends-no-version'),
+    path('api/predict/adaptive/', AdaptivePredictionsAPIView.as_view(), name='adaptive-predictions-no-version'),
+    path('api/predict/confidence/', ConfidenceCalculationsAPIView.as_view(), name='confidence-calculations-no-version'),
+    path('api/predict/comprehensive/', ComprehensivePredictiveAnalyticsAPIView.as_view(), name='comprehensive-predictive-no-version'),
+    path('api/predict/dashboard/', predictive_dashboard_data, name='predictive-dashboard-no-version'),
 ]
