@@ -16,7 +16,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 
-from ..services.realtime_monitoring_service import RealtimeMonitoringService
+from .services.realtime_monitoring_service import RealtimeMonitoringService
 
 User = get_user_model()
 
