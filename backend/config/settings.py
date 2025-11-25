@@ -55,6 +55,7 @@ LOCAL_APPS = [
     'apps.agents',
     'apps.knowledge_graph',
     'apps.jac_execution',
+    'apps.gamification',
     'apps.management',
 ]
 

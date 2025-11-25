@@ -1,257 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
-import toast from 'react-hot-toast';
+import { Card, Badge, Tabs, LoadingSpinner } from '../components/ui';
+import { 
+  GamificationOverview,
+  Achievement, 
+  UserAchievement, 
+  Badge as BadgeType, 
+  UserBadge,
+  UserPoints,
+  UserLevel,
+  LearningStreak
+} from '../services/gamificationService';
+import gamificationService from '../services/gamificationService';
 import { authService } from '../services/authService';
 
-// Types
-interface Achievement {
-  id: string;
-  title: string;
-  description: string;
-  icon: string;
-  category: 'learning' | 'coding' | 'streak' | 'special' | 'milestone';
-  difficulty: 'bronze' | 'silver' | 'gold' | 'platinum';
-  points: number;
+// Achievement and Badge types are imported from gamificationService
+// Local interfaces for UI state
+interface AchievementWithProgress extends Achievement {
   unlocked: boolean;
   unlockedAt?: string;
   progress?: number;
   target?: number;
-  requirements: string[];
-  rarity: 'common' | 'rare' | 'epic' | 'legendary';
+  user_achievement?: UserAchievement;
 }
-
-interface Badge {
-  id: string;
-  name: string;
-  description: string;
-  icon: string;
-  earned: boolean;
-  earnedAt?: string;
-  category: string;
-}
-
-// Mock achievement data
-const mockAchievements: Achievement[] = [
-  {
-    id: '1',
-    title: 'First Steps',
-    description: 'Complete your first learning module',
-    icon: '👶',
-    category: 'learning',
-    difficulty: 'bronze',
-    points: 50,
-    unlocked: true,
-    unlockedAt: '2025-11-15',
-    requirements: ['Complete 1 module'],
-    rarity: 'common'
-  },
-  {
-    id: '2',
-    title: 'Code Explorer',
-    description: 'Run your first piece of code successfully',
-    icon: '💻',
-    category: 'coding',
-    difficulty: 'bronze',
-    points: 75,
-    unlocked: true,
-    unlockedAt: '2025-11-16',
-    requirements: ['Execute code 1 time'],
-    rarity: 'common'
-  },
-  {
-    id: '3',
-    title: '7-Day Warrior',
-    description: 'Maintain a 7-day learning streak',
-    icon: '🔥',
-    category: 'streak',
-    difficulty: 'silver',
-    points: 200,
-    unlocked: true,
-    unlockedAt: '2025-11-18',
-    requirements: ['7-day streak'],
-    rarity: 'rare'
-  },
-  {
-    id: '4',
-    title: 'Problem Solver',
-    description: 'Complete 10 coding challenges',
-    icon: '🧩',
-    category: 'coding',
-    difficulty: 'silver',
-    points: 150,
-    unlocked: true,
-    unlockedAt: '2025-11-20',
-    requirements: ['Complete 10 challenges'],
-    rarity: 'rare'
-  },
-  {
-    id: '5',
-    title: 'Knowledge Seeker',
-    description: 'Complete 5 learning modules',
-    icon: '📚',
-    category: 'learning',
-    difficulty: 'silver',
-    points: 125,
-    unlocked: true,
-    unlockedAt: '2025-11-19',
-    requirements: ['Complete 5 modules'],
-    rarity: 'rare'
-  },
-  {
-    id: '6',
-    title: 'Code Master',
-    description: 'Execute code 50 times successfully',
-    icon: '⚡',
-    category: 'coding',
-    difficulty: 'gold',
-    points: 500,
-    unlocked: false,
-    progress: 15,
-    target: 50,
-    requirements: ['Execute code 50 times'],
-    rarity: 'epic'
-  },
-  {
-    id: '7',
-    title: 'Dedicated Learner',
-    description: 'Maintain a 30-day learning streak',
-    icon: '💎',
-    category: 'streak',
-    difficulty: 'gold',
-    points: 1000,
-    unlocked: false,
-    progress: 7,
-    target: 30,
-    requirements: ['30-day streak'],
-    rarity: 'epic'
-  },
-  {
-    id: '8',
-    title: 'Module Master',
-    description: 'Complete 25 learning modules',
-    icon: '🏆',
-    category: 'learning',
-    difficulty: 'gold',
-    points: 750,
-    unlocked: false,
-    progress: 12,
-    target: 25,
-    requirements: ['Complete 25 modules'],
-    rarity: 'epic'
-  },
-  {
-    id: '9',
-    title: 'AI Assistant Pioneer',
-    description: 'Have 100 conversations with AI agents',
-    icon: '🤖',
-    category: 'special',
-    difficulty: 'gold',
-    points: 800,
-    unlocked: false,
-    progress: 23,
-    target: 100,
-    requirements: ['100 AI conversations'],
-    rarity: 'epic'
-  },
-  {
-    id: '10',
-    title: 'Perfect Score',
-    description: 'Achieve 100% on 5 assessments',
-    icon: '🌟',
-    category: 'milestone',
-    difficulty: 'platinum',
-    points: 1500,
-    unlocked: false,
-    progress: 1,
-    target: 5,
-    requirements: ['5 perfect scores'],
-    rarity: 'legendary'
-  },
-  {
-    id: '11',
-    title: 'Code Legend',
-    description: 'Complete 100 coding challenges',
-    icon: '👑',
-    category: 'coding',
-    difficulty: 'platinum',
-    points: 2000,
-    unlocked: false,
-    progress: 10,
-    target: 100,
-    requirements: ['100 challenges'],
-    rarity: 'legendary'
-  },
-  {
-    id: '12',
-    title: 'Platform Expert',
-    description: 'Use all platform features at least once',
-    icon: '🎯',
-    category: 'special',
-    difficulty: 'platinum',
-    points: 2500,
-    unlocked: false,
-    progress: 6,
-    target: 12,
-    requirements: ['Use all 12 features'],
-    rarity: 'legendary'
-  }
-];
-
-const mockBadges: Badge[] = [
-  {
-    id: '1',
-    name: 'Novice',
-    description: 'New to the platform',
-    icon: '🌱',
-    earned: true,
-    earnedAt: '2025-11-15',
-    category: 'Progress'
-  },
-  {
-    id: '2',
-    name: 'Active Learner',
-    description: 'Logged in for 7 consecutive days',
-    icon: '📈',
-    earned: true,
-    earnedAt: '2025-11-18',
-    category: 'Engagement'
-  },
-  {
-    id: '3',
-    name: 'Code Warrior',
-    description: 'Completed 10 coding exercises',
-    icon: '⚔️',
-    earned: true,
-    earnedAt: '2025-11-20',
-    category: 'Coding'
-  },
-  {
-    id: '4',
-    name: 'Scholar',
-    description: 'Completed 5 learning modules',
-    icon: '🎓',
-    earned: true,
-    earnedAt: '2025-11-19',
-    category: 'Learning'
-  },
-  {
-    id: '5',
-    name: 'AI Explorer',
-    description: 'Had 25 conversations with AI',
-    icon: '🔍',
-    earned: false,
-    category: 'AI Interaction'
-  },
-  {
-    id: '6',
-    name: 'Perfectionist',
-    description: 'Achieved 100% on an assessment',
-    icon: '💯',
-    earned: false,
-    category: 'Performance'
-  }
-];
 
 const categories = [
   { id: 'all', label: 'All Achievements', icon: '🏆' },
@@ -278,15 +50,83 @@ const rarities = {
 };
 
 const Achievements: React.FC = () => {
-  const [achievements, setAchievements] = useState<Achievement[]>(mockAchievements);
-  const [badges, setBadges] = useState<Badge[]>(mockBadges);
+  // State management
+  const [overview, setOverview] = useState<GamificationOverview | null>(null);
+  const [achievements, setAchievements] = useState<AchievementWithProgress[]>([]);
+  const [badges, setBadges] = useState<UserBadge[]>([]);
+  const [allBadges, setAllBadges] = useState<BadgeType[]>([]);
+  const [userPoints, setUserPoints] = useState<UserPoints | null>(null);
+  const [userLevel, setUserLevel] = useState<UserLevel | null>(null);
+  const [streak, setStreak] = useState<LearningStreak | null>(null);
+  
+  // UI state
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeDifficulty, setActiveDifficulty] = useState('all');
   const [showUnlockedOnly, setShowUnlockedOnly] = useState(false);
-  const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
+  const [selectedAchievement, setSelectedAchievement] = useState<AchievementWithProgress | null>(null);
   const [viewMode, setViewMode] = useState<'achievements' | 'badges'>('achievements');
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  
   const user = useSelector((state: any) => state.auth.user) || authService.getCurrentUser();
 
+  // Load gamification data on component mount
+  useEffect(() => {
+    loadGamificationData();
+  }, []);
+
+  // Load all gamification data from API
+  const loadGamificationData = async () => {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      // Load overview data
+      const overviewData = await gamificationService.getGamificationOverview();
+      setOverview(overviewData);
+      
+      // Load achievements
+      const achievementsData = await gamificationService.getUserAchievements();
+      setAchievements(formatAchievements(achievementsData));
+      
+      // Load badges
+      const userBadgesData = await gamificationService.getUserBadges();
+      setBadges(userBadgesData);
+      
+      const allBadgesData = await gamificationService.getBadges();
+      setAllBadges(allBadgesData);
+      
+      // Load user stats
+      const pointsData = await gamificationService.getUserPoints();
+      setUserPoints(pointsData);
+      
+      const levelData = await gamificationService.getUserLevel();
+      setUserLevel(levelData);
+      
+      const streakData = await gamificationService.getLearningStreak();
+      setStreak(streakData);
+      
+    } catch (err) {
+      console.error('Failed to load gamification data:', err);
+      setError('Failed to load achievements and badges. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Format achievements with progress data
+  const formatAchievements = (userAchievements: UserAchievement[]): AchievementWithProgress[] => {
+    return userAchievements.map(userAchievement => ({
+      ...userAchievement.achievement,
+      unlocked: userAchievement.is_completed,
+      unlockedAt: userAchievement.completed_at,
+      progress: userAchievement.current_progress,
+      target: userAchievement.target_progress,
+      user_achievement: userAchievement
+    }));
+  };
+
+  // Filter achievements based on current filters
   const filteredAchievements = achievements.filter(achievement => {
     const categoryMatch = activeCategory === 'all' || achievement.category === activeCategory;
     const difficultyMatch = activeDifficulty === 'all' || achievement.difficulty === activeDifficulty;
@@ -295,10 +135,11 @@ const Achievements: React.FC = () => {
     return categoryMatch && difficultyMatch && unlockedMatch;
   });
 
-  const stats = {
+  // Calculate statistics
+  const stats = overview ? {
     total: achievements.length,
     unlocked: achievements.filter(a => a.unlocked).length,
-    totalPoints: achievements.filter(a => a.unlocked).reduce((sum, a) => sum + a.points, 0),
+    totalPoints: overview.total_points,
     byCategory: {
       learning: achievements.filter(a => a.category === 'learning' && a.unlocked).length,
       coding: achievements.filter(a => a.category === 'coding' && a.unlocked).length,
@@ -312,9 +153,15 @@ const Achievements: React.FC = () => {
       gold: achievements.filter(a => a.difficulty === 'gold' && a.unlocked).length,
       platinum: achievements.filter(a => a.difficulty === 'platinum' && a.unlocked).length
     }
+  } : {
+    total: 0,
+    unlocked: 0,
+    totalPoints: 0,
+    byCategory: { learning: 0, coding: 0, streak: 0, special: 0, milestone: 0 },
+    byDifficulty: { bronze: 0, silver: 0, gold: 0, platinum: 0 }
   };
 
-  const completionPercentage = Math.round((stats.unlocked / stats.total) * 100);
+  const completionPercentage = stats.total > 0 ? Math.round((stats.unlocked / stats.total) * 100) : 0;
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -336,7 +183,8 @@ const Achievements: React.FC = () => {
     }
   };
 
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString?: string) => {
+    if (!dateString) return '';
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
@@ -344,7 +192,51 @@ const Achievements: React.FC = () => {
     });
   };
 
-  const renderAchievementCard = (achievement: Achievement) => (
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <Card variant="glass" padding="lg" className="text-center">
+            <LoadingSpinner size="lg" />
+            <h2 className="text-xl font-semibold text-white mt-4">
+              Loading Achievements...
+            </h2>
+            <p className="text-white/80">
+              Fetching your gamification data
+            </p>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <Card variant="glass" padding="lg" className="text-center">
+            <div className="text-4xl mb-4">⚠️</div>
+            <h2 className="text-xl font-semibold text-white mb-2">
+              Unable to Load Achievements
+            </h2>
+            <p className="text-white/80 mb-4">
+              {error}
+            </p>
+            <button
+              onClick={loadGamificationData}
+              className="px-6 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors"
+            >
+              Try Again
+            </button>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  const renderAchievementCard = (achievement: AchievementWithProgress) => (
     <motion.div
       key={achievement.id}
       initial={{ opacity: 0, y: 20 }}
@@ -375,8 +267,8 @@ const Achievements: React.FC = () => {
           <span className={`text-xs px-2 py-1 rounded-full bg-gradient-to-r ${getDifficultyColor(achievement.difficulty)} text-white font-medium`}>
             {achievement.difficulty.toUpperCase()}
           </span>
-          <span className={`text-xs px-2 py-1 rounded-full ${rarities[achievement.rarity].color} font-medium`}>
-            {achievement.rarity}
+          <span className={`text-xs px-2 py-1 rounded-full ${achievement.rarity ? rarities[achievement.rarity].color : 'text-gray-400'} font-medium`}>
+            {achievement.rarity || 'common'}
           </span>
         </div>
       </div>
@@ -384,7 +276,7 @@ const Achievements: React.FC = () => {
       {achievement.unlocked ? (
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <span className="text-yellow-400 font-bold">{achievement.points}</span>
+            <span className="text-yellow-400 font-bold">{achievement.points_reward || 0}</span>
             <span className="text-white/60 text-sm">points</span>
           </div>
           {achievement.unlockedAt && (
@@ -410,7 +302,7 @@ const Achievements: React.FC = () => {
             </div>
           )}
           <div className="flex justify-between items-center">
-            <span className="text-white/60 text-sm">{achievement.points} points</span>
+            <span className="text-white/60 text-sm">{achievement.points_reward || 0} points</span>
             <span className="text-white/50 text-sm">Locked</span>
           </div>
         </div>
@@ -418,42 +310,42 @@ const Achievements: React.FC = () => {
 
       <div className="mt-3 pt-3 border-t border-white/10">
         <p className="text-xs text-white/60">
-          <strong>Requirements:</strong> {achievement.requirements.join(', ')}
+          <strong>Requirements:</strong> {achievement.criteria_type.replace('_', ' ')} {achievement.criteria_value}
         </p>
       </div>
     </motion.div>
   );
 
-  const renderBadge = (badge: Badge) => (
+  const renderBadge = (userBadge: UserBadge) => (
     <motion.div
-      key={badge.id}
+      key={userBadge.id}
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       whileHover={{ scale: 1.05 }}
-      className={`bg-white/10 backdrop-blur-lg rounded-lg p-6 text-center transition-all duration-300 ${
-        badge.earned ? 'border border-white/20' : 'border border-white/10 opacity-50'
-      }`}
+      className="bg-white/10 backdrop-blur-lg rounded-lg p-6 text-center transition-all duration-300 border border-white/20"
     >
-      <div className={`text-4xl mb-3 ${badge.earned ? '' : 'grayscale'}`}>
-        {badge.icon}
+      <div className="text-4xl mb-3">
+        {userBadge.badge.icon}
       </div>
-      <h3 className={`font-semibold mb-2 ${badge.earned ? 'text-white' : 'text-white/60'}`}>
-        {badge.name}
+      <h3 className="font-semibold mb-2 text-white">
+        {userBadge.badge.name}
       </h3>
-      <p className={`text-sm mb-3 ${badge.earned ? 'text-white/80' : 'text-white/50'}`}>
-        {badge.description}
+      <p className="text-sm mb-3 text-white/80">
+        {userBadge.badge.description}
       </p>
       <div className="flex flex-col items-center space-y-2">
-        <span className="text-xs px-3 py-1 rounded-full bg-white/20 text-white">
-          {badge.category}
+        <span className={`text-xs px-3 py-1 rounded-full ${
+          userBadge.badge.difficulty === 'bronze' ? 'bg-orange-500/20 text-orange-300' :
+          userBadge.badge.difficulty === 'silver' ? 'bg-gray-500/20 text-gray-300' :
+          userBadge.badge.difficulty === 'gold' ? 'bg-yellow-500/20 text-yellow-300' :
+          'bg-purple-500/20 text-purple-300'
+        }`}>
+          {userBadge.badge.difficulty}
         </span>
-        {badge.earned && badge.earnedAt && (
+        {userBadge.earnedAt && (
           <span className="text-xs text-white/60">
-            Earned {formatDate(badge.earnedAt)}
+            Earned {formatDate(userBadge.earnedAt)}
           </span>
-        )}
-        {!badge.earned && (
-          <span className="text-xs text-white/50">Not yet earned</span>
         )}
       </div>
     </motion.div>
@@ -508,7 +400,13 @@ const Achievements: React.FC = () => {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         {Object.entries(stats.byCategory).map(([category, count]) => (
           <div key={category} className="text-center">
-            <div className="text-xl mb-2">{categories.find(c => c.id === category)?.icon}</div>
+            <div className="text-xl mb-2">
+              {category === 'learning' ? '📚' :
+               category === 'coding' ? '💻' :
+               category === 'streak' ? '🔥' :
+               category === 'special' ? '✨' :
+               category === 'milestone' ? '🎯' : '🏆'}
+            </div>
             <div className="text-lg font-bold text-gray-900">{count}</div>
             <div className="text-sm text-gray-700 capitalize">{category}</div>
           </div>
