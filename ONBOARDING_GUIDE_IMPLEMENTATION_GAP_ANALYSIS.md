@@ -384,5 +384,5 @@ def seed_knowledge_graph():
 
 ---
 
-**Document prepared by**: MiniMax Agent  
+**Document prepared by**: Cavin Otieno  
 **Date**: November 25, 2025

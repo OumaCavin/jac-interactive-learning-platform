@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Frontend-to-Backend Integration Test Suite
-Author: MiniMax Agent
+Author: Cavin Otieno
 Date: 2025-11-25
 
 This script tests the integration between frontend services and backend APIs.
@@ -310,7 +310,7 @@ def main():
     """Main test execution function"""
     print("=" * 80)
     print("FRONTEND-TO-BACKEND INTEGRATION TEST SUITE")
-    print("Author: MiniMax Agent")
+    print("Author: Cavin Otieno")
     print("Date: 2025-11-25")
     print("=" * 80)
     

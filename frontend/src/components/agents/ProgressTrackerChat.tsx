@@ -4,7 +4,7 @@
  * Specialized chat interface for the Progress Tracker AI Agent.
  * Focuses on analytics, progress monitoring, and learning insights.
  * 
- * Author: MiniMax Agent
+ * Author: Cavin Otieno
  * Created: 2025-11-26
  */
 

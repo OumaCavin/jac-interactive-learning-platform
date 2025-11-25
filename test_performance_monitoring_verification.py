@@ -8,7 +8,7 @@ This test verifies the implementation status of:
 2. Performance threshold monitoring  
 3. Automated performance intervention triggers
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

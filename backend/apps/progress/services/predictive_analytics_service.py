@@ -4,7 +4,7 @@ Predictive Analytics Service - JAC Learning Platform
 Advanced machine learning and statistical modeling for learning predictions.
 Provides sophisticated forecasting, trend analysis, and adaptive predictions.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

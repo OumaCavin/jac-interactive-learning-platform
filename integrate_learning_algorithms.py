@@ -3,7 +3,7 @@
 Learning Algorithms Integration Script
 Adds the missing methods to the PredictiveAnalyticsService
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

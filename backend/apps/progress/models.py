@@ -12,7 +12,7 @@ Models:
 - ProgressGoal: User-defined learning goals
 - ProgressNotification: Progress-related notifications
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-25
 """
 

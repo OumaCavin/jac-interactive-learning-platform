@@ -4,7 +4,7 @@
  * Service for gamification features including achievements, badges, points, and streaks.
  * Connects React frontend to Django backend gamification API.
  * 
- * Author: MiniMax Agent
+ * Author: Cavin Otieno
  * Created: 2025-11-26
  */
 

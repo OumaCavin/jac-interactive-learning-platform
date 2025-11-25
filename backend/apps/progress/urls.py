@@ -17,7 +17,7 @@ URL Patterns:
 - /api/progress/summary/ - Comprehensive progress summary
 - /api/progress/track/ - Real-time progress tracking
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-25
 """
 

@@ -15,7 +15,7 @@ Models:
 - LevelRequirement: Level progression requirements
 - AchievementProgress: Progress tracking for achievements
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

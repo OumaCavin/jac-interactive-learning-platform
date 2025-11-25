@@ -3,7 +3,7 @@ URL Configuration for Gamification App
 
 URL patterns for gamification API endpoints including achievements, badges, points, and streaks.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

@@ -3,7 +3,7 @@ Collaboration Signals - JAC Learning Platform
 
 Django signals for automatic collaboration features.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

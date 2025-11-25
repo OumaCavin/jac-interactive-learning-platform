@@ -4,7 +4,7 @@
  * Specialized chat interface for the System Orchestrator AI Agent.
  * Focuses on coordination, optimization, and system-wide learning management.
  * 
- * Author: MiniMax Agent
+ * Author: Cavin Otieno
  * Created: 2025-11-26
  */
 

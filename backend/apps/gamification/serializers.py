@@ -3,7 +3,7 @@ Gamification Serializers - JAC Learning Platform
 
 DRF serializers for gamification API endpoints.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

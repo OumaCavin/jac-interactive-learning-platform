@@ -4,7 +4,7 @@
  * Comprehensive chat interface that allows users to interact with all 6 AI agents.
  * Features agent selection, real-time switching, and unified chat experience.
  * 
- * Author: MiniMax Agent
+ * Author: Cavin Otieno
  * Created: 2025-11-26
  */
 

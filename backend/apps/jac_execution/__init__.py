@@ -51,7 +51,7 @@ Usage:
         task_id="tutorial_001"
     )
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-24
 """
 
@@ -90,7 +90,7 @@ except ImportError as e:
 
 # Package metadata
 __version__ = "1.0.0"
-__author__ = "MiniMax Agent"
+__author__ = "Cavin Otieno"
 
 # Configuration constants
 __execution_timeout__ = 30  # Default timeout in seconds

@@ -4,7 +4,7 @@ Simple Predictive Analytics Service Test
 
 Tests the core predictive analytics functionality without requiring full Django setup.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

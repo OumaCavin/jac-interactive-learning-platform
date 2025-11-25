@@ -2,7 +2,7 @@
 
 **JAC Learning Platform - Advanced Analytics Engine**  
 **Verification Date:** November 26, 2025  
-**Author:** MiniMax Agent
+**Author:** Cavin Otieno
 
 ---
 

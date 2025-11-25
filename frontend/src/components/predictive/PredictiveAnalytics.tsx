@@ -3,7 +3,7 @@
  * 
  * React components for displaying machine learning predictions and advanced analytics.
  * 
- * Author: MiniMax Agent
+ * Author: Cavin Otieno
  * Created: 2025-11-26
  */
 

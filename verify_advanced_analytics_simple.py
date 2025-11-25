@@ -4,7 +4,7 @@ JAC Learning Platform
 
 Verifies the implementation of advanced analytics features without Django dependencies.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

@@ -6,7 +6,7 @@ JAC Learning Platform
 Quick verification script to check the current status of
 performance monitoring infrastructure components.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

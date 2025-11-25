@@ -5,7 +5,7 @@ Sophisticated statistical analysis, advanced pattern recognition, and integrated
 personalized recommendation engine that combines predictive analytics with 
 knowledge graph insights.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

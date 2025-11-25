@@ -4,7 +4,7 @@
  * Specialized chat interface for the Quiz Master AI Agent.
  * Focuses on quiz creation, knowledge testing, and interactive learning challenges.
  * 
- * Author: MiniMax Agent
+ * Author: Cavin Otieno
  * Created: 2025-11-26
  */
 

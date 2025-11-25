@@ -4,7 +4,7 @@
  * Specialized chat interface for the Motivator AI Agent.
  * Focuses on encouragement, goal setting, and maintaining learning momentum.
  * 
- * Author: MiniMax Agent
+ * Author: Cavin Otieno
  * Created: 2025-11-26
  */
 

@@ -4,7 +4,7 @@
  * Manages global WebSocket connections for the entire application.
  * Provides real-time updates for dashboard, alerts, metrics, and activities.
  * 
- * Author: MiniMax Agent
+ * Author: Cavin Otieno
  * Created: 2025-11-26
  */
 

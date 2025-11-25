@@ -1,6 +1,6 @@
 # Django Backend Production Dockerfile
 # Multi-stage build for optimized production deployment
-# Author: MiniMax Agent
+# Author: Cavin Otieno
 
 # Stage 1: Dependencies
 FROM python:3.11-slim as dependencies

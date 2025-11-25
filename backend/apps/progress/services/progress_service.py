@@ -4,7 +4,7 @@ Progress Service - JAC Learning Platform
 This service handles core progress tracking functionality including
 snapshot creation, progress calculation, and real-time activity tracking.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-25
 """
 

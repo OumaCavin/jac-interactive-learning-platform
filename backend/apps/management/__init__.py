@@ -19,7 +19,7 @@ Usage:
     # Run management command
     python manage.py initialize_platform --help
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-24
 """
 
@@ -36,4 +36,4 @@ except ImportError:
 
 # Package metadata
 __version__ = "1.0.0"
-__author__ = "MiniMax Agent"
+__author__ = "Cavin Otieno"

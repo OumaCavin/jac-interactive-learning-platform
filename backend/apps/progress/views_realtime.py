@@ -10,7 +10,7 @@ Endpoints:
 - /api/progress/performance-alerts/ - Live performance alerts  
 - /api/progress/trend-analysis/ - Advanced trend analysis
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

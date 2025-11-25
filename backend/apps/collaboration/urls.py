@@ -3,7 +3,7 @@ Collaboration URLs - JAC Learning Platform
 
 URL routing for collaboration features.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

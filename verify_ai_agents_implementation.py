@@ -12,7 +12,7 @@ frontend-to-backend integration components:
 5. Motivator Agent
 6. SystemOrchestrator Agent
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Date: 2025-11-26
 """
 

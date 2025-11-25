@@ -36,7 +36,7 @@ Usage:
     # Use serializers
     from apps.users.serializers import UserSerializer
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-24
 """
 
@@ -51,7 +51,7 @@ __all__ = []
 
 # Package metadata
 __version__ = "1.0.0"
-__author__ = "MiniMax Agent"
+__author__ = "Cavin Otieno"
 
 # Users app is ready for Django app registry
 __app_ready__ = True

@@ -4,7 +4,7 @@ Notification Service - JAC Learning Platform
 This service handles progress-related notifications, alerts, and messaging
 for the JAC Interactive Learning Platform.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-25
 """
 

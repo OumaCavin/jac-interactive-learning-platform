@@ -4,7 +4,7 @@ Real-time Monitoring Service - JAC Learning Platform
 This service provides real-time performance monitoring, WebSocket connections,
 and live analytics for dashboard data feeds.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

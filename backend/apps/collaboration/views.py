@@ -3,7 +3,7 @@ Collaboration Views - JAC Learning Platform
 
 Django REST Framework viewsets for collaboration features.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

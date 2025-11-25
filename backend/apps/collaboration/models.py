@@ -3,7 +3,7 @@ Collaboration Models - JAC Learning Platform
 
 Models for study groups, discussions, peer sharing, and mentorship.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

@@ -4,7 +4,7 @@ Analytics Service - JAC Learning Platform
 This service handles advanced analytics generation, reporting, and insights
 for progress tracking in the JAC Interactive Learning Platform.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-25
 """
 

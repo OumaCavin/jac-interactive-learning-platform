@@ -3,7 +3,7 @@ Collaboration Admin - JAC Learning Platform
 
 Django admin interfaces for collaboration features.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

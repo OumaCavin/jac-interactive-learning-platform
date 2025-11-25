@@ -2,7 +2,7 @@
 
 **JAC Learning Platform - Frontend-to-Backend Integration Status**  
 **Date:** 2025-11-26  
-**Author:** MiniMax Agent  
+**Author:** Cavin Otieno  
 
 ## Executive Summary
 

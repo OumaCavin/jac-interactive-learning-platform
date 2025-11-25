@@ -11,7 +11,7 @@ Previously Missing Endpoints:
 - GET /api/progress/performance-alerts/         # ❌ Live performance alerts
 - GET /api/progress/trend-analysis/             # ❌ Advanced trend analysis
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

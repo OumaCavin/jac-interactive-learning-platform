@@ -8,7 +8,7 @@
  * - Group challenges
  * - Mentorship system
  * 
- * Author: MiniMax Agent
+ * Author: Cavin Otieno
  * Created: 2025-11-26
  */
 

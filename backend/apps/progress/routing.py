@@ -10,7 +10,7 @@ URL Patterns:
 - /ws/metrics/ - Real-time performance metrics
 - /ws/activity/ - Live activity stream
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

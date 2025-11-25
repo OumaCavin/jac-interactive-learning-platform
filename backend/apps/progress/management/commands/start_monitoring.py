@@ -7,7 +7,7 @@ for real-time performance tracking and analytics.
 Usage:
     python manage.py start_monitoring
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

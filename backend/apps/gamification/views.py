@@ -3,7 +3,7 @@ Gamification Views - JAC Learning Platform
 
 API views for gamification system including achievements, badges, points, and streaks.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

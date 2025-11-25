@@ -4,7 +4,7 @@ ASGI Configuration - JAC Learning Platform
 ASGI (Asynchronous Server Gateway Interface) configuration for Django,
 supporting WebSocket connections and real-time features.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

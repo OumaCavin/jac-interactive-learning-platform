@@ -4,7 +4,7 @@
  * Handles WebSocket connections for real-time dashboard updates,
  * live alerts, performance metrics, and activity streams.
  * 
- * Author: MiniMax Agent
+ * Author: Cavin Otieno
  * Created: 2025-11-26
  */
 

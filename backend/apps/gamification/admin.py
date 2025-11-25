@@ -3,7 +3,7 @@ Gamification Admin Configuration - JAC Learning Platform
 
 Django admin interface configuration for gamification models.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

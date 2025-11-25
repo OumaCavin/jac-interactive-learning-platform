@@ -4,7 +4,7 @@
  * Specialized chat interface for the Evaluator AI Agent.
  * Focuses on assessment, progress evaluation, and detailed feedback.
  * 
- * Author: MiniMax Agent
+ * Author: Cavin Otieno
  * Created: 2025-11-26
  */
 

@@ -4,7 +4,7 @@ WebSocket Consumers - JAC Learning Platform
 WebSocket consumers for real-time dashboard data feeds, live alerts,
 and continuous performance monitoring.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

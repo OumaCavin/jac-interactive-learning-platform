@@ -4,7 +4,7 @@ Background Monitoring Service - JAC Learning Platform
 Continuous background monitoring for performance tracking, alerts, and analytics.
 Runs as a background service to monitor all users and learning paths.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

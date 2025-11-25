@@ -4,7 +4,7 @@
  * Reusable base component for individual agent chat interfaces.
  * Handles common chat functionality, WebSocket integration, and UI patterns.
  * 
- * Author: MiniMax Agent
+ * Author: Cavin Otieno
  * Created: 2025-11-26
  */
 

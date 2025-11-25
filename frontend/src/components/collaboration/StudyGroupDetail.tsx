@@ -8,7 +8,7 @@
  * - Code sharing
  * - Group challenges
  * 
- * Author: MiniMax Agent
+ * Author: Cavin Otieno
  * Created: 2025-11-26
  */
 

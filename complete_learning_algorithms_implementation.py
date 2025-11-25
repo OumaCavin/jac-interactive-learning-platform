@@ -11,7 +11,7 @@ This module provides the missing implementations for:
 6. Knowledge Gap Detection
 7. Adaptive Feedback Generation
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

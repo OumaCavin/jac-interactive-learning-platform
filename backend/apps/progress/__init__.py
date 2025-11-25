@@ -29,7 +29,7 @@ Usage:
         progress_percentage=75
     )
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-24
 """
 
@@ -38,7 +38,7 @@ default_app_config = 'apps.progress.apps.ProgressConfig'
 
 # Package metadata
 __version__ = "1.0.0"
-__author__ = "MiniMax Agent"
+__author__ = "Cavin Otieno"
 
 # Optional imports - handle gracefully if models don't exist yet
 try:

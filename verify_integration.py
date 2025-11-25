@@ -6,7 +6,7 @@ JAC Learning Platform - Complete Integration Testing
 This script verifies that all frontend and backend components
 are properly integrated and functional.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 
@@ -210,7 +210,7 @@ def main():
     print("🔍 FRONTEND-BACKEND INTEGRATION VERIFICATION")
     print("=" * 60)
     print("JAC Interactive Learning Platform")
-    print("Author: MiniMax Agent")
+    print("Author: Cavin Otieno")
     print("Date: 2025-11-26")
     
     # Verify backend implementation

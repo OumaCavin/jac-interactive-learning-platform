@@ -5,7 +5,7 @@ JAC Learning Platform
 This script verifies that all real-time analytics enhancements and AI integration
 components are properly implemented and functional.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

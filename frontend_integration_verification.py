@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Simple Frontend Integration Verification
-Author: MiniMax Agent
+Author: Cavin Otieno
 Date: 2025-11-25
 
 This script verifies frontend-to-backend integration without requiring a running server.
@@ -351,7 +351,7 @@ def main():
     """Main verification function"""
     print("="*80)
     print("FRONTEND-TO-BACKEND INTEGRATION VERIFICATION")
-    print("Author: MiniMax Agent")
+    print("Author: Cavin Otieno")
     print("Date: 2025-11-25")
     print("="*80)
     

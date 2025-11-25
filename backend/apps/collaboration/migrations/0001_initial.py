@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('learning', '0003_add_adaptive_learning_models'),  # Add dependency on learning app
+        ('learning', '0003_adaptive_learning_clean'),  # Fixed dependency on learning app
     ]
 
     operations = [

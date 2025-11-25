@@ -5,7 +5,7 @@ Predictive Analytics API Views - JAC Learning Platform
 
 API endpoints for advanced machine learning and predictive analytics.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

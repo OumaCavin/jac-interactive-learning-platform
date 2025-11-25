@@ -18,7 +18,7 @@ API Views:
 - CreateProgressSnapshotAPIView: Create new progress snapshots
 - TrackUserProgressAPIView: Track real-time user progress
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-25
 """
 

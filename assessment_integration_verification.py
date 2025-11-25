@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Assessment Integration Verification Script
-Author: MiniMax Agent
+Author: Cavin Otieno
 Date: 2025-11-25
 
 This script verifies the assessment frontend-to-backend integration.
@@ -355,7 +355,7 @@ def main():
     """Main verification function"""
     print("="*80)
     print("ASSESSMENT FRONTEND-TO-BACKEND INTEGRATION VERIFICATION")
-    print("Author: MiniMax Agent")
+    print("Author: Cavin Otieno")
     print("Date: 2025-11-25")
     print("="*80)
     

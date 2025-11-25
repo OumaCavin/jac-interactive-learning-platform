@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Complete Integration of Remaining Predictive Learning Models and K-Means Clustering
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 
 This script integrates the 6 remaining predictive learning models and K-Means clustering

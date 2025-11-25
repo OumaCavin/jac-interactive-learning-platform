@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Corrected Verification of Predictive Learning Models
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 
 This script verifies the integration with corrected Django models and imports.

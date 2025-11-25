@@ -4,7 +4,7 @@ JAC Learning Platform
 
 Rapid verification that the Advanced Analytics Engine is operational.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

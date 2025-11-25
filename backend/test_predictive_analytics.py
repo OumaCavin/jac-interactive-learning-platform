@@ -4,7 +4,7 @@ Predictive Analytics API Test Script
 
 Tests the newly implemented predictive analytics endpoints to verify functionality.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

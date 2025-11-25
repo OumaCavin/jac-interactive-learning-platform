@@ -55,8 +55,8 @@ def main():
             content = f.read()
             if "Author: Cavin Otieno" in content:
                 print("\n✅ CONFIRMED: backend/apps/learning/__init__.py contains 'Author: Cavin Otieno'")
-            elif "Author: MiniMax Agent" in content:
-                print("\n❌ ERROR: backend/apps/learning/__init__.py still contains 'Author: MiniMax Agent'")
+            elif "Author: Cavin Otieno" in content:
+                print("\n❌ ERROR: backend/apps/learning/__init__.py still contains 'Author: Cavin Otieno'")
             else:
                 print("\n⚠️  WARNING: No author line found in backend/apps/learning/__init__.py")
     

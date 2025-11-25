@@ -5,7 +5,7 @@ JAC Learning Platform
 This script enhances the existing real-time analytics framework to integrate
 with the newly added predictive learning models and improve WebSocket streaming.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

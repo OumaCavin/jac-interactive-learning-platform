@@ -4,7 +4,7 @@
  * Specialized chat interface for the Content Curator AI Agent.
  * Focuses on content organization, learning path creation, and material recommendations.
  * 
- * Author: MiniMax Agent
+ * Author: Cavin Otieno
  * Created: 2025-11-26
  */
 

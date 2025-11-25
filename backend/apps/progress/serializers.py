@@ -14,7 +14,7 @@ Serializers:
 - ProgressSummarySerializer: Comprehensive progress summary
 - ProgressAnalyticsSerializer: Advanced analytics data
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-25
 """
 

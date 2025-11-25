@@ -3,7 +3,7 @@ Gamification Signals - JAC Learning Platform
 
 Django signals for automatic gamification triggers.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

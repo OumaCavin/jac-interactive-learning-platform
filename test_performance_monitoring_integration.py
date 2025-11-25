@@ -7,7 +7,7 @@ This test verifies the complete functionality of the performance monitoring
 infrastructure including real-time alerts, threshold monitoring, and 
 automated intervention triggers with full frontend-to-backend integration.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 

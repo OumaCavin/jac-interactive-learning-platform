@@ -5,7 +5,7 @@ JAC Learning Platform
 This script performs a simplified verification of the implementation
 without requiring Django settings configuration.
 
-Author: MiniMax Agent
+Author: Cavin Otieno
 Created: 2025-11-26
 """
 
