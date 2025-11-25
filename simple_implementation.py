@@ -22,19 +22,20 @@ def setup_django_minimal():
         django.setup()
         
         # Import models directly
-        from knowledge_graph.models import Concept, Relationship
-        from learning.models import LearningPath, Module
-        from agents.models import Agent
-        from assessments.models import Assessment, Question
+        from apps.knowledge_graph.models import ConceptRelation, KnowledgeNode
+        from apps.learning.models import LearningPath, Module
+        from apps.agents.simple_models import SimpleAgent, LearningSession
+        from apps.assessments.models import Assessment, AssessmentQuestion
         
         return {
-            'Concept': Concept,
-            'Relationship': Relationship, 
+            'ConceptRelation': ConceptRelation,
+            'KnowledgeNode': KnowledgeNode, 
             'LearningPath': LearningPath,
             'Module': Module,
-            'Agent': Agent,
+            'Agent': SimpleAgent,
+            'LearningSession': LearningSession,
             'Assessment': Assessment,
-            'Question': Question
+            'AssessmentQuestion': AssessmentQuestion
         }
     except Exception as e:
         print(f"⚠️  Django setup warning: {e}")
