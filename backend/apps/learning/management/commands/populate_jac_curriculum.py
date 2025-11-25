@@ -6,7 +6,7 @@ with comprehensive content based on official JAC documentation.
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 from apps.learning.models import (
-    LearningPath, Module, Lesson, Assessment, Question
+    LearningPath, Module, Lesson, Assessment, AssessmentQuestion
 )
 import uuid
 import json
@@ -195,7 +195,7 @@ class Command(BaseCommand):
                     
                     # Create questions for this assessment
                     for i, question_data in enumerate(assessment_data['questions']):
-                        question, q_created = Question.objects.get_or_create(
+                        question, q_created = AssessmentQuestion.objects.get_or_create(
                             assessment=assessment,
                             question_text=question_data['text'],
                             defaults={
@@ -218,7 +218,7 @@ class Command(BaseCommand):
         self.stdout.write(f'📖 Created {Module.objects.filter(learning_path=learning_path).count()} module(s)')
         self.stdout.write(f'📝 Created {Lesson.objects.filter(module__learning_path=learning_path).count()} lesson(s)')
         self.stdout.write(f'🎯 Created {Assessment.objects.filter(module__learning_path=learning_path).count()} assessment(s)')
-        self.stdout.write(f'❓ Created {Question.objects.filter(assessment__module__learning_path=learning_path).count()} question(s)')
+        self.stdout.write(f'❓ Created {AssessmentQuestion.objects.filter(assessment__module__learning_path=learning_path).count()} question(s)')
 
     # Module 1: JAC Fundamentals Content
     def get_module1_content(self):

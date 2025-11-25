@@ -537,7 +537,7 @@ class AssessmentAttempt(models.Model):
     ]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assessment_attempts')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='learning_assessment_attempts')
     assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='attempts')
     
     # Attempt tracking
