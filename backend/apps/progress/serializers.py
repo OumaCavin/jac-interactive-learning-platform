@@ -440,3 +440,117 @@ class PredictiveDashboardSerializer(serializers.Serializer):
     trends = serializers.DictField()
     confidence = serializers.DictField()
     charts = serializers.DictField(required=False)
+
+
+# Advanced Analytics Serializers
+
+class SophisticatedStatisticalAnalysisSerializer(serializers.Serializer):
+    """
+    Serializer for sophisticated statistical analysis
+    """
+    user_id = serializers.CharField()
+    analysis_timestamp = serializers.DateTimeField()
+    analysis_type = serializers.CharField()
+    data_quality_score = serializers.FloatField()
+    sample_size = serializers.IntegerField()
+    multivariate_analysis = serializers.DictField()
+    clustering_analysis = serializers.DictField()
+    correlation_analysis = serializers.DictField()
+    hypothesis_testing = serializers.DictField()
+    outlier_analysis = serializers.DictField()
+    statistical_significance_summary = serializers.DictField()
+    key_statistical_insights = serializers.ListField(child=serializers.CharField())
+
+
+class EnhancedMLInsightsSerializer(serializers.Serializer):
+    """
+    Serializer for enhanced ML insights
+    """
+    user_id = serializers.CharField()
+    analysis_timestamp = serializers.DateTimeField()
+    feature_importance_analysis = serializers.DictField()
+    user_segmentation = serializers.DictField()
+    model_interpretability = serializers.DictField()
+    pathway_optimization = serializers.DictField()
+    ml_insights_summary = serializers.CharField()
+    recommendations = serializers.ListField(child=serializers.CharField())
+
+
+class AdvancedPatternRecognitionSerializer(serializers.Serializer):
+    """
+    Serializer for advanced pattern recognition
+    """
+    user_id = serializers.CharField()
+    analysis_timestamp = serializers.DateTimeField()
+    learning_style_detection = serializers.DictField()
+    engagement_patterns = serializers.DictField()
+    performance_anomalies = serializers.DictField()
+    knowledge_acquisition_patterns = serializers.DictField()
+    temporal_patterns = serializers.DictField()
+    pattern_recognition_summary = serializers.DictField()
+    pattern_based_recommendations = serializers.ListField(child=serializers.CharField())
+
+
+class IntegratedPersonalizedRecommendationsSerializer(serializers.Serializer):
+    """
+    Serializer for integrated personalized recommendations
+    """
+    user_id = serializers.CharField()
+    recommendation_timestamp = serializers.DateTimeField()
+    recommendation_type = serializers.CharField()
+    knowledge_graph_recommendations = serializers.ListField()
+    predictive_insights = serializers.DictField()
+    statistical_insights = serializers.DictField()
+    ml_insights = serializers.DictField()
+    pattern_recognition = serializers.DictField()
+    integrated_recommendations = serializers.ListField()
+    ranked_recommendations = serializers.ListField()
+    recommendation_summary = serializers.DictField()
+    confidence_scores = serializers.DictField()
+
+
+class AdvancedAnalyticsDashboardSerializer(serializers.Serializer):
+    """
+    Serializer for advanced analytics dashboard data
+    """
+    user_id = serializers.CharField()
+    dashboard_timestamp = serializers.DateTimeField()
+    learning_path_id = serializers.CharField(allow_null=True, required=False)
+    statistical_analysis = serializers.DictField()
+    ml_insights = serializers.DictField()
+    pattern_recognition = serializers.DictField()
+    integrated_recommendations = serializers.DictField()
+    errors = serializers.ListField(child=serializers.CharField())
+    data_availability = serializers.DictField()
+    dashboard_summary = serializers.DictField()
+
+
+class AdvancedAnalyticsSerializer(serializers.Serializer):
+    """
+    Master serializer for all advanced analytics data
+    """
+    sophisticated_statistical_analysis = SophisticatedStatisticalAnalysisSerializer(required=False)
+    enhanced_ml_insights = EnhancedMLInsightsSerializer(required=False)
+    advanced_pattern_recognition = AdvancedPatternRecognitionSerializer(required=False)
+    integrated_personalized_recommendations = IntegratedPersonalizedRecommendationsSerializer(required=False)
+    advanced_analytics_dashboard = AdvancedAnalyticsDashboardSerializer(required=False)
+    
+    def to_representation(self, instance):
+        """Handle different types of advanced analytics data."""
+        if hasattr(instance, 'user_id'):
+            # Statistical analysis
+            return SophisticatedStatisticalAnalysisSerializer(instance).data
+        elif hasattr(instance, 'ml_insights_summary'):
+            # ML insights
+            return EnhancedMLInsightsSerializer(instance).data
+        elif hasattr(instance, 'pattern_recognition_summary'):
+            # Pattern recognition
+            return AdvancedPatternRecognitionSerializer(instance).data
+        elif hasattr(instance, 'ranked_recommendations'):
+            # Personalized recommendations
+            return IntegratedPersonalizedRecommendationsSerializer(instance).data
+        elif hasattr(instance, 'dashboard_summary'):
+            # Dashboard data
+            return AdvancedAnalyticsDashboardSerializer(instance).data
+        else:
+            return super().to_representation(instance)

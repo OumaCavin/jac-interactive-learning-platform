@@ -31,6 +31,11 @@ from .views_predictive import (
     ConfidenceCalculationsAPIView, ComprehensivePredictiveAnalyticsAPIView,
     predictive_dashboard_data
 )
+from .views_advanced_analytics import (
+    SophisticatedStatisticalAnalysisAPIView, EnhancedMLInsightsAPIView,
+    AdvancedPatternRecognitionAPIView, IntegratedPersonalizedRecommendationsAPIView,
+    AdvancedAnalyticsDashboardAPIView, advanced_analytics_dashboard
+)
 
 # Create a router and register our viewsets with it
 router = DefaultRouter()
@@ -71,6 +76,14 @@ urlpatterns = [
     path('api/v1/predict/comprehensive/', ComprehensivePredictiveAnalyticsAPIView.as_view(), name='comprehensive-predictive'),
     path('api/v1/predict/dashboard/', predictive_dashboard_data, name='predictive-dashboard'),
     
+    # Advanced Analytics Endpoints
+    path('api/v1/advanced/statistical/', SophisticatedStatisticalAnalysisAPIView.as_view(), name='sophisticated-statistical'),
+    path('api/v1/advanced/ml-insights/', EnhancedMLInsightsAPIView.as_view(), name='enhanced-ml-insights'),
+    path('api/v1/advanced/pattern-recognition/', AdvancedPatternRecognitionAPIView.as_view(), name='advanced-pattern-recognition'),
+    path('api/v1/advanced/personalized-recommendations/', IntegratedPersonalizedRecommendationsAPIView.as_view(), name='integrated-personalized-recommendations'),
+    path('api/v1/advanced/dashboard/', AdvancedAnalyticsDashboardAPIView.as_view(), name='advanced-analytics-dashboard'),
+    path('api/v1/advanced/', advanced_analytics_dashboard, name='advanced-analytics'),
+    
     # Alternative endpoints without API version
     path('api/predict/ml/', MLPredictionsAPIView.as_view(), name='ml-predictions-no-version'),
     path('api/predict/trends/', HistoricalTrendsAPIView.as_view(), name='historical-trends-no-version'),
@@ -78,4 +91,12 @@ urlpatterns = [
     path('api/predict/confidence/', ConfidenceCalculationsAPIView.as_view(), name='confidence-calculations-no-version'),
     path('api/predict/comprehensive/', ComprehensivePredictiveAnalyticsAPIView.as_view(), name='comprehensive-predictive-no-version'),
     path('api/predict/dashboard/', predictive_dashboard_data, name='predictive-dashboard-no-version'),
+    
+    # Alternative advanced analytics endpoints without API version
+    path('api/advanced/statistical/', SophisticatedStatisticalAnalysisAPIView.as_view(), name='sophisticated-statistical-no-version'),
+    path('api/advanced/ml-insights/', EnhancedMLInsightsAPIView.as_view(), name='enhanced-ml-insights-no-version'),
+    path('api/advanced/pattern-recognition/', AdvancedPatternRecognitionAPIView.as_view(), name='advanced-pattern-recognition-no-version'),
+    path('api/advanced/personalized-recommendations/', IntegratedPersonalizedRecommendationsAPIView.as_view(), name='integrated-personalized-recommendations-no-version'),
+    path('api/advanced/dashboard/', AdvancedAnalyticsDashboardAPIView.as_view(), name='advanced-analytics-dashboard-no-version'),
+    path('api/advanced/', advanced_analytics_dashboard, name='advanced-analytics-no-version'),
 ]
