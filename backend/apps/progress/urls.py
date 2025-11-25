@@ -36,6 +36,10 @@ from .views_advanced_analytics import (
     AdvancedPatternRecognitionAPIView, IntegratedPersonalizedRecommendationsAPIView,
     AdvancedAnalyticsDashboardAPIView, advanced_analytics_dashboard
 )
+from .views_realtime import (
+    RealTimeDashboardAPIView, PredictiveAnalyticsAPIView,
+    PerformanceAlertsAPIView, TrendAnalysisAPIView
+)
 
 # Create a router and register our viewsets with it
 router = DefaultRouter()
@@ -99,4 +103,16 @@ urlpatterns = [
     path('api/advanced/personalized-recommendations/', IntegratedPersonalizedRecommendationsAPIView.as_view(), name='integrated-personalized-recommendations-no-version'),
     path('api/advanced/dashboard/', AdvancedAnalyticsDashboardAPIView.as_view(), name='advanced-analytics-dashboard-no-version'),
     path('api/advanced/', advanced_analytics_dashboard, name='advanced-analytics-no-version'),
+    
+    # Real-time Progress API Endpoints (MISSING ENDPOINTS IMPLEMENTATION)
+    path('api/progress/real-time-dashboard/', RealTimeDashboardAPIView.as_view(), name='real-time-dashboard'),
+    path('api/progress/predictive-analytics/', PredictiveAnalyticsAPIView.as_view(), name='predictive-analytics'),
+    path('api/progress/performance-alerts/', PerformanceAlertsAPIView.as_view(), name='performance-alerts'),
+    path('api/progress/trend-analysis/', TrendAnalysisAPIView.as_view(), name='trend-analysis'),
+    
+    # Alternative real-time endpoints with API version
+    path('api/v1/progress/real-time-dashboard/', RealTimeDashboardAPIView.as_view(), name='real-time-dashboard-v1'),
+    path('api/v1/progress/predictive-analytics/', PredictiveAnalyticsAPIView.as_view(), name='predictive-analytics-v1'),
+    path('api/v1/progress/performance-alerts/', PerformanceAlertsAPIView.as_view(), name='performance-alerts-v1'),
+    path('api/v1/progress/trend-analysis/', TrendAnalysisAPIView.as_view(), name='trend-analysis-v1'),
 ]
