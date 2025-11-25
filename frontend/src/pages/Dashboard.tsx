@@ -12,10 +12,13 @@ import {
   ArrowRightIcon,
   FireIcon,
   StarIcon,
+  SignalIcon,
 } from '@heroicons/react/24/outline';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { learningService, LearningPath } from '../services/learningService';
+import { WebSocketProvider, ConnectionStatus } from '../components/realtime/WebSocketProvider';
+import RealTimeDashboard from '../components/realtime/RealTimeDashboard';
 // Note: agentService removed to avoid unused import warning
 // import { agentService } from './services/agentService';
 
@@ -296,33 +299,44 @@ export const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className="space-y-8" role="main" aria-label="Learning dashboard and progress overview">
-      {/* Welcome Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-white"
-      >
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold">
-              Welcome back, {user?.first_name || 'Learner'}!
-            </h1>
-            <p className="text-primary-100 mt-2 text-lg">
-              Ready to continue your JAC learning journey?
-            </p>
-          </div>
-          <div className="hidden lg:block">
-            <div className="flex items-center space-x-2 text-primary-100">
-              <FireIcon className="h-5 w-5" />
-              <span className="font-semibold">{stats.currentStreak} day streak!</span>
+    <WebSocketProvider autoConnect={true}>
+      <div className="space-y-8" role="main" aria-label="Learning dashboard and progress overview">
+        {/* Welcome Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-white"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold">
+                Welcome back, {user?.first_name || 'Learner'}!
+              </h1>
+              <p className="text-primary-100 mt-2 text-lg">
+                Ready to continue your JAC learning journey?
+              </p>
+            </div>
+            <div className="hidden lg:flex items-center gap-4">
+              <ConnectionStatus />
+              <div className="flex items-center space-x-2 text-primary-100">
+                <FireIcon className="h-5 w-5" />
+                <span className="font-semibold">{stats.currentStreak} day streak!</span>
+              </div>
             </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Real-time Dashboard */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+        >
+          <RealTimeDashboard className="mb-8" />
+        </motion.div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title="Modules Completed"
           value={stats.totalModulesCompleted}
@@ -462,7 +476,7 @@ export const Dashboard: React.FC = () => {
           </div>
         </motion.div>
       </div>
-    </div>
+    </WebSocketProvider>
   );
 };
 
