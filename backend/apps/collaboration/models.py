@@ -8,10 +8,12 @@ Created: 2025-11-26
 """
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.conf import settings
 import uuid
+
+User = get_user_model()
 
 class StudyGroup(models.Model):
     """Study groups for collaborative learning"""
@@ -226,7 +228,7 @@ class GroupChallenge(models.Model):
     allow_team_participation = models.BooleanField(default=True)
     
     # Relationships
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_challenges')
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_group_challenges')
     study_group = models.ForeignKey(StudyGroup, on_delete=models.CASCADE, related_name='challenges')
     
     # Timestamps
