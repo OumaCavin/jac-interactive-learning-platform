@@ -1551,4 +1551,204 @@ class TrendAnalysisAPIView(APIView):
 
 
 # Import numpy for statistical calculations
+
+    def _get_comprehensive_predictions(self, user: User, time_horizon: int, learning_path_id: Optional[str]) -> Dict[str, Any]:
+        """Get comprehensive ML predictions using all integrated models"""
+        try:
+            # Use the predictive analytics service with all 8 methods
+            predictions = self.predictive_service.generate_comprehensive_predictions(
+                user=user,
+                time_horizon_days=time_horizon,
+                learning_path_id=learning_path_id
+            )
+            
+            # Also get individual model results for detailed analysis
+            individual_predictions = {}
+            
+            # Learning velocity analysis
+            try:
+                individual_predictions['learning_velocity'] = self.predictive_service.analyze_learning_velocity(user)
+            except Exception as e:
+                individual_predictions['learning_velocity'] = {'error': str(e)}
+            
+            # Engagement pattern analysis
+            try:
+                individual_predictions['engagement_patterns'] = self.predictive_service.analyze_engagement_patterns(user)
+            except Exception as e:
+                individual_predictions['engagement_patterns'] = {'error': str(e)}
+            
+            # Success probability modeling
+            try:
+                individual_predictions['success_probability'] = self.predictive_service.model_success_probability(user)
+            except Exception as e:
+                individual_predictions['success_probability'] = {'error': str(e)}
+            
+            # Time to completion prediction
+            try:
+                individual_predictions['time_to_completion'] = self.predictive_service.predict_time_to_completion(user)
+            except Exception as e:
+                individual_predictions['time_to_completion'] = {'error': str(e)}
+            
+            # Retention risk assessment
+            try:
+                individual_predictions['retention_risk'] = self.predictive_service.assess_retention_risk(user)
+            except Exception as e:
+                individual_predictions['retention_risk'] = {'error': str(e)}
+            
+            # Knowledge gap detection
+            try:
+                individual_predictions['knowledge_gaps'] = self.predictive_service.detect_knowledge_gaps(user)
+            except Exception as e:
+                individual_predictions['knowledge_gaps'] = {'error': str(e)}
+            
+            # Learning clusters analysis
+            try:
+                individual_predictions['learning_clusters'] = self.predictive_service.perform_learning_analytics_clustering(user)
+            except Exception as e:
+                individual_predictions['learning_clusters'] = {'error': str(e)}
+            
+            # Performance forecasting
+            try:
+                individual_predictions['performance_forecast'] = self.predictive_service.analyze_performance_forecasting(user)
+            except Exception as e:
+                individual_predictions['performance_forecast'] = {'error': str(e)}
+            
+            return {
+                'comprehensive_overview': predictions,
+                'individual_models': individual_predictions,
+                'model_count': len(individual_predictions),
+                'successful_predictions': len([p for p in individual_predictions.values() if 'error' not in p])
+            }
+            
+        except Exception as e:
+            # Fallback to basic predictions if service fails
+            return self._fallback_predictions(user, time_horizon)
+    
+    async def _get_ai_enhanced_predictions(self, user: User) -> Dict[str, Any]:
+        """Get AI-enhanced predictions using multi-agent system"""
+        try:
+            from apps.agents.ai_multi_agent_system import get_multi_agent_system
+            
+            ai_system = get_multi_agent_system()
+            
+            # Get prediction context
+            context = {
+                'user_progress': self._get_user_progress_context(user),
+                'recent_activity': self._get_recent_activity_context(user),
+                'performance_trends': self._get_performance_trends_data(user)
+            }
+            
+            ai_request = {
+                'user_id': str(user.id),
+                'message': 'Analyze my learning data and provide strategic insights about my progress, challenges, and recommendations',
+                'agent_type': 'knowledge_explorer',
+                'context': context
+            }
+            
+            ai_response = await ai_system.process_request(ai_request)
+            
+            return {
+                'ai_insights': ai_response,
+                'context_used': context,
+                'timestamp': timezone.now().isoformat()
+            }
+            
+        except Exception as e:
+            return {'error': str(e)}
+    
+    def _get_user_progress_context(self, user: User) -> Dict[str, Any]:
+        """Get user progress context for AI analysis"""
+        total_modules = UserModuleProgress.objects.filter(user=user).count()
+        completed_modules = UserModuleProgress.objects.filter(user=user, status='completed').count()
+        
+        return {
+            'total_modules': total_modules,
+            'completed_modules': completed_modules,
+            'completion_rate': round((completed_modules / max(total_modules, 1)) * 100, 2)
+        }
+    
+    def _get_recent_activity_context(self, user: User) -> Dict[str, Any]:
+        """Get recent activity context"""
+        week_ago = timezone.now() - timedelta(days=7)
+        recent_activities = UserModuleProgress.objects.filter(
+            user=user,
+            updated_at__gte=week_ago
+        ).count()
+        
+        return {
+            'activities_last_week': recent_activities,
+            'engagement_level': 'high' if recent_activities >= 10 else 'medium' if recent_activities >= 5 else 'low'
+        }
+    
+    def _get_performance_trends_data(self, user: User) -> Dict[str, Any]:
+        """Get performance trends data"""
+        recent_assessments = AssessmentAttempt.objects.filter(
+            user=user,
+            completed_at__gte=timezone.now() - timedelta(days=30),
+            score__isnull=False
+        )
+        
+        if recent_assessments.exists():
+            scores = [a.score for a in recent_assessments]
+            return {
+                'recent_average_score': round(sum(scores) / len(scores), 2),
+                'score_trend': 'improving' if len(scores) >= 3 and scores[-1] > scores[0] else 'stable',
+                'total_assessments': len(scores)
+            }
+        
+        return {'no_recent_data': True}
+    
+    def get(self, request):
+        """Enhanced GET method with AI integration"""
+        try:
+            user = request.user
+            time_horizon = request.GET.get('horizon', '30')
+            learning_path_id = request.GET.get('learning_path_id')
+            include_ai = request.GET.get('ai_enhanced', 'false').lower() == 'true'
+            
+            # Get comprehensive predictions using all models
+            predictions = self._get_comprehensive_predictions(user, int(time_horizon), learning_path_id)
+            
+            # Get AI-enhanced insights if requested
+            ai_enhanced_insights = {}
+            if include_ai:
+                import asyncio
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+                ai_enhanced_insights = loop.run_until_complete(self._get_ai_enhanced_predictions(user))
+            
+            # Get performance forecasts
+            performance_forecast = self._get_performance_forecast(user)
+            
+            # Get learning recommendations
+            learning_recommendations = self._get_learning_recommendations(user)
+            
+            # Get completion predictions
+            completion_predictions = self._get_completion_predictions(user)
+            
+            response_data = {
+                'user_id': user.id,
+                'timestamp': timezone.now().isoformat(),
+                'prediction_horizon_days': int(time_horizon),
+                'comprehensive_predictions': predictions,
+                'performance_forecast': performance_forecast,
+                'learning_recommendations': learning_recommendations,
+                'completion_predictions': completion_predictions,
+                'confidence_scores': self._get_prediction_confidence(user),
+                'model_insights': self._get_model_insights(user)
+            }
+            
+            # Add AI enhanced insights if requested
+            if include_ai and ai_enhanced_insights:
+                response_data['ai_enhanced_insights'] = ai_enhanced_insights
+            
+            return Response(response_data, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            return Response({
+                'error': 'Failed to generate enhanced predictions',
+                'message': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 import numpy as np

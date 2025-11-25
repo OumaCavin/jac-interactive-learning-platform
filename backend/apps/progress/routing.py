@@ -18,6 +18,8 @@ from django.urls import re_path
 from . import consumers
 
 websocket_urlpatterns = [
+    re_path(r'ws/predictive/$', consumers.PredictiveAnalyticsConsumer.as_asgi()),
+    re_path(r'ws/ai-interaction/$', consumers.AIInteractionConsumer.as_asgi()),
     re_path(r'ws/dashboard/$', consumers.DashboardConsumer.as_asgi()),
     re_path(r'ws/alerts/$', consumers.AlertConsumer.as_asgi()),
     re_path(r'ws/metrics/$', consumers.RealtimeMetricsConsumer.as_asgi()),
