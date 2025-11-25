@@ -1267,8 +1267,6 @@ const KnowledgeGraph: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-
   // Helper functions
   function getNodeTypeIcon(type: string) {
     switch (type) {
@@ -1292,6 +1290,8 @@ const KnowledgeGraph: React.FC = () => {
       default: return '#6B7280';
     }
   }
+
+  return (
 };
 
 export default KnowledgeGraph;

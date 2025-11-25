@@ -10,7 +10,7 @@ import {
   MagnifyingGlassIcon, 
   XMarkIcon,
   ClockIcon,
-  TrendingUpIcon,
+  ArrowTrendingUpIcon as TrendingUpIcon,
   FireIcon
 } from '@heroicons/react/24/outline';
 import { useDispatch, useSelector } from 'react-redux';

@@ -1,13 +1,13 @@
-"""
-Advanced Analytics Frontend Components - JAC Learning Platform
-
-React components for displaying sophisticated statistical analysis, 
-enhanced ML insights, advanced pattern recognition, and integrated
-personalized recommendations.
-
-Author: MiniMax Agent
-Created: 2025-11-26
-"""
+/**
+ * Advanced Analytics Frontend Components - JAC Learning Platform
+ * 
+ * React components for displaying sophisticated statistical analysis, 
+ * enhanced ML insights, advanced pattern recognition, and integrated
+ * personalized recommendations.
+ * 
+ * Author: MiniMax Agent
+ * Created: 2025-11-26
+ */
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';

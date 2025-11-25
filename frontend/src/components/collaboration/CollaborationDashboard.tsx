@@ -40,10 +40,10 @@ import {
   Activity,
   TrendingUp,
 } from 'lucide-react'
-import { Button } from '../ui/button'
-import { Input } from '../ui/input'
-import { Badge } from '../ui/badge'
-import { Skeleton } from '../ui/skeleton'
+import Button from '../ui/button'
+import Input from '../ui/input'
+import Badge from '../ui/badge'
+import Skeleton from '../ui/skeleton'
 import {
   AlertDialog,
   AlertDialogAction,

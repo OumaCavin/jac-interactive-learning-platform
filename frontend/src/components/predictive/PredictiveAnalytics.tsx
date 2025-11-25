@@ -1,11 +1,11 @@
-"""
-Predictive Analytics Frontend Components - JAC Learning Platform
-
-React components for displaying machine learning predictions and advanced analytics.
-
-Author: MiniMax Agent
-Created: 2025-11-26
-"""
+/**
+ * Predictive Analytics Frontend Components - JAC Learning Platform
+ * 
+ * React components for displaying machine learning predictions and advanced analytics.
+ * 
+ * Author: MiniMax Agent
+ * Created: 2025-11-26
+ */
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';

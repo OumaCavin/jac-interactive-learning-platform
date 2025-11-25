@@ -42,10 +42,10 @@ import {
   Star,
   ArrowLeft,
 } from 'lucide-react'
-import { Button } from '../ui/button'
-import { Badge } from '../ui/badge'
+import Button from '../ui/button'
+import Badge from '../ui/badge'
 import { Avatar, AvatarFallback } from '../ui/avatar'
-import { Skeleton } from '../ui/skeleton'
+import Skeleton from '../ui/skeleton'
 
 import collaborationService, {
   StudyGroup,
