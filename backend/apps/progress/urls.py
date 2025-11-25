@@ -29,7 +29,10 @@ from .views import (
 from .views_predictive import (
     MLPredictionsAPIView, HistoricalTrendsAPIView, AdaptivePredictionsAPIView,
     ConfidenceCalculationsAPIView, ComprehensivePredictiveAnalyticsAPIView,
-    predictive_dashboard_data
+    predictive_dashboard_data,
+    # New Predictive Learning Models APIs
+    LearningVelocityAPIView, EngagementPatternsAPIView, SuccessProbabilityAPIView,
+    TimeToCompletionAPIView, RetentionRiskAPIView, KnowledgeGapsAPIView, LearningClustersAPIView
 )
 from .views_advanced_analytics import (
     SophisticatedStatisticalAnalysisAPIView, EnhancedMLInsightsAPIView,
@@ -80,6 +83,15 @@ urlpatterns = [
     path('api/v1/predict/comprehensive/', ComprehensivePredictiveAnalyticsAPIView.as_view(), name='comprehensive-predictive'),
     path('api/v1/predict/dashboard/', predictive_dashboard_data, name='predictive-dashboard'),
     
+    # New Predictive Learning Models Endpoints
+    path('api/v1/predict/velocity/', LearningVelocityAPIView.as_view(), name='learning-velocity'),
+    path('api/v1/predict/engagement/', EngagementPatternsAPIView.as_view(), name='engagement-patterns'),
+    path('api/v1/predict/success-probability/', SuccessProbabilityAPIView.as_view(), name='success-probability'),
+    path('api/v1/predict/time-to-completion/', TimeToCompletionAPIView.as_view(), name='time-to-completion'),
+    path('api/v1/predict/retention-risk/', RetentionRiskAPIView.as_view(), name='retention-risk'),
+    path('api/v1/predict/knowledge-gaps/', KnowledgeGapsAPIView.as_view(), name='knowledge-gaps'),
+    path('api/v1/predict/learning-clusters/', LearningClustersAPIView.as_view(), name='learning-clusters'),
+    
     # Advanced Analytics Endpoints
     path('api/v1/advanced/statistical/', SophisticatedStatisticalAnalysisAPIView.as_view(), name='sophisticated-statistical'),
     path('api/v1/advanced/ml-insights/', EnhancedMLInsightsAPIView.as_view(), name='enhanced-ml-insights'),
@@ -95,6 +107,15 @@ urlpatterns = [
     path('api/predict/confidence/', ConfidenceCalculationsAPIView.as_view(), name='confidence-calculations-no-version'),
     path('api/predict/comprehensive/', ComprehensivePredictiveAnalyticsAPIView.as_view(), name='comprehensive-predictive-no-version'),
     path('api/predict/dashboard/', predictive_dashboard_data, name='predictive-dashboard-no-version'),
+    
+    # Alternative new predictive learning models endpoints
+    path('api/predict/velocity/', LearningVelocityAPIView.as_view(), name='learning-velocity-no-version'),
+    path('api/predict/engagement/', EngagementPatternsAPIView.as_view(), name='engagement-patterns-no-version'),
+    path('api/predict/success-probability/', SuccessProbabilityAPIView.as_view(), name='success-probability-no-version'),
+    path('api/predict/time-to-completion/', TimeToCompletionAPIView.as_view(), name='time-to-completion-no-version'),
+    path('api/predict/retention-risk/', RetentionRiskAPIView.as_view(), name='retention-risk-no-version'),
+    path('api/predict/knowledge-gaps/', KnowledgeGapsAPIView.as_view(), name='knowledge-gaps-no-version'),
+    path('api/predict/learning-clusters/', LearningClustersAPIView.as_view(), name='learning-clusters-no-version'),
     
     # Alternative advanced analytics endpoints without API version
     path('api/advanced/statistical/', SophisticatedStatisticalAnalysisAPIView.as_view(), name='sophisticated-statistical-no-version'),

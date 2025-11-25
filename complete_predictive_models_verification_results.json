@@ -1,0 +1,107 @@
+{
+  "overall_status": "poor",
+  "success_rate": 12.5,
+  "passed_tests": 1,
+  "failed_tests": 7,
+  "error_tests": 0,
+  "total_tests": 8,
+  "detailed_results": {
+    "learning_velocity_analysis": {
+      "status": "failed",
+      "message": "Method returned error status: error",
+      "result": {
+        "status": "error",
+        "message": "Velocity analysis failed: name 'F' is not defined",
+        "velocity_score": 0.5,
+        "trend": "stable",
+        "predicted_pace": "moderate"
+      }
+    },
+    "engagement_pattern_analysis": {
+      "status": "failed",
+      "message": "Method returned error status: error",
+      "result": {
+        "status": "error",
+        "message": "Engagement analysis failed: name 'F' is not defined",
+        "engagement_score": 0.5,
+        "primary_pattern": "analysis_failed"
+      }
+    },
+    "success_probability_modeling": {
+      "status": "failed",
+      "message": "Method returned error status: error",
+      "result": {
+        "status": "error",
+        "message": "Success probability modeling failed: name 'Case' is not defined",
+        "success_probability": 0.5,
+        "confidence_score": 0.0
+      }
+    },
+    "time_to_completion_prediction": {
+      "status": "failed",
+      "message": "Missing expected key: time_estimates",
+      "result": {
+        "status": "completed",
+        "message": "All objectives already completed",
+        "completion_status": "finished",
+        "time_remaining": 0
+      }
+    },
+    "retention_risk_assessment": {
+      "status": "failed",
+      "message": "Method returned error status: error",
+      "result": {
+        "status": "error",
+        "message": "Retention risk assessment failed: Cannot resolve keyword 'performance_score' into field. Choices are: coding_score, completed_at, created_at, feedback, id, last_activity_at, module, module_id, overall_score, progress_percentage, quiz_score, started_at, status, time_spent, updated_at, user, user_id, user_notes",
+        "risk_assessment": {
+          "overall_risk_score": 0.5,
+          "risk_level": "unknown",
+          "confidence_score": 0.0
+        }
+      }
+    },
+    "knowledge_gap_detection": {
+      "status": "failed",
+      "message": "Method returned error status: error",
+      "result": {
+        "status": "error",
+        "message": "Knowledge gap detection failed: Cannot resolve keyword 'created_at' into field. Choices are: answers, assessment, assessment_id, attempt_number, completed_at, feedback, id, is_passed, max_score, passing_score, score, started_at, status, time_limit, time_spent, user, user_id",
+        "knowledge_gaps_summary": {
+          "total_gaps_identified": 0,
+          "high_priority_gaps": 0
+        },
+        "detection_confidence": 0.0
+      }
+    },
+    "kmeans_clustering_algorithm": {
+      "status": "failed",
+      "message": "Method returned error status: error",
+      "result": {
+        "status": "error",
+        "message": "Clustering analysis failed: Manager isn't available; 'auth.User' has been swapped for 'users.User'",
+        "clustering_results": {
+          "optimal_clusters": 0,
+          "total_users_analyzed": 0
+        }
+      }
+    },
+    "original_ml_algorithms": {
+      "status": "passed",
+      "message": "Original ML algorithms still working correctly",
+      "details": {
+        "ml_predictions_working": true,
+        "prediction_status": null,
+        "model_count": 0
+      }
+    },
+    "frontend_integration": {
+      "status": "not_tested",
+      "details": {}
+    },
+    "api_endpoints": {
+      "status": "not_tested",
+      "details": {}
+    }
+  },
+  "test_environment_setup": false
+}

@@ -227,6 +227,54 @@ class ComprehensivePredictiveAnalyticsAPIView(APIView):
                 confidence_level=confidence_level
             )
             
+            # Learning Velocity Analysis (NEW)
+            results['learning_velocity'] = predictive_service.analyze_learning_velocity(
+                user=request.user,
+                learning_path_id=learning_path_id,
+                days_window=min(analysis_period, 30)
+            )
+            
+            # Engagement Pattern Analysis (NEW)
+            results['engagement_patterns'] = predictive_service.analyze_engagement_patterns(
+                user=request.user,
+                learning_path_id=learning_path_id,
+                analysis_depth='comprehensive'
+            )
+            
+            # Success Probability Modeling (NEW)
+            results['success_probability'] = predictive_service.model_success_probability(
+                user=request.user,
+                learning_path_id=learning_path_id,
+                time_horizon_days=prediction_horizon
+            )
+            
+            # Time-to-Completion Prediction (NEW)
+            results['time_to_completion'] = predictive_service.predict_time_to_completion(
+                user=request.user,
+                learning_path_id=learning_path_id,
+                include_holidays=True
+            )
+            
+            # Retention Risk Assessment (NEW)
+            results['retention_risk'] = predictive_service.assess_retention_risk(
+                user=request.user,
+                learning_path_id=learning_path_id,
+                risk_horizon_days=prediction_horizon
+            )
+            
+            # Knowledge Gap Detection (NEW)
+            results['knowledge_gaps'] = predictive_service.detect_knowledge_gaps(
+                user=request.user,
+                learning_path_id=learning_path_id,
+                analysis_depth='comprehensive'
+            )
+            
+            # K-Means Clustering Analysis (NEW)
+            results['learning_clusters'] = predictive_service.perform_learning_analytics_clustering(
+                learning_path_id=learning_path_id,
+                feature_selection='comprehensive'
+            )
+            
             # Generate summary insights
             results['summary_insights'] = self._generate_summary_insights(results)
             
@@ -384,6 +432,189 @@ def _prepare_prediction_chart_data(ml_predictions: dict) -> dict:
             'lower': [p * 0.9 for p in predictions]
         }
     }
+
+# New Predictive Learning Models API Views
+# =======================================
+
+class LearningVelocityAPIView(APIView):
+    """API for learning velocity analysis"""
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request):
+        """Get learning velocity analysis"""
+        try:
+            learning_path_id = request.query_params.get('learning_path_id')
+            days_window = int(request.query_params.get('days_window', 30))
+            
+            service = PredictiveAnalyticsService()
+            result = service.analyze_learning_velocity(
+                user=request.user,
+                learning_path_id=learning_path_id,
+                days_window=days_window
+            )
+            
+            return Response({
+                'success': True,
+                'data': result
+            })
+        except Exception as e:
+            return Response({'error': str(e)}, status=500)
+
+
+class EngagementPatternsAPIView(APIView):
+    """API for engagement pattern analysis"""
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request):
+        """Get engagement pattern analysis"""
+        try:
+            learning_path_id = request.query_params.get('learning_path_id')
+            analysis_depth = request.query_params.get('analysis_depth', 'comprehensive')
+            
+            service = PredictiveAnalyticsService()
+            result = service.analyze_engagement_patterns(
+                user=request.user,
+                learning_path_id=learning_path_id,
+                analysis_depth=analysis_depth
+            )
+            
+            return Response({
+                'success': True,
+                'data': result
+            })
+        except Exception as e:
+            return Response({'error': str(e)}, status=500)
+
+
+class SuccessProbabilityAPIView(APIView):
+    """API for success probability modeling"""
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request):
+        """Get success probability prediction"""
+        try:
+            learning_path_id = request.query_params.get('learning_path_id')
+            target_module_id = request.query_params.get('target_module_id')
+            time_horizon_days = int(request.query_params.get('time_horizon_days', 30))
+            
+            service = PredictiveAnalyticsService()
+            result = service.model_success_probability(
+                user=request.user,
+                learning_path_id=learning_path_id,
+                target_module_id=target_module_id,
+                time_horizon_days=time_horizon_days
+            )
+            
+            return Response({
+                'success': True,
+                'data': result
+            })
+        except Exception as e:
+            return Response({'error': str(e)}, status=500)
+
+
+class TimeToCompletionAPIView(APIView):
+    """API for time-to-completion prediction"""
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request):
+        """Get time-to-completion prediction"""
+        try:
+            learning_path_id = request.query_params.get('learning_path_id')
+            target_module_id = request.query_params.get('target_module_id')
+            include_holidays = request.query_params.get('include_holidays', 'true').lower() == 'true'
+            
+            service = PredictiveAnalyticsService()
+            result = service.predict_time_to_completion(
+                user=request.user,
+                learning_path_id=learning_path_id,
+                target_module_id=target_module_id,
+                include_holidays=include_holidays
+            )
+            
+            return Response({
+                'success': True,
+                'data': result
+            })
+        except Exception as e:
+            return Response({'error': str(e)}, status=500)
+
+
+class RetentionRiskAPIView(APIView):
+    """API for retention risk assessment"""
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request):
+        """Get retention risk assessment"""
+        try:
+            learning_path_id = request.query_params.get('learning_path_id')
+            risk_horizon_days = int(request.query_params.get('risk_horizon_days', 30))
+            
+            service = PredictiveAnalyticsService()
+            result = service.assess_retention_risk(
+                user=request.user,
+                learning_path_id=learning_path_id,
+                risk_horizon_days=risk_horizon_days
+            )
+            
+            return Response({
+                'success': True,
+                'data': result
+            })
+        except Exception as e:
+            return Response({'error': str(e)}, status=500)
+
+
+class KnowledgeGapsAPIView(APIView):
+    """API for knowledge gap detection"""
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request):
+        """Get knowledge gap detection"""
+        try:
+            learning_path_id = request.query_params.get('learning_path_id')
+            analysis_depth = request.query_params.get('analysis_depth', 'comprehensive')
+            
+            service = PredictiveAnalyticsService()
+            result = service.detect_knowledge_gaps(
+                user=request.user,
+                learning_path_id=learning_path_id,
+                analysis_depth=analysis_depth
+            )
+            
+            return Response({
+                'success': True,
+                'data': result
+            })
+        except Exception as e:
+            return Response({'error': str(e)}, status=500)
+
+
+class LearningClustersAPIView(APIView):
+    """API for learning analytics clustering"""
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request):
+        """Get learning analytics clustering"""
+        try:
+            learning_path_id = request.query_params.get('learning_path_id')
+            cluster_count = request.query_params.get('cluster_count')
+            feature_selection = request.query_params.get('feature_selection', 'comprehensive')
+            
+            service = PredictiveAnalyticsService()
+            result = service.perform_learning_analytics_clustering(
+                learning_path_id=learning_path_id,
+                cluster_count=int(cluster_count) if cluster_count else None,
+                feature_selection=feature_selection
+            )
+            
+            return Response({
+                'success': True,
+                'data': result
+            })
+        except Exception as e:
+            return Response({'error': str(e)}, status=500)
+
 
 def _prepare_trend_chart_data(trends: dict) -> dict:
     """Prepare chart data for trends"""
