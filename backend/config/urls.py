@@ -63,6 +63,7 @@ urlpatterns = [
     path('api/content/', include('apps.content.urls')),
     path('api/agents/', include('apps.agents.urls')),
     path('api/assessments/', include('apps.assessments.urls')),
+    path('api/progress/', include('apps.progress.urls')),  # Progress tracking and analytics
     path('api/jac-execution/', include('apps.jac_execution.urls')),  # JAC execution engine
     path('api/knowledge-graph/', include('apps.knowledge_graph.urls')),  # Knowledge Graph API
     # path('api/ai-agents/', include('apps.api_endpoints.ai_agents_urls')),  # AI Multi-Agent System (commented out temporarily)
@@ -71,6 +72,7 @@ urlpatterns = [
     path('users/', include('apps.users.urls')),  # Users app now properly installed
     path('learning/', include('apps.learning.urls')),
     path('assessments/', include('apps.assessments.urls')),
+    path('progress/', include('apps.progress.urls')),  # Progress tracking and analytics
     path('jac-execution/', include('apps.jac_execution.urls')),  # JAC execution engine
     # Note: agents endpoints are only available via /api/agents/ to avoid namespace conflicts
     

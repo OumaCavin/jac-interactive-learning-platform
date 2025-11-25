@@ -43,6 +43,7 @@ THIRD_PARTY_APPS = [
     'django_celery_beat',
     'drf_spectacular',
     'django_extensions',
+    'channels',  # Django Channels for WebSocket support
 ]
 
 LOCAL_APPS = [

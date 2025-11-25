@@ -13,14 +13,18 @@ from typing import Dict, Any, Optional, List
 from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import User
-from django.db.models import Q, Count, Sum, Avg, Max, Min, StdDev
+from django.db.models import Q, Count, Sum, Avg, Max, Min, StdDev, F
 from django.db.models.functions import TruncDate, TruncWeek
 from datetime import datetime, timedelta
 import logging
+import numpy as np
+import statistics
+import json
+from collections import defaultdict, Counter
 
 from ..models import LearningAnalytics
 from apps.learning.models import (
-    LearningPath, Module, UserLearningPath, UserModuleProgress
+    LearningPath, Module, UserLearningPath, UserModuleProgress, AssessmentAttempt
 )
 from apps.agents.progress_tracker import ProgressTrackerAgent
 
@@ -187,7 +191,7 @@ class AnalyticsService:
             updated_at__lte=end_date
         )
         
-        assessment_query = UserAssessmentResult.objects.filter(
+        assessment_query = AssessmentAttempt.objects.filter(
             user=user,
             completed_at__gte=start_date,
             completed_at__lte=end_date
@@ -296,7 +300,7 @@ class AnalyticsService:
         end_date: datetime
     ) -> Dict[str, Any]:
         """Collect performance-specific data"""
-        assessment_query = UserAssessmentResult.objects.filter(
+        assessment_query = AssessmentAttempt.objects.filter(
             user=user,
             completed_at__gte=start_date,
             completed_at__lte=end_date
@@ -398,7 +402,7 @@ class AnalyticsService:
         if learning_path:
             progress_query = progress_query.filter(module__learning_path=learning_path)
         
-        assessment_query = UserAssessmentResult.objects.filter(
+        assessment_query = AssessmentAttempt.objects.filter(
             user=user,
             completed_at__gte=start_date,
             completed_at__lte=end_date
@@ -641,42 +645,205 @@ class AnalyticsService:
         return round(motivation_score, 2)
     
     def _analyze_skill_progression(self, progress_query) -> float:
-        """Analyze skill progression over time"""
-        # This is a simplified implementation
-        # In practice, you'd analyze progression through difficulty levels
-        return 75.0  # Placeholder
+        """Analyze skill progression over time using actual progression data"""
+        # Calculate progression through difficulty levels
+        completed_progress = progress_query.filter(status='completed').order_by('updated_at')
+        
+        if not completed_progress.exists():
+            return 0.0
+        
+        # Calculate difficulty progression
+        difficulty_scores = []
+        for progress in completed_progress:
+            difficulty_score = self._get_module_difficulty_score(progress.module)
+            difficulty_scores.append(difficulty_score)
+        
+        if len(difficulty_scores) < 2:
+            return difficulty_scores[0] if difficulty_scores else 0.0
+        
+        # Calculate average progression rate
+        total_progression = max(difficulty_scores) - min(difficulty_scores)
+        time_span_days = (completed_progress.last().updated_at - completed_progress.first().updated_at).days
+        time_span_days = max(time_span_days, 1)  # Avoid division by zero
+        
+        progression_rate = (total_progression / time_span_days) * 30  # Per month
+        return round(min(100.0, max(0.0, progression_rate)), 2)
+    
+    def _get_module_difficulty_score(self, module) -> float:
+        """Get numerical difficulty score for a module"""
+        difficulty_map = {
+            'beginner': 25.0,
+            'easy': 25.0,
+            'basic': 25.0,
+            'intermediate': 50.0,
+            'medium': 50.0,
+            'advanced': 75.0,
+            'hard': 75.0,
+            'expert': 95.0,
+            'difficult': 95.0
+        }
+        
+        difficulty = getattr(module, 'difficulty_level', 'beginner').lower()
+        return difficulty_map.get(difficulty, 25.0)
     
     def _calculate_learning_velocity_data(self, progress_query) -> float:
-        """Calculate learning velocity from progress data"""
-        # Calculate activities per week
+        """Calculate learning velocity from actual progress data"""
+        # Get activities completed in the last 30 days
+        thirty_days_ago = timezone.now() - timedelta(days=30)
         recent_progress = progress_query.filter(
-            updated_at__gte=timezone.now() - timedelta(weeks=4)
+            updated_at__gte=thirty_days_ago,
+            status='completed'
         )
         
-        return recent_progress.count() / 4.0
+        # Calculate weighted velocity (more recent activities have higher weight)
+        activities = list(recent_progress.order_by('-updated_at')[:20])  # Last 20 activities
+        if not activities:
+            return 0.0
+        
+        velocity_scores = []
+        for i, activity in enumerate(activities):
+            # Weight decreases with age (more recent = higher weight)
+            weight = max(0.1, 1.0 - (i * 0.05))
+            velocity_scores.append(weight)
+        
+        total_weighted_velocity = sum(velocity_scores)
+        return round(total_weighted_velocity, 2)
     
     def _identify_knowledge_gaps(self, progress_query) -> List[str]:
-        """Identify potential knowledge gaps"""
-        # Simplified implementation
-        incomplete_modules = progress_query.filter(
-            status__in=['in_progress', 'not_started']
+        """Identify knowledge gaps using performance analysis"""
+        knowledge_gaps = []
+        
+        # Analyze modules where user struggled (low scores or repeated attempts)
+        struggling_modules = progress_query.filter(
+            status='completed',
+            score__lt=70.0  # Score below 70%
         ).values_list('module__title', flat=True)
         
-        return list(incomplete_modules[:5])  # Return first 5 incomplete modules
+        if struggling_modules:
+            knowledge_gaps.extend(list(struggling_modules))
+        
+        # Identify incomplete critical modules (dependencies)
+        incomplete_modules = progress_query.filter(
+            status__in=['in_progress', 'not_started']
+        ).order_by('module__order')[:5]
+        
+        for module in incomplete_modules:
+            # Check if this module is a prerequisite for others
+            if self._is_critical_module(module.module):
+                knowledge_gaps.append(f"Critical gap: {module.module.title}")
+        
+        # Remove duplicates and return top gaps
+        return list(dict.fromkeys(knowledge_gaps))[:5]
+    
+    def _is_critical_module(self, module) -> bool:
+        """Determine if a module is critical (prerequisite for others)"""
+        # This would typically check for dependencies
+        # For now, consider first 3 modules as critical
+        return getattr(module, 'order', 1) <= 3
     
     def _analyze_learning_style_indicators(self, progress_query) -> Dict[str, Any]:
-        """Analyze learning style indicators"""
-        # Simplified implementation
+        """Analyze learning style indicators from actual behavior data"""
+        completed_activities = progress_query.filter(status='completed')
+        
+        if not completed_activities.exists():
+            return {
+                'preferred_difficulty': 'beginner',
+                'session_length': 'short',
+                'practice_frequency': 'irregular'
+            }
+        
+        # Analyze session patterns
+        session_lengths = []
+        daily_activities = defaultdict(int)
+        
+        for activity in completed_activities:
+            # Session length analysis
+            if activity.time_spent:
+                session_lengths.append(activity.time_spent.total_seconds() / 60)  # Convert to minutes
+            
+            # Daily activity patterns
+            daily_activities[activity.updated_at.date()] += 1
+        
+        # Determine preferred session length
+        avg_session_length = np.mean(session_lengths) if session_lengths else 30
+        if avg_session_length < 15:
+            session_length = 'short'
+        elif avg_session_length < 45:
+            session_length = 'moderate'
+        else:
+            session_length = 'long'
+        
+        # Determine practice frequency
+        days_active = len(daily_activities)
+        if days_active >= 20:  # Active most days
+            frequency = 'regular'
+        elif days_active >= 10:
+            frequency = 'moderate'
+        else:
+            frequency = 'irregular'
+        
+        # Analyze difficulty preferences
+        difficulty_scores = [self._get_module_difficulty_score(a.module) for a in completed_activities]
+        avg_difficulty = np.mean(difficulty_scores) if difficulty_scores else 25.0
+        
+        if avg_difficulty < 40:
+            preferred_difficulty = 'beginner'
+        elif avg_difficulty < 60:
+            preferred_difficulty = 'intermediate'
+        else:
+            preferred_difficulty = 'advanced'
+        
         return {
-            'preferred_difficulty': 'medium',
-            'session_length': 'moderate',
-            'practice_frequency': 'regular'
+            'preferred_difficulty': preferred_difficulty,
+            'session_length': session_length,
+            'practice_frequency': frequency,
+            'avg_session_minutes': round(avg_session_length, 1),
+            'days_active': days_active
         }
     
     def _analyze_retention(self, progress_query) -> float:
-        """Analyze knowledge retention"""
-        # Simplified retention analysis
-        return 80.0  # Placeholder for 80% retention rate
+        """Analyze knowledge retention using spaced repetition patterns"""
+        completed_activities = progress_query.filter(status='completed')
+        
+        if not completed_activities.exists():
+            return 0.0
+        
+        # Analyze repeat performance on similar modules
+        retention_scores = []
+        module_performance = defaultdict(list)
+        
+        for activity in completed_activities:
+            module_type = getattr(activity.module, 'module_type', 'general')
+            module_performance[module_type].append(activity.score or 0)
+        
+        # Calculate retention for each module type
+        for module_type, scores in module_performance.items():
+            if len(scores) >= 2:
+                # Compare first vs latest performance in this module type
+                first_score = scores[0]
+                latest_score = scores[-1]
+                
+                if first_score > 0:
+                    retention = (latest_score / first_score) * 100
+                    retention_scores.append(retention)
+        
+        # Overall retention
+        if retention_scores:
+            # Use median to avoid outlier influence
+            overall_retention = np.median(retention_scores)
+        else:
+            # Fallback: analyze score consistency within module types
+            consistencies = []
+            for module_type, scores in module_performance.items():
+                if len(scores) >= 3:
+                    std_dev = np.std(scores)
+                    # Lower standard deviation = better retention
+                    consistency = max(0, 100 - (std_dev * 2))
+                    consistencies.append(consistency)
+            
+            overall_retention = np.mean(consistencies) if consistencies else 80.0
+        
+        return round(min(100.0, max(0.0, overall_retention)), 2)
     
     def _calculate_score_variance(self, scores: List[float]) -> float:
         """Calculate variance in assessment scores"""
@@ -704,9 +871,36 @@ class AnalyticsService:
         return sum(weekly_counts.values()) / max(len(weekly_counts), 1)
     
     def _calculate_skill_progression_rate(self, data: Dict[str, Any]) -> float:
-        """Calculate skill progression rate"""
-        # Simplified implementation
-        return 5.0  # Placeholder for 5% progression per period
+        """Calculate skill progression rate using actual performance improvement"""
+        assessment_data = data['assessment_data']
+        
+        if len(assessment_data) < 2:
+            return 0.0
+        
+        # Sort by completion date
+        sorted_assessments = sorted(assessment_data, key=lambda x: x.completed_at or x.started_at)
+        
+        # Calculate progression over time periods
+        progression_points = []
+        window_size = max(1, len(sorted_assessments) // 3)  # Divide into 3 periods
+        
+        for i in range(0, len(sorted_assessments), window_size):
+            window_assessments = sorted_assessments[i:i + window_size]
+            if window_assessments:
+                window_scores = [a.score for a in window_assessments if a.score is not None]
+                if window_scores:
+                    progression_points.append(np.mean(window_scores))
+        
+        if len(progression_points) < 2:
+            return 0.0
+        
+        # Calculate overall progression rate
+        first_half_avg = np.mean(progression_points[:len(progression_points)//2])
+        second_half_avg = np.mean(progression_points[len(progression_points)//2:])
+        
+        progression_rate = ((second_half_avg - first_half_avg) / max(first_half_avg, 1)) * 100
+        
+        return round(max(-50.0, min(50.0, progression_rate)), 2)  # Cap at ±50%
     
     def _analyze_performance_trend(self, data: Dict[str, Any]) -> str:
         """Analyze overall performance trend"""
@@ -730,29 +924,129 @@ class AnalyticsService:
         return 'stable'
     
     def _predict_completion_days(self, data: Dict[str, Any]) -> Optional[int]:
-        """Predict days to completion"""
-        # Simplified prediction based on current velocity
+        """Predict days to completion using ML-based forecasting"""
         progress_data = data['progress_data']
+        assessment_data = data['assessment_data']
         
         if not progress_data:
             return None
         
-        # Calculate remaining work (simplified)
+        # Calculate current completion status
         completed = len([p for p in progress_data if p.status == 'completed'])
         total = len(progress_data)
         
         if completed >= total:
             return 0
         
-        # Estimate based on current velocity
-        days_elapsed = (data['period_end'] - data['period_start']).days
-        velocity = completed / max(days_elapsed, 1)
-        remaining_work = total - completed
+        # Analyze learning velocity patterns
+        recent_activities = [p for p in progress_data if p.status == 'completed']
+        if not recent_activities:
+            return None
         
-        if velocity > 0:
-            return int(remaining_work / velocity)
+        # Calculate multiple velocity metrics
+        velocities = self._calculate_multiple_velocity_metrics(recent_activities)
         
-        return None
+        # Use ensemble prediction (weighted average of different metrics)
+        predictions = []
+        weights = []
+        
+        # Daily velocity prediction
+        daily_velocity = velocities.get('daily', 0)
+        if daily_velocity > 0:
+            remaining_work = total - completed
+            daily_prediction = int(remaining_work / daily_velocity)
+            predictions.append(daily_prediction)
+            weights.append(0.4)
+        
+        # Weekly velocity prediction (more stable)
+        weekly_velocity = velocities.get('weekly', 0)
+        if weekly_velocity > 0:
+            weekly_prediction = int((total - completed) / (weekly_velocity / 7))
+            predictions.append(weekly_prediction)
+            weights.append(0.3)
+        
+        # Trend-adjusted prediction
+        trend_velocity = velocities.get('trend_adjusted', 0)
+        if trend_velocity > 0:
+            trend_prediction = int((total - completed) / trend_velocity)
+            predictions.append(trend_prediction)
+            weights.append(0.3)
+        
+        if not predictions:
+            return None
+        
+        # Weighted ensemble prediction
+        if len(predictions) == 1:
+            return max(1, predictions[0])
+        
+        weighted_prediction = sum(p * w for p, w in zip(predictions, weights)) / sum(weights)
+        final_prediction = max(1, int(weighted_prediction))
+        
+        # Apply confidence adjustment
+        confidence = self._calculate_prediction_confidence(data, velocities)
+        if confidence < 0.5:
+            final_prediction = int(final_prediction * 1.2)  # Add 20% buffer for low confidence
+        
+        return final_prediction
+    
+    def _calculate_multiple_velocity_metrics(self, activities: List) -> Dict[str, float]:
+        """Calculate multiple velocity metrics for better predictions"""
+        if len(activities) < 2:
+            return {}
+        
+        # Sort by completion date
+        sorted_activities = sorted(activities, key=lambda x: x.updated_at)
+        
+        velocities = {}
+        
+        # Daily velocity (last 7 days)
+        recent_7_days = [a for a in sorted_activities if a.updated_at >= timezone.now() - timedelta(days=7)]
+        if recent_7_days:
+            velocities['daily'] = len(recent_7_days) / 7.0
+        
+        # Weekly velocity (last 4 weeks)
+        recent_4_weeks = [a for a in sorted_activities if a.updated_at >= timezone.now() - timedelta(weeks=4)]
+        if len(recent_4_weeks) >= 4:
+            velocities['weekly'] = len(recent_4_weeks) / 4.0
+        
+        # Trend-adjusted velocity (weighted recent activities)
+        if len(sorted_activities) >= 5:
+            weighted_count = 0
+            total_weight = 0
+            
+            for i, activity in enumerate(sorted_activities[-10:]):  # Last 10 activities
+                weight = max(0.1, 1.0 - (i * 0.1))  # Decay weight
+                weighted_count += weight
+                total_weight += weight
+            
+            if total_weight > 0:
+                velocities['trend_adjusted'] = weighted_count / total_weight
+        
+        return velocities
+    
+    def _calculate_prediction_confidence(self, data: Dict[str, Any], velocities: Dict[str, float]) -> float:
+        """Calculate confidence level for predictions"""
+        factors = []
+        
+        # Data quantity factor
+        total_activities = len(data.get('progress_data', []))
+        factors.append(min(1.0, total_activities / 20.0))  # Max confidence at 20+ activities
+        
+        # Consistency factor (lower variance = higher confidence)
+        if velocities:
+            velocity_values = list(velocities.values())
+            if len(velocity_values) > 1:
+                velocity_std = np.std(velocity_values)
+                velocity_mean = np.mean(velocity_values)
+                consistency = max(0, 1.0 - (velocity_std / max(velocity_mean, 0.1)))
+                factors.append(consistency)
+        
+        # Recency factor (more recent data = higher confidence)
+        recent_activities = len([a for a in data.get('progress_data', []) 
+                               if a.updated_at >= timezone.now() - timedelta(days=7)])
+        factors.append(min(1.0, recent_activities / 5.0))  # Max confidence at 5+ recent activities
+        
+        return np.mean(factors) if factors else 0.3
     
     def _calculate_confidence_level(self, data: Dict[str, Any]) -> float:
         """Calculate confidence level in predictions"""
@@ -772,45 +1066,219 @@ class AnalyticsService:
             return 0.3
     
     def _generate_key_insights(self, data: Dict[str, Any], metrics: Dict[str, Any]) -> List[str]:
-        """Generate key insights from analytics"""
+        """Generate key insights from analytics using advanced pattern analysis"""
         insights = []
+        assessment_data = data.get('assessment_data', [])
+        progress_data = data.get('progress_data', [])
         
         # Performance insights
-        if metrics.get('accuracy_rate', 0) >= 85:
-            insights.append("Excellent performance with high accuracy rates")
-        elif metrics.get('accuracy_rate', 0) < 70:
-            insights.append("Consider focusing on practice to improve accuracy")
+        accuracy_rate = metrics.get('accuracy_rate', 0)
+        if accuracy_rate >= 90:
+            insights.append("Exceptional performance with consistent high accuracy rates")
+        elif accuracy_rate >= 80:
+            insights.append("Strong performance with good accuracy - ready for advanced challenges")
+        elif accuracy_rate >= 70:
+            insights.append("Solid performance foundation - focus on consistency")
+        elif accuracy_rate >= 60:
+            insights.append("Performance is improving - consider additional practice")
+        else:
+            insights.append("Performance requires focused attention - review fundamentals")
+        
+        # Learning velocity insights
+        learning_velocity = metrics.get('learning_velocity', 0)
+        if learning_velocity > 5:
+            insights.append("Fast learning pace detected - consider acceleration or enrichment")
+        elif learning_velocity > 2:
+            insights.append("Good learning momentum maintained")
+        elif learning_velocity > 0.5:
+            insights.append("Steady learning progress - maintain consistency")
+        elif learning_velocity > 0:
+            insights.append("Learning pace is slow but steady")
+        else:
+            insights.append("Learning activity has declined - consider motivation strategies")
         
         # Engagement insights
-        if metrics.get('consistency_score', 0) >= 80:
-            insights.append("Highly consistent learning habits")
-        elif metrics.get('consistency_score', 0) < 50:
-            insights.append("Inconsistent learning pattern detected")
+        consistency_score = metrics.get('consistency_score', 0)
+        if consistency_score >= 90:
+            insights.append("Highly consistent learning habits - excellent discipline")
+        elif consistency_score >= 75:
+            insights.append("Good learning consistency with regular engagement")
+        elif consistency_score >= 50:
+            insights.append("Moderate consistency - room for improvement in regularity")
+        else:
+            insights.append("Inconsistent learning pattern detected - establish routine")
         
-        # Velocity insights
-        if metrics.get('learning_velocity', 0) > 2:
-            insights.append("Fast learning pace - consider advancing difficulty")
-        elif metrics.get('learning_velocity', 0) < 0.5:
-            insights.append("Slow learning pace - consider additional support")
+        # Skill development insights
+        skill_progression = metrics.get('skill_progression_rate', 0)
+        if skill_progression > 10:
+            insights.append("Rapid skill development - exceeding expectations")
+        elif skill_progression > 0:
+            insights.append("Positive skill development trajectory")
+        elif skill_progression > -10:
+            insights.append("Skill development is steady - consider targeted practice")
+        else:
+            insights.append("Skill development has plateaued - try new learning approaches")
         
-        return insights
+        # Time efficiency insights
+        efficiency_score = metrics.get('efficiency_score', 0)
+        if efficiency_score >= 85:
+            insights.append("Highly efficient learning - optimal time management")
+        elif efficiency_score >= 70:
+            insights.append("Good time efficiency in learning activities")
+        else:
+            insights.append("Time efficiency could be improved - consider time management techniques")
+        
+        # Pattern-based insights
+        if len(assessment_data) >= 5:
+            scores = [a.score for a in assessment_data if a.score]
+            if len(scores) >= 3:
+                score_trend = self._analyze_score_trend(scores)
+                if score_trend == 'improving':
+                    insights.append("Learning outcomes are improving over time")
+                elif score_trend == 'declining':
+                    insights.append("Learning outcomes show decline - consider intervention")
+        
+        # Engagement pattern insights
+        if len(progress_data) >= 10:
+            engagement_pattern = self._analyze_engagement_patterns(progress_data)
+            if engagement_pattern == 'consistent':
+                insights.append("Consistent engagement patterns suggest sustainable learning")
+            elif engagement_pattern == 'sporadic':
+                insights.append("Sporadic engagement detected - consider structured scheduling")
+        
+        return insights[:5]  # Return top 5 insights
+    
+    def _analyze_score_trend(self, scores: List[float]) -> str:
+        """Analyze trend in assessment scores"""
+        if len(scores) < 3:
+            return 'stable'
+        
+        # Calculate trend using linear regression slope
+        n = len(scores)
+        x = list(range(n))
+        y = scores
+        
+        # Linear regression calculation
+        x_mean = np.mean(x)
+        y_mean = np.mean(y)
+        
+        numerator = sum((x[i] - x_mean) * (y[i] - y_mean) for i in range(n))
+        denominator = sum((x[i] - x_mean) ** 2 for i in range(n))
+        
+        if denominator == 0:
+            return 'stable'
+        
+        slope = numerator / denominator
+        
+        # Determine trend based on slope
+        if slope > 2:
+            return 'improving'
+        elif slope < -2:
+            return 'declining'
+        else:
+            return 'stable'
+    
+    def _analyze_engagement_patterns(self, progress_data: List) -> str:
+        """Analyze engagement patterns"""
+        # Group by day and analyze consistency
+        daily_counts = defaultdict(int)
+        for progress in progress_data:
+            daily_counts[progress.updated_at.date()] += 1
+        
+        if len(daily_counts) < 3:
+            return 'sporadic'
+        
+        # Calculate variance in daily engagement
+        counts = list(daily_counts.values())
+        variance = np.var(counts)
+        mean_count = np.mean(counts)
+        
+        if mean_count > 0:
+            coefficient_of_variation = variance ** 0.5 / mean_count
+            if coefficient_of_variation < 0.5:
+                return 'consistent'
+            else:
+                return 'sporadic'
+        
+        return 'sporadic'
     
     def _generate_recommendations(self, data: Dict[str, Any], metrics: Dict[str, Any]) -> List[str]:
-        """Generate actionable recommendations"""
+        """Generate actionable recommendations using advanced analytics"""
         recommendations = []
         
         # Performance-based recommendations
-        if metrics.get('accuracy_rate', 0) < 75:
-            recommendations.append("Focus on fundamental concepts before advancing")
-            recommendations.append("Consider additional practice exercises")
+        accuracy_rate = metrics.get('accuracy_rate', 0)
+        if accuracy_rate < 70:
+            recommendations.append("Focus on fundamental concepts before advancing to complex topics")
+            recommendations.append("Consider additional practice exercises in weak areas")
+            recommendations.append("Break down complex problems into smaller, manageable steps")
+        elif accuracy_rate < 85:
+            recommendations.append("Strengthen understanding of core concepts through varied practice")
+            recommendations.append("Review incorrect answers to identify knowledge gaps")
+        elif accuracy_rate > 90:
+            recommendations.append("Excellent performance - consider taking on advanced challenges")
+            recommendations.append("Explore mentor opportunities to reinforce your knowledge")
         
         # Engagement-based recommendations
-        if metrics.get('consistency_score', 0) < 60:
-            recommendations.append("Establish a regular learning schedule")
-            recommendations.append("Set smaller, achievable daily goals")
+        consistency_score = metrics.get('consistency_score', 0)
+        if consistency_score < 60:
+            recommendations.append("Establish a consistent daily learning routine (15-30 minutes)")
+            recommendations.append("Set smaller, achievable daily goals to build momentum")
+            recommendations.append("Use calendar reminders to maintain learning schedule")
+        elif consistency_score < 80:
+            recommendations.append("Maintain current learning consistency")
+            recommendations.append("Consider extending session length slightly for deeper learning")
         
         # Learning velocity recommendations
-        if metrics.get('learning_velocity', 0) > 3:
-            recommendations.append("You're learning quickly - consider challenging projects")
+        learning_velocity = metrics.get('learning_velocity', 0)
+        if learning_velocity > 5:
+            recommendations.append("Fast learning pace - consider advanced or enrichment activities")
+            recommendations.append("Explore cross-subject connections to deepen understanding")
+        elif learning_velocity < 0.5:
+            recommendations.append("Increase study frequency to maintain learning momentum")
+            recommendations.append("Consider time-blocking for dedicated learning sessions")
         
-        return recommendations
+        # Skill development recommendations
+        skill_progression = metrics.get('skill_progression_rate', 0)
+        if skill_progression < -5:
+            recommendations.append("Focus on skill consolidation through targeted practice")
+            recommendations.append("Consider reviewing prerequisite material")
+        elif skill_progression > 10:
+            recommendations.append("Rapid skill development - explore advanced applications")
+        
+        # Time efficiency recommendations
+        efficiency_score = metrics.get('efficiency_score', 0)
+        if efficiency_score < 60:
+            recommendations.append("Improve time management - use the Pomodoro technique")
+            recommendations.append("Eliminate distractions during learning sessions")
+            recommendations.append("Plan learning sessions with clear objectives")
+        
+        # Knowledge retention recommendations
+        retention_analysis = metrics.get('retention_analysis', {})
+        if isinstance(retention_analysis, dict) and retention_analysis.get('retention_rate', 0) < 70:
+            recommendations.append("Implement spaced repetition for better knowledge retention")
+            recommendations.append("Schedule regular review sessions of previously learned material")
+            recommendations.append("Create summary notes for quick review")
+        
+        # Adaptive recommendations based on learning style
+        learning_style = metrics.get('learning_style_indicators', {})
+        if isinstance(learning_style, dict):
+            session_length = learning_style.get('session_length', 'moderate')
+            if session_length == 'short':
+                recommendations.append("Use micro-learning sessions (10-15 minutes) for better retention")
+            elif session_length == 'long':
+                recommendations.append("Take regular breaks during longer study sessions")
+            
+            preferred_difficulty = learning_style.get('preferred_difficulty', 'beginner')
+            if preferred_difficulty == 'beginner':
+                recommendations.append("Gradually increase difficulty level to challenge yourself")
+        
+        # Goal-based recommendations
+        completion_rate = metrics.get('completion_rate', 0)
+        if completion_rate < 50:
+            recommendations.append("Focus on completing current modules before starting new ones")
+            recommendations.append("Set weekly completion goals to track progress")
+        elif completion_rate > 80:
+            recommendations.append("Excellent completion rate - maintain current approach")
+        
+        return recommendations[:8]  # Return top 8 recommendations
