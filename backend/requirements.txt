@@ -1,4 +1,8 @@
 # JAC Learning Platform - Production Dependencies
+# Real-time WebSocket support
+channels==4.0.0
+channels-redis==4.1.0
+
 aiohappyeyeballs==2.6.1
 aiohttp==3.13.2
 aiosignal==1.4.0
