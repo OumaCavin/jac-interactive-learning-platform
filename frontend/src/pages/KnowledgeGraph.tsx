@@ -1268,6 +1268,8 @@ const KnowledgeGraph: React.FC = () => {
           </AnimatePresence>
         </div>
       </div>
+    )
+    }
     </div>
   );
 };
