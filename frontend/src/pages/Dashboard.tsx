@@ -478,6 +478,7 @@ export const Dashboard: React.FC = () => {
           </div>
         </motion.div>
       </div>
+      </div>
     </WebSocketProvider>
   );
 };
