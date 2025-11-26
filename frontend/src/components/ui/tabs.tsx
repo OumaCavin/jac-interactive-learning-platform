@@ -7,9 +7,10 @@ interface TabsProps {
   defaultValue?: string;
   value?: string;
   onValueChange?: (value: string) => void;
+  className?: string;
 }
 
-const Tabs: React.FC<TabsProps> = ({ children, defaultValue, value, onValueChange }) => {
+const Tabs: React.FC<TabsProps> = ({ children, defaultValue, value, onValueChange, className = '' }) => {
   const [activeTab, setActiveTab] = React.useState(value || defaultValue || '');
   
   const handleTabChange = (newValue: string) => {
@@ -20,7 +21,7 @@ const Tabs: React.FC<TabsProps> = ({ children, defaultValue, value, onValueChang
   };
   
   return (
-    <div data-value={value || activeTab}>
+    <div data-value={value || activeTab} className={className}>
       {React.Children.map(children, child => 
         React.isValidElement(child) 
           ? React.cloneElement(child as React.ReactElement<any>, { 

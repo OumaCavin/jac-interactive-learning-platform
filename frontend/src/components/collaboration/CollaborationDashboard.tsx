@@ -133,7 +133,7 @@ const StudyGroupsSection: React.FC = () => {
             className="pl-10"
           />
         </div>
-        <Button variant="outline" size="sm">
+        <Button variant="secondary" size="sm">
           <Filter className="h-4 w-4 mr-2" />
           Filter
         </Button>
@@ -169,7 +169,7 @@ const StudyGroupsSection: React.FC = () => {
                   Created by {group.created_by.username}
                 </span>
                 {group.is_member ? (
-                  <Button variant="outline" size="sm">
+                  <Button variant="secondary" size="sm">
                     View Group
                   </Button>
                 ) : (
@@ -321,8 +321,8 @@ const CodeSharingSection: React.FC = () => {
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base">{share.title}</CardTitle>
                 <div className="flex items-center space-x-2">
-                  <Badge variant="outline">{share.language}</Badge>
-                  <Badge variant={share.share_type === 'tutorial' ? 'default' : 'secondary'}>
+                  <Badge variant="info">{share.language}</Badge>
+                  <Badge variant={share.share_type === 'tutorial' ? 'primary' : 'info'}>
                     {share.share_type}
                   </Badge>
                 </div>
@@ -346,14 +346,14 @@ const CodeSharingSection: React.FC = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Button
-                    variant="outline"
+                    variant="secondary"
                     size="sm"
                     onClick={() => handleLike(share.id)}
                   >
                     <Star className={`h-4 w-4 mr-1 ${share.is_liked ? 'fill-current text-yellow-500' : ''}`} />
                     Like
                   </Button>
-                  <Button variant="outline" size="sm">
+                  <Button variant="secondary" size="sm">
                     View Code
                   </Button>
                 </div>
@@ -428,10 +428,10 @@ const GroupChallengesSection: React.FC = () => {
                   </CardDescription>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Badge variant={challenge.status === 'active' ? 'default' : 'secondary'}>
+                  <Badge variant={challenge.status === 'active' ? 'primary' : 'info'}>
                     {challenge.status}
                   </Badge>
-                  <Badge variant="outline">
+                  <Badge variant="info">
                     {challenge.participant_count} participants
                   </Badge>
                 </div>
@@ -451,7 +451,7 @@ const GroupChallengesSection: React.FC = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   {challenge.is_participating ? (
-                    <Button variant="outline" size="sm">
+                    <Button variant="secondary" size="sm">
                       View Submission
                     </Button>
                   ) : (
@@ -462,7 +462,7 @@ const GroupChallengesSection: React.FC = () => {
                       Participate
                     </Button>
                   )}
-                  <Button variant="outline" size="sm">
+                  <Button variant="secondary" size="sm">
                     View Details
                   </Button>
                 </div>
@@ -553,7 +553,7 @@ const MentorshipSection: React.FC = () => {
                       Accept
                     </Button>
                   )}
-                  <Button variant="outline" size="sm">
+                  <Button variant="secondary" size="sm">
                     View Sessions
                   </Button>
                 </div>
@@ -679,7 +679,7 @@ const CollaborationDashboard: React.FC = () => {
           <p className="text-gray-600">Connect, learn, and grow together</p>
         </div>
         <div className="flex items-center space-x-2">
-          <Button variant="outline">
+          <Button variant="secondary">
             <TrendingUp className="h-4 w-4 mr-2" />
             View Analytics
           </Button>
