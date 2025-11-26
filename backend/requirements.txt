@@ -1,6 +1,6 @@
 # JAC Learning Platform - Production Dependencies
 # Real-time WebSocket support
-channels==4.2.0
+channels==4.3.2
 channels-redis==4.1.0
 
 aiohappyeyeballs==2.6.1
@@ -42,7 +42,7 @@ django-redis==5.2.0
 django-celery-beat==2.8.1
 djangorestframework==3.16.1
 djangorestframework-simplejwt==5.5.1
-django-filter==24.3
+django-filter==25.2
 docstring-parser==0.17.0
 docx2txt==0.9
 drf-spectacular==0.29.0
