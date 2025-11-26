@@ -1269,7 +1269,10 @@ const KnowledgeGraph: React.FC = () => {
         </div>
       </div>
     </div>
-  // Helper functions
+  );
+};
+
+// Helper functions
   function getNodeTypeIcon(type: string) {
     switch (type) {
       case 'learning_path': return <BookOpenIcon className="w-5 h-5" />;
