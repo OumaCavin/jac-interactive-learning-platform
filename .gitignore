@@ -606,7 +606,6 @@
 # ==============================================================================
 # Docker
 **/Dockerfile*
-!frontend/Dockerfile.prod
 **/.dockerignore
 **/docker-compose*.yml
 **/.docker/
