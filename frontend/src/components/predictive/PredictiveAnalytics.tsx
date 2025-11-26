@@ -12,7 +12,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadialBarChart, RadialBar } from 'recharts';
-import { apiClient } from '../services/apiClient';
+import { apiClient } from '../../services/apiClient';
 
 // Predictive Analytics Types
 interface MLPrediction {

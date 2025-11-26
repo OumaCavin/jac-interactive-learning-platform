@@ -18,7 +18,7 @@ import {
   Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   Radar, ScatterChart, Scatter, PieChart, Pie, Cell, ComposedChart
 } from 'recharts';
-import { apiClient } from '../services/apiClient';
+import { apiClient } from '../../services/apiClient';
 
 // Advanced Analytics Types
 interface SophisticatedStatisticalAnalysis {
