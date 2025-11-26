@@ -105,7 +105,7 @@ const KnowledgeGraph: React.FC = () => {
   const [chatMessage, setChatMessage] = useState('');
   const [chatHistory, setChatHistory] = useState<any[]>([]);
   const [concepts, setConcepts] = useState<KnowledgeNode[]>([]);
-  const [learningPaths, setLearningPaths] = useState<any[]>([]);
+  const [graphLearningPaths, setGraphLearningPaths] = useState<any[]>([]);
   
   // Loading and error states
   const [loading, setLoading] = useState<LoadingState>({
@@ -125,7 +125,7 @@ const KnowledgeGraph: React.FC = () => {
   });
   
   const user = useSelector(selectUser);
-  const learningPaths = useSelector(selectLearning).learning_paths;
+  const userLearningPathsData = useSelector(selectLearning).learning_paths;
   const userLearningPaths = useSelector(selectUserLearningPaths);
   const userModuleProgress = useSelector(selectUserModuleProgress);
 
@@ -343,7 +343,7 @@ const KnowledgeGraph: React.FC = () => {
         agent_type: selectedAgent,
         context: {
           concepts: concepts,
-          learning_paths: learningPaths
+          learning_paths: graphLearningPaths
         }
       });
 

@@ -342,8 +342,6 @@ const AssessmentDetail: React.FC = () => {
     return quiz.questions.length - getAnsweredCount();
   };
 
-  const currentQuestion = quiz.questions[currentQuestionIndex];
-
   // Loading state
   if (loading) {
     return (

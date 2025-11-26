@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
-import { Card, Button, Badge, ProgressBar } from '../components/ui';
+import { Card, Button, Badge, Progress } from '../components/ui';
 import { selectAuth, getUserStats } from '../store/slices/authSlice';
 import { useAppDispatch } from '../store/store';
 import type { User } from '../services/authService';
@@ -154,7 +154,7 @@ const Profile: React.FC = () => {
             {user.experience_level} / {user.next_level_points} XP
           </span>
         </div>
-        <ProgressBar
+        <Progress
           value={getProgressToNextLevel()}
           variant="primary"
           showLabel
@@ -174,7 +174,7 @@ const Profile: React.FC = () => {
           <h3 className="text-lg font-semibold text-white">Profile Completion</h3>
           <span className="text-sm text-white/70">{getProfileCompletion().toFixed(0)}%</span>
         </div>
-        <ProgressBar
+        <Progress
           value={getProfileCompletion()}
           variant={getProfileCompletion() === 100 ? 'success' : 'primary'}
           showLabel={false}
@@ -362,7 +362,7 @@ const Profile: React.FC = () => {
             
             <div className="mt-4">
               <p className="text-sm text-white/70 mb-2">Streak Progress</p>
-              <ProgressBar
+              <Progress
                 value={Math.min((user.current_streak / user.longest_streak) * 100, 100)}
                 variant="warning"
                 showLabel={false}

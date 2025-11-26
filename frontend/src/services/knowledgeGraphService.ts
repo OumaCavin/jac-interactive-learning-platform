@@ -349,7 +349,7 @@ class KnowledgeGraphServiceClass {
 }
 
 // Enhanced API endpoints for JAC knowledge graph and AI agents
-export const enhancedKnowledgeGraphService = {
+const enhancedKnowledgeGraphService = {
   // Get all concepts with filtering and pagination
   getConcepts: async (params: {
     node_type?: string;
@@ -454,7 +454,7 @@ export const enhancedKnowledgeGraphService = {
 };
 
 // AI Multi-Agent System Service
-export const aiAgentsService = {
+const aiAgentsService = {
   // Get available AI agents
   getAvailableAgents: async (): Promise<{ success: boolean; data: { agents: any[]; total_agents: number } }> => {
     try {

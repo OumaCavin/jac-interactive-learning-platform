@@ -28,6 +28,7 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
+    "@craco/craco": "^7.1.0",
     "@monaco-editor/react": "^4.6.0",
     "@playwright/test": "^1.40.0",
     "@tailwindcss/forms": "^0.5.7",
@@ -36,22 +37,23 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^30.0.0",
-
     "autoprefixer": "^10.4.16",
+    "babel-plugin-module-resolver": "^5.0.2",
     "eslint": "^8.54.0",
     "eslint-config-react-app": "^7.0.1",
+    "path-browserify": "^1.0.1",
     "postcss": "^8.4.32",
     "prettier": "^3.1.0",
     "tailwindcss": "^3.3.6",
     "vite": "^5.0.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "CI=false react-scripts build",
-    "build:production": "react-scripts build",
-    "test": "react-scripts test",
-    "test:watch": "react-scripts test --watch",
-    "test:coverage": "react-scripts test --coverage --watchAll=false",
+    "start": "craco start",
+    "build": "CI=false craco build",
+    "build:production": "craco build",
+    "test": "craco test",
+    "test:watch": "craco test --watch",
+    "test:coverage": "craco test --coverage --watchAll=false",
     "test:e2e": "playwright test",
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .ts,.tsx",
