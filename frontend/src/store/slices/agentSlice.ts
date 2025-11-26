@@ -15,6 +15,7 @@ export interface Agent {
   type: 'content_curator' | 'quiz_master' | 'evaluator' | 'progress_tracker' | 'motivator' | 'orchestrator';
   description: string;
   status: 'active' | 'inactive' | 'busy';
+  isTyping?: boolean;
   capabilities: string[];
   personality: {
     tone: 'friendly' | 'professional' | 'encouraging' | 'analytical';

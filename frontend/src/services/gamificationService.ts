@@ -10,7 +10,7 @@
  * Created: 2025-11-26
  */
 
-import api from './learningService';
+import { apiClient } from './apiClient';
 
 // Types for gamification system
 export interface Badge {
@@ -189,139 +189,139 @@ export interface GamificationStats {
 export const gamificationService = {
   // Badge Management
   getBadges: (): Promise<Badge[]> =>
-    api.get('/gamification/badges/').then(res => res.data),
+    apiClient.get('/gamification/badges/').then(res => res.data),
 
   getBadge: (id: string): Promise<Badge> =>
-    api.get(`/gamification/badges/${id}/`).then(res => res.data),
+    apiClient.get(`/gamification/badges/${id}/`).then(res => res.data),
 
   claimBadge: (id: string): Promise<UserBadge> =>
-    api.post(`/gamification/badges/${id}/claim/`).then(res => res.data),
+    apiClient.post(`/gamification/badges/${id}/claim/`).then(res => res.data),
 
   // User Badge Management
   getUserBadges: (): Promise<UserBadge[]> =>
-    api.get('/gamification/user-badges/').then(res => res.data),
+    apiClient.get('/gamification/user-badges/').then(res => res.data),
 
   getUserBadgesByCategory: (): Promise<Record<string, UserBadge[]>> =>
-    api.get('/gamification/user-badges/by_category/').then(res => res.data),
+    apiClient.get('/gamification/user-badges/by_category/').then(res => res.data),
 
   getRecentBadges: (): Promise<UserBadge[]> =>
-    api.get('/gamification/user-badges/recent/').then(res => res.data),
+    apiClient.get('/gamification/user-badges/recent/').then(res => res.data),
 
   // Achievement Management
   getAchievements: (): Promise<Achievement[]> =>
-    api.get('/gamification/achievements/').then(res => res.data),
+    apiClient.get('/gamification/achievements/').then(res => res.data),
 
   getAchievement: (id: string): Promise<Achievement> =>
-    api.get(`/gamification/achievements/${id}/`).then(res => res.data),
+    apiClient.get(`/gamification/achievements/${id}/`).then(res => res.data),
 
   startAchievementTracking: (id: string): Promise<any> =>
-    api.post(`/gamification/achievements/${id}/start_tracking/`).then(res => res.data),
+    apiClient.post(`/gamification/achievements/${id}/start_tracking/`).then(res => res.data),
 
   // User Achievement Management
   getUserAchievements: (): Promise<UserAchievement[]> =>
-    api.get('/gamification/user-achievements/').then(res => res.data),
+    apiClient.get('/gamification/user-achievements/').then(res => res.data),
 
   getUserAchievementsInProgress: (): Promise<UserAchievement[]> =>
-    api.get('/gamification/user-achievements/in_progress/').then(res => res.data),
+    apiClient.get('/gamification/user-achievements/in_progress/').then(res => res.data),
 
   getUserAchievementsCompleted: (): Promise<UserAchievement[]> =>
-    api.get('/gamification/user-achievements/completed/').then(res => res.data),
+    apiClient.get('/gamification/user-achievements/completed/').then(res => res.data),
 
   getUserAchievementsByCategory: (): Promise<Record<string, UserAchievement[]>> =>
-    api.get('/gamification/user-achievements/by_category/').then(res => res.data),
+    apiClient.get('/gamification/user-achievements/by_category/').then(res => res.data),
 
   // User Points Management
   getUserPoints: (): Promise<UserPoints> =>
-    api.get('/gamification/user-points/').then(res => res.data),
+    apiClient.get('/gamification/user-points/').then(res => res.data),
 
   addPoints: (amount: number, source: string, metadata?: Record<string, any>): Promise<any> =>
-    api.post('/gamification/user-points/add_points/', {
+    apiClient.post('/gamification/user-points/add_points/', {
       amount,
       source,
       metadata: metadata || {}
     }).then(res => res.data),
 
   spendPoints: (amount: number, purpose: string, metadata?: Record<string, any>): Promise<any> =>
-    api.post('/gamification/user-points/spend_points/', {
+    apiClient.post('/gamification/user-points/spend_points/', {
       amount,
       purpose,
       metadata: metadata || {}
     }).then(res => res.data),
 
   getPointTransactions: (): Promise<PointTransaction[]> =>
-    api.get('/gamification/user-points/transactions/').then(res => res.data),
+    apiClient.get('/gamification/user-points/transactions/').then(res => res.data),
 
   // User Level Management
   getUserLevel: (): Promise<UserLevel> =>
-    api.get('/gamification/user-level/').then(res => res.data),
+    apiClient.get('/gamification/user-level/').then(res => res.data),
 
   addXP: (amount: number): Promise<any> =>
-    api.post('/gamification/user-level/add_xp/', { amount }).then(res => res.data),
+    apiClient.post('/gamification/user-level/add_xp/', { amount }).then(res => res.data),
 
   // Learning Streak Management
   getLearningStreak: (): Promise<LearningStreak> =>
-    api.get('/gamification/learning-streak/').then(res => res.data),
+    apiClient.get('/gamification/learning-streak/').then(res => res.data),
 
   recordStreakActivity: (activityDate?: string, context?: Record<string, any>): Promise<any> =>
-    api.post('/gamification/learning-streak/record_activity/', {
+    apiClient.post('/gamification/learning-streak/record_activity/', {
       activity_date: activityDate,
       context: context || {}
     }).then(res => res.data),
 
   // Comprehensive Endpoints
   getGamificationOverview: (): Promise<GamificationOverview> =>
-    api.get('/gamification/overview/').then(res => res.data),
+    apiClient.get('/gamification/overview/').then(res => res.data),
 
   getLeaderboard: (type: 'points' | 'streak' | 'level' = 'points', limit: number = 10): Promise<LeaderboardEntry[]> => {
     const params = new URLSearchParams({
       type,
       limit: limit.toString()
     });
-    return api.get(`/gamification/leaderboard/?${params}`).then(res => res.data);
+    return apiClient.get(`/gamification/leaderboard/?${params}`).then(res => res.data);
   },
 
   getGamificationStats: (): Promise<GamificationStats> =>
-    api.get('/gamification/stats/').then(res => res.data),
+    apiClient.get('/gamification/stats/').then(res => res.data),
 
   // Integration endpoints
   awardPoints: (amount: number, source: string, metadata?: Record<string, any>): Promise<any> =>
-    api.post('/gamification/integration/award_points/', {
+    apiClient.post('/gamification/integration/award_points/', {
       amount,
       source,
       metadata: metadata || {}
     }).then(res => res.data),
 
   updateStreak: (): Promise<any> =>
-    api.post('/gamification/integration/update_streak/').then(res => res.data),
+    apiClient.post('/gamification/integration/update_streak/').then(res => res.data),
 
   checkAchievements: (type: string, value: number): Promise<any> =>
-    api.post('/gamification/integration/check_achievements/', {
+    apiClient.post('/gamification/integration/check_achievements/', {
       type,
       value
     }).then(res => res.data),
 
   // Achievement Progress Tracking
   getAchievementProgress: (): Promise<any[]> =>
-    api.get('/gamification/achievement-progress/').then(res => res.data),
+    apiClient.get('/gamification/achievement-progress/').then(res => res.data),
 
   incrementAchievementProgress: (id: string, incrementBy: number = 1, context?: Record<string, any>): Promise<any> =>
-    api.post(`/gamification/achievement-progress/${id}/increment/`, {
+    apiClient.post(`/gamification/achievement-progress/${id}/increment/`, {
       increment_by: incrementBy,
       context: context || {}
     }).then(res => res.data),
 
   // Filtered queries
   getBadgesByCategory: (category: string): Promise<Badge[]> =>
-    api.get(`/gamification/badges/?category=${category}`).then(res => res.data),
+    apiClient.get(`/gamification/badges/?category=${category}`).then(res => res.data),
 
   getBadgesByDifficulty: (difficulty: string): Promise<Badge[]> =>
-    api.get(`/gamification/badges/?difficulty=${difficulty}`).then(res => res.data),
+    apiClient.get(`/gamification/badges/?difficulty=${difficulty}`).then(res => res.data),
 
   getAchievementsByCategory: (category: string): Promise<Achievement[]> =>
-    api.get(`/gamification/achievements/?category=${category}`).then(res => res.data),
+    apiClient.get(`/gamification/achievements/?category=${category}`).then(res => res.data),
 
   getAchievementsByDifficulty: (difficulty: string): Promise<Achievement[]> =>
-    api.get(`/gamification/achievements/?difficulty=${difficulty}`).then(res => res.data),
+    apiClient.get(`/gamification/achievements/?difficulty=${difficulty}`).then(res => res.data),
 
   // Helper methods for gamification triggers
   triggerModuleCompletion: async (moduleId: string, moduleTitle: string, learningPathId?: string): Promise<void> => {

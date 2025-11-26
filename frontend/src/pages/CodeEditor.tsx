@@ -128,7 +128,7 @@ const CodeEditor: React.FC = () => {
         };
       } else {
         // Use generic execution for other languages
-        response = await learningService.executeCode(code.trim(), selectedLanguage);
+        response = await learningService.quickExecuteCode(code.trim(), selectedLanguage);
       }
       
       const result: ExecutionResult = {
