@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 # Configuration
 PLATFORM_NAME="JAC Learning Platform"
 DEFAULT_ADMIN_USER="admin"
-DEFAULT_ADMIN_EMAIL="admin@jacplatform.com"
+DEFAULT_ADMIN_EMAIL="cavin.otieno012@gmail.com"
 DEFAULT_ADMIN_PASSWORD="admin123"
 
 echo -e "${BLUE}🚀 Starting ${PLATFORM_NAME} Setup${NC}"
