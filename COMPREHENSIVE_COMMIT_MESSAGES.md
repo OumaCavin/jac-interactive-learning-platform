@@ -226,7 +226,7 @@ Based on the JAC Interactive Learning Platform development, here are the proper 
     - Replace: Message 337772059414669 - 1764016884
     - Description: Translation fixes in admin and deployment documentation
 
-49. **style: Replace MiniMax Agent references with Cavin Otieno**
+49. **style: Replace Cavin Otieno references with Cavin Otieno**
     - Replace: Message 337738896228523 - 1764009496
     - Description: Attribution updates throughout codebase
 
@@ -266,7 +266,7 @@ After rebase, add one final commit:
 git commit -m "feat: Complete JAC Interactive Learning Platform implementation
 
 - Fixed Chinese content translation in documentation
-- Replaced all MiniMax Agent references with Cavin Otieno
+- Replaced all Cavin Otieno references with Cavin Otieno
 - Cleaned system-generated commit messages
 - Updated admin interface and deployment guides
 - Verified PostgreSQL Docker readiness
