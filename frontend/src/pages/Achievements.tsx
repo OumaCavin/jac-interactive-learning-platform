@@ -344,9 +344,9 @@ const Achievements: React.FC = () => {
         }`}>
           {userBadge.badge.difficulty}
         </span>
-        {userBadge.earnedAt && (
+        {userBadge.earned_at && (
           <span className="text-xs text-white/60">
-            Earned {formatDate(userBadge.earnedAt)}
+            Earned {formatDate(userBadge.earned_at)}
           </span>
         )}
       </div>
@@ -578,7 +578,7 @@ const Achievements: React.FC = () => {
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-white/60">Points:</span>
-                <span className="text-yellow-400 font-bold">{selectedAchievement.points}</span>
+                <span className="text-yellow-400 font-bold">{selectedAchievement.points_reward}</span>
               </div>
 
               <div className="flex items-center justify-between">
@@ -620,7 +620,7 @@ const Achievements: React.FC = () => {
 
             <div className="mt-4 pt-4 border-t border-white/20">
               <p className="text-sm text-white/60">
-                <strong>Requirements:</strong> {selectedAchievement.requirements.join(', ')}
+                <strong>Requirements:</strong> {selectedAchievement.criteria_operator} {selectedAchievement.criteria_value} {selectedAchievement.criteria_type}
               </p>
             </div>
           </motion.div>

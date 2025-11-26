@@ -67,12 +67,16 @@ interface LoadingState {
   graph: boolean;
   analytics: boolean;
   search: boolean;
+  agents: boolean;
+  chat: boolean;
 }
 
 interface ErrorState {
   graph: string | null;
   analytics: string | null;
   search: string | null;
+  agents: string | null;
+  chat: string | null;
 }
 
 const KnowledgeGraph: React.FC = () => {
@@ -245,7 +249,7 @@ const KnowledgeGraph: React.FC = () => {
     try {
       const searchParams: GraphSearchParams = {
         query: query.trim(),
-        node_types: searchFilters?.nodeTypes,
+        node_types: searchFilters?.node_types,
         difficulty_levels: searchFilters?.difficulty_levels,
         limit: 100
       };
@@ -285,13 +289,6 @@ const KnowledgeGraph: React.FC = () => {
     }
   }, [loadGraphData]);
 
-  // Initialize graph data, analytics, and AI agents on component mount
-  useEffect(() => {
-    loadGraphData();
-    loadAnalytics();
-    loadAIAgentData();
-  }, [loadGraphData, loadAnalytics, loadAIAgentData]);
-
   // Load AI agent data
   const loadAIAgentData = useCallback(async () => {
     setLoading(prev => ({ ...prev, agents: true }));
@@ -311,7 +308,7 @@ const KnowledgeGraph: React.FC = () => {
         setConcepts(conceptsData.data.concepts);
       }
       if (pathsData.success) {
-        setLearningPaths(pathsData.data.learning_paths);
+        setGraphLearningPaths(pathsData.data.learning_paths);
       }
     } catch (error) {
       console.error('Error loading AI agent data:', error);
@@ -321,6 +318,13 @@ const KnowledgeGraph: React.FC = () => {
       setLoading(prev => ({ ...prev, agents: false }));
     }
   }, []);
+
+  // Initialize graph data, analytics, and AI agents on component mount
+  useEffect(() => {
+    loadGraphData();
+    loadAnalytics();
+    loadAIAgentData();
+  }, [loadGraphData, loadAnalytics, loadAIAgentData]);
 
   // Handle chat submission
   const handleChatSubmit = async () => {
@@ -560,7 +564,7 @@ const KnowledgeGraph: React.FC = () => {
           </p>
           <button
             onClick={() => {
-              setErrors({ graph: null, analytics: null, search: null });
+              setErrors({ graph: null, analytics: null, search: null, agents: null, chat: null });
               loadGraphData();
             }}
             className="mt-3 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 rounded-lg text-red-300 transition-colors flex items-center gap-2"
@@ -777,16 +781,16 @@ const KnowledgeGraph: React.FC = () => {
                 </p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {concept.tags.slice(0, 3).map((tag, tagIndex) => (
-                    <span key={tagIndex} className="text-xs px-2 py-1 bg-blue-500/20 text-blue-300 rounded">
-                      {tag}
+                  {concept.learning_objectives.slice(0, 3).map((objective, objIndex) => (
+                    <span key={objIndex} className="text-xs px-2 py-1 bg-blue-500/20 text-blue-300 rounded">
+                      {objective}
                     </span>
                   ))}
                 </div>
                 
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-white/70 capitalize">
-                    {concept.category.replace('_', ' ')}
+                    {concept.node_type.replace('_', ' ')}
                   </span>
                   <button
                     onClick={() => {

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { authService } from '../../services/authService';
@@ -13,6 +13,7 @@ import {
   selectAssessmentLoading,
   selectAssessmentSubmitting
 } from '../../store/slices/assessmentSlice';
+import { useAppDispatch } from '../../store/store';
 import { learningService } from '../../services/learningService';
 import { apiClient } from '../../services/apiClient';
 
@@ -63,34 +64,10 @@ interface QuizResult {
   }[];
 }
 
-// API service for assessments
-const assessmentService = {
-  getQuiz: async (quizId: string): Promise<any> => {
-    return await learningService.getQuiz(quizId);
-  },
-  
-  getQuizQuestions: async (moduleId?: string): Promise<Question[]> => {
-    const response = await learningService.getAssessmentQuestions(moduleId);
-    return response;
-  },
-  
-  startAttempt: async (quizId: string): Promise<any> => {
-    // Create attempt via Redux thunk
-    const result = await dispatch(startQuizAttempt(quizId)).unwrap();
-    return result;
-  },
-  
-  submitAttempt: async (attemptId: string, answers: any): Promise<any> => {
-    // Submit attempt via Redux thunk
-    const result = await dispatch(submitQuizAttempt({ attemptId, answers })).unwrap();
-    return result;
-  }
-};
-
 const AssessmentDetail: React.FC = () => {
   const { assessmentId } = useParams<{ assessmentId: string }>();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<{ [questionId: string]: string | string[] }>({});
@@ -107,6 +84,30 @@ const AssessmentDetail: React.FC = () => {
   const user = useSelector((state: any) => state.auth.user) || authService.getCurrentUser();
   const isLoading = useSelector(selectAssessmentLoading);
   const isAttemptSubmitting = useSelector(selectAssessmentSubmitting);
+
+  // API service for assessments - moved inside component to access dispatch
+  const assessmentService = {
+    getQuiz: async (quizId: string): Promise<any> => {
+      return await learningService.getQuiz(quizId);
+    },
+    
+    getQuizQuestions: async (moduleId?: string): Promise<Question[]> => {
+      const response = await learningService.getAssessmentQuestions(moduleId);
+      return response;
+    },
+    
+    startAttempt: async (quizId: string): Promise<any> => {
+      // Create attempt via Redux thunk
+      const result = await dispatch(startQuizAttempt(quizId)).unwrap();
+      return result;
+    },
+    
+    submitAttempt: async (attemptId: string, answers: any): Promise<any> => {
+      // Submit attempt via Redux thunk
+      const result = await dispatch(submitQuizAttempt({ attemptId, answers })).unwrap();
+      return result;
+    }
+  };
 
   useEffect(() => {
     // Load assessment data from backend

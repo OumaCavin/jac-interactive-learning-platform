@@ -156,8 +156,6 @@ const Profile: React.FC = () => {
         </div>
         <Progress
           value={getProgressToNextLevel()}
-          variant="primary"
-          showLabel
           className="mb-2"
         />
         <p className="text-sm text-white/60">
@@ -176,8 +174,6 @@ const Profile: React.FC = () => {
         </div>
         <Progress
           value={getProfileCompletion()}
-          variant={getProfileCompletion() === 100 ? 'success' : 'primary'}
-          showLabel={false}
         />
         <p className="text-sm text-white/60 mt-2">
           {getProfileCompletion() === 100 
@@ -364,8 +360,6 @@ const Profile: React.FC = () => {
               <p className="text-sm text-white/70 mb-2">Streak Progress</p>
               <Progress
                 value={Math.min((user.current_streak / user.longest_streak) * 100, 100)}
-                variant="warning"
-                showLabel={false}
               />
             </div>
           </div>

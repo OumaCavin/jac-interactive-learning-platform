@@ -1,10 +1,10 @@
 // JAC Learning Platform - TypeScript utilities by Cavin Otieno
 
-export { Button } from './button';
-export { Card as Card } from './index';
+export { AdvancedButton as Button } from './advanced-button';
+export { AdvancedCard as Card } from './advanced-card';
 export { CardHeader, CardTitle, CardContent, CardDescription } from './card';
-export { Input } from './input';
-export { Badge } from './badge';
+export { AdvancedInput as Input } from './advanced-input';
+export { AdvancedBadge as Badge } from './advanced-badge';
 export { Skeleton } from './skeleton';
 export { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
 export { Avatar, AvatarFallback } from './avatar';

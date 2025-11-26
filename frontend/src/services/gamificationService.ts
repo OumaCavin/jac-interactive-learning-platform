@@ -47,6 +47,7 @@ export interface Achievement {
   icon: string;
   category: string;
   difficulty: string;
+  rarity?: string;
   criteria_type: string;
   criteria_value: number;
   criteria_operator: string;
