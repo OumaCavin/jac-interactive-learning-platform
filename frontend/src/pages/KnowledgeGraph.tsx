@@ -1273,30 +1273,27 @@ const KnowledgeGraph: React.FC = () => {
 };
 
 // Helper functions
-  function getNodeTypeIcon(type: string) {
-    switch (type) {
-      case 'learning_path': return <BookOpenIcon className="w-5 h-5" />;
-      case 'module': return <AcademicCapIcon className="w-5 h-5" />;
-      case 'concept': return <CodeBracketIcon className="w-5 h-5" />;
-      case 'lesson': return <StarIcon className="w-5 h-5" />;
-      case 'assessment': return <StarIcon className="w-5 h-5" />;
-      default: return <StarIcon className="w-5 h-5" />;
-    }
+function getNodeTypeIcon(type: string) {
+  switch (type) {
+    case 'learning_path': return <BookOpenIcon className="w-5 h-5" />;
+    case 'module': return <AcademicCapIcon className="w-5 h-5" />;
+    case 'concept': return <CodeBracketIcon className="w-5 h-5" />;
+    case 'lesson': return <StarIcon className="w-5 h-5" />;
+    case 'assessment': return <StarIcon className="w-5 h-5" />;
+    default: return <StarIcon className="w-5 h-5" />;
   }
+}
 
-  function getEdgeColor(type: string) {
-    switch (type) {
-      case 'prerequisite': return '#EF4444';
-      case 'prerequisite_of': return '#EF4444';
-      case 'contains': return '#3B82F6';
-      case 'related': return '#8B5CF6';
-      case 'leads_to': return '#10B981';
-      case 'mastery': return '#10B981';
-      default: return '#6B7280';
-    }
+function getEdgeColor(type: string) {
+  switch (type) {
+    case 'prerequisite': return '#EF4444';
+    case 'prerequisite_of': return '#EF4444';
+    case 'contains': return '#3B82F6';
+    case 'related': return '#8B5CF6';
+    case 'leads_to': return '#10B981';
+    case 'mastery': return '#10B981';
+    default: return '#6B7280';
   }
-
-  return (
 };
 
 export default KnowledgeGraph;
