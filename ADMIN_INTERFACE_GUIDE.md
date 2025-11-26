@@ -83,7 +83,7 @@ The JAC Learning Platform provides two different administrative interfaces for m
 
 ## Route Protection Behavior
 
-### Non-Admin User访问 `/admin`
+### Non-Admin User Access to `/admin`
 When a non-admin user tries to access `http://localhost:3000/admin`:
 
 1. **Route Protection Activates**
@@ -99,7 +99,7 @@ When a non-admin user tries to access `http://localhost:3000/admin`:
    - User never sees the admin dashboard interface
    - Proper security boundaries maintained
 
-### Admin User访问 `/admin`
+### Admin User Access to `/admin`
 When an admin user accesses `http://localhost:3000/admin`:
 
 1. **Route Protection Passes**
