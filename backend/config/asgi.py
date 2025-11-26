@@ -1,3 +1,5 @@
+# JAC Platform Configuration - Settings by Cavin Otieno
+
 """
 ASGI Configuration - JAC Learning Platform
 

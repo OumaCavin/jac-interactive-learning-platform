@@ -1,3 +1,5 @@
+# JAC Platform Configuration - Settings by Cavin Otieno
+
 """
 Minimal Django settings for JAC Learning Platform backend - Agents Only
 """
