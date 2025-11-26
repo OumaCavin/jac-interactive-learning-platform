@@ -71,7 +71,7 @@ const BaseAgentChat: React.FC<BaseAgentChatProps> = ({
   );
   
   const isAgentTyping = useAppSelector(state => 
-    state.agents?.typing?.[agentId] || false
+    state.agents?.isTyping?.[agentId] || false
   );
 
   // Initialize WebSocket connection
@@ -270,7 +270,7 @@ const BaseAgentChat: React.FC<BaseAgentChatProps> = ({
               {isConnected ? 'Connected' : 'Offline'}
             </Badge>
             {isTyping && (
-              <Badge variant="info" size="sm" animate>
+              <Badge variant="info" size="sm">
                 Typing...
               </Badge>
             )}

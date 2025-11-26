@@ -545,7 +545,7 @@ const aiAgentsService = {
 };
 
 // Combined service functions for enhanced functionality
-export const enhancedServices = {
+const enhancedServices = {
   // Get comprehensive learning assistance
   getLearningAssistance: async (userQuery: string, userId: string) => {
     try {
