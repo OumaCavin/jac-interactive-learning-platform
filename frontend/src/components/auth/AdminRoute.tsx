@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * AdminRoute Component
  * Protects admin-only routes by checking user privileges

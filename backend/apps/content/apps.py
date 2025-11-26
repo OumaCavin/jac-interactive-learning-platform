@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 from django.apps import AppConfig
 
 

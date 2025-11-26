@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * API Client Configuration
  * Centralized axios configuration for all API calls

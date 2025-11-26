@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 #!/usr/bin/env python3
 """
 Django Management Command to populate the Knowledge Graph with JAC content

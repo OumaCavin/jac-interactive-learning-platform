@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 Object-Spatial Programming (OSP) Implementation for Knowledge Graphs.
 

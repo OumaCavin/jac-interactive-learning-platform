@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 WebSocket URL Routing - JAC Learning Platform
 

@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 

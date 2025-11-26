@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 Progress App Models - JAC Learning Platform
 

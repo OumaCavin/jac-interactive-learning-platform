@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 JAC Code Execution Engine for JAC Interactive Learning Platform
 

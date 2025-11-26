@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Authentication service
  * Handles user authentication, token management, and user session

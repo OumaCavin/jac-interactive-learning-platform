@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 export { default as Button, Button as Button } from './button';
 export { default as Card, CardHeader, CardTitle, CardContent, CardDescription } from './card';
 export { default as Input } from './input';

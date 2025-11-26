@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Authentication slice
  * Manages authentication state, user data, and login/logout functionality

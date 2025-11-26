@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 Configuration for the JAC Execution app.
 Secure code execution engine for the JAC Learning Platform.

@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Search Service for JAC Learning Platform Frontend
  * Handles search functionality with backend API integration

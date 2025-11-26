@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Search Results Page
  * Displays comprehensive search results with filtering and sorting

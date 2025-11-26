@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 # Generated migration for collaboration features
 
 from django.db import migrations, models

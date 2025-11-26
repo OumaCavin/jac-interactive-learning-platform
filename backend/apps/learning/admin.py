@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 Django admin configuration for the Learning app.
 Admin interface for managing learning content, paths, modules, and assessments.

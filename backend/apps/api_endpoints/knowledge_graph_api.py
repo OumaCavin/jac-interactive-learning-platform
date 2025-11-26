@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 API Endpoints for Knowledge Graph and AI Multi-Agent System
 

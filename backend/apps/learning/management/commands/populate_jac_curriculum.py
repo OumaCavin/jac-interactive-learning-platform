@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 Django management command to populate the complete JAC learning curriculum
 with comprehensive content based on official JAC documentation.

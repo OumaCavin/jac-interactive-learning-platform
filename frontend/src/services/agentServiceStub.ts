@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 // Temporary stub for agentService to resolve build issues
 // This will be replaced with the actual implementation
 

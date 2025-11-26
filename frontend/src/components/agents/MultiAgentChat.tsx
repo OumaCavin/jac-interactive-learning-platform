@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Multi-Agent Chat Interface - JAC Learning Platform
  * 

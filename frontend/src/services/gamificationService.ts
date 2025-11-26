@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Gamification Service - JAC Learning Platform Frontend
  * 

@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 Real-time Progress API Endpoints - JAC Learning Platform
 

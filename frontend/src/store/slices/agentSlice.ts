@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Agent slice
  * Manages multi-agent system state and agent interactions

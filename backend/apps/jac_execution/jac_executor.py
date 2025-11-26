@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 JAC Code Execution Service for Interactive Learning Platform
 Provides JAC code execution, validation, and feedback for learning purposes

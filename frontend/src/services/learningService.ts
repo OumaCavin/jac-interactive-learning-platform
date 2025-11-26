@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 import { apiClient } from './apiClient';
 import { toast } from 'react-hot-toast';
 

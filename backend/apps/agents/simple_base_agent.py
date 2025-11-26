@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 Simplified Base Agent Architecture for JAC Interactive Learning Platform
 

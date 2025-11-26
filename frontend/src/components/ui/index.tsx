@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Basic UI components with glassmorphism design
  * Provides reusable components following the design system

@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 Django management command to initialize the JAC Learning Platform.
 Automatically runs migrations, creates superuser, and sets up initial data.

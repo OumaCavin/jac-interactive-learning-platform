@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 # Clean migration for adaptive learning features
 
 from django.db import migrations, models
