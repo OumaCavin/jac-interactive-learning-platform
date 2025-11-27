@@ -107,7 +107,7 @@ DATABASES = {
         'HOST': config('DB_HOST', default='postgres'),
         'PORT': config('DB_PORT', default='5432'),
         'OPTIONS': {
-            'charset': 'utf8',
+            # PostgreSQL handles encoding through LC_ settings, not connection options
         },
         'CONN_MAX_AGE': 60,
     }
