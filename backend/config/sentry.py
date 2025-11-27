@@ -1,3 +1,5 @@
+# JAC Platform Configuration - Settings by Cavin Otieno
+
 """
 Sentry Error Monitoring Configuration for JAC Learning Platform
 """

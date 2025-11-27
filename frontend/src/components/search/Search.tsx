@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Search Component
  * Comprehensive search interface with autocomplete and results display

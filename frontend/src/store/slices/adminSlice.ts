@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Admin analytics slice
  * Manages admin-specific data and analytics for learning path administration

@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MultiAgentChat } from '../components/agents';

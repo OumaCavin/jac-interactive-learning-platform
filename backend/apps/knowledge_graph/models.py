@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 OSP-based Knowledge Graph Models for JAC Learning Platform
 

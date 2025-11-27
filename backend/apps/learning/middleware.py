@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 Mock JWT Authentication for Development
 This middleware allows mock tokens from frontend to pass through Django authentication

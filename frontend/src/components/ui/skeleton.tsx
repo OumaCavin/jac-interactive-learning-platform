@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 import React from 'react';
 
 export const Skeleton: React.FC<{ className?: string }> = ({ className = '' }) => (

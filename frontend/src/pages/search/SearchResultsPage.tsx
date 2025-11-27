@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Search Results Page
  * Displays comprehensive search results with filtering and sorting
@@ -11,7 +13,7 @@ import {
   FunnelIcon,
   AdjustmentsHorizontalIcon,
   ClockIcon,
-  TrendingUpIcon,
+  ArrowTrendingUpIcon as TrendingUpIcon,
   BookOpenIcon,
   AcademicCapIcon,
   ChartBarIcon,
@@ -128,10 +130,7 @@ const SearchResultsPage: React.FC = () => {
     
     // Re-search with filters
     if (query) {
-      dispatch(performSearch({ 
-        query, 
-        content_types: newFilters.length > 0 ? newFilters : undefined 
-      }));
+      dispatch(performSearch(query));
     }
   };
   
@@ -154,7 +153,7 @@ const SearchResultsPage: React.FC = () => {
   
   // Handle result click
   const handleResultClick = (result: any) => {
-    searchService.trackClick(query, result.url);
+    searchService.trackClick(query, result.url, 'unknown');
     navigate(result.url);
   };
   

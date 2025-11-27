@@ -207,7 +207,7 @@ docker-compose ps
 3. **Setup Domain & DNS**
    ```bash
    # DNS Configuration
-   A记录: yourdomain.com → your-server-ip
+   A Record: yourdomain.com → your-server-ip
    CNAME: www → yourdomain.com
    ```
 

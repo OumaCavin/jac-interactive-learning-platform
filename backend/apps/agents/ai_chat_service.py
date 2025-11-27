@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 AI Chat Service for JAC Learning Platform
 Provides intelligent responses for different agent types based on JAC language content

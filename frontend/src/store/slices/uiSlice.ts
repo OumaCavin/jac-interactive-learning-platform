@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * UI slice
  * Manages global UI state like theme, sidebar, loading states, etc.

@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Assessment slice
  * Manages quizzes, assessments, and evaluation state
@@ -7,7 +9,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { learningService } from '../../services/learningService';
 
 // Async thunks for API calls
-export const fetchQuizzes = createAsyncThunk(
+const fetchQuizzes = createAsyncThunk(
   'assessments/fetchQuizzes',
   async (_, { rejectWithValue }) => {
     try {
@@ -19,7 +21,7 @@ export const fetchQuizzes = createAsyncThunk(
   }
 );
 
-export const fetchQuiz = createAsyncThunk(
+const fetchQuiz = createAsyncThunk(
   'assessments/fetchQuiz',
   async (quizId: string, { rejectWithValue }) => {
     try {
@@ -31,7 +33,7 @@ export const fetchQuiz = createAsyncThunk(
   }
 );
 
-export const fetchUserAttempts = createAsyncThunk(
+const fetchUserAttempts = createAsyncThunk(
   'assessments/fetchUserAttempts',
   async (_, { rejectWithValue }) => {
     try {
@@ -43,7 +45,7 @@ export const fetchUserAttempts = createAsyncThunk(
   }
 );
 
-export const startQuizAttempt = createAsyncThunk(
+const startQuizAttempt = createAsyncThunk(
   'assessments/startQuizAttempt',
   async (quizId: string, { rejectWithValue }) => {
     try {
@@ -55,7 +57,7 @@ export const startQuizAttempt = createAsyncThunk(
   }
 );
 
-export const submitQuizAttempt = createAsyncThunk(
+const submitQuizAttempt = createAsyncThunk(
   'assessments/submitQuizAttempt',
   async ({ attemptId, answers }: { attemptId: string; answers: any }, { rejectWithValue }) => {
     try {
@@ -67,7 +69,7 @@ export const submitQuizAttempt = createAsyncThunk(
   }
 );
 
-export const fetchAssessmentStats = createAsyncThunk(
+const fetchAssessmentStats = createAsyncThunk(
   'assessments/fetchAssessmentStats',
   async (_, { rejectWithValue }) => {
     try {
@@ -265,19 +267,11 @@ const assessmentSlice = createSlice({
   },
 });
 
-// Export actions
-export const {
-  // Async thunks
-  fetchQuizzes,
-  fetchQuiz,
-  fetchUserAttempts,
-  startQuizAttempt,
-  submitQuizAttempt,
-  fetchAssessmentStats,
-  
-  // Reset
-  resetAssessment,
-} = assessmentSlice.actions;
+// Export async thunks directly
+export { fetchQuizzes, fetchQuiz, fetchUserAttempts, startQuizAttempt, submitQuizAttempt, fetchAssessmentStats };
+
+// Export slice actions
+export const { resetAssessment } = assessmentSlice.actions;
 
 // Selectors
 export const selectAssessments = (state: { assessments: AssessmentState }) => state.assessments;

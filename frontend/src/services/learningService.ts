@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 import { apiClient } from './apiClient';
 import { toast } from 'react-hot-toast';
 
@@ -167,14 +169,14 @@ export const learningService = {
   getAssessmentAttempt: (attemptId: string): Promise<any> =>
     apiClient.get(`/assessments/attempts/${attemptId}/`).then(res => res.data),
 
-  getAssessmentStats: (moduleId?: string): Promise<any> =>
+  getDirectAssessmentStats: (moduleId?: string): Promise<any> =>
     apiClient.get(`/assessments/stats/${moduleId ? `?module_id=${moduleId}` : ''}`).then(res => res.data),
 
   checkAssessmentAnswer: (questionId: string, answer: string): Promise<any> =>
     apiClient.post(`/assessments/questions/${questionId}/check_answer/`, { answer }).then(res => res.data),
 
   // JAC Code Execution (using correct backend endpoints)
-  executeCode: (code: string, language: string = 'jac'): Promise<any> =>
+  quickExecuteCode: (code: string, language: string = 'jac'): Promise<any> =>
     apiClient.post('/jac-execution/api/quick-execute/', { code, language, stdin: '' }).then(res => res.data),
 
   validateCode: (code: string, language: string = 'jac'): Promise<any> =>

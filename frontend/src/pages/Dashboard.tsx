@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -337,39 +339,39 @@ export const Dashboard: React.FC = () => {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard
-          title="Modules Completed"
-          value={stats.totalModulesCompleted}
-          subtitle="out of 45 total"
-          icon={BookOpenIcon}
-          color="bg-blue-500"
-          trend={{ value: 12, isPositive: true }}
-        />
-        <StatCard
-          title="Time Invested"
-          value={formatTime(stats.totalTimeSpent)}
-          subtitle="this month"
-          icon={ClockIcon}
-          color="bg-green-500"
-          trend={{ value: 8, isPositive: true }}
-        />
-        <StatCard
-          title="Average Score"
-          value={`${stats.averageScore}%`}
-          subtitle="across all assessments"
-          icon={StarIcon}
-          color="bg-yellow-500"
-          trend={{ value: 5, isPositive: true }}
-        />
-        <StatCard
-          title="Learning Paths"
-          value={stats.completedPaths}
-          subtitle="paths completed"
-          icon={TrophyIcon}
-          color="bg-purple-500"
-          trend={{ value: 3, isPositive: true }}
-        />
-      </div>
+          <StatCard
+            title="Modules Completed"
+            value={stats.totalModulesCompleted}
+            subtitle="out of 45 total"
+            icon={BookOpenIcon}
+            color="bg-blue-500"
+            trend={{ value: 12, isPositive: true }}
+          />
+          <StatCard
+            title="Time Invested"
+            value={formatTime(stats.totalTimeSpent)}
+            subtitle="this month"
+            icon={ClockIcon}
+            color="bg-green-500"
+            trend={{ value: 8, isPositive: true }}
+          />
+          <StatCard
+            title="Average Score"
+            value={`${stats.averageScore}%`}
+            subtitle="across all assessments"
+            icon={StarIcon}
+            color="bg-yellow-500"
+            trend={{ value: 5, isPositive: true }}
+          />
+          <StatCard
+            title="Learning Paths"
+            value={stats.completedPaths}
+            subtitle="paths completed"
+            icon={TrophyIcon}
+            color="bg-purple-500"
+            trend={{ value: 3, isPositive: true }}
+          />
+        </div>
 
       {/* Quick Actions */}
       <motion.div
@@ -475,6 +477,7 @@ export const Dashboard: React.FC = () => {
             )}
           </div>
         </motion.div>
+      </div>
       </div>
     </WebSocketProvider>
   );

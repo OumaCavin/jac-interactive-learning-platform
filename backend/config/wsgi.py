@@ -1,3 +1,5 @@
+# JAC Platform Configuration - Settings by Cavin Otieno
+
 """
 WSGI config for JAC Learning Platform backend.
 

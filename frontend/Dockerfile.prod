@@ -13,6 +13,8 @@ COPY package*.json ./
 COPY pnpm-lock.yaml ./
 COPY tsconfig.json ./
 COPY tailwind.config.js ./
+COPY postcss.config.js ./
+COPY craco.config.js ./
 
 # Update npm to latest version and install pnpm
 RUN npm install -g npm@latest

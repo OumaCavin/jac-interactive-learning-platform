@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Settings service
  * Handles user settings management through the UserSettingsView API

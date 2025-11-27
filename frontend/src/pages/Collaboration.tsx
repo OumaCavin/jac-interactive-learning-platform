@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Collaboration Page
  * 
@@ -9,7 +11,7 @@
 
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import MainLayout from '../components/layout/MainLayout'
+import { MainLayout } from '../components/layout/MainLayout'
 import { CollaborationDashboard, StudyGroupDetail } from '../components/collaboration'
 
 const CollaborationPage: React.FC = () => {

@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 Users app for the JAC Learning Platform.
 Handles user authentication, profiles, and learning preferences.

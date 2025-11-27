@@ -1,3 +1,5 @@
+# JAC Platform Configuration - Settings by Cavin Otieno
+
 """
 Main URL Configuration for JAC Learning Platform
 
@@ -75,7 +77,7 @@ urlpatterns = [
     path('learning/', include('apps.learning.urls')),
     path('assessments/', include('apps.assessments.urls')),
     # path('progress/', include('apps.progress.urls')),  # Progress tracking and analytics (temporarily disabled)
-    path('jac-execution/', include('apps.jac_execution.urls')),  # JAC execution engine
+    # Note: jac_execution URLs included only once to avoid namespace conflicts
     # Note: agents endpoints are only available via /api/agents/ to avoid namespace conflicts
     
     # Health check endpoints without /api/ prefix

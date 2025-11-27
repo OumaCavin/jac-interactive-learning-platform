@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 
 from .views_predictive import PredictiveStreamingAPIView, AIInteractionAPIView
 from .views_realtime import RealTimeDashboardAPIView, PredictiveAnalyticsAPIView, PerformanceAlertsAPIView, TrendAnalysisAPIView

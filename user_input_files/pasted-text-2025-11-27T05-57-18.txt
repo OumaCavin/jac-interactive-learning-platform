@@ -1,0 +1,628 @@
+Step 22/22 : CMD ["python", "/tmp/entrypoint.py"]
+ ---> Using cache
+ ---> addfeb816f55
+Successfully built addfeb816f55
+Successfully tagged jac-interactive-learning-platform_jac-sandbox:latest
+Creating jac-sandbox                                  ... done
+Creating jac-interactive-learning-platform_postgres_1 ... done
+Creating jac-interactive-learning-platform_redis_1    ... done
+Creating jac-celery-worker                            ... done
+Creating jac-celery-beat                              ... done
+Creating jac-interactive-learning-platform_backend_1  ... done
+Creating jac-interactive-learning-platform_frontend_1 ... done
+Creating jac-nginx                                    ... done
+⏳ Waiting for database to be ready...
+/var/run/postgresql:5432 - rejecting connections
+Database not ready yet, waiting...
+/var/run/postgresql:5432 - accepting connections
+✅ Database is ready!
+⏳ Waiting for backend to be ready...
+Backend not ready yet, waiting...
+Backend not ready yet, waiting...
+Backend not ready yet, waiting...
+✅ Backend is ready!
+🔄 Running Django migrations with automated handling...
+  → Fixing permissions...
+chmod: changing permissions of '/app/': Operation not permitted
+chmod: changing permissions of '/app/db.sqlite3': Operation not permitted
+chmod: changing permissions of '/app/test_ml_final.py': Operation not permitted
+chmod: changing permissions of '/app/fix_migration_issue.py': Operation not permitted
+chmod: changing permissions of '/app/README.md': Operation not permitted
+chmod: changing permissions of '/app/requirements.txt': Operation not permitted
+chmod: changing permissions of '/app/run_and_verify.py': Operation not permitted
+chmod: changing permissions of '/app/sandbox': Operation not permitted
+chmod: changing permissions of '/app/test_apis.py': Operation not permitted
+chmod: changing permissions of '/app/verify_curriculum.py': Operation not permitted
+chmod: changing permissions of '/app/populate_curriculum.py': Operation not permitted
+chmod: changing permissions of '/app/logs': Operation not permitted
+chmod: changing permissions of '/app/logs/django.log': Operation not permitted
+chmod: changing permissions of '/app/jac_sandbox_server.py': Operation not permitted
+chmod: changing permissions of '/app/backup_manager.py': Operation not permitted
+chmod: changing permissions of '/app/media': Operation not permitted
+chmod: changing permissions of '/app/test_phase2_integration.py': Operation not permitted
+chmod: changing permissions of '/app/docs': Operation not permitted
+chmod: changing permissions of '/app/docs/REAL_TIME_MONITORING_GUIDE.md': Operation not permitted
+chmod: changing permissions of '/app/fix_migrations.py': Operation not permitted
+chmod: changing permissions of '/app/Dockerfile': Operation not permitted
+chmod: changing permissions of '/app/curriculum_log.txt': Operation not permitted
+chmod: changing permissions of '/app/search': Operation not permitted
+chmod: changing permissions of '/app/search/admin.py': Operation not permitted
+chmod: changing permissions of '/app/search/apps.py': Operation not permitted
+chmod: changing permissions of '/app/search/urls.py': Operation not permitted
+chmod: changing permissions of '/app/search/serializers.py': Operation not permitted
+chmod: changing permissions of '/app/search/models.py': Operation not permitted
+chmod: changing permissions of '/app/search/views.py': Operation not permitted
+chmod: changing permissions of '/app/search/services': Operation not permitted
+chmod: changing permissions of '/app/search/services/search_service.py': Operation not permitted
+chmod: changing permissions of '/app/search/services/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/search/migrations': Operation not permitted
+chmod: changing permissions of '/app/search/migrations/0001_initial.py': Operation not permitted
+chmod: changing permissions of '/app/search/migrations/0002_rename_search_queries_query_idx_search_quer_query_50e46f_idx_and_more.py': Operation not permitted
+chmod: changing permissions of '/app/search/migrations/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/search/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/auto_migrate_fix.py': Operation not permitted
+chmod: changing permissions of '/app/test_ml_implementation.py': Operation not permitted
+chmod: changing permissions of '/app/test_ml_simple.py': Operation not permitted
+chmod: changing permissions of '/app/test_predictive_simple.py': Operation not permitted
+chmod: changing permissions of '/app/direct_db_fix.py': Operation not permitted
+chmod: changing permissions of '/app/pre_migration_hook.py': Operation not permitted
+chmod: changing permissions of '/app/templates': Operation not permitted
+chmod: changing permissions of '/app/templates/emails': Operation not permitted
+chmod: changing permissions of '/app/templates/emails/verification_email.html': Operation not permitted
+chmod: changing permissions of '/app/templates/admin': Operation not permitted
+chmod: changing permissions of '/app/templates/admin/login.html': Operation not permitted
+chmod: changing permissions of '/app/templates/admin/base_site.html': Operation not permitted
+chmod: changing permissions of '/app/requirements_realtime.txt': Operation not permitted
+chmod: changing permissions of '/app/verify_fixes.py': Operation not permitted
+chmod: changing permissions of '/app/entrypoint.sh': Operation not permitted
+chmod: changing permissions of '/app/static': Operation not permitted
+chmod: changing permissions of '/app/static/admin': Operation not permitted
+chmod: changing permissions of '/app/static/admin/css': Operation not permitted
+chmod: changing permissions of '/app/static/admin/css/admin_custom.css': Operation not permitted
+chmod: changing permissions of '/app/startup_debug.py': Operation not permitted
+chmod: changing permissions of '/app/management': Operation not permitted
+chmod: changing permissions of '/app/management/commands': Operation not permitted
+chmod: changing permissions of '/app/management/commands/safe_migrate.py': Operation not permitted
+chmod: changing permissions of '/app/management/commands/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/management/commands/auto_migrate.py': Operation not permitted
+chmod: changing permissions of '/app/management/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/fix_migration_history.py': Operation not permitted
+chmod: changing permissions of '/app/config': Operation not permitted
+chmod: changing permissions of '/app/config/celery.py': Operation not permitted
+chmod: changing permissions of '/app/config/sentry.py': Operation not permitted
+chmod: changing permissions of '/app/config/custom_admin.py': Operation not permitted
+chmod: changing permissions of '/app/config/urls.py': Operation not permitted
+chmod: changing permissions of '/app/config/wsgi.py': Operation not permitted
+chmod: changing permissions of '/app/config/settings.py': Operation not permitted
+chmod: changing permissions of '/app/config/asgi.py': Operation not permitted
+chmod: changing permissions of '/app/config/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/config/__pycache__': Operation not permitted
+chmod: changing permissions of '/app/config/__pycache__/urls.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/config/__pycache__/sentry.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/config/__pycache__/settings.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/config/settings_minimal.py': Operation not permitted
+chmod: changing permissions of '/app/backups': Operation not permitted
+chmod: changing permissions of '/app/backups/db_backup_20251125_010802_metadata.json': Operation not permitted
+chmod: changing permissions of '/app/backups/db_backup_20251125_010714_metadata.json': Operation not permitted
+chmod: changing permissions of '/app/test_predictive_analytics.py': Operation not permitted
+chmod: changing permissions of '/app/test_agent_fixes.py': Operation not permitted
+chmod: changing permissions of '/app/manage.py': Operation not permitted
+chmod: changing permissions of '/app/apps': Operation not permitted
+chmod: changing permissions of '/app/apps/progress': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/views_predictive.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/views_advanced_analytics.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/consumers.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/apps.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/urls.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/serializers.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/routing.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/models.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/views.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/views_realtime.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/services': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/services/realtime_monitoring_service.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/services/notification_service.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/services/background_monitoring_service.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/services/advanced_analytics_service.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/services/progress_service.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/services/predictive_analytics_service.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/services/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/services/analytics_service.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/management': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/management/commands': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/management/commands/start_monitoring.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/management/commands/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/management/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/__pycache__': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/__pycache__/apps.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/progress/__pycache__/__init__.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/admin.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/apps.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/urls.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/serializers.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/models.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/views.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/services': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/services/osp_implementation.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/services/graph_algorithms.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/services/jac_populator.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/services/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/services/analytics.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/management': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/management/commands': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/management/commands/populate_knowledge_graph.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/management/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/migrations': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/migrations/0001_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/migrations/0002_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/migrations/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/__pycache__': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/__pycache__/apps.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/knowledge_graph/__pycache__/__init__.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/learning': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/admin.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/middleware.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/apps.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/urls.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/serializers.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/models.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/views.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/services': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/services/difficulty_adjustment_service.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/services/adaptive_challenge_service.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/management': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/management/commands': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/management/commands/populate_jac_curriculum.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/management/commands/populate_knowledge_graph.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/management/commands/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/management/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/jac_code_executor.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/migrations': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/migrations/0001_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/migrations/0002_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/migrations/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/migrations/0003_adaptive_learning_clean.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/__pycache__': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/__pycache__/apps.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/__pycache__/jac_code_executor.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/learning/__pycache__/models.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/admin.py': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/jac_executor.py': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/apps.py': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/urls.py': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/serializers.py': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/models.py': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/views.py': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/services': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/services/executor.py': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/services/translator.py': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/serializers': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/serializers/translation_serializers.py': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/migrations': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/migrations/0001_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/migrations/0002_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/migrations/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/__pycache__': Operation not permitted
+chmod: changing permissions of '/app/apps/jac_execution/__pycache__/__init__.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/collaboration': Operation not permitted
+chmod: changing permissions of '/app/apps/collaboration/admin.py': Operation not permitted
+chmod: changing permissions of '/app/apps/collaboration/signals.py': Operation not permitted
+chmod: changing permissions of '/app/apps/collaboration/apps.py': Operation not permitted
+chmod: changing permissions of '/app/apps/collaboration/urls.py': Operation not permitted
+chmod: changing permissions of '/app/apps/collaboration/serializers.py': Operation not permitted
+chmod: changing permissions of '/app/apps/collaboration/models.py': Operation not permitted
+chmod: changing permissions of '/app/apps/collaboration/views.py': Operation not permitted
+chmod: changing permissions of '/app/apps/collaboration/migrations': Operation not permitted
+chmod: changing permissions of '/app/apps/collaboration/migrations/0001_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/collaboration/migrations/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/collaboration/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/management': Operation not permitted
+chmod: changing permissions of '/app/apps/management/commands': Operation not permitted
+chmod: changing permissions of '/app/apps/management/commands/initialize_platform.py': Operation not permitted
+chmod: changing permissions of '/app/apps/management/commands/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/management/apps.py': Operation not permitted
+chmod: changing permissions of '/app/apps/management/migrations': Operation not permitted
+chmod: changing permissions of '/app/apps/management/migrations/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/management/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/api_endpoints': Operation not permitted
+chmod: changing permissions of '/app/apps/api_endpoints/knowledge_graph_api.py': Operation not permitted
+chmod: changing permissions of '/app/apps/api_endpoints/ai_agents_urls.py': Operation not permitted
+chmod: changing permissions of '/app/apps/gamification': Operation not permitted
+chmod: changing permissions of '/app/apps/gamification/admin.py': Operation not permitted
+chmod: changing permissions of '/app/apps/gamification/signals.py': Operation not permitted
+chmod: changing permissions of '/app/apps/gamification/apps.py': Operation not permitted
+chmod: changing permissions of '/app/apps/gamification/urls.py': Operation not permitted
+chmod: changing permissions of '/app/apps/gamification/serializers.py': Operation not permitted
+chmod: changing permissions of '/app/apps/gamification/models.py': Operation not permitted
+chmod: changing permissions of '/app/apps/gamification/views.py': Operation not permitted
+chmod: changing permissions of '/app/apps/gamification/migrations': Operation not permitted
+chmod: changing permissions of '/app/apps/gamification/migrations/0001_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/gamification/migrations/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/gamification/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/admin.py': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/tests.py': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/apps.py': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/urls.py': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/serializers.py': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/models.py': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/views.py': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/migrations': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/migrations/0001_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/migrations/0003_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/migrations/0002_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/migrations/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/__pycache__': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/__pycache__/apps.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/assessments/__pycache__/__init__.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/users': Operation not permitted
+chmod: changing permissions of '/app/apps/users/admin.py': Operation not permitted
+chmod: changing permissions of '/app/apps/users/signals.py': Operation not permitted
+chmod: changing permissions of '/app/apps/users/apps.py': Operation not permitted
+chmod: changing permissions of '/app/apps/users/urls.py': Operation not permitted
+chmod: changing permissions of '/app/apps/users/serializers.py': Operation not permitted
+chmod: changing permissions of '/app/apps/users/models.py': Operation not permitted
+chmod: changing permissions of '/app/apps/users/views.py': Operation not permitted
+chmod: changing permissions of '/app/apps/users/migrations': Operation not permitted
+chmod: changing permissions of '/app/apps/users/migrations/0001_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/users/migrations/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/users/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/users/__pycache__': Operation not permitted
+chmod: changing permissions of '/app/apps/users/__pycache__/apps.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/users/__pycache__/__init__.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/users/__pycache__/models.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/agents': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/progress_tracker.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/content_curator.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/ai_multi_agent_system.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/apps.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/agents_manager.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/urls.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/motivator.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/serializers.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/quiz_master.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/simple_base_agent.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/models.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/views.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/models_complex.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/simple_agents_manager.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/ai_chat_service.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/evaluator.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/system_orchestrator.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/base_agent.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/simple_models.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/migrations': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/migrations/0001_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/migrations/0002_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/migrations/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/__pycache__': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/__pycache__/simple_models.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/__pycache__/apps.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/__pycache__/__init__.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/__pycache__/models.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/agents/__pycache__/views.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/content': Operation not permitted
+chmod: changing permissions of '/app/apps/content/admin.py': Operation not permitted
+chmod: changing permissions of '/app/apps/content/apps.py': Operation not permitted
+chmod: changing permissions of '/app/apps/content/urls.py': Operation not permitted
+chmod: changing permissions of '/app/apps/content/serializers.py': Operation not permitted
+chmod: changing permissions of '/app/apps/content/models.py': Operation not permitted
+chmod: changing permissions of '/app/apps/content/views.py': Operation not permitted
+chmod: changing permissions of '/app/apps/content/migrations': Operation not permitted
+chmod: changing permissions of '/app/apps/content/migrations/0001_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/content/migrations/0002_initial.py': Operation not permitted
+chmod: changing permissions of '/app/apps/content/migrations/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/content/__init__.py': Operation not permitted
+chmod: changing permissions of '/app/apps/content/__pycache__': Operation not permitted
+chmod: changing permissions of '/app/apps/content/__pycache__/apps.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/apps/content/__pycache__/__init__.cpython-312.pyc': Operation not permitted
+chmod: changing permissions of '/app/test_agent_api.py': Operation not permitted
+chmod: changing permissions of '/app/execute_curriculum.py': Operation not permitted
+chmod: changing permissions of '/app/fix_migration_interactive.py': Operation not permitted
+chmod: changing permissions of '/app/complete_migration_fix.py': Operation not permitted
+  ℹ️  Permission fix attempted
+  → Running enhanced migrations with explicit app targeting...
+Step 1: Collecting static files...
+Step 2: Creating migrations for users and learning apps...
+System check identified some issues:
+
+WARNINGS:
+?: (urls.W005) URL namespace 'jac_execution' isn't unique. You may not be able to reverse all URLs in this namespace
+No conflicts detected to merge.
+Step 3: Checking for any remaining unmigrated changes...
+System check identified some issues:
+
+WARNINGS:
+?: (urls.W005) URL namespace 'jac_execution' isn't unique. You may not be able to reverse all URLs in this namespace
+Field 'content' on model 'adaptivechallenge' not migrated: it is impossible to add a non-nullable field without specifying a default.
+Step 4: Applying all migrations...
+System check identified some issues:
+
+WARNINGS:
+?: (urls.W005) URL namespace 'jac_execution' isn't unique. You may not be able to reverse all URLs in this namespace
+Operations to perform:
+  Apply all migrations: admin, agents, assessments, auth, collaboration, content, contenttypes, django_celery_beat, gamification, jac_execution, knowledge_graph, learning, sessions, users
+Running migrations:
+  No migrations to apply.
+  Your models in app(s): 'collaboration', 'gamification', 'learning' have changes that are not yet reflected in a migration, and so won't be applied.
+  Run 'manage.py makemigrations' to make new migrations, and then re-run 'manage.py migrate' to apply them.
+Step 5: Verifying User model fields...
+71 objects imported automatically (use -v 2 for details).
+
+✅ User table: users_user
+✅ Total fields: 39
+✅ email: EmailField
+✅ created_at: DateTimeField
+✅ updated_at: DateTimeField
+✅ last_login_at: DateTimeField
+✅ last_activity_at: DateTimeField
+✅ total_points: PositiveIntegerField
+✅ level: PositiveIntegerField
+Step 6: Creating superuser if needed...
+71 objects imported automatically (use -v 2 for details).
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 948, in get_or_create
+    return self.get(**kwargs), False
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 635, in get
+    raise self.model.DoesNotExist(
+apps.gamification.models.UserLevel.DoesNotExist: UserLevel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "xp_to_next_level" of relation "user_level" violates not-null constraint
+DETAIL:  Failing row contains (4bad7340-c1c1-42bd-bb47-7237c30e41e3, 1, 0, 0, null, [], null, 2025-11-27 05:51:05.083916+00, 1).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/manage.py", line 32, in <module>
+    main()
+  File "/app/manage.py", line 28, in main
+    execute_from_command_line(sys.argv)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 416, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 460, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/commands/shell.py", line 257, in handle
+    exec(sys.stdin.read(), {**globals(), **self.get_namespace(**options)})
+  File "<string>", line 6, in <module>
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/models.py", line 195, in create_superuser
+    return self._create_user(username, email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/models.py", line 163, in _create_user
+    user.save(using=self._db)
+  File "/app/apps/users/models.py", line 126, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/contrib/auth/base_user.py", line 65, in save
+    super().save(*args, **kwargs)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1023, in save_base
+    post_save.send(
+  File "/usr/local/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/gamification/signals.py", line 32, in create_user_gamification_records
+    UserLevel.objects.get_or_create(user=instance)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 955, in get_or_create
+    return self.create(**params), True
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 665, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/base.py", line 1210, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1873, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: null value in column "xp_to_next_level" of relation "user_level" violates not-null constraint
+DETAIL:  Failing row contains (4bad7340-c1c1-42bd-bb47-7237c30e41e3, 1, 0, 0, null, [], null, 2025-11-27 05:51:05.083916+00, 1).
+
+Step 7: Final migration status...
+System check identified some issues:
+
+WARNINGS:
+?: (urls.W005) URL namespace 'jac_execution' isn't unique. You may not be able to reverse all URLs in this namespace
+admin
+ [X] 0001_initial
+ [X] 0002_logentry_remove_auto_add
+ [X] 0003_logentry_add_action_flag_choices
+agents
+ [X] 0001_initial
+ [X] 0002_initial
+assessments
+ [X] 0001_initial
+ [X] 0002_initial
+ [X] 0003_initial
+auth
+ [X] 0001_initial
+ [X] 0002_alter_permission_name_max_length
+ [X] 0003_alter_user_email_max_length
+ [X] 0004_alter_user_username_opts
+ [X] 0005_alter_user_last_login_null
+ [X] 0006_require_contenttypes_0002
+ [X] 0007_alter_validators_add_error_messages
+ [X] 0008_alter_user_username_max_length
+ [X] 0009_alter_user_last_name_max_length
+ [X] 0010_alter_group_name_max_length
+ [X] 0011_update_proxy_permissions
+ [X] 0012_alter_user_first_name_max_length
+collaboration
+ [X] 0001_initial
+content
+ [X] 0001_initial
+ [X] 0002_initial
+contenttypes
+ [X] 0001_initial
+ [X] 0002_remove_content_type_name
+django_celery_beat
+ [X] 0001_initial
+ [X] 0002_auto_20161118_0346
+ [X] 0003_auto_20161209_0049
+ [X] 0004_auto_20170221_0000
+ [X] 0005_add_solarschedule_events_choices
+ [X] 0006_auto_20180322_0932
+ [X] 0007_auto_20180521_0826
+ [X] 0008_auto_20180914_1922
+ [X] 0006_auto_20180210_1226
+ [X] 0006_periodictask_priority
+ [X] 0009_periodictask_headers
+ [X] 0010_auto_20190429_0326
+ [X] 0011_auto_20190508_0153
+ [X] 0012_periodictask_expire_seconds
+ [X] 0013_auto_20200609_0727
+ [X] 0014_remove_clockedschedule_enabled
+ [X] 0015_edit_solarschedule_events_choices
+ [X] 0016_alter_crontabschedule_timezone
+ [X] 0017_alter_crontabschedule_month_of_year
+ [X] 0018_improve_crontab_helptext
+ [X] 0019_alter_periodictasks_options
+gamification
+ [X] 0001_initial
+jac_execution
+ [X] 0001_initial
+ [X] 0002_initial
+knowledge_graph
+ [X] 0001_initial
+ [X] 0002_initial
+learning
+ [X] 0001_initial
+ [X] 0002_initial
+ [X] 0003_adaptive_learning_clean
+management
+ (no migrations)
+sessions
+ [X] 0001_initial
+users
+ [X] 0001_initial
+  ✅ Enhanced migrations completed successfully!
+✅ Migration process completed!
+🔍 Verifying admin account...
+⚠️  Admin account not found - this should not happen with enhanced migrations
+🔍 Checking service health...
+✅ Backend API is healthy
+✅ Frontend is accessible
+
+🎉 JAC Learning Platform Setup Complete!
+================================================
+📊 Service Status:
+  • Backend API:     http://localhost:8000
+  • Frontend:        http://localhost:3000
+  • Django Admin:    http://localhost:8000/admin/
+  • Admin Dashboard: http://localhost:3000/admin
+
+🔑 Superadmin Credentials:
+  • Username: admin
+  • Email:    cavin.otieno012@gmail.com
+  • Password: admin123
+
+📝 Important Notes:
+  • Enhanced migration system automatically handles missing fields
+  • URL namespace conflicts resolved automatically
+  • User model with all 22 fields will be created
+  • Change the default admin password immediately
+  • Update .env file with production settings
+  • Configure SSL/HTTPS for production
+  • Set up database backups for production
+
+📖 Management Commands:
+  • View logs:     docker-compose logs -f
+  • Stop services: docker-compose down
+  • Restart:       docker-compose restart
+  • Update:        docker-compose up -d --build
+
+🌟 Happy Learning with JAC!
+📋 Container Status:
+                    Name                                  Command                  State                                       Ports                                 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+jac-celery-beat                                celery -A config beat -l i ...   Up (healthy)   8000/tcp                                                              
+jac-celery-worker                              celery -A config worker -l ...   Up (healthy)   8000/tcp                                                              
+jac-interactive-learning-platform_backend_1    python /tmp/entrypoint.py        Up (healthy)   0.0.0.0:8000->8000/tcp,:::8000->8000/tcp                              
+jac-interactive-learning-platform_frontend_1   /docker-entrypoint.sh ngin ...   Up (healthy)   0.0.0.0:3000->80/tcp,:::3000->80/tcp                                  
+jac-interactive-learning-platform_postgres_1   docker-entrypoint.sh postgres    Up (healthy)   0.0.0.0:5432->5432/tcp,:::5432->5432/tcp                              
+jac-interactive-learning-platform_redis_1      docker-entrypoint.sh redis ...   Up (healthy)   0.0.0.0:6379->6379/tcp,:::6379->6379/tcp                              
+jac-nginx                                      /docker-entrypoint.sh ngin ...   Up (healthy)   0.0.0.0:443->443/tcp,:::443->443/tcp, 0.0.0.0:80->80/tcp,:::80->80/tcp
+jac-sandbox                                    python jac_sandbox_server.py     Up (healthy)   8000/tcp, 0.0.0.0:8080->8080/tcp,:::8080->8080/tcp                    
+
+💡 Tip: Use 'docker-compose logs -f [service]' to follow specific service logs
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # Look at the database configuration
+grep -A 15 -B 5 "DATABASES" backend/config/settings.py
+WSGI_APPLICATION = 'config.wsgi.application'
+ASGI_APPLICATION = 'config.asgi.application'
+
+# Database
+# Database Configuration
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME', default='jac_learning_db'),
+        'USER': config('DB_USER', default='jac_user'),
+        'PASSWORD': config('DB_PASSWORD', default='jac_password'),
+        'HOST': config('DB_HOST', default='postgres'),
+        'PORT': config('DB_PORT', default='5432'),
+        'OPTIONS': {
+            # PostgreSQL handles encoding through LC_ settings, not connection options
+        },
+        'CONN_MAX_AGE': 60,
+    }
+}
+
+# Caching
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker-compose exec backend python manage.py check --database default
+System check identified some issues:
+
+WARNINGS:
+?: (urls.W005) URL namespace 'jac_execution' isn't unique. You may not be able to reverse all URLs in this namespace
+
+System check identified 1 issue (0 silenced).
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 

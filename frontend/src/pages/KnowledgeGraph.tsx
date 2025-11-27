@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -65,12 +67,16 @@ interface LoadingState {
   graph: boolean;
   analytics: boolean;
   search: boolean;
+  agents: boolean;
+  chat: boolean;
 }
 
 interface ErrorState {
   graph: string | null;
   analytics: string | null;
   search: string | null;
+  agents: string | null;
+  chat: string | null;
 }
 
 const KnowledgeGraph: React.FC = () => {
@@ -103,7 +109,7 @@ const KnowledgeGraph: React.FC = () => {
   const [chatMessage, setChatMessage] = useState('');
   const [chatHistory, setChatHistory] = useState<any[]>([]);
   const [concepts, setConcepts] = useState<KnowledgeNode[]>([]);
-  const [learningPaths, setLearningPaths] = useState<any[]>([]);
+  const [graphLearningPaths, setGraphLearningPaths] = useState<any[]>([]);
   
   // Loading and error states
   const [loading, setLoading] = useState<LoadingState>({
@@ -123,7 +129,7 @@ const KnowledgeGraph: React.FC = () => {
   });
   
   const user = useSelector(selectUser);
-  const learningPaths = useSelector(selectLearning).learning_paths;
+  const userLearningPathsData = useSelector(selectLearning).learning_paths;
   const userLearningPaths = useSelector(selectUserLearningPaths);
   const userModuleProgress = useSelector(selectUserModuleProgress);
 
@@ -243,7 +249,7 @@ const KnowledgeGraph: React.FC = () => {
     try {
       const searchParams: GraphSearchParams = {
         query: query.trim(),
-        node_types: searchFilters?.nodeTypes,
+        node_types: searchFilters?.node_types,
         difficulty_levels: searchFilters?.difficulty_levels,
         limit: 100
       };
@@ -283,13 +289,6 @@ const KnowledgeGraph: React.FC = () => {
     }
   }, [loadGraphData]);
 
-  // Initialize graph data, analytics, and AI agents on component mount
-  useEffect(() => {
-    loadGraphData();
-    loadAnalytics();
-    loadAIAgentData();
-  }, [loadGraphData, loadAnalytics, loadAIAgentData]);
-
   // Load AI agent data
   const loadAIAgentData = useCallback(async () => {
     setLoading(prev => ({ ...prev, agents: true }));
@@ -309,7 +308,7 @@ const KnowledgeGraph: React.FC = () => {
         setConcepts(conceptsData.data.concepts);
       }
       if (pathsData.success) {
-        setLearningPaths(pathsData.data.learning_paths);
+        setGraphLearningPaths(pathsData.data.learning_paths);
       }
     } catch (error) {
       console.error('Error loading AI agent data:', error);
@@ -319,6 +318,13 @@ const KnowledgeGraph: React.FC = () => {
       setLoading(prev => ({ ...prev, agents: false }));
     }
   }, []);
+
+  // Initialize graph data, analytics, and AI agents on component mount
+  useEffect(() => {
+    loadGraphData();
+    loadAnalytics();
+    loadAIAgentData();
+  }, [loadGraphData, loadAnalytics, loadAIAgentData]);
 
   // Handle chat submission
   const handleChatSubmit = async () => {
@@ -341,7 +347,7 @@ const KnowledgeGraph: React.FC = () => {
         agent_type: selectedAgent,
         context: {
           concepts: concepts,
-          learning_paths: learningPaths
+          learning_paths: graphLearningPaths
         }
       });
 
@@ -558,7 +564,7 @@ const KnowledgeGraph: React.FC = () => {
           </p>
           <button
             onClick={() => {
-              setErrors({ graph: null, analytics: null, search: null });
+              setErrors({ graph: null, analytics: null, search: null, agents: null, chat: null });
               loadGraphData();
             }}
             className="mt-3 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 rounded-lg text-red-300 transition-colors flex items-center gap-2"
@@ -775,16 +781,16 @@ const KnowledgeGraph: React.FC = () => {
                 </p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {concept.tags.slice(0, 3).map((tag, tagIndex) => (
-                    <span key={tagIndex} className="text-xs px-2 py-1 bg-blue-500/20 text-blue-300 rounded">
-                      {tag}
+                  {concept.learning_objectives.slice(0, 3).map((objective, objIndex) => (
+                    <span key={objIndex} className="text-xs px-2 py-1 bg-blue-500/20 text-blue-300 rounded">
+                      {objective}
                     </span>
                   ))}
                 </div>
                 
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-white/70 capitalize">
-                    {concept.category.replace('_', ' ')}
+                    {concept.node_type.replace('_', ' ')}
                   </span>
                   <button
                     onClick={() => {
@@ -1266,32 +1272,34 @@ const KnowledgeGraph: React.FC = () => {
           </AnimatePresence>
         </div>
       </div>
+    )
+    }
     </div>
-  // Helper functions
-  function getNodeTypeIcon(type: string) {
-    switch (type) {
-      case 'learning_path': return <BookOpenIcon className="w-5 h-5" />;
-      case 'module': return <AcademicCapIcon className="w-5 h-5" />;
-      case 'concept': return <CodeBracketIcon className="w-5 h-5" />;
-      case 'lesson': return <StarIcon className="w-5 h-5" />;
-      case 'assessment': return <StarIcon className="w-5 h-5" />;
-      default: return <StarIcon className="w-5 h-5" />;
-    }
-  }
+  );
+};
 
-  function getEdgeColor(type: string) {
-    switch (type) {
-      case 'prerequisite': return '#EF4444';
-      case 'prerequisite_of': return '#EF4444';
-      case 'contains': return '#3B82F6';
-      case 'related': return '#8B5CF6';
-      case 'leads_to': return '#10B981';
-      case 'mastery': return '#10B981';
-      default: return '#6B7280';
-    }
+// Helper functions
+function getNodeTypeIcon(type: string) {
+  switch (type) {
+    case 'learning_path': return <BookOpenIcon className="w-5 h-5" />;
+    case 'module': return <AcademicCapIcon className="w-5 h-5" />;
+    case 'concept': return <CodeBracketIcon className="w-5 h-5" />;
+    case 'lesson': return <StarIcon className="w-5 h-5" />;
+    case 'assessment': return <StarIcon className="w-5 h-5" />;
+    default: return <StarIcon className="w-5 h-5" />;
   }
+}
 
-  return (
+function getEdgeColor(type: string) {
+  switch (type) {
+    case 'prerequisite': return '#EF4444';
+    case 'prerequisite_of': return '#EF4444';
+    case 'contains': return '#3B82F6';
+    case 'related': return '#8B5CF6';
+    case 'leads_to': return '#10B981';
+    case 'mastery': return '#10B981';
+    default: return '#6B7280';
+  }
 };
 
 export default KnowledgeGraph;

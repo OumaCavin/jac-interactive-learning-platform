@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Agent Chat Components Index - JAC Learning Platform
  * 
@@ -9,6 +11,7 @@
 
 export { default as BaseAgentChat } from './BaseAgentChat';
 export { default as ContentCuratorChat } from './ContentCuratorChat';
+export { default as MultiAgentChat } from './MultiAgentChat';
 export { default as QuizMasterChat } from './QuizMasterChat';
 export { default as EvaluatorChat } from './EvaluatorChat';
 export { default as ProgressTrackerChat } from './ProgressTrackerChat';

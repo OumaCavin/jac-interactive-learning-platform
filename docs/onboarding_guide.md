@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform Documentation - Author: Cavin Otieno
+
 # JAC Interactive Learning Platform - Complete Onboarding Guide
 
 ## 🎯 Welcome to JAC!

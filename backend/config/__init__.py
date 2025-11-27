@@ -1,3 +1,5 @@
+# JAC Platform Configuration - Settings by Cavin Otieno
+
 """
 Django configuration module initialization.
 This module initializes the Celery application for background tasks.

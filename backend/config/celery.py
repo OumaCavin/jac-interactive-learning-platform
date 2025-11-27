@@ -1,3 +1,5 @@
+# JAC Platform Configuration - Settings by Cavin Otieno
+
 """
 Celery configuration for the JAC Learning Platform backend.
 """

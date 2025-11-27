@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 Configuration for the management app.
 Custom Django app for management commands and platform utilities.

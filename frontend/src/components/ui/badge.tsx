@@ -1,8 +1,10 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 import React from 'react';
 
 interface BadgeProps {
   children: React.ReactNode;
-  variant?: 'default' | 'secondary' | 'info' | 'success' | 'warning' | 'error';
+  variant?: 'default' | 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
@@ -15,6 +17,7 @@ export const Badge: React.FC<BadgeProps> = ({
 }) => {
   const variantClasses = {
     default: 'bg-gray-100 text-gray-800',
+    primary: 'bg-blue-100 text-blue-800',
     secondary: 'bg-gray-200 text-gray-900',
     info: 'bg-blue-100 text-blue-800',
     success: 'bg-green-100 text-green-800',

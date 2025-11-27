@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Study Group Detail Component
  * 
@@ -75,7 +77,7 @@ const MembersList: React.FC<{ group: StudyGroup, memberships: StudyGroupMembersh
       case 'moderator':
         return 'secondary'
       default:
-        return 'outline'
+        return 'info'
     }
   }
 
@@ -242,7 +244,7 @@ const GroupCodeSharing: React.FC<{ groupId: string }> = ({ groupId }) => {
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base">{share.title}</CardTitle>
                 <div className="flex items-center space-x-2">
-                  <Badge variant="outline">{share.language}</Badge>
+                  <Badge variant="info">{share.language}</Badge>
                   <Badge variant={share.share_type === 'tutorial' ? 'default' : 'secondary'}>
                     {share.share_type}
                   </Badge>
@@ -264,7 +266,7 @@ const GroupCodeSharing: React.FC<{ groupId: string }> = ({ groupId }) => {
                     {share.downloads_count}
                   </span>
                 </div>
-                <Button variant="outline" size="sm">
+                <Button variant="secondary" size="sm">
                   View Code
                 </Button>
               </div>
@@ -331,7 +333,7 @@ const GroupChallenges: React.FC<{ groupId: string }> = ({ groupId }) => {
                   <Badge variant={challenge.status === 'active' ? 'default' : 'secondary'}>
                     {challenge.status}
                   </Badge>
-                  <Badge variant="outline">
+                  <Badge variant="info">
                     {challenge.participant_count} participants
                   </Badge>
                 </div>
@@ -351,7 +353,7 @@ const GroupChallenges: React.FC<{ groupId: string }> = ({ groupId }) => {
                 </div>
                 <div className="flex items-center space-x-2">
                   {challenge.is_participating ? (
-                    <Button variant="outline" size="sm">
+                    <Button variant="secondary" size="sm">
                       View Submission
                     </Button>
                   ) : (
@@ -359,7 +361,7 @@ const GroupChallenges: React.FC<{ groupId: string }> = ({ groupId }) => {
                       Participate
                     </Button>
                   )}
-                  <Button variant="outline" size="sm">
+                  <Button variant="secondary" size="sm">
                     View Details
                   </Button>
                 </div>
@@ -431,7 +433,7 @@ const StudyGroupDetail: React.FC = () => {
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <Button
-            variant="outline"
+            variant="secondary"
             size="sm"
             onClick={() => navigate('/collaboration')}
           >
@@ -447,7 +449,7 @@ const StudyGroupDetail: React.FC = () => {
         </div>
         <div className="flex items-center space-x-2">
           {group.is_member ? (
-            <Button variant="outline" onClick={handleLeaveGroup}>
+            <Button variant="secondary" onClick={handleLeaveGroup}>
               <UserMinus className="h-4 w-4 mr-2" />
               Leave Group
             </Button>
@@ -457,7 +459,7 @@ const StudyGroupDetail: React.FC = () => {
               Join Group
             </Button>
           )}
-          <Button variant="outline">
+          <Button variant="secondary">
             <Settings className="h-4 w-4 mr-2" />
             Settings
           </Button>

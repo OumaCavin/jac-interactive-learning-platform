@@ -1,6 +1,10 @@
 # JAC Learning Platform - Production Dependencies
+# Real-time WebSocket support
+channels==4.3.2
+channels-redis==4.1.0
+
 aiohappyeyeballs==2.6.1
-aiohttp==3.11.16
+aiohttp==3.13.2
 aiosignal==1.4.0
 amqp==5.3.1
 annotated-types==0.7.0
@@ -38,6 +42,8 @@ django-redis==5.2.0
 django-celery-beat==2.8.1
 djangorestframework==3.16.1
 djangorestframework-simplejwt==5.5.1
+django-filter==25.2
+google-generativeai==0.8.3
 docstring-parser==0.17.0
 docx2txt==0.9
 drf-spectacular==0.29.0
@@ -72,8 +78,8 @@ mypy-extensions==1.1.0
 networkx==3.5
 nltk==3.9.2
 numba==0.62.1
-numpy==2.3.5
-opencv-python==4.11.0.86
+numpy==2.2.6
+opencv-python==4.12.0.88
 openpyxl==3.1.5
 packaging==25.0
 pandas==2.3.3
@@ -83,7 +89,7 @@ pdfminer-six==20251107
 pdfplumber==0.11.8
 pillow==12.0.0
 platformdirs==4.5.0
-playwright==1.52.0
+playwright==1.56.0
 pluggy==1.6.0
 pooch==1.8.2
 prompt-toolkit==3.0.52

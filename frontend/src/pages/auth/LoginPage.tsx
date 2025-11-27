@@ -1,10 +1,12 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from '../../store/store';
 import { loginUser } from '../../store/slices/authSlice';
 import { authService } from '../../services/authService';
 import { toast } from 'react-hot-toast';
@@ -18,7 +20,7 @@ interface LoginFormData {
 export const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
@@ -73,7 +75,7 @@ export const LoginPage: React.FC = () => {
   }
 
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-md login-form-container">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -86,9 +88,9 @@ export const LoginPage: React.FC = () => {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 login-form">
           {/* Email Field */}
-          <div>
+          <div className="input-wrapper">
             <label htmlFor="email" className="block text-sm font-medium text-gray-800 mb-1">
               Email address
             </label>
@@ -109,12 +111,12 @@ export const LoginPage: React.FC = () => {
               placeholder="Enter your email"
             />
             {errors.email && (
-              <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+              <p className="error-message field-error">{errors.email.message}</p>
             )}
           </div>
 
           {/* Password Field */}
-          <div>
+          <div className="input-wrapper">
             <label htmlFor="password" className="block text-sm font-medium text-gray-800 mb-1">
               Password
             </label>
@@ -148,12 +150,12 @@ export const LoginPage: React.FC = () => {
               </button>
             </div>
             {errors.password && (
-              <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+              <p className="error-message field-error">{errors.password.message}</p>
             )}
           </div>
 
           {/* Remember Me & Forgot Password */}
-          <div className="flex items-center justify-between">
+          <div className="remember-forgot-section">
             <div className="flex items-center">
               <input
                 {...register('rememberMe')}
@@ -179,7 +181,7 @@ export const LoginPage: React.FC = () => {
             whileTap={{ scale: 0.98 }}
             type="submit"
             disabled={isLoading}
-            className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white transition-colors ${
+            className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white transition-colors btn-primary ${
               isLoading
                 ? 'bg-gray-400 cursor-not-allowed'
                 : 'bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
@@ -196,7 +198,7 @@ export const LoginPage: React.FC = () => {
           </motion.button>
 
           {/* Demo Credentials */}
-          <div className="bg-gray-100 border border-gray-400 rounded-lg p-4">
+          <div className="demo-credentials">
             <h4 className="text-sm font-medium text-gray-800 mb-2">Demo Credentials</h4>
             <p className="text-xs text-gray-700 mb-1">
               <strong>Email:</strong> demo@example.com
@@ -207,12 +209,12 @@ export const LoginPage: React.FC = () => {
           </div>
 
           {/* Sign Up Link */}
-          <div className="text-center">
+          <div className="signup-section">
             <p className="text-sm text-gray-700">
               Don't have an account?{' '}
               <Link
                 to="/register"
-                className="text-primary-700 hover:text-primary-800 font-semibold"
+                className="signup-link"
               >
                 Sign up for free
               </Link>

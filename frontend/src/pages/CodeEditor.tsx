@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -107,6 +109,7 @@ const CodeEditor: React.FC = () => {
       };
 
       const startTime = Date.now();
+      const endTime = Date.now(); // Declare endTime early to avoid scope issues
       let response: CodeExecutionResponse;
       
       // Use JAC-specific execution for better functionality
@@ -125,10 +128,9 @@ const CodeEditor: React.FC = () => {
         };
       } else {
         // Use generic execution for other languages
-        response = await learningService.executeCode(request);
+        response = await learningService.quickExecuteCode(code.trim(), selectedLanguage);
       }
-      const endTime = Date.now();
-
+      
       const result: ExecutionResult = {
         success: response.success,
         output: response.output,

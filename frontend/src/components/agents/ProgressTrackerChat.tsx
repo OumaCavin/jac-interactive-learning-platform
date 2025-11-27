@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Progress Tracker Agent Chat - JAC Learning Platform
  * 

@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 Gamification Models - JAC Learning Platform
 
@@ -394,7 +396,7 @@ class UserLevel(models.Model):
     current_level = models.PositiveIntegerField(default=1)
     current_xp = models.PositiveIntegerField(default=0)
     total_xp = models.PositiveIntegerField(default=0)
-    xp_to_next_level = models.PositiveIntegerField()
+    xp_to_next_level = models.PositiveIntegerField(default=100)
     
     # Progress Tracking
     level_up_notifications = models.JSONField(default=list, blank=True)

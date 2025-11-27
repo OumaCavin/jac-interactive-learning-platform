@@ -1,3 +1,5 @@
+# JAC Platform Configuration - Settings by Cavin Otieno
+
 """
 Django settings for the JAC Learning Platform backend.
 """
@@ -95,12 +97,19 @@ WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
 
 # Database
-# Database
-# Temporarily using SQLite for testing - switch back to PostgreSQL in production
+# Database Configuration
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME', default='jac_learning_db'),
+        'USER': config('DB_USER', default='jac_user'),
+        'PASSWORD': config('DB_PASSWORD', default='jac_password'),
+        'HOST': config('DB_HOST', default='postgres'),
+        'PORT': config('DB_PORT', default='5432'),
+        'OPTIONS': {
+            # PostgreSQL handles encoding through LC_ settings, not connection options
+        },
+        'CONN_MAX_AGE': 60,
     }
 }
 

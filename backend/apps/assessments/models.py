@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 """
 Assessment models for JAC Learning Platform
 Consolidated and comprehensive assessment system

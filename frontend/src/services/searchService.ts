@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * Search Service for JAC Learning Platform Frontend
  * Handles search functionality with backend API integration
@@ -100,7 +102,7 @@ class SearchService {
   /**
    * Track user click on search result
    */
-  async trackClick(query: string, resultId: string, resultType: string): Promise<void> {
+  async trackClick(query: string, resultId: string, resultType?: string): Promise<void> {
     try {
       await apiClient.post('/search/search/track_click/', {
         query,

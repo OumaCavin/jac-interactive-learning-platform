@@ -1,3 +1,5 @@
+# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+
 # Generated migration for gamification app
 
 from django.conf import settings

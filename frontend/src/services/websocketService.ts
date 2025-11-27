@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 /**
  * WebSocket Service - JAC Learning Platform Frontend
  * 
@@ -102,8 +104,8 @@ class WebSocketService {
     // Listen for store auth changes
     store.subscribe(() => {
       const state = store.getState();
-      if (state.auth?.token && state.auth.token !== this.authToken) {
-        this.handleAuthChange(state.auth.token);
+      if (state.auth?.tokens?.access && state.auth.tokens.access !== this.authToken) {
+        this.handleAuthChange(state.auth.tokens.access);
       }
     });
   }

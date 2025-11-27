@@ -1,3 +1,5 @@
+// JAC Learning Platform - TypeScript utilities by Cavin Otieno
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
@@ -94,23 +96,30 @@ const Assessments: React.FC = () => {
   const isSubmitting = useSelector(selectAssessmentSubmitting);
   const user = useSelector((state: any) => state.auth.user) || authService.getCurrentUser();
 
+  // Format time helper function
+  const formatTime = (minutes: number) => {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+  };
+
   // Calculate stats from real data
   const stats = {
     totalQuizzes: quizzes.length,
     completedQuizzes: attempts.filter(a => a.passed).length,
-    averageScore: attempts.length > 0 ? Math.round(attempts.reduce((sum, a) => sum + (a.percentage || 0), 0) / attempts.length) : 0,
-    totalTimeSpent: formatTime(Math.round(attempts.reduce((sum, a) => sum + (a.timeTaken || 0), 0) / 60)),
+    averageScore: attempts.length > 0 ? Math.round(attempts.reduce((sum, a) => sum + (a.max_score > 0 ? (a.score / a.max_score) * 100 : 0), 0) / attempts.length) : 0,
+    totalTimeSpent: formatTime(Math.round(attempts.reduce((sum, a) => sum + (a.time_taken || 0), 0) / 60)),
     currentStreak: 3, // TODO: Calculate from attempts
-    bestScore: attempts.length > 0 ? Math.max(...attempts.map(a => a.percentage || 0)) : 0,
+    bestScore: attempts.length > 0 ? Math.max(...attempts.map(a => a.max_score > 0 ? (a.score / a.max_score) * 100 : 0)) : 0,
     passRate: attempts.length > 0 ? Math.round((attempts.filter(a => a.passed).length / attempts.length) * 100) : 0,
     improvement: 12 // TODO: Calculate improvement trend
   };
 
   // Performance data from real attempts
   const performanceData = attempts.slice(-7).map(attempt => ({
-    date: new Date(attempt.completedAt || attempt.startedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-    score: attempt.percentage || 0,
-    difficulty: attempt.difficulty || 'medium',
+    date: new Date(attempt.completed_at || attempt.started_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    score: attempt.max_score > 0 ? (attempt.score / attempt.max_score) * 100 : 0,
+    difficulty: 'medium', // Default difficulty since it's not available in the interface
     completed: true
   }));
 
@@ -152,7 +161,7 @@ const Assessments: React.FC = () => {
     if (quizAttempts.length === 0) return 'not_started';
     
     const bestAttempt = quizAttempts.reduce((best, current) => 
-      (current.percentage || 0) > (best.percentage || 0) ? current : best
+      ((current.max_score > 0 ? (current.score / current.max_score) * 100 : 0) > (best.max_score > 0 ? (best.score / best.max_score) * 100 : 0)) ? current : best
     );
     
     return bestAttempt.passed ? 'completed' : 'in_progress';
@@ -162,7 +171,7 @@ const Assessments: React.FC = () => {
     const quizAttempts = attempts.filter(a => a.quiz === quizId);
     if (quizAttempts.length === 0) return 0;
     
-    return Math.max(...quizAttempts.map(a => a.percentage || 0));
+    return Math.max(...quizAttempts.map(a => a.max_score > 0 ? (a.score / a.max_score) * 100 : 0));
   };
 
   const getAttemptsRemaining = (quizId: string) => {
@@ -181,12 +190,6 @@ const Assessments: React.FC = () => {
     
     const maxAttempts = quiz.max_attempts || quiz.max_attempts || 3;
     return (quizAttempts.length / maxAttempts) * 100;
-  };
-
-  const formatTime = (minutes: number) => {
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
   };
 
   const formatDate = (dateString: string) => {
@@ -327,8 +330,8 @@ const Assessments: React.FC = () => {
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className={`text-lg font-bold ${getScoreColor(attempt.percentage || 0)}`}>
-                    {attempt.percentage || 0}%
+                  <div className={`text-lg font-bold ${getScoreColor(attempt.max_score > 0 ? (attempt.score / attempt.max_score) * 100 : 0)}`}>
+                    {attempt.max_score > 0 ? Math.round((attempt.score / attempt.max_score) * 100) : 0}%
                   </div>
                   <div className="text-xs text-white/85">
                     Attempt {index + 1}
@@ -412,11 +415,11 @@ const Assessments: React.FC = () => {
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="text-white/85">Questions:</span>
-                      <span className="text-white">{quiz.questionCount || quiz.questions?.length || 0}</span>
+                      <span className="text-white">{quiz.questions ? quiz.questions.length : 0}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-white/85">Points:</span>
-                      <span className="text-white">{quiz.totalPoints || 100}</span>
+                      <span className="text-white">100</span>
                     </div>
                     {quiz.time_limit && (
                       <div className="flex justify-between">
@@ -515,7 +518,7 @@ const Assessments: React.FC = () => {
             // Find the quiz for this attempt
             const quiz = quizzes.find(q => q.id === attempt.quiz);
             const quizTitle = quiz?.title || 'Unknown Quiz';
-            const difficulty = attempt.difficulty || 'medium';
+            const difficulty = 'medium'; // Default difficulty since it's not in the QuizAttempt interface
             
             return (
               <motion.div
@@ -545,8 +548,8 @@ const Assessments: React.FC = () => {
                   </div>
                   
                   <div className="text-right">
-                    <div className={`text-xl font-bold ${getScoreColor(attempt.percentage || 0)}`}>
-                      {attempt.percentage || 0}%
+                    <div className={`text-xl font-bold ${getScoreColor(attempt.max_score > 0 ? (attempt.score / attempt.max_score) * 100 : 0)}`}>
+                      {attempt.max_score > 0 ? Math.round((attempt.score / attempt.max_score) * 100) : 0}%
                     </div>
                     <div className="text-sm text-white/85">
                       {attempt.score || 0}/{attempt.max_score || 100} points
@@ -588,9 +591,10 @@ const Assessments: React.FC = () => {
           <h3 className="text-lg font-semibold text-white mb-4">Performance by Difficulty</h3>
           <div className="space-y-4">
             {['easy', 'medium', 'hard'].map(difficulty => {
-              const difficultyAttempts = attempts.filter(a => (a.difficulty || 'medium') === difficulty);
+              // Since difficulty is not available in QuizAttempt interface, show overall stats for all attempts
+              const difficultyAttempts = attempts; // Show all attempts for all difficulty levels
               const averageScore = difficultyAttempts.length > 0 
-                ? Math.round(difficultyAttempts.reduce((sum, a) => sum + (a.percentage || 0), 0) / difficultyAttempts.length)
+                ? Math.round(difficultyAttempts.reduce((sum, a) => sum + (a.max_score > 0 ? (a.score / a.max_score) * 100 : 0), 0) / difficultyAttempts.length)
                 : 0;
               const passRate = difficultyAttempts.length > 0
                 ? Math.round((difficultyAttempts.filter(a => a.passed).length / difficultyAttempts.length) * 100)
