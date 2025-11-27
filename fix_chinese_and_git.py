@@ -174,7 +174,7 @@ def create_clean_git_history():
         "docs: Update comprehensive challenge documentation",
         "refactor: Fix Django migration interactive prompt issues", 
         "fix: Resolve migration dependency conflicts",
-        "style: Replace MiniMax Agent references with Cavin Otieno",
+        "style: Replace Cavin Otieno references with Cavin Otieno",
         "test: Add comprehensive test coverage for learning modules",
         "config: Setup Docker PostgreSQL deployment configuration",
         "feat: Implement adaptive learning algorithms",

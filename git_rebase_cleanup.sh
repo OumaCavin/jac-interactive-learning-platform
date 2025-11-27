@@ -171,7 +171,7 @@ pick: Message 337772059414669 - 1764016884
 reword: fix: Chinese content translation in documentation
 
 pick: Message 337738896228523 - 1764009496
-reword: style: Replace MiniMax Agent references with Cavin Otieno
+reword: style: Replace Cavin Otieno references with Cavin Otieno
 
 pick: Message 337742746567016 - 1764010147
 reword: feat: Final platform integration and testing
@@ -192,7 +192,7 @@ echo "git add ."
 echo "git commit -m 'feat: Complete JAC Interactive Learning Platform implementation"
 echo ""
 echo "- Fixed Chinese content translation in documentation"
-echo "- Replaced all MiniMax Agent references with Cavin Otieno"
+echo "- Replaced all Cavin Otieno references with Cavin Otieno"
 echo "- Resolved Django migration interactive prompt issues"
 echo "- Cleaned up system-generated commit messages"
 echo "- Updated admin interface and deployment guides"

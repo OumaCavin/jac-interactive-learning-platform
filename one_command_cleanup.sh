@@ -57,7 +57,7 @@ COMMIT_MESSAGE="feat: Complete JAC Interactive Learning Platform implementation
 - Fixed Chinese content translation in documentation
 
 ✅ Quality Assurance:
-- Replaced all MiniMax Agent references with Cavin Otieno
+- Replaced all Cavin Otieno references with Cavin Otieno
 - Cleaned up system-generated commit messages
 - Verified PostgreSQL Docker readiness
 - Comprehensive platform testing and validation
@@ -95,7 +95,7 @@ else
     echo ""
     echo "📊 Summary:"
     echo "  ✓ Chinese content fixed in documentation"
-    echo "  ✓ MiniMax Agent references replaced with Cavin Otieno"  
+    echo "  ✓ Cavin Otieno references replaced with Cavin Otieno"  
     echo "  ✓ System-generated commit messages cleaned"
     echo "  ✓ Professional commit message created"
     echo "  ✓ Changes pushed to remote repository"
