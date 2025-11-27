@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3 
 """
 Comprehensive Verification Script for Frontend Pages
 Verifies all remaining page files in frontend/src/pages/ directory
