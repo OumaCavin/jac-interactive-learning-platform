@@ -21,17 +21,23 @@ RUN apt-get update && apt-get install -y \
     netcat-openbsd \
     && rm -rf /var/lib/apt/lists/*
 
+# Create non-root user for package installation
+RUN groupadd -r jac && useradd -r -g jac jac
+
 # Set work directory
 WORKDIR /app
 
 # Copy requirements first for better caching
 COPY requirements.txt .
 
-# Install Python dependencies with retry, timeout, and fallback mirror
-RUN pip install --no-cache-dir --default-timeout=300 --retries=5 \
+# Install Python dependencies as non-root user with virtual environment
+USER jac
+RUN python -m venv /home/jac/venv && \
+    /home/jac/venv/bin/pip install --upgrade pip && \
+    /home/jac/venv/bin/pip install --no-cache-dir --default-timeout=300 --retries=5 \
     -r requirements.txt || \
     (echo "Primary PyPI mirror failed, trying alternative" && \
-     pip install --no-cache-dir --default-timeout=300 --retries=5 --index-url https://pypi.douban.com/simple/ -r requirements.txt)
+     /home/jac/venv/bin/pip install --no-cache-dir --default-timeout=300 --retries=5 --index-url https://pypi.douban.com/simple/ -r requirements.txt)
 
 # Stage 2: Application
 FROM python:3.11-slim as application
@@ -52,15 +58,27 @@ RUN apt-get update && apt-get install -y \
 # Set work directory
 WORKDIR /app
 
-# Copy installed packages from dependencies stage
+# Copy installed packages and virtual environment from dependencies stage
 COPY --from=dependencies /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
 COPY --from=dependencies /usr/local/bin/ /usr/local/bin/
+COPY --from=dependencies /home/jac/venv /home/jac/venv
+COPY --from=dependencies --chown=jac:jac /home/jac/venv /home/jac/venv
+
+# Switch to non-root user for file operations
+USER jac
 
 # Copy application code
-COPY . .
+COPY --chown=jac:jac . .
 
 # Create directories for logs and media
 RUN mkdir -p logs media static
+
+# Set Python path to use the virtual environment
+ENV PATH="/home/jac/venv/bin:$PATH"
+ENV PYTHONPATH="/home/jac/venv/lib/python3.11/site-packages:$PYTHONPATH"
+
+# Switch back to root to create entrypoint (but keep ownership correct)
+USER root
 
 # Create production-ready entrypoint
 RUN echo 'import subprocess' > /tmp/entrypoint.py && \
@@ -91,7 +109,7 @@ RUN echo 'import subprocess' > /tmp/entrypoint.py && \
     echo '    print("📦 Running database migrations...")' >> /tmp/entrypoint.py && \
     echo '    try:' >> /tmp/entrypoint.py && \
     echo '        result = subprocess.run([' >> /tmp/entrypoint.py && \
-    echo '            "python", "manage.py", "migrate", "--noinput"' >> /tmp/entrypoint.py && \
+    echo '            "/home/jac/venv/bin/python", "manage.py", "migrate", "--noinput"' >> /tmp/entrypoint.py && \
     echo '        ], check=False, capture_output=True, text=True, timeout=60)' >> /tmp/entrypoint.py && \
     echo '        if result.returncode == 0:' >> /tmp/entrypoint.py && \
     echo '            print("✅ Database migrations completed")' >> /tmp/entrypoint.py && \
@@ -101,13 +119,13 @@ RUN echo 'import subprocess' > /tmp/entrypoint.py && \
     echo '        print(f"⚠️ Migration error: {e} (continuing anyway)")' >> /tmp/entrypoint.py && \
     echo '    print("🌐 Starting Django application server...")' >> /tmp/entrypoint.py && \
     echo '    sys.stdout.flush()' >> /tmp/entrypoint.py && \
-    echo '    os.execvp("python", ["python", "manage.py", "runserver", "0.0.0.0:8000"])' >> /tmp/entrypoint.py && \
+    echo '    os.execvp("/home/jac/venv/bin/python", ["/home/jac/venv/bin/python", "manage.py", "runserver", "0.0.0.0:8000"])' >> /tmp/entrypoint.py && \
     echo '' >> /tmp/entrypoint.py && \
     echo 'if __name__ == "__main__":' >> /tmp/entrypoint.py && \
     echo '    start_application()' >> /tmp/entrypoint.py
 
 # Change ownership to non-root user
-RUN chown -R jac:jac /app
+RUN chown -R jac:jac /app /tmp/entrypoint.py
 
 # Switch to non-root user
 USER jac
