@@ -606,6 +606,9 @@
 # ==============================================================================
 # Docker
 **/Dockerfile*
+!**/backend/Dockerfile.celery-worker
+!**/backend/Dockerfile.celery-beat
+!**/backend/Dockerfile.jac-sandbox
 **/.dockerignore
 **/docker-compose*.yml
 **/.docker/
