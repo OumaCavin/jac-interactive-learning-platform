@@ -71,7 +71,7 @@ export const RegisterPage: React.FC = () => {
       >
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900">Create your account</h2>
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-800 mt-2">
             Join the JAC Learning Platform and start your journey
           </p>
         </div>
@@ -79,7 +79,7 @@ export const RegisterPage: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Name Field */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="name" className="block text-sm font-medium text-gray-900 mb-1">
               Full name
             </label>
             <input
@@ -93,19 +93,19 @@ export const RegisterPage: React.FC = () => {
               type="text"
               id="name"
               autoComplete="name"
-              className={`w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
-                errors.name ? 'border-red-300' : 'border-gray-300'
+              className={`w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-600 focus:outline-none focus:ring-primary-600 focus:border-primary-600 ${
+                errors.name ? 'border-red-500' : 'border-gray-400'
               }`}
               placeholder="Enter your full name"
             />
             {errors.name && (
-              <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+              <p className="mt-1 text-sm text-red-600 font-medium">{errors.name.message}</p>
             )}
           </div>
 
           {/* Email Field */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-1">
               Email address
             </label>
             <input
@@ -119,19 +119,19 @@ export const RegisterPage: React.FC = () => {
               type="email"
               id="email"
               autoComplete="email"
-              className={`w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
-                errors.email ? 'border-red-300' : 'border-gray-300'
+              className={`w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-600 focus:outline-none focus:ring-primary-600 focus:border-primary-600 ${
+                errors.email ? 'border-red-500' : 'border-gray-400'
               }`}
               placeholder="Enter your email"
             />
             {errors.email && (
-              <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+              <p className="mt-1 text-sm text-red-600 font-medium">{errors.email.message}</p>
             )}
           </div>
 
           {/* Password Field */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-900 mb-1">
               Password
             </label>
             <div className="relative">
@@ -150,15 +150,16 @@ export const RegisterPage: React.FC = () => {
                 type={showPassword ? 'text' : 'password'}
                 id="password"
                 autoComplete="new-password"
-                className={`w-full px-3 py-2 pr-10 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
-                  errors.password ? 'border-red-300' : 'border-gray-300'
+                className={`w-full px-3 py-2 pr-10 border rounded-md shadow-sm placeholder-gray-600 focus:outline-none focus:ring-primary-600 focus:border-primary-600 ${
+                  errors.password ? 'border-red-500' : 'border-gray-400'
                 }`}
                 placeholder="Create a strong password"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 transition-colors"
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? (
                   <EyeSlashIcon className="h-5 w-5" />
@@ -168,13 +169,13 @@ export const RegisterPage: React.FC = () => {
               </button>
             </div>
             {errors.password && (
-              <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+              <p className="mt-1 text-sm text-red-600 font-medium">{errors.password.message}</p>
             )}
           </div>
 
           {/* Confirm Password Field */}
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-900 mb-1">
               Confirm password
             </label>
             <div className="relative">
@@ -187,15 +188,16 @@ export const RegisterPage: React.FC = () => {
                 type={showConfirmPassword ? 'text' : 'password'}
                 id="confirmPassword"
                 autoComplete="new-password"
-                className={`w-full px-3 py-2 pr-10 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 ${
-                  errors.confirmPassword ? 'border-red-300' : 'border-gray-300'
+                className={`w-full px-3 py-2 pr-10 border rounded-md shadow-sm placeholder-gray-600 focus:outline-none focus:ring-primary-600 focus:border-primary-600 ${
+                  errors.confirmPassword ? 'border-red-500' : 'border-gray-400'
                 }`}
                 placeholder="Confirm your password"
               />
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 transition-colors"
+                aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
               >
                 {showConfirmPassword ? (
                   <EyeSlashIcon className="h-5 w-5" />
@@ -205,7 +207,7 @@ export const RegisterPage: React.FC = () => {
               </button>
             </div>
             {errors.confirmPassword && (
-              <p className="mt-1 text-sm text-red-600">{errors.confirmPassword.message}</p>
+              <p className="mt-1 text-sm text-red-600 font-medium">{errors.confirmPassword.message}</p>
             )}
           </div>
 
@@ -220,19 +222,19 @@ export const RegisterPage: React.FC = () => {
                 type="checkbox"
                 className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded mt-1"
               />
-              <label htmlFor="agreeToTerms" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="agreeToTerms" className="ml-2 block text-sm text-gray-800">
                 I agree to the{' '}
-                <Link to="/terms" className="text-primary-600 hover:text-primary-700 font-medium">
+                <Link to="/terms" className="text-primary-700 hover:text-primary-800 font-medium underline">
                   Terms of Service
                 </Link>{' '}
                 and{' '}
-                <Link to="/privacy" className="text-primary-600 hover:text-primary-700 font-medium">
+                <Link to="/privacy" className="text-primary-700 hover:text-primary-800 font-medium underline">
                   Privacy Policy
                 </Link>
               </label>
             </div>
             {errors.agreeToTerms && (
-              <p className="text-sm text-red-600">{errors.agreeToTerms.message}</p>
+              <p className="text-sm text-red-600 font-medium">{errors.agreeToTerms.message}</p>
             )}
 
             <div className="flex items-start">
@@ -242,7 +244,7 @@ export const RegisterPage: React.FC = () => {
                 type="checkbox"
                 className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded mt-1"
               />
-              <label htmlFor="subscribeToNewsletter" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="subscribeToNewsletter" className="ml-2 block text-sm text-gray-800">
                 Subscribe to our newsletter for updates and learning tips
               </label>
             </div>
@@ -257,7 +259,7 @@ export const RegisterPage: React.FC = () => {
             className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white transition-colors ${
               isLoading
                 ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
+                : 'bg-primary-700 hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600'
             }`}
           >
             {isLoading ? (
@@ -272,11 +274,11 @@ export const RegisterPage: React.FC = () => {
 
           {/* Sign In Link */}
           <div className="text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-800">
               Already have an account?{' '}
               <Link
                 to="/login"
-                className="text-primary-600 hover:text-primary-700 font-medium"
+                className="text-primary-700 hover:text-primary-800 font-medium underline"
               >
                 Sign in
               </Link>

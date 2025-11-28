@@ -1,0 +1,47 @@
+# JAC Learning Platform - JAC Sandbox Dockerfile
+# This is a standalone Dockerfile for the JAC code execution sandbox service
+
+FROM python:3.11-slim
+
+# Install system dependencies for code execution sandbox
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create app directory
+WORKDIR /app
+
+# Create non-root user with limited privileges
+RUN groupadd -r jac && useradd -r -g jac jac
+
+# Copy requirements first for better caching
+COPY requirements.txt requirements_realtime.txt ./
+
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt \
+    && pip install --no-cache-dir -r requirements_realtime.txt
+
+# Copy the entire backend directory
+COPY . .
+
+# Create sandbox directories
+RUN mkdir -p sandbox logs static media
+
+# Set proper permissions
+RUN chown -R jac:jac /app
+
+# Switch to non-root user
+USER jac
+
+# Expose sandbox service port
+EXPOSE 8080
+
+# Health check for sandbox service
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD python -c "import socket; s = socket.socket(); s.settimeout(3); s.connect(('localhost', 8080)); s.close()" || exit 1
+
+# Start JAC sandbox service
+CMD ["python", "jac_sandbox_server.py"]
