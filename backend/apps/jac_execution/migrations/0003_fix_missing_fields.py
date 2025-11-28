@@ -40,39 +40,20 @@ class Migration(migrations.Migration):
             field=models.PositiveIntegerField(default=1, help_text='Number of CPU cores used'),
         ),
         
-        # Add TranslationJob fields
+        # Add additional CodeExecution fields (keeping existing fields intact)
         migrations.AddField(
-            model_name='translationjob',
-            name='translation_engine',
-            field=models.CharField(choices=[('google', 'Google Translate'), ('deepL', 'DeepL'), ('local', 'Local Model')], default='google', max_length=20),
+            model_name='codeexecution',
+            name='status_details',
+            field=models.TextField(blank=True, null=True, help_text='Additional status details or error messages'),
         ),
         
         migrations.AddField(
-            model_name='translationjob',
-            name='confidence_score',
-            field=models.FloatField(null=True, blank=True, help_text='Translation confidence score (0-1)'),
+            model_name='codeexecution',
+            name='user_agent',
+            field=models.CharField(max_length=255, blank=True, null=True, help_text='User agent string for execution tracking'),
         ),
         
-        migrations.AddField(
-            model_name='translationjob',
-            name='target_language',
-            field=models.CharField(max_length=10, help_text='Target language code (e.g., en, es, fr)'),
-        ),
-        
-        # Add CodeExecutionHistory fields
-        migrations.AddField(
-            model_name='codeexecutionhistory',
-            name='execution_environment',
-            field=models.JSONField(default=dict, help_text='Execution environment details'),
-        ),
-        
-        migrations.AddField(
-            model_name='codeexecutionhistory',
-            name='input_parameters',
-            field=models.JSONField(default=list, help_text='Input parameters used for execution'),
-        ),
-        
-        # Add performance indexes
+        # Add performance indexes for CodeExecution
         migrations.AddIndex(
             model_name='codeexecution',
             index=models.Index(fields=['status', 'created_at'], name='jac_execution_code_execution_status_created_idx'),
@@ -83,13 +64,9 @@ class Migration(migrations.Migration):
             index=models.Index(fields=['user', 'status'], name='jac_execution_code_execution_user_status_idx'),
         ),
         
+        # Add index for CodeExecutionSession
         migrations.AddIndex(
-            model_name='translationjob',
-            index=models.Index(fields=['status', 'created_at'], name='jac_execution_translation_job_status_created_idx'),
-        ),
-        
-        migrations.AddIndex(
-            model_name='codeexecutionhistory',
-            index=models.Index(fields=['user', 'created_at'], name='jac_execution_code_execution_history_user_created_idx'),
+            model_name='codeexecutionsession',
+            index=models.Index(fields=['user', 'is_active'], name='jac_execution_code_execution_session_user_active_idx'),
         ),
     ]
