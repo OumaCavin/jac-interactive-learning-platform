@@ -15,33 +15,14 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        # Add missing Badge fields
-        migrations.AddField(
-            model_name='badge',
-            name='unlock_conditions',
-            field=models.JSONField(default=dict, help_text='Specific conditions to unlock this badge'),
-        ),
-        
+        # Add missing Badge fields (unlock_conditions already exists)
         migrations.AddField(
             model_name='badge',
             name='usage_count',
             field=models.PositiveIntegerField(default=0, help_text='How many times this badge has been awarded'),
         ),
         
-        # Add missing Achievement fields
-        migrations.AddField(
-            model_name='achievement',
-            name='unlock_order',
-            field=models.PositiveIntegerField(default=0, help_text='Order for unlocking achievements'),
-        ),
-        
-        # Add UserAchievement tracking fields
-        migrations.AddField(
-            model_name='userachievement',
-            name='progress_percentage',
-            field=models.FloatField(default=0.0, help_text='Current progress percentage (0-100)'),
-        ),
-        
+        # Add UserAchievement tracking fields (unlock_order and progress_percentage already exist)
         migrations.AddField(
             model_name='userachievement',
             name='last_updated',
