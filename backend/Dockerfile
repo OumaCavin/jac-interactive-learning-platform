@@ -21,8 +21,10 @@ RUN apt-get update && apt-get install -y \
     netcat-openbsd \
     && rm -rf /var/lib/apt/lists/*
 
-# Create non-root user for package installation
-RUN groupadd -r jac && useradd -r -g jac jac
+# Create non-root user for package installation with proper home directory
+RUN groupadd -r jac && \
+    useradd -r -g jac -m -d /home/jac jac && \
+    chmod 755 /home/jac
 
 # Set work directory
 WORKDIR /app
@@ -32,7 +34,9 @@ COPY requirements.txt .
 
 # Install Python dependencies as non-root user with virtual environment
 USER jac
-RUN python -m venv /home/jac/venv && \
+# Ensure home directory is writable and create virtual environment
+RUN mkdir -p /home/jac && \
+    python -m venv /home/jac/venv && \
     /home/jac/venv/bin/pip install --upgrade pip && \
     /home/jac/venv/bin/pip install --no-cache-dir --default-timeout=300 --retries=5 \
     -r requirements.txt || \
@@ -46,8 +50,10 @@ FROM python:3.11-slim as application
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-# Create non-root user
-RUN groupadd -r jac && useradd -r -g jac jac
+# Create non-root user with proper home directory
+RUN groupadd -r jac && \
+    useradd -r -g jac -m -d /home/jac jac && \
+    chmod 755 /home/jac
 
 # Install runtime dependencies
 RUN apt-get update && apt-get install -y \
@@ -61,8 +67,9 @@ WORKDIR /app
 # Copy installed packages and virtual environment from dependencies stage
 COPY --from=dependencies /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
 COPY --from=dependencies /usr/local/bin/ /usr/local/bin/
-COPY --from=dependencies /home/jac/venv /home/jac/venv
-COPY --from=dependencies --chown=jac:jac /home/jac/venv /home/jac/venv
+# Try to copy virtual environment, with fallback
+COPY --from=dependencies --chown=jac:jac /home/jac/venv /home/jac/venv || \
+COPY --from=dependencies --chown=jac:jac /app/venv /home/jac/venv
 
 # Switch to non-root user for file operations
 USER jac
@@ -73,9 +80,9 @@ COPY --chown=jac:jac . .
 # Create directories for logs and media
 RUN mkdir -p logs media static
 
-# Set Python path to use the virtual environment
-ENV PATH="/home/jac/venv/bin:$PATH"
-ENV PYTHONPATH="/home/jac/venv/lib/python3.11/site-packages:$PYTHONPATH"
+# Set Python path to use the virtual environment (with fallbacks)
+ENV PATH="/home/jac/venv/bin:/app/venv/bin:/usr/local/bin:$PATH"
+ENV PYTHONPATH="/home/jac/venv/lib/python3.11/site-packages:/app/venv/lib/python3.11/site-packages:$PYTHONPATH"
 
 # Switch back to root to create entrypoint (but keep ownership correct)
 USER root
@@ -86,6 +93,20 @@ RUN echo 'import subprocess' > /tmp/entrypoint.py && \
     echo 'import socket' >> /tmp/entrypoint.py && \
     echo 'import os' >> /tmp/entrypoint.py && \
     echo 'import sys' >> /tmp/entrypoint.py && \
+    echo 'import glob' >> /tmp/entrypoint.py && \
+    echo '' >> /tmp/entrypoint.py && \
+    echo 'def find_python_executable():' >> /tmp/entrypoint.py && \
+    echo '    # Try multiple possible locations for python executable' >> /tmp/entrypoint.py && \
+    echo '    possible_paths = [' >> /tmp/entrypoint.py && \
+    echo '        "/home/jac/venv/bin/python",' >> /tmp/entrypoint.py && \
+    echo '        "/app/venv/bin/python",' >> /tmp/entrypoint.py && \
+    echo '        "/usr/local/bin/python"' >> /tmp/entrypoint.py && \
+    echo '    ]' >> /tmp/entrypoint.py && \
+    echo '    for path in possible_paths:' >> /tmp/entrypoint.py && \
+    echo '        if os.path.exists(path):' >> /tmp/entrypoint.py && \
+    echo '            return path' >> /tmp/entrypoint.py && \
+    echo '    # Fallback to system python' >> /tmp/entrypoint.py && \
+    echo '    return "python"' >> /tmp/entrypoint.py && \
     echo '' >> /tmp/entrypoint.py && \
     echo 'def wait_for_database(max_retries=30):' >> /tmp/entrypoint.py && \
     echo '    print("🚀 Starting JAC Learning Platform Backend...")' >> /tmp/entrypoint.py && \
@@ -105,11 +126,13 @@ RUN echo 'import subprocess' > /tmp/entrypoint.py && \
     echo '    return False' >> /tmp/entrypoint.py && \
     echo '' >> /tmp/entrypoint.py && \
     echo 'def start_application():' >> /tmp/entrypoint.py && \
+    echo '    python_exe = find_python_executable()' >> /tmp/entrypoint.py && \
+    echo '    print(f"🐍 Using Python: {python_exe}")' >> /tmp/entrypoint.py && \
     echo '    wait_for_database()' >> /tmp/entrypoint.py && \
     echo '    print("📦 Running database migrations...")' >> /tmp/entrypoint.py && \
     echo '    try:' >> /tmp/entrypoint.py && \
     echo '        result = subprocess.run([' >> /tmp/entrypoint.py && \
-    echo '            "/home/jac/venv/bin/python", "manage.py", "migrate", "--noinput"' >> /tmp/entrypoint.py && \
+    echo '            python_exe, "manage.py", "migrate", "--noinput"' >> /tmp/entrypoint.py && \
     echo '        ], check=False, capture_output=True, text=True, timeout=60)' >> /tmp/entrypoint.py && \
     echo '        if result.returncode == 0:' >> /tmp/entrypoint.py && \
     echo '            print("✅ Database migrations completed")' >> /tmp/entrypoint.py && \
@@ -119,7 +142,7 @@ RUN echo 'import subprocess' > /tmp/entrypoint.py && \
     echo '        print(f"⚠️ Migration error: {e} (continuing anyway)")' >> /tmp/entrypoint.py && \
     echo '    print("🌐 Starting Django application server...")' >> /tmp/entrypoint.py && \
     echo '    sys.stdout.flush()' >> /tmp/entrypoint.py && \
-    echo '    os.execvp("/home/jac/venv/bin/python", ["/home/jac/venv/bin/python", "manage.py", "runserver", "0.0.0.0:8000"])' >> /tmp/entrypoint.py && \
+    echo '    os.execvp(python_exe, [python_exe, "manage.py", "runserver", "0.0.0.0:8000"])' >> /tmp/entrypoint.py && \
     echo '' >> /tmp/entrypoint.py && \
     echo 'if __name__ == "__main__":' >> /tmp/entrypoint.py && \
     echo '    start_application()' >> /tmp/entrypoint.py
