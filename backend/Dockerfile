@@ -67,9 +67,8 @@ WORKDIR /app
 # Copy installed packages and virtual environment from dependencies stage
 COPY --from=dependencies /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
 COPY --from=dependencies /usr/local/bin/ /usr/local/bin/
-# Try to copy virtual environment, with fallback
-COPY --from=dependencies --chown=jac:jac /home/jac/venv /home/jac/venv || \
-COPY --from=dependencies --chown=jac:jac /app/venv /home/jac/venv
+# Copy the virtual environment from the dependencies stage
+COPY --from=dependencies --chown=jac:jac /home/jac/venv /home/jac/venv
 
 # Switch to non-root user for file operations
 USER jac
@@ -80,9 +79,9 @@ COPY --chown=jac:jac . .
 # Create directories for logs and media
 RUN mkdir -p logs media static
 
-# Set Python path to use the virtual environment (with fallbacks)
-ENV PATH="/home/jac/venv/bin:/app/venv/bin:/usr/local/bin:$PATH"
-ENV PYTHONPATH="/home/jac/venv/lib/python3.11/site-packages:/app/venv/lib/python3.11/site-packages:$PYTHONPATH"
+# Set Python path to use the virtual environment
+ENV PATH="/home/jac/venv/bin:/usr/local/bin:$PATH"
+ENV PYTHONPATH="/home/jac/venv/lib/python3.11/site-packages:$PYTHONPATH"
 
 # Switch back to root to create entrypoint (but keep ownership correct)
 USER root
@@ -96,10 +95,9 @@ RUN echo 'import subprocess' > /tmp/entrypoint.py && \
     echo 'import glob' >> /tmp/entrypoint.py && \
     echo '' >> /tmp/entrypoint.py && \
     echo 'def find_python_executable():' >> /tmp/entrypoint.py && \
-    echo '    # Try multiple possible locations for python executable' >> /tmp/entrypoint.py && \
+    echo '    # Try primary location for python executable' >> /tmp/entrypoint.py && \
     echo '    possible_paths = [' >> /tmp/entrypoint.py && \
     echo '        "/home/jac/venv/bin/python",' >> /tmp/entrypoint.py && \
-    echo '        "/app/venv/bin/python",' >> /tmp/entrypoint.py && \
     echo '        "/usr/local/bin/python"' >> /tmp/entrypoint.py && \
     echo '    ]' >> /tmp/entrypoint.py && \
     echo '    for path in possible_paths:' >> /tmp/entrypoint.py && \
