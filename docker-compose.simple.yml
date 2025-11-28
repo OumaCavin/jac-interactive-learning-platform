@@ -1,0 +1,122 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: jac_learning_db
+      POSTGRES_USER: jac_user
+      POSTGRES_PASSWORD: jac_password
+      POSTGRES_INITDB_ARGS: --encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - jac_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jac_user -d jac_learning_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache & Session Store
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - jac_network
+    command: redis-server --appendonly yes --requirepass redis_password
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # Django Backend API
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    user: "jac:jac"
+    environment:
+      DEBUG: "False"
+      DJANGO_SETTINGS_MODULE: "config.settings"
+      DB_NAME: "jac_learning_db"
+      DB_USER: "jac_user"
+      DB_PASSWORD: "jac_password"
+      DB_HOST: "postgres"
+      DB_PORT: "5432"
+      CELERY_BROKER_URL: "redis://:redis_password@redis:6379/0"
+      CELERY_RESULT_BACKEND: "redis://:redis_password@redis:6379/0"
+      SECRET_KEY: "${SECRET_KEY:-django-insecure-production-key}"
+      CORS_ALLOWED_ORIGINS: "http://localhost:3000,http://frontend:3000"
+      SENTRY_DSN_BACKEND: "${SENTRY_DSN_BACKEND:-}"
+      ENVIRONMENT: "production"
+      RELEASE_VERSION: "${RELEASE_VERSION:-1.0.0}"
+      SENTRY_TRACES_SAMPLE_RATE: "0.1"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - ./backend/static:/app/static
+      - ./backend/media:/app/media
+      - ./backend/logs:/app/logs
+    networks:
+      - jac_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/api/health/static/ > /dev/null 2>&1 && exit 0 || curl -f http://localhost:8000/api/health/simple/ > /dev/null 2>&1 && exit 0 || curl -f http://localhost:8000/api/health/ > /dev/null 2>&1 && exit 0 || exit 1"]
+      interval: 45s
+      timeout: 15s
+      retries: 3
+      start_period: 90s
+
+  # React Frontend (Production Build)
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+      args:
+        - REACT_APP_API_URL=http://localhost:8000
+        - REACT_APP_WS_URL=ws://localhost:8000
+    ports:
+      - "3000:80"
+    environment:
+      REACT_APP_API_URL: "http://localhost:8000/api"
+      NODE_ENV: "production"
+      REACT_APP_SENTRY_DSN: "${REACT_APP_SENTRY_DSN:-}"
+      REACT_APP_VERSION: "${RELEASE_VERSION:-1.0.0}"
+      REACT_APP_WS_URL: "ws://localhost:8000/ws"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - jac_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "ps aux | grep nginx | grep -v grep"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  jac_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
