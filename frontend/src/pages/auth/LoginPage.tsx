@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
-import { loginUser } from '../../store/slices/authSlice';
+import { setUser } from '../../store/slices/authSlice';
 import { authService } from '../../services/authService';
 import { toast } from 'react-hot-toast';
 
@@ -52,11 +52,7 @@ export const LoginPage: React.FC = () => {
       });
 
       // Update Redux state with the user data and tokens
-      dispatch(loginUser({
-        user: result.user,
-        tokens: result.tokens,
-        isAuthenticated: true
-      }));
+      dispatch(setUser(result.user));
 
       toast.success('Welcome back! You have been logged in successfully.');
       
