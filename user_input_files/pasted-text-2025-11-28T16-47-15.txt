@@ -1,0 +1,212 @@
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ git pull origin main
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 3.65 KiB | 623.00 KiB/s, done.
+From https://github.com/OumaCavin/jac-interactive-learning-platform
+ * branch            main       -> FETCH_HEAD
+   95dc168..d1e439f  main       -> origin/main
+Updating 95dc168..d1e439f
+Fast-forward
+ DEPLOY_LOCAL_FIXES.sh | 341 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 341 insertions(+)
+ create mode 100644 DEPLOY_LOCAL_FIXES.sh
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ bash DEPLOY_LOCAL_FIXES.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 🚀 JAC PLATFORM - LOCAL FIX DEPLOYMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ℹ️  This command applies ALL fixes on your LOCAL machine
+🔸 Step 1: Checking Docker services...
+✅ Docker is available
+🔸 Step 2: Starting/Checking Docker services...
+✅ Services are already running
+🔸 Step 3: Setting up password authentication...
+
+Choose password approach:
+1) Empty password + first login (RECOMMENDED - Modern UX)
+2) Fixed passwords with proper hashing (Traditional)
+
+Enter choice (1 or 2, default: 1): 1
+ℹ️  Setting up empty password + first login approach...
+71 objects imported automatically (use -v 2 for details).
+
+🔧 Creating users with empty passwords...
+Traceback (most recent call last):
+  File "/app/manage.py", line 32, in <module>
+    main()
+  File "/app/manage.py", line 28, in main
+    execute_from_command_line(sys.argv)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 416, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 460, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/commands/shell.py", line 257, in handle
+    exec(sys.stdin.read(), {**globals(), **self.get_namespace(**options)})
+  File "<string>", line 9, in <module>
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 196, in __get__
+    raise AttributeError(
+AttributeError: Manager isn't available; 'auth.User' has been swapped for 'users.User'
+⚠️  Empty password setup failed, falling back to fixed password approach
+ℹ️  Setting up fixed passwords with proper hashing...
+Traceback (most recent call last):
+  File "/app/manage.py", line 32, in <module>
+    main()
+  File "/app/manage.py", line 28, in main
+    execute_from_command_line(sys.argv)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+71 objects imported automatically (use -v 2 for details).
+
+🔧 Creating users with proper password hashing...
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 416, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 460, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/commands/shell.py", line 257, in handle
+    exec(sys.stdin.read(), {**globals(), **self.get_namespace(**options)})
+  File "<string>", line 6, in <module>
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 196, in __get__
+    raise AttributeError(
+AttributeError: Manager isn't available; 'auth.User' has been swapped for 'users.User'
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ git pull origin main
+From https://github.com/OumaCavin/jac-interactive-learning-platform
+ * branch            main       -> FETCH_HEAD
+Already up to date.
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ bash DEPLOY_LOCAL_FIXES.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 🚀 JAC PLATFORM - LOCAL FIX DEPLOYMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ℹ️  This command applies ALL fixes on your LOCAL machine
+🔸 Step 1: Checking Docker services...
+✅ Docker is available
+🔸 Step 2: Starting/Checking Docker services...
+✅ Services are already running
+🔸 Step 3: Setting up password authentication...
+
+Choose password approach:
+1) Empty password + first login (RECOMMENDED - Modern UX)
+2) Fixed passwords with proper hashing (Traditional)
+
+Enter choice (1 or 2, default: 1): 2
+ℹ️  Setting up fixed passwords with proper hashing...
+71 objects imported automatically (use -v 2 for details).
+
+🔧 Creating users with proper password hashing...
+Traceback (most recent call last):
+  File "/app/manage.py", line 32, in <module>
+    main()
+  File "/app/manage.py", line 28, in main
+    execute_from_command_line(sys.argv)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 416, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 460, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/commands/shell.py", line 257, in handle
+    exec(sys.stdin.read(), {**globals(), **self.get_namespace(**options)})
+  File "<string>", line 6, in <module>
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 196, in __get__
+    raise AttributeError(
+AttributeError: Manager isn't available; 'auth.User' has been swapped for 'users.User'
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ bash DEPLOY_LOCAL_FIXES.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 🚀 JAC PLATFORM - LOCAL FIX DEPLOYMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ℹ️  This command applies ALL fixes on your LOCAL machine
+🔸 Step 1: Checking Docker services...
+✅ Docker is available
+🔸 Step 2: Starting/Checking Docker services...
+✅ Services are already running
+🔸 Step 3: Setting up password authentication...
+
+Choose password approach:
+1) Empty password + first login (RECOMMENDED - Modern UX)
+2) Fixed passwords with proper hashing (Traditional)
+
+Enter choice (1 or 2, default: 1): 
+ℹ️  Setting up empty password + first login approach...
+71 objects imported automatically (use -v 2 for details).
+
+🔧 Creating users with empty passwords...
+Traceback (most recent call last):
+  File "/app/manage.py", line 32, in <module>
+    main()
+  File "/app/manage.py", line 28, in main
+    execute_from_command_line(sys.argv)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 416, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 460, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/commands/shell.py", line 257, in handle
+    exec(sys.stdin.read(), {**globals(), **self.get_namespace(**options)})
+  File "<string>", line 9, in <module>
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 196, in __get__
+    raise AttributeError(
+AttributeError: Manager isn't available; 'auth.User' has been swapped for 'users.User'
+⚠️  Empty password setup failed, falling back to fixed password approach
+ℹ️  Setting up fixed passwords with proper hashing...
+71 objects imported automatically (use -v 2 for details).
+
+🔧 Creating users with proper password hashing...
+Traceback (most recent call last):
+  File "/app/manage.py", line 32, in <module>
+    main()
+  File "/app/manage.py", line 28, in main
+    execute_from_command_line(sys.argv)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 416, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/base.py", line 460, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/management/commands/shell.py", line 257, in handle
+    exec(sys.stdin.read(), {**globals(), **self.get_namespace(**options)})
+  File "<string>", line 6, in <module>
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/manager.py", line 196, in __get__
+    raise AttributeError(
+AttributeError: Manager isn't available; 'auth.User' has been swapped for 'users.User'
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ bash DEPLOY_LOCAL_FIXES.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 🚀 JAC PLATFORM - LOCAL FIX DEPLOYMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ℹ️  This command applies ALL fixes on your LOCAL machine
+🔸 Step 1: Checking Docker services...
+✅ Docker is available
+🔸 Step 2: Starting/Checking Docker services...
+✅ Services are already running
+🔸 Step 3: Setting up password authentication...
+
+Choose password approach:
+1) Empty password + first login (RECOMMENDED - Modern UX)
+2) Fixed passwords with proper hashing (Traditional)
+
+Enter choice (1 or 2, default: 1): 
