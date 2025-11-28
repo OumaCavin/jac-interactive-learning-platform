@@ -172,7 +172,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 # Use a writable location for static root to avoid permission issues
-STATIC_ROOT = '/tmp/staticfiles'
+STATIC_ROOT = '/var/www/static'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
