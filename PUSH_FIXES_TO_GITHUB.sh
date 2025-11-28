@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script to push the Dockerfile fixes to GitHub
-# Author: MiniMax Agent
+# Author: Cavin Otieno
 
 echo "🚀 Pushing Dockerfile fixes to GitHub..."
 echo
