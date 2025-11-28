@@ -1,0 +1,270 @@
+jac-celery-beat  | [2025-11-28 20:11:22,321: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,321: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,321: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,321: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 100, in _execute
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] with self.db.wrap_database_errors:
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-28 20:11:22,322: WARNING/MainProcess] raise dj_exc_value.with_traceback(traceback) from exc_value
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess]   File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess]     
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] return self.cursor.execute(sql, params)
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess]  
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,323: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] ^
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] django.db.utils
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] .
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] ProgrammingError
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] : 
+jac-celery-beat  | [2025-11-28 20:11:22,324: WARNING/MainProcess] relation "django_celery_beat_crontabschedule" does not exist
+jac-celery-beat  | LINE 1: ...django_celery_beat_crontabschedule"."minute" FROM "django_ce...
+jac-celery-beat  |                                                              ^
+jac-celery-beat  | celery beat v5.5.3 (immunity) is starting.
+jac-celery-beat  | __    -    ... __   -        _
+jac-celery-beat  | LocalTime -> 2025-11-28 20:11:22
+jac-celery-beat  | Configuration ->
+jac-celery-beat  |     . broker -> redis://:**@redis:6379/0
+jac-celery-beat  |     . loader -> celery.loaders.app.AppLoader
+jac-celery-beat  |     . scheduler -> django_celery_beat.schedulers.DatabaseScheduler
+jac-celery-beat  | 
+jac-celery-beat  |     . logfile -> [stderr]@%INFO
+jac-celery-beat  |     . maxinterval -> 5.00 seconds (5s)
+jac-celery-beat  | [2025-11-28 20:12:23,198: INFO/MainProcess] beat: Starting...
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ curl -I http://localhost
+HTTP/1.1 200 OK
+Server: nginx/1.29.3
+Date: Fri, 28 Nov 2025 20:23:57 GMT
+Content-Type: text/html
+Content-Length: 615
+Last-Modified: Tue, 28 Oct 2025 16:30:37 GMT
+Connection: keep-alive
+Vary: Accept-Encoding
+ETag: "6900efad-267"
+Expires: Fri, 28 Nov 2025 20:23:56 GMT
+Cache-Control: no-cache
+Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0
+Accept-Ranges: bytes
+
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker-compose logs backend
+Attaching to jac-interactive-learning-platform_backend_1
+backend_1        | 🐍 Using Python: /home/jac/venv/bin/python
+backend_1        | 🚀 Starting JAC Learning Platform Backend...
+backend_1        | 📡 Waiting for database connection...
+backend_1        | ✅ Database connection established!
+backend_1        | 📦 Running database migrations...
+backend_1        | ⚠️ Migration warnings (continuing): Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 32, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 28, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 416, in run_from_argv
+backend_1        |     self.execute(*args, **cmd_options)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 460, in execute
+backend_1        |     output = self.handle(*args, **options)
+backend_1        |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 107, in wrapper
+backend_1        |     res = handle_func(*args, **kwargs)
+backend_1        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/commands/migrate.py", line 353, in handle
+backend_1        |     post_migrate_state = executor.migrate(
+backend_1        |                          ^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/db/migrations/executor.py", line 135, in migrate
+backend_1        |     state = self._migrate_all_forwards(
+backend_1        |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/db/migrations/executor.py", line 167, in _migrate_all_forwards
+backend_1        |     state = self.apply_migration(
+backend_1        |             ^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/db/migrations/executor.py", line 255, in apply_migration
+backend_1        |     state = migration.apply(state, schema_editor)
+backend_1        |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/db/migrations/migration.py", line 118, in apply
+backend_1        |     operation.state_forwards(self.app_label, project_state)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/db/migrations/operations/fields.py", line 95, in state_forwards
+backend_1        |     state.add_field(
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/db/migrations/state.py", line 261, in add_field
+backend_1        |     self.models[model_key].fields[name] = field
+backend_1        |     ~~~~~~~~~~~^^^^^^^^^^^
+backend_1        | KeyError: ('content', 'contentblock')
+backend_1        | 
+backend_1        | 🌐 Starting Django application server...
+backend_1        | Watching for file changes with StatReloader
+backend_1        | Performing system checks...
+backend_1        | 
+backend_1        | System check identified no issues (0 silenced).
+backend_1        | 
+backend_1        | You have 34 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): content, django_celery_beat, gamification, jac_execution, knowledge_graph, learning, sessions.
+backend_1        | Run 'python manage.py migrate' to apply them.
+backend_1        | November 28, 2025 - 19:54:27
+backend_1        | Django version 5.2.8, using settings 'config.settings'
+backend_1        | Starting development server at http://0.0.0.0:8000/
+backend_1        | Quit the server with CONTROL-C.
+backend_1        | 
+backend_1        | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+backend_1        | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /admin/login/?next=/admin/ HTTP/1.1" 200 10772
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /admin/login/?next=/admin/ HTTP/1.1" 200 10772
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | /app/apps/gamification/migrations/0002_fix_missing_fields.py changed, reloading.
+backend_1        | Watching for file changes with StatReloader
+backend_1        | Performing system checks...
+backend_1        | 
+backend_1        | System check identified no issues (0 silenced).
+backend_1        | 
+backend_1        | You have 11 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): gamification, jac_execution, knowledge_graph, learning, sessions.
+backend_1        | Run 'python manage.py migrate' to apply them.
+backend_1        | November 28, 2025 - 20:13:10
+backend_1        | Django version 5.2.8, using settings 'config.settings'
+backend_1        | Starting development server at http://0.0.0.0:8000/
+backend_1        | Quit the server with CONTROL-C.
+backend_1        | 
+backend_1        | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+backend_1        | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | /app/apps/jac_execution/migrations/0003_fix_missing_fields.py changed, reloading.
+backend_1        | Watching for file changes with StatReloader
+backend_1        | Performing system checks...
+backend_1        | 
+backend_1        | System check identified no issues (0 silenced).
+backend_1        | 
+backend_1        | You have 8 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): jac_execution, knowledge_graph, learning, sessions.
+backend_1        | Run 'python manage.py migrate' to apply them.
+backend_1        | November 28, 2025 - 20:17:18
+backend_1        | Django version 5.2.8, using settings 'config.settings'
+backend_1        | Starting development server at http://0.0.0.0:8000/
+backend_1        | Quit the server with CONTROL-C.
+backend_1        | 
+backend_1        | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+backend_1        | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | /app/apps/learning/migrations/0006_add_missing_fields.py changed, reloading.
+backend_1        | Watching for file changes with StatReloader
+backend_1        | Performing system checks...
+backend_1        | 
+backend_1        | System check identified no issues (0 silenced).
+backend_1        | 
+backend_1        | You have 4 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): content, learning, sessions.
+backend_1        | Run 'python manage.py migrate' to apply them.
+backend_1        | November 28, 2025 - 20:20:39
+backend_1        | Django version 5.2.8, using settings 'config.settings'
+backend_1        | Starting development server at http://0.0.0.0:8000/
+backend_1        | Quit the server with CONTROL-C.
+backend_1        | 
+backend_1        | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+backend_1        | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | /app/apps/learning/migrations/0006_add_missing_fields.py changed, reloading.
+backend_1        | Watching for file changes with StatReloader
+backend_1        | Performing system checks...
+backend_1        | 
+backend_1        | System check identified no issues (0 silenced).
+backend_1        | 
+backend_1        | You have 3 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): learning, sessions.
+backend_1        | Run 'python manage.py migrate' to apply them.
+backend_1        | November 28, 2025 - 20:22:30
+backend_1        | Django version 5.2.8, using settings 'config.settings'
+backend_1        | Starting development server at http://0.0.0.0:8000/
+backend_1        | Quit the server with CONTROL-C.
+backend_1        | 
+backend_1        | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+backend_1        | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+backend_1        | "GET /admin/login/?next=/admin/ HTTP/1.1" 200 10772
+backend_1        | "GET /api/health/static/ HTTP/1.1" 200 178
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 
