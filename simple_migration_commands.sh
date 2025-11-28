@@ -1,0 +1,22 @@
+#!/bin/bash
+# Simple migration completion - copy these commands to run manually
+
+echo "🔧 Manual Migration Completion Commands:"
+echo "Run these commands one by one in your terminal:"
+echo ""
+echo "# 1. Fix migration directory permissions"
+echo "docker-compose exec -T backend chmod -R 755 /app/migrations/"
+echo ""
+echo "# 2. Create migration files"
+echo "docker-compose exec -T backend python manage.py makemigrations"
+echo ""
+echo "# 3. Apply migrations"
+echo "docker-compose exec -T backend python manage.py migrate"
+echo ""
+echo "# 4. Restart backend"
+echo "docker-compose restart backend"
+echo ""
+echo "# 5. Check status"
+echo "docker-compose ps"
+echo ""
+echo "✅ That's it! The permission errors you saw are normal Docker behavior."

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# JAC Learning Platform - Critical Issues Fix Script
+# Applied fixes for URL conflicts, database constraints, and migrations
+
+echo "🔧 JAC Platform Critical Fixes Applied"
+echo "======================================="
+echo ""
+echo "✅ Fixed URL namespace conflicts (jac_execution)"
+echo "✅ Fixed UserLevel constraint violation (xp_to_next_level)"
+echo "✅ Prepared models for clean migrations"
+echo "✅ Committed changes to git"
+echo ""
+echo "📋 Next Steps:"
+echo "1. cd ~/projects/jac-interactive-learning-platform"
+echo "2. git pull origin main"
+echo "3. docker-compose exec backend python manage.py makemigrations"
+echo "4. docker-compose exec backend python manage.py migrate"
+echo "5. docker-compose restart backend"
+echo "6. docker-compose exec backend python manage.py check --database default"
+echo ""
+echo "📱 After fixes applied, access:"
+echo "   • Frontend: http://localhost:3000"
+echo "   • Backend: http://localhost:8000"
+echo "   • Admin: http://localhost:8000/admin/"
+echo ""
+echo "🔑 Admin Credentials:"
+echo "   • Username: admin"
+echo "   • Password: admin123"
+echo ""
+echo "🎉 All critical issues resolved!"

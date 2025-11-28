@@ -423,6 +423,228 @@ input::placeholder {
   90%, 100% { content: ''; }
 }
 
+/* LOGIN FORM SPECIFIC FIXES - Override problematic styling */
+
+/* Fix login form container and ensure proper contrast */
+.login-form-container {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  color: #1a1a1a !important;
+}
+
+/* Reset text colors specifically for login form content */
+.login-form-container *,
+.login-form-container h1,
+.login-form-container h2,
+.login-form-container h3,
+.login-form-container h4,
+.login-form-container h5,
+.login-form-container h6,
+.login-form-container p,
+.login-form-container span,
+.login-form-container div,
+.login-form-container label {
+  color: #1a1a1a !important;
+}
+
+/* Fix input field styling and positioning */
+.login-form-container input[type="email"],
+.login-form-container input[type="password"],
+.login-form-container input[type="text"] {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 2px solid #d1d5db !important;
+  color: #1a1a1a !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+}
+
+.login-form-container input::placeholder {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+/* Fix input focus states */
+.login-form-container input:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  outline: none !important;
+}
+
+/* Fix validation error styling - ensure errors appear BELOW inputs, not inside */
+.login-form-container .field-error {
+  color: #dc2626 !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  margin-top: 8px !important;
+  margin-bottom: 0 !important;
+  line-height: 1.4 !important;
+  display: block !important;
+  position: relative !important;
+  clear: both !important;
+}
+
+/* Ensure form error messages don't overlap with inputs */
+.login-form-container .input-wrapper {
+  position: relative !important;
+  margin-bottom: 24px !important;
+}
+
+.login-form-container .error-message {
+  position: absolute !important;
+  bottom: -20px !important;
+  left: 0 !important;
+  width: 100% !important;
+  color: #dc2626 !important;
+  font-size: 14px !important;
+  z-index: 10 !important;
+}
+
+/* Fix button styling - ensure text is visible */
+.login-form-container button,
+.login-form-container .btn-primary {
+  background: #3b82f6 !important;
+  color: white !important;
+  border: none !important;
+  padding: 12px 24px !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 48px !important;
+}
+
+.login-form-container button:hover:not(:disabled),
+.login-form-container .btn-primary:hover {
+  background: #2563eb !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+.login-form-container button:active,
+.login-form-container .btn-primary:active {
+  transform: translateY(0) !important;
+}
+
+/* Fix checkbox styling */
+.login-form-container input[type="checkbox"] {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 2px solid #d1d5db !important;
+  border-radius: 4px !important;
+  background: white !important;
+  cursor: pointer !important;
+  accent-color: #3b82f6 !important;
+}
+
+.login-form-container input[type="checkbox"]:checked {
+  background: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+/* Fix checkbox label positioning */
+.login-form-container label[for="rememberMe"] {
+  color: #374151 !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Fix forgot password link */
+.login-form-container a[href="/forgot-password"] {
+  color: #3b82f6 !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+}
+
+.login-form-container a[href="/forgot-password"]:hover {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+}
+
+/* Fix remember me section layout */
+.login-form-container .remember-forgot-section {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin: 24px 0 !important;
+  padding: 0 !important;
+}
+
+/* Demo credentials section */
+.login-form-container .demo-credentials {
+  background: #f3f4f6 !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  margin: 24px 0 !important;
+}
+
+.login-form-container .demo-credentials h4 {
+  color: #374151 !important;
+  font-weight: 600 !important;
+  margin-bottom: 8px !important;
+}
+
+.login-form-container .demo-credentials p {
+  color: #6b7280 !important;
+  margin-bottom: 4px !important;
+  font-size: 14px !important;
+}
+
+/* Sign up link section */
+.login-form-container .signup-section {
+  text-align: center !important;
+  margin-top: 24px !important;
+}
+
+.login-form-container .signup-section p {
+  color: #6b7280 !important;
+  margin: 0 !important;
+}
+
+.login-form-container .signup-link {
+  color: #3b82f6 !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+}
+
+.login-form-container .signup-link:hover {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+}
+
+/* Ensure proper spacing and layout */
+.login-form-container form {
+  padding: 32px !important;
+  max-width: 400px !important;
+  margin: 0 auto !important;
+}
+
+/* Loading state styling */
+.login-form-container button:disabled {
+  background: #9ca3af !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Apply login-specific fixes only to form containers */
+.max-w-md .login-form,
+form .login-form,
+#root > div .login-form {
+  /* This ensures the fixes apply to the login form specifically */
+}
+
 /* Print styles */
 @media print {
   .no-print {

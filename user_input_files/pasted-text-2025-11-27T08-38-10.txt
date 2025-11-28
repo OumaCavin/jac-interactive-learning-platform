@@ -1,0 +1,184 @@
+Step 20/26 : RUN pnpm config set network-timeout 300000 &&     pnpm build
+ ---> Running in 195ea2973313
+
+> jac-learning-platform-frontend@1.0.0 build /app
+> CI=false craco build
+
+Creating an optimized production build...
+Compiled with warnings.
+
+[eslint] 
+src/components/agents/BaseAgentChat.tsx
+  Line 15:18:  'Input' is defined but never used                                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 16:28:  'WebSocketMessage' is defined but never used                                                                                                                           @typescript-eslint/no-unused-vars
+  Line 69:9:   'agent' is assigned a value but never used                                                                                                                             @typescript-eslint/no-unused-vars
+  Line 96:6:   React Hook useEffect has missing dependencies: 'handleAgentMessage', 'handleAgentStatus', and 'handleAgentTyping'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 106:6:  React Hook useEffect has a missing dependency: 'loadChatHistory'. Either include it or remove the dependency array                                                     react-hooks/exhaustive-deps
+
+src/components/agents/ContentCuratorChat.tsx
+  Line 15:10:  'webSocketService' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/agents/MultiAgentChat.tsx
+  Line 15:23:  'Button' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 15:31:  'Tabs' is defined but never used    @typescript-eslint/no-unused-vars
+
+src/components/collaboration/CollaborationDashboard.tsx
+  Line 50:3:  'AlertDialog' is defined but never used             @typescript-eslint/no-unused-vars
+  Line 51:3:  'AlertDialogAction' is defined but never used       @typescript-eslint/no-unused-vars
+  Line 52:3:  'AlertDialogCancel' is defined but never used       @typescript-eslint/no-unused-vars
+  Line 53:3:  'AlertDialogContent' is defined but never used      @typescript-eslint/no-unused-vars
+  Line 54:3:  'AlertDialogDescription' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 55:3:  'AlertDialogFooter' is defined but never used       @typescript-eslint/no-unused-vars
+  Line 56:3:  'AlertDialogHeader' is defined but never used       @typescript-eslint/no-unused-vars
+  Line 57:3:  'AlertDialogTitle' is defined but never used        @typescript-eslint/no-unused-vars
+  Line 58:3:  'AlertDialogTrigger' is defined but never used      @typescript-eslint/no-unused-vars
+
+src/components/collaboration/StudyGroupDetail.tsx
+  Line 389:6:  React Hook useEffect has a missing dependency: 'loadGroupData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/realtime/WebSocketProvider.tsx
+  Line 58:9:   'defaultEndpoints' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 109:5:  'historicalData' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+src/components/search/Search.tsx
+  Line 9:10:   'Link' is defined but never used                                                                                                                                                                 @typescript-eslint/no-unused-vars
+  Line 26:3:   'setShowSuggestions' is defined but never used                                                                                                                                                   @typescript-eslint/no-unused-vars
+  Line 29:3:   'selectCurrentQuery' is defined but never used                                                                                                                                                   @typescript-eslint/no-unused-vars
+  Line 30:3:   'selectShowSuggestions' is defined but never used                                                                                                                                                @typescript-eslint/no-unused-vars
+  Line 33:3:   'selectPopularSearches' is defined but never used                                                                                                                                                @typescript-eslint/no-unused-vars
+  Line 34:3:   'selectTrendingSearches' is defined but never used                                                                                                                                               @typescript-eslint/no-unused-vars
+  Line 66:5:   'trendingSearches' is assigned a value but never used                                                                                                                                            @typescript-eslint/no-unused-vars
+  Line 148:6:  React Hook useCallback has missing dependencies: 'getItemAtIndex', 'handleItemClick', 'handleSearch', 'showDropdown', and 'showSuggestions'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+src/hooks/useWebSocket.ts
+  Line 13:8:   'React' is defined but never used                                                                           @typescript-eslint/no-unused-vars
+  Line 13:28:  'useRef' is defined but never used                                                                          @typescript-eslint/no-unused-vars
+  Line 271:9:  'dispatch' is assigned a value but never used                                                               @typescript-eslint/no-unused-vars
+  Line 307:6:  React Hook useEffect has a missing dependency: 'options'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/pages/Achievements.tsx
+  Line 6:16:   'Badge' is defined but never used                                                                                        @typescript-eslint/no-unused-vars
+  Line 6:23:   'Tabs' is defined but never used                                                                                         @typescript-eslint/no-unused-vars
+  Line 59:10:  'allBadges' is assigned a value but never used                                                                           @typescript-eslint/no-unused-vars
+  Line 60:10:  'userPoints' is assigned a value but never used                                                                          @typescript-eslint/no-unused-vars
+  Line 61:10:  'userLevel' is assigned a value but never used                                                                           @typescript-eslint/no-unused-vars
+  Line 62:10:  'streak' is assigned a value but never used                                                                              @typescript-eslint/no-unused-vars
+  Line 73:9:   'user' is assigned a value but never used                                                                                @typescript-eslint/no-unused-vars
+  Line 78:6:   React Hook useEffect has a missing dependency: 'loadGamificationData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 178:9:  'getRarityGradient' is assigned a value but never used                                                                   @typescript-eslint/no-unused-vars
+
+src/pages/AdminDashboard.tsx
+  Line 29:57:  'setAgentsLoading' is defined but never used               @typescript-eslint/no-unused-vars
+  Line 68:9:   'dispatch' is assigned a value but never used              @typescript-eslint/no-unused-vars
+  Line 69:9:   'agents' is assigned a value but never used                @typescript-eslint/no-unused-vars
+  Line 85:10:  'tasksData' is assigned a value but never used             @typescript-eslint/no-unused-vars
+  Line 86:10:  'agentMetrics' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 90:10:  'selectedAgent' is assigned a value but never used         @typescript-eslint/no-unused-vars
+  Line 90:25:  'setSelectedAgent' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 202:9:  'getHealthStatusColor' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/pages/CodeEditor.tsx
+  Line 75:9:    'dispatch' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 76:11:   'user' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 104:13:  'request' is assigned a value but never used   @typescript-eslint/no-unused-vars
+
+src/pages/Dashboard.tsx
+  Line 17:3:  'SignalIcon' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/pages/KnowledgeGraph.tsx
+  Line 10:3:    'ArrowsPointingOutIcon' is defined but never used           @typescript-eslint/no-unused-vars
+  Line 32:3:    'enhancedServices' is defined but never used                @typescript-eslint/no-unused-vars
+  Line 99:10:   'isDragging' is assigned a value but never used             @typescript-eslint/no-unused-vars
+  Line 99:22:   'setIsDragging' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 101:21:  'setShowStats' is assigned a value but never used           @typescript-eslint/no-unused-vars
+  Line 102:10:  'selectedConcept' is assigned a value but never used        @typescript-eslint/no-unused-vars
+  Line 102:27:  'setSelectedConcept' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 132:9:   'userLearningPathsData' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 385:9:   'getNodeTypeColor' is assigned a value but never used       @typescript-eslint/no-unused-vars
+
+src/pages/Profile.tsx
+  Line 9:15:   'User' is defined but never used                @typescript-eslint/no-unused-vars
+  Line 12:11:  'ProfileStats' is defined but never used        @typescript-eslint/no-unused-vars
+  Line 23:11:  'Achievement' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 30:11:  'Badge' is already defined                      @typescript-eslint/no-redeclare
+  Line 34:11:  'ProfileForm' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 43:17:  'isLoading' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/pages/Settings.tsx
+  Line 9:15:   'User' is defined but never used               @typescript-eslint/no-unused-vars
+  Line 10:27:  'UserSettings' is defined but never used       @typescript-eslint/no-unused-vars
+  Line 15:9:   'dispatch' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/pages/assessments/AssessmentDetail.tsx
+  Line 10:3:    'fetchQuiz' is defined but never used                                                                                  @typescript-eslint/no-unused-vars
+  Line 18:10:   'apiClient' is defined but never used                                                                                  @typescript-eslint/no-unused-vars
+  Line 84:9:    'user' is assigned a value but never used                                                                              @typescript-eslint/no-unused-vars
+  Line 85:9:    'isLoading' is assigned a value but never used                                                                         @typescript-eslint/no-unused-vars
+  Line 86:9:    'isAttemptSubmitting' is assigned a value but never used                                                               @typescript-eslint/no-unused-vars
+  Line 115:6:   React Hook useEffect has a missing dependency: 'loadAssessmentData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 216:6:   React Hook useEffect has a missing dependency: 'handleSubmitQuiz'. Either include it or remove the dependency array    react-hooks/exhaustive-deps
+  Line 256:9:   'handleMultipleSelectChange' is assigned a value but never used                                                        @typescript-eslint/no-unused-vars
+  Line 381:11:  'selected' is assigned a value but never used                                                                          @typescript-eslint/no-unused-vars
+
+src/pages/assessments/Assessments.tsx
+  Line 6:10:   'LineChart' is defined but never used                                                                                  @typescript-eslint/no-unused-vars
+  Line 6:21:   'Line' is defined but never used                                                                                       @typescript-eslint/no-unused-vars
+  Line 6:27:   'AreaChart' is defined but never used                                                                                  @typescript-eslint/no-unused-vars
+  Line 6:38:   'Area' is defined but never used                                                                                       @typescript-eslint/no-unused-vars
+  Line 6:44:   'BarChart' is defined but never used                                                                                   @typescript-eslint/no-unused-vars
+  Line 6:54:   'Bar' is defined but never used                                                                                        @typescript-eslint/no-unused-vars
+  Line 6:59:   'XAxis' is defined but never used                                                                                      @typescript-eslint/no-unused-vars
+  Line 6:66:   'YAxis' is defined but never used                                                                                      @typescript-eslint/no-unused-vars
+  Line 6:73:   'CartesianGrid' is defined but never used                                                                              @typescript-eslint/no-unused-vars
+  Line 6:88:   'Tooltip' is defined but never used                                                                                    @typescript-eslint/no-unused-vars
+  Line 6:118:  'PieChart' is defined but never used                                                                                   @typescript-eslint/no-unused-vars
+  Line 6:128:  'Pie' is defined but never used                                                                                        @typescript-eslint/no-unused-vars
+  Line 6:133:  'Cell' is defined but never used                                                                                       @typescript-eslint/no-unused-vars
+  Line 16:3:   'AssessmentState' is defined but never used                                                                            @typescript-eslint/no-unused-vars
+  Line 20:11:  'Quiz' is defined but never used                                                                                       @typescript-eslint/no-unused-vars
+  Line 36:11:  'QuizAttempt' is defined but never used                                                                                @typescript-eslint/no-unused-vars
+  Line 51:11:  'AssessmentStats' is defined but never used                                                                            @typescript-eslint/no-unused-vars
+  Line 62:11:  'PerformanceData' is defined but never used                                                                            @typescript-eslint/no-unused-vars
+  Line 72:7:   'COLORS' is assigned a value but never used                                                                            @typescript-eslint/no-unused-vars
+  Line 96:9:   'isSubmitting' is assigned a value but never used                                                                      @typescript-eslint/no-unused-vars
+  Line 97:9:   'user' is assigned a value but never used                                                                              @typescript-eslint/no-unused-vars
+  Line 119:9:  'performanceData' is assigned a value but never used                                                                   @typescript-eslint/no-unused-vars
+  Line 129:6:  React Hook useEffect has a missing dependency: 'loadAssessmentData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/pages/auth/LoginPage.tsx
+  Line 49:13:  'result' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/pages/learning/LearningPathDetail.tsx
+  Line 17:3:   'CalendarIcon' is defined but never used                                                                                 @typescript-eslint/no-unused-vars
+  Line 21:10:  'learningService' is defined but never used                                                                              @typescript-eslint/no-unused-vars
+  Line 158:9:  'user' is assigned a value but never used                                                                                @typescript-eslint/no-unused-vars
+  Line 181:6:  React Hook useEffect has a missing dependency: 'loadLearningPathData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/pages/learning/ModuleContent.tsx
+  Line 8:3:     'ArrowRightIcon' is defined but never used          @typescript-eslint/no-unused-vars
+  Line 130:92:  Unnecessary escape character: \`                    no-useless-escape
+  Line 130:97:  Unnecessary escape character: \`                    no-useless-escape
+  Line 136:9:   'navigate' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  Line 138:22:  'setModuleData' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 368:25:  'language' is assigned a value but never used       @typescript-eslint/no-unused-vars
+
+src/pages/search/SearchResultsPage.tsx
+  Line 14:3:   'AdjustmentsHorizontalIcon' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 15:3:   'ClockIcon' is defined but never used                  @typescript-eslint/no-unused-vars
+  Line 16:26:  'TrendingUpIcon' is defined but never used             @typescript-eslint/no-unused-vars
+  Line 22:3:   'XMarkIcon' is defined but never used                  @typescript-eslint/no-unused-vars
+  Line 31:3:   'selectCurrentQuery' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 32:3:   'selectSearchResults' is defined but never used        @typescript-eslint/no-unused-vars
+  Line 33:3:   'selectSearchLoading' is defined but never used        @typescript-eslint/no-unused-vars
+  Line 34:3:   'selectTotalResults' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 49:24:  'setSearchParams' is assigned a value but never used   @typescript-eslint/no-unused-vars
+  Line 56:5:   'currentQuery' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+src/services/agentService.ts
+  Line 3:8:  'axios' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/services/knowledgeGraphService.ts
+  Line 11:10:  'toast' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/store/slices/assessmentSlice.ts
+  Line 8:23:  'PayloadAction' is defined but never used  @typescript-eslint/no-unused-vars

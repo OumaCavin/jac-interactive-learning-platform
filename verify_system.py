@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3 
 """
 Assessment System Verification Script
 Tests all agent imports and model functionality without relying on Django migrations

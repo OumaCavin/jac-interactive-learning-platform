@@ -1,0 +1,194 @@
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # 1. Check current disk usage
+docker system df
+
+# 2. See detailed breakdown
+docker system df -v
+
+# 3. List images by size (this will show you the culprit)
+docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}"
+
+# 4. Clean up old images and layers
+docker image prune -a -f
+
+# 5. Clean up stopped containers
+docker container prune -f
+
+# 6. Check space after cleanup
+docker system df
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          13        5         8.222GB   7.916GB (96%)
+Containers      8         8         3.398kB   0B (0%)
+Local Volumes   7         2         651.2MB   603.7MB (92%)
+Build Cache     0         0         0B        0B
+Images space usage:
+
+REPOSITORY                                   TAG              IMAGE ID       CREATED          SIZE      SHARED SIZE   UNIQUE SIZE   CONTAINERS
+<none>                                       <none>           d1419c602037   18 minutes ago   670MB     643.6MB       25.92MB       0
+jac-interactive-learning-platform_backend    latest           7dee6b731b47   21 minutes ago   1.7GB     1.696GB       0B            4
+<none>                                       <none>           88c3d8e8c837   22 minutes ago   2.02GB    487.1MB       1.535GB       0
+<none>                                       <none>           6079f05fb4d5   7 hours ago      1.7GB     1.696GB       0B            0
+<none>                                       <none>           1b2e4c744edd   9 hours ago      1.57GB    1.566GB       0B            0
+jac-interactive-learning-platform_frontend   latest           258548892143   11 hours ago     59.9MB    59.9MB        0B            1
+python                                       3.11-slim        040af88f5bce   8 days ago       124MB     124.5MB       0B            0
+postgres                                     15-alpine        6df5377b1f74   12 days ago      273MB     8.322MB       264.8MB       1
+redis                                        7-alpine         13105d2858de   3 weeks ago      41.4MB    0B            41.41MB       1
+node                                         22-alpine        d14f4a9e34c6   4 weeks ago      162MB     162MB         0B            0
+nginx                                        alpine           d4918ca78576   4 weeks ago      52.8MB    52.84MB       0B            1
+node                                         18-alpine        ee77c6cd7c18   8 months ago     127MB     0B            127MB         0
+neo4j                                        5.15-community   885f86d3ddb8   22 months ago    492MB     0B            492.4MB       0
+
+Containers space usage:
+
+CONTAINER ID   IMAGE                                             COMMAND                  LOCAL VOLUMES   SIZE      CREATED          STATUS                        NAMES
+05f480e20de4   nginx:alpine                                      "/docker-entrypoint.…"   0               1.09kB    18 minutes ago   Up About a minute (healthy)   jac-nginx
+4a321863d545   jac-interactive-learning-platform_frontend        "/docker-entrypoint.…"   0               2.24kB    18 minutes ago   Up About a minute (healthy)   jac-interactive-learning-platform_frontend_1
+d3c56f60da35   jac-interactive-learning-platform_backend         "python /tmp/entrypo…"   0               0B        18 minutes ago   Up About a minute (healthy)   jac-interactive-learning-platform_backend_1
+1d92ca91f80c   jac-interactive-learning-platform_celery-worker   "celery -A config wo…"   0               0B        18 minutes ago   Up About a minute (healthy)   jac-celery-worker
+39058a9c5f12   jac-interactive-learning-platform_celery-beat     "celery -A config be…"   0               0B        18 minutes ago   Up About a minute (healthy)   jac-celery-beat
+ab81462604c4   postgres:15-alpine                                "docker-entrypoint.s…"   1               63B       18 minutes ago   Up About a minute (healthy)   jac-interactive-learning-platform_postgres_1
+d9a0d234c21f   redis:7-alpine                                    "docker-entrypoint.s…"   1               0B        18 minutes ago   Up About a minute (healthy)   jac-interactive-learning-platform_redis_1
+8162a773708c   jac-interactive-learning-platform_jac-sandbox     "python jac_sandbox_…"   0               0B        18 minutes ago   Up About a minute (healthy)   jac-sandbox
+
+Local Volumes space usage:
+
+VOLUME NAME                                       LINKS     SIZE
+jac-smart-learning_neo4j_data                     0         541MB
+jac-smart-learning_neo4j_logs                     0         1.179MB
+jac-smart-learning_neo4j_plugins                  0         13.62MB
+jac-smart-learning_postgres_data                  0         47.93MB
+jac-smart-learning_redis_data                     0         264B
+jac-interactive-learning-platform_postgres_data   1         47.53MB
+jac-interactive-learning-platform_redis_data      1         2.84kB
+
+Build cache usage: 0B
+
+CACHE ID   CACHE TYPE   SIZE      CREATED   LAST USED   USAGE     SHARED
+REPOSITORY                                        TAG              SIZE
+<none>                                            <none>           670MB
+jac-interactive-learning-platform_celery-beat     latest           1.7GB
+jac-interactive-learning-platform_celery-worker   latest           1.7GB
+jac-interactive-learning-platform_jac-sandbox     latest           1.7GB
+jac-interactive-learning-platform_backend         latest           1.7GB
+<none>                                            <none>           2.02GB
+<none>                                            <none>           1.7GB
+<none>                                            <none>           1.57GB
+jac-interactive-learning-platform_frontend        latest           59.9MB
+python                                            3.11-slim        124MB
+postgres                                          15-alpine        273MB
+redis                                             7-alpine         41.4MB
+node                                              22-alpine        162MB
+nginx                                             alpine           52.8MB
+node                                              18-alpine        127MB
+neo4j                                             5.15-community   492MB
+Deleted Images:
+untagged: python:3.11-slim
+untagged: python@sha256:193fdd0bbcb3d2ae612bd6cc3548d2f7c78d65b549fcaa8af75624c47474444d
+untagged: node:22-alpine
+untagged: node@sha256:b2358485e3e33bc3a33114d2b1bdb18cdbe4df01bd2b257198eb51beb1f026c5
+deleted: sha256:6079f05fb4d563488cf45a1e17f91c947d0c225b39add694dc794f251cf2f293
+deleted: sha256:391c5735e1a0c67640408c4efcc7f7b6f1d8747be66d47f478fd4d50ca4fbc5a
+deleted: sha256:5d0dadbfecc0dd87ef0372bf043e4b7cb6e8f748601043e73a0a109372f23932
+deleted: sha256:da2301f90dd1f5f4d1ec975852c945c34d5c4c717697796716e1d26f712976ae
+deleted: sha256:83a3cdb24523f024278322caa851de01627ff2da83e6bfab2ace740228df8f22
+deleted: sha256:f7ee8425d06f68c80251ecd463c0a0d95bf70e92746b9dbe62b97cc8171e9160
+deleted: sha256:df58317f66b6c10798b47172b5be32619fe68d3c1a7bf38e13c94f5452008801
+deleted: sha256:99185c25cf2a7b689edb1ebf99f512070c48b5a699f402a9d68c7f3765b50bd9
+deleted: sha256:4fe8f05d2cf67cd1a5a9227975aa889b4eeeca55484e28f2d9c6ae4da19e1793
+deleted: sha256:54e59ad179393476af1e91c98e9cfdf715b244cf090fc46ab05f366599e74a38
+deleted: sha256:cd651155824d2f846a4158152179aa6a5047631211a6b97e2e47caa36d63c2d7
+deleted: sha256:9fb92fd4ced8957e062eb110e15e0e92d9b2d174486f067f8185fa46a5416c24
+deleted: sha256:685d1f5a48c3bd474e981f7727acae0ffdc9ed3cb4006d7fad93e4f2876a769f
+deleted: sha256:e223573f959dacc93327a4922342a52a328d794bc60d67029638a2b352fd9a6e
+deleted: sha256:c9cd8b815ebf4e9f1162eca1ed5dc055208506f8baaaa5a31024a7291fd05d9c
+deleted: sha256:692c9f355a5879ba8b52869777464479429675867d3dd06324263fbec4e6a1c9
+deleted: sha256:26884cd9e10528ddd6146762eeeee14c35c25d142a58e7370a8831707d37abc7
+untagged: jac-interactive-learning-platform_backend:latest
+untagged: jac-interactive-learning-platform_celery-beat:latest
+untagged: jac-interactive-learning-platform_celery-worker:latest
+deleted: sha256:d1419c602037ee8ce3f639ab384e7ec3982fb45ccddeae602636c997e6df202f
+deleted: sha256:e51c5e74bb7319d6769b2d5682c0b952efdfea6487e71fde2d7eda86f86dd11c
+deleted: sha256:e64323c331ce7282ee7a76104c46b2ef8aae9a0195ed4d6f0ca98e1dffdfaf91
+deleted: sha256:3b3636d3460acdac2ddb0ac071b3a023bf2437e0d9b6c96fad1d73058d619985
+deleted: sha256:60fdef91ae99acfe9f4259c48055b8b2b4c73b1e273821353e7a1a373e9a0ac8
+deleted: sha256:5173a8071273c2f319c8db49eef76dda9db7aa249200a018932011fa5bd82738
+deleted: sha256:9e9ece23a289b3a8c8f048cee6d80a3baeb6c8edcd40f5c023f90a3435f9375e
+deleted: sha256:eb37296f32a75ba2d84b92a7c2434dc5682f432befa9281206a7c12995023b81
+deleted: sha256:468420fc7378f193986aaeb342021c21de5d3d5333f969cb3f6c68c1c8e8a78d
+deleted: sha256:23f1d7f2b0031c736928253cd04ef9892ef6489f194ac89630f4e891fcde4069
+deleted: sha256:e3233c7b5e05d1e4a4a2a897f12853d8acdc0134c68c712f1fdc145409172aa2
+deleted: sha256:5cd3be19c6a2fd51a5974d2bf42410e936b7d19d5460d801d1f84d323d65232c
+deleted: sha256:af5f972f065adf573edcef6e059d793546e29d288496d880fcb6745e25038ab6
+deleted: sha256:bef1da00a019996ecbedcbcad480576f49bc6a3b4f27c329069c210349f1821d
+deleted: sha256:2106b4a30d49f5b9e1dd259f49151258556e0076c5562f05855041ec53a27d3e
+deleted: sha256:4513b1b444460c3e7247289dfc9d9305f3fae96a801f008902bcc46ae0ee8105
+deleted: sha256:56d159f4d57e8c9c5a1add0e1bfea3f34454cf15dae50c9f4139cca26d8017e2
+deleted: sha256:56008a241eaf7b4255e51a4d90acb09209acad92e82d29108accd928533999e7
+deleted: sha256:891c546783dac26ec93db5bb6310058e973e8c3dd4d5447266556916540756dd
+deleted: sha256:aa3423ca548cba3bfee163eecdd09c3d6b9229163aee8cd987375303bb51f1fd
+deleted: sha256:c1d56b45c5f2a17fa7b35f5a749e83a753d25c7bdb4a71c2378b25072c278af3
+deleted: sha256:97d688ac80c5c0a5781d8fa6aa9625c35e045a182c82df020f7de2176d1768b4
+deleted: sha256:2f279896dbc5bab82e50d96b08b1c07b0779d970f77fef1eb5d5bd95cbed56eb
+deleted: sha256:a16549c44a6e4d794e2c24aef2e16faa5c321abf69e9e8288e7607a9b8d51abe
+deleted: sha256:26bdc561e124e34bf9d4934712bda629c7aa41d03773de1e59e2d9959e7f8352
+deleted: sha256:5187aaae31b7a6e80d466ec46281b79f8ae5801926e6072f043e39bca4f843ba
+deleted: sha256:b11cdefa103e0a133ee37715fe1115ce2d0edd166aafb515449a86956517c020
+deleted: sha256:882650167f3446e889e8ca8f557c3b02872dcf9ea6dabea7fe971d22ffe2c8b6
+deleted: sha256:e3305339c355faef1a837e8eb878cc4a86c7438410eab38cd2eba5c8382dcd43
+deleted: sha256:af54fdd75106405f2e285f6aeab5387e139e0883626d88b49579986ead0206c8
+deleted: sha256:a76c17865184029a1963bfb8159dffd8d748158a2ba66a044b0445ca6fe7d89d
+deleted: sha256:3922ca50156df3c1202644dda8e6c5f8767903424777fa8f27e13a3ce239252b
+deleted: sha256:9d7824eeb8d1e0d66fffcb2e5a98947232a447424402c35a413ea55c20882451
+deleted: sha256:d14f4a9e34c680024562fea6bc778ca0ce51df5e88cf12fe050870999573f5df
+deleted: sha256:345ff50df720b725c5c5ec52feb1a3a434734962b3a29550c37e37627b2074b1
+deleted: sha256:8df0c1f409f27313e7f32bd3906f6168a39c7643a8f033fc8c8c96515f538c0e
+deleted: sha256:d786c06467f01b97a60fdce78ce0de22e449c4783839d804d195794023868490
+deleted: sha256:88c3d8e8c837a9732766390467cb9b54edc0dea28376057067bea5f51aafdf99
+deleted: sha256:02e7934838ed565333c03431391619d1a8e2345a6bad7922b555fe1150e5c64c
+deleted: sha256:dc06eefce167e462826eb50e5c5ae7bd75694fa93f22cbf78b8a5ecd63b5328e
+deleted: sha256:271457b141f942884a7c2230b9b3294de410506912958ae42d732dba9b4a79b2
+deleted: sha256:882f13c6a3cf04a27de298a7fecc67e295e9218fe79aed8a9770c39ac809747b
+deleted: sha256:7343219506e1e39311e903ab789d7e0c96499f9f72fdedc9258d17cf3656d120
+deleted: sha256:7c240520e530f38abc1cea5d2f3833ee5f5ab4ecde226814174c9fcc47e2c1d0
+deleted: sha256:99568e20a95d00b8137b4ea5bf4fea421630fae1c0e6921acdfc98a7cffbd112
+deleted: sha256:dc4215488128300ea30b95ce64494865161a37e202ca52788f721532c1c006f2
+untagged: node:18-alpine
+untagged: node@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+deleted: sha256:ee77c6cd7c1886ecc802ad6cedef3a8ec1ea27d1fb96162bf03dd3710839b8da
+deleted: sha256:0651a8adb9173aa253206e2403d033598996ddd3d84a2f85d874196f2c65d6fd
+deleted: sha256:3603644c7663feb5f3c537355d5b91dc0fab5cb7df286b77575016e4edfeea05
+deleted: sha256:339e88a868ff4123c6e91492fe1f29bd6932ef7a20680f489f0dc4e17cf04328
+deleted: sha256:08000c18d16dadf9553d747a58cf44023423a9ab010aab96cf263d2216b8b350
+untagged: neo4j:5.15-community
+untagged: neo4j@sha256:d9e2fb1ba398536e50d22ebc3d5d585baa086c1c0cf8e5b96bdc9e11e87e002a
+deleted: sha256:885f86d3ddb8492bebea9680fc23af24f8b19f284d3105d4e76c27e9c59be160
+deleted: sha256:dd3453afe79a36ae2563f23f3140d9bfce918ed88b666b146130d53d55b28773
+deleted: sha256:49f889668526e302abd9aa70276939e8914c3ebda4740c661bbe8947118d719a
+deleted: sha256:37963add157b7e2f380ca71887a8537f1570e92948b1378883c92acc1e168536
+deleted: sha256:09f720661fb9804182bbad00975e14b2cb81127d2e519a5561b2b99aec044368
+deleted: sha256:e1325a2db1db2260452d6a438db928c7670d8ed925800e99e8919b570174dad0
+deleted: sha256:1b2e4c744edd0855aad9f4d52af7fc42c3053505c94baf1735337f77b9e26107
+deleted: sha256:c325d51a74b93cbded399bd2e3797e3708f73df2b45cfb61056a6279696d676a
+deleted: sha256:14d69cb5068b02b002e9732cb779dac46c51f47d1a3001ef48742ddf1fbe6149
+deleted: sha256:f511b1b184f3b559e273f0cf47e0138c551f1f63e325c8bab2ffc06546a70851
+deleted: sha256:03c14816803fa6a636447fce81f606e76ea9fa890028fe16dc3d762f3fff8fda
+deleted: sha256:cf000a24100470bdb6e29b2727d500bacd24aaebd2154b73d51131316b7ababd
+deleted: sha256:2f861edf79aa3fc4ebe560057f376445eab4379fc98d763ce278f04b2d086bd4
+deleted: sha256:587814687361a27910df8cff3627aa4f9d7f3ae627a95d65ab2de9577e3034c4
+deleted: sha256:1ede089369ab110174a3bee3ab49c6c93d8ba96e43a4e13e60540d46660af0ba
+deleted: sha256:bda6b7aafbd8f53d395817cbc47c8caadcfba22207c357eca43ad25502fbfd47
+deleted: sha256:71d663b150d26f64a7e4938485d523aab8fbf3efff0fa233c5cabee09b3031f9
+deleted: sha256:12078c98ce997e707d77dab33882681d43ddd4bc0947a89863566fa34a60a50e
+deleted: sha256:8e930342e7da1cffe632cf516772a753b1e896515ddaf0c62494b9fec17630ad
+deleted: sha256:3a59f94e1e14066dd2f8317264a5d477b2957380c8a16c3a8c958ff05370730e
+deleted: sha256:83e8992817416f5a47f9699fd13c391e8785998bd94bcbf9a9c3994023ee8a01
+deleted: sha256:b2c23ea992f4bb80734d36212f6205b81ebbefb20c7bf1419f46b79152426f3d
+deleted: sha256:54a89fd86746e6159e318662067e9f87d631ba925413d4c44b042436e1b8b29a
+
+Total reclaimed space: 6.16GB
+Total reclaimed space: 0B
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          5         5         2.062GB   1.756GB (85%)
+Containers      8         8         3.398kB   0B (0%)
+Local Volumes   7         2         651.2MB   603.7MB (92%)
+Build Cache     0         0         0B        0B
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 
