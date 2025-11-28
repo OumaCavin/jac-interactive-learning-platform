@@ -277,6 +277,10 @@ class UserPoints(models.Model):
     assessment_points = models.PositiveIntegerField(default=0)
     engagement_points = models.PositiveIntegerField(default=0)
     
+    # Points Source Breakdown (from migration 0002_fix_missing_fields)
+    points_from_achievements = models.PositiveIntegerField(default=0, help_text='Total points earned from achievements')
+    points_from_challenges = models.PositiveIntegerField(default=0, help_text='Total points earned from challenges')
+    
     # Metadata
     last_earned = models.DateTimeField(null=True, blank=True)
     last_spent = models.DateTimeField(null=True, blank=True)
