@@ -1,0 +1,163 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans "Page not found" %} | {% trans "JAC Admin" %}{% endblock %}
+
+{% block extrastyle %}
+<style>
+    .error-404-container {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        padding: 48px;
+        width: 100%;
+        max-width: 600px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    .error-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+        font-size: 32px;
+        color: white;
+        font-weight: 700;
+    }
+    
+    .error-title {
+        color: #d97706;
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0 0 16px 0;
+        line-height: 1.2;
+    }
+    
+    .error-description {
+        color: #374151;
+        font-size: 16px;
+        line-height: 1.5;
+        margin: 0 0 24px 0;
+    }
+    
+    .navigation-panel {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 24px;
+        margin: 24px 0;
+        text-align: left;
+    }
+    
+    .navigation-title {
+        color: #374151;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 16px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .navigation-list {
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+    }
+    
+    .navigation-list li {
+        margin: 0 0 8px 0;
+        font-size: 14px;
+        color: #6b7280;
+        line-height: 1.5;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .navigation-list li::before {
+        content: "→";
+        color: #667eea;
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+    
+    .nav-button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 14px 28px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-block;
+        transition: all 0.3s ease;
+        margin: 8px;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    
+    .nav-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        text-decoration: none;
+        color: white;
+    }
+    
+    .nav-button.secondary {
+        background: #6b7280;
+    }
+    
+    .nav-button.secondary:hover {
+        background: #4b5563;
+        box-shadow: 0 8px 25px rgba(107, 114, 128, 0.4);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-404-container">
+    <div class="error-icon">
+        <i class="fas fa-search"></i>
+    </div>
+    
+    <h1 class="error-title">Page Not Found</h1>
+    
+    <p class="error-description">
+        {% blocktrans trimmed %}
+            The page you are looking for doesn't exist or has been moved. 
+            The requested URL <code style="background: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-family: monospace;">{{ request.path }}</code> 
+            could not be found on this server.
+        {% endblocktrans %}
+    </p>
+    
+    <div class="navigation-panel">
+        <div class="navigation-title">
+            <i class="fas fa-compass"></i>
+            Quick Navigation
+        </div>
+        <ul class="navigation-list">
+            <li><a href="{% url 'admin:index' %}" style="color: #667eea; text-decoration: none;">Admin Dashboard</a></li>
+            <li><a href="/" style="color: #667eea; text-decoration: none;">JAC Learning Platform Home</a></li>
+            <li><a href="{% url 'admin:login' %}" style="color: #667eea; text-decoration: none;">Admin Login</a></li>
+            <li>Check the URL for typos and try again</li>
+        </ul>
+    </div>
+    
+    <div style="margin-top: 32px;">
+        <a href="{% url 'admin:index' %}" class="nav-button">
+            <i class="fas fa-home"></i> Admin Dashboard
+        </a>
+        <a href="/" class="nav-button secondary">
+            <i class="fas fa-arrow-left"></i> Main Site
+        </a>
+    </div>
+</div>
+{% endblock %}

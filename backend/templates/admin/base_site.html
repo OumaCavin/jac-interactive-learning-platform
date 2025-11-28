@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         /* Reset and Base Styles */
@@ -224,12 +226,99 @@
 </head>
 <body class="{% block bodyclass %}{% endblock %}" id="{% block bodyid %}{% endblock %}">
     {% if user.is_authenticated %}
-    <p class="errornote">
-        {% blocktrans trimmed %}
-            You are authenticated as {{ username }}, but are not authorized to
-            access this page. Would you like to login to a different account?
-        {% endblocktrans %}
-    </p>
+    <div class="auth-error-container" style="
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        padding: 32px;
+        margin: 20px auto;
+        max-width: 600px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+    ">
+        <div style="
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 24px;
+            color: white;
+            font-weight: 700;
+        ">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z" fill="currentColor"/>
+                <path d="M19 17H5V15H19V17Z" fill="currentColor"/>
+                <path d="M19 21H5V19H19V21Z" fill="currentColor"/>
+            </svg>
+        </div>
+        
+        <h2 style="
+            color: #dc2626;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 16px 0;
+            line-height: 1.2;
+        ">Access Denied</h2>
+        
+        <p style="
+            color: #374151;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0 0 24px 0;
+        ">
+            {% blocktrans trimmed %}
+                You are authenticated as <strong style="color: #1f2937;">{{ user.get_username }}</strong>, but you don't have permission to access this admin page.
+            {% endblocktrans %}
+        </p>
+        
+        <div style="
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 24px 0;
+            text-align: left;
+        ">
+            <h4 style="
+                color: #374151;
+                font-size: 14px;
+                font-weight: 600;
+                margin: 0 0 12px 0;
+            ">What can you do?</h4>
+            <ul style="
+                margin: 0;
+                padding-left: 20px;
+                font-size: 14px;
+                color: #6b7280;
+                line-height: 1.5;
+            ">
+                <li>Contact your administrator to request proper permissions</li>
+                <li>Use a different account with admin access</li>
+                <li>Return to the main site: <a href="/" style="color: #667eea; text-decoration: none; font-weight: 500;">JAC Learning Platform</a></li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 24px;">
+            <a href="{% url 'admin:index' %}" style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 600;
+                display: inline-block;
+                transition: all 0.2s ease;
+            " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(102, 126, 234, 0.4)';" 
+               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.3)';">
+                Return to Admin Dashboard
+            </a>
+        </div>
+    </div>
     {% endif %}
     
     <a href="#main-content" class="skip-link">Skip to main content</a>
