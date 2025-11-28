@@ -45,16 +45,17 @@ export const LoginPage: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // Use actual authentication service instead of mock
+      // Use authentication service to login
       const result = await authService.login({
         username: data.email, // Using email as username for the backend
         password: data.password
       });
 
-      // Update Redux state with actual user data and tokens
+      // Update Redux state with the user data and tokens
       dispatch(loginUser({
-        username: data.email,
-        password: data.password
+        user: result.user,
+        tokens: result.tokens,
+        isAuthenticated: true
       }));
 
       toast.success('Welcome back! You have been logged in successfully.');
@@ -64,7 +65,15 @@ export const LoginPage: React.FC = () => {
 
     } catch (error: any) {
       console.error('Login error:', error);
-      toast.error(error.message || 'Login failed. Please check your credentials.');
+      
+      // Provide more specific error messages
+      if (error.message.includes('demo')) {
+        toast.error('Demo credentials should be demo@example.com / demo123');
+      } else if (error.message.includes('admin')) {
+        toast.error('Admin credentials should be admin@jac.com / admin123');
+      } else {
+        toast.error(error.message || 'Login failed. Please check your credentials.');
+      }
     } finally {
       setIsLoading(false);
     }

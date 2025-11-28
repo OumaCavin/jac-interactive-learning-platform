@@ -9,9 +9,9 @@ interface AuthLayoutProps {
 
 export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen flex">
+    <div className="auth-layout-container">
       {/* Left side - Branding and background */}
-      <div className="hidden lg:flex lg:flex-1 lg:flex-col lg:justify-center lg:px-12 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 relative overflow-hidden">
+      <div className="auth-layout-left">
         {/* Background pattern */}
         <div className="absolute inset-0 bg-[url(&apos;data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.1&quot;%3E%3Ccircle cx=&quot;30&quot; cy=&quot;30&quot; r=&quot;2&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&apos;)] opacity-20"></div>
         
@@ -65,7 +65,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
       </div>
 
       {/* Right side - Auth form */}
-      <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="auth-layout-right">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -73,11 +73,11 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
           className="w-full max-w-md mx-auto"
         >
           {/* Logo for mobile */}
-          <div className="lg:hidden mb-8" role="banner">
-            <h1 className="text-2xl font-bold text-center text-gray-900">
+          <div className="lg:hidden mb-8 text-center" role="banner">
+            <h1 className="text-2xl font-bold text-gray-900">
               JAC Learning Platform
             </h1>
-            <p className="text-center text-gray-600 mt-2">
+            <p className="text-gray-600 mt-2">
               Master AI-first programming
             </p>
           </div>

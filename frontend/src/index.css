@@ -434,6 +434,39 @@ input::placeholder {
   color: #1a1a1a !important;
 }
 
+/* Position login form to the right side */
+.auth-layout-container {
+  display: flex !important;
+  min-height: 100vh !important;
+}
+
+.auth-layout-left {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  position: relative !important;
+}
+
+.auth-layout-right {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: white !important;
+  padding: 2rem !important;
+}
+
+@media (max-width: 1024px) {
+  .auth-layout-left {
+    display: none !important;
+  }
+  .auth-layout-right {
+    flex: 1 !important;
+  }
+}
+
 /* Reset text colors specifically for login form content */
 .login-form-container *,
 .login-form-container h1,

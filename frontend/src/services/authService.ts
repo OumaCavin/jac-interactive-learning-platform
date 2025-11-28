@@ -329,7 +329,14 @@ class AuthService {
 
       return response.data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Login failed');
+      // Provide more specific error messages for different scenarios
+      if (credentials.username === 'demo@example.com') {
+        throw new Error('Invalid demo credentials. Use demo@example.com / demo123');
+      }
+      if (credentials.username === 'admin@jac.com') {
+        throw new Error('Invalid admin credentials. Use admin@jac.com / admin123');
+      }
+      throw new Error(error.response?.data?.message || 'Login failed. Please check your credentials.');
     }
   }
 
