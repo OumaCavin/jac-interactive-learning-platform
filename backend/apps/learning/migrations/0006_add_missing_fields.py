@@ -53,17 +53,22 @@ class Migration(migrations.Migration):
         ),
         
         # Add missing fields for LearningModule
-        migrations.AddField(
-            model_name='learningmodule',
-            name='completion_criteria',
-            field=models.JSONField(default=dict, help_text='Criteria for module completion'),
-        ),
+        # NOTE: LearningModule model doesn't exist in models.py - commenting out to avoid errors
+        # The closest models are 'Module', 'LearningPath', 'UserLearningPath'
         
-        migrations.AddField(
-            model_name='learningmodule',
-            name='adaptive_difficulty',
-            field=models.BooleanField(default=True, help_text='Whether this module uses adaptive difficulty'),
-        ),
+        # migrations.AddField(
+        #     model_name='learningmodule',
+        #     name='completion_criteria',
+        #     field=models.JSONField(default=dict, help_text='Criteria for module completion'),
+        # ),
+        # # Model doesn't exist: 'learningmodule' not found in learning/models.py
+        
+        # migrations.AddField(
+        #     model_name='learningmodule',
+        #     name='adaptive_difficulty',
+        #     field=models.BooleanField(default=True, help_text='Whether this module uses adaptive difficulty'),
+        # ),
+        # # Model doesn't exist: 'learningmodule' not found in learning/models.py
         
         # Add performance indexes
         migrations.AddIndex(
