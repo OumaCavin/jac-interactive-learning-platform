@@ -21,6 +21,17 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """Populate the complete JAC curriculum with real content from official docs"""
         
+        # Get environment variables for URLs
+        import os
+        backend_host = os.environ.get('BACKEND_HOST', 'localhost')
+        backend_port = os.environ.get('BACKEND_PORT', '8000')
+        frontend_host = os.environ.get('FRONTEND_HOST', 'localhost')
+        frontend_port = os.environ.get('FRONTEND_PORT', '3000')
+        protocol = 'https' if os.environ.get('USE_HTTPS', 'false').lower() == 'true' else 'http'
+        
+        backend_url = f"{protocol}://{backend_host}:{backend_port}"
+        frontend_url = f"{protocol}://{frontend_host}:{frontend_port}"
+        
         # Create or get admin user for content creation - PRODUCTION VERSION
         try:
             admin_user = User.objects.filter(is_superuser=True).first()
@@ -28,7 +39,7 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.ERROR(
                     'No admin user found. Please create one before running this command:\n'
                     '  python manage.py createsuperuser\n'
-                    '  Or use Django admin at http://localhost:8000/admin/'
+                    f'  Or use Django admin at {backend_url}/admin/'
                 ))
                 return
             else:
@@ -2684,7 +2695,18 @@ withentry {
     // Use Django admin or registration endpoints to create users
     print("=== Multi-User Architecture Demo ===");
     print("Admin and student users should be created through Django admin or registration.");
-    print("See: http://localhost:8000/admin/ or http://localhost:3000/register");
+    # Get environment variables for URLs
+    import os
+    backend_host = os.environ.get('BACKEND_HOST', 'localhost')
+    backend_port = os.environ.get('BACKEND_PORT', '8000')
+    frontend_host = os.environ.get('FRONTEND_HOST', 'localhost')
+    frontend_port = os.environ.get('FRONTEND_PORT', '3000')
+    protocol = 'https' if os.environ.get('USE_HTTPS', 'false').lower() == 'true' else 'http'
+    
+    backend_url = f"{protocol}://{backend_host}:{backend_port}"
+    frontend_url = f"{protocol}://{frontend_host}:{frontend_port}"
+    
+    print(f"See: {backend_url}/admin/ or {frontend_url}/register");
     print("=== Demo Complete ===");
     return;
     

@@ -195,7 +195,7 @@ daphne -b 0.0.0.0 -p 8000 config.asgi:application
 
 Connect to WebSocket in browser console:
 ```javascript
-const ws = new WebSocket('ws://localhost:8000/ws/dashboard/');
+const ws = new WebSocket(`ws://${window.location.host}/ws/dashboard/`);
 ws.onmessage = function(event) {
     const data = JSON.parse(event.data);
     console.log('Real-time update:', data);
