@@ -118,3 +118,19 @@ def save_user_profile(sender, instance, **kwargs):
     """
     if hasattr(instance, 'profile'):
         instance.profile.save()
+
+
+@receiver(post_save, sender=UserModel)
+def ensure_admin_permissions(sender, instance, **kwargs):
+    """
+    Ensure superuser permissions are properly maintained.
+    This handles edge cases where superuser permissions might not be set correctly.
+    """
+    # If user is supposed to be a superuser, ensure all admin flags are set
+    if instance.is_superuser:
+        if not instance.is_staff:
+            instance.is_staff = True
+            instance.save(update_fields=['is_staff'])
+        if not instance.is_active:
+            instance.is_active = True
+            instance.save(update_fields=['is_active'])
