@@ -1,0 +1,199 @@
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker-compose down backend
+docker-compose build backend
+docker-compose up -d backend
+Stops containers and removes containers, networks, volumes, and images
+created by `up`.
+
+By default, the only things removed are:
+
+- Containers for services defined in the Compose file
+- Networks defined in the `networks` section of the Compose file
+- The default network, if one is used
+
+Networks and volumes defined as `external` are never removed.
+
+Usage: down [options]
+
+Options:
+    --rmi type              Remove images. Type must be one of:
+                              'all': Remove all images used by any service.
+                              'local': Remove only images that don't have a
+                              custom tag set by the `image` field.
+    -v, --volumes           Remove named volumes declared in the `volumes`
+                            section of the Compose file and anonymous volumes
+                            attached to containers.
+    --remove-orphans        Remove containers for services not defined in the
+                            Compose file
+    -t, --timeout TIMEOUT   Specify a shutdown timeout in seconds.
+                            (default: 10)
+Building backend
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  5.188MB
+Step 1/29 : FROM python:3.11-slim as dependencies
+ ---> 040af88f5bce
+Step 2/29 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1     PIP_NO_CACHE_DIR=1     PIP_DISABLE_PIP_VERSION_CHECK=1
+ ---> Using cache
+ ---> 565dea23656a
+Step 3/29 : RUN apt-get update && apt-get install -y     build-essential     curl     gcc     libc6-dev     libpq-dev     netcat-openbsd     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 822db3fa6f23
+Step 4/29 : RUN groupadd -r jac &&     useradd -r -g jac -m -d /home/jac jac &&     chmod 755 /home/jac
+ ---> Using cache
+ ---> db92eae6c4b4
+Step 5/29 : WORKDIR /app
+ ---> Using cache
+ ---> 9c32ac0b499c
+Step 6/29 : COPY requirements.txt .
+ ---> Using cache
+ ---> 984d397e2657
+Step 7/29 : USER jac
+ ---> Using cache
+ ---> d44c4e6309a5
+Step 8/29 : RUN mkdir -p /home/jac &&     python -m venv /home/jac/venv &&     /home/jac/venv/bin/pip install --upgrade pip &&     /home/jac/venv/bin/pip install --no-cache-dir --default-timeout=300 --retries=5     -r requirements.txt ||     (echo "Primary PyPI mirror failed, trying alternative" &&      /home/jac/venv/bin/pip install --no-cache-dir --default-timeout=300 --retries=5 --index-url https://pypi.douban.com/simple/ -r requirements.txt)
+ ---> Using cache
+ ---> 1b06b3df6898
+Step 9/29 : FROM python:3.11-slim as application
+ ---> 040af88f5bce
+Step 10/29 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1
+ ---> Using cache
+ ---> 0c74517acb53
+Step 11/29 : RUN groupadd -r jac &&     useradd -r -g jac -m -d /home/jac jac &&     chmod 755 /home/jac
+ ---> Using cache
+ ---> d16852233e61
+Step 12/29 : RUN apt-get update && apt-get install -y     libpq5     curl     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> f534e1dba842
+Step 13/29 : WORKDIR /app
+ ---> Using cache
+ ---> bcc385e9af6f
+Step 14/29 : COPY --from=dependencies /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
+ ---> Using cache
+ ---> e2be1c2a4436
+Step 15/29 : COPY --from=dependencies /usr/local/bin/ /usr/local/bin/
+ ---> Using cache
+ ---> a0fad30a717f
+Step 16/29 : COPY --from=dependencies --chown=jac:jac /home/jac/venv /home/jac/venv
+ ---> Using cache
+ ---> 45bc16d3dc1e
+Step 17/29 : USER jac
+ ---> Using cache
+ ---> 1cb9dd91f10c
+Step 18/29 : COPY --chown=jac:jac . .
+ ---> cda94711f522
+Step 19/29 : RUN mkdir -p logs media static
+ ---> Running in 7a544d236881
+ ---> Removed intermediate container 7a544d236881
+ ---> e6bf84d0f9ed
+Step 20/29 : ENV PATH="/home/jac/venv/bin:/usr/local/bin:$PATH"
+ ---> Running in 644e513334a5
+ ---> Removed intermediate container 644e513334a5
+ ---> 7612969fa96e
+Step 21/29 : ENV PYTHONPATH="/home/jac/venv/lib/python3.11/site-packages:$PYTHONPATH"
+ ---> Running in 00af6251be1a
+ ---> Removed intermediate container 00af6251be1a
+ ---> d18a78d45588
+Step 22/29 : USER root
+ ---> Running in e12dc90e24f3
+ ---> Removed intermediate container e12dc90e24f3
+ ---> 0eed60132e03
+Step 23/29 : RUN echo 'import subprocess' > /tmp/entrypoint.py &&     echo 'import time' >> /tmp/entrypoint.py &&     echo 'import socket' >> /tmp/entrypoint.py &&     echo 'import os' >> /tmp/entrypoint.py &&     echo 'import sys' >> /tmp/entrypoint.py &&     echo 'import glob' >> /tmp/entrypoint.py &&     echo '' >> /tmp/entrypoint.py &&     echo 'def find_python_executable():' >> /tmp/entrypoint.py &&     echo '    # Try primary location for python executable' >> /tmp/entrypoint.py &&     echo '    possible_paths = [' >> /tmp/entrypoint.py &&     echo '        "/home/jac/venv/bin/python",' >> /tmp/entrypoint.py &&     echo '        "/usr/local/bin/python"' >> /tmp/entrypoint.py &&     echo '    ]' >> /tmp/entrypoint.py &&     echo '    for path in possible_paths:' >> /tmp/entrypoint.py &&     echo '        if os.path.exists(path):' >> /tmp/entrypoint.py &&     echo '            return path' >> /tmp/entrypoint.py &&     echo '    # Fallback to system python' >> /tmp/entrypoint.py &&     echo '    return "python"' >> /tmp/entrypoint.py &&     echo '' >> /tmp/entrypoint.py &&     echo 'def wait_for_database(max_retries=30):' >> /tmp/entrypoint.py &&     echo '    print("🚀 Starting JAC Learning Platform Backend...")' >> /tmp/entrypoint.py &&     echo '    print("📡 Waiting for database connection...")' >> /tmp/entrypoint.py &&     echo '    for i in range(max_retries):' >> /tmp/entrypoint.py &&     echo '        try:' >> /tmp/entrypoint.py &&     echo '            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:' >> /tmp/entrypoint.py &&     echo '                s.settimeout(2)' >> /tmp/entrypoint.py &&     echo '                result = s.connect_ex(("postgres", 5432))' >> /tmp/entrypoint.py &&     echo '                if result == 0:' >> /tmp/entrypoint.py &&     echo '                    print("✅ Database connection established!")' >> /tmp/entrypoint.py &&     echo '                    return True' >> /tmp/entrypoint.py &&     echo '        except Exception as e:' >> /tmp/entrypoint.py &&     echo '            print(f"  Database check {i+1}/{max_retries} failed: {e}")' >> /tmp/entrypoint.py &&     echo '        time.sleep(2)' >> /tmp/entrypoint.py &&     echo '    print("⚠️ Database connection timeout, continuing anyway...")' >> /tmp/entrypoint.py &&     echo '    return False' >> /tmp/entrypoint.py &&     echo '' >> /tmp/entrypoint.py &&     echo 'def start_application():' >> /tmp/entrypoint.py &&     echo '    python_exe = find_python_executable()' >> /tmp/entrypoint.py &&     echo '    print(f"🐍 Using Python: {python_exe}")' >> /tmp/entrypoint.py &&     echo '    wait_for_database()' >> /tmp/entrypoint.py &&     echo '    print("📦 Running database migrations...")' >> /tmp/entrypoint.py &&     echo '    try:' >> /tmp/entrypoint.py &&     echo '        result = subprocess.run([' >> /tmp/entrypoint.py &&     echo '            python_exe, "manage.py", "migrate", "--noinput"' >> /tmp/entrypoint.py &&     echo '        ], check=False, capture_output=True, text=True, timeout=60)' >> /tmp/entrypoint.py &&     echo '        if result.returncode == 0:' >> /tmp/entrypoint.py &&     echo '            print("✅ Database migrations completed")' >> /tmp/entrypoint.py &&     echo '        else:' >> /tmp/entrypoint.py &&     echo '            print("⚠️ Migration warnings (continuing):", result.stderr)' >> /tmp/entrypoint.py &&     echo '    except Exception as e:' >> /tmp/entrypoint.py &&     echo '        print(f"⚠️ Migration error: {e} (continuing anyway)")' >> /tmp/entrypoint.py &&     echo '    print("🌐 Starting Django application server...")' >> /tmp/entrypoint.py &&     echo '    sys.stdout.flush()' >> /tmp/entrypoint.py &&     echo '    os.execvp(python_exe, [python_exe, "manage.py", "runserver", "0.0.0.0:8000"])' >> /tmp/entrypoint.py &&     echo '' >> /tmp/entrypoint.py &&     echo 'if __name__ == "__main__":' >> /tmp/entrypoint.py &&     echo '    # Fix permissions for static files directory' >> /tmp/entrypoint.py &&     echo '    import os' >> /tmp/entrypoint.py &&     echo '    static_dir = "/var/www/static"' >> /tmp/entrypoint.py &&     echo '    try:' >> /tmp/entrypoint.py &&     echo '        os.makedirs(static_dir, exist_ok=True)' >> /tmp/entrypoint.py &&     echo '        os.system(f"chown -R jac:jac {static_dir}")' >> /tmp/entrypoint.py &&     echo '        os.system(f"chmod -R 755 {static_dir}")' >> /tmp/entrypoint.py &&     echo '        print(f"✅ Static files directory permissions fixed: {static_dir}")' >> /tmp/entrypoint.py &&     echo '    except Exception as e:' >> /tmp/entrypoint.py &&     echo '        print(f"⚠️ Warning: Could not fix static directory permissions: {e}")' >> /tmp/entrypoint.py &&     echo '    start_application()' >> /tmp/entrypoint.py
+ ---> Running in bfeb0ea09049
+ ---> Removed intermediate container bfeb0ea09049
+ ---> af37e519d48a
+Step 24/29 : RUN chown -R jac:jac /app /tmp/entrypoint.py
+ ---> Running in aaefb00fedfb
+ ---> Removed intermediate container aaefb00fedfb
+ ---> 60201d21cd45
+Step 25/29 : USER jac
+ ---> Running in c6ba9cb3a050
+ ---> Removed intermediate container c6ba9cb3a050
+ ---> 35e7d469fcc8
+Step 26/29 : EXPOSE 8000
+ ---> Running in 4f123518cbf3
+ ---> Removed intermediate container 4f123518cbf3
+ ---> 59c4713a3524
+Step 27/29 : RUN echo '#!/bin/bash' > /tmp/healthcheck.sh &&     echo 'curl -f http://localhost:8000/api/health/static/ > /dev/null 2>&1 && exit 0 || curl -f http://localhost:8000/api/health/simple/ > /dev/null 2>&1 && exit 0 || curl -f http://localhost:8000/api/health/ > /dev/null 2>&1 && exit 0 || exit 1' >> /tmp/healthcheck.sh &&     chmod +x /tmp/healthcheck.sh
+ ---> Running in 67a8840faabc
+ ---> Removed intermediate container 67a8840faabc
+ ---> 8ecac7275fe5
+Step 28/29 : HEALTHCHECK --interval=45s --timeout=10s --start-period=90s --retries=5     CMD /tmp/healthcheck.sh
+ ---> Running in 3128612143a8
+ ---> Removed intermediate container 3128612143a8
+ ---> 308d14e96a32
+Step 29/29 : CMD ["python", "/tmp/entrypoint.py"]
+ ---> Running in e9819adfa34c
+ ---> Removed intermediate container e9819adfa34c
+ ---> 2f200168de15
+Successfully built 2f200168de15
+Successfully tagged jac-interactive-learning-platform_backend:latest
+jac-interactive-learning-platform_postgres_1 is up-to-date
+jac-interactive-learning-platform_redis_1 is up-to-date
+Recreating jac-interactive-learning-platform_backend_1 ... 
+
+ERROR: for jac-interactive-learning-platform_backend_1  'ContainerConfig'
+
+ERROR: for backend  'ContainerConfig'
+Traceback (most recent call last):
+  File "/usr/bin/docker-compose", line 33, in <module>
+    sys.exit(load_entry_point('docker-compose==1.29.2', 'console_scripts', 'docker-compose')())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/cli/main.py", line 81, in main
+    command_func()
+  File "/usr/lib/python3/dist-packages/compose/cli/main.py", line 203, in perform_command
+    handler(command, command_options)
+  File "/usr/lib/python3/dist-packages/compose/metrics/decorator.py", line 18, in wrapper
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/cli/main.py", line 1186, in up
+    to_attach = up(False)
+                ^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/cli/main.py", line 1166, in up
+    return self.project.up(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/project.py", line 697, in up
+    results, errors = parallel.parallel_execute(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/parallel.py", line 108, in parallel_execute
+    raise error_to_reraise
+  File "/usr/lib/python3/dist-packages/compose/parallel.py", line 206, in producer
+    result = func(obj)
+             ^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/project.py", line 679, in do
+    return service.execute_convergence_plan(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 579, in execute_convergence_plan
+    return self._execute_convergence_recreate(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 499, in _execute_convergence_recreate
+    containers, errors = parallel_execute(
+                         ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/parallel.py", line 108, in parallel_execute
+    raise error_to_reraise
+  File "/usr/lib/python3/dist-packages/compose/parallel.py", line 206, in producer
+    result = func(obj)
+             ^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 494, in recreate
+    return self.recreate_container(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 612, in recreate_container
+    new_container = self.create_container(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 330, in create_container
+    container_options = self._get_container_create_options(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 921, in _get_container_create_options
+    container_options, override_options = self._build_container_volume_options(
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 960, in _build_container_volume_options
+    binds, affinity = merge_volume_bindings(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 1548, in merge_volume_bindings
+    old_volumes, old_mounts = get_container_data_volumes(
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/compose/service.py", line 1579, in get_container_data_volumes
+    container.image_config['ContainerConfig'].get('Volumes') or {}
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'ContainerConfig'
