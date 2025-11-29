@@ -5,11 +5,12 @@ Django admin configuration for the Users app.
 """
 
 from django.contrib import admin
+from config.custom_admin import custom_admin_site
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import User
 
 
-@admin.register(User)
+@admin.register(User, site=custom_admin_site)
 class UserAdmin(BaseUserAdmin):
     """Admin interface for the custom User model."""
     

@@ -6,6 +6,7 @@ Admin interface for managing learning content, paths, modules, and assessments.
 """
 
 from django.contrib import admin
+from config.custom_admin import custom_admin_site
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -17,7 +18,7 @@ from .models import (
 )
 
 
-@admin.register(LearningPath)
+@admin.register(LearningPath, site=custom_admin_site)
 class LearningPathAdmin(admin.ModelAdmin):
     """Admin interface for LearningPath model."""
     
@@ -73,7 +74,7 @@ class LearningPathAdmin(admin.ModelAdmin):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
-@admin.register(Module)
+@admin.register(Module, site=custom_admin_site)
 class ModuleAdmin(admin.ModelAdmin):
     """Admin interface for Module model."""
     
@@ -127,7 +128,7 @@ class ModuleAdmin(admin.ModelAdmin):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
-@admin.register(Lesson)
+@admin.register(Lesson, site=custom_admin_site)
 class LessonAdmin(admin.ModelAdmin):
     """Admin interface for Lesson model."""
     
@@ -171,7 +172,7 @@ class LessonAdmin(admin.ModelAdmin):
         return qs.select_related('module', 'module__learning_path')
 
 
-@admin.register(Assessment)
+@admin.register(Assessment, site=custom_admin_site)
 class AssessmentAdmin(admin.ModelAdmin):
     """Admin interface for Assessment model."""
     
@@ -225,7 +226,7 @@ class AssessmentAdmin(admin.ModelAdmin):
 
 
 
-@admin.register(UserModuleProgress)
+@admin.register(UserModuleProgress, site=custom_admin_site)
 class UserModuleProgressAdmin(admin.ModelAdmin):
     """Admin interface for UserModuleProgress model."""
     
@@ -273,7 +274,7 @@ class UserModuleProgressAdmin(admin.ModelAdmin):
         return qs.select_related('user', 'module')
 
 
-@admin.register(UserLearningPath)
+@admin.register(UserLearningPath, site=custom_admin_site)
 class UserLearningPathAdmin(admin.ModelAdmin):
     """Admin interface for UserLearningPath model."""
     

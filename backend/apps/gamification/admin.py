@@ -10,6 +10,7 @@ Created: 2025-11-26
 """
 
 from django.contrib import admin
+from config.custom_admin import custom_admin_site
 from django.utils.html import format_html
 from django.db.models import Count
 from .models import (
@@ -19,7 +20,7 @@ from .models import (
 )
 
 
-@admin.register(Badge)
+@admin.register(Badge, site=custom_admin_site)
 class BadgeAdmin(admin.ModelAdmin):
     list_display = ['icon', 'name', 'category', 'difficulty', 'rarity', 'is_active', 'created_at']
     list_filter = ['category', 'difficulty', 'rarity', 'is_active']
@@ -46,7 +47,7 @@ class BadgeAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(UserBadge)
+@admin.register(UserBadge, site=custom_admin_site)
 class UserBadgeAdmin(admin.ModelAdmin):
     list_display = ['user', 'badge', 'earned_at', 'earned_through', 'is_verified']
     list_filter = ['is_verified', 'badge__category', 'badge__difficulty']
@@ -57,7 +58,7 @@ class UserBadgeAdmin(admin.ModelAdmin):
         return super().get_queryset(request).select_related('user', 'badge')
 
 
-@admin.register(Achievement)
+@admin.register(Achievement, site=custom_admin_site)
 class AchievementAdmin(admin.ModelAdmin):
     list_display = ['icon', 'title', 'category', 'difficulty', 'criteria_type', 'points_reward', 'is_active', 'unlock_order']
     list_filter = ['category', 'difficulty', 'criteria_type', 'is_active']
@@ -87,7 +88,7 @@ class AchievementAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(UserAchievement)
+@admin.register(UserAchievement, site=custom_admin_site)
 class UserAchievementAdmin(admin.ModelAdmin):
     list_display = ['user', 'achievement', 'current_progress', 'is_completed', 'completed_at', 'points_earned']
     list_filter = ['is_completed', 'achievement__category', 'achievement__difficulty']
@@ -98,7 +99,7 @@ class UserAchievementAdmin(admin.ModelAdmin):
         return super().get_queryset(request).select_related('user', 'achievement', 'badge_earned')
 
 
-@admin.register(UserPoints)
+@admin.register(UserPoints, site=custom_admin_site)
 class UserPointsAdmin(admin.ModelAdmin):
     list_display = ['user', 'total_points', 'available_points', 'lifetime_points', 'last_earned', 'last_spent']
     list_filter = ['last_earned', 'last_spent']
@@ -109,7 +110,7 @@ class UserPointsAdmin(admin.ModelAdmin):
         return super().get_queryset(request).select_related('user')
 
 
-@admin.register(PointTransaction)
+@admin.register(PointTransaction, site=custom_admin_site)
 class PointTransactionAdmin(admin.ModelAdmin):
     list_display = ['user', 'amount', 'transaction_type', 'source', 'description', 'balance_after', 'created_at']
     list_filter = ['transaction_type', 'source', 'created_at']
@@ -120,7 +121,7 @@ class PointTransactionAdmin(admin.ModelAdmin):
         return super().get_queryset(request).select_related('user')
 
 
-@admin.register(UserLevel)
+@admin.register(UserLevel, site=custom_admin_site)
 class UserLevelAdmin(admin.ModelAdmin):
     list_display = ['user', 'current_level', 'current_xp', 'total_xp', 'xp_to_next_level', 'progress_percentage', 'last_level_up']
     list_filter = ['current_level', 'last_level_up']
@@ -135,7 +136,7 @@ class UserLevelAdmin(admin.ModelAdmin):
         return super().get_queryset(request).select_related('user')
 
 
-@admin.register(LearningStreak)
+@admin.register(LearningStreak, site=custom_admin_site)
 class LearningStreakAdmin(admin.ModelAdmin):
     list_display = ['user', 'current_streak', 'longest_streak', 'streak_multiplier', 'last_activity_date']
     list_filter = ['current_streak', 'longest_streak', 'last_activity_date']
@@ -146,7 +147,7 @@ class LearningStreakAdmin(admin.ModelAdmin):
         return super().get_queryset(request).select_related('user')
 
 
-@admin.register(LevelRequirement)
+@admin.register(LevelRequirement, site=custom_admin_site)
 class LevelRequirementAdmin(admin.ModelAdmin):
     list_display = ['level', 'requirement_type', 'requirement_value', 'badge', 'title']
     list_filter = ['requirement_type']
@@ -156,7 +157,7 @@ class LevelRequirementAdmin(admin.ModelAdmin):
         return super().get_queryset(request).select_related('badge')
 
 
-@admin.register(AchievementProgress)
+@admin.register(AchievementProgress, site=custom_admin_site)
 class AchievementProgressAdmin(admin.ModelAdmin):
     list_display = ['user', 'achievement', 'current_count', 'target_count', 'last_update']
     list_filter = ['achievement__category', 'achievement__difficulty', 'last_update']

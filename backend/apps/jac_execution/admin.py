@@ -8,6 +8,7 @@ managing code executions, templates, and security settings.
 """
 
 from django.contrib import admin
+from config.custom_admin import custom_admin_site
 from django.utils.html import format_html
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -15,7 +16,7 @@ from django.contrib import messages
 from .models import CodeExecution, ExecutionTemplate, CodeExecutionSession, SecuritySettings
 
 
-@admin.register(CodeExecution)
+@admin.register(CodeExecution, site=custom_admin_site)
 class CodeExecutionAdmin(admin.ModelAdmin):
     """Admin interface for code execution records."""
     
@@ -61,7 +62,7 @@ class CodeExecutionAdmin(admin.ModelAdmin):
         return True
 
 
-@admin.register(ExecutionTemplate)
+@admin.register(ExecutionTemplate, site=custom_admin_site)
 class ExecutionTemplateAdmin(admin.ModelAdmin):
     """Admin interface for execution templates."""
     
@@ -96,7 +97,7 @@ class ExecutionTemplateAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
-@admin.register(CodeExecutionSession)
+@admin.register(CodeExecutionSession, site=custom_admin_site)
 class CodeExecutionSessionAdmin(admin.ModelAdmin):
     """Admin interface for execution sessions."""
     
@@ -118,7 +119,7 @@ class CodeExecutionSessionAdmin(admin.ModelAdmin):
     success_rate.short_description = 'Success Rate'
 
 
-@admin.register(SecuritySettings)
+@admin.register(SecuritySettings, site=custom_admin_site)
 class SecuritySettingsAdmin(admin.ModelAdmin):
     """Admin interface for security settings."""
     

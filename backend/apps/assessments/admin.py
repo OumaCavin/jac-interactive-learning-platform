@@ -5,13 +5,14 @@ Assessment admin configuration for Django Admin Interface
 """
 
 from django.contrib import admin
+from config.custom_admin import custom_admin_site
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from .models import AssessmentAttempt, AssessmentQuestion, UserAssessmentResult
 
 
-@admin.register(AssessmentQuestion)
+@admin.register(AssessmentQuestion, site=custom_admin_site)
 class AssessmentQuestionAdmin(admin.ModelAdmin):
     """
     Admin interface for AssessmentQuestion model
@@ -50,7 +51,7 @@ class AssessmentQuestionAdmin(admin.ModelAdmin):
         return super().get_queryset(request).select_related('module')
 
 
-@admin.register(AssessmentAttempt)
+@admin.register(AssessmentAttempt, site=custom_admin_site)
 class AssessmentAttemptAdmin(admin.ModelAdmin):
     """
     Admin interface for AssessmentAttempt model
@@ -109,7 +110,7 @@ class AssessmentAttemptAdmin(admin.ModelAdmin):
         return super().get_queryset(request).select_related('user', 'module')
 
 
-@admin.register(UserAssessmentResult)
+@admin.register(UserAssessmentResult, site=custom_admin_site)
 class UserAssessmentResultAdmin(admin.ModelAdmin):
     """
     Admin interface for UserAssessmentResult model
