@@ -166,6 +166,7 @@ def export_execution_data(modeladmin, request, queryset):
     """Custom action to export execution data."""
     import json
     from django.http import HttpResponse
+from config.custom_admin import custom_admin_site
     
     data = []
     for execution in queryset:

@@ -14,6 +14,7 @@ from config.custom_admin import custom_admin_site
 from django.utils.html import format_html
 from django.db.models import Count
 from .models import (
+from config.custom_admin import custom_admin_site
     Badge, UserBadge, Achievement, UserAchievement,
     UserPoints, PointTransaction, UserLevel, LearningStreak,
     LevelRequirement, AchievementProgress

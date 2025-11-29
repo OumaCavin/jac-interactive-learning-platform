@@ -3,34 +3,36 @@
 
 FROM python:3.11-slim
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+# Install system dependencies with minimal memory usage - CRITICAL FIX
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update --allow-releaseinfo-change \
+    && apt-get install -y --no-install-recommends --no-install-recommends \
+        build-essential \
+        curl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/cache/apt/* \
+    && rm -rf /tmp/*
 
-# Create app directory
+# Create app directory and non-root user in single layer
+RUN groupadd -r jac && useradd -r -g jac jac && mkdir -p /app/logs
+
 WORKDIR /app
-
-# Create non-root user
-RUN groupadd -r jac && useradd -r -g jac jac
 
 # Copy requirements first for better caching
 COPY requirements.txt requirements_realtime.txt ./
 
-# Install Python dependencies
-RUN pip install --no-cache-dir --upgrade pip \
+# Install Python dependencies with memory-efficient approach
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
     && pip install --no-cache-dir -r requirements.txt \
-    && pip install --no-cache-dir -r requirements_realtime.txt
+    && pip install --no-cache-dir -r requirements_realtime.txt \
+    && pip cache purge
 
 # Copy the entire backend directory
 COPY . .
 
-# Create necessary directories
-RUN mkdir -p logs static media
-
 # Set proper permissions
-RUN chown -R jac:jac /app
+RUN chown -R jac:jac /app && chmod -R 755 /app
 
 # Switch to non-root user
 USER jac

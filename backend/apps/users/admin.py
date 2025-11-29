@@ -1,18 +1,18 @@
-# JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
+# JAC Platform Configuration - Settings by Cavin Otieno
 
 """
-Django admin configuration for the Users app.
+Django admin configuration for the Users app with custom admin site.
 """
 
 from django.contrib import admin
-from config.custom_admin import custom_admin_site
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import User
+from config.custom_admin import custom_admin_site
 
 
 @admin.register(User, site=custom_admin_site)
 class UserAdmin(BaseUserAdmin):
-    """Admin interface for the custom User model."""
+    """Admin interface for the custom User model on custom admin site."""
     
     list_display = (
         'username', 'email', 'first_name', 'last_name', 

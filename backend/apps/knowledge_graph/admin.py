@@ -671,6 +671,7 @@ bulk_generate_learning_paths.short_description = "Generate learning paths for al
 def export_knowledge_graph_analytics(modeladmin, request, queryset):
     """Export comprehensive analytics for selected graphs"""
     from .services.analytics import KnowledgeGraphAnalytics
+from config.custom_admin import custom_admin_site
     
     analytics_data = []
     for graph in queryset:
