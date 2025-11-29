@@ -3,6 +3,7 @@ Admin configuration for search app
 """
 
 from django.contrib import admin
+from config.custom_admin import custom_admin_site
 from .models import SearchQuery, SearchResult
 from config.custom_admin import custom_admin_site
 

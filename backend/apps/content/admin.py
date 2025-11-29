@@ -5,8 +5,8 @@ Content admin interface for JAC Learning Platform
 """
 
 from django.contrib import admin
-from .models import Content, ContentRecommendation, ContentAnalytics
 from config.custom_admin import custom_admin_site
+from .models import Content, ContentRecommendation, ContentAnalytics
 
 
 @admin.register(Content, site=custom_admin_site)

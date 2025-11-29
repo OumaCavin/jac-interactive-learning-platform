@@ -5,11 +5,11 @@ Assessment admin configuration for Django Admin Interface
 """
 
 from django.contrib import admin
+from config.custom_admin import custom_admin_site
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from .models import AssessmentAttempt, AssessmentQuestion, UserAssessmentResult
-from config.custom_admin import custom_admin_site
 
 
 @admin.register(AssessmentQuestion, site=custom_admin_site)
