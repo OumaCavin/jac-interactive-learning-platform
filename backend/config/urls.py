@@ -98,3 +98,4 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # Serve static files from Docker volume in development
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+>>>>>>> 899e926 (fix: serve Django admin static files from local static directory in development)
