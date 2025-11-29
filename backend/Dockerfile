@@ -143,16 +143,18 @@ RUN echo 'import subprocess' > /tmp/entrypoint.py && \
     echo '    os.execvp(python_exe, [python_exe, "manage.py", "runserver", "0.0.0.0:8000"])' >> /tmp/entrypoint.py && \
     echo '' >> /tmp/entrypoint.py && \
     echo 'if __name__ == "__main__":' >> /tmp/entrypoint.py && \
-    echo '    # Fix permissions for static files directory' >> /tmp/entrypoint.py && \
+    echo '    # Create and prepare static files directory' >> /tmp/entrypoint.py && \
     echo '    import os' >> /tmp/entrypoint.py && \
+    echo '    import stat' >> /tmp/entrypoint.py && \
     echo '    static_dir = "/var/www/static"' >> /tmp/entrypoint.py && \
     echo '    try:' >> /tmp/entrypoint.py && \
-    echo '        os.makedirs(static_dir, exist_ok=True)' >> /tmp/entrypoint.py && \
-    echo '        os.system(f"chown -R jac:jac {static_dir}")' >> /tmp/entrypoint.py && \
-    echo '        os.system(f"chmod -R 755 {static_dir}")' >> /tmp/entrypoint.py && \
-    echo '        print(f"✅ Static files directory permissions fixed: {static_dir}")' >> /tmp/entrypoint.py && \
+    echo '        # Create directory with proper permissions (owner can read/write/execute)' >> /tmp/entrypoint.py && \
+    echo '        os.makedirs(static_dir, exist_ok=True, mode=0o755)' >> /tmp/entrypoint.py && \
+    echo '        # Ensure directory is writable by current user' >> /tmp/entrypoint.py && \
+    echo '        os.chmod(static_dir, 0o755)' >> /tmp/entrypoint.py && \
+    echo '        print(f"✅ Static files directory prepared: {static_dir}")' >> /tmp/entrypoint.py && \
     echo '    except Exception as e:' >> /tmp/entrypoint.py && \
-    echo '        print(f"⚠️ Warning: Could not fix static directory permissions: {e}")' >> /tmp/entrypoint.py && \
+    echo '        print(f"⚠️ Warning: Could not prepare static directory: {e}")' >> /tmp/entrypoint.py && \
     echo '    start_application()' >> /tmp/entrypoint.py
 
 # Change ownership to non-root user
