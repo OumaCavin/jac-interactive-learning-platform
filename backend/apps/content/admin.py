@@ -6,9 +6,10 @@ Content admin interface for JAC Learning Platform
 
 from django.contrib import admin
 from .models import Content, ContentRecommendation, ContentAnalytics
+from config.custom_admin import custom_admin_site
 
 
-@admin.register(Content)
+@admin.register(Content, site=custom_admin_site)
 class ContentAdmin(admin.ModelAdmin):
     """
     Admin interface for Content model
@@ -51,7 +52,7 @@ class ContentAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
-@admin.register(ContentRecommendation)
+@admin.register(ContentRecommendation, site=custom_admin_site)
 class ContentRecommendationAdmin(admin.ModelAdmin):
     """
     Admin interface for ContentRecommendation model
@@ -68,7 +69,7 @@ class ContentRecommendationAdmin(admin.ModelAdmin):
     ordering = ['-match_score', '-created_at']
 
 
-@admin.register(ContentAnalytics)
+@admin.register(ContentAnalytics, site=custom_admin_site)
 class ContentAnalyticsAdmin(admin.ModelAdmin):
     """
     Admin interface for ContentAnalytics model

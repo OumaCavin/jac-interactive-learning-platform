@@ -14,12 +14,13 @@ from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from .models import (
+from config.custom_admin import custom_admin_site
     StudyGroup, StudyGroupMembership, DiscussionForum, DiscussionTopic,
     DiscussionPost, PeerCodeShare, CodeLike, GroupChallenge,
     ChallengeParticipation, MentorshipRelationship, MentorshipSession
 )
 
-@admin.register(StudyGroup)
+@admin.register(StudyGroup, site=custom_admin_site)
 class StudyGroupAdmin(admin.ModelAdmin):
     list_display = [
         'name', 'subject_area', 'level', 'member_count', 'is_public', 
@@ -38,14 +39,14 @@ class StudyGroupAdmin(admin.ModelAdmin):
         qs = super().get_queryset(request)
         return qs.select_related('created_by').prefetch_related('memberships')
 
-@admin.register(StudyGroupMembership)
+@admin.register(StudyGroupMembership, site=custom_admin_site)
 class StudyGroupMembershipAdmin(admin.ModelAdmin):
     list_display = ['user', 'study_group', 'role', 'joined_at']
     list_filter = ['role', 'joined_at']
     search_fields = ['user__username', 'study_group__name']
     readonly_fields = ['joined_at']
 
-@admin.register(DiscussionForum)
+@admin.register(DiscussionForum, site=custom_admin_site)
 class DiscussionForumAdmin(admin.ModelAdmin):
     list_display = ['name', 'study_group', 'topic_count', 'is_active', 'created_at']
     list_filter = ['is_active', 'created_at']
@@ -56,7 +57,7 @@ class DiscussionForumAdmin(admin.ModelAdmin):
         return obj.topics.count()
     topic_count.short_description = 'Topics'
 
-@admin.register(DiscussionTopic)
+@admin.register(DiscussionTopic, site=custom_admin_site)
 class DiscussionTopicAdmin(admin.ModelAdmin):
     list_display = [
         'title', 'forum', 'author', 'status', 'is_pinned', 
@@ -74,7 +75,7 @@ class DiscussionTopicAdmin(admin.ModelAdmin):
         qs = super().get_queryset(request)
         return qs.select_related('forum', 'forum__study_group', 'author').prefetch_related('posts')
 
-@admin.register(DiscussionPost)
+@admin.register(DiscussionPost, site=custom_admin_site)
 class DiscussionPostAdmin(admin.ModelAdmin):
     list_display = [
         'author', 'topic', 'is_solution', 'created_at', 'updated_at'
@@ -87,7 +88,7 @@ class DiscussionPostAdmin(admin.ModelAdmin):
         qs = super().get_queryset(request)
         return qs.select_related('author', 'topic', 'topic__forum', 'topic__forum__study_group')
 
-@admin.register(PeerCodeShare)
+@admin.register(PeerCodeShare, site=custom_admin_site)
 class PeerCodeShareAdmin(admin.ModelAdmin):
     list_display = [
         'title', 'author', 'language', 'share_type', 'likes_count', 
@@ -104,7 +105,7 @@ class PeerCodeShareAdmin(admin.ModelAdmin):
         qs = super().get_queryset(request)
         return qs.select_related('author').prefetch_related('likes')
 
-@admin.register(CodeLike)
+@admin.register(CodeLike, site=custom_admin_site)
 class CodeLikeAdmin(admin.ModelAdmin):
     list_display = ['user', 'code_share', 'created_at']
     list_filter = ['created_at']
@@ -115,7 +116,7 @@ class CodeLikeAdmin(admin.ModelAdmin):
         qs = super().get_queryset(request)
         return qs.select_related('user', 'code_share', 'code_share__author')
 
-@admin.register(GroupChallenge)
+@admin.register(GroupChallenge, site=custom_admin_site)
 class GroupChallengeAdmin(admin.ModelAdmin):
     list_display = [
         'title', 'study_group', 'challenge_type', 'difficulty_level',
@@ -133,7 +134,7 @@ class GroupChallengeAdmin(admin.ModelAdmin):
         return obj.participations.count()
     participant_count.short_description = 'Participants'
 
-@admin.register(ChallengeParticipation)
+@admin.register(ChallengeParticipation, site=custom_admin_site)
 class ChallengeParticipationAdmin(admin.ModelAdmin):
     list_display = [
         'participant', 'challenge', 'status', 'team_name', 
@@ -153,7 +154,7 @@ class ChallengeParticipationAdmin(admin.ModelAdmin):
         qs = super().get_queryset(request)
         return qs.select_related('participant', 'challenge', 'challenge__study_group')
 
-@admin.register(MentorshipRelationship)
+@admin.register(MentorshipRelationship, site=custom_admin_site)
 class MentorshipRelationshipAdmin(admin.ModelAdmin):
     list_display = [
         'mentor', 'mentee', 'status', 'subject_areas_display',
@@ -167,7 +168,7 @@ class MentorshipRelationshipAdmin(admin.ModelAdmin):
         return ', '.join(obj.subject_areas) if obj.subject_areas else '-'
     subject_areas_display.short_description = 'Subject Areas'
 
-@admin.register(MentorshipSession)
+@admin.register(MentorshipSession, site=custom_admin_site)
 class MentorshipSessionAdmin(admin.ModelAdmin):
     list_display = [
         'title', 'relationship', 'session_type', 'status',

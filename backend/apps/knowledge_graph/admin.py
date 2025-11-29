@@ -22,7 +22,7 @@ from .models import (
 )
 
 
-@admin.register(KnowledgeNode)
+@admin.register(KnowledgeNode, site=custom_admin_site)
 class KnowledgeNodeAdmin(admin.ModelAdmin):
     """
     Admin interface for KnowledgeNode model.
@@ -97,7 +97,7 @@ class KnowledgeNodeAdmin(admin.ModelAdmin):
         return super().get_queryset(request).select_related('created_by')
 
 
-@admin.register(KnowledgeEdge)
+@admin.register(KnowledgeEdge, site=custom_admin_site)
 class KnowledgeEdgeAdmin(admin.ModelAdmin):
     """
     Admin interface for KnowledgeEdge model.
@@ -186,7 +186,7 @@ class KnowledgeEdgeAdmin(admin.ModelAdmin):
         return super().get_queryset(request).select_related('source_node', 'target_node')
 
 
-@admin.register(ConceptRelation)
+@admin.register(ConceptRelation, site=custom_admin_site)
 class ConceptRelationAdmin(admin.ModelAdmin):
     """
     Admin interface for ConceptRelation model.
@@ -278,7 +278,7 @@ class LearningGraphEdgeInline(admin.TabularInline):
     autocomplete_fields = ['knowledge_edge']
 
 
-@admin.register(LearningGraph)
+@admin.register(LearningGraph, site=custom_admin_site)
 class LearningGraphAdmin(admin.ModelAdmin):
     """
     Admin interface for LearningGraph model.
@@ -392,7 +392,7 @@ class LearningGraphAdmin(admin.ModelAdmin):
         return readonly_fields
 
 
-@admin.register(LearningPath)
+@admin.register(LearningPath, site=custom_admin_site)
 class LearningPathAdmin(admin.ModelAdmin):
     """
     Admin interface for LearningPath model.
@@ -493,7 +493,7 @@ class LearningPathAdmin(admin.ModelAdmin):
         return super().get_queryset(request).select_related('user', 'learning_graph', 'current_node')
 
 
-@admin.register(UserKnowledgeState)
+@admin.register(UserKnowledgeState, site=custom_admin_site)
 class UserKnowledgeStateAdmin(admin.ModelAdmin):
     """
     Admin interface for UserKnowledgeState model.
@@ -670,6 +670,7 @@ bulk_generate_learning_paths.short_description = "Generate learning paths for al
 def export_knowledge_graph_analytics(modeladmin, request, queryset):
     """Export comprehensive analytics for selected graphs"""
     from .services.analytics import KnowledgeGraphAnalytics
+from config.custom_admin import custom_admin_site
     
     analytics_data = []
     for graph in queryset:
