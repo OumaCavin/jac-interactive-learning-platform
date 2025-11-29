@@ -98,4 +98,3 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # Serve static files from Docker volume in development
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
->>>>>>> e9f48e6 (sync: update urls.py with corrected static files serving from Docker volume)
