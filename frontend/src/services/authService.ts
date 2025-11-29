@@ -1,8 +1,26 @@
 // JAC Learning Platform - TypeScript utilities by Cavin Otieno
 
 /**
- * Authentication service
- * Handles user authentication, token management, and user session
+ * Authentication service - Real Django Backend Integration
+ * 
+ * IMPORTANT CHANGES:
+ * - Mock authentication logic has been completely removed
+ * - All authentication now uses real Django backend at http://localhost:8000
+ * - Requires Django backend to be running for any authentication
+ * 
+ * REQUIREMENTS:
+ * - Django backend must be accessible at REACT_APP_API_URL (default: http://localhost:8000/api)
+ * - Users must be created through Django admin or registration endpoint
+ * - JWT tokens must be valid and properly formatted
+ * 
+ * BACKEND ENDPOINTS USED:
+ * - POST /users/auth/login/ - User authentication
+ * - POST /users/auth/register/ - User registration  
+ * - POST /users/auth/logout/ - User logout
+ * - POST /users/auth/refresh/ - Token refresh
+ * - GET /users/profile/ - Get user profile
+ * - PUT /users/profile/ - Update user profile
+ * - GET /users/health/ - Backend health check
  */
 
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
@@ -181,10 +199,17 @@ class AuthService {
   }
 
   /**
-   * Register a new user
+   * Register a new user through Django backend
    */
   async register(data: RegisterData): Promise<AuthResponse> {
     try {
+      // Check backend connectivity first
+      try {
+        await this.apiClient.get('/users/health/');
+      } catch (healthError) {
+        throw new Error('Backend service is not available. Please ensure Django backend is running on port 8000.');
+      }
+
       const response: AxiosResponse<AuthResponse> = await this.apiClient.post(
         '/users/auth/register/',
         data
@@ -199,121 +224,63 @@ class AuthService {
 
       return response.data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Registration failed');
+      // Enhanced error handling for registration
+      if (error.code === 'ECONNREFUSED') {
+        throw new Error('Cannot connect to backend server. Please ensure Django backend is running at http://localhost:8000');
+      }
+      
+      if (error.response?.status === 400) {
+        const errors = error.response.data;
+        if (errors.username) {
+          throw new Error(`Username error: ${errors.username.join(', ')}`);
+        }
+        if (errors.email) {
+          throw new Error(`Email error: ${errors.email.join(', ')}`);
+        }
+        if (errors.password) {
+          throw new Error(`Password error: ${errors.password.join(', ')}`);
+        }
+        throw new Error(errors.message || 'Invalid registration data. Please check your input.');
+      }
+      
+      if (error.response?.status >= 500) {
+        throw new Error('Server error occurred during registration. Please try again later.');
+      }
+      
+      throw new Error(error.response?.data?.message || 'Registration failed. Please check your data and try again.');
     }
   }
 
   /**
-   * Login user
+   * Login user - Real Django Backend Integration
+   * 
+   * NOTE: Mock logic has been removed. All authentication now uses the real Django backend.
+   * Users must be registered in the Django admin or through the registration endpoint.
    */
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
     try {
-      // Mock login for demo purposes
-      if (credentials.username === 'demo@example.com' && credentials.password === 'demo123') {
-        const mockUser: User = {
-          id: '1',
-          username: 'demo_user',
-          email: credentials.username,
-          first_name: 'Demo',
-          last_name: 'User',
-          is_staff: false, // Regular demo user - no admin privileges
-          bio: 'Demo user for JAC Learning Platform',
-          profile_image: undefined,
-          learning_style: 'visual',
-          preferred_difficulty: 'beginner',
-          learning_pace: 'moderate',
-          total_modules_completed: 12,
-          total_time_spent: '480 minutes',
-          current_streak: 7,
-          longest_streak: 14,
-          total_points: 1250,
-          level: 3,
-          experience_level: 75,
-          next_level_points: 1500,
-          achievements: [],
-          badges: [],
-          current_goal: 'Complete JAC Fundamentals',
-          goal_deadline: '2025-12-31',
-          agent_interaction_level: 'moderate',
-          preferred_feedback_style: 'detailed',
-          dark_mode: false,
-          notifications_enabled: true,
-          email_notifications: true,
-          push_notifications: false,
-          created_at: '2024-01-01T00:00:00Z',
-          updated_at: '2025-11-21T21:24:42Z',
-        };
+      // =================================================================
+      // MOCK LOGIC REMOVED - Using only real Django backend authentication
+      // =================================================================
+      // 
+      // Previously, the following mock users were hardcoded:
+      // - demo@example.com / demo123 (regular user)
+      // - admin@jac.com / admin123 (admin user)
+      //
+      // Now all authentication requires:
+      // 1. Django backend to be running at http://localhost:8000
+      // 2. Users to be created through Django admin or registration
+      // 3. Valid JWT tokens from the backend API
+      // =================================================================
 
-        const mockTokens: AuthTokens = {
-          access: 'mock-jwt-token-' + Date.now(),
-          refresh: 'mock-refresh-token-' + Date.now(),
-        };
-
-        // Store tokens and user
-        localStorage.setItem('token', mockTokens.access);
-        localStorage.setItem('access_token', mockTokens.access);
-        localStorage.setItem('refresh_token', mockTokens.refresh);
-        this.saveUserToStorage(mockUser);
-
-        return { user: mockUser, tokens: mockTokens };
+      // Check backend connectivity first
+      try {
+        await this.apiClient.get('/users/health/');
+      } catch (healthError) {
+        throw new Error('Backend service is not available. Please ensure Django backend is running on port 8000.');
       }
 
-      // Admin demo user
-      if (credentials.username === 'admin@jac.com' && credentials.password === 'admin123') {
-        const adminUser: User = {
-          id: '2',
-          username: 'admin_user',
-          email: credentials.username,
-          first_name: 'Admin',
-          last_name: 'User',
-          is_staff: true, // Admin user with admin privileges
-          bio: 'Administrator account for JAC Learning Platform',
-          profile_image: undefined,
-          learning_style: 'visual',
-          preferred_difficulty: 'advanced',
-          learning_pace: 'fast',
-          total_modules_completed: 45,
-          total_time_spent: '1240 minutes',
-          current_streak: 30,
-          longest_streak: 45,
-          total_points: 5240,
-          level: 8,
-          experience_level: 95,
-          next_level_points: 5500,
-          achievements: [
-            { id: '1', name: 'Platform Administrator', description: 'Full admin access' },
-            { id: '2', name: 'Power User', description: 'Completed 40+ modules' },
-          ],
-          badges: [
-            { id: '1', name: 'Admin Badge', icon: 'shield-check' },
-          ],
-          current_goal: 'Platform Optimization',
-          goal_deadline: '2025-12-31',
-          agent_interaction_level: 'high',
-          preferred_feedback_style: 'brief',
-          dark_mode: false,
-          notifications_enabled: true,
-          email_notifications: true,
-          push_notifications: true,
-          created_at: '2024-01-01T00:00:00Z',
-          updated_at: '2025-11-23T18:39:00Z',
-        };
-
-        const mockTokens: AuthTokens = {
-          access: 'mock-admin-jwt-token-' + Date.now(),
-          refresh: 'mock-admin-refresh-token-' + Date.now(),
-        };
-
-        // Store tokens and user
-        localStorage.setItem('token', mockTokens.access);
-        localStorage.setItem('access_token', mockTokens.access);
-        localStorage.setItem('refresh_token', mockTokens.refresh);
-        this.saveUserToStorage(adminUser);
-
-        return { user: adminUser, tokens: mockTokens };
-      }
-
-      // Real API login
+      // Real API login to Django backend
       const response: AxiosResponse<AuthResponse> = await this.apiClient.post(
         '/users/auth/login/',
         credentials
@@ -329,14 +296,45 @@ class AuthService {
 
       return response.data;
     } catch (error: any) {
-      // Provide more specific error messages for different scenarios
-      if (credentials.username === 'demo@example.com') {
-        throw new Error('Invalid demo credentials. Use demo@example.com / demo123');
+      // Enhanced error handling for real backend scenarios
+      if (error.code === 'ECONNREFUSED') {
+        throw new Error('Cannot connect to backend server. Please ensure Django backend is running at http://localhost:8000');
       }
-      if (credentials.username === 'admin@jac.com') {
-        throw new Error('Invalid admin credentials. Use admin@jac.com / admin123');
+      
+      if (error.response?.status === 401) {
+        throw new Error('Invalid username or password. Please check your credentials.');
       }
-      throw new Error(error.response?.data?.message || 'Login failed. Please check your credentials.');
+      
+      if (error.response?.status === 404) {
+        throw new Error('Authentication endpoint not found. Please check if backend is properly configured.');
+      }
+      
+      if (error.response?.status >= 500) {
+        throw new Error('Server error occurred. Please try again later or contact support.');
+      }
+      
+      if (error.response?.data?.non_field_errors) {
+        throw new Error(error.response.data.non_field_errors.join(', '));
+      }
+      
+      if (error.response?.data?.detail) {
+        throw new Error(error.response.data.detail);
+      }
+      
+      throw new Error(error.response?.data?.message || 'Login failed. Please check your credentials and ensure the backend is running.');
+    }
+  }
+
+  /**
+   * Check if Django backend is available and responsive
+   */
+  async checkBackendHealth(): Promise<boolean> {
+    try {
+      await this.apiClient.get('/users/health/', { timeout: 5000 });
+      return true;
+    } catch (error) {
+      console.warn('Backend health check failed:', error);
+      return false;
     }
   }
 
@@ -365,16 +363,20 @@ class AuthService {
 
   /**
    * Check if user is authenticated
+   * 
+   * NOTE: Mock token checking has been removed. Only validates real JWT tokens.
    */
   isAuthenticated(): boolean {
     try {
       const token = localStorage.getItem('token') || localStorage.getItem('access_token');
       if (!token) return false;
 
-      // For mock tokens (simple check)
-      if (token.startsWith('mock-jwt-token-')) {
-        return true;
-      }
+      // =================================================================
+      // MOCK TOKEN CHECKING REMOVED
+      // =================================================================
+      // Previously checked for tokens starting with 'mock-jwt-token-'
+      // Now only validates real JWT tokens from Django backend
+      // =================================================================
       
       // For real JWT tokens (decode to check expiration)
       const tokenParts = token.split('.');
@@ -385,13 +387,18 @@ class AuthService {
           return payload.exp > currentTime;
         } catch (decodeError) {
           console.warn('Failed to decode JWT token:', decodeError);
+          // Clear invalid tokens
+          this.clearUserFromStorage();
           return false;
         }
       }
       
+      // Clear invalid token format
+      this.clearUserFromStorage();
       return false;
     } catch (error) {
       console.error('Error checking authentication:', error);
+      this.clearUserFromStorage();
       return false;
     }
   }
