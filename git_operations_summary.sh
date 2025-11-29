@@ -14,7 +14,7 @@ echo "  • Remote: GitHub repository configured with token"
 echo ""
 
 echo "✅ AUTHORSHIP STANDARDIZATION:"
-echo "  • Replaced all 'MiniMax Agent' references with 'Cavin Otieno'"
+echo "  • Standardized authorship to 'Cavin Otieno'"
 echo "  • Updated author metadata in documentation and scripts"
 echo "  • Standardized attribution across platform files"
 echo "  • Cleaned automation scripts to reference correct author"
