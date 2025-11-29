@@ -83,11 +83,20 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS('🎉 JAC Learning Platform initialization completed!')
         )
+        # Get environment variables for URLs
+        import os
+        backend_host = os.environ.get('BACKEND_HOST', 'localhost')
+        backend_port = os.environ.get('BACKEND_PORT', '8000')
+        protocol = 'https' if os.environ.get('USE_HTTPS', 'false').lower() == 'true' else 'http'
+        
+        admin_url = f"{protocol}://{backend_host}:{backend_port}/admin/"
+        api_url = f"{protocol}://{backend_host}:{backend_port}/api/"
+        
         self.stdout.write(
-            self.style.SUCCESS(f'Admin URL: http://localhost:8000/admin/')
+            self.style.SUCCESS(f'Admin URL: {admin_url}')
         )
         self.stdout.write(
-            self.style.SUCCESS(f'API URL: http://localhost:8000/api/')
+            self.style.SUCCESS(f'API URL: {api_url}')
         )
 
     def run_migrations(self):
