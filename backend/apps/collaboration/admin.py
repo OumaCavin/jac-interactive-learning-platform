@@ -15,7 +15,6 @@ from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from .models import (
-from config.custom_admin import custom_admin_site
     StudyGroup, StudyGroupMembership, DiscussionForum, DiscussionTopic,
     DiscussionPost, PeerCodeShare, CodeLike, GroupChallenge,
     ChallengeParticipation, MentorshipRelationship, MentorshipSession
