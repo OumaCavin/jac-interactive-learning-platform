@@ -152,6 +152,8 @@ RUN echo 'import subprocess' > /tmp/entrypoint.py && \
     echo '        os.makedirs(static_dir, exist_ok=True, mode=0o755)' >> /tmp/entrypoint.py && \
     echo '        # Ensure directory is writable by current user' >> /tmp/entrypoint.py && \
     echo '        os.chmod(static_dir, 0o755)' >> /tmp/entrypoint.py && \
+    echo '        # Also set sticky bit for subdirectories (inherit permissions)' >> /tmp/entrypoint.py && \
+    echo '        os.chmod(static_dir, 0o755)' >> /tmp/entrypoint.py && \
     echo '        print(f"✅ Static files directory prepared: {static_dir}")' >> /tmp/entrypoint.py && \
     echo '    except Exception as e:' >> /tmp/entrypoint.py && \
     echo '        print(f"⚠️ Warning: Could not prepare static directory: {e}")' >> /tmp/entrypoint.py && \
@@ -159,6 +161,11 @@ RUN echo 'import subprocess' > /tmp/entrypoint.py && \
 
 # Change ownership to non-root user
 RUN chown -R jac:jac /app /tmp/entrypoint.py
+
+# Create static files directory with proper ownership (while still root)
+RUN mkdir -p /var/www/static && \
+    chown -R jac:jac /var/www/static && \
+    chmod -R u+w /var/www/static
 
 # Switch to non-root user
 USER jac
