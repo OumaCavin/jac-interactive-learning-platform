@@ -17,11 +17,8 @@ from .models import (
     UserDifficultyProfile, AdaptiveChallenge, UserChallengeAttempt, SpacedRepetitionSession
 )
 
-from config.custom_admin import custom_admin_site
-
-
 @admin.register(LearningPath, site=custom_admin_site)
-class LearningPathAdmin(admin.ModelAdmin):
+class LearningPathTemplateAdmin(admin.ModelAdmin):
     """Admin interface for LearningPath model."""
     
     list_display = (
