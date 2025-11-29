@@ -96,5 +96,5 @@ urlpatterns = [
 # Serve media files in development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    # Serve static files from the local static directory in development
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.BASE_DIR / 'static')
+    # Serve static files from Docker volume in development
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
