@@ -35,56 +35,57 @@ def print_error(message):
     print(f"❌ {message}")
 
 def create_admin_user():
-    """Step 1: Create admin user"""
-    print_step(1, "Creating Admin User")
+    """Step 1: Create admin user - PRODUCTION VERSION
+    
+    NOTE: Hardcoded user creation has been removed for production security.
+    Admin users should be created through Django admin interface or 
+    management commands with secure credentials.
+    """
+    print_step(1, "Admin User Setup")
     
     User = get_user_model()
     
-    try:
-        # Try to get existing admin user
-        admin_user = User.objects.get(username='admin')
-        print_success(f"Admin user 'admin' already exists with ID: {admin_user.id}")
-        return admin_user
-    except User.DoesNotExist:
-        # Create new admin user
-        admin_user = User.objects.create_user(
-            username='admin',
-            email='cavin.otieno012@gmail.com',
-            password='admin123',
-            first_name='Admin',
-            last_name='User',
-            is_staff=True,
-            is_superuser=True,
-            is_active=True,
-            date_joined=timezone.now()
-        )
-        print_success(f"Created admin user: {admin_user.username} (ID: {admin_user.id})")
-        return admin_user
+    print_success("Admin user creation disabled for production security.")
+    print("To create admin user:")
+    print("  1. Run: python manage.py createsuperuser")
+    print("  2. Or use Django admin at http://localhost:8000/admin/")
+    print("  3. Or use initialize_platform command with --username, --email, --password")
+    
+    # Check if any superuser exists
+    superusers = User.objects.filter(is_superuser=True)
+    if superusers.exists():
+        print_success(f"Found {superusers.count()} superuser(s) in database")
+        for admin in superusers:
+            print(f"  - {admin.username} ({admin.email})")
+        return superusers.first()
+    else:
+        print("⚠️  No superuser found. Please create one using the methods above.")
+        return None
 
 def create_demo_user():
-    """Step 2: Create demo user"""
-    print_step(2, "Creating Demo User")
+    """Step 2: Demo user creation - PRODUCTION VERSION
     
-    User = get_user_model()
+    NOTE: Hardcoded demo user creation has been removed for production security.
+    Demo users should be created through the registration endpoint or Django admin.
+    """
+    print_step(2, "Demo User Setup")
     
-    try:
-        demo_user = User.objects.get(username='demo')
-        print_success(f"Demo user 'demo' already exists with ID: {demo_user.id}")
-        return demo_user
-    except User.DoesNotExist:
-        demo_user = User.objects.create_user(
-            username='demo',
-            email='demo@example.com',
-            password='demo123',
-            first_name='Demo',
-            last_name='User',
-            is_staff=False,
-            is_superuser=False,
-            is_active=True,
-            date_joined=timezone.now()
-        )
-        print_success(f"Created demo user: {demo_user.username} (ID: {demo_user.id})")
-        return demo_user
+    print_success("Demo user creation disabled for production security.")
+    print("To create test/demo users:")
+    print("  1. Use frontend registration at http://localhost:3000/register")
+    print("  2. Use Django admin at http://localhost:8000/admin/")
+    print("  3. Use API endpoint /users/auth/register/")
+    
+    # Check if demo users exist
+    demo_users = User.objects.filter(username__in=['demo', 'test', 'demo_user'])
+    if demo_users.exists():
+        print_success(f"Found {demo_users.count()} demo/test user(s)")
+        for user in demo_users:
+            print(f"  - {user.username} ({user.email})")
+        return demo_users.first()
+    else:
+        print("⚠️  No demo users found. Create test users through registration or admin.")
+        return None
 
 def create_sample_content(admin_user):
     """Step 3: Create sample learning content"""
@@ -520,17 +521,25 @@ def create_user_profiles(users):
         print_success(f"Created difficulty profile for {user.username}" if created else f"Difficulty profile exists for {user.username}")
 
 def main():
-    """Main function to run all data loading steps"""
-    print("🚀 JAC Interactive Learning Platform - Data Loader")
+    """Main function to run all data loading steps - PRODUCTION VERSION"""
+    print("🚀 JAC Interactive Learning Platform - Data Loader (Production Mode)")
     print("=" * 60)
     
     try:
-        # Step 1: Create admin user
+        # Step 1: Check admin users (no creation)
         admin_user = create_admin_user()
         
-        # Step 2: Create demo user
+        # Step 2: Check demo users (no creation)
         demo_user = create_demo_user()
-        users = [admin_user, demo_user]
+        
+        # Only proceed with content creation if we have at least one admin user
+        if not admin_user:
+            print_error("No admin user found. Cannot create content without admin user.")
+            print("Please create an admin user first using:")
+            print("  python manage.py createsuperuser")
+            return False
+            
+        users = [admin_user] + ([demo_user] if demo_user else [])
         
         # Step 3: Create sample content
         modules = create_sample_content(admin_user)
@@ -546,23 +555,23 @@ def main():
         
         # Final summary
         print_step("COMPLETE", "Data Loading Complete!")
-        print_success(f"✅ Admin user created: admin (ID: {admin_user.id})")
-        print_success(f"✅ Demo user created: demo (ID: {demo_user.id})")
+        if admin_user:
+            print_success(f"✅ Admin user available: {admin_user.username} (ID: {admin_user.id})")
+        if demo_user:
+            print_success(f"✅ Demo user available: {demo_user.username} (ID: {demo_user.id})")
         print_success(f"✅ Learning modules created: {len(modules)}")
         print_success(f"✅ Achievements created: {len(achievements)}")
         print_success(f"✅ Study groups created: {len(groups)}")
         print_success(f"✅ All user profiles and gamification records created")
         
-        print("\n🎯 LOGIN CREDENTIALS:")
+        print("\n🎯 PRODUCTION LOGIN:")
         print("=" * 30)
         print("Django Admin:")
         print("  URL: http://localhost:8000/admin/")
-        print("  Username: admin")
-        print("  Password: admin123")
-        print("\nDemo User:")
-        print("  URL: http://localhost:3000/login")
-        print("  Email: demo@example.com")
-        print("  Password: demo123")
+        print("  Create users through admin interface or registration")
+        print("\nFrontend Registration:")
+        print("  URL: http://localhost:3000/register")
+        print("  Create new accounts for testing")
         
         print("\n✅ All data loaded successfully!")
         return True

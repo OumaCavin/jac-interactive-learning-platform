@@ -35,14 +35,13 @@ class Command(BaseCommand):
         parser.add_argument(
             '--email',
             type=str,
-            default='admin@jacplatform.com',
-            help='Superuser email (default: admin@jacplatform.com)',
+            default='admin@platform.local',
+            help='Superuser email (default: admin@platform.local)',
         )
         parser.add_argument(
             '--password',
             type=str,
-            default='admin123',
-            help='Superuser password (default: admin123)',
+            help='Superuser password (REQUIRED for production)',
         )
         parser.add_argument(
             '--force',
@@ -69,8 +68,11 @@ class Command(BaseCommand):
         # Run migrations
         self.run_migrations()
 
-        # Create superuser if not skipped
+        # Create superuser if not skipped and password is provided
         if not options['no_superuser']:
+            if not options['password']:
+                raise CommandError('Password is required for superuser creation. Use --password option.')
+            
             self.create_superuser(
                 username=options['username'],
                 email=options['email'],

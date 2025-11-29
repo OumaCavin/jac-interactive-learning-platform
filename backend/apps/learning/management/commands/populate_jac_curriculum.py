@@ -21,18 +21,20 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """Populate the complete JAC curriculum with real content from official docs"""
         
-        # Create or get admin user for content creation
+        # Create or get admin user for content creation - PRODUCTION VERSION
         try:
             admin_user = User.objects.filter(is_superuser=True).first()
             if not admin_user:
-                admin_user = User.objects.create_superuser(
-                    username='admin',
-                    email='admin@jaclang.org',
-                    password='admin123'
-                )
-                self.stdout.write(self.style.SUCCESS('Created admin user'))
+                self.stdout.write(self.style.ERROR(
+                    'No admin user found. Please create one before running this command:\n'
+                    '  python manage.py createsuperuser\n'
+                    '  Or use Django admin at http://localhost:8000/admin/'
+                ))
+                return
+            else:
+                self.stdout.write(self.style.SUCCESS(f'Using existing admin user: {admin_user.username}'))
         except Exception as e:
-            self.stdout.write(self.style.WARNING(f'Could not create admin user: {e}'))
+            self.stdout.write(self.style.ERROR(f'Error accessing user database: {e}'))
             return
 
         # Create the main JAC learning path
@@ -2678,7 +2680,16 @@ node User {
 withentry {
     print("=== Multi-User Architecture Demo ===");
     
-    admin: User = User(username="admin", email="admin@school.edu", role="admin");
+    // NOTE: Hardcoded users removed for production security
+    // Use Django admin or registration endpoints to create users
+    print("=== Multi-User Architecture Demo ===");
+    print("Admin and student users should be created through Django admin or registration.");
+    print("See: http://localhost:8000/admin/ or http://localhost:3000/register");
+    print("=== Demo Complete ===");
+    return;
+    
+    // Previously hardcoded:
+    // admin: User = User(username="admin", email="admin@school.edu", role="admin");
     student: User = User(username="alice", email="alice@student.edu", role="student");
     
     print(f"Admin can grade: {admin.has_permission("grade_assignments")}");

@@ -260,17 +260,19 @@ class AuthService {
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
     try {
       // =================================================================
-      // MOCK LOGIC REMOVED - Using only real Django backend authentication
+      // PRODUCTION BACKEND AUTHENTICATION
       // =================================================================
       // 
-      // Previously, the following mock users were hardcoded:
-      // - demo@example.com / demo123 (regular user)
-      // - admin@jac.com / admin123 (admin user)
+      // All authentication now uses the real Django backend API.
+      // Users must be created through:
+      // 1. Django admin panel at http://localhost:8000/admin/
+      // 2. Frontend registration at http://localhost:3000/register
+      // 3. API endpoint /users/auth/register/
       //
-      // Now all authentication requires:
-      // 1. Django backend to be running at http://localhost:8000
-      // 2. Users to be created through Django admin or registration
-      // 3. Valid JWT tokens from the backend API
+      // Required for authentication:
+      // 1. Django backend running at http://localhost:8000
+      // 2. Valid user account in the database
+      // 3. JWT tokens from the backend API
       // =================================================================
 
       // Check backend connectivity first
