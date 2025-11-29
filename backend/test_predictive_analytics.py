@@ -26,7 +26,7 @@ def test_predictive_analytics():
     """
     Test predictive analytics endpoints
     """
-    base_url = "http://localhost:8000"
+    base_url = os.environ.get('TEST_API_URL', 'http://localhost:8000')
     headers = {
         'Content-Type': 'application/json',
         # Note: In production, you would include proper authentication
@@ -209,4 +209,4 @@ if __name__ == "__main__":
     print("1. Start Django server: cd /workspace/backend && python manage.py runserver")
     print("2. Run frontend: cd /workspace/frontend && npm run dev")
     print("3. Navigate to Progress page to see predictive analytics")
-    print("4. Check API endpoints at http://localhost:8000/api/v1/predict/")
+    print(f"4. Check API endpoints at {base_url}/api/v1/predict/")
