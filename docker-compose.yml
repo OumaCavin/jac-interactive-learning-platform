@@ -72,7 +72,7 @@ services:
       - ./backend/media:/app/media
       - ./backend/logs:/app/logs
       - ./database:/app/database
-      - static_files:/tmp/staticfiles
+      - static_files:/var/www/static
     networks:
       - jac_network
     restart: unless-stopped
