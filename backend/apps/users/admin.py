@@ -10,7 +10,7 @@ from .models import User
 from config.custom_admin import custom_admin_site
 
 
-@admin.register(User, site=custom_admin_site, site=custom_admin_site)
+@admin.register(User, site=custom_admin_site)
 class UserAdmin(BaseUserAdmin):
     """Admin interface for the custom User model on custom admin site."""
     
