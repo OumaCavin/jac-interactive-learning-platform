@@ -41,10 +41,8 @@ class CustomAdminSite(AdminSite):
 # Create custom admin site instance
 custom_admin_site = CustomAdminSite(name='custom_admin')
 
-# Custom admin URLs configuration
-from django.urls import include
+# Custom admin site configuration is complete
+# URL patterns are defined in config/urls.py
 
-urlpatterns = [
-    path('admin/', custom_admin_site.urls),
-    # Add other URL patterns as needed
-]
+# Remove unused imports
+# from django.urls import include
