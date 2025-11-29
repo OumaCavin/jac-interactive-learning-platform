@@ -62,11 +62,9 @@ export const LoginPage: React.FC = () => {
     } catch (error: any) {
       console.error('Login error:', error);
       
-      // Provide more specific error messages
-      if (error.message.includes('demo')) {
-        toast.error('Demo credentials should be demo@example.com / demo123');
-      } else if (error.message.includes('admin')) {
-        toast.error('Admin credentials should be admin@jac.com / admin123');
+      // Provide specific error messages for backend connectivity
+      if (error.message.includes('backend') || error.message.includes('connection')) {
+        toast.error('Unable to connect to backend server. Please ensure Django backend is running.');
       } else {
         toast.error(error.message || 'Login failed. Please check your credentials.');
       }
@@ -202,14 +200,11 @@ export const LoginPage: React.FC = () => {
             )}
           </motion.button>
 
-          {/* Demo Credentials */}
-          <div className="demo-credentials">
-            <h4 className="text-sm font-medium text-gray-800 mb-2">Demo Credentials</h4>
-            <p className="text-xs text-gray-700 mb-1">
-              <strong>Email:</strong> demo@example.com
-            </p>
+          {/* Production Notice */}
+          <div className="production-notice">
+            <h4 className="text-sm font-medium text-gray-800 mb-2">Production System</h4>
             <p className="text-xs text-gray-700">
-              <strong>Password:</strong> demo123
+              Please use your registered account credentials. Create an account at the registration page if you don't have one.
             </p>
           </div>
 
