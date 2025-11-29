@@ -61,6 +61,8 @@ fi
 print_header "🚀 JAC PLATFORM - COMPREHENSIVE LOCAL DEPLOYMENT"
 print_info "This command applies ALL fixes and creates complete database schema"
 print_info "Including: Docker fixes, TypeScript fixes, and comprehensive data setup"
+print_info "Requirements: database/ directory must be present (SQL files for schema creation)"
+print_info "Docker Compose updated with database volume mapping for container access"
 
 # ========================================
 # DATABASE SETUP FUNCTIONS
@@ -107,13 +109,13 @@ execute_complete_schema() {
         # Execute SQL with comprehensive error handling
         local result=0
         
-        # Method 1: Via backend container
+        # Method 1: Via backend container (now that database is mounted)
         if docker-compose exec -T backend psql -U jac_user -d jac_learning_db -f "/app/database/$sql_file" > /dev/null 2>&1; then
             print_success "✅ $description completed successfully"
         else
-            print_warning "⚠️  $description had issues, trying direct method..."
+            print_warning "⚠️  $description had issues, trying alternative method..."
             
-            # Method 2: Direct psql via docker run
+            # Method 2: Direct psql via docker run from host
             if docker run --rm --network $(basename $(pwd))_default \
                 -v "$(pwd):/workspace" \
                 -w /workspace \
@@ -121,10 +123,17 @@ execute_complete_schema() {
                 -f "/workspace/database/$sql_file" --quiet --no-align > /tmp/sql_error.log 2>&1; then
                 print_success "✅ $description completed via direct method"
             else
-                print_error "❌ $description failed completely"
-                print_info "Error details:"
-                cat /tmp/sql_error.log 2>/dev/null || print_info "No error details available"
-                return 1
+                print_warning "⚠️  Trying via backend shell..."
+                
+                # Method 3: Via backend container shell
+                if docker-compose exec -T backend bash -c "cd /app && psql -U jac_user -d jac_learning_db -f database/$sql_file" > /dev/null 2>&1; then
+                    print_success "✅ $description completed via backend shell"
+                else
+                    print_error "❌ $description failed with all methods"
+                    print_info "Error details:"
+                    cat /tmp/sql_error.log 2>/dev/null || print_info "No error details available"
+                    return 1
+                fi
             fi
         fi
         

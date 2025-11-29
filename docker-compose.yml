@@ -71,6 +71,7 @@ services:
       - ./backend/static:/app/static
       - ./backend/media:/app/media
       - ./backend/logs:/app/logs
+      - ./database:/app/database
       - static_files:/tmp/staticfiles
     networks:
       - jac_network
