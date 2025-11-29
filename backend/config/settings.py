@@ -177,6 +177,16 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
+# For development, serve static files from both locations
+if DEBUG:
+    # Allow serving static files from STATICFILES_DIRS in development
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static',
+    ]
+else:
+    # For production, use STATIC_ROOT (already set above)
+    pass
+
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
