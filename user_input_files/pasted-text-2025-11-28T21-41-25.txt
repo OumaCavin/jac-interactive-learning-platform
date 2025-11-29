@@ -1,0 +1,158 @@
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # Check if static files are accessible
+curl -I http://localhost:8000/static/admin/css/base.css
+
+# Test admin panel
+curl -I http://localhost:8000/admin/
+HTTP/1.1 404 Not Found
+Date: Fri, 28 Nov 2025 21:39:12 GMT
+Server: WSGIServer/0.2 CPython/3.11.14
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 179
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Vary: origin
+
+HTTP/1.1 302 Found
+Date: Fri, 28 Nov 2025 21:39:13 GMT
+Server: WSGIServer/0.2 CPython/3.11.14
+Content-Type: text/html; charset=utf-8
+Location: /admin/login/?next=/admin/
+Expires: Fri, 28 Nov 2025 21:39:13 GMT
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate, private
+X-Frame-Options: DENY
+Vary: Cookie, origin
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker-compose exec backend python manage.py collectstatic --noinput
+
+# Verify static files were created
+docker-compose exec backend ls -la /tmp/staticfiles/admin/css/ | head -10
+Traceback (most recent call last):
+  File "/app/manage.py", line 32, in <module>
+    main()
+  File "/app/manage.py", line 28, in main
+    execute_from_command_line(sys.argv)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 416, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 460, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jac/venv/lib/python3.11/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py", line 209, in handle
+    collected = self.collect()
+                ^^^^^^^^^^^^^^
+  File "/home/jac/venv/lib/python3.11/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py", line 135, in collect
+    handler(path, prefixed_path, storage)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py", line 378, in copy_file
+    self.storage.save(prefixed_path, source_file)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/files/storage/base.py", line 49, in save
+    name = self._save(name, content)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/files/storage/filesystem.py", line 100, in _save
+    os.makedirs(directory, exist_ok=True)
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 225, in makedirs
+PermissionError: [Errno 13] Permission denied: '/tmp/staticfiles/admin'
+ls: cannot access '/tmp/staticfiles/admin/css/': No such file or directory
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # Test static files through nginx
+curl -I http://localhost:8000/static/admin/css/dashboard.css
+curl -I http://localhost:8000/static/admin/css/base.css
+
+# Also test the backend directly (to confirm files exist)
+docker-compose exec backend curl -I http://localhost:8000/static/admin/css/dashboard.css
+HTTP/1.1 404 Not Found
+Date: Fri, 28 Nov 2025 21:40:29 GMT
+Server: WSGIServer/0.2 CPython/3.11.14
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 179
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Vary: origin
+
+HTTP/1.1 404 Not Found
+Date: Fri, 28 Nov 2025 21:40:29 GMT
+Server: WSGIServer/0.2 CPython/3.11.14
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 179
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Vary: origin
+
+HTTP/1.1 404 Not Found
+Date: Fri, 28 Nov 2025 21:40:29 GMT
+Server: WSGIServer/0.2 CPython/3.11.14
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 179
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Vary: origin
+
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # Check nginx configuration
+docker-compose exec nginx cat /etc/nginx/conf.d/default.conf
+
+# Test nginx configuration
+docker-compose exec nginx nginx -t
+
+# Check nginx logs for any errors
+docker-compose exec nginx tail -20 /var/log/nginx/access.log
+docker-compose exec nginx tail -20 /var/log/nginx/error.log
+server {
+    listen       80;
+    listen  [::]:80;
+    server_name  localhost;
+
+    #access_log  /var/log/nginx/host.access.log  main;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+    #
+    #location ~ \.php$ {
+    #    proxy_pass   http://127.0.0.1;
+    #}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #
+    #location ~ \.php$ {
+    #    root           html;
+    #    fastcgi_pass   127.0.0.1:9000;
+    #    fastcgi_index  index.php;
+    #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+    #    include        fastcgi_params;
+    #}
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    #location ~ /\.ht {
+    #    deny  all;
+    #}
+}
+
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful

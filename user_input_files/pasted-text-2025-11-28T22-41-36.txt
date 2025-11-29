@@ -1,0 +1,170 @@
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # 1. First, let's verify the current Django settings
+docker-compose exec backend cat /app/config/settings.py | grep -A 2 -B 2 "STATIC_ROOT"
+
+# 2. Check what the actual error is in Django settings
+docker-compose exec backend python manage.py shell -c "
+from django.conf import settings
+import os
+print('STATIC_ROOT in settings:', settings.STATIC_ROOT)
+print('Static files root:', os.path.expanduser(str(settings.STATIC_ROOT)))
+"
+STATIC_URL = '/static/'
+# Use a writable location for static root to avoid permission issues
+STATIC_ROOT = '/tmp/staticfiles'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+71 objects imported automatically (use -v 2 for details).
+
+STATIC_ROOT in settings: /tmp/staticfiles
+Static files root: /tmp/staticfiles
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # 3. Read the current settings and fix it properly
+docker-compose exec backend cat /app/config/settings.py | grep "STATIC_ROOT"
+
+# 4. Let's modify the settings.py directly with a more reliable method
+docker-compose exec backend python -c "
+import re
+with open('/app/config/settings.py', 'r') as f:
+    content = f.read()
+
+# Replace the STATIC_ROOT line
+content = re.sub(
+    r'STATIC_ROOT\s*=\s*Path\([^)]+\)',
+    \"STATIC_ROOT = Path('/var/www/static')\",
+    content
+)
+
+with open('/app/config/settings.py', 'w') as f:
+    f.write(content)
+
+print('Updated STATIC_ROOT in settings.py')
+"
+
+# 5. Verify the change
+docker-compose exec backend cat /app/config/settings.py | grep "STATIC_ROOT"
+STATIC_ROOT = '/tmp/staticfiles'
+Traceback (most recent call last):
+  File "<string>", line 13, in <module>
+PermissionError: [Errno 13] Permission denied: '/app/config/settings.py'
+STATIC_ROOT = '/tmp/staticfiles'
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # 6. Restart only the backend container to apply settings
+docker-compose restart backend
+
+# Wait for it to be healthy
+docker-compose ps backend
+
+# 7. Now let's use a different approach - create the directory through nginx first, then copy
+# Create directory in nginx (which runs as root)
+docker-compose exec nginx mkdir -p /var/www/static
+docker-compose exec nginx chmod -R 777 /var/www/static
+
+# 8. Run collectstatic with the new settings
+docker-compose exec backend python manage.py collectstatic --noinput
+
+# 9. Verify static files were created
+docker-compose exec backend ls -la /var/www/static/admin/css/ | head -10
+docker-compose exec nginx ls -la /var/www/static/admin/css/ | head -10
+Restarting jac-interactive-learning-platform_backend_1 ... done
+                   Name                                Command                    State                            Ports                  
+------------------------------------------------------------------------------------------------------------------------------------------
+jac-interactive-learning-platform_backend_1   python /tmp/entrypoint.py   Up (health: starting)   0.0.0.0:8000->8000/tcp,:::8000->8000/tcp
+
+177 static files copied to '/tmp/staticfiles'.
+ls: cannot access '/var/www/static/admin/css/': No such file or directory
+total 136
+drwxr-xr-x    3 999      ping          4096 Nov 28 22:40 .
+drwxr-xr-x    5 999      ping          4096 Nov 28 22:40 ..
+-rw-r--r--    1 999      ping          1379 Nov 28 22:40 admin_custom.css
+-rw-r--r--    1 999      ping          9185 Nov 28 22:40 autocomplete.css
+-rw-r--r--    1 999      ping         22120 Nov 28 22:40 base.css
+-rw-r--r--    1 999      ping          6878 Nov 28 22:40 changelists.css
+-rw-r--r--    1 999      ping          2808 Nov 28 22:40 dark_mode.css
+-rw-r--r--    1 999      ping           441 Nov 28 22:40 dashboard.css
+-rw-r--r--    1 999      ping          8525 Nov 28 22:40 forms.css
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # 10. Test static files through nginx
+curl -I http://localhost:8000/static/admin/css/dashboard.css
+curl -I http://localhost:8000/static/admin/css/base.css
+
+# 11. Test frontend login (which should be working)
+curl -I http://localhost:3000/login
+
+# 12. Test the full frontend page
+curl http://localhost:3000/login | head -10
+HTTP/1.1 404 Not Found
+Date: Fri, 28 Nov 2025 22:40:53 GMT
+Server: WSGIServer/0.2 CPython/3.11.14
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 179
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Vary: origin
+
+HTTP/1.1 404 Not Found
+Date: Fri, 28 Nov 2025 22:40:53 GMT
+Server: WSGIServer/0.2 CPython/3.11.14
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 179
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Vary: origin
+
+HTTP/1.1 200 OK
+Server: nginx/1.29.3
+Date: Fri, 28 Nov 2025 22:40:53 GMT
+Content-Type: text/html
+Content-Length: 592
+Last-Modified: Fri, 28 Nov 2025 19:46:42 GMT
+Connection: keep-alive
+ETag: "6929fc22-250"
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Referrer-Policy: no-referrer-when-downgrade
+Content-Security-Policy: default-src 'self' http: https: data: blob: 'unsafe-inline'
+Accept-Ranges: bytes
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   592  100   592    0     0   221k      0 --:--:-- --:--:-- --:--:--  289k
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="JAC Interactive Learning Platform - AI-powered educational experience"/><title>JAC Learning Platform</title><script defer="defer" src="/static/js/main.b0685fb2.js"></script><link href="/static/css/main.c9e7feac.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # 13. Test if we can actually(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # 13. Test if we can actually access the login form
+curl -s http://localhost:3000/login | grep -i "login\|password\|email" | head -5
+
+# 14. Test if the main dashboard/root is accessible
+curl -s http://localhost:3000/ | grep -i "title\|react\|app" | head -3
+
+# 15. Verify the static assets for frontend are loading
+curl -I http://localhost:3000/static/js/main.b0685fb2.js
+curl -I http://localhost:3000/static/css/main.c9e7feac.css
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="JAC Interactive Learning Platform - AI-powered educational experience"/><title>JAC Learning Platform</title><script defer="defer" src="/static/js/main.b0685fb2.js"></script><link href="/static/css/main.c9e7feac.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+HTTP/1.1 200 OK
+Server: nginx/1.29.3
+Date: Fri, 28 Nov 2025 22:41:13 GMT
+Content-Type: application/javascript
+Content-Length: 472285
+Last-Modified: Fri, 28 Nov 2025 19:46:42 GMT
+Connection: keep-alive
+Vary: Accept-Encoding
+ETag: "6929fc22-734dd"
+Expires: Sat, 28 Nov 2026 22:41:13 GMT
+Cache-Control: max-age=31536000
+Cache-Control: public, immutable
+Accept-Ranges: bytes
+
+HTTP/1.1 200 OK
+Server: nginx/1.29.3
+Date: Fri, 28 Nov 2025 22:41:13 GMT
+Content-Type: text/css
+Content-Length: 11045
+Last-Modified: Fri, 28 Nov 2025 19:46:42 GMT
+Connection: keep-alive
+Vary: Accept-Encoding
+ETag: "6929fc22-2b25"
+Expires: Sat, 28 Nov 2026 22:41:13 GMT
+Cache-Control: max-age=31536000
+Cache-Control: public, immutable
+Accept-Ranges: bytes
+
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 

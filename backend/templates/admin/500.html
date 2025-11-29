@@ -1,0 +1,186 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans "Server Error" %} | {% trans "JAC Admin" %}{% endblock %}
+
+{% block extrastyle %}
+<style>
+    .error-500-container {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        padding: 48px;
+        width: 100%;
+        max-width: 600px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    .error-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+        font-size: 32px;
+        color: white;
+        font-weight: 700;
+    }
+    
+    .error-title {
+        color: #dc2626;
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0 0 16px 0;
+        line-height: 1.2;
+    }
+    
+    .error-description {
+        color: #374151;
+        font-size: 16px;
+        line-height: 1.5;
+        margin: 0 0 24px 0;
+    }
+    
+    .support-panel {
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        border-radius: 12px;
+        padding: 24px;
+        margin: 24px 0;
+        text-align: left;
+    }
+    
+    .support-title {
+        color: #dc2626;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 16px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .support-list {
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+    }
+    
+    .support-list li {
+        margin: 0 0 8px 0;
+        font-size: 14px;
+        color: #6b7280;
+        line-height: 1.5;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .support-list li::before {
+        content: "→";
+        color: #dc2626;
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+    
+    .support-button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 14px 28px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-block;
+        transition: all 0.3s ease;
+        margin: 8px;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    
+    .support-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        text-decoration: none;
+        color: white;
+    }
+    
+    .support-button.secondary {
+        background: #6b7280;
+    }
+    
+    .support-button.secondary:hover {
+        background: #4b5563;
+        box-shadow: 0 8px 25px rgba(107, 114, 128, 0.4);
+    }
+    
+    .error-details {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 16px;
+        margin: 20px 0;
+        text-align: left;
+        font-family: monospace;
+        font-size: 12px;
+        color: #6b7280;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-500-container">
+    <div class="error-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+    </div>
+    
+    <h1 class="error-title">Server Error</h1>
+    
+    <p class="error-description">
+        {% blocktrans trimmed %}
+            We apologize, but something went wrong on our end. The server encountered an internal error 
+            and was unable to complete your request. This is usually a temporary issue that will be resolved shortly.
+        {% endblocktrans %}
+    </p>
+    
+    {% if DEBUG %}
+    <div class="error-details">
+        <strong>Error Details (Debug Mode):</strong><br>
+        {{ exception }}
+    </div>
+    {% endif %}
+    
+    <div class="support-panel">
+        <div class="support-title">
+            <i class="fas fa-life-ring"></i>
+            What you can do:
+        </div>
+        <ul class="support-list">
+            <li>Try refreshing the page in a few moments</li>
+            <li>Check if there are any system status updates</li>
+            <li>If the problem persists, contact technical support</li>
+            <li>Try accessing the site during off-peak hours</li>
+        </ul>
+    </div>
+    
+    <div style="margin-top: 32px;">
+        <a href="{% url 'admin:index' %}" class="support-button" onclick="window.location.reload();">
+            <i class="fas fa-redo"></i> Try Again
+        </a>
+        <a href="/" class="support-button secondary">
+            <i class="fas fa-arrow-left"></i> Main Site
+        </a>
+        <a href="{% url 'admin:logout' %}" class="support-button secondary">
+            <i class="fas fa-sign-out-alt"></i> Log Out
+        </a>
+    </div>
+</div>
+{% endblock %}

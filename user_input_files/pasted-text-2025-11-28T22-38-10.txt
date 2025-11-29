@@ -1,0 +1,180 @@
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # 1. First, let's stop the containers and restart with proper permissions
+docker-compose down
+
+# 2. Check and modify the backend Dockerfile if needed to ensure proper user setup
+# Look at the backend user setup in the Dockerfile
+docker-compose exec backend whoami
+
+# 3. Let's modify the STATIC_ROOT in Django settings to use the shared volume location directly
+docker-compose exec backend python manage.py shell -c "
+import os
+from django.conf import settings
+print('Current STATIC_ROOT:', settings.STATIC_ROOT)
+"
+
+# 4. Change the STATIC_ROOT to use the shared volume location that both containers can access
+docker-compose exec backend python manage.py shell -c "
+from django.conf import settings
+import os
+# Use the same path that nginx expects
+os.environ['STATIC_ROOT'] = '/var/www/static'
+print('Static root set to:', os.environ.get('STATIC_ROOT'))
+"
+Stopping jac-nginx                                    ... done
+Stopping jac-interactive-learning-platform_frontend_1 ... done
+Stopping jac-interactive-learning-platform_backend_1  ... done
+Stopping jac-celery-worker                            ... done
+Stopping jac-celery-beat                              ... done
+Stopping jac-interactive-learning-platform_redis_1    ... done
+Stopping jac-interactive-learning-platform_postgres_1 ... done
+Stopping jac-sandbox                                  ... done
+Removing jac-nginx                                    ... done
+Removing jac-interactive-learning-platform_frontend_1 ... done
+Removing jac-interactive-learning-platform_backend_1  ... done
+Removing jac-celery-worker                            ... done
+Removing jac-celery-beat                              ... done
+Removing jac-interactive-learning-platform_redis_1    ... done
+Removing jac-interactive-learning-platform_postgres_1 ... done
+Removing jac-sandbox                                  ... done
+Removing network jac-interactive-learning-platform_jac_network
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # 5. Edit the Django settings to use /var/www/static as STATIC_ROOT
+docker-compose exec backend sed -i "s|STATIC_ROOT = Path('/tmp/staticfiles')|STATIC_ROOT = Path('/var/www/static')|g" /app/config/settings.py
+
+# Verify the change
+docker-compose exec backend grep "STATIC_ROOT" /app/config/settings.py
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # 6. Restart containers
+docker-compose up -d
+
+# Wait for containers to be healthy
+docker-compose ps
+
+# 7. Create the static directory with proper permissions
+docker-compose exec backend mkdir -p /var/www/static
+docker-compose exec backend chmod -R 777 /var/www/static
+
+# 8. Run collectstatic
+docker-compose exec backend python manage.py collectstatic --noinput
+
+# Verify static files were created
+docker-compose exec backend ls -la /var/www/static/admin/css/ | head -10
+
+# Check that nginx can access the files
+docker-compose exec nginx ls -la /var/www/static/admin/css/ | head -10
+Creating network "jac-interactive-learning-platform_jac_network" with driver "bridge"
+Creating jac-interactive-learning-platform_postgres_1 ... done
+Creating jac-sandbox                                  ... done
+Creating jac-interactive-learning-platform_redis_1    ... done
+Creating jac-celery-beat                              ... done
+Creating jac-interactive-learning-platform_backend_1  ... done
+Creating jac-celery-worker                            ... done
+Creating jac-interactive-learning-platform_frontend_1 ... done
+Creating jac-nginx                                    ... done
+                    Name                                  Command                       State                                           Ports                                 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+jac-celery-beat                                celery -A config beat --lo ...   Up (health: starting)                                                                         
+jac-celery-worker                              celery -A config worker -- ...   Up (health: starting)                                                                         
+jac-interactive-learning-platform_backend_1    python /tmp/entrypoint.py        Up (health: starting)   0.0.0.0:8000->8000/tcp,:::8000->8000/tcp                              
+jac-interactive-learning-platform_frontend_1   /docker-entrypoint.sh ngin ...   Up (health: starting)   0.0.0.0:3000->80/tcp,:::3000->80/tcp                                  
+jac-interactive-learning-platform_postgres_1   docker-entrypoint.sh postgres    Up (health: starting)   0.0.0.0:5432->5432/tcp,:::5432->5432/tcp                              
+jac-interactive-learning-platform_redis_1      docker-entrypoint.sh redis ...   Up (health: starting)   0.0.0.0:6379->6379/tcp,:::6379->6379/tcp                              
+jac-nginx                                      /docker-entrypoint.sh ngin ...   Up (health: starting)   0.0.0.0:443->443/tcp,:::443->443/tcp, 0.0.0.0:80->80/tcp,:::80->80/tcp
+jac-sandbox                                    python jac_sandbox_server.py     Up (health: starting)   0.0.0.0:8080->8080/tcp,:::8080->8080/tcp                              
+mkdir: cannot create directory ‘/var/www’: Permission denied
+chmod: cannot access '/var/www/static': No such file or directory
+Traceback (most recent call last):
+  File "/app/manage.py", line 32, in <module>
+    main()
+  File "/app/manage.py", line 28, in main
+    execute_from_command_line(sys.argv)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 416, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 460, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jac/venv/lib/python3.11/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py", line 209, in handle
+    collected = self.collect()
+                ^^^^^^^^^^^^^^
+  File "/home/jac/venv/lib/python3.11/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py", line 135, in collect
+    handler(path, prefixed_path, storage)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py", line 378, in copy_file
+    self.storage.save(prefixed_path, source_file)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/files/storage/base.py", line 49, in save
+    name = self._save(name, content)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/files/storage/filesystem.py", line 100, in _save
+    os.makedirs(directory, exist_ok=True)
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 225, in makedirs
+PermissionError: [Errno 13] Permission denied: '/tmp/staticfiles/admin'
+ls: cannot access '/var/www/static/admin/css/': No such file or directory
+ls: /var/www/static/admin/css/: No such file or directory
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # 9. Test static files through nginx
+curl -I http://localhost:8000/static/admin/css/dashboard.css
+curl -I http://localhost:8000/static/admin/css/base.css
+
+# 10. Test frontend login (which should already be working)
+curl -I http://localhost:3000/login
+curl -I http://localhost:3000/
+
+# 11. Test the full frontend login flow with the actual page
+curl http://localhost:3000/login | head -20
+HTTP/1.1 404 Not Found
+Date: Fri, 28 Nov 2025 22:37:44 GMT
+Server: WSGIServer/0.2 CPython/3.11.14
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 179
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Vary: origin
+
+HTTP/1.1 404 Not Found
+Date: Fri, 28 Nov 2025 22:37:44 GMT
+Server: WSGIServer/0.2 CPython/3.11.14
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 179
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Vary: origin
+
+HTTP/1.1 200 OK
+Server: nginx/1.29.3
+Date: Fri, 28 Nov 2025 22:37:44 GMT
+Content-Type: text/html
+Content-Length: 592
+Last-Modified: Fri, 28 Nov 2025 19:46:42 GMT
+Connection: keep-alive
+ETag: "6929fc22-250"
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Referrer-Policy: no-referrer-when-downgrade
+Content-Security-Policy: default-src 'self' http: https: data: blob: 'unsafe-inline'
+Accept-Ranges: bytes
+
+HTTP/1.1 200 OK
+Server: nginx/1.29.3
+Date: Fri, 28 Nov 2025 22:37:44 GMT
+Content-Type: text/html
+Content-Length: 592
+Last-Modified: Fri, 28 Nov 2025 19:46:42 GMT
+Connection: keep-alive
+ETag: "6929fc22-250"
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Referrer-Policy: no-referrer-when-downgrade
+Content-Security-Policy: default-src 'self' http: https: data: blob: 'unsafe-inline'
+Accept-Ranges: bytes
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   592  100   592    0     0   120k      0 --:--:-- --:--:-- --:--:--  144k
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="JAC Interactive Learning Platform - AI-powered educational experience"/><title>JAC Learning Platform</title><script defer="defer" src="/static/js/main.b0685fb2.js"></script><link href="/static/css/main.c9e7feac.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 

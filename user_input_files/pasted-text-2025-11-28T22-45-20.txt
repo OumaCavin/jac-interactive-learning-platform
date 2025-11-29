@@ -1,0 +1,233 @@
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # 1. First, let's ensure the static files are properly set up
+docker-compose exec backend mkdir -p /var/www/static
+docker-compose exec backend python manage.py collectstatic --noinput
+
+# 2. Copy files to nginx shared volume
+docker-compose exec backend cp -r /tmp/staticfiles/* /var/www/static/
+
+# 3. Test static files through nginx (port 80) instead of Django (port 8000)
+curl -I http://localhost/static/admin/css/dashboard.css
+curl -I http://localhost/static/admin/css/base.css
+
+# 4. Test the admin panel styling through nginx
+curl -I http://localhost/admin/
+mkdir: cannot create directory ‘/var/www’: Permission denied
+Traceback (most recent call last):
+  File "/app/manage.py", line 32, in <module>
+    main()
+  File "/app/manage.py", line 28, in main
+    execute_from_command_line(sys.argv)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 416, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 460, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jac/venv/lib/python3.11/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py", line 209, in handle
+    collected = self.collect()
+                ^^^^^^^^^^^^^^
+  File "/home/jac/venv/lib/python3.11/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py", line 135, in collect
+    handler(path, prefixed_path, storage)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py", line 378, in copy_file
+    self.storage.save(prefixed_path, source_file)
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/files/storage/base.py", line 49, in save
+    name = self._save(name, content)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jac/venv/lib/python3.11/site-packages/django/core/files/storage/filesystem.py", line 100, in _save
+    os.makedirs(directory, exist_ok=True)
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 225, in makedirs
+PermissionError: [Errno 13] Permission denied: '/var/www'
+cp: cannot stat '/tmp/staticfiles/*': No such file or directory
+HTTP/1.1 200 OK
+Server: nginx/1.29.3
+Date: Fri, 28 Nov 2025 22:44:26 GMT
+Content-Type: text/css
+Content-Length: 441
+Last-Modified: Fri, 28 Nov 2025 22:40:43 GMT
+Connection: keep-alive
+Vary: Accept-Encoding
+ETag: "692a24eb-1b9"
+Expires: Sat, 28 Nov 2026 22:44:26 GMT
+Cache-Control: max-age=31536000
+Cache-Control: public, immutable
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, OPTIONS
+Access-Control-Allow-Headers: DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range
+Accept-Ranges: bytes
+
+HTTP/1.1 200 OK
+Server: nginx/1.29.3
+Date: Fri, 28 Nov 2025 22:44:27 GMT
+Content-Type: text/css
+Content-Length: 22120
+Last-Modified: Fri, 28 Nov 2025 22:40:43 GMT
+Connection: keep-alive
+Vary: Accept-Encoding
+ETag: "692a24eb-5668"
+Expires: Sat, 28 Nov 2026 22:44:27 GMT
+Cache-Control: max-age=31536000
+Cache-Control: public, immutable
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, OPTIONS
+Access-Control-Allow-Headers: DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range
+Accept-Ranges: bytes
+
+HTTP/1.1 200 OK
+Server: nginx/1.29.3
+Date: Fri, 28 Nov 2025 22:44:27 GMT
+Content-Type: text/html
+Content-Length: 615
+Last-Modified: Tue, 28 Oct 2025 16:30:37 GMT
+Connection: keep-alive
+Vary: Accept-Encoding
+ETag: "6900efad-267"
+Expires: Fri, 28 Nov 2025 22:44:26 GMT
+Cache-Control: no-cache
+Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0
+Accept-Ranges: bytes
+
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # 5. Add the STATIC_ROOT environment variable to docker-compose.yml to persist the change
+grep -n "STATIC_ROOT" docker-compose.yml || echo "STATIC_ROOT environment variable not found, adding it..."
+
+# Add to backend environment section
+sed -i '/backend:/,/volumes:/ {
+    /environment:/,/depends_on:/ {
+        /SENTRY_TRACES_SAMPLE_RATE/a\\
+      STATIC_ROOT: "/var/www/static"
+    }
+}' docker-compose.yml
+
+# 6. Commit and push the settings change
+git add backend/config/settings.py docker-compose.yml
+git commit -m "Fix static files: Use /var/www/static for Django static files"
+git push origin main
+
+# 7. Test both login pages
+echo "=== Frontend Login (port 3000) ==="
+curl -I http://localhost:3000/login
+
+echo -e "\n=== Django Admin (via nginx port 80) ==="
+curl -I http://localhost/admin/
+
+echo -e "\n=== Django Static Files (via nginx port 80) ==="
+curl -I http://localhost/static/admin/css/base.css
+
+curl -I http://localhost:8000/admin/port 8000) ==="
+STATIC_ROOT environment variable not found, adding it...
+sed: -e expression #1, char 105: unknown command: `S'
+[main 47b43ed] Fix static files: Use /var/www/static for Django static files
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 480 bytes | 480.00 KiB/s, done.
+Total 5 (delta 4), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (4/4), completed with 4 local objects.
+To https://github.com/OumaCavin/jac-interactive-learning-platform.git
+   9604b0b..47b43ed  main -> main
+=== Frontend Login (port 3000) ===
+HTTP/1.1 200 OK
+Server: nginx/1.29.3
+Date: Fri, 28 Nov 2025 22:44:50 GMT
+Content-Type: text/html
+Content-Length: 592
+Last-Modified: Fri, 28 Nov 2025 19:46:42 GMT
+Connection: keep-alive
+ETag: "6929fc22-250"
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Referrer-Policy: no-referrer-when-downgrade
+Content-Security-Policy: default-src 'self' http: https: data: blob: 'unsafe-inline'
+Accept-Ranges: bytes
+
+
+=== Django Admin (via nginx port 80) ===
+HTTP/1.1 200 OK
+Server: nginx/1.29.3
+Date: Fri, 28 Nov 2025 22:44:50 GMT
+Content-Type: text/html
+Content-Length: 615
+Last-Modified: Tue, 28 Oct 2025 16:30:37 GMT
+Connection: keep-alive
+Vary: Accept-Encoding
+ETag: "6900efad-267"
+Expires: Fri, 28 Nov 2025 22:44:49 GMT
+Cache-Control: no-cache
+Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0
+Accept-Ranges: bytes
+
+
+=== Django Static Files (via nginx port 80) ===
+HTTP/1.1 200 OK
+Server: nginx/1.29.3
+Date: Fri, 28 Nov 2025 22:44:50 GMT
+Content-Type: text/css
+Content-Length: 22120
+Last-Modified: Fri, 28 Nov 2025 22:40:43 GMT
+Connection: keep-alive
+Vary: Accept-Encoding
+ETag: "692a24eb-5668"
+Expires: Sat, 28 Nov 2026 22:44:50 GMT
+Cache-Control: max-age=31536000
+Cache-Control: public, immutable
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, OPTIONS
+Access-Control-Allow-Headers: DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range
+Accept-Ranges: bytes
+
+
+=== Django Admin Direct (port 8000) ===
+HTTP/1.1 302 Found
+Date: Fri, 28 Nov 2025 22:44:50 GMT
+Server: WSGIServer/0.2 CPython/3.11.14
+Content-Type: text/html; charset=utf-8
+Location: /admin/login/?next=/admin/
+Expires: Fri, 28 Nov 2025 22:44:50 GMT
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate, private
+X-Frame-Options: DENY
+Vary: Cookie, origin
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ # 8. Test the actual admin login page styling
+curl -I http://localhost:8000/admin/login/
+
+# 9. Check if we can see the static files in browser-compatible format
+curl http://localhost/static/admin/css/base.css | head -10
+HTTP/1.1 200 OK
+Date: Fri, 28 Nov 2025 22:44:56 GMT
+Server: WSGIServer/0.2 CPython/3.11.14
+Content-Type: text/html; charset=utf-8
+Expires: Fri, 28 Nov 2025 22:44:56 GMT
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate, private
+Vary: Cookie, origin
+X-Frame-Options: DENY
+Content-Length: 10759
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Set-Cookie:  csrftoken=d6yw93SKwcTGX7wWJ3fvy7gU10GqwVkL; expires=Fri, 27 Nov 2026 22:44:56 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 22120  100 22120    0     0  13.1M      0 --:--:-- --:--:-- --:--:-- 21.0M
+/*
+    DJANGO Admin styles
+*/
+
+/* VARIABLE DEFINITIONS */
+html[data-theme="light"],
+:root {
+    --primary: #79aec8;
+    --secondary: #417690;
+    --accent: #f5dd5d;
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ 

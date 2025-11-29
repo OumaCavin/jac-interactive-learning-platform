@@ -171,7 +171,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# Use a writable location for static root to avoid permission issues
+STATIC_ROOT = '/var/www/static'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
@@ -325,3 +326,47 @@ AGENT_CONFIG = {
         'coordination_timeout': 10,
     }
 }
+
+# Custom Error Handlers for Admin
+def custom_403_handler(request, exception):
+    """Custom 403 error handler that uses admin templates."""
+    from django.template.response import TemplateResponse
+    from django.contrib import admin
+    
+    # Return custom 403 template
+    return TemplateResponse(
+        request=request,
+        template='admin/403.html',
+        context={'user': request.user},
+        status=403,
+        using=None
+    )
+
+def custom_404_handler(request, exception):
+    """Custom 404 error handler."""
+    from django.template.response import TemplateResponse
+    
+    return TemplateResponse(
+        request=request,
+        template='admin/404.html',
+        context={'request': request},
+        status=404,
+        using=None
+    )
+
+def custom_500_handler(request):
+    """Custom 500 error handler."""
+    from django.template.response import TemplateResponse
+    
+    return TemplateResponse(
+        request=request,
+        template='admin/500.html',
+        context={'request': request},
+        status=500,
+        using=None
+    )
+
+# Register custom error handlers
+handler403 = 'config.settings.custom_403_handler'
+handler404 = 'config.settings.custom_404_handler'
+handler500 = 'config.settings.custom_500_handler'

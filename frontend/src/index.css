@@ -612,6 +612,29 @@ input::placeholder {
   align-items: center !important;
   margin: 24px 0 !important;
   padding: 0 !important;
+  position: relative !important;
+  min-height: 40px !important;
+}
+
+/* Fix blue rectangle glitch - ensure no extra elements appear */
+.login-form-container .remember-forgot-section::before,
+.login-form-container .remember-forgot-section::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Ensure proper spacing for list items */
+.auth-layout-left .flex.items-center.gap-3 span:last-child {
+  margin-left: 8px !important;
+}
+
+/* Fix numbered list formatting */
+.auth-layout-left .flex.items-center.gap-3 {
+  margin-bottom: 16px !important;
+}
+
+.auth-layout-left .flex.items-center.gap-3 span {
+  white-space: nowrap !important;
 }
 
 /* Demo credentials section */
@@ -676,6 +699,116 @@ input::placeholder {
 form .login-form,
 #root > div .login-form {
   /* This ensures the fixes apply to the login form specifically */
+}
+
+/* Fix registration page styling */
+.register-form-container {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  color: #1a1a1a !important;
+}
+
+.register-form-container *,
+.register-form-container h1,
+.register-form-container h2,
+.register-form-container h3,
+.register-form-container h4,
+.register-form-container h5,
+.register-form-container h6,
+.register-form-container p,
+.register-form-container span,
+.register-form-container div,
+.register-form-container label {
+  color: #1a1a1a !important;
+}
+
+.register-form-container input[type="text"],
+.register-form-container input[type="email"],
+.register-form-container input[type="password"] {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 2px solid #d1d5db !important;
+  color: #1a1a1a !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+}
+
+.register-form-container input::placeholder {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+.register-form-container input:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  outline: none !important;
+}
+
+.register-form-container button[type="submit"] {
+  background: #3b82f6 !important;
+  color: white !important;
+  border: none !important;
+  padding: 12px 24px !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.register-form-container button[type="submit"]:hover {
+  background: #2563eb !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Fix checkbox styling for registration */
+.register-form-container input[type="checkbox"] {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 2px solid #d1d5db !important;
+  border-radius: 4px !important;
+  background: white !important;
+  cursor: pointer !important;
+  accent-color: #3b82f6 !important;
+}
+
+.register-form-container input[type="checkbox"]:checked {
+  background: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+.register-form-container label {
+  color: #374151 !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  display: block !important;
+  margin-bottom: 6px !important;
+}
+
+/* Fix potential blue rectangle/glitch issues */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure form elements don't have unexpected styling */
+input, button, select, textarea {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Fix any floating/positioning issues */
+.form-row, .input-wrapper {
+  position: relative;
+  clear: both;
+  overflow: visible;
 }
 
 /* Print styles */
