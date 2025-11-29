@@ -172,7 +172,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 # Use a writable location for static root to avoid permission issues
-STATIC_ROOT = '/app/staticfiles'  # Path owned by jac:jac user in container
+STATIC_ROOT = '/var/www/static'  # Docker volume mount path (same as nginx)
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
