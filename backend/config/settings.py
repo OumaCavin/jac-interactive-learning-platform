@@ -172,7 +172,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 # Use a writable location for static root to avoid permission issues
-STATIC_ROOT = '/var/www/static'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Docker-compatible path
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
