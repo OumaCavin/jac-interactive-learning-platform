@@ -6,11 +6,11 @@ Admin interface for managing learning content, paths, modules, and assessments.
 """
 
 from django.contrib import admin
+from config.custom_admin import custom_admin_site
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from .models import (
-from config.custom_admin import custom_admin_site
     LearningPath, Module, Lesson,
     UserLearningPath, UserModuleProgress, PathRating, LearningRecommendation,
     Assessment, AssessmentQuestion, AssessmentAttempt,
