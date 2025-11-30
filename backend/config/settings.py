@@ -29,7 +29,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=lamb
 
 # Application definition
 DJANGO_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',  # Removed to avoid duplicate admin configurations
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -41,11 +41,11 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    'mptt',
-    'django_celery_beat',
-    'drf_spectacular',
-    'django_extensions',
-    'channels',  # Django Channels for WebSocket support
+    # 'mptt',  # Temporarily disabled
+    # 'django_celery_beat',  # Temporarily disabled
+    # 'drf_spectacular',     # Temporarily disabled
+    # 'django_extensions',   # Temporarily disabled
+    # 'channels',  # Temporarily disabled
 ]
 
 LOCAL_APPS = [
