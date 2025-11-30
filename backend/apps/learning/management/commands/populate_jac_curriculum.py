@@ -41,7 +41,6 @@ class Command(BaseCommand):
                     '  python manage.py createsuperuser\n'
                     f'  Or use Django admin at {backend_url}/admin/'
                 ))
-                ))
                 return
             else:
                 self.stdout.write(self.style.SUCCESS(f'Using existing admin user: {admin_user.username}'))
