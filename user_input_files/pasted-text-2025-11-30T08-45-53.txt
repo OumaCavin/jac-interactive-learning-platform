@@ -1,0 +1,560 @@
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker-compose logs backend
+Attaching to jac-interactive-learning-platform_backend_1
+backend_1        | ✅ Static files directory prepared: /var/www/static
+backend_1        | 🐍 Using Python: /home/jac/venv/bin/python
+backend_1        | 🚀 Starting JAC Learning Platform Backend...
+backend_1        | 📡 Waiting for database connection...
+backend_1        | ✅ Database connection established!
+backend_1        | 📦 Running database migrations...
+backend_1        | ⚠️ Migration warnings (continuing): Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 32, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 28, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 416, in run_from_argv
+backend_1        |     self.execute(*args, **cmd_options)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 457, in execute
+backend_1        |     self.check(**check_kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 492, in check
+backend_1        |     all_issues = checks.run_checks(
+backend_1        |                  ^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+backend_1        |     new_errors = check(app_configs=app_configs, databases=databases)
+backend_1        |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+backend_1        |     all_namespaces = _load_all_namespaces(resolver)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+backend_1        |     url_patterns = getattr(resolver, "url_patterns", [])
+backend_1        |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+backend_1        |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+backend_1        |                        ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+backend_1        |     return import_module(self.urlconf_name)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/config/urls.py", line 69, in <module>
+backend_1        |     path('api/progress/', include('apps.progress.urls')),
+backend_1        |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+backend_1        |     urlconf_module = import_module(urlconf_module)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/apps/progress/urls.py", line 31, in <module>
+backend_1        |     from .views_predictive import (
+backend_1        |   File "/app/apps/progress/views_predictive.py", line 24, in <module>
+backend_1        |     from ..services.predictive_analytics_service import PredictiveAnalyticsService
+backend_1        | ModuleNotFoundError: No module named 'apps.services'
+backend_1        | 
+backend_1        | 🌐 Starting Django application server...
+backend_1        | Watching for file changes with StatReloader
+backend_1        | Performing system checks...
+backend_1        | 
+backend_1        | Exception in thread django-main-thread:
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/usr/local/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+backend_1        |     self.run()
+backend_1        |   File "/usr/local/lib/python3.11/threading.py", line 982, in run
+backend_1        |     self._target(*self._args, **self._kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/autoreload.py", line 64, in wrapper
+backend_1        |     fn(*args, **kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+backend_1        |     self.check(**check_kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 492, in check
+backend_1        |     all_issues = checks.run_checks(
+backend_1        |                  ^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+backend_1        |     new_errors = check(app_configs=app_configs, databases=databases)
+backend_1        |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+backend_1        |     all_namespaces = _load_all_namespaces(resolver)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+backend_1        |     url_patterns = getattr(resolver, "url_patterns", [])
+backend_1        |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+backend_1        |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+backend_1        |                        ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+backend_1        |     return import_module(self.urlconf_name)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/config/urls.py", line 69, in <module>
+backend_1        |     path('api/progress/', include('apps.progress.urls')),
+backend_1        |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+backend_1        |     urlconf_module = import_module(urlconf_module)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/apps/progress/urls.py", line 31, in <module>
+backend_1        |     from .views_predictive import (
+backend_1        |   File "/app/apps/progress/views_predictive.py", line 24, in <module>
+backend_1        |     from ..services.predictive_analytics_service import PredictiveAnalyticsService
+backend_1        | ModuleNotFoundError: No module named 'apps.services'
+backend_1        | /app/apps/progress/services/__init__.py changed, reloading.
+backend_1        | Watching for file changes with StatReloader
+backend_1        | Performing system checks...
+backend_1        | 
+backend_1        | Exception in thread django-main-thread:
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/usr/local/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+backend_1        |     self.run()
+backend_1        |   File "/usr/local/lib/python3.11/threading.py", line 982, in run
+backend_1        |     self._target(*self._args, **self._kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/autoreload.py", line 64, in wrapper
+backend_1        |     fn(*args, **kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+backend_1        |     self.check(**check_kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 492, in check
+backend_1        |     all_issues = checks.run_checks(
+backend_1        |                  ^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+backend_1        |     new_errors = check(app_configs=app_configs, databases=databases)
+backend_1        |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+backend_1        |     all_namespaces = _load_all_namespaces(resolver)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+backend_1        |     url_patterns = getattr(resolver, "url_patterns", [])
+backend_1        |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+backend_1        |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+backend_1        |                        ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+backend_1        |     return import_module(self.urlconf_name)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/config/urls.py", line 69, in <module>
+backend_1        |     path('api/progress/', include('apps.progress.urls')),
+backend_1        |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+backend_1        |     urlconf_module = import_module(urlconf_module)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/apps/progress/urls.py", line 31, in <module>
+backend_1        |     from .views_predictive import (
+backend_1        |   File "/app/apps/progress/views_predictive.py", line 24, in <module>
+backend_1        |     from ..services.predictive_analytics_service import PredictiveAnalyticsService
+backend_1        | ModuleNotFoundError: No module named 'apps.services'
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker-compose restart backend celery-beat celery-worker
+Restarting jac-interactive-learning-platform_backend_1 ... done
+(jac-int-venv) cavin@DESKTOP-KR7GL8A:~/projects/jac-interactive-learning-platform$ docker-compose logs backend
+Attaching to jac-interactive-learning-platform_backend_1
+backend_1        | ✅ Static files directory prepared: /var/www/static
+backend_1        | 🐍 Using Python: /home/jac/venv/bin/python
+backend_1        | 🚀 Starting JAC Learning Platform Backend...
+backend_1        | 📡 Waiting for database connection...
+backend_1        | ✅ Database connection established!
+backend_1        | 📦 Running database migrations...
+backend_1        | ⚠️ Migration warnings (continuing): Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 32, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 28, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 416, in run_from_argv
+backend_1        |     self.execute(*args, **cmd_options)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 457, in execute
+backend_1        |     self.check(**check_kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 492, in check
+backend_1        |     all_issues = checks.run_checks(
+backend_1        |                  ^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+backend_1        |     new_errors = check(app_configs=app_configs, databases=databases)
+backend_1        |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+backend_1        |     all_namespaces = _load_all_namespaces(resolver)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+backend_1        |     url_patterns = getattr(resolver, "url_patterns", [])
+backend_1        |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+backend_1        |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+backend_1        |                        ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+backend_1        |     return import_module(self.urlconf_name)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/config/urls.py", line 69, in <module>
+backend_1        |     path('api/progress/', include('apps.progress.urls')),
+backend_1        |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+backend_1        |     urlconf_module = import_module(urlconf_module)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/apps/progress/urls.py", line 31, in <module>
+backend_1        |     from .views_predictive import (
+backend_1        |   File "/app/apps/progress/views_predictive.py", line 24, in <module>
+backend_1        |     from ..services.predictive_analytics_service import PredictiveAnalyticsService
+backend_1        | ModuleNotFoundError: No module named 'apps.services'
+backend_1        | 
+backend_1        | 🌐 Starting Django application server...
+backend_1        | Watching for file changes with StatReloader
+backend_1        | Performing system checks...
+backend_1        | 
+backend_1        | Exception in thread django-main-thread:
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/usr/local/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+backend_1        |     self.run()
+backend_1        |   File "/usr/local/lib/python3.11/threading.py", line 982, in run
+backend_1        |     self._target(*self._args, **self._kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/autoreload.py", line 64, in wrapper
+backend_1        |     fn(*args, **kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+backend_1        |     self.check(**check_kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 492, in check
+backend_1        |     all_issues = checks.run_checks(
+backend_1        |                  ^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+backend_1        |     new_errors = check(app_configs=app_configs, databases=databases)
+backend_1        |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+backend_1        |     all_namespaces = _load_all_namespaces(resolver)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+backend_1        |     url_patterns = getattr(resolver, "url_patterns", [])
+backend_1        |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+backend_1        |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+backend_1        |                        ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+backend_1        |     return import_module(self.urlconf_name)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/config/urls.py", line 69, in <module>
+backend_1        |     path('api/progress/', include('apps.progress.urls')),
+backend_1        |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+backend_1        |     urlconf_module = import_module(urlconf_module)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/apps/progress/urls.py", line 31, in <module>
+backend_1        |     from .views_predictive import (
+backend_1        |   File "/app/apps/progress/views_predictive.py", line 24, in <module>
+backend_1        |     from ..services.predictive_analytics_service import PredictiveAnalyticsService
+backend_1        | ModuleNotFoundError: No module named 'apps.services'
+backend_1        | /app/apps/progress/services/__init__.py changed, reloading.
+backend_1        | Watching for file changes with StatReloader
+backend_1        | Performing system checks...
+backend_1        | 
+backend_1        | Exception in thread django-main-thread:
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/usr/local/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+backend_1        |     self.run()
+backend_1        |   File "/usr/local/lib/python3.11/threading.py", line 982, in run
+backend_1        |     self._target(*self._args, **self._kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/autoreload.py", line 64, in wrapper
+backend_1        |     fn(*args, **kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+backend_1        |     self.check(**check_kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 492, in check
+backend_1        |     all_issues = checks.run_checks(
+backend_1        |                  ^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+backend_1        |     new_errors = check(app_configs=app_configs, databases=databases)
+backend_1        |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+backend_1        |     all_namespaces = _load_all_namespaces(resolver)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+backend_1        |     url_patterns = getattr(resolver, "url_patterns", [])
+backend_1        |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+backend_1        |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+backend_1        |                        ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+backend_1        |     return import_module(self.urlconf_name)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/config/urls.py", line 69, in <module>
+backend_1        |     path('api/progress/', include('apps.progress.urls')),
+backend_1        |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+backend_1        |     urlconf_module = import_module(urlconf_module)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/apps/progress/urls.py", line 31, in <module>
+backend_1        |     from .views_predictive import (
+backend_1        |   File "/app/apps/progress/views_predictive.py", line 24, in <module>
+backend_1        |     from ..services.predictive_analytics_service import PredictiveAnalyticsService
+backend_1        | ModuleNotFoundError: No module named 'apps.services'
+backend_1        | ✅ Static files directory prepared: /var/www/static
+backend_1        | 🐍 Using Python: /home/jac/venv/bin/python
+backend_1        | 🚀 Starting JAC Learning Platform Backend...
+backend_1        | 📡 Waiting for database connection...
+backend_1        | ✅ Database connection established!
+backend_1        | 📦 Running database migrations...
+backend_1        | ⚠️ Migration warnings (continuing): Traceback (most recent call last):
+backend_1        |   File "/app/manage.py", line 32, in <module>
+backend_1        |     main()
+backend_1        |   File "/app/manage.py", line 28, in main
+backend_1        |     execute_from_command_line(sys.argv)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+backend_1        |     utility.execute()
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/__init__.py", line 436, in execute
+backend_1        |     self.fetch_command(subcommand).run_from_argv(self.argv)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 416, in run_from_argv
+backend_1        |     self.execute(*args, **cmd_options)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 457, in execute
+backend_1        |     self.check(**check_kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 492, in check
+backend_1        |     all_issues = checks.run_checks(
+backend_1        |                  ^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+backend_1        |     new_errors = check(app_configs=app_configs, databases=databases)
+backend_1        |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+backend_1        |     all_namespaces = _load_all_namespaces(resolver)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+backend_1        |     url_patterns = getattr(resolver, "url_patterns", [])
+backend_1        |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+backend_1        |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+backend_1        |                        ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+backend_1        |     return import_module(self.urlconf_name)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/config/urls.py", line 69, in <module>
+backend_1        |     path('api/progress/', include('apps.progress.urls')),
+backend_1        |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+backend_1        |     urlconf_module = import_module(urlconf_module)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/apps/progress/urls.py", line 31, in <module>
+backend_1        |     from .views_predictive import (
+backend_1        |   File "/app/apps/progress/views_predictive.py", line 24, in <module>
+backend_1        |     from ..services.predictive_analytics_service import PredictiveAnalyticsService
+backend_1        | ModuleNotFoundError: No module named 'apps.services'
+backend_1        | 
+backend_1        | 🌐 Starting Django application server...
+backend_1        | Watching for file changes with StatReloader
+backend_1        | Performing system checks...
+backend_1        | 
+backend_1        | Exception in thread django-main-thread:
+backend_1        | Traceback (most recent call last):
+backend_1        |   File "/usr/local/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+backend_1        |     self.run()
+backend_1        |   File "/usr/local/lib/python3.11/threading.py", line 982, in run
+backend_1        |     self._target(*self._args, **self._kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/autoreload.py", line 64, in wrapper
+backend_1        |     fn(*args, **kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+backend_1        |     self.check(**check_kwargs)
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/management/base.py", line 492, in check
+backend_1        |     all_issues = checks.run_checks(
+backend_1        |                  ^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+backend_1        |     new_errors = check(app_configs=app_configs, databases=databases)
+backend_1        |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+backend_1        |     all_namespaces = _load_all_namespaces(resolver)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+backend_1        |     url_patterns = getattr(resolver, "url_patterns", [])
+backend_1        |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+backend_1        |     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+backend_1        |                        ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+backend_1        |     res = instance.__dict__[self.name] = self.func(instance)
+backend_1        |                                          ^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+backend_1        |     return import_module(self.urlconf_name)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/config/urls.py", line 69, in <module>
+backend_1        |     path('api/progress/', include('apps.progress.urls')),
+backend_1        |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/home/jac/venv/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+backend_1        |     urlconf_module = import_module(urlconf_module)
+backend_1        |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+backend_1        |     return _bootstrap._gcd_import(name[level:], package, level)
+backend_1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend_1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+backend_1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+backend_1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+backend_1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+backend_1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+backend_1        |   File "/app/apps/progress/urls.py", line 31, in <module>
+backend_1        |     from .views_predictive import (
+backend_1        |   File "/app/apps/progress/views_predictive.py", line 24, in <module>
+backend_1        |     from ..services.predictive_analytics_service import PredictiveAnalyticsService
+backend_1        | ModuleNotFoundError: No module named 'apps.services'
