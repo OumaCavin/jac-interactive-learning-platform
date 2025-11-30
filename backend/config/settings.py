@@ -184,11 +184,12 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-# For development, serve static files from both locations
+# For development, serve static files from both STATIC_ROOT and STATICFILES_DIRS
 if DEBUG:
-    # Allow serving static files from STATICFILES_DIRS in development
+    # In development, serve from both local static files and the collected STATIC_ROOT
     STATICFILES_DIRS = [
         BASE_DIR / 'static',
+        '/var/www/static',  # Add the Docker volume mount path
     ]
 else:
     # For production, use STATIC_ROOT (already set above)
