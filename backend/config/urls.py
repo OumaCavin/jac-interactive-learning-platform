@@ -19,10 +19,10 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-# from drf_spectacular.views import (
-#     SpectacularAPIView,
-#     SpectacularSwaggerView,
-# )
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+)
 from apps.agents import views as agents_views
 
 # Create a router and register our viewsets with it.
@@ -32,9 +32,9 @@ urlpatterns = [
     # Django Admin Interface (Custom Styled)
     path('admin/', custom_admin_site.urls),
     
-    # API Documentation (Commented out - requires drf_spectacular)
-    # path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
-    # path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    # API Documentation (Re-enabled with drf_spectacular)
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     
     # JWT Authentication
     path('api/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -65,18 +65,22 @@ urlpatterns = [
     path('api/content/', include('apps.content.urls')),
     path('api/agents/', include('apps.agents.urls')),
     path('api/assessments/', include('apps.assessments.urls')),
-    # path('api/progress/', include('apps.progress.urls')),  # Progress tracking and analytics (temporarily disabled)
+    # Progress tracking and analytics (re-enabled)
+    path('api/progress/', include('apps.progress.urls')),
     path('api/gamification/', include('apps.gamification.urls')),  # Gamification system
-    # path('api/collaboration/', include('apps.collaboration.urls')),  # Collaboration features (temporarily disabled - missing django_filters)
-    # path('api/jac-execution/', include('apps.jac_execution.urls')),  # JAC execution engine (temporarily disabled)
-    # path('api/knowledge-graph/', include('apps.knowledge_graph.urls')),  # Knowledge Graph API (temporarily disabled - missing google.generativeai)
+    # Collaboration features (re-enabled)
+    path('api/collaboration/', include('apps.collaboration.urls')),
+    # JAC execution engine (re-enabled)
+    path('api/jac-execution/', include('apps.jac_execution.urls')),
+    # Knowledge Graph API (re-enabled)
+    path('api/knowledge-graph/', include('apps.knowledge_graph.urls')),
     # path('api/ai-agents/', include('apps.api_endpoints.ai_agents_urls')),  # AI Multi-Agent System (commented out temporarily)
     
     # Fallback endpoints without /api/ prefix (for frontend compatibility)
     path('users/', include('apps.users.urls')),  # Users app now properly installed
     path('learning/', include('apps.learning.urls')),
     path('assessments/', include('apps.assessments.urls')),
-    # path('progress/', include('apps.progress.urls')),  # Progress tracking and analytics (temporarily disabled)
+    path('progress/', include('apps.progress.urls')),  # Progress tracking and analytics (re-enabled)
     # Note: jac_execution URLs included only once to avoid namespace conflicts
     # Note: agents endpoints are only available via /api/agents/ to avoid namespace conflicts
     

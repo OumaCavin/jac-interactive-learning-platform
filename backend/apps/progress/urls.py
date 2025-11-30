@@ -1,8 +1,5 @@
 # JAC Interactive Learning Platform - Core backend implementation by Cavin Otieno
 
-
-from .views_predictive import PredictiveStreamingAPIView, AIInteractionAPIView
-from .views_realtime import RealTimeDashboardAPIView, PredictiveAnalyticsAPIView, PerformanceAlertsAPIView, TrendAnalysisAPIView
 """
 Progress App URL Configuration
 
@@ -24,6 +21,31 @@ Created: 2025-11-25
 """
 
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import (
+    ProgressSnapshotViewSet, LearningAnalyticsViewSet, AchievementViewSet,
+    UserProgressMetricViewSet, ProgressGoalViewSet, ProgressNotificationViewSet,
+    ProgressSummaryAPIView, ProgressAnalyticsAPIView, CreateProgressSnapshotAPIView,
+    TrackUserProgressAPIView
+)
+from .views_predictive import (
+    MLPredictionsAPIView, HistoricalTrendsAPIView, AdaptivePredictionsAPIView,
+    ConfidenceCalculationsAPIView, ComprehensivePredictiveAnalyticsAPIView,
+    predictive_dashboard_data,
+    # New Predictive Learning Models APIs
+    LearningVelocityAPIView, EngagementPatternsAPIView, SuccessProbabilityAPIView,
+    TimeToCompletionAPIView, RetentionRiskAPIView, KnowledgeGapsAPIView, LearningClustersAPIView,
+    PredictiveStreamingAPIView, AIInteractionAPIView
+)
+from .views_advanced_analytics import (
+    SophisticatedStatisticalAnalysisAPIView, EnhancedMLInsightsAPIView,
+    AdvancedPatternRecognitionAPIView, IntegratedPersonalizedRecommendationsAPIView,
+    AdvancedAnalyticsDashboardAPIView, advanced_analytics_dashboard
+)
+from .views_realtime import (
+    RealTimeDashboardAPIView, PredictiveAnalyticsAPIView,
+    PerformanceAlertsAPIView, TrendAnalysisAPIView
+)
 from rest_framework.routers import DefaultRouter
 from .views import (
     ProgressSnapshotViewSet, LearningAnalyticsViewSet, AchievementViewSet,
