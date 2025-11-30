@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeseci Learning Platform - Interactive Jac Programming Education</title>
+    
+    <!-- React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Monaco Editor -->
+    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
+    
+    <!-- Jac-Client Frontend -->
+    <script src="index.js"></script>
+    
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Jac Font and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="root">
+        <!-- Loading screen -->
+        <div id="loading-screen" class="loading-screen">
+            <div class="loading-content">
+                <div class="jac-logo">
+                    <i class="fas fa-code"></i>
+                    <span>Jeseci</span>
+                </div>
+                <div class="loading-spinner"></div>
+                <p>Initializing Jac Learning Platform...</p>
+            </div>
+        </div>
+        
+        <!-- Main application (hidden until initialized) -->
+        <div id="app" class="hidden">
+            <header class="app-header">
+                <div class="header-brand">
+                    <i class="fas fa-code"></i>
+                    <span class="brand-text">Jeseci Learning Platform</span>
+                </div>
+                <nav class="header-nav">
+                    <button class="nav-btn active" data-view="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </button>
+                    <button class="nav-btn" data-view="lessons">
+                        <i class="fas fa-book"></i>
+                        Lessons
+                    </button>
+                    <button class="nav-btn" data-view="quiz">
+                        <i class="fas fa-brain"></i>
+                        Quiz
+                    </button>
+                    <button class="nav-btn" data-view="practice">
+                        <i class="fas fa-keyboard"></i>
+                        Practice
+                    </button>
+                </nav>
+                <div class="header-user">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <span class="username">Learning Jac</span>
+                </div>
+            </header>
+            
+            <main class="app-main">
+                <!-- Dashboard View -->
+                <section id="dashboard-view" class="view active">
+                    <div class="dashboard-grid">
+                        <!-- Learning Progress Card -->
+                        <div class="dashboard-card progress-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-chart-line"></i> Learning Progress</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="progress-stats">
+                                    <div class="stat">
+                                        <span class="stat-value" id="mastery-average">75%</span>
+                                        <span class="stat-label">Average Mastery</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-value" id="concepts-mastered">8</span>
+                                        <span class="stat-label">Concepts Mastered</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-value" id="learning-streak">5</span>
+                                        <span class="stat-label">Day Streak</span>
+                                    </div>
+                                </div>
+                                <div class="progress-chart">
+                                    <canvas id="progress-chart" width="300" height="150"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Skill Map Card -->
+                        <div class="dashboard-card skill-map-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-project-diagram"></i> Skill Map</h3>
+                                <button class="btn-secondary" onclick="toggleSkillMap()">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                            <div class="card-content">
+                                <div class="skill-map-container">
+                                    <canvas id="skill-map-canvas" width="400" height="300"></canvas>
+                                </div>
+                                <div class="skill-map-legend">
+                                    <div class="legend-item">
+                                        <div class="legend-color mastery-high"></div>
+                                        <span>Mastered (80%+)</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color mastery-medium"></div>
+                                        <span>Learning (50-80%)</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color mastery-low"></div>
+                                        <span>Starting (0-50%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Recommendations Card -->
+                        <div class="dashboard-card recommendations-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-lightbulb"></i> AI Recommendations</h3>
+                                <span class="ai-badge">byLLM Powered</span>
+                            </div>
+                            <div class="card-content">
+                                <div id="recommendations-list" class="recommendations-list">
+                                    <!-- Populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Learning Path Card -->
+                        <div class="dashboard-card path-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-route"></i> Your Learning Path</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="learning-path-container">
+                                    <div id="current-concept" class="current-concept">
+                                        <div class="concept-node active">
+                                            <span class="concept-name">Jac Basics</span>
+                                            <span class="completion-badge">In Progress</span>
+                                        </div>
+                                    </div>
+                                    <div class="path-arrow">→</div>
+                                    <div class="concept-node">
+                                        <span class="concept-name">Nodes & Edges</span>
+                                        <span class="completion-badge locked">Locked</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Activity Card -->
+                        <div class="dashboard-card activity-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                            </div>
+                            <div class="card-content">
+                                <div id="recent-activity" class="activity-list">
+                                    <!-- Populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Achievements Card -->
+                        <div class="dashboard-card achievements-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-trophy"></i> Achievements</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="achievements-grid">
+                                    <div class="achievement">
+                                        <i class="fas fa-code achievement-icon"></i>
+                                        <span class="achievement-name">First Walker</span>
+                                    </div>
+                                    <div class="achievement">
+                                        <i class="fas fa-brain achievement-icon"></i>
+                                        <span class="achievement-name">Quiz Master</span>
+                                    </div>
+                                    <div class="achievement">
+                                        <i class="fas fa-fire achievement-icon"></i>
+                                        <span class="achievement-name">Streak Champion</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Lessons View -->
+                <section id="lessons-view" class="view">
+                    <div class="lessons-header">
+                        <h2>Interactive Lessons</h2>
+                        <p>Master Jac programming through hands-on lessons with AI-generated content</p>
+                    </div>
+                    
+                    <div class="lessons-container">
+                        <div class="lessons-sidebar">
+                            <div class="lesson-categories">
+                                <h4>Concepts</h4>
+                                <ul id="lesson-categories">
+                                    <!-- Populated by JavaScript -->
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="lesson-content">
+                            <div id="lesson-selector" class="lesson-selector">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                            
+                            <div id="lesson-player" class="lesson-player hidden">
+                                <div class="lesson-player-header">
+                                    <h3 id="lesson-title">Lesson Title</h3>
+                                    <div class="lesson-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" id="lesson-progress-fill"></div>
+                                        </div>
+                                        <span id="lesson-progress-text">0% Complete</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="lesson-content-area">
+                                    <div id="lesson-block" class="lesson-block">
+                                        <!-- Dynamic content based on lesson block type -->
+                                    </div>
+                                </div>
+                                
+                                <div class="lesson-controls">
+                                    <button id="prev-btn" class="btn-secondary" disabled>
+                                        <i class="fas fa-arrow-left"></i> Previous
+                                    </button>
+                                    <button id="next-btn" class="btn-primary">
+                                        Next <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Quiz View -->
+                <section id="quiz-view" class="view">
+                    <div class="quiz-header">
+                        <h2>Adaptive Quizzes</h2>
+                        <p>AI-powered assessments that adapt to your learning level</p>
+                        <span class="ai-badge">byLLM Generated</span>
+                    </div>
+                    
+                    <div class="quiz-container">
+                        <div id="quiz-selector" class="quiz-selector">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                        
+                        <div id="quiz-player" class="quiz-player hidden">
+                            <div class="quiz-header-info">
+                                <h3 id="quiz-title">Quiz Title</h3>
+                                <div class="quiz-meta">
+                                    <span id="quiz-concept">Concept: Jac Basics</span>
+                                    <span id="quiz-difficulty">Difficulty: Beginner</span>
+                                    <span id="quiz-timer">Time Limit: 15 min</span>
+                                </div>
+                            </div>
+                            
+                            <div class="quiz-progress">
+                                <div class="quiz-progress-bar">
+                                    <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                                </div>
+                                <span id="quiz-progress-text">Question 1 of 10</span>
+                            </div>
+                            
+                            <div class="quiz-content">
+                                <div id="quiz-question" class="quiz-question">
+                                    <!-- Dynamic question content -->
+                                </div>
+                            </div>
+                            
+                            <div class="quiz-controls">
+                                <button id="submit-quiz-btn" class="btn-primary">Submit Quiz</button>
+                            </div>
+                        </div>
+                        
+                        <div id="quiz-results" class="quiz-results hidden">
+                            <!-- Quiz results and analysis -->
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Practice View -->
+                <section id="practice-view" class="view">
+                    <div class="practice-header">
+                        <h2>Code Practice</h2>
+                        <p>Interactive coding environment with Monaco Editor and Jac execution</p>
+                    </div>
+                    
+                    <div class="practice-container">
+                        <div class="practice-sidebar">
+                            <div class="practice-exercises">
+                                <h4>Exercises</h4>
+                                <div id="exercise-list" class="exercise-list">
+                                    <!-- Populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="practice-main">
+                            <div class="code-editor-container">
+                                <div class="editor-header">
+                                    <h4 id="exercise-title">Exercise Title</h4>
+                                    <div class="editor-controls">
+                                        <button id="validate-code-btn" class="btn-secondary">
+                                            <i class="fas fa-check"></i> Validate
+                                        </button>
+                                        <button id="run-code-btn" class="btn-primary">
+                                            <i class="fas fa-play"></i> Run
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="monaco-editor" class="monaco-editor"></div>
+                            </div>
+                            
+                            <div class="practice-output">
+                                <div class="output-header">
+                                    <h5>Output</h5>
+                                    <button id="clear-output-btn" class="btn-secondary">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                                <div id="code-output" class="code-output">
+                                    <div class="output-placeholder">
+                                        <i class="fas fa-code"></i>
+                                        <p>Your code output will appear here</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+        
+        <!-- Modals -->
+        <div id="skill-map-modal" class="modal hidden">
+            <div class="modal-content large">
+                <div class="modal-header">
+                    <h3>Skill Map Visualization</h3>
+                    <button class="modal-close" onclick="closeModal('skill-map-modal')">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <canvas id="modal-skill-map" width="800" height="600"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+    
+    <!-- App Initialization Script -->
+    <script>
+        // Initialize Jac Client when page loads
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Create Jac Client instance
+                window.jacClient = new JacClientApp();
+                
+                // Simulate loading process
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Hide loading screen and show app
+                document.getElementById('loading-screen').classList.add('hidden');
+                document.getElementById('app').classList.remove('hidden');
+                
+                // Initialize the dashboard
+                await initializeDashboard();
+                
+                showToast('Welcome to Jeseci Learning Platform!', 'success');
+                
+            } catch (error) {
+                console.error('Failed to initialize app:', error);
+                showToast('Failed to initialize platform. Please refresh the page.', 'error');
+            }
+        });
+        
+        // Navigation handler
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('nav-btn')) {
+                // Update active nav button
+                document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                // Show corresponding view
+                const viewName = e.target.dataset.view;
+                document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+                document.getElementById(`${viewName}-view`).classList.add('active');
+                
+                // Load view-specific data
+                loadViewData(viewName);
+            }
+        });
+        
+        // Modal handlers
+        function toggleSkillMap() {
+            const modal = document.getElementById('skill-map-modal');
+            modal.classList.toggle('hidden');
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+        
+        // Toast notification system
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <div class="toast-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.getElementById('toast-container').appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    document.getElementById('toast-container').removeChild(toast);
+                }, 300);
+            }, 4000);
+        }
+        
+        // Load data for specific views
+        async function loadViewData(viewName) {
+            try {
+                switch(viewName) {
+                    case 'dashboard':
+                        await initializeDashboard();
+                        break;
+                    case 'lessons':
+                        await loadLessonsView();
+                        break;
+                    case 'quiz':
+                        await loadQuizView();
+                        break;
+                    case 'practice':
+                        await loadPracticeView();
+                        break;
+                }
+            } catch (error) {
+                console.error(`Failed to load ${viewName} view:`, error);
+                showToast(`Failed to load ${viewName} data`, 'error');
+            }
+        }
+        
+        // Initialize dashboard data
+        async function initializeDashboard() {
+            // This would typically call Jac walkers through the API
+            // For demo purposes, we'll use mock data
+            
+            updateProgressStats();
+            renderSkillMap();
+            loadRecommendations();
+            renderRecentActivity();
+            updateLearningPath();
+        }
+        
+        // Mock data update functions
+        function updateProgressStats() {
+            document.getElementById('mastery-average').textContent = '75%';
+            document.getElementById('concepts-mastered').textContent = '8';
+            document.getElementById('learning-streak').textContent = '5';
+        }
+        
+        function renderSkillMap() {
+            const canvas = document.getElementById('skill-map-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Mock skill map nodes
+            const nodes = [
+                { x: 100, y: 100, concept: 'Jac Basics', mastery: 0.9, category: 'beginner' },
+                { x: 200, y: 150, concept: 'Variables', mastery: 0.8, category: 'syntax' },
+                { x: 300, y: 100, concept: 'Functions', mastery: 0.6, category: 'syntax' },
+                { x: 150, y: 200, concept: 'Nodes', mastery: 0.7, category: 'graph' },
+                { x: 250, y: 250, concept: 'Edges', mastery: 0.5, category: 'graph' },
+                { x: 350, y: 200, concept: 'Walkers', mastery: 0.3, category: 'algorithms' }
+            ];
+            
+            // Draw nodes
+            nodes.forEach(node => {
+                const color = getMasteryColor(node.mastery);
+                
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, 25, 0, 2 * Math.PI);
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // Add label
+                ctx.fillStyle = '#333';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(node.concept, node.x, node.y + 40);
+                ctx.fillText(`${Math.round(node.mastery * 100)}%`, node.x, node.y + 55);
+            });
+        }
+        
+        function getMasteryColor(mastery) {
+            if (mastery >= 0.8) return '#4caf50';
+            if (mastery >= 0.6) return '#ffeb3b';
+            if (mastery >= 0.4) return '#ff9800';
+            return '#f44336';
+        }
+        
+        function loadRecommendations() {
+            const recommendations = [
+                {
+                    type: 'focus_weakness',
+                    title: 'Focus on Graph Concepts',
+                    description: 'Your graph theory understanding could be improved. Try the "Nodes and Edges" lesson.',
+                    priority: 'high'
+                },
+                {
+                    type: 'strengthen_foundations',
+                    title: 'Strengthen Function Basics',
+                    description: 'Review function implementation to solidify your foundation.',
+                    priority: 'medium'
+                }
+            ];
+            
+            const container = document.getElementById('recommendations-list');
+            container.innerHTML = recommendations.map(rec => `
+                <div class="recommendation recommendation-${rec.priority}">
+                    <div class="recommendation-icon">
+                        <i class="fas fa-${rec.type === 'focus_weakness' ? 'exclamation-triangle' : 'lightbulb'}"></i>
+                    </div>
+                    <div class="recommendation-content">
+                        <h5>${rec.title}</h5>
+                        <p>${rec.description}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function renderRecentActivity() {
+            const activities = [
+                { type: 'lesson', title: 'Completed "Jac Basics"', time: '2 hours ago' },
+                { type: 'quiz', title: 'Passed Syntax Quiz (85%)', time: '1 day ago' },
+                { type: 'achievement', title: 'Earned "First Walker" badge', time: '2 days ago' }
+            ];
+            
+            const container = document.getElementById('recent-activity');
+            container.innerHTML = activities.map(activity => `
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-${activity.type === 'lesson' ? 'book' : activity.type === 'quiz' ? 'brain' : 'trophy'}"></i>
+                    </div>
+                    <div class="activity-content">
+                        <span class="activity-title">${activity.title}</span>
+                        <span class="activity-time">${activity.time}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function updateLearningPath() {
+            // Update current learning path display
+            const currentConcept = document.querySelector('.current-concept .concept-name');
+            const nextConcept = document.querySelector('.concept-node:not(.active) .concept-name');
+            
+            if (currentConcept) currentConcept.textContent = 'Jac Basics';
+            if (nextConcept) nextConcept.textContent = 'Nodes & Edges';
+        }
+    </script>
+</body>
+</html>
