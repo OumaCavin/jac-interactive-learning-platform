@@ -346,7 +346,7 @@ class MentorshipSession(models.Model):
     
     # Status
     status = models.CharField(max_length=20, choices=SessionStatus.choices, default=SessionStatus.SCHEDULED)
-    session_type = models.CharField(max_length=50, default="", choices=[
+    session_type = models.CharField(max_length=50, choices=[
         ('one_on_one', 'One-on-One'),
         ('group', 'Group Session'),
         ('code_review', 'Code Review'),
