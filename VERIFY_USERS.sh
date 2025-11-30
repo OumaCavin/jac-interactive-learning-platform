@@ -18,36 +18,49 @@ echo ""
 echo "📊 Total users in database:"
 docker-compose exec backend python manage.py shell -c "
 from apps.users.models import User
-print(f'Total users: {User.objects.count()}')
+try:
+    count = User.objects.count()
+    print(f'Total users: {count}')
+except Exception as e:
+    print(f'Error checking users: {e}')
 "
 
 echo ""
 echo "👤 Listing all users:"
 docker-compose exec backend python manage.py shell -c "
 from apps.users.models import User
-users = User.objects.all().order_by('username')
-for user in users:
-    print(f'  {user.username:<15} | {user.email:<25} | Superuser: {user.is_superuser} | Staff: {user.is_staff} | Active: {user.is_active}')
+try:
+    users = User.objects.all().order_by('username')
+    for user in users:
+        print(f'  {user.username:<15} | {user.email:<25} | Superuser: {user.is_superuser} | Staff: {user.is_staff} | Active: {user.is_active}')
+except Exception as e:
+    print(f'Error listing users: {e}')
 "
 
 echo ""
 echo "🔑 Superusers:"
 docker-compose exec backend python manage.py shell -c "
 from apps.users.models import User
-superusers = User.objects.filter(is_superuser=True)
-print(f'Superuser count: {superusers.count()}')
-for user in superusers:
-    print(f'  {user.username} ({user.email})')
+try:
+    superusers = User.objects.filter(is_superuser=True)
+    print(f'Superuser count: {superusers.count()}')
+    for user in superusers:
+        print(f'  {user.username} ({user.email})')
+except Exception as e:
+    print(f'Error checking superusers: {e}')
 "
 
 echo ""
 echo "👨‍💼 Staff users:"
 docker-compose exec backend python manage.py shell -c "
 from apps.users.models import User
-staff = User.objects.filter(is_staff=True)
-print(f'Staff count: {staff.count()}')
-for user in staff:
-    print(f'  {user.username} ({user.email})')
+try:
+    staff = User.objects.filter(is_staff=True)
+    print(f'Staff count: {staff.count()}')
+    for user in staff:
+        print(f'  {user.username} ({user.email})')
+except Exception as e:
+    print(f'Error checking staff: {e}')
 "
 
 echo ""

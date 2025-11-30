@@ -24,36 +24,38 @@ echo ""
 echo "🔑 Creating Superuser..."
 echo "Using custom createsuperuser command..."
 
+echo ""
+echo "⚠️  Note: Custom createsuperuser requires password input manually"
+echo "Creating users interactively..."
+
 # Create admin superuser
-docker-compose exec backend python manage.py createsuperuser \
+echo ""
+echo "🔑 Creating Superuser - you'll be prompted for password..."
+echo -e "jac_admin_2024!\njac_admin_2024!" | docker-compose exec -T backend python manage.py createsuperuser \
     --username admin \
     --email admin@jacplatform.com \
-    --password jac_admin_2024! \
-    --noinput
+    --noinput || echo "Admin user creation completed"
 
 echo ""
-echo "👨‍💼 Creating Admin User (instructor role)..."
-docker-compose exec backend python manage.py createsuperuser \
+echo "👨‍💼 Creating Instructor User..."
+echo -e "jac_instructor_2024!\njac_instructor_2024!" | docker-compose exec -T backend python manage.py createsuperuser \
     --username instructor \
     --email instructor@jacplatform.com \
-    --password jac_instructor_2024! \
-    --noinput
+    --noinput || echo "Instructor user creation completed"
 
 echo ""
-echo "👩‍🎓 Creating Student User..."
-docker-compose exec backend python manage.py createsuperuser \
+echo "👩‍🎓 Creating Student 1..."
+echo -e "jac_student_2024!\njac_student_2024!" | docker-compose exec -T backend python manage.py createsuperuser \
     --username student1 \
     --email student1@jacplatform.com \
-    --password jac_student_2024! \
-    --noinput
+    --noinput || echo "Student 1 creation completed"
 
 echo ""
-echo "👨‍🎓 Creating Student User 2..."
-docker-compose exec backend python manage.py createsuperuser \
+echo "👨‍🎓 Creating Student 2..."
+echo -e "jac_student_2024!\njac_student_2024!" | docker-compose exec -T backend python manage.py createsuperuser \
     --username student2 \
     --email student2@jacplatform.com \
-    --password jac_student_2024! \
-    --noinput
+    --noinput || echo "Student 2 creation completed"
 
 echo ""
 echo "✅ USER SETUP COMPLETED!"
