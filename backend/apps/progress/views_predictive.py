@@ -22,7 +22,6 @@ from datetime import datetime, timedelta
 import logging
 
 from .services.predictive_analytics_service import PredictiveAnalyticsService
-from .serializers import PredictiveAnalyticsSerializer
 
 logger = logging.getLogger(__name__)
 
