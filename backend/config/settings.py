@@ -97,45 +97,33 @@ WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
 
 # Database
-# Database Configuration
+# Database Configuration - Using SQLite for development
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default='jac_learning_db'),
-        'USER': config('DB_USER', default='jac_user'),
-        'PASSWORD': config('DB_PASSWORD', default='jac_password'),
-        'HOST': config('DB_HOST', default='postgres'),
-        'PORT': config('DB_PORT', default='5432'),
-        'OPTIONS': {
-            # PostgreSQL handles encoding through LC_ settings, not connection options
-        },
-        'CONN_MAX_AGE': 60,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-# Caching
+# Caching - Using Django's default cache for development (no Redis required)
 CACHES = {
     'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': config('REDIS_URL', default='redis://:redis_password@redis:6379/1'),
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
     }
 }
 
-# Session Storage
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-SESSION_CACHE_ALIAS = 'default'
+# Session Storage - Using database for sessions
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_AGE = 86400  # 24 hours
 
-# Celery Configuration
-CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='redis://:redis_password@redis:6379/0')
-CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default='redis://:redis_password@redis:6379/0')
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'UTC'
+# Celery Configuration - Disabled for development (no Redis required)
+# CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='redis://:redis_password@redis:6379/0')
+# CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default='redis://:redis_password@redis:6379/0')
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_TIMEZONE = 'UTC'
 
 # Jaseci Configuration
 JASECCI_URL = config('JASECCI_URL', default='http://localhost:8001')
