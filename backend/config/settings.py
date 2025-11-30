@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
 
 # Database
-# Database Configuration - Using SQLite for development
+# Database Configuration - Using SQLite for development (Docker PostgreSQL setup needed)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
