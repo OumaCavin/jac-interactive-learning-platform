@@ -1,0 +1,2131 @@
+Using Python 3.12.5 environment at: /tmp/.venv
+⠋ Resolving dependencies...                                                     ⠙ Resolving dependencies...                                                     ⠋ Resolving dependencies...                                                     ⠙ Resolving dependencies...                                                     ⠹ Resolving dependencies...                                                     ⠸ Resolving dependencies...                                                     ⠼ Resolving dependencies...                                                     ⠼ channels==4.3.2                                                               ⠴ channels==4.3.2                                                               ⠦ channels==4.3.2                                                               ⠦ channels-redis==4.1.0                                                         ⠧ channels-redis==4.1.0                                                         ⠇ channels-redis==4.1.0                                                         ⠇ aiohappyeyeballs==2.6.1                                                       ⠇ aiohttp==3.13.2                                                               ⠇ aiosignal==1.4.0                                                              ⠇ amqp==5.3.1                                                                   ⠇ annotated-types==0.7.0                                                        ⠇ anyio==4.11.0                                                                 ⠇ asgiref==3.11.0                                                               ⠇ ast-decompiler==0.8.0                                                         ⠇ attrs==25.4.0                                                                 ⠇ audioread==3.1.0                                                              ⠇ beautifulsoup4==4.14.2                                                        ⠇ billiard==4.2.3                                                               ⠇ brotli==1.2.0                                                                 ⠇ brotli==1.2.0                                                                 ⠇ celery==5.5.3                                                                 ⠇ certifi==2025.11.12                                                           ⠇ cffi==2.0.0                                                                   ⠇ charset-normalizer==3.4.4                                                     ⠇ click==8.3.1                                                                  ⠇ click-didyoumean==0.3.1                                                       ⠇ click-plugins==1.1.1.2                                                        ⠇ nltk==3.9.2                                                                   ⠋ zopfli==0.4.0                                                                 ⠋ google-ai-generativelanguage==0.6.10                                          ⠙ google-ai-generativelanguage==0.6.10                                          ⠹ google-ai-generativelanguage==0.6.10                                          ⠸ google-ai-generativelanguage==0.6.10                                          ⠸ django-timezone-field==7.1                                                    ⠸ python-crontab==3.3.0                                                         ⠸ cron-descriptor==2.0.6                                                        ⠸ google-api-core==2.28.1                                                       ⠸ google-api-core==2.28.1                                                       ⠸ google-api-python-client==2.187.0                                             ⠸ google-auth==2.43.0                                                           ⠸ protobuf==5.29.5                                                              ⠼ protobuf==5.29.5                                                              ⠼ proto-plus==1.26.1                                                            ⠴ proto-plus==1.26.1                                                            ⠴ googleapis-common-protos==1.72.0                                              ⠦ googleapis-common-protos==1.72.0                                              ⠦ grpcio==1.76.0                                                                ⠧ grpcio==1.76.0                                                                ⠧ grpcio==1.76.0                                                                ⠧ grpcio-status==1.76.0                                                         ⠧ grpcio-status==1.75.1                                                         ⠇ grpcio-status==1.75.1                                                         ⠇ grpcio-status==1.75.0                                                         ⠋ grpcio-status==1.75.0                                                         ⠋ grpcio-status==1.74.0                                                         ⠙ grpcio-status==1.74.0                                                         ⠹ grpcio-status==1.74.0                                                         ⠹ grpcio-status==1.73.1                                                         ⠸ grpcio-status==1.73.1                                                         ⠸ grpcio==1.76.0                                                                ⠸ grpcio==1.76.0                                                                ⠸ grpcio-status==1.76.0                                                         ⠸ grpcio==1.76.0                                                                ⠸ grpcio==1.76.0                                                                ⠸ grpcio-status==1.73.0                                                         ⠼ grpcio-status==1.73.0                                                         ⠼ grpcio-status==1.72.2                                                         ⠴ grpcio-status==1.72.2                                                         ⠴ grpcio-status==1.72.1                                                         ⠦ grpcio-status==1.72.1                                                         ⠦ grpcio-status==1.71.2                                                         ⠧ grpcio-status==1.71.2                                                         ⠧ protobuf==5.29.5                                                              ⠧ google-api-python-client==2.187.0                                             ⠧ google-auth==2.43.0                                                           ⠧ proto-plus==1.26.1                                                            ⠧ googleapis-common-protos==1.72.0                                              ⠧ grpcio-status==1.71.2                                                         ⠧ httplib2==0.31.0                                                              ⠧ google-auth-httplib2==0.2.1                                                   ⠧ cachetools==6.2.2                                                             ⠧ pyasn1-modules==0.4.2                                                         ⠧ rsa==4.9.1                                                                    ⠇ rsa==4.9.1                                                                    ⠇ pyasn1==0.6.1                                                                 ⠇                                                                               Resolved 167 packages in 5.11s
+⠋ Preparing packages... (0/0)                                                   ⠋ Preparing packages... (0/74)                                                  ⠙ Preparing packages... (0/74)                                                  ⠙ Preparing packages... (0/74)
+prompt-toolkit ------------------------------     0 B/382.26 KiB                ⠙ Preparing packages... (0/74)
+prompt-toolkit ------------------------------ 13.77 KiB/382.26 KiB              ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------     0 B/9.30 KiB
+prompt-toolkit ------------------------------ 13.77 KiB/382.26 KiB              ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------ 9.30 KiB/9.30 KiB
+prompt-toolkit ------------------------------ 13.77 KiB/382.26 KiB              ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------ 9.30 KiB/9.30 KiB
+cachetools ------------------------------     0 B/11.23 KiB
+prompt-toolkit ------------------------------ 13.77 KiB/382.26 KiB              ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------ 9.30 KiB/9.30 KiB
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+prompt-toolkit ------------------------------ 13.77 KiB/382.26 KiB              ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------ 9.30 KiB/9.30 KiB
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+referencing ------------------------------     0 B/26.14 KiB
+prompt-toolkit ------------------------------ 13.77 KiB/382.26 KiB              ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------ 9.30 KiB/9.30 KiB
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+referencing ------------------------------ 13.77 KiB/26.14 KiB
+prompt-toolkit ------------------------------ 13.77 KiB/382.26 KiB              ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------ 9.30 KiB/9.30 KiB
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+referencing ------------------------------ 13.77 KiB/26.14 KiB
+google-generativeai ------------------------------     0 B/157.05 KiB
+prompt-toolkit ------------------------------ 13.77 KiB/382.26 KiB              ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------ 9.30 KiB/9.30 KiB
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+referencing ------------------------------ 13.77 KiB/26.14 KiB
+google-generativeai ------------------------------ 13.78 KiB/157.05 KiB
+prompt-toolkit ------------------------------ 13.77 KiB/382.26 KiB              ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------ 9.30 KiB/9.30 KiB
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+django-cors-headers ------------------------------     0 B/12.51 KiB
+referencing ------------------------------ 13.77 KiB/26.14 KiB
+google-generativeai ------------------------------ 13.78 KiB/157.05 KiB
+prompt-toolkit ------------------------------ 13.77 KiB/382.26 KiB              ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------ 9.30 KiB/9.30 KiB
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+django-cors-headers ------------------------------ 7.52 KiB/12.51 KiB
+referencing ------------------------------ 13.77 KiB/26.14 KiB
+google-generativeai ------------------------------ 13.78 KiB/157.05 KiB
+prompt-toolkit ------------------------------ 13.77 KiB/382.26 KiB              ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------ 9.30 KiB/9.30 KiB
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+django-cors-headers ------------------------------ 7.52 KiB/12.51 KiB
+referencing ------------------------------ 13.77 KiB/26.14 KiB
+google-generativeai ------------------------------ 13.78 KiB/157.05 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB             ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------ 9.30 KiB/9.30 KiB
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+django-cors-headers ------------------------------ 7.52 KiB/12.51 KiB
+referencing ------------------------------ 13.77 KiB/26.14 KiB
+django-celery-beat ------------------------------     0 B/102.38 KiB
+google-generativeai ------------------------------ 13.78 KiB/157.05 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB             ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------ 9.30 KiB/9.30 KiB
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+django-cors-headers ------------------------------ 7.52 KiB/12.51 KiB
+referencing ------------------------------ 13.77 KiB/26.14 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+google-generativeai ------------------------------ 13.78 KiB/157.05 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB             ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------ 9.30 KiB/9.30 KiB
+python-decouple ------------------------------     0 B/9.71 KiB
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+django-cors-headers ------------------------------ 7.52 KiB/12.51 KiB
+referencing ------------------------------ 13.77 KiB/26.14 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+google-generativeai ------------------------------ 13.78 KiB/157.05 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB             ⠙ Preparing packages... (0/74)
+google-auth-httplib2 ------------------------------ 9.30 KiB/9.30 KiB
+python-decouple ------------------------------ 9.71 KiB/9.71 KiB
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+django-cors-headers ------------------------------ 7.52 KiB/12.51 KiB
+referencing ------------------------------ 13.77 KiB/26.14 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+google-generativeai ------------------------------ 13.78 KiB/157.05 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB             ⠙ Preparing packages... (0/74)
+python-decouple ------------------------------ 9.71 KiB/9.71 KiB
+cachetools ------------------------------ 11.23 KiB/11.23 KiB
+django-cors-headers ------------------------------ 7.52 KiB/12.51 KiB
+referencing ------------------------------ 13.77 KiB/26.14 KiB
+rsa        ------------------------------ 15.52 KiB/33.88 KiB
+pyasn1     ------------------------------ 15.52 KiB/81.19 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+google-generativeai ------------------------------ 29.78 KiB/157.05 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+aiohttp    ------------------------------ 31.54 KiB/1.67 MiB
+google-api-python-client ------------------------------ 7.51 KiB/13.96 MiB
+playwright ------------------------------ 10.95 KiB/44.12 MiB                   ⠙ Preparing packages... (0/74)
+python-decouple ------------------------------ 9.71 KiB/9.71 KiB
+django-cors-headers ------------------------------ 12.51 KiB/12.51 KiB
+referencing ------------------------------ 26.14 KiB/26.14 KiB
+rsa        ------------------------------ 15.52 KiB/33.88 KiB
+pyasn1     ------------------------------ 15.52 KiB/81.19 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+google-generativeai ------------------------------ 29.78 KiB/157.05 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+aiohttp    ------------------------------ 31.54 KiB/1.67 MiB
+google-api-python-client ------------------------------ 7.51 KiB/13.96 MiB
+playwright ------------------------------ 10.95 KiB/44.12 MiB                   ⠙ Preparing packages... (0/74)
+django-cors-headers ------------------------------ 12.51 KiB/12.51 KiB
+referencing ------------------------------ 26.14 KiB/26.14 KiB
+rsa        ------------------------------ 15.52 KiB/33.88 KiB
+pyasn1     ------------------------------ 15.52 KiB/81.19 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+google-generativeai ------------------------------ 61.78 KiB/157.05 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+aiohttp    ------------------------------ 95.54 KiB/1.67 MiB
+google-api-python-client ------------------------------ 23.51 KiB/13.96 MiB
+playwright ------------------------------ 10.95 KiB/44.12 MiB                   ⠙ Preparing packages... (0/74)
+click-plugins ------------------------------ 7.52 KiB/10.79 KiB
+pluggy     ------------------------------ 7.52 KiB/20.06 KiB
+pyjwt      ------------------------------ 22.46 KiB/22.46 KiB
+referencing ------------------------------ 26.14 KiB/26.14 KiB
+rsa        ------------------------------ 33.88 KiB/33.88 KiB
+pyasn1     ------------------------------ 15.52 KiB/81.19 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+google-generativeai ------------------------------ 61.78 KiB/157.05 KiB
+google-api-core ------------------------------ 7.52 KiB/169.63 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+pydantic   ------------------------------ 7.52 KiB/452.54 KiB
+greenlet   ------------------------------ 7.51 KiB/593.35 KiB
+pygments   ------------------------------ 7.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 159.54 KiB/1.67 MiB
+google-api-python-client ------------------------------ 23.51 KiB/13.96 MiB
+playwright ------------------------------ 10.95 KiB/44.12 MiB                   ⠙ Preparing packages... (0/74)
+click-plugins ------------------------------ 7.52 KiB/10.79 KiB
+uritemplate ------------------------------ 7.52 KiB/11.22 KiB
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+pyjwt      ------------------------------ 22.46 KiB/22.46 KiB
+rsa        ------------------------------ 33.88 KiB/33.88 KiB
+factory-boy ------------------------------ 23.52 KiB/36.17 KiB
+sqlparse   ------------------------------ 15.52 KiB/43.37 KiB
+pyasn1     ------------------------------ 47.52 KiB/81.19 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+google-generativeai ------------------------------ 61.78 KiB/157.05 KiB
+google-api-core ------------------------------ 23.52 KiB/169.63 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+rpds-py    ------------------------------ 7.51 KiB/386.06 KiB
+pydantic   ------------------------------ 23.52 KiB/452.54 KiB
+greenlet   ------------------------------ 23.51 KiB/593.35 KiB
+pygments   ------------------------------ 23.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 543.54 KiB/1.67 MiB
+networkx   ------------------------------ 7.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 31.54 KiB/13.96 MiB
+playwright ------------------------------ 26.95 KiB/44.12 MiB                   ⠙ Preparing packages... (0/74)
+uritemplate ------------------------------ 11.22 KiB/11.22 KiB
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+pyjwt      ------------------------------ 22.46 KiB/22.46 KiB
+rsa        ------------------------------ 33.88 KiB/33.88 KiB
+factory-boy ------------------------------ 36.17 KiB/36.17 KiB
+sqlparse   ------------------------------ 43.37 KiB/43.37 KiB
+pyasn1     ------------------------------ 47.52 KiB/81.19 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+google-generativeai ------------------------------ 61.78 KiB/157.05 KiB
+google-api-core ------------------------------ 55.52 KiB/169.63 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+rpds-py    ------------------------------ 55.51 KiB/386.06 KiB
+pydantic   ------------------------------ 55.52 KiB/452.54 KiB
+greenlet   ------------------------------ 55.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 31.52 KiB/742.23 KiB
+pygments   ------------------------------ 55.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 927.54 KiB/1.67 MiB
+networkx   ------------------------------ 55.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 31.54 KiB/13.96 MiB
+playwright ------------------------------ 58.95 KiB/44.12 MiB                   ⠙ Preparing packages... (0/74)
+uritemplate ------------------------------ 11.22 KiB/11.22 KiB
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+pyjwt      ------------------------------ 22.46 KiB/22.46 KiB
+factory-boy ------------------------------ 36.17 KiB/36.17 KiB
+sqlparse   ------------------------------ 43.37 KiB/43.37 KiB
+pyasn1     ------------------------------ 47.52 KiB/81.19 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+google-generativeai ------------------------------ 61.78 KiB/157.05 KiB
+google-api-core ------------------------------ 55.52 KiB/169.63 KiB
+google-auth ------------------------------ 31.51 KiB/217.88 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+rpds-py    ------------------------------ 119.51 KiB/386.06 KiB
+pydantic   ------------------------------ 55.52 KiB/452.54 KiB
+greenlet   ------------------------------ 55.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 31.52 KiB/742.23 KiB
+pygments   ------------------------------ 55.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 927.54 KiB/1.67 MiB
+networkx   ------------------------------ 55.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 31.54 KiB/13.96 MiB
+playwright ------------------------------ 58.95 KiB/44.12 MiB                   ⠙ Preparing packages... (0/74)
+pluggy     ------------------------------ 20.06 KiB/20.06 KiB
+pyjwt      ------------------------------ 22.46 KiB/22.46 KiB
+factory-boy ------------------------------ 36.17 KiB/36.17 KiB
+sqlparse   ------------------------------ 43.37 KiB/43.37 KiB
+pyasn1     ------------------------------ 47.52 KiB/81.19 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+google-generativeai ------------------------------ 61.78 KiB/157.05 KiB
+google-api-core ------------------------------ 55.52 KiB/169.63 KiB
+google-auth ------------------------------ 31.51 KiB/217.88 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+rpds-py    ------------------------------ 247.51 KiB/386.06 KiB
+pydantic   ------------------------------ 55.52 KiB/452.54 KiB
+greenlet   ------------------------------ 55.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 31.52 KiB/742.23 KiB
+pygments   ------------------------------ 55.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 927.54 KiB/1.67 MiB
+networkx   ------------------------------ 55.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 31.54 KiB/13.96 MiB
+playwright ------------------------------ 58.95 KiB/44.12 MiB                   ⠙ Preparing packages... (0/74)
+pyjwt      ------------------------------ 22.46 KiB/22.46 KiB
+factory-boy ------------------------------ 36.17 KiB/36.17 KiB
+sqlparse   ------------------------------ 43.37 KiB/43.37 KiB
+pyasn1     ------------------------------ 47.52 KiB/81.19 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+google-generativeai ------------------------------ 61.78 KiB/157.05 KiB
+google-api-core ------------------------------ 55.52 KiB/169.63 KiB
+google-auth ------------------------------ 31.51 KiB/217.88 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+rpds-py    ------------------------------ 386.06 KiB/386.06 KiB
+pydantic   ------------------------------ 55.52 KiB/452.54 KiB
+greenlet   ------------------------------ 55.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 31.52 KiB/742.23 KiB
+pygments   ------------------------------ 55.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 927.54 KiB/1.67 MiB
+networkx   ------------------------------ 55.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 31.54 KiB/13.96 MiB
+playwright ------------------------------ 58.95 KiB/44.12 MiB                   ⠙ Preparing packages... (0/74)
+pyjwt      ------------------------------ 22.46 KiB/22.46 KiB
+factory-boy ------------------------------ 36.17 KiB/36.17 KiB
+sqlparse   ------------------------------ 43.37 KiB/43.37 KiB
+pyasn1     ------------------------------ 47.52 KiB/81.19 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+google-generativeai ------------------------------ 125.78 KiB/157.05 KiB
+google-api-core ------------------------------ 55.52 KiB/169.63 KiB
+google-auth ------------------------------ 31.51 KiB/217.88 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+pydantic   ------------------------------ 119.52 KiB/452.54 KiB
+greenlet   ------------------------------ 247.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 31.52 KiB/742.23 KiB
+pygments   ------------------------------ 119.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 991.54 KiB/1.67 MiB
+networkx   ------------------------------ 55.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 87.54 KiB/13.96 MiB
+playwright ------------------------------ 58.95 KiB/44.12 MiB                   ⠙ Preparing packages... (0/74)
+factory-boy ------------------------------ 36.17 KiB/36.17 KiB
+sqlparse   ------------------------------ 43.37 KiB/43.37 KiB
+pyasn1     ------------------------------ 47.52 KiB/81.19 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+google-generativeai ------------------------------ 125.78 KiB/157.05 KiB
+google-api-core ------------------------------ 55.52 KiB/169.63 KiB
+google-auth ------------------------------ 31.51 KiB/217.88 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+pydantic   ------------------------------ 119.52 KiB/452.54 KiB
+greenlet   ------------------------------ 247.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 31.52 KiB/742.23 KiB
+pygments   ------------------------------ 119.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 991.54 KiB/1.67 MiB
+networkx   ------------------------------ 55.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 87.54 KiB/13.96 MiB
+playwright ------------------------------ 58.95 KiB/44.12 MiB                   ⠙ Preparing packages... (0/74)
+jsonschema-specifications ------------------------------ 18.00 KiB/18.00 KiB
+sqlparse   ------------------------------ 43.37 KiB/43.37 KiB
+pyasn1     ------------------------------ 81.19 KiB/81.19 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+django-mptt ------------------------------ 31.52 KiB/117.34 KiB
+google-generativeai ------------------------------ 125.78 KiB/157.05 KiB
+google-api-core ------------------------------ 119.52 KiB/169.63 KiB
+google-auth ------------------------------ 31.51 KiB/217.88 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+pydantic   ------------------------------ 247.52 KiB/452.54 KiB
+greenlet   ------------------------------ 503.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 31.52 KiB/742.23 KiB
+pygments   ------------------------------ 119.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 991.54 KiB/1.67 MiB
+networkx   ------------------------------ 119.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 87.54 KiB/13.96 MiB
+playwright ------------------------------ 122.95 KiB/44.12 MiB                  ⠙ Preparing packages... (0/74)
+jsonschema-specifications ------------------------------ 18.00 KiB/18.00 KiB
+sqlparse   ------------------------------ 43.37 KiB/43.37 KiB
+pyasn1     ------------------------------ 81.19 KiB/81.19 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+django-mptt ------------------------------ 31.52 KiB/117.34 KiB
+google-generativeai ------------------------------ 125.78 KiB/157.05 KiB
+google-api-core ------------------------------ 119.52 KiB/169.63 KiB
+google-auth ------------------------------ 31.51 KiB/217.88 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+pydantic   ------------------------------ 247.52 KiB/452.54 KiB
+greenlet   ------------------------------ 503.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 95.52 KiB/742.23 KiB
+pygments   ------------------------------ 119.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 991.54 KiB/1.67 MiB
+networkx   ------------------------------ 119.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 87.54 KiB/13.96 MiB
+playwright ------------------------------ 122.95 KiB/44.12 MiB                  ⠙ Preparing packages... (0/74)
+jsonschema-specifications ------------------------------ 18.00 KiB/18.00 KiB
+pytest-django ------------------------------ 24.69 KiB/24.69 KiB
+proto-plus ------------------------------ 48.99 KiB/48.99 KiB
+pyasn1     ------------------------------ 81.19 KiB/81.19 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+google-generativeai ------------------------------ 125.78 KiB/157.05 KiB
+google-api-core ------------------------------ 119.52 KiB/169.63 KiB
+google-auth ------------------------------ 95.51 KiB/217.88 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+pydantic   ------------------------------ 247.52 KiB/452.54 KiB
+greenlet   ------------------------------ 503.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 95.52 KiB/742.23 KiB
+pygments   ------------------------------ 119.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 1.09 MiB/1.67 MiB
+networkx   ------------------------------ 119.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 151.54 KiB/13.96 MiB
+playwright ------------------------------ 122.95 KiB/44.12 MiB                  ⠙ Preparing packages... (0/74)
+jsonschema-specifications ------------------------------ 18.00 KiB/18.00 KiB
+pytest-django ------------------------------ 24.69 KiB/24.69 KiB
+proto-plus ------------------------------ 48.99 KiB/48.99 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+google-generativeai ------------------------------ 125.78 KiB/157.05 KiB
+google-api-core ------------------------------ 119.52 KiB/169.63 KiB
+google-auth ------------------------------ 95.51 KiB/217.88 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+pydantic   ------------------------------ 247.52 KiB/452.54 KiB
+greenlet   ------------------------------ 503.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 95.52 KiB/742.23 KiB
+pygments   ------------------------------ 247.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 1.09 MiB/1.67 MiB
+networkx   ------------------------------ 119.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 279.54 KiB/13.96 MiB
+playwright ------------------------------ 122.95 KiB/44.12 MiB                  ⠙ Preparing packages... (0/74)
+jsonschema-specifications ------------------------------ 18.00 KiB/18.00 KiB
+proto-plus ------------------------------ 48.99 KiB/48.99 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+google-generativeai ------------------------------ 125.78 KiB/157.05 KiB
+google-api-core ------------------------------ 119.52 KiB/169.63 KiB
+google-auth ------------------------------ 95.51 KiB/217.88 KiB
+prompt-toolkit ------------------------------ 116.94 KiB/382.26 KiB
+pydantic   ------------------------------ 247.52 KiB/452.54 KiB
+greenlet   ------------------------------ 503.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 95.52 KiB/742.23 KiB
+pygments   ------------------------------ 247.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 1.09 MiB/1.67 MiB
+networkx   ------------------------------ 247.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 279.54 KiB/13.96 MiB
+playwright ------------------------------ 122.95 KiB/44.12 MiB                  ⠙ Preparing packages... (0/74)
+jsonschema-specifications ------------------------------ 18.00 KiB/18.00 KiB
+proto-plus ------------------------------ 48.99 KiB/48.99 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+google-generativeai ------------------------------ 125.78 KiB/157.05 KiB
+google-api-core ------------------------------ 119.52 KiB/169.63 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+pydantic   ------------------------------ 247.52 KiB/452.54 KiB
+greenlet   ------------------------------ 503.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 95.52 KiB/742.23 KiB
+pygments   ------------------------------ 247.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 1.09 MiB/1.67 MiB
+networkx   ------------------------------ 247.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 407.54 KiB/13.96 MiB
+playwright ------------------------------ 122.95 KiB/44.12 MiB                  ⠙ Preparing packages... (0/74)
+proto-plus ------------------------------ 48.99 KiB/48.99 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+django-celery-beat ------------------------------ 102.38 KiB/102.38 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+google-generativeai ------------------------------ 157.05 KiB/157.05 KiB
+google-api-core ------------------------------ 169.63 KiB/169.63 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+pydantic   ------------------------------ 375.52 KiB/452.54 KiB
+greenlet   ------------------------------ 503.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 223.52 KiB/742.23 KiB
+pygments   ------------------------------ 375.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 1.09 MiB/1.67 MiB
+networkx   ------------------------------ 247.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 663.54 KiB/13.96 MiB
+playwright ------------------------------ 914.95 KiB/44.12 MiB                  ⠙ Preparing packages... (0/74)
+proto-plus ------------------------------ 48.99 KiB/48.99 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+google-generativeai ------------------------------ 157.05 KiB/157.05 KiB
+google-api-core ------------------------------ 169.63 KiB/169.63 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+pydantic   ------------------------------ 375.52 KiB/452.54 KiB
+greenlet   ------------------------------ 503.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 223.52 KiB/742.23 KiB
+pygments   ------------------------------ 375.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 1.09 MiB/1.67 MiB
+networkx   ------------------------------ 247.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 1.05 MiB/13.96 MiB
+playwright ------------------------------ 914.95 KiB/44.12 MiB                  ⠙ Preparing packages... (0/74)
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+google-generativeai ------------------------------ 157.05 KiB/157.05 KiB
+google-api-core ------------------------------ 169.63 KiB/169.63 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+pydantic   ------------------------------ 375.52 KiB/452.54 KiB
+greenlet   ------------------------------ 503.51 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 223.52 KiB/742.23 KiB
+pygments   ------------------------------ 375.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 1.09 MiB/1.67 MiB
+networkx   ------------------------------ 247.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 1.05 MiB/13.96 MiB
+playwright ------------------------------ 2.09 MiB/44.12 MiB                    ⠙ Preparing packages... (0/74)
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+google-api-core ------------------------------ 169.63 KiB/169.63 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+pytest     ------------------------------ 13.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+pydantic   ------------------------------ 375.52 KiB/452.54 KiB
+greenlet   ------------------------------ 593.35 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 223.52 KiB/742.23 KiB
+pygments   ------------------------------ 375.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 1.22 MiB/1.67 MiB
+networkx   ------------------------------ 247.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 1.17 MiB/13.96 MiB
+playwright ------------------------------ 3.28 MiB/44.12 MiB                    ⠙ Preparing packages... (0/74)
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+google-api-core ------------------------------ 169.63 KiB/169.63 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+pytest     ------------------------------ 13.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+celery     ------------------------------ 128.00 KiB/428.49 KiB
+pydantic   ------------------------------ 375.52 KiB/452.54 KiB
+greenlet   ------------------------------ 593.35 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 223.52 KiB/742.23 KiB
+pygments   ------------------------------ 375.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 1.22 MiB/1.67 MiB
+networkx   ------------------------------ 247.52 KiB/1.94 MiB
+google-api-python-client ------------------------------ 1.30 MiB/13.96 MiB
+playwright ------------------------------ 3.53 MiB/44.12 MiB                    ⠹ Preparing packages... (19/74)
+django-redis ------------------------------ 7.51 KiB/30.11 KiB
+wcwidth    ------------------------------ 7.51 KiB/36.41 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+billiard   ------------------------------ 8.72 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+google-api-core ------------------------------ 169.63 KiB/169.63 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+pytest     ------------------------------ 29.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB
+celery     ------------------------------ 128.00 KiB/428.49 KiB
+pydantic   ------------------------------ 375.52 KiB/452.54 KiB
+greenlet   ------------------------------ 593.35 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 223.52 KiB/742.23 KiB
+pygments   ------------------------------ 375.51 KiB/1.17 MiB
+aiohttp    ------------------------------ 1.67 MiB/1.67 MiB
+networkx   ------------------------------ 247.52 KiB/1.94 MiB
+grpcio     ------------------------------ 23.50 KiB/6.27 MiB
+google-api-python-client ------------------------------ 1.30 MiB/13.96 MiB⠹ Preparing packages... (19/74)
+django-js-asset ------------------------------ 5.77 KiB/5.77 KiB
+inflection ------------------------------ 7.51 KiB/9.23 KiB
+vine       ------------------------------ 7.51 KiB/9.41 KiB
+click-repl ------------------------------ 7.51 KiB/10.05 KiB
+ast-decompiler ------------------------------ 13.47 KiB/13.47 KiB
+grpcio-status ------------------------------ 14.09 KiB/14.09 KiB
+channels-redis ------------------------------ 15.51 KiB/17.73 KiB
+python-crontab ------------------------------ 7.51 KiB/26.89 KiB
+django-redis ------------------------------ 7.51 KiB/30.11 KiB
+wcwidth    ------------------------------ 23.51 KiB/36.41 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+billiard   ------------------------------ 24.72 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 24.37 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 7.51 KiB/105.15 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 7.50 KiB/227.52 KiB
+django-debug-toolbar ------------------------------ 7.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 23.50 KiB/312.44 KiB⠹ Preparing packages... (19/74)
+django-js-asset ------------------------------ 5.77 KiB/5.77 KiB
+inflection ------------------------------ 9.23 KiB/9.23 KiB
+vine       ------------------------------ 7.51 KiB/9.41 KiB
+click-repl ------------------------------ 7.51 KiB/10.05 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+ast-decompiler ------------------------------ 13.47 KiB/13.47 KiB
+grpcio-status ------------------------------ 14.09 KiB/14.09 KiB
+channels-redis ------------------------------ 15.51 KiB/17.73 KiB
+python-crontab ------------------------------ 23.51 KiB/26.89 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 7.50 KiB/72.70 KiB
+billiard   ------------------------------ 24.72 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+httplib2   ------------------------------ 89.01 KiB/89.01 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 24.37 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 7.51 KiB/105.15 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 7.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB⠹ Preparing packages... (19/74)
+django-js-asset ------------------------------ 5.77 KiB/5.77 KiB
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+inflection ------------------------------ 9.23 KiB/9.23 KiB
+vine       ------------------------------ 7.51 KiB/9.41 KiB
+click-repl ------------------------------ 10.05 KiB/10.05 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+grpcio-status ------------------------------ 14.09 KiB/14.09 KiB
+channels-redis ------------------------------ 17.73 KiB/17.73 KiB
+python-crontab ------------------------------ 26.89 KiB/26.89 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 56.72 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+httplib2   ------------------------------ 89.01 KiB/89.01 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 24.37 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 7.51 KiB/105.15 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 7.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB⠹ Preparing packages... (19/74)
+django-js-asset ------------------------------ 5.77 KiB/5.77 KiB
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+inflection ------------------------------ 9.23 KiB/9.23 KiB
+vine       ------------------------------ 7.51 KiB/9.41 KiB
+click-repl ------------------------------ 10.05 KiB/10.05 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+grpcio-status ------------------------------ 14.09 KiB/14.09 KiB
+channels-redis ------------------------------ 17.73 KiB/17.73 KiB
+python-crontab ------------------------------ 26.89 KiB/26.89 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 56.72 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+httplib2   ------------------------------ 89.01 KiB/89.01 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 24.37 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 23.50 KiB/205.11 KiB⠹ Preparing packages... (19/74)
+django-js-asset ------------------------------ 5.77 KiB/5.77 KiB
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+vine       ------------------------------ 7.51 KiB/9.41 KiB
+click-repl ------------------------------ 10.05 KiB/10.05 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+grpcio-status ------------------------------ 14.09 KiB/14.09 KiB
+channels-redis ------------------------------ 17.73 KiB/17.73 KiB
+python-crontab ------------------------------ 26.89 KiB/26.89 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 56.72 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+httplib2   ------------------------------ 89.01 KiB/89.01 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 24.37 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 23.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB⠹ Preparing packages... (19/74)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+vine       ------------------------------ 9.41 KiB/9.41 KiB
+click-repl ------------------------------ 10.05 KiB/10.05 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+grpcio-status ------------------------------ 14.09 KiB/14.09 KiB
+channels-redis ------------------------------ 17.73 KiB/17.73 KiB
+python-crontab ------------------------------ 26.89 KiB/26.89 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+wcwidth    ------------------------------ 36.41 KiB/36.41 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 56.72 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+httplib2   ------------------------------ 89.01 KiB/89.01 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 24.37 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 23.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 7.50 KiB/227.52 KiB⠹ Preparing packages... (19/74)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+vine       ------------------------------ 9.41 KiB/9.41 KiB
+click-repl ------------------------------ 10.05 KiB/10.05 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+grpcio-status ------------------------------ 14.09 KiB/14.09 KiB
+channels-redis ------------------------------ 17.73 KiB/17.73 KiB
+python-crontab ------------------------------ 26.89 KiB/26.89 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 56.72 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+httplib2   ------------------------------ 89.01 KiB/89.01 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 23.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 47.50 KiB/255.37 KiB⠹ Preparing packages... (19/74)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+vine       ------------------------------ 9.41 KiB/9.41 KiB
+click-repl ------------------------------ 10.05 KiB/10.05 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+grpcio-status ------------------------------ 14.09 KiB/14.09 KiB
+python-crontab ------------------------------ 26.89 KiB/26.89 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 56.72 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+httplib2   ------------------------------ 89.01 KiB/89.01 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 23.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 47.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 23.50 KiB/262.76 KiB⠹ Preparing packages... (19/74)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+vine       ------------------------------ 9.41 KiB/9.41 KiB
+click-repl ------------------------------ 10.05 KiB/10.05 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+python-crontab ------------------------------ 26.89 KiB/26.89 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 56.72 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+httplib2   ------------------------------ 89.01 KiB/89.01 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 23.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 47.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 23.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB⠹ Preparing packages... (19/74)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+vine       ------------------------------ 9.41 KiB/9.41 KiB
+click-repl ------------------------------ 10.05 KiB/10.05 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 56.72 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+httplib2   ------------------------------ 89.01 KiB/89.01 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 95.52 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 23.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 23.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB⠹ Preparing packages... (19/74)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+vine       ------------------------------ 9.41 KiB/9.41 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 56.72 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+httplib2   ------------------------------ 89.01 KiB/89.01 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 23.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 23.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 125.80 KiB/364.91 KiB⠹ Preparing packages... (19/74)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+vine       ------------------------------ 9.41 KiB/9.41 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+tinycss2   ------------------------------     0 B/27.74 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 56.72 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+httplib2   ------------------------------ 89.01 KiB/89.01 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 55.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 23.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB⠹ Preparing packages... (19/74)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+tinycss2   ------------------------------ 15.52 KiB/27.74 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 56.72 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+httplib2   ------------------------------ 89.01 KiB/89.01 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 55.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 23.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 125.80 KiB/364.91 KiB⠸ Preparing packages... (29/74)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+tinycss2   ------------------------------ 15.52 KiB/27.74 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+httplib2   ------------------------------ 89.01 KiB/89.01 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 55.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 23.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 125.80 KiB/364.91 KiB⠸ Preparing packages... (29/74)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+tinycss2   ------------------------------ 15.52 KiB/27.74 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 55.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 23.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 125.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB⠸ Preparing packages... (29/74)
+iniconfig  ------------------------------ 7.31 KiB/7.31 KiB
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+tinycss2   ------------------------------ 15.52 KiB/27.74 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 55.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 23.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB⠸ Preparing packages... (29/74)
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+tinycss2   ------------------------------ 15.52 KiB/27.74 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 55.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 23.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB⠸ Preparing packages... (29/74)
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+tinycss2   ------------------------------ 15.52 KiB/27.74 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 55.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 23.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB⠸ Preparing packages... (29/74)
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+tinycss2   ------------------------------ 15.52 KiB/27.74 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+amqp       ------------------------------ 49.75 KiB/49.75 KiB
+cron-descriptor ------------------------------ 23.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 55.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 55.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB⠸ Preparing packages... (29/74)
+django-timezone-field ------------------------------ 12.87 KiB/12.87 KiB
+tinycss2   ------------------------------ 15.52 KiB/27.74 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 55.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 55.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB
+celery     ------------------------------ 128.00 KiB/428.49 KiB⠸ Preparing packages... (29/74)
+asgiref    ------------------------------ 15.51 KiB/23.53 KiB
+tinycss2   ------------------------------ 15.52 KiB/27.74 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 55.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 55.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB⠸ Preparing packages... (29/74)
+asgiref    ------------------------------ 15.51 KiB/23.53 KiB
+tinycss2   ------------------------------ 27.74 KiB/27.74 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 23.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 55.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 55.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB⠸ Preparing packages... (29/74)
+click-didyoumean ------------------------------ 3.55 KiB/3.55 KiB
+asgiref    ------------------------------ 15.51 KiB/23.53 KiB
+tinycss2   ------------------------------ 27.74 KiB/27.74 KiB
+django-redis ------------------------------ 23.51 KiB/30.11 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+jsonschema ------------------------------ 87.93 KiB/87.93 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 55.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 55.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB⠼ Preparing packages... (34/74)
+click-didyoumean ------------------------------ 3.55 KiB/3.55 KiB
+asgiref    ------------------------------ 15.51 KiB/23.53 KiB
+tinycss2   ------------------------------ 27.74 KiB/27.74 KiB
+django-redis ------------------------------ 30.11 KiB/30.11 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 55.50 KiB/205.11 KiB
+google-auth ------------------------------ 217.88 KiB/217.88 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 55.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB⠼ Preparing packages... (34/74)
+click-didyoumean ------------------------------ 3.55 KiB/3.55 KiB
+asgiref    ------------------------------ 15.51 KiB/23.53 KiB
+tinycss2   ------------------------------ 27.74 KiB/27.74 KiB
+django-redis ------------------------------ 30.11 KiB/30.11 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 55.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB⠼ Preparing packages... (34/74)
+click-didyoumean ------------------------------ 3.55 KiB/3.55 KiB
+asgiref    ------------------------------ 15.51 KiB/23.53 KiB
+tinycss2   ------------------------------ 27.74 KiB/27.74 KiB
+django-redis ------------------------------ 30.11 KiB/30.11 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+django-mptt ------------------------------ 117.34 KiB/117.34 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 55.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB⠼ Preparing packages... (34/74)
+click-didyoumean ------------------------------ 3.55 KiB/3.55 KiB
+asgiref    ------------------------------ 15.51 KiB/23.53 KiB
+tinycss2   ------------------------------ 27.74 KiB/27.74 KiB
+django-redis ------------------------------ 30.11 KiB/30.11 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 55.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 244.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+pydantic   ------------------------------ 452.54 KiB/452.54 KiB⠼ Preparing packages... (34/74)
+click-didyoumean ------------------------------ 3.55 KiB/3.55 KiB
+asgiref    ------------------------------ 15.51 KiB/23.53 KiB
+tinycss2   ------------------------------ 27.74 KiB/27.74 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 55.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+pydantic   ------------------------------ 452.54 KiB/452.54 KiB
+greenlet   ------------------------------ 593.35 KiB/593.35 KiB⠼ Preparing packages... (34/74)
+asgiref    ------------------------------ 15.51 KiB/23.53 KiB
+tinycss2   ------------------------------ 27.74 KiB/27.74 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 55.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+pydantic   ------------------------------ 452.54 KiB/452.54 KiB
+greenlet   ------------------------------ 593.35 KiB/593.35 KiB⠼ Preparing packages... (34/74)
+asgiref    ------------------------------ 15.51 KiB/23.53 KiB
+tinycss2   ------------------------------ 27.74 KiB/27.74 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 55.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+pydantic   ------------------------------ 452.54 KiB/452.54 KiB
+greenlet   ------------------------------ 593.35 KiB/593.35 KiB⠼ Preparing packages... (34/74)
+asgiref    ------------------------------ 15.51 KiB/23.53 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 55.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+pydantic   ------------------------------ 452.54 KiB/452.54 KiB
+greenlet   ------------------------------ 593.35 KiB/593.35 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB⠼ Preparing packages... (34/74)
+asgiref    ------------------------------ 15.51 KiB/23.53 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+billiard   ------------------------------ 85.00 KiB/85.00 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+pydantic   ------------------------------ 452.54 KiB/452.54 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB⠼ Preparing packages... (34/74)
+asgiref    ------------------------------ 23.53 KiB/23.53 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 128.00 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+pydantic   ------------------------------ 452.54 KiB/452.54 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 503.51 KiB/1.17 MiB⠼ Preparing packages... (34/74)
+asgiref    ------------------------------ 23.53 KiB/23.53 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 111.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 52.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+pydantic   ------------------------------ 452.54 KiB/452.54 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 503.51 KiB/1.17 MiB⠴ Preparing packages... (42/74)
+asgiref    ------------------------------ 23.53 KiB/23.53 KiB
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 247.50 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+pydantic   ------------------------------ 452.54 KiB/452.54 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 503.51 KiB/1.17 MiB⠴ Preparing packages... (42/74)
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+pydantic   ------------------------------ 452.54 KiB/452.54 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 503.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB⠴ Preparing packages... (42/74)
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+pydantic   ------------------------------ 452.54 KiB/452.54 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 503.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB⠴ Preparing packages... (42/74)
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 503.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 239.50 KiB/1.89 MiB⠴ Preparing packages... (42/74)
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 55.50 KiB/72.70 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 253.80 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 503.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 239.50 KiB/1.89 MiB⠴ Preparing packages... (42/74)
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 72.70 KiB/72.70 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 631.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 239.50 KiB/1.89 MiB⠦ Preparing packages... (44/74)
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 72.70 KiB/72.70 KiB
+django-filter ------------------------------ 91.94 KiB/91.94 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 55.51 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 631.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 239.50 KiB/1.89 MiB⠦ Preparing packages... (44/74)
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 72.70 KiB/72.70 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 23.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 631.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 239.50 KiB/1.89 MiB
+networkx   ------------------------------ 375.52 KiB/1.94 MiB⠦ Preparing packages... (44/74)
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 72.70 KiB/72.70 KiB
+drf-spectacular ------------------------------ 102.96 KiB/102.96 KiB
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 55.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 631.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 239.50 KiB/1.89 MiB
+networkx   ------------------------------ 375.52 KiB/1.94 MiB⠦ Preparing packages... (44/74)
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 72.70 KiB/72.70 KiB
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 55.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 631.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 239.50 KiB/1.89 MiB
+networkx   ------------------------------ 375.52 KiB/1.94 MiB
+pypdfium2  ------------------------------ 119.50 KiB/2.85 MiB⠦ Preparing packages... (44/74)
+channels   ------------------------------ 30.58 KiB/30.58 KiB
+cron-descriptor ------------------------------ 72.70 KiB/72.70 KiB
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 55.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 631.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 239.50 KiB/1.89 MiB
+networkx   ------------------------------ 375.52 KiB/1.94 MiB
+pypdfium2  ------------------------------ 119.50 KiB/2.85 MiB⠦ Preparing packages... (44/74)
+cron-descriptor ------------------------------ 72.70 KiB/72.70 KiB
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 78.05 KiB/177.01 KiB
+kombu      ------------------------------ 119.50 KiB/205.11 KiB
+django-extensions ------------------------------ 55.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 119.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 351.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 631.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 239.50 KiB/1.89 MiB
+networkx   ------------------------------ 375.52 KiB/1.94 MiB
+pypdfium2  ------------------------------ 119.50 KiB/2.85 MiB
+grpcio     ------------------------------ 6.27 MiB/6.27 MiB⠦ Preparing packages... (44/74)
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+kombu      ------------------------------ 205.11 KiB/205.11 KiB
+django-extensions ------------------------------ 55.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 479.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 631.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 239.50 KiB/1.89 MiB
+networkx   ------------------------------ 375.52 KiB/1.94 MiB
+pypdfium2  ------------------------------ 119.50 KiB/2.85 MiB
+grpcio     ------------------------------ 6.27 MiB/6.27 MiB
+django     ------------------------------ 247.50 KiB/7.91 MiB⠦ Preparing packages... (44/74)
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+kombu      ------------------------------ 205.11 KiB/205.11 KiB
+django-extensions ------------------------------ 55.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 225.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 479.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 127.50 KiB/1.03 MiB
+pygments   ------------------------------ 631.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 239.50 KiB/1.89 MiB
+networkx   ------------------------------ 375.52 KiB/1.94 MiB
+pypdfium2  ------------------------------ 375.50 KiB/2.85 MiB
+grpcio     ------------------------------ 6.27 MiB/6.27 MiB
+django     ------------------------------ 247.50 KiB/7.91 MiB⠦ Preparing packages... (44/74)
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+kombu      ------------------------------ 205.11 KiB/205.11 KiB
+django-extensions ------------------------------ 55.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 257.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 479.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 255.50 KiB/1.03 MiB
+pygments   ------------------------------ 631.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 367.50 KiB/1.89 MiB
+networkx   ------------------------------ 375.52 KiB/1.94 MiB
+grpcio     ------------------------------ 6.27 MiB/6.27 MiB
+django     ------------------------------ 375.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 2.64 MiB/13.96 MiB⠦ Preparing packages... (44/74)
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+kombu      ------------------------------ 205.11 KiB/205.11 KiB
+django-extensions ------------------------------ 55.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 257.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 479.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 255.50 KiB/1.03 MiB
+pygments   ------------------------------ 631.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 367.50 KiB/1.89 MiB
+networkx   ------------------------------ 375.52 KiB/1.94 MiB
+grpcio     ------------------------------ 6.27 MiB/6.27 MiB
+django     ------------------------------ 375.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 2.64 MiB/13.96 MiB⠦ Preparing packages... (44/74)
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+kombu      ------------------------------ 205.11 KiB/205.11 KiB
+django-extensions ------------------------------ 55.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+pytest     ------------------------------ 364.91 KiB/364.91 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 257.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 479.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 255.50 KiB/1.03 MiB
+pygments   ------------------------------ 631.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 367.50 KiB/1.89 MiB
+networkx   ------------------------------ 503.52 KiB/1.94 MiB
+django     ------------------------------ 375.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 2.77 MiB/13.96 MiB
+numpy      ------------------------------ 415.53 KiB/15.76 MiB⠦ Preparing packages... (44/74)
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+kombu      ------------------------------ 205.11 KiB/205.11 KiB
+django-extensions ------------------------------ 55.50 KiB/227.52 KiB
+redis      ------------------------------ 239.50 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+prompt-toolkit ------------------------------ 372.94 KiB/382.26 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 257.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 479.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 255.50 KiB/1.03 MiB
+pygments   ------------------------------ 631.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 367.50 KiB/1.89 MiB
+networkx   ------------------------------ 503.52 KiB/1.94 MiB
+django     ------------------------------ 375.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 2.77 MiB/13.96 MiB
+numpy      ------------------------------ 415.53 KiB/15.76 MiB
+playwright ------------------------------ 41.91 MiB/44.12 MiB⠦ Preparing packages... (44/74)
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+kombu      ------------------------------ 205.11 KiB/205.11 KiB
+django-extensions ------------------------------ 55.50 KiB/227.52 KiB
+redis      ------------------------------ 255.37 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 257.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 479.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 255.50 KiB/1.03 MiB
+pygments   ------------------------------ 631.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 367.50 KiB/1.89 MiB
+networkx   ------------------------------ 503.52 KiB/1.94 MiB
+django     ------------------------------ 375.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 2.77 MiB/13.96 MiB
+numpy      ------------------------------ 415.53 KiB/15.76 MiB
+playwright ------------------------------ 41.91 MiB/44.12 MiB
+opencv-python ------------------------------ 28.02 MiB/63.94 MiB                ⠧ Preparing packages... (53/74)
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+kombu      ------------------------------ 205.11 KiB/205.11 KiB
+django-extensions ------------------------------ 55.50 KiB/227.52 KiB
+redis      ------------------------------ 255.37 KiB/255.37 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+sentry-sdk ------------------------------ 231.23 KiB/395.30 KiB
+celery     ------------------------------ 321.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 479.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 255.50 KiB/1.03 MiB
+pygments   ------------------------------ 759.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 495.50 KiB/1.89 MiB
+networkx   ------------------------------ 503.52 KiB/1.94 MiB
+django     ------------------------------ 375.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 2.89 MiB/13.96 MiB
+numpy      ------------------------------ 415.53 KiB/15.76 MiB
+playwright ------------------------------ 41.91 MiB/44.12 MiB
+opencv-python ------------------------------ 28.14 MiB/63.94 MiB                ⠧ Preparing packages... (53/74)
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+kombu      ------------------------------ 205.11 KiB/205.11 KiB
+django-extensions ------------------------------ 55.50 KiB/227.52 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+sentry-sdk ------------------------------ 359.23 KiB/395.30 KiB
+celery     ------------------------------ 321.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 479.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 255.50 KiB/1.03 MiB
+pygments   ------------------------------ 759.51 KiB/1.17 MiB
+django-allauth ------------------------------ 95.53 KiB/1.70 MiB
+faker      ------------------------------ 495.50 KiB/1.89 MiB
+networkx   ------------------------------ 503.52 KiB/1.94 MiB
+django     ------------------------------ 375.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 2.89 MiB/13.96 MiB
+numpy      ------------------------------ 415.53 KiB/15.76 MiB
+playwright ------------------------------ 41.91 MiB/44.12 MiB
+opencv-python ------------------------------ 28.14 MiB/63.94 MiB                ⠧ Preparing packages... (53/74)
+djangorestframework-simplejwt ------------------------------ 105.15 KiB/105.15 KiB
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+django-extensions ------------------------------ 55.50 KiB/227.52 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+sentry-sdk ------------------------------ 359.23 KiB/395.30 KiB
+celery     ------------------------------ 321.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 479.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 255.50 KiB/1.03 MiB
+pygments   ------------------------------ 759.51 KiB/1.17 MiB
+django-allauth ------------------------------ 223.53 KiB/1.70 MiB
+faker      ------------------------------ 495.50 KiB/1.89 MiB
+networkx   ------------------------------ 503.52 KiB/1.94 MiB
+django     ------------------------------ 375.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 3.04 MiB/13.96 MiB
+numpy      ------------------------------ 415.53 KiB/15.76 MiB
+playwright ------------------------------ 41.91 MiB/44.12 MiB
+opencv-python ------------------------------ 28.14 MiB/63.94 MiB                ⠧ Preparing packages... (53/74)
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+django-extensions ------------------------------ 119.50 KiB/227.52 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 148.14 KiB/290.54 KiB
+protobuf   ------------------------------ 312.44 KiB/312.44 KiB
+sentry-sdk ------------------------------ 359.23 KiB/395.30 KiB
+celery     ------------------------------ 321.71 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 479.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 255.50 KiB/1.03 MiB
+pygments   ------------------------------ 759.51 KiB/1.17 MiB
+django-allauth ------------------------------ 223.53 KiB/1.70 MiB
+faker      ------------------------------ 495.50 KiB/1.89 MiB
+networkx   ------------------------------ 503.52 KiB/1.94 MiB
+django     ------------------------------ 375.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 3.04 MiB/13.96 MiB
+numpy      ------------------------------ 415.53 KiB/15.76 MiB
+playwright ------------------------------ 41.93 MiB/44.12 MiB
+opencv-python ------------------------------ 28.14 MiB/63.94 MiB                ⠧ Preparing packages... (53/74)
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+django-extensions ------------------------------ 119.50 KiB/227.52 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 244.14 KiB/290.54 KiB
+sentry-sdk ------------------------------ 359.23 KiB/395.30 KiB
+celery     ------------------------------ 428.49 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 607.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 255.50 KiB/1.03 MiB
+pygments   ------------------------------ 887.51 KiB/1.17 MiB
+django-allauth ------------------------------ 223.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 503.52 KiB/1.94 MiB
+django     ------------------------------ 503.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 3.84 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.06 MiB/44.12 MiB
+opencv-python ------------------------------ 28.14 MiB/63.94 MiB                ⠧ Preparing packages... (53/74)
+pyasn1-modules ------------------------------ 177.01 KiB/177.01 KiB
+django-extensions ------------------------------ 227.52 KiB/227.52 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 244.14 KiB/290.54 KiB
+sentry-sdk ------------------------------ 359.23 KiB/395.30 KiB
+celery     ------------------------------ 428.49 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 607.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 383.50 KiB/1.03 MiB
+pygments   ------------------------------ 887.51 KiB/1.17 MiB
+django-allauth ------------------------------ 223.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 503.52 KiB/1.94 MiB
+django     ------------------------------ 503.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 4.91 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.06 MiB/44.12 MiB
+opencv-python ------------------------------ 28.14 MiB/63.94 MiB                ⠧ Preparing packages... (53/74)
+django-extensions ------------------------------ 227.52 KiB/227.52 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 244.14 KiB/290.54 KiB
+sentry-sdk ------------------------------ 359.23 KiB/395.30 KiB
+celery     ------------------------------ 428.49 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 607.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 383.50 KiB/1.03 MiB
+pygments   ------------------------------ 887.51 KiB/1.17 MiB
+django-allauth ------------------------------ 223.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 503.52 KiB/1.94 MiB
+django     ------------------------------ 503.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 4.91 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.06 MiB/44.12 MiB
+opencv-python ------------------------------ 28.14 MiB/63.94 MiB                ⠧ Preparing packages... (53/74)
+django-extensions ------------------------------ 227.52 KiB/227.52 KiB
+django-debug-toolbar ------------------------------ 247.50 KiB/262.76 KiB
+googleapis-common-protos ------------------------------ 244.14 KiB/290.54 KiB
+sentry-sdk ------------------------------ 359.23 KiB/395.30 KiB
+celery     ------------------------------ 428.49 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 607.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 383.50 KiB/1.03 MiB
+pygments   ------------------------------ 911.51 KiB/1.17 MiB
+django-allauth ------------------------------ 223.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 503.52 KiB/1.94 MiB
+django     ------------------------------ 503.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 5.16 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.06 MiB/44.12 MiB
+opencv-python ------------------------------ 28.66 MiB/63.94 MiB                ⠧ Preparing packages... (53/74)
+django-extensions ------------------------------ 227.52 KiB/227.52 KiB
+googleapis-common-protos ------------------------------ 244.14 KiB/290.54 KiB
+sentry-sdk ------------------------------ 359.23 KiB/395.30 KiB
+celery     ------------------------------ 428.49 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 607.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 383.50 KiB/1.03 MiB
+pygments   ------------------------------ 1.02 MiB/1.17 MiB
+django-allauth ------------------------------ 223.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 631.52 KiB/1.94 MiB
+django     ------------------------------ 631.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 5.43 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.06 MiB/44.12 MiB
+opencv-python ------------------------------ 30.66 MiB/63.94 MiB                ⠧ Preparing packages... (53/74)
+django-extensions ------------------------------ 227.52 KiB/227.52 KiB
+googleapis-common-protos ------------------------------ 244.14 KiB/290.54 KiB
+sentry-sdk ------------------------------ 359.23 KiB/395.30 KiB
+celery     ------------------------------ 428.49 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 735.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 383.50 KiB/1.03 MiB
+pygments   ------------------------------ 1.02 MiB/1.17 MiB
+django-allauth ------------------------------ 223.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 631.52 KiB/1.94 MiB
+django     ------------------------------ 631.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 5.68 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.18 MiB/44.12 MiB
+opencv-python ------------------------------ 32.65 MiB/63.94 MiB                ⠧ Preparing packages... (53/74)
+django-extensions ------------------------------ 227.52 KiB/227.52 KiB
+googleapis-common-protos ------------------------------ 244.14 KiB/290.54 KiB
+sentry-sdk ------------------------------ 359.23 KiB/395.30 KiB
+celery     ------------------------------ 428.49 KiB/428.49 KiB
+google-ai-generativelanguage ------------------------------ 735.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 511.50 KiB/1.03 MiB
+pygments   ------------------------------ 1.02 MiB/1.17 MiB
+django-allauth ------------------------------ 223.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 631.52 KiB/1.94 MiB
+django     ------------------------------ 631.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 5.83 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.18 MiB/44.12 MiB
+opencv-python ------------------------------ 35.44 MiB/63.94 MiB                ⠇ Preparing packages... (59/74)
+django-extensions ------------------------------ 227.52 KiB/227.52 KiB
+googleapis-common-protos ------------------------------ 244.14 KiB/290.54 KiB
+sentry-sdk ------------------------------ 359.23 KiB/395.30 KiB
+google-ai-generativelanguage ------------------------------ 735.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 511.50 KiB/1.03 MiB
+pygments   ------------------------------ 1.02 MiB/1.17 MiB
+django-allauth ------------------------------ 223.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 631.52 KiB/1.94 MiB
+django     ------------------------------ 631.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 5.83 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.18 MiB/44.12 MiB
+opencv-python ------------------------------ 35.86 MiB/63.94 MiB                ⠇ Preparing packages... (59/74)
+django-extensions ------------------------------ 227.52 KiB/227.52 KiB
+googleapis-common-protos ------------------------------ 244.14 KiB/290.54 KiB
+sentry-sdk ------------------------------ 359.23 KiB/395.30 KiB
+google-ai-generativelanguage ------------------------------ 735.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 639.50 KiB/1.03 MiB
+pygments   ------------------------------ 1.02 MiB/1.17 MiB
+django-allauth ------------------------------ 223.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 631.52 KiB/1.94 MiB
+django     ------------------------------ 631.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 6.08 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.18 MiB/44.12 MiB
+opencv-python ------------------------------ 40.22 MiB/63.94 MiB                ⠇ Preparing packages... (59/74)
+django-extensions ------------------------------ 227.52 KiB/227.52 KiB
+googleapis-common-protos ------------------------------ 290.54 KiB/290.54 KiB
+sentry-sdk ------------------------------ 359.23 KiB/395.30 KiB
+google-ai-generativelanguage ------------------------------ 735.52 KiB/742.23 KiB
+djangorestframework ------------------------------ 767.50 KiB/1.03 MiB
+pygments   ------------------------------ 1.02 MiB/1.17 MiB
+django-allauth ------------------------------ 223.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 631.52 KiB/1.94 MiB
+django     ------------------------------ 759.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 6.75 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.18 MiB/44.12 MiB
+opencv-python ------------------------------ 42.23 MiB/63.94 MiB                ⠇ Preparing packages... (59/74)
+django-extensions ------------------------------ 227.52 KiB/227.52 KiB
+googleapis-common-protos ------------------------------ 290.54 KiB/290.54 KiB
+sentry-sdk ------------------------------ 359.23 KiB/395.30 KiB
+djangorestframework ------------------------------ 767.50 KiB/1.03 MiB
+pygments   ------------------------------ 1.02 MiB/1.17 MiB
+django-allauth ------------------------------ 223.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 631.52 KiB/1.94 MiB
+django     ------------------------------ 759.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 6.75 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.18 MiB/44.12 MiB
+opencv-python ------------------------------ 43.01 MiB/63.94 MiB                ⠇ Preparing packages... (59/74)
+googleapis-common-protos ------------------------------ 290.54 KiB/290.54 KiB
+sentry-sdk ------------------------------ 395.30 KiB/395.30 KiB
+djangorestframework ------------------------------ 919.50 KiB/1.03 MiB
+pygments   ------------------------------ 1.14 MiB/1.17 MiB
+django-allauth ------------------------------ 223.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 631.52 KiB/1.94 MiB
+django     ------------------------------ 759.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 6.87 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.18 MiB/44.12 MiB
+opencv-python ------------------------------ 45.02 MiB/63.94 MiB                ⠇ Preparing packages... (59/74)
+googleapis-common-protos ------------------------------ 290.54 KiB/290.54 KiB
+sentry-sdk ------------------------------ 395.30 KiB/395.30 KiB
+djangorestframework ------------------------------ 919.50 KiB/1.03 MiB
+pygments   ------------------------------ 1.14 MiB/1.17 MiB
+django-allauth ------------------------------ 351.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 631.52 KiB/1.94 MiB
+django     ------------------------------ 759.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 7.30 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.31 MiB/44.12 MiB
+opencv-python ------------------------------ 46.99 MiB/63.94 MiB                ⠇ Preparing packages... (59/74)
+googleapis-common-protos ------------------------------ 290.54 KiB/290.54 KiB
+djangorestframework ------------------------------ 919.50 KiB/1.03 MiB
+pygments   ------------------------------ 1.14 MiB/1.17 MiB
+django-allauth ------------------------------ 351.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 759.52 KiB/1.94 MiB
+django     ------------------------------ 759.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 7.82 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.31 MiB/44.12 MiB
+opencv-python ------------------------------ 49.41 MiB/63.94 MiB                ⠋ Preparing packages... (62/74)
+googleapis-common-protos ------------------------------ 290.54 KiB/290.54 KiB
+djangorestframework ------------------------------ 919.50 KiB/1.03 MiB
+pygments   ------------------------------ 1.14 MiB/1.17 MiB
+django-allauth ------------------------------ 351.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 759.52 KiB/1.94 MiB
+django     ------------------------------ 759.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 7.82 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.31 MiB/44.12 MiB
+opencv-python ------------------------------ 49.78 MiB/63.94 MiB                ⠋ Preparing packages... (62/74)
+djangorestframework ------------------------------ 1.02 MiB/1.03 MiB
+pygments   ------------------------------ 1.14 MiB/1.17 MiB
+django-allauth ------------------------------ 351.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 887.52 KiB/1.94 MiB
+django     ------------------------------ 759.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 8.07 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.31 MiB/44.12 MiB
+opencv-python ------------------------------ 52.05 MiB/63.94 MiB                ⠋ Preparing packages... (62/74)
+djangorestframework ------------------------------ 1.02 MiB/1.03 MiB
+pygments   ------------------------------ 1.14 MiB/1.17 MiB
+django-allauth ------------------------------ 479.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 887.52 KiB/1.94 MiB
+django     ------------------------------ 887.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 8.22 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.31 MiB/44.12 MiB
+opencv-python ------------------------------ 54.56 MiB/63.94 MiB                ⠋ Preparing packages... (62/74)
+djangorestframework ------------------------------ 1.02 MiB/1.03 MiB
+pygments   ------------------------------ 1.14 MiB/1.17 MiB
+django-allauth ------------------------------ 479.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 887.52 KiB/1.94 MiB
+django     ------------------------------ 887.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 8.22 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.31 MiB/44.12 MiB
+opencv-python ------------------------------ 57.37 MiB/63.94 MiB                ⠋ Preparing packages... (62/74)
+djangorestframework ------------------------------ 1.02 MiB/1.03 MiB
+pygments   ------------------------------ 1.14 MiB/1.17 MiB
+django-allauth ------------------------------ 607.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 887.52 KiB/1.94 MiB
+django     ------------------------------ 887.50 KiB/7.91 MiB
+google-api-python-client ------------------------------ 8.34 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.31 MiB/44.12 MiB
+opencv-python ------------------------------ 62.41 MiB/63.94 MiB                ⠙ Preparing packages... (64/74)
+djangorestframework ------------------------------ 1.02 MiB/1.03 MiB
+pygments   ------------------------------ 1.14 MiB/1.17 MiB
+django-allauth ------------------------------ 735.53 KiB/1.70 MiB
+faker      ------------------------------ 623.50 KiB/1.89 MiB
+networkx   ------------------------------ 911.52 KiB/1.94 MiB
+django     ------------------------------ 1.02 MiB/7.91 MiB
+google-api-python-client ------------------------------ 8.62 MiB/13.96 MiB
+numpy      ------------------------------ 543.53 KiB/15.76 MiB
+playwright ------------------------------ 42.46 MiB/44.12 MiB
+opencv-python ------------------------------ 63.94 MiB/63.94 MiB                ⠙ Preparing packages... (64/74)
+djangorestframework ------------------------------ 1.02 MiB/1.03 MiB
+django-allauth ------------------------------ 1015.53 KiB/1.70 MiB
+faker      ------------------------------ 751.50 KiB/1.89 MiB
+networkx   ------------------------------ 1.02 MiB/1.94 MiB
+django     ------------------------------ 1.02 MiB/7.91 MiB
+google-api-python-client ------------------------------ 9.02 MiB/13.96 MiB
+numpy      ------------------------------ 671.53 KiB/15.76 MiB
+playwright ------------------------------ 42.46 MiB/44.12 MiB
+opencv-python ------------------------------ 63.94 MiB/63.94 MiB                ⠙ Preparing packages... (64/74)
+djangorestframework ------------------------------ 1.02 MiB/1.03 MiB
+django-allauth ------------------------------ 1.12 MiB/1.70 MiB
+faker      ------------------------------ 751.50 KiB/1.89 MiB
+networkx   ------------------------------ 1.02 MiB/1.94 MiB
+django     ------------------------------ 1.14 MiB/7.91 MiB
+google-api-python-client ------------------------------ 9.27 MiB/13.96 MiB
+numpy      ------------------------------ 671.53 KiB/15.76 MiB
+playwright ------------------------------ 42.46 MiB/44.12 MiB                   ⠙ Preparing packages... (64/74)
+django-allauth ------------------------------ 1.12 MiB/1.70 MiB
+faker      ------------------------------ 751.50 KiB/1.89 MiB
+networkx   ------------------------------ 1.02 MiB/1.94 MiB
+django     ------------------------------ 1.14 MiB/7.91 MiB
+google-api-python-client ------------------------------ 9.41 MiB/13.96 MiB
+numpy      ------------------------------ 671.53 KiB/15.76 MiB
+playwright ------------------------------ 42.46 MiB/44.12 MiB                   ⠙ Preparing packages... (64/74)
+django-allauth ------------------------------ 1.39 MiB/1.70 MiB
+faker      ------------------------------ 751.50 KiB/1.89 MiB
+networkx   ------------------------------ 1.27 MiB/1.94 MiB
+django     ------------------------------ 1.41 MiB/7.91 MiB
+google-api-python-client ------------------------------ 10.34 MiB/13.96 MiB
+numpy      ------------------------------ 799.53 KiB/15.76 MiB
+playwright ------------------------------ 42.58 MiB/44.12 MiB                   ⠙ Preparing packages... (64/74)
+django-allauth ------------------------------ 1.39 MiB/1.70 MiB
+faker      ------------------------------ 751.50 KiB/1.89 MiB
+networkx   ------------------------------ 1.27 MiB/1.94 MiB
+django     ------------------------------ 1.54 MiB/7.91 MiB
+google-api-python-client ------------------------------ 10.73 MiB/13.96 MiB
+numpy      ------------------------------ 799.53 KiB/15.76 MiB
+playwright ------------------------------ 42.98 MiB/44.12 MiB                   ⠙ Preparing packages... (64/74)
+django-allauth ------------------------------ 1.39 MiB/1.70 MiB
+faker      ------------------------------ 879.50 KiB/1.89 MiB
+networkx   ------------------------------ 1.66 MiB/1.94 MiB
+django     ------------------------------ 1.69 MiB/7.91 MiB
+google-api-python-client ------------------------------ 11.41 MiB/13.96 MiB
+numpy      ------------------------------ 799.53 KiB/15.76 MiB                  ⠙ Preparing packages... (64/74)
+django-allauth ------------------------------ 1.39 MiB/1.70 MiB
+faker      ------------------------------ 879.50 KiB/1.89 MiB
+networkx   ------------------------------ 1.81 MiB/1.94 MiB
+django     ------------------------------ 1.81 MiB/7.91 MiB
+google-api-python-client ------------------------------ 12.05 MiB/13.96 MiB
+numpy      ------------------------------ 823.53 KiB/15.76 MiB                  ⠙ Preparing packages... (64/74)
+django-allauth ------------------------------ 1.39 MiB/1.70 MiB
+faker      ------------------------------ 879.50 KiB/1.89 MiB
+networkx   ------------------------------ 1.81 MiB/1.94 MiB
+django     ------------------------------ 1.94 MiB/7.91 MiB
+google-api-python-client ------------------------------ 12.73 MiB/13.96 MiB
+numpy      ------------------------------ 951.53 KiB/15.76 MiB                  ⠹ Preparing packages... (68/74)
+django-allauth ------------------------------ 1.39 MiB/1.70 MiB
+faker      ------------------------------ 1.01 MiB/1.89 MiB
+django     ------------------------------ 2.06 MiB/7.91 MiB
+google-api-python-client ------------------------------ 13.25 MiB/13.96 MiB
+numpy      ------------------------------ 1.18 MiB/15.76 MiB                    ⠹ Preparing packages... (68/74)
+django-allauth ------------------------------ 1.39 MiB/1.70 MiB
+faker      ------------------------------ 1.01 MiB/1.89 MiB
+django     ------------------------------ 2.21 MiB/7.91 MiB
+numpy      ------------------------------ 1.33 MiB/15.76 MiB                    ⠹ Preparing packages... (68/74)
+django-allauth ------------------------------ 1.52 MiB/1.70 MiB
+faker      ------------------------------ 1.26 MiB/1.89 MiB
+django     ------------------------------ 2.46 MiB/7.91 MiB
+numpy      ------------------------------ 2.65 MiB/15.76 MiB                    ⠹ Preparing packages... (68/74)
+django-allauth ------------------------------ 1.52 MiB/1.70 MiB
+faker      ------------------------------ 1.26 MiB/1.89 MiB
+django     ------------------------------ 2.61 MiB/7.91 MiB
+numpy      ------------------------------ 3.19 MiB/15.76 MiB                    ⠹ Preparing packages... (68/74)
+django-allauth ------------------------------ 1.52 MiB/1.70 MiB
+faker      ------------------------------ 1.66 MiB/1.89 MiB
+django     ------------------------------ 3.01 MiB/7.91 MiB
+numpy      ------------------------------ 7.03 MiB/15.76 MiB                    ⠹ Preparing packages... (68/74)
+django-allauth ------------------------------ 1.52 MiB/1.70 MiB
+faker      ------------------------------ 1.80 MiB/1.89 MiB
+django     ------------------------------ 3.26 MiB/7.91 MiB
+numpy      ------------------------------ 7.95 MiB/15.76 MiB                    ⠸ Preparing packages... (70/74)
+django-allauth ------------------------------ 1.52 MiB/1.70 MiB
+faker      ------------------------------ 1.80 MiB/1.89 MiB
+django     ------------------------------ 3.26 MiB/7.91 MiB
+numpy      ------------------------------ 13.01 MiB/15.76 MiB                   ⠸ Preparing packages... (70/74)
+django-allauth ------------------------------ 1.64 MiB/1.70 MiB
+faker      ------------------------------ 1.80 MiB/1.89 MiB
+django     ------------------------------ 3.26 MiB/7.91 MiB                     ⠸ Preparing packages... (70/74)
+django-allauth ------------------------------ 1.64 MiB/1.70 MiB
+faker      ------------------------------ 1.80 MiB/1.89 MiB
+django     ------------------------------ 3.41 MiB/7.91 MiB                     ⠸ Preparing packages... (70/74)
+django-allauth ------------------------------ 1.64 MiB/1.70 MiB
+django     ------------------------------ 3.53 MiB/7.91 MiB                     ⠸ Preparing packages... (70/74)
+django     ------------------------------ 3.66 MiB/7.91 MiB                     ⠸ Preparing packages... (70/74)
+django     ------------------------------ 4.87 MiB/7.91 MiB                     ⠸ Preparing packages... (70/74)
+django     ------------------------------ 5.27 MiB/7.91 MiB                     ⠼ Preparing packages... (73/74)
+django     ------------------------------ 6.19 MiB/7.91 MiB                     ⠼ Preparing packages... (73/74)
+django     ------------------------------ 6.72 MiB/7.91 MiB                     ⠼ Preparing packages... (73/74)                                                 Prepared 74 packages in 2.53s
+Uninstalled 9 packages in 61ms
+░░░░░░░░░░░░░░░░░░░░ [0/0] Installing wheels...                                 ░░░░░░░░░░░░░░░░░░░░ [0/74] Installing wheels...                                ░░░░░░░░░░░░░░░░░░░░ [0/74] google-auth-httplib2==0.2.1                         ░░░░░░░░░░░░░░░░░░░░ [1/74] google-auth-httplib2==0.2.1                         ░░░░░░░░░░░░░░░░░░░░ [1/74] cachetools==6.2.2                                   ░░░░░░░░░░░░░░░░░░░░ [2/74] cachetools==6.2.2                                   ░░░░░░░░░░░░░░░░░░░░ [2/74] python-decouple==3.8                                ░░░░░░░░░░░░░░░░░░░░ [3/74] python-decouple==3.8                                ░░░░░░░░░░░░░░░░░░░░ [3/74] django-cors-headers==4.9.0                          █░░░░░░░░░░░░░░░░░░░ [4/74] django-cors-headers==4.9.0                          █░░░░░░░░░░░░░░░░░░░ [4/74] referencing==0.37.0                                 █░░░░░░░░░░░░░░░░░░░ [5/74] referencing==0.37.0                                 █░░░░░░░░░░░░░░░░░░░ [5/74] click-plugins==1.1.1.2                              █░░░░░░░░░░░░░░░░░░░ [6/74] click-plugins==1.1.1.2                              █░░░░░░░░░░░░░░░░░░░ [6/74] rsa==4.9.1                                          █░░░░░░░░░░░░░░░░░░░ [7/74] rsa==4.9.1                                          █░░░░░░░░░░░░░░░░░░░ [7/74] uritemplate==4.2.0                                  ██░░░░░░░░░░░░░░░░░░ [8/74] uritemplate==4.2.0                                  ██░░░░░░░░░░░░░░░░░░ [8/74] pluggy==1.6.0                                       ██░░░░░░░░░░░░░░░░░░ [9/74] pluggy==1.6.0                                       █████████████████░░░ [63/74] googleapis-common-protos==1.72.0                   ███████████████████░ [71/74] faker==38.2.0                                      ███████████████████░ [73/74] django==5.2.8                                      ████████████████████ [74/74] django==5.2.8                                      Installed 74 packages in 232ms
+ - aiohttp==3.11.16
+ + aiohttp==3.13.2
+ + amqp==5.3.1
+ + asgiref==3.11.0
+ + ast-decompiler==0.8.0
+ + billiard==4.2.3
+ + cachetools==6.2.2
+ + celery==5.5.3
+ + channels==4.3.2
+ + channels-redis==4.1.0
+ + click-didyoumean==0.3.1
+ + click-plugins==1.1.1.2
+ + click-repl==0.3.0
+ + cron-descriptor==2.0.6
+ + django==5.2.8
+ + django-allauth==65.13.1
+ + django-celery-beat==2.8.1
+ + django-cors-headers==4.9.0
+ + django-debug-toolbar==6.1.0
+ + django-extensions==4.1
+ + django-filter==25.2
+ + django-js-asset==3.1.2
+ + django-mptt==0.18.0
+ + django-redis==5.2.0
+ + django-timezone-field==7.1
+ + djangorestframework==3.16.1
+ + djangorestframework-simplejwt==5.5.1
+ + drf-spectacular==0.29.0
+ + factory-boy==3.3.3
+ + faker==38.2.0
+ + google-ai-generativelanguage==0.6.10
+ + google-api-core==2.28.1
+ + google-api-python-client==2.187.0
+ + google-auth==2.43.0
+ + google-auth-httplib2==0.2.1
+ + google-generativeai==0.8.3
+ + googleapis-common-protos==1.72.0
+ - greenlet==3.2.3
+ + greenlet==3.2.4
+ + grpcio==1.76.0
+ + grpcio-status==1.71.2
+ + httplib2==0.31.0
+ + inflection==0.5.1
+ + iniconfig==2.3.0
+ + jsonschema==4.25.1
+ + jsonschema-specifications==2025.9.1
+ + kombu==5.5.4
+ - networkx==3.6
+ + networkx==3.5
+ - numpy==2.3.5
+ + numpy==2.2.6
+ - opencv-python==4.11.0.86
+ + opencv-python==4.12.0.88
+ - playwright==1.52.0
+ + playwright==1.56.0
+ + pluggy==1.6.0
+ + prompt-toolkit==3.0.52
+ + proto-plus==1.26.1
+ + protobuf==5.29.5
+ + psycopg2-binary==2.9.11
+ + pyasn1==0.6.1
+ + pyasn1-modules==0.4.2
+ - pydantic==2.12.5
+ + pydantic==2.12.4
+ + pygments==2.19.2
+ + pyjwt==2.10.1
+ - pypdfium2==5.1.0
+ + pypdfium2==5.0.0
+ + pytest==9.0.1
+ + pytest-django==4.11.1
+ + python-crontab==3.3.0
+ + python-decouple==3.8
+ + redis==5.2.1
+ + referencing==0.37.0
+ + rpds-py==0.29.0
+ + rsa==4.9.1
+ + sentry-sdk==2.45.0
+ + sqlparse==0.5.3
+ - tinycss2==1.5.1
+ + tinycss2==1.5.0
+ + uritemplate==4.2.0
+ + vine==5.1.0
+ + wcwidth==0.2.14
