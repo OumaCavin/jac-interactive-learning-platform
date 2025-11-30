@@ -52,12 +52,12 @@ class Badge(models.Model):
     ]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=200, unique=True)
-    description = models.TextField()
-    icon = models.CharField(max_length=100, help_text="Emoji or icon identifier")
+    name = models.CharField(max_length=200, unique=True, default="")
+    description = models.TextField(default="", blank=True)
+    icon = models.CharField(max_length=100, default="", help_text="Emoji or icon identifier")
     
     # Classification
-    category = models.CharField(max_length=20, choices=CATEGORIES)
+    category = models.CharField(max_length=20, choices=CATEGORIES, default="")
     difficulty = models.CharField(max_length=15, choices=DIFFICULTY_LEVELS, default='bronze')
     
     # Requirements
@@ -145,16 +145,16 @@ class Achievement(models.Model):
     ]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    title = models.CharField(max_length=200, unique=True)
-    description = models.TextField()
-    icon = models.CharField(max_length=100, help_text="Achievement icon")
+    title = models.CharField(max_length=200, unique=True, default="")
+    description = models.TextField(default="", blank=True)
+    icon = models.CharField(max_length=100, default="", help_text="Achievement icon")
     
     # Classification
-    category = models.CharField(max_length=20, choices=CATEGORIES)
+    category = models.CharField(max_length=20, choices=CATEGORIES, default="")
     difficulty = models.CharField(max_length=15, choices=DIFFICULTY_LEVELS, default='bronze')
     
     # Achievement Criteria
-    criteria_type = models.CharField(max_length=50)  # modules_completed, perfect_scores, etc.
+    criteria_type = models.CharField(max_length=50, default="")  # modules_completed, perfect_scores, etc.
     criteria_value = models.PositiveIntegerField()
     criteria_operator = models.CharField(max_length=10, choices=[
         ('gte', 'Greater than or equal'),
@@ -363,9 +363,9 @@ class PointTransaction(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='point_transactions')
     
     # Transaction Details
-    amount = models.IntegerField()  # Can be negative for spending
-    transaction_type = models.CharField(max_length=15, choices=TRANSACTION_TYPES)
-    source = models.CharField(max_length=50)  # Where points came from/went to
+    amount = models.IntegerField(default=0)  # Can be negative for spending
+    transaction_type = models.CharField(max_length=15, choices=TRANSACTION_TYPES, default="")
+    source = models.CharField(max_length=50, default="")  # Where points came from/went to
     description = models.CharField(max_length=200, blank=True)
     
     # Context
@@ -571,7 +571,7 @@ class LevelRequirement(models.Model):
     level = models.PositiveIntegerField(unique=True)
     
     # Requirements
-    requirement_type = models.CharField(max_length=20, choices=REQUIREMENT_TYPES)
+    requirement_type = models.CharField(max_length=20, choices=REQUIREMENT_TYPES, default="")
     requirement_value = models.PositiveIntegerField()
     
     # Rewards

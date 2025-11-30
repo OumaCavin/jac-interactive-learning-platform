@@ -19,8 +19,8 @@ class LearningPath(models.Model):
     Represents a learning path - a structured sequence of modules.
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=200)
-    description = models.TextField()
+    name = models.CharField(max_length=200, default="")
+    description = models.TextField(default="", blank=True)
     difficulty_level = models.CharField(
         max_length=20,
         choices=[
@@ -89,7 +89,7 @@ class Module(models.Model):
     description = models.TextField()
     
     # Content
-    content = models.TextField(help_text='Main module content in markdown or rich text')
+    content = models.TextField(default="", blank=True, help_text='Main module content in markdown or rich text')
     content_type = models.CharField(
         max_length=20,
         choices=[
@@ -247,8 +247,8 @@ class Lesson(models.Model):
     # Core identification
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     module = models.ForeignKey('Module', on_delete=models.CASCADE, related_name='lessons')
-    title = models.CharField(max_length=200)
-    order = models.PositiveIntegerField()
+    title = models.CharField(max_length=200, default="")
+    order = models.PositiveIntegerField(default=0)
     
     # Content type and data
     lesson_type = models.CharField(max_length=20, choices=LESSON_TYPE_CHOICES, default='text')
@@ -411,9 +411,9 @@ class Achievement(models.Model):
     ]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=100, unique=True)
-    description = models.TextField()
-    achievement_type = models.CharField(max_length=20, choices=ACHIEVEMENT_TYPES)
+    name = models.CharField(max_length=100, unique=True, default="")
+    description = models.TextField(default="", blank=True)
+    achievement_type = models.CharField(max_length=20, choices=ACHIEVEMENT_TYPES, default="")
     rarity = models.CharField(max_length=20, choices=RARITY_CHOICES, default='common')
     
     # Requirements
@@ -623,10 +623,10 @@ class CodeSubmission(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='code_submissions')
     
     # Submission details
-    submission_id = models.CharField(max_length=100, unique=True)
-    task_title = models.CharField(max_length=200)
-    task_description = models.TextField()
-    code = models.TextField()
+    submission_id = models.CharField(max_length=100, unique=True, default="")
+    task_title = models.CharField(max_length=200, default="")
+    task_description = models.TextField(default="", blank=True)
+    code = models.TextField(default="", blank=True)
     language = models.CharField(max_length=20, choices=LANGUAGE_CHOICES, default='python')
     
     # Execution results
@@ -664,7 +664,7 @@ class CodeExecutionLog(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     submission = models.ForeignKey(CodeSubmission, on_delete=models.CASCADE, related_name='execution_logs')
     
-    execution_id = models.CharField(max_length=100)
+    execution_id = models.CharField(max_length=100, default="")
     output = models.TextField(blank=True)
     error_output = models.TextField(blank=True)
     execution_time = models.FloatField()
@@ -696,12 +696,12 @@ class AICodeReview(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     submission = models.ForeignKey(CodeSubmission, on_delete=models.CASCADE, related_name='ai_reviews')
     
-    review_type = models.CharField(max_length=20, choices=REVIEW_TYPES)
+    review_type = models.CharField(max_length=20, choices=REVIEW_TYPES, default="")
     findings = models.JSONField(default=dict)
     suggestions = models.TextField(blank=True)
     score = models.FloatField(null=True, blank=True)
     
-    agent_id = models.CharField(max_length=100)
+    agent_id = models.CharField(max_length=100, default="")
     created_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
@@ -726,7 +726,7 @@ class LearningRecommendation(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='learning_recommendations')
     
-    recommendation_type = models.CharField(max_length=30, choices=RECOMMENDATION_TYPES)
+    recommendation_type = models.CharField(max_length=30, choices=RECOMMENDATION_TYPES, default="")
     content = models.JSONField(help_text='Recommendation details and reasoning')
     priority_score = models.FloatField(default=0.0, help_text='AI-calculated priority score')
     
@@ -873,13 +873,13 @@ class AdaptiveChallenge(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     
     # Challenge details
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    challenge_type = models.CharField(max_length=20, choices=CHALLENGE_TYPES)
+    title = models.CharField(max_length=200, default="")
+    description = models.TextField(default="", blank=True)
+    challenge_type = models.CharField(max_length=20, choices=CHALLENGE_TYPES, default="")
     content = models.TextField(default="", blank=True)  # JSON or structured content for the challenge
     
     # Difficulty and adaptation
-    difficulty_level = models.CharField(max_length=20, choices=UserDifficultyProfile.DIFFICULTY_LEVELS)
+    difficulty_level = models.CharField(max_length=20, choices=UserDifficultyProfile.DIFFICULTY_LEVELS, default='beginner')
     skill_dimensions = models.JSONField(default=dict, help_text='What skills this challenge targets')
     estimated_time = models.PositiveIntegerField(help_text='Estimated completion time in minutes')
     
@@ -951,7 +951,7 @@ class UserChallengeAttempt(models.Model):
     # Attempt details
     status = models.CharField(max_length=20, choices=ATTEMPT_STATUS, default='started')
     score = models.FloatField(null=True, blank=True, help_text='Final score (0.0 to 1.0)')
-    time_spent = models.PositiveIntegerField(help_text='Time spent in minutes')
+    time_spent = models.PositiveIntegerField(default=0, help_text='Time spent in minutes')
     responses = models.JSONField(default=dict, help_text='User responses to challenge')
     feedback = models.TextField(blank=True, help_text='AI-generated feedback')
     
