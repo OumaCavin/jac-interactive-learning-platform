@@ -27,7 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
             'level', 'experience_level', 'next_level_points', 'achievements', 'badges',
             'current_goal', 'goal_deadline', 'agent_interaction_level',
             'preferred_feedback_style', 'dark_mode', 'notifications_enabled',
-            'email_notifications', 'push_notifications', 'created_at', 'updated_at'
+            'email_notifications', 'push_notifications', 'password', 'created_at', 'updated_at'
         ]
         read_only_fields = [
             'id', 'total_modules_completed', 'total_time_spent', 'current_streak',

@@ -126,7 +126,7 @@ class DashboardConsumer(AsyncWebsocketConsumer):
     
     async def _generate_dashboard_update(self) -> dict:
         """Generate fresh dashboard update data"""
-        from ..services.analytics_service import AnalyticsService
+        from .services.analytics_service import AnalyticsService
         
         analytics_service = AnalyticsService()
         

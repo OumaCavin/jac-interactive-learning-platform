@@ -29,7 +29,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=lamb
 
 # Application definition
 DJANGO_APPS = [
-    'django.contrib.admin',
+    'django.contrib.admin',  # Re-enabled - custom admin configuration active
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -41,11 +41,11 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    'mptt',
-    'django_celery_beat',
-    'drf_spectacular',
-    'django_extensions',
-    'channels',  # Django Channels for WebSocket support
+    'mptt',  # Re-enabled for tree structures
+    'django_celery_beat',  # Re-enabled for task scheduling
+    'drf_spectacular',     # Re-enabled for API documentation
+    'django_extensions',   # Re-enabled for Django extensions
+    'channels',  # Re-enabled for WebSocket support
 ]
 
 LOCAL_APPS = [
@@ -53,12 +53,12 @@ LOCAL_APPS = [
     'apps.learning',
     'apps.content',
     'apps.assessments',
-    # 'apps.progress',  # Temporarily disabled due to import issues
+    'apps.progress',  # Re-enabled
     'apps.agents',
-    'apps.knowledge_graph',
-    'apps.jac_execution',
+    'apps.knowledge_graph',  # Re-enabled
+    'apps.jac_execution',  # Re-enabled
     'apps.gamification',
-    'apps.collaboration',
+    'apps.collaboration',  # Re-enabled
     'apps.management',
 ]
 
@@ -97,45 +97,52 @@ WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
 
 # Database
-# Database Configuration
+# Database Configuration - PostgreSQL for production/Docker
+# SQLite commented out for PostgreSQL setup
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# Database Configuration - Using PostgreSQL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': config('DB_NAME', default='jac_learning_db'),
         'USER': config('DB_USER', default='jac_user'),
         'PASSWORD': config('DB_PASSWORD', default='jac_password'),
-        'HOST': config('DB_HOST', default='postgres'),
+        'HOST': config('DB_HOST', default='localhost'),
         'PORT': config('DB_PORT', default='5432'),
-        'OPTIONS': {
-            # PostgreSQL handles encoding through LC_ settings, not connection options
+        'TEST': {
+            'NAME': 'test_jac_learning_db',
         },
-        'CONN_MAX_AGE': 60,
     }
 }
 
-# Caching
+# Caching - Using Redis for production
 CACHES = {
     'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': config('REDIS_URL', default='redis://:redis_password@redis:6379/1'),
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': config('REDIS_URL', default='redis://redis:6379/1'),
     }
 }
 
-# Session Storage
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-SESSION_CACHE_ALIAS = 'default'
+# Session Storage - Using database for sessions
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_AGE = 86400  # 24 hours
 
-# Celery Configuration
-CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='redis://:redis_password@redis:6379/0')
-CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default='redis://:redis_password@redis:6379/0')
+# Celery Configuration - Re-enabled for production
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='redis://redis:6379/0')
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default='redis://redis:6379/0')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+CELERY_WORKER_CONCURRENCY = 4
+CELERY_WORKER_MAX_TASKS_PER_CHILD = 1000
 
 # Jaseci Configuration
 JASECCI_URL = config('JASECCI_URL', default='http://localhost:8001')
@@ -205,7 +212,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',  # Re-enabled - drf_spectacular installed
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle'
@@ -278,7 +285,7 @@ LOGGING = {
     },
 }
 
-# Spectacular OpenAPI Configuration
+# Spectacular OpenAPI Configuration - Re-enabled
 SPECTACULAR_SETTINGS = {
     'TITLE': 'JAC Learning Platform API',
     'DESCRIPTION': 'API for the JAC Interactive Learning Platform with multi-agent system',

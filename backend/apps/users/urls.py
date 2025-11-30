@@ -5,8 +5,12 @@ URL routing for the Users app.
 """
 
 from django.urls import path, include
+from django.http import JsonResponse
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from django.utils import timezone
 
 from .views import (
     UserRegistrationView, UserLoginView, UserProfileView,
@@ -17,7 +21,20 @@ from .views import (
 # Create router for ViewSets
 router = DefaultRouter()
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def health_check(request):
+    """Health check endpoint for frontend to verify backend connectivity"""
+    return JsonResponse({
+        'status': 'ok', 
+        'message': 'Backend is running and accessible',
+        'timestamp': str(timezone.now())
+    })
+
 urlpatterns = [
+    # Health check endpoint for frontend (public access)
+    path('health/', health_check, name='health'),
+    
     # Authentication URLs
     path('auth/register/', UserRegistrationView.as_view(), name='user-register'),
     path('auth/login/', UserLoginView.as_view(), name='user-login'),

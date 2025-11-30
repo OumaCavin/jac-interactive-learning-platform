@@ -21,9 +21,9 @@ class StudyGroup(models.Model):
     """Study groups for collaborative learning"""
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=200, db_index=True)
+    name = models.CharField(max_length=200, db_index=True, default="")
     description = models.TextField(blank=True)
-    subject_area = models.CharField(max_length=100, db_index=True)
+    subject_area = models.CharField(max_length=100, db_index=True, default="")
     level = models.CharField(max_length=50, choices=[
         ('beginner', 'Beginner'),
         ('intermediate', 'Intermediate'),
@@ -75,7 +75,7 @@ class DiscussionForum(models.Model):
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     study_group = models.OneToOneField(StudyGroup, on_delete=models.CASCADE, related_name='forum')
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, default="")
     description = models.TextField(blank=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -96,8 +96,8 @@ class DiscussionTopic(models.Model):
         
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     forum = models.ForeignKey(DiscussionForum, on_delete=models.CASCADE, related_name='topics')
-    title = models.CharField(max_length=200, db_index=True)
-    content = models.TextField()
+    title = models.CharField(max_length=200, db_index=True, default="")
+    content = models.TextField(default="", blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_topics')
     status = models.CharField(max_length=20, choices=TopicStatus.choices, default=TopicStatus.OPEN)
     is_pinned = models.BooleanField(default=False)
@@ -118,7 +118,7 @@ class DiscussionPost(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     topic = models.ForeignKey(DiscussionTopic, on_delete=models.CASCADE, related_name='posts')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='discussion_posts')
-    content = models.TextField()
+    content = models.TextField(default="", blank=True)
     parent_post = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
     is_solution = models.BooleanField(default=False, help_text="Marked as solution by topic author")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -143,8 +143,8 @@ class PeerCodeShare(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=200, db_index=True)
     description = models.TextField(blank=True)
-    code_content = models.TextField(help_text="Actual code content")
-    language = models.CharField(max_length=50, db_index=True)
+    code_content = models.TextField(default="", blank=True, help_text="Actual code content")
+    language = models.CharField(max_length=50, db_index=True, default="")
     file_name = models.CharField(max_length=200, blank=True)
     tags = models.JSONField(default=list, help_text="List of tags for categorization")
     share_type = models.CharField(max_length=20, choices=ShareType.choices)
@@ -203,8 +203,8 @@ class GroupChallenge(models.Model):
         CANCELLED = 'cancelled', 'Cancelled'
         
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    title = models.CharField(max_length=200, db_index=True)
-    description = models.TextField()
+    title = models.CharField(max_length=200, db_index=True, default="")
+    description = models.TextField(default="", blank=True)
     challenge_type = models.CharField(max_length=30, choices=ChallengeType.choices)
     difficulty_level = models.CharField(max_length=20, choices=[
         ('easy', 'Easy'),
@@ -333,7 +333,7 @@ class MentorshipSession(models.Model):
     relationship = models.ForeignKey(MentorshipRelationship, on_delete=models.CASCADE, related_name='sessions')
     
     # Session details
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, default="")
     agenda = models.TextField(blank=True)
     notes = models.TextField(blank=True)
     action_items = models.JSONField(default=list)
@@ -346,7 +346,7 @@ class MentorshipSession(models.Model):
     
     # Status
     status = models.CharField(max_length=20, choices=SessionStatus.choices, default=SessionStatus.SCHEDULED)
-    session_type = models.CharField(max_length=50, choices=[
+    session_type = models.CharField(max_length=50, default="", choices=[
         ('one_on_one', 'One-on-One'),
         ('group', 'Group Session'),
         ('code_review', 'Code Review'),

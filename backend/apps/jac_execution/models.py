@@ -44,7 +44,7 @@ class CodeExecution(models.Model):
     
     # Code execution details
     language = models.CharField(max_length=10, choices=LANGUAGE_CHOICES, default='python')
-    code = models.TextField()
+    code = models.TextField(default="", blank=True)
     stdin = models.TextField(blank=True, null=True)
     
     # Execution results
@@ -110,10 +110,10 @@ class ExecutionTemplate(models.Model):
     ]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    language = models.CharField(max_length=10, choices=LANGUAGE_CHOICES)
-    code = models.TextField()
+    name = models.CharField(max_length=255, default="")
+    description = models.TextField(default="", blank=True)
+    language = models.CharField(max_length=10, choices=LANGUAGE_CHOICES, default='python')
+    code = models.TextField(default="", blank=True)
     stdin = models.TextField(blank=True, null=True)
     
     # Template metadata
@@ -148,7 +148,7 @@ class CodeExecutionSession(models.Model):
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='execution_sessions')
-    session_id = models.CharField(max_length=255, unique=True)
+    session_id = models.CharField(max_length=255, unique=True, default="")
     
     # Session statistics
     total_executions = models.IntegerField(default=0)
