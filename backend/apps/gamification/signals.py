@@ -101,7 +101,7 @@ def update_gamification_on_assessment(sender, instance, created, **kwargs):
             _update_achievement_progress(user, 'perfect_scores', 1)
 
 
-@receiver(post_save, sender='jac_execution.CodeExecution')
+# @receiver(post_save, sender='jac_execution.CodeExecution')  # TEMPORARILY DISABLED - app not installed
 def update_gamification_on_code_execution(sender, instance, created, **kwargs):
     """Update gamification when code is successfully executed"""
     if instance.is_successful:
@@ -136,7 +136,7 @@ def update_gamification_on_agent_chat(sender, instance, created, **kwargs):
         _update_achievement_progress(user, 'ai_conversations', 1)
 
 
-@receiver(post_save, sender='knowledge_graph.KnowledgeNode')
+# @receiver(post_save, sender='knowledge_graph.KnowledgeNode')  # TEMPORARILY DISABLED - app not installed
 def update_gamification_on_knowledge_graph(sender, instance, created, **kwargs):
     """Update gamification when user creates or explores knowledge nodes"""
     if created:

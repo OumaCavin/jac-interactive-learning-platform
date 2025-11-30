@@ -55,10 +55,10 @@ LOCAL_APPS = [
     'apps.assessments',
     # 'apps.progress',  # Temporarily disabled due to import issues
     'apps.agents',
-    'apps.knowledge_graph',
-    'apps.jac_execution',
+    # 'apps.knowledge_graph',  # Temporarily disabled - missing google.generativeai dependency
+    # 'apps.jac_execution',  # Temporarily disabled
     'apps.gamification',
-    'apps.collaboration',
+    # 'apps.collaboration',  # Temporarily disabled - missing django_filters dependency
     'apps.management',
 ]
 
@@ -193,7 +193,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    # 'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',  # Commented out - drf_spectacular not installed
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle'
@@ -266,12 +266,12 @@ LOGGING = {
     },
 }
 
-# Spectacular OpenAPI Configuration
-SPECTACULAR_SETTINGS = {
-    'TITLE': 'JAC Learning Platform API',
-    'DESCRIPTION': 'API for the JAC Interactive Learning Platform with multi-agent system',
-    'VERSION': '1.0.0',
-}
+# Spectacular OpenAPI Configuration - Commented out as drf_spectacular is not installed
+# SPECTACULAR_SETTINGS = {
+#     'TITLE': 'JAC Learning Platform API',
+#     'DESCRIPTION': 'API for the JAC Interactive Learning Platform with multi-agent system',
+#     'VERSION': '1.0.0',
+# }
 
 # Email Configuration
 EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')

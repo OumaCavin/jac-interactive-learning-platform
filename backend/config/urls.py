@@ -67,9 +67,9 @@ urlpatterns = [
     path('api/assessments/', include('apps.assessments.urls')),
     # path('api/progress/', include('apps.progress.urls')),  # Progress tracking and analytics (temporarily disabled)
     path('api/gamification/', include('apps.gamification.urls')),  # Gamification system
-    path('api/collaboration/', include('apps.collaboration.urls')),  # Collaboration features
-    path('api/jac-execution/', include('apps.jac_execution.urls')),  # JAC execution engine
-    path('api/knowledge-graph/', include('apps.knowledge_graph.urls')),  # Knowledge Graph API
+    # path('api/collaboration/', include('apps.collaboration.urls')),  # Collaboration features (temporarily disabled - missing django_filters)
+    # path('api/jac-execution/', include('apps.jac_execution.urls')),  # JAC execution engine (temporarily disabled)
+    # path('api/knowledge-graph/', include('apps.knowledge_graph.urls')),  # Knowledge Graph API (temporarily disabled - missing google.generativeai)
     # path('api/ai-agents/', include('apps.api_endpoints.ai_agents_urls')),  # AI Multi-Agent System (commented out temporarily)
     
     # Fallback endpoints without /api/ prefix (for frontend compatibility)
