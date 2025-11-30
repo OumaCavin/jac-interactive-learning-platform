@@ -19,7 +19,7 @@ import asyncio
 import signal
 import sys
 
-from ....services.background_monitoring_service import BackgroundMonitoringService
+from ..services.background_monitoring_service import BackgroundMonitoringService
 
 
 class Command(BaseCommand):
