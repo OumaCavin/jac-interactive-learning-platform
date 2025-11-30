@@ -20,7 +20,7 @@ from django.conf import settings
 from datetime import datetime, timedelta
 import logging
 
-from ..services.advanced_analytics_service import AdvancedAnalyticsService
+from .services.advanced_analytics_service import AdvancedAnalyticsService
 from .serializers import AdvancedAnalyticsSerializer
 
 logger = logging.getLogger(__name__)
