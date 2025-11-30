@@ -1,0 +1,18 @@
+# JAC Learning Platform - Local Development Dependencies
+# Created by Cavin Otieno
+
+# Core Django
+Django>=4.2.0,<6.0.0
+djangorestframework>=3.14.0
+django-cors-headers>=4.0.0
+python-decouple>=3.8
+
+# Development tools
+django-filter>=23.0.0
+djangorestframework-simplejwt>=5.2.0
+
+# Optional: For future features
+# drf-spectacular>=0.26.0  # OpenAPI documentation
+# django-extensions>=3.2.0  # Django extensions
+# celery>=5.3.0  # Background tasks
+# redis>=4.0.0  # Caching and sessions
