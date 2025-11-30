@@ -34,8 +34,14 @@ from .views_predictive import (
     predictive_dashboard_data,
     # New Predictive Learning Models APIs
     LearningVelocityAPIView, EngagementPatternsAPIView, SuccessProbabilityAPIView,
-    TimeToCompletionAPIView, RetentionRiskAPIView, KnowledgeGapsAPIView, LearningClustersAPIView,
-    PredictiveStreamingAPIView, AIInteractionAPIView
+    TimeToCompletionAPIView, RetentionRiskAPIView, KnowledgeGapsAPIView, LearningClustersAPIView
+    # Note: PredictiveStreamingAPIView and AIInteractionAPIView not yet implemented
+    # path('api/predictive/streaming/', PredictiveStreamingAPIView.as_view()),
+    # path('api/predictive/streaming/<str:stream_type>/', PredictiveStreamingAPIView.as_view()),
+    
+    # Note: AIInteractionAPIView not yet implemented
+    # path('api/ai/interaction/', AIInteractionAPIView.as_view()),
+    # path('api/ai/agents/', AIInteractionAPIView.as_view()),
 )
 from .views_advanced_analytics import (
     SophisticatedStatisticalAnalysisAPIView, EnhancedMLInsightsAPIView,
@@ -83,13 +89,6 @@ router.register(r'notifications', ProgressNotificationViewSet, basename='progres
 app_name = 'progress'
 
 urlpatterns = [
-    # Predictive Analytics Streaming
-    path('api/predictive/streaming/', PredictiveStreamingAPIView.as_view()),
-    path('api/predictive/streaming/<str:stream_type>/', PredictiveStreamingAPIView.as_view()),
-    
-    # AI Interaction
-    path('api/ai/interaction/', AIInteractionAPIView.as_view()),
-    path('api/ai/agents/', AIInteractionAPIView.as_view()),
     # Include router URLs
     path('api/v1/', include(router.urls)),
     
