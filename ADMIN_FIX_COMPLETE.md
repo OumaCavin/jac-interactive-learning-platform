@@ -99,4 +99,4 @@ The fix resolves the fundamental mismatch where:
 This ensures that the admin interface can find and display all registered models.
 
 ---
-*Fix created by MiniMax Agent on 2025-11-29*
+*Fix created by Cavin Otieno on 2025-11-29*
