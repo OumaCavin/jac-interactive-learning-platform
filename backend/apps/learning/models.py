@@ -876,7 +876,7 @@ class AdaptiveChallenge(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     challenge_type = models.CharField(max_length=20, choices=CHALLENGE_TYPES)
-    content = models.TextField()  # JSON or structured content for the challenge
+    content = models.TextField(default="", blank=True)  # JSON or structured content for the challenge
     
     # Difficulty and adaptation
     difficulty_level = models.CharField(max_length=20, choices=UserDifficultyProfile.DIFFICULTY_LEVELS)
@@ -884,8 +884,8 @@ class AdaptiveChallenge(models.Model):
     estimated_time = models.PositiveIntegerField(help_text='Estimated completion time in minutes')
     
     # AI generation metadata
-    generated_by_agent = models.CharField(max_length=50, help_text='Which AI agent generated this')
-    generation_prompt = models.TextField(help_text='The prompt used to generate this challenge')
+    generated_by_agent = models.CharField(max_length=50, default="", blank=True, help_text='Which AI agent generated this')
+    generation_prompt = models.TextField(default="", blank=True, help_text='The prompt used to generate this challenge')
     adaptation_rules = models.JSONField(default=dict, help_text='Rules for adapting this challenge')
     
     # Performance tracking
